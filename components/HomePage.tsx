@@ -5,16 +5,43 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CanvasLayer from "@/components/three/CanvasLayer";
+import { ArrowUpRight, FileText } from "lucide-react";
+
+// Data for the new Protocol section
+const steps = [
+  {
+    number: "01",
+    image: "/scale.svg",
+    title: "The Scale",
+    description:
+      "Atomic models are too small to be useful. We model the Mesoscale—where pores, grains, and defects actually determine if a material works in a factory.",
+  },
+  {
+    number: "02",
+    image: "/Design.svg",
+    title: "The Design",
+    description:
+      "We don't do trial and error. You define the target—like heat resistance or energy density—and SkandaX generates the exact microstructure to achieve it.",
+  },
+  {
+    number: "03",
+    image: "/Lab.svg",
+    title: "The Lab",
+    description:
+      "Discovery stops at the lab door. We are building Autonomous Robotics to synthesize and test these materials in days, closing the loop between software and hardware.",
+  },
+];
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen w-full text-[#f0f0ff] selection:bg-[#48cae4] selection:text-[#081421]">
+    <div className="relative min-h-screen w-full text-[#f0f0ff] selection:bg-[#48cae4] selection:text-[#081421] overflow-x-hidden">
       <CanvasLayer />
 
       <main id="html-scroll-container" className="relative z-[2] w-full pointer-events-none">
         <Navbar />
 
-        <section className="min-h-screen flex items-center px-6 md:px-10 max-w-6xl mx-auto pt-28 md:pt-36">
+        {/* HERO SECTION */}
+        <section className="min-h-screen flex items-center px-4 sm:px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto pt-28 md:pt-36 pb-12">
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 pointer-events-auto">
               <div className="flex items-center gap-3 mb-6">
@@ -22,7 +49,8 @@ export default function HomePage() {
                 <span className="text-[#48cae4] text-xs font-bold tracking-[0.2em] uppercase">Shodh AI</span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05]">
+              {/* Text scales smoothly from mobile -> laptop -> 32" screen */}
+              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-12xl font-medium tracking-tight leading-[1.05] break-words">
                 BUILDING
                 <br />
                 THE TYPE 1
@@ -50,13 +78,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="lg:col-span-5 pointer-events-auto">
-              <div className="rounded-2xl border border-white/20 bg-black/40 p-8 backdrop-blur-xl shadow-2xl">
+            <div className="lg:col-span-5 pointer-events-auto mt-8 lg:mt-0">
+              <div className="rounded-2xl border border-white/20 bg-black/40 p-6 md:p-8 backdrop-blur-xl shadow-2xl">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-white/70 tracking-[0.2em] uppercase font-semibold">IndiaAI Mission</span>
                   <Image src="/shodhai_logo.svg" alt="Shodh AI" width={110} height={26} className="opacity-90" />
                 </div>
-                <p className="mt-6 text-lg text-white/90 leading-relaxed font-light">
+                <p className="mt-6 text-base md:text-lg text-white/90 leading-relaxed font-light">
                   Generative AI for Mesoscale manufacturing. From design intent to factory success.
                 </p>
               </div>
@@ -64,135 +92,205 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="h-[60vh] flex items-center px-6 md:px-10 max-w-6xl mx-auto">
-          <div className="pointer-events-auto max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-medium drop-shadow-lg">CHEMISTRY IS TOO SLOW.</h2>
-            <p className="mt-6 text-white/90 text-lg md:text-xl font-light leading-relaxed">
+        {/* SCROLL SECTION 1: CHEMISTRY */}
+        <section className="min-h-[50vh] md:h-[60vh] py-12 md:py-0 flex items-center px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto">
+          <div className="pointer-events-auto max-w-2xl w-full">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium drop-shadow-lg 2xl:whitespace-nowrap leading-tight">CHEMISTRY IS TOO SLOW.</h2>
+            <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-3xl lg:text-4xl font-light leading-relaxed">
               10,000 failures. 10 years. 1 material.
               <br />
-              Discovery is the human bottleneck. We are removing it.
+              Discovery is the human <br className="hidden md:block" />bottleneck. We are removing it.
+            </p>
+          </div>
+          <div className="hidden md:block md:w-1/2" />
+        </section>
+
+        {/* SCROLL SECTION 2: PHYSICS */}
+        <section className="min-h-[50vh] md:h-[60vh] py-12 md:py-0 flex items-center justify-center px-6 md:px-10 max-w-6xl mx-auto">
+          <div className="w-full md:w-1/2 pointer-events-auto text-left">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium drop-shadow-lg 2xl:whitespace-nowrap leading-tight">PHYSICS, GENERATED.</h2>
+            <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-3xl lg:text-4xl font-light leading-relaxed">
+              Introducing SkandaX.
+              <br />
+              We don&#39;t guess the chemistry;<br />
+              we choose the result.
+            </p>
+          </div>
+          <div className="hidden md:block md:w-1/2" />
+        </section>
+
+        {/* SCROLL SECTION 3: BEYOND */}
+        <section className="min-h-[50vh] md:h-[60vh] py-12 md:py-0 flex items-center px-6 md:px-10 max-w-6xl mx-auto">
+          <div className="w-full md:w-1/2 hidden md:block" />
+          <div className="w-full md:w-1/2 pointer-events-auto">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium drop-shadow-lg 2xl:whitespace-nowrap leading-tight">BEYOND SCIENCE FICTION.</h2>
+            <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-3xl lg:text-4xl font-light leading-relaxed">
+              Generative design. Autonomous robotic labs.
+              <br />
+              Materials that endure heat, pressure, and time.
+              <br />
+              The future is physical.
             </p>
           </div>
         </section>
 
-        <section className="h-[60vh] flex items-center px-6 md:px-10 max-w-6xl mx-auto">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-6 pointer-events-auto">
-              <h2 className="text-3xl md:text-5xl font-medium drop-shadow-lg">PHYSICS, GENERATED.</h2>
-              <p className="mt-6 text-white/90 text-lg md:text-xl font-light leading-relaxed">
-                Introducing SkandaX.
-                <br />
-                We don&#39;t guess the chemistry; we choose the result.
-              </p>
-            </div>
-            <div className="lg:col-span-6" />
-          </div>
-        </section>
+        {/* GENESIS PROTOCOL */}
+        <section className="px-4 sm:px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto mb-32 mt-10 md:mt-20">
+          <div className="pointer-events-auto rounded-3xl border border-white/10 bg-[#081421]/80 backdrop-blur-md shadow-2xl p-6 sm:p-10 lg:p-16 2xl:py-[120px] 2xl:px-[80px]">
+            <div className="flex flex-col xl:flex-row justify-between items-center gap-10 xl:gap-20">
 
-        <section className="h-[60vh] flex items-center px-6 md:px-10 max-w-6xl mx-auto">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-4 hidden lg:block" />
-
-            <div className="lg:col-span-8 pointer-events-auto">
-              <h2 className="text-3xl md:text-5xl font-medium drop-shadow-lg">BEYOND SCIENCE FICTION.</h2>
-              <p className="mt-6 text-white/90 text-lg md:text-xl font-light leading-relaxed">
-                Generative design. Autonomous robotic labs.
-                <br />
-                Materials that endure heat, pressure, and time.
-                <br />
-                The future is physical.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 md:px-10 max-w-6xl mx-auto mb-32 mt-20">
-          <div className="pointer-events-auto rounded-3xl border border-white/10 bg-[#081421]/80 backdrop-blur-md p-8 md:p-12 shadow-2xl">
-            <div className="flex flex-col md:flex-row justify-between items-start gap-10">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-1.5 h-1.5 bg-[#48cae4] rounded-full animate-pulse" />
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#48cae4]">The System</span>
+              <div className="w-full xl:max-w-2xl">
+                <div className="inline-flex items-center gap-3 mb-4 px-4 py-2 rounded-lg bg-gray-800/60 backdrop-blur-md border border-white/10">
+                  <div className="w-4 h-4 bg-[#48cae4] rounded-lg" />
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-white">The System</span>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-medium text-white mb-6">THE GENESIS PROTOCOL.</h2>
-                <p className="text-lg text-white/70 mb-8 leading-relaxed">
+
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-6 pt-[2px] leading-tight 2xl:whitespace-nowrap">
+                  THE GENESIS PROTOCOL.
+                </h2>
+
+                <p className="text-base md:text-lg text-white/70 mb-12 leading-relaxed max-w-xl">
                   Shodh AI deletes the iteration loop. We are compressing 5 years of lab failure into 6 months of factory success.
                 </p>
+
                 <Link
                   href="/genesis"
-                  className="inline-flex items-center gap-2 rounded-full bg-white text-[#081421] px-6 py-3 text-sm font-bold hover:bg-gray-200 transition"
+                  className="inline-flex items-center gap-2 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[32px] bg-white text-[#081421] px-6 py-3 text-[16px] font-regular hover:bg-gray-200 transition"
                 >
                   READ THE MANIFESTO <span>→</span>
                 </Link>
               </div>
 
-              <div className="w-full md:w-auto bg-white/5 border border-white/10 rounded-xl p-6 text-sm font-mono leading-loose min-w-[300px]">
-                <div className="mb-4 opacity-50">
-                  <span className="block text-xs uppercase tracking-wider text-white/50 mb-1">Traditional (5 Years)</span>
-                  <span className="text-white">
+              <div className="w-full xl:w-auto flex-shrink-0 bg-white/5 border border-white/10 rounded-xl p-6 md:p-10 text-sm md:text-lg 2xl:text-2xl font-mono leading-loose xl:min-w-[500px] 2xl:min-w-[600px] text-center">
+                <div className="mb-6 md:mb-8 opacity-50">
+                  <span className="block text-xs md:text-sm 2xl:text-base uppercase tracking-wider text-white/50 mb-2">Traditional (5 Years)</span>
+                  <span className="text-white block">
                     Design → Lab → <span className="text-red-400">Fail</span> → Repeat
                   </span>
                 </div>
                 <div>
-                  <span className="block text-xs uppercase tracking-wider text-[#48cae4] mb-1">Shodh AI (6 Months)</span>
-                  <span className="text-white">
+                  <span className="block text-xs md:text-sm 2xl:text-base uppercase tracking-wider text-[#48cae4] mb-2">Shodh AI (6 Months)</span>
+                  <span className="text-white block">
                     Design → <span className="text-[#48cae4]">Matter Compiler</span> → Success
                   </span>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
-        <section className="px-6 md:px-10 max-w-6xl mx-auto pb-24">
-          <div className="pointer-events-auto rounded-3xl bg-white text-[#081421] p-8 md:p-12 shadow-2xl">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
-              <div>
-                <span className="text-[#48cae4] font-bold tracking-widest text-xs uppercase mb-2 block">Our Methodology</span>
-                <h2 className="text-3xl md:text-5xl font-medium text-[#081421]">The Skanda Protocol</h2>
+        {/* SKANDA PROTOCOL (UPDATED) */}
+        <section className="relative pointer-events-auto w-full bg-none py-32 px-6 md:px-10 flex flex-col items-center overflow-hidden">
+          
+          {/* Background Decor (Subtle Grid) */}
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(#48cae4 1px, transparent 1px), linear-gradient(to right, #48cae4 1px, transparent 1px)`,
+              backgroundSize: '40px 40px'
+            }}
+          />
+
+          <div className="relative z-10 w-full max-w-[1440px] flex flex-col items-center">
+
+            {/* Header Section */}
+            <div className="relative w-full flex flex-col items-center text-center">
+
+              {/* Badge */}
+              <div className="flex items-center gap-2 bg-[#48cae4]/10 border border-[#48cae4]/20 rounded px-3 py-2.5 w-fit mb-8 backdrop-blur-md">
+                <div className="w-2.5 h-2.5 bg-[#48cae4] rounded-sm shadow-[0_0_8px_#48cae4]" />
+                <span className="text-[#48cae4] text-xs tracking-wider uppercase font-medium">
+                  HOW IT WORKS
+                </span>
               </div>
-              <Link
-                href="/protocol"
-                className="inline-flex items-center gap-2 rounded-full border border-[#081421]/10 bg-[#f4f4f9] px-6 py-3 text-sm font-semibold text-[#081421] hover:bg-[#e4e4e9] transition"
-              >
-                Read Whitepaper <span>→</span>
-              </Link>
+
+              {/* Main Title */}
+              <h2 className="text-white text-4xl md:text-7xl font-medium uppercase tracking-tighter mb-6">
+                The Skanda Protocol
+              </h2>
+
+              {/* Secondary Title */}
+              <p className="text-white/60 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                Skanda: a <span className="text-white">Foundation Model for Matter</span> — a generative LMM trained on physics-first simulations and deployed as an industrial OS.
+              </p>
+
+              {/* Button */}
+              <div className="relative flex flex-col items-center mb-20">
+                {/* Connecting Line (Top) */}
+                <div className="w-px h-10 bg-gradient-to-b from-[#48cae4] to-transparent mb-4 opacity-50" />
+
+                <Link
+                  href="/protocol"
+                  className="group relative flex items-center gap-3 px-8 py-4 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#48cae4]/20 via-transparent to-transparent transition-opacity duration-500" />
+
+                  <FileText className="w-4 h-4 text-[#48cae4]" />
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase relative z-10">
+                    Read Whitepaper
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 text-white/50 group-hover:text-[#48cae4]" />
+                </Link>
+
+                {/* Connecting Line (Bottom) */}
+                <div className="w-px h-16 bg-gradient-to-t from-[#48cae4] to-transparent mt-4 opacity-30" />
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-6 rounded-2xl bg-[#f8f9fa] border border-gray-100">
-                <div className="w-10 h-10 bg-[#081421] rounded-full flex items-center justify-center text-white font-bold mb-4">1</div>
-                <h3 className="text-sm font-bold tracking-widest uppercase text-gray-400 mb-2">The Scale</h3>
-                <p className="text-[#081421]/80 leading-relaxed">
-                  Atomic models are too small to be useful. We model the Mesoscale—where pores, grains, and defects actually determine if a material works in a factory.
-                </p>
-              </div>
+            {/* Grid Container */}
+            <div className="w-full border border-white/10 rounded-3xl bg-white/[0.01] backdrop-blur-sm overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                {steps.map((step, index) => (
+                  <div
+                    key={index}
+                    className="group relative flex flex-col items-center text-center px-10 py-20 hover:bg-white/[0.02] transition-colors duration-500"
+                  >
+                    <span className="absolute top-8 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 text-white/5 text-5xl font-black group-hover:text-[#48cae4]/10 transition-colors">
+                      {step.number}
+                    </span>
 
-              <div className="p-6 rounded-2xl bg-[#f8f9fa] border border-gray-100">
-                <div className="w-10 h-10 bg-[#48cae4] rounded-full flex items-center justify-center text-[#081421] font-bold mb-4">2</div>
-                <h3 className="text-sm font-bold tracking-widest uppercase text-gray-400 mb-2">The Design</h3>
-                <p className="text-[#081421]/80 leading-relaxed">
-                  We don&#39;t do trial and error. You define the target—like heat resistance or energy density—and SkandaX generates the exact microstructure to achieve it.
-                </p>
-              </div>
+                    <div className="relative mb-12">
+                      <div className="absolute inset-0 bg-[#48cae4] blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 rounded-full" />
+                      <div className="relative w-28 h-28 bg-white/[0.03] border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#48cae4]/40 group-hover:rotate-[360deg] transition-all duration-1000">
+                        <Image
+                          src={step.image}
+                          alt={step.title}
+                          width={80}
+                          height={80}
+                          className="w-14 h-14 invert opacity-70 group-hover:opacity-100 transition-opacity"
+                        />
+                      </div>
+                    </div>
 
-              <div className="p-6 rounded-2xl bg-[#f8f9fa] border border-gray-100">
-                <div className="w-10 h-10 bg-[#081421] rounded-full flex items-center justify-center text-white font-bold mb-4">3</div>
-                <h3 className="text-sm font-bold tracking-widest uppercase text-gray-400 mb-2">The Lab</h3>
-                <p className="text-[#081421]/80 leading-relaxed">
-                  Discovery stops at the lab door. We are building Autonomous Robotics to synthesize and test these materials in days, closing the loop between software and hardware.
-                </p>
+                    <h3 className="text-white text-2xl font-medium mb-6 group-hover:text-[#48cae4] transition-colors tracking-wide">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-white/50 text-sm leading-relaxed max-w-[280px] mx-auto">
+                      {step.description.split("Mesoscale").map((part, i, arr) => (
+                        <span key={i}>
+                          {part}
+                          {i < arr.length - 1 && (
+                            <span className="text-white font-semibold underline decoration-[#48cae4]/30 decoration-2 underline-offset-4">Mesoscale</span>
+                          )}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="px-6 md:px-10 max-w-6xl mx-auto pb-24">
-          <div className="pointer-events-auto rounded-3xl bg-white text-[#081421] p-8 md:p-12 shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        {/* NATIONAL MANDATE */}
+        <section className="px-4 sm:px-6 md:px-10 max-w-6xl mx-auto pb-24 mt-24">
+          <div className="pointer-events-auto rounded-3xl bg-white text-[#081421] p-6 sm:p-8 md:p-12 shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
               <div>
                 <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#48cae4] mb-4">National Mandate</div>
-                <h2 className="text-3xl md:text-5xl font-medium leading-tight mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight mb-6">
                   SELECTED TO LEAD THE <br />&#39;AI FOR SCIENCE&#39; <br />REVOLUTION.
                 </h2>
                 <p className="text-lg text-[#081421]/70 mb-8">
@@ -200,9 +298,9 @@ export default function HomePage() {
                 </p>
 
                 <div className="flex flex-wrap items-center gap-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-500">
-                  <Image src="/demo/india-ai-logo.png" alt="IndiaAI" width={120} height={40} className="object-contain" />
-                  <Image src="/demo/nvidia-partner-logo.png" alt="Nvidia" width={120} height={40} className="object-contain" />
-                  <div className="h-8 flex items-center font-bold text-xl text-gray-400">Google</div>
+                  <Image src="/demo/india-ai-logo.png" alt="IndiaAI" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
+                  <Image src="/demo/nvidia-partner-logo.png" alt="Nvidia" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
+                  <div className="h-8 flex items-center font-bold text-lg md:text-xl text-gray-400">Google</div>
                 </div>
               </div>
 
