@@ -15,7 +15,7 @@ import Image from "next/image";
 
 export default function SkandaPage() {
   return (
-    <main className="min-h-screen w-full relative bg-transparent text-[#f0f0ff] font-sans selection:bg-[#48cae4] selection:text-[#081421] overflow-x-hidden">
+    <main className="min-h-screen w-full relative bg-[#081421] text-[#f0f0ff] font-sans selection:bg-[#48cae4] selection:text-[#081421]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image 
@@ -23,7 +23,7 @@ export default function SkandaPage() {
           alt="Background"
           fill
           priority
-          className="object-cover opacity-40"
+          className="object-cover opacity-60"
         />
         {/* Tech Grid Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
@@ -34,7 +34,7 @@ export default function SkandaPage() {
       <div className="relative z-10">
         <Navbar />
 
-        <div className="pt-32 md:pt-40 pb-16 md:pb-20 px-6 md:px-10 max-w-6xl mx-auto">
+        <div className="pt-40 pb-20 px-6 md:px-10 max-w-6xl mx-auto">
           
           {/* --- HERO SECTION --- */}
           <header className="text-center mb-24">

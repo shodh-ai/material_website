@@ -137,15 +137,15 @@ export default function HomePage() {
         {/* GENESIS PROTOCOL */}
         <section className="px-4 sm:px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto mb-32 mt-10 md:mt-20">
           <div className="pointer-events-auto rounded-3xl border border-white/10 bg-[#081421]/80 backdrop-blur-md shadow-2xl p-6 sm:p-10 lg:p-16 2xl:py-[120px] 2xl:px-[80px]">
-            <div className="flex flex-col xl:flex-row justify-between items-center gap-10 xl:gap-20">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-16 items-center">
 
-              <div className="w-full xl:max-w-2xl">
+              <div className="w-full xl:col-span-7">
                 <div className="inline-flex items-center gap-3 mb-4 px-4 py-2 rounded-lg bg-gray-800/60 backdrop-blur-md border border-white/10">
                   <div className="w-4 h-4 bg-[#48cae4] rounded-lg" />
                   <span className="text-xs font-bold tracking-[0.2em] uppercase text-white">The System</span>
                 </div>
 
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-6 pt-[2px] leading-tight 2xl:whitespace-nowrap">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-6 pt-[2px] leading-tight">
                   THE GENESIS PROTOCOL.
                 </h2>
 
@@ -161,8 +161,8 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div className="w-full xl:w-auto flex-shrink-0 bg-white/5 border border-white/10 rounded-xl p-6 md:p-10 text-sm md:text-lg 2xl:text-2xl font-mono leading-loose xl:min-w-[500px] 2xl:min-w-[600px] text-center">
-                <div className="mb-6 md:mb-8 opacity-50">
+              <div className="w-full xl:col-span-5 bg-white/5 border border-white/10 rounded-xl p-6 md:p-10 text-sm md:text-lg 2xl:text-2xl font-mono leading-loose text-center">
+                <div className="mb-6 md:mb-8 opacity-60">
                   <span className="block text-xs md:text-sm 2xl:text-base uppercase tracking-wider text-white/50 mb-2">Traditional (5 Years)</span>
                   <span className="text-white block">
                     Design → Lab → <span className="text-red-400">Fail</span> → Repeat
@@ -286,39 +286,67 @@ export default function HomePage() {
 
         {/* NATIONAL MANDATE */}
         <section className="px-4 sm:px-6 md:px-10 max-w-6xl mx-auto pb-24 mt-24">
-          <div className="pointer-events-auto rounded-3xl bg-white text-[#081421] p-6 sm:p-8 md:p-12 shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-              <div>
-                <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#48cae4] mb-4">National Mandate</div>
+          <div className="pointer-events-auto rounded-3xl border border-white/10 bg-white/95 text-[#081421] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#48cae4]/20 blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#081421]/10 blur-3xl" />
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+              <div className="lg:col-span-5">
+                <div className="inline-flex items-center gap-2 rounded-full bg-[#081421]/5 px-3 py-1.5 mb-5">
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#48cae4]">National Mandate</span>
+                </div>
+
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight mb-6">
                   SELECTED TO LEAD THE <br />&#39;AI FOR SCIENCE&#39; <br />REVOLUTION.
                 </h2>
-                <p className="text-lg text-[#081421]/70 mb-8">
+
+                <p className="text-base sm:text-lg text-[#081421]/70 mb-8 max-w-xl">
                   Shodh AI is the flagship partner of the IndiaAI Mission. We are making the national foundation for scientific intelligence.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-500">
-                  <Image src="/demo/india-ai-logo.png" alt="IndiaAI" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
-                  <Image src="/demo/nvidia-partner-logo.png" alt="Nvidia" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
-                  <div className="h-8 flex items-center font-bold text-lg md:text-xl text-gray-400">Google</div>
+                <div className="rounded-2xl border border-[#081421]/10 bg-white p-4 sm:p-5">
+                  <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#081421]/60 mb-3">
+                    Strategic Partners
+                  </div>
+                  <div className="flex flex-wrap items-center gap-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                    <Image src="/demo/india-ai-logo.png" alt="IndiaAI" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
+                    <Image src="/demo/nvidia-partner-logo.png" alt="Nvidia" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
+                    <div className="h-8 flex items-center font-bold text-lg md:text-xl text-gray-400">Google</div>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="p-5 rounded-xl bg-[#f8f9fa] border-l-4 border-[#48cae4]">
-                  <h4 className="font-bold text-[#081421]">TODAY: WE BUILD.</h4>
-                  <div className="text-xs font-semibold text-[#48cae4] mt-1 mb-1">THE MISSION: ENERGY STORAGE.</div>
-                  <p className="text-sm text-gray-600">Removing defects and scaling safe, high-density EV batteries for the global market.</p>
-                </div>
-                <div className="p-5 rounded-xl bg-[#f8f9fa] border-l-4 border-[#081421]">
-                  <h4 className="font-bold text-[#081421]">TOMORROW: WE DISCOVER.</h4>
-                  <div className="text-xs font-semibold text-[#48cae4] mt-1 mb-1">THE MISSION: POST-LITHIUM.</div>
-                  <p className="text-sm text-gray-600">Pioneering Sodium-Ion chemistries and non-lithium alternatives to secure material independence.</p>
-                </div>
-                <div className="p-5 rounded-xl bg-[#f8f9fa] border-l-4 border-gray-300">
-                  <h4 className="font-bold text-[#081421]">THE FUTURE: WE DESIGN.</h4>
-                  <div className="text-xs font-semibold text-[#48cae4] mt-1 mb-1">THE MISSION: TYPE 1 CIVILIZATION.</div>
-                  <p className="text-sm text-gray-600">Materials for Fusion, Space Exploration, and Quantum Computing.</p>
+              <div className="lg:col-span-7">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Today</div>
+                      <div className="h-2 w-2 rounded-full bg-[#48cae4]" />
+                    </div>
+                    <h4 className="font-bold text-[#081421] mb-2">WE BUILD.</h4>
+                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: ENERGY STORAGE.</div>
+                    <p className="text-sm text-[#081421]/70">Removing defects and scaling safe, high-density EV batteries for the global market.</p>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Tomorrow</div>
+                      <div className="h-2 w-2 rounded-full bg-[#081421]" />
+                    </div>
+                    <h4 className="font-bold text-[#081421] mb-2">WE DISCOVER.</h4>
+                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: POST-LITHIUM.</div>
+                    <p className="text-sm text-[#081421]/70">Pioneering Sodium-Ion chemistries and non-lithium alternatives to secure material independence.</p>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Future</div>
+                      <div className="h-2 w-2 rounded-full bg-[#081421]/40" />
+                    </div>
+                    <h4 className="font-bold text-[#081421] mb-2">WE DESIGN.</h4>
+                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: TYPE 1 CIVILIZATION.</div>
+                    <p className="text-sm text-[#081421]/70">Materials for Fusion, Space Exploration, and Quantum Computing.</p>
+                  </div>
                 </div>
               </div>
             </div>
