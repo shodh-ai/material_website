@@ -5,9 +5,10 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CanvasLayer from "@/components/three/CanvasLayer";
-import { ArrowUpRight, FileText } from "lucide-react";
+// Merged imports: Added Battery, Atom, Rocket, Cpu
+import { ArrowUpRight, FileText, Battery, Atom, Rocket, Cpu } from "lucide-react";
 
-// Data for the new Protocol section
+// --- DATA: Skanda Protocol ---
 const steps = [
   {
     number: "01",
@@ -32,6 +33,66 @@ const steps = [
   },
 ];
 
+// --- DATA: National Mandate (Impact Cards) ---
+const impactCards = [
+  {
+    image: "/pexels-thisisengineering-3861442%201.svg",
+    title: "Better Batteries",
+    description: "Silicon Anodes for EVs with 20% more range.",
+    overlayStyle: {
+      backgroundImage:
+        "linear-gradient(212.82853677342678deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%), linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%)",
+    },
+  },
+  {
+    image: "/image%201.svg",
+    title: "Safer Grids",
+    description: "Sodium-Ion storage that handles Indian heat.",
+    overlayClassName: "bg-[rgba(0,0,0,0.3)]",
+  },
+  {
+    image: "/batteries%201.svg",
+    title: "Cheaper Hydrogen",
+    description: "New catalysts to replace expensive Platinum.",
+    overlayClassName:
+      "bg-gradient-to-b from-[rgba(0,0,0,0)] from-1/2 to-[rgba(0,0,0,0.7)]",
+  },
+];
+
+// --- DATA: National Mandate (Stages) ---
+const stages = [
+  {
+    label: "TODAY",
+    title: "WE BUILD.",
+    mission: "The Mission: Energy Storage",
+    desc: "Removing defects and scaling safe, high-density EV batteries for the global market.",
+    icon: Battery,
+    color: "text-[#48cae4]",
+    bg: "bg-[#48cae4]/10",
+    border: "border-[#48cae4]/20",
+  },
+  {
+    label: "TOMORROW",
+    title: "WE DISCOVER.",
+    mission: "The Mission: Post-Lithium",
+    desc: "Pioneering Sodium-Ion chemistries and non-lithium alternatives to secure material independence.",
+    icon: Atom,
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
+    border: "border-purple-500/20",
+  },
+  {
+    label: "THE FUTURE",
+    title: "WE DESIGN.",
+    mission: "The Mission: Type 1 Civilization",
+    desc: "Inventing the materials required for Fusion, Space Exploration, and Quantum Computing.",
+    icon: Rocket,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full text-[#f0f0ff] selection:bg-[#48cae4] selection:text-[#081421] overflow-x-hidden">
@@ -49,7 +110,7 @@ export default function HomePage() {
                 <span className="text-[#48cae4] text-xs font-bold tracking-[0.2em] uppercase">Shodh AI</span>
               </div>
 
-              {/* Text scales smoothly from mobile -> laptop -> 32" screen */}
+              {/* Text scales smoothly */}
               <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-12xl font-medium tracking-tight leading-[1.05] break-words">
                 BUILDING
                 <br />
@@ -180,17 +241,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SKANDA PROTOCOL (UPDATED) */}
-        <section className="relative pointer-events-auto w-full bg-none py-32 px-6 md:px-10 flex flex-col items-center overflow-hidden">
+        {/* SKANDA PROTOCOL */}
+        <section className="relative pointer-events-auto w-full bg-[#f0f0ff] py-32 px-6 md:px-10 flex flex-col items-center overflow-hidden">
           
-          {/* Background Decor (Subtle Grid) */}
-          <div
-            className="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(#48cae4 1px, transparent 1px), linear-gradient(to right, #48cae4 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
-            }}
-          />
+          {/* Background Decor */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" />
 
           <div className="relative z-10 w-full max-w-[1440px] flex flex-col items-center">
 
@@ -200,19 +255,19 @@ export default function HomePage() {
               {/* Badge */}
               <div className="flex items-center gap-2 bg-[#48cae4]/10 border border-[#48cae4]/20 rounded px-3 py-2.5 w-fit mb-8 backdrop-blur-md">
                 <div className="w-2.5 h-2.5 bg-[#48cae4] rounded-sm shadow-[0_0_8px_#48cae4]" />
-                <span className="text-[#48cae4] text-xs tracking-wider uppercase font-medium">
+                <span className="text-black text-xs tracking-wider uppercase font-medium">
                   HOW IT WORKS
                 </span>
               </div>
 
               {/* Main Title */}
-              <h2 className="text-white text-4xl md:text-7xl font-medium uppercase tracking-tighter mb-6">
+              <h2 className="text-black text-4xl md:text-7xl font-medium uppercase tracking-tighter mb-6">
                 The Skanda Protocol
               </h2>
 
               {/* Secondary Title */}
-              <p className="text-white/60 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed mb-10">
-                Skanda: a <span className="text-white">Foundation Model for Matter</span> — a generative LMM trained on physics-first simulations and deployed as an industrial OS.
+              <p className="text-black/60 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                Skanda: a <span className="text-black">Foundation Model for Matter</span> — a generative LMM trained on physics-first simulations and deployed as an industrial OS.
               </p>
 
               {/* Button */}
@@ -222,7 +277,7 @@ export default function HomePage() {
 
                 <Link
                   href="/protocol"
-                  className="group relative flex items-center gap-3 px-8 py-4 bg-white/[0.03] hover:bg-white/[0.08] text-white rounded-full border border-white/10 transition-all duration-500 overflow-hidden"
+                  className="group relative flex items-center gap-3 px-8 py-4 bg-black/[0.03] hover:bg-black/[0.08] text-black rounded-full border border-black/10 transition-all duration-500 overflow-hidden"
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#48cae4]/20 via-transparent to-transparent transition-opacity duration-500" />
 
@@ -230,7 +285,7 @@ export default function HomePage() {
                   <span className="text-xs font-bold tracking-[0.2em] uppercase relative z-10">
                     Read Whitepaper
                   </span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 text-white/50 group-hover:text-[#48cae4]" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 text-black/50 group-hover:text-[#48cae4]" />
                 </Link>
 
                 {/* Connecting Line (Bottom) */}
@@ -239,40 +294,40 @@ export default function HomePage() {
             </div>
 
             {/* Grid Container */}
-            <div className="w-full border border-white/10 rounded-3xl bg-white/[0.01] backdrop-blur-sm overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div className="w-full border border-black/10 rounded-3xl bg-black/[0.01] backdrop-blur-sm overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-black/10">
                 {steps.map((step, index) => (
                   <div
                     key={index}
-                    className="group relative flex flex-col items-center text-center px-10 py-20 hover:bg-white/[0.02] transition-colors duration-500"
+                    className="group relative flex flex-col items-center text-center px-10 py-20 hover:bg-black/[0.02] transition-colors duration-500"
                   >
-                    <span className="absolute top-8 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 text-white/5 text-5xl font-black group-hover:text-[#48cae4]/10 transition-colors">
+                    <span className="absolute top-8 left-1/2 -translate-x-1/2 md:left-auto md:right-8 md:translate-x-0 text-black/5 text-5xl font-black group-hover:text-[#48cae4]/10 transition-colors">
                       {step.number}
                     </span>
 
                     <div className="relative mb-12">
                       <div className="absolute inset-0 bg-[#48cae4] blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 rounded-full" />
-                      <div className="relative w-28 h-28 bg-white/[0.03] border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#48cae4]/40 group-hover:rotate-[360deg] transition-all duration-1000">
+                      <div className="relative w-28 h-28 bg-black/[0.03] border border-black/10 rounded-2xl flex items-center justify-center group-hover:border-[#48cae4]/40 group-hover:rotate-[360deg] transition-all duration-1000">
                         <Image
                           src={step.image}
                           alt={step.title}
                           width={80}
                           height={80}
-                          className="w-14 h-14 invert opacity-70 group-hover:opacity-100 transition-opacity"
+                          className="w-14 h-14 opacity-70 group-hover:opacity-100 transition-opacity"
                         />
                       </div>
                     </div>
 
-                    <h3 className="text-white text-2xl font-medium mb-6 group-hover:text-[#48cae4] transition-colors tracking-wide">
+                    <h3 className="text-black text-2xl font-medium mb-6 group-hover:text-[#173a68] transition-colors tracking-wide">
                       {step.title}
                     </h3>
 
-                    <p className="text-white/50 text-sm leading-relaxed max-w-[280px] mx-auto">
+                    <p className="text-black/50 text-sm leading-relaxed max-w-[280px] mx-auto">
                       {step.description.split("Mesoscale").map((part, i, arr) => (
                         <span key={i}>
                           {part}
                           {i < arr.length - 1 && (
-                            <span className="text-white font-semibold underline decoration-[#48cae4]/30 decoration-2 underline-offset-4">Mesoscale</span>
+                            <span className="text-black font-semibold underline decoration-[#48cae4]/30 decoration-2 underline-offset-4">Mesoscale</span>
                           )}
                         </span>
                       ))}
@@ -284,72 +339,128 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* NATIONAL MANDATE */}
-        <section className="px-4 sm:px-6 md:px-10 max-w-6xl mx-auto pb-24 mt-24">
-          <div className="pointer-events-auto rounded-3xl border border-white/10 bg-white/95 text-[#081421] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#48cae4]/20 blur-3xl" />
-            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#081421]/10 blur-3xl" />
+        {/* --- NATIONAL MANDATE (REPLACED SECTION) --- */}
+        <section className="relative w-full pointer-events-auto bg-[#081421] py-32 px-6 md:px-10 border-t border-white/5">
+          
+          {/* Background Decor */}
+          <div 
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+           
+          />
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-              <div className="lg:col-span-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-[#081421]/5 px-3 py-1.5 mb-5">
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#48cae4]">National Mandate</span>
-                </div>
-
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium leading-tight mb-6">
-                  SELECTED TO LEAD THE <br />&#39;AI FOR SCIENCE&#39; <br />REVOLUTION.
-                </h2>
-
-                <p className="text-base sm:text-lg text-[#081421]/70 mb-8 max-w-xl">
-                  Shodh AI is the flagship partner of the IndiaAI Mission. We are making the national foundation for scientific intelligence.
-                </p>
-
-                <div className="rounded-2xl border border-[#081421]/10 bg-white p-4 sm:p-5">
-                  <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#081421]/60 mb-3">
-                    Strategic Partners
-                  </div>
-                  <div className="flex flex-wrap items-center gap-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition duration-500">
-                    <Image src="/demo/india-ai-logo.png" alt="IndiaAI" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
-                    <Image src="/demo/nvidia-partner-logo.png" alt="Nvidia" width={100} height={35} className="object-contain md:w-[120px] md:h-[40px]" />
-                    <div className="h-8 flex items-center font-bold text-lg md:text-xl text-gray-400">Google</div>
-                  </div>
+          <div className="max-w-[1440px] mx-auto relative z-10">
+            
+            {/* --- 1. HEADER --- */}
+            <div className="text-center mb-24">
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blur-400 rounded-full backdrop-blur-md border border-white/10">
+                  <div className="w-2 h-2 bg-[#48cae4] rounded-full" />
+                  <Cpu className="w-4 h-4 text-white" />
+                  <span className="text-white text-xs font-bold tracking-[0.15em] uppercase">
+                    The National Mandate
+                  </span>
                 </div>
               </div>
+              
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]">
+                Selected to lead the <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#48cae4] to-white">
+                  'AI for Science' Revolution.
+                </span>
+              </h2>
+              
+              <p className="text-xl text-white/60 font-light max-w-2xl mx-auto leading-relaxed">
+                Shodh AI is the flagship partner of the <strong className="text-white">IndiaAI Mission</strong>. We are making the national foundation for scientific intelligence.
+              </p>
+            </div>
 
-              <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Today</div>
-                      <div className="h-2 w-2 rounded-full bg-[#48cae4]" />
-                    </div>
-                    <h4 className="font-bold text-[#081421] mb-2">WE BUILD.</h4>
-                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: ENERGY STORAGE.</div>
-                    <p className="text-sm text-[#081421]/70">Removing defects and scaling safe, high-density EV batteries for the global market.</p>
+           
+            {/* --- 3. TIMELINE CARDS --- */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              {stages.map((stage, i) => (
+                <div 
+                  key={i} 
+                  className={`relative group p-8 rounded-2xl border ${stage.border} bg-[#0a1628] hover:bg-white/[0.02] transition-all duration-500 h-[500px]`}
+                >
+                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-widest mb-8 ${stage.bg} ${stage.color}`}>
+                    <div className={`w-1.5 h-1.5 rounded-full bg-current`} />
+                    {stage.label}
                   </div>
 
-                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Tomorrow</div>
-                      <div className="h-2 w-2 rounded-full bg-[#081421]" />
-                    </div>
-                    <h4 className="font-bold text-[#081421] mb-2">WE DISCOVER.</h4>
-                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: POST-LITHIUM.</div>
-                    <p className="text-sm text-[#081421]/70">Pioneering Sodium-Ion chemistries and non-lithium alternatives to secure material independence.</p>
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-medium text-white mb-2">{stage.title}</h3>
+                    <p className={`text-sm font-mono uppercase tracking-wider ${stage.color}`}>
+                      {stage.mission}
+                    </p>
                   </div>
 
-                  <div className="rounded-2xl border border-[#081421]/10 bg-white p-5 shadow-sm">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-xs font-bold tracking-[0.2em] uppercase text-[#081421]/50">Future</div>
-                      <div className="h-2 w-2 rounded-full bg-[#081421]/40" />
-                    </div>
-                    <h4 className="font-bold text-[#081421] mb-2">WE DESIGN.</h4>
-                    <div className="text-xs font-semibold text-[#48cae4] mb-2">THE MISSION: TYPE 1 CIVILIZATION.</div>
-                    <p className="text-sm text-[#081421]/70">Materials for Fusion, Space Exploration, and Quantum Computing.</p>
+                  <p className="text-white/60 leading-relaxed text-xl mb-8 min-h-[60px]">
+                    {stage.desc}
+                  </p>
+
+                  <div className={`absolute bottom-8 right-8 p-3 rounded-xl ${stage.bg} ${stage.color} opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500`}>
+                    <stage.icon className="w-6 h-6" />
                   </div>
+                </div>
+              ))}
+            </div>
+
+
+             {/* --- 2. IMPACT IMAGES --- */}
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 mb-6">
+              {impactCards.map((card) => (
+                <div key={card.title} className="relative group">
+                  <div className="relative h-[500px] overflow-hidden rounded-2xl border border-white/10">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+
+                    {/* Overlays */}
+                    {card.overlayStyle ? (
+                      <div className="absolute inset-0" style={card.overlayStyle} />
+                    ) : (
+                      <div className={`absolute inset-0 ${card.overlayClassName ?? ""}`} />
+                    )}
+
+                    {/* Text Content */}
+                    <div className="absolute bottom-8 left-8 right-8 text-[#f0f0ff]">
+                      <h3 className="mb-3 text-[32px] font-medium capitalize">
+                        {card.title}
+                      </h3>
+                      <p className="text-xl text-white/70 leading-relaxed">
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+
+            {/* --- 4. LOGOS --- */}
+            <div className="border-t border-white/10 pt-16">
+              <p className="text-center text-xs font-bold tracking-[0.2em] text-white/30 uppercase mb-12">
+                Backed By National & Global Leaders
+              </p>
+              
+              <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <div className="flex items-center gap-3">
+                   <div className="text-2xl font-bold text-white tracking-tighter">
+                     India<span className="text-[#ff9933]">AI</span>
+                   </div>
+                </div>
+                <div className="flex items-center gap-2">
+                   <span className="text-2xl font-bold text-white tracking-tight">NVIDIA</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <span className="text-2xl font-bold text-white tracking-tight">Google</span>
                 </div>
               </div>
             </div>
+
           </div>
         </section>
 

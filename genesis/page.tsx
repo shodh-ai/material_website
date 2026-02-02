@@ -39,7 +39,7 @@ export default function GenesisPage() {
               {/* Old Way */}
               <div>
                 <h4 className="text-white font-medium mb-4 flex items-center gap-2 text-2xl md:text-3xl">
-                  <span style={{ width: '10px', height: '10px', backgroundColor: 'red-500', borderRadius: '50%', display: 'inline-block' }} /> Old Way (5 Years)
+                  <span style={{ width: '10px', height: '10px', backgroundColor: '#ef4444', borderRadius: '50%', display: 'inline-block' }} /> Old Way (5 Years)
                 </h4>
                 <div className="flex flex-wrap gap-3 text-sm md:text-base font-mono text-white/70">
                   <span>Design</span>
@@ -153,7 +153,7 @@ export default function GenesisPage() {
             <div className="bg-[#0a1628] border border-white/10 rounded-xl p-6 md:p-8 mb-16">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-6">The Mechanism</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm md:text-base">
-                  <div className="bg-white/5 p-4 rounded border border-white/5">
+                  <div className="bg-white/5 p-4 rounded border border-white/5 p">
                      <strong className="block text-[#48cae4] mb-2">1. Generate</strong>
                      <span className="text-white/70">The Inverse Model proposes a new chemistry.</span>
                   </div>
