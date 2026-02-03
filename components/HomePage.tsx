@@ -167,32 +167,14 @@
             <div className="hidden md:block md:w-1/2" />
           </section>
 
-          {/* SCROLL SECTION 2: PHYSICS */}
-          <section className="min-h-[50vh] md:h-[60vh] py-12 md:py-0 flex items-center justify-center px-6 md:px-10 max-w-6xl mx-auto">
-            <div className="w-full md:w-1/2 pointer-events-auto text-left">
-              <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium drop-shadow-lg 2xl:whitespace-nowrap leading-tight">PHYSICS, GENERATED.</h2>
-              <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-3xl lg:text-4xl font-light leading-relaxed">
-                Introducing SkandaX.
-                <br />
-                We don&#39;t guess the chemistry;<br />
-                we choose the result.
-              </p>
-            </div>
-            <div className="hidden md:block md:w-1/2" />
-          </section>
+          
 
           {/* SCROLL SECTION 3: BEYOND */}
           <section className="min-h-[50vh] md:h-[60vh] py-12 md:py-0 flex items-center px-6 md:px-10 max-w-6xl mx-auto">
             <div className="w-full md:w-1/2 hidden md:block" />
             <div className="w-full md:w-1/2 pointer-events-auto">
               <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium drop-shadow-lg 2xl:whitespace-nowrap leading-tight">BEYOND SCIENCE FICTION.</h2>
-              <p className="mt-6 text-white/90 text-lg sm:text-xl md:text-3xl lg:text-4xl font-light leading-relaxed">
-                Generative design. Autonomous robotic labs.
-                <br />
-                Materials that endure heat, pressure, and time.
-                <br />
-                The future is physical.
-              </p>
+
             </div>
           </section>
 
