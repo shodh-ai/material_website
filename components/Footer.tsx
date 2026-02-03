@@ -120,7 +120,7 @@ export default function Footer() {
 
         {/* Large Brand Text */}
         <div className="mb-10 overflow-hidden">
-          <h1 className="text-[#f0f0ff] font-normal leading-[0.9] select-none w-full text-[clamp(3.5rem,12vw,18rem)] whitespace-nowrap">
+          <h1 className="text-[#f0f0ff] font-normal leading-[0.9] select-none w-full text-[clamp(4.5rem,22vw,24rem)] whitespace-nowrap">
             Shodh AI
           </h1>
         </div>
