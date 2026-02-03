@@ -388,7 +388,7 @@ export default function InvestorHomePage() {
 
               <motion.h1 
                 variants={fadeInUp}
-                className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-12xl font-medium tracking-tight leading-[1.05] break-words"
+                className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-12xl font-medium tracking-tight leading-[1.05] break-normal"
               >
                 BUILDING
                 <br />
