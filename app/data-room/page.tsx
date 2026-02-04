@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -71,6 +71,19 @@ export default function DataRoomPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Restore access state from localStorage on mount
+  useEffect(() => {
+    const savedAccess = localStorage.getItem('dataRoomAccess');
+    if (savedAccess) {
+      const { accessGranted: granted, formData: savedFormData } = JSON.parse(savedAccess);
+      if (granted) {
+        setAccessGranted(true);
+        setFormData(savedFormData);
+        setStep('access');
+      }
+    }
+  }, []);
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -82,6 +95,11 @@ export default function DataRoomPage() {
       if (result.success) {
         setAccessGranted(true);
         setStep("access");
+        // Persist access state to localStorage
+        localStorage.setItem('dataRoomAccess', JSON.stringify({
+          accessGranted: true,
+          formData
+        }));
       } else {
         setError("Failed to save your application. Please try again.");
       }
