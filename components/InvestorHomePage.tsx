@@ -5,21 +5,22 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useRef, useState } from "react";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CanvasLayer from "@/components/three/CanvasLayer";
-import { 
-  ArrowUpRight, 
-  FileText, 
-  Battery, 
-  Atom, 
-  Rocket, 
-  Cpu, 
-  Zap, 
-  Globe, 
-  Lock, 
-  TrendingUp, 
-  Layers, 
+import InvestmentThesisSection from "@/components/InvestmentThesisSection";
+import VisualWorkflow from "@/components/VisualWorkflow";
+import {
+  ArrowUpRight,
+  FileText,
+  Battery,
+  Atom,
+  Rocket,
+  Cpu,
+  Zap,
+  Globe,
+  Lock,
+  TrendingUp,
+  Layers,
   Factory,
   Microscope,
   Beaker,
@@ -61,165 +62,6 @@ const scaleIn: Variants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: [0, 0, 0.2, 1] } }
 };
 
-// ============================================
-// CHAPTER 3: MATTER COMPILER - Interactive Diagram
-// ============================================
-function MatterCompilerDiagram() {
-  const [activeStep, setActiveStep] = useState(0);
-  
-  const steps = [
-    { 
-      id: 0, 
-      label: "Intent", 
-      desc: "Define target properties", 
-      icon: Target, 
-      detail: "Specify exact material requirements: heat resistance, energy density, durability. No guesswork.",
-      color: "#48cae4"
-    },
-    { 
-      id: 1, 
-      label: "AI Design", 
-      desc: "3D Diffusion Transformer", 
-      icon: Cpu, 
-      detail: "SkandaX generates optimal mesoscale microstructure in minutes, not years.",
-      color: "#a855f7"
-    },
-    { 
-      id: 2, 
-      label: "Robotics", 
-      desc: "Autonomous synthesis", 
-      icon: Factory, 
-      detail: "Robotic labs synthesize and test materials 24/7 without human intervention.",
-      color: "#22c55e"
-    },
-    { 
-      id: 3, 
-      label: "Sensors", 
-      desc: "Real-time validation", 
-      icon: Zap, 
-      detail: "High-precision sensors validate performance against target specifications.",
-      color: "#f59e0b"
-    },
-    { 
-      id: 4, 
-      label: "Data Loop", 
-      desc: "Federated learning", 
-      icon: Database, 
-      detail: "Factory data stays private. Intelligence compounds globally. The moat deepens.",
-      color: "#ef4444"
-    },
-  ];
-
-  return (
-    <div className="relative w-full">
-      {/* Flow Diagram */}
-      <div className="relative flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 mb-12">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
-          const isActive = activeStep === index;
-          
-          return (
-            <div key={step.id} className="flex items-center gap-4 w-full md:w-auto">
-              <motion.button
-                onClick={() => setActiveStep(index)}
-                className={`relative flex flex-col items-center gap-3 p-6 rounded-2xl transition-all duration-300 w-full md:w-40 ${
-                  isActive 
-                    ? "bg-gradient-to-br from-[#48cae4]/20 to-[#a855f7]/10 border-2 border-[#48cae4] shadow-lg shadow-[#48cae4]/20" 
-                    : "bg-white/5 border border-white/10 hover:bg-white/10"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isActive 
-                    ? "bg-gradient-to-br from-[#48cae4] to-[#a855f7] shadow-lg shadow-[#48cae4]/50" 
-                    : "bg-white/10 border border-white/20"
-                }`}>
-                  <Icon className={`w-8 h-8 ${isActive ? "text-white" : "text-white/60"}`} />
-                </div>
-                
-                <div className="text-center">
-                  <p className={`text-sm font-bold tracking-wider uppercase transition-colors ${
-                    isActive ? "text-[#48cae4]" : "text-white/70"
-                  }`}>
-                    {step.label}
-                  </p>
-                </div>
-
-                {isActive && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute -bottom-2 w-16 h-1 bg-gradient-to-r from-[#48cae4] to-[#a855f7] rounded-full"
-                  />
-                )}
-              </motion.button>
-              
-              {index < steps.length - 1 && (
-                <ChevronRight className="hidden md:block w-6 h-6 text-white/30 flex-shrink-0" />
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Detail Panel */}
-      <motion.div
-        key={activeStep}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="p-8 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-white/20 backdrop-blur-sm"
-      >
-        <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center flex-shrink-0">
-            {(() => {
-              const Icon = steps[activeStep].icon;
-              return <Icon className="w-6 h-6 text-[#48cae4]" />;
-            })()}
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-[#48cae4] font-mono text-xs tracking-wider">STEP {activeStep + 1} OF 5</span>
-              <div className="h-px flex-1 bg-gradient-to-r from-[#48cae4]/50 to-transparent" />
-            </div>
-            <h4 className="text-2xl font-medium text-white mb-3">{steps[activeStep].label}</h4>
-            <p className="text-white/70 leading-relaxed mb-2 text-lg">{steps[activeStep].desc}</p>
-            <p className="text-white/50 leading-relaxed">{steps[activeStep].detail}</p>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Unit Economics Callout */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-[#48cae4]/10 to-[#a855f7]/10 border border-[#48cae4]/30"
-      >
-        <div className="flex items-center justify-between flex-wrap gap-6">
-          <div>
-            <p className="text-white/60 text-sm mb-1">Traditional R&D Cycle</p>
-            <p className="text-3xl font-bold text-white">5 Years</p>
-          </div>
-          <ArrowUpRight className="w-8 h-8 text-[#48cae4] rotate-90" />
-          <div>
-            <p className="text-[#48cae4] text-sm mb-1">Shodh AI Cycle</p>
-            <p className="text-3xl font-bold text-[#48cae4]">6 Months</p>
-          </div>
-          <div className="w-full md:w-auto">
-            <p className="text-white/90 text-lg font-medium">
-              <span className="text-[#48cae4]">10x faster.</span> This is the unit economics that changes everything.
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
 
 // ============================================
 // CHAPTER 5: GENESIS PROTOCOL - Business Layers
@@ -227,39 +69,39 @@ function MatterCompilerDiagram() {
 const businessLayers = [
   {
     layer: "01",
-    title: "The Bridge",
-    subtitle: "NRE / Development Fees",
-    description: "Cash flow from enterprise partnerships. We co-develop custom materials for industry leaders.",
-    metric: "$2-5M",
-    metricLabel: "per engagement",
+    title: "Strategic Design Partnerships",
+    subtitle: "The FDE Model",
+    description: "We deploy Forward Deployed Engineers (FDEs) directly into R&D centers of Tier-1 OEMs in Japan and Europe. Partners pay for 18-month Design Sprints where our engineers use SkandaX to design next-gen Silicon or Sodium-Ion recipes on-site.",
+    metric: "$3M-7M",
+    metricLabel: "per 18-month sprint",
     color: "#48cae4",
     icon: Beaker,
-    features: ["Custom material design", "Pilot validation", "IP co-creation"],
-    example: "Tata Steel pays $3M for custom alloy development"
+    features: ["Forward Deployed Engineers", "On-site design sprints", "Non-dilutive funding"],
+    example: "Tata, BMW, Panasonic pay $3M-7M for custom battery design"
   },
   {
     layer: "02",
-    title: "The Rent",
-    subtitle: "SaaS for Factory Lines",
-    description: "Recurring revenue from deployed Matter Compilers. Factories pay per-use for continuous optimization.",
-    metric: "$50K-200K",
+    title: "The Yield Operating System",
+    subtitle: "SaaS per Production Line",
+    description: "SkandaX DEPLOY becomes the factory's operating system. We are Yield Insurance—if our AI prevents even one bad batch or reduces ramp-up time by 3 months, the software pays for itself 10x over. Once integrated into PLC/MES sensors, switching costs become astronomical.",
+    metric: "$250K-500K",
     metricLabel: "annual per line",
     color: "#a855f7",
     icon: Factory,
-    features: ["Real-time optimization", "Federated learning", "24/7 monitoring"],
-    example: "100 factory lines = $10M ARR"
+    features: ["Factory Guard Edge Node", "Yield insurance", "PLC/MES integration"],
+    example: "Every production line running our software = recurring revenue"
   },
   {
     layer: "03",
-    title: "The Empire",
-    subtitle: "Production Royalties",
-    description: "Exponential upside from every unit produced using our materials. The true scale play.",
-    metric: "1-5%",
-    metricLabel: "per unit royalty",
+    title: "The Sovereign Royalty",
+    subtitle: "IP Tax (Intel Inside Model)",
+    description: "Because we used SkandaX GENESIS to create the proprietary microstructure and machine recipe, we own the IP. We take a small Technology Tax on every battery produced using a Shodh-proprietary design. This is exponential upside—as partners scale from 1 GWh to 100 GWh, our revenue explodes with zero marginal cost.",
+    metric: "$0.50-1.50",
+    metricLabel: "per kWh produced",
     color: "#f59e0b",
     icon: TrendingUp,
-    features: ["Per-unit fees", "Global scale", "Passive income"],
-    example: "1M EVs/year = $50-250M in royalties"
+    features: ["Production royalties", "Zero marginal cost", "IP powerhouse"],
+    example: "Similar to ARM in semiconductors or Qualcomm in mobile"
   }
 ];
 
@@ -269,42 +111,42 @@ const businessLayers = [
 const roadmapPhases = [
   {
     phase: "PHASE 1",
-    title: "Beachhead",
-    focus: "EV Batteries & Energy Storage",
-    timeline: "Months 0-12",
-    milestone: "Closed-Loop Validation",
+    title: "The Physics Validator",
+    focus: "Silicon Anodes (0-6 Months)",
+    timeline: "Months 0-6",
+    milestone: "Scientific De-risking",
     valuation: "$50M",
-    capital: "$5M",
-    description: "Prove the Matter Compiler with silicon anode batteries. First commercial deployment with Tata/Tesla.",
+    capital: "Initial $5M",
+    description: "Master the hardest physics first. Train SkandaX on 10M-point Physics Hypercube and run Parent-Child Protocol in autonomous lab to generate 1,000 ground truth data points. Prove >95% accuracy on silicon-graphite expansion prediction.",
     color: "#48cae4",
     icon: Battery,
-    kpis: ["First paying customer", "AI→Robot→Data loop proven", "94%+ prediction accuracy"]
+    kpis: ["10M synthetic simulation dataset", ">95% failure prediction accuracy", "First pilot partner (Tata/Exide)"]
   },
   {
     phase: "PHASE 2",
-    title: "Expansion",
-    focus: "Hydrogen & Membranes",
-    timeline: "Months 12-24",
-    milestone: "Multi-Vertical Traction",
+    title: "Platform Scalability",
+    focus: "Cathodes & Global Expansion (6-12 Months)",
+    timeline: "Months 6-12",
+    milestone: "Economic De-risking",
     valuation: "$200M",
-    capital: "$15M",
-    description: "Scale to hydrogen catalysts and separation membranes. 10+ enterprise clients across 3 verticals.",
+    capital: "$15M total",
+    description: "Demonstrate Transfer Learning advantage. Expand to NMC/LFP cathodes with 70% less data than Phase 1. Deploy FDE teams to Japan and Europe. Open Munich and Tokyo offices. Prove marginal cost drops >50% per iteration.",
     color: "#a855f7",
     icon: Atom,
-    kpis: ["10+ enterprise clients", "$10M ARR", "3 material verticals"]
+    kpis: ["3 FDE teams deployed globally", "3+ material chemistries", "$5M in NRE revenue"]
   },
   {
     phase: "PHASE 3",
-    title: "Endgame",
-    focus: "Aerospace & Fusion",
-    timeline: "Months 24-36",
-    milestone: "Global Category Leader",
+    title: "Industrial Integration",
+    focus: "Factory Deployment (12-18 Months)",
+    timeline: "Months 12-18",
+    milestone: "Commercial De-risking",
     valuation: "$500M+",
     capital: "$20M total",
-    description: "Enter aerospace materials and fusion reactor components. IPO or strategic acquisition by energy/tech titan.",
+    description: "Move from lab to production line. Deploy Factory Guard into partner Gigafactory. Launch full-cell digital twin. AI reads real-time sensor data and flags micro-defects. On-site teams in Tokyo and Munich oversee factory-floor reality.",
     color: "#f59e0b",
     icon: Rocket,
-    kpis: ["Category leadership", "$50M+ ARR", "Strategic exit options"]
+    kpis: ["Factory Guard in 2 facilities", "10%+ yield improvement", "$10M ARR achieved"]
   }
 ];
 
@@ -363,14 +205,13 @@ export default function InvestorHomePage() {
       <CanvasLayer />
 
       <main id="html-scroll-container" className="relative z-[2] w-full pointer-events-none">
-        <Navbar />
 
         {/* ============================================ */}
         {/* CHAPTER 1: THE INEVITABILITY - Hero */}
         {/* ============================================ */}
-        <section className="min-h-screen flex items-center px-4 sm:px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto pt-28 md:pt-36 pb-12">
+        <section className="min-h-screen flex flex-col items-center px-4 sm:px-6 md:px-10 max-w-[95%] lg:max-w-[90%] mx-auto pt-28 md:pt-36 pb-12">
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <motion.div 
+            <motion.div
               className="lg:col-span-7 pointer-events-auto"
               initial="hidden"
               animate="visible"
@@ -386,7 +227,7 @@ export default function InvestorHomePage() {
                 </div>
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 variants={fadeInUp}
                 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-10xl 2xl:text-12xl font-medium tracking-tight leading-[1.05] break-normal"
               >
@@ -399,205 +240,237 @@ export default function InvestorHomePage() {
                 </span>
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 variants={fadeInUp}
                 className="mt-6 text-base md:text-xl text-white/90 font-light max-w-2xl drop-shadow-md leading-relaxed"
               >
-                AI for Science isn't just coming—it's the next <strong className="text-white">$0 to $1 Trillion market</strong>. 
-                We are at the perfect "Compute + Physics" intersection. 
+                AI for Science isn't just coming—it's the next <strong className="text-white">$0 to $1 Trillion market</strong>.
+                We are at the perfect "Compute + Physics" intersection.
                 <span className="text-[#48cae4]"> Shodh AI is India's sovereign answer</span> to the global race for material dominance.
               </motion.p>
 
-              <motion.div 
-                variants={fadeInUp}
-                className="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
-              >
-                <p className="text-white/70 text-sm italic leading-relaxed">
-                  "The world is moving from <span className="text-white font-medium">Discovery by Luck</span> to <span className="text-[#48cae4] font-medium">Discovery by Design</span>. It is inevitable."
-                </p>
-              </motion.div>
-
-              <motion.div 
-                variants={fadeInUp}
-                className="mt-10 flex flex-wrap gap-[20px]"
-              >
-                <Link
-                  href="#investor-portal"
-                  className="inline-flex items-center gap-2 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[28px] bg-gradient-to-r from-[#48cae4] to-[#a855f7] text-white px-8 py-4 text-[16px] font-medium hover:shadow-lg hover:shadow-[#48cae4]/30 transition-all"
-                >
-                  <Lock className="w-4 h-4" />
-                  REQUEST DATA ROOM ACCESS
-                </Link>
-                <Link
-                  href="/genesis"
-                  className="inline-flex items-center gap-2 rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[28px] text-[#ffffff] px-8 py-4 text-[16px] font-medium border border-[#ffffff] hover:bg-white/10 transition-all"
-                >
-                  READ THE MANIFESTO
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
             </motion.div>
 
-            <motion.div 
-              className="lg:col-span-5 pointer-events-auto mt-8 lg:mt-0"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <div className="rounded-2xl border border-white/20 bg-black/40 p-6 md:p-8 backdrop-blur-xl shadow-2xl">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-xs text-white/70 tracking-[0.2em] uppercase font-semibold">The Thesis</span>
-                  <Sparkles className="w-5 h-5 text-[#48cae4]" />
+            {/* 3D Visual placeholder - right side */}
+            <div className="lg:col-span-5 pointer-events-auto mt-8 lg:mt-0 relative z-10">
+              {/* The 3D petal canvas renders here */}
+            </div>
+          </div>
+
+          {/* The Thesis Card - Now positioned below the hero grid */}
+          <motion.div
+            className="w-full max-w-3xl pointer-events-auto mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <div className="rounded-2xl border border-white/20 bg-black/60 p-6 md:p-8 backdrop-blur-xl shadow-2xl">
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-xs text-white/70 tracking-[0.2em] uppercase font-semibold">The Thesis</span>
+                <Sparkles className="w-5 h-5 text-[#48cae4]" />
+              </div>
+              <h3 className="text-2xl font-medium text-white mb-4">The Inevitable Shift</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#48cae4] flex-shrink-0 mt-0.5" />
+                  <p className="text-white/80 leading-relaxed">
+                    <strong className="text-white">The market is desperate.</strong> Every industry needs better materials. Yesterday.
+                  </p>
                 </div>
-                <h3 className="text-2xl font-medium text-white mb-4">The Perfect Storm</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#48cae4] flex-shrink-0 mt-0.5" />
-                    <p className="text-white/80 leading-relaxed">
-                      <strong className="text-white">Compute is abundant.</strong> GPUs are commoditized. The infrastructure is ready.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#48cae4] flex-shrink-0 mt-0.5" />
-                    <p className="text-white/80 leading-relaxed">
-                      <strong className="text-white">Physics is understood.</strong> We know the equations. We just need to solve them at scale.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#48cae4] flex-shrink-0 mt-0.5" />
-                    <p className="text-white/80 leading-relaxed">
-                      <strong className="text-white">The market is desperate.</strong> Every industry needs better materials. Yesterday.
-                    </p>
-                  </div>
+                <div className="p-6 rounded-xl bg-white/5 border border-white/10 mt-6">
+                  <p className="text-white/70 text-lg italic leading-relaxed">
+                    "The world is moving from <span className="text-white font-medium">Discovery by Luck</span> to <span className="text-[#48cae4] font-medium">Discovery by Design</span>. It is inevitable."
+                  </p>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* ============================================ */}
-        {/* CHAPTER 2: THE "ZOMBIE MATERIAL" CRISIS */}
+        {/* CHAPTER 2: THE \"ZOMBIE MATERIAL\" CRISIS */}
         {/* ============================================ */}
         <section className="min-h-screen py-32 px-6 md:px-10 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-20"
-            >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 rounded-full backdrop-blur-md border border-red-500/30 mb-6">
-                <AlertTriangle className="w-4 h-4 text-red-400" />
-                <span className="text-red-400 text-xs font-bold tracking-[0.15em] uppercase">
-                  The Problem
-                </span>
-              </motion.div>
 
-              <motion.h2 
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
-              >
-                BEYOND THE
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-400">
-                  SCIENCE FICTION.
-                </span>
-              </motion.h2>
-
-              <motion.p 
-                variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed"
-              >
-                Our competitors focus on the <strong className="text-white">Lab</strong>. 
-                We focus on the <strong className="text-[#48cae4]">Factory</strong>.
-                <br />
-                <span className="text-white/90 mt-2 block">
-                  We don't just invent the battery; we empower every factory in the world to invent their own.
-                </span>
-              </motion.p>
-            </motion.div>
-
-            {/* Competitor Comparison */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 pointer-events-auto"
-            >
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
-                    <AlertTriangle className="w-5 h-5 text-red-400" />
-                  </div>
-                  <h3 className="text-xl font-medium text-white">The Old Way</h3>
-                </div>
-                <p className="text-white/60 leading-relaxed mb-4">
-                  Radical AI, Lila, and others build materials in the lab. Beautiful science. But it stops at the lab door.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-red-400/70">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    <span className="text-sm">Lab-scale only</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-red-400/70">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    <span className="text-sm">No factory integration</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-red-400/70">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    <span className="text-sm">Limited scalability</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-gradient-to-br from-[#48cae4]/10 to-[#a855f7]/10 border-2 border-[#48cae4]/30">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#48cae4]/30 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-[#48cae4]" />
-                  </div>
-                  <h3 className="text-xl font-medium text-white">The Shodh Way</h3>
-                </div>
-                <p className="text-white/80 leading-relaxed mb-4">
-                  We build the <strong className="text-[#48cae4]">Matter Compiler</strong>—the engine that makes materials possible at factory scale.
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-[#48cae4]">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span className="text-sm">Factory-first design</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#48cae4]">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span className="text-sm">Closed-loop AI→Robot→Data</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#48cae4]">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span className="text-sm">Global scale from day one</span>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* The Flex */}
+            {/* Video Section - Full Width with Overlay Text */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-10 rounded-3xl bg-gradient-to-r from-[#48cae4]/20 via-[#a855f7]/20 to-[#48cae4]/20 border border-[#48cae4]/30 text-center pointer-events-auto"
+              className="relative w-screen left-[50%] right-[50%] -mx-[50vw] mb-32 pointer-events-auto"
             >
-              <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed">
-                "We aren't just building a better battery; <br className="hidden md:block" />
-                we are building <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] to-[#a855f7]">the machine that makes the battery possible.</span>"
-              </p>
+              <div className="relative w-full overflow-hidden bg-black/40">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto"
+                >
+                  <source src="/video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Overlay - Centered Title */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-black/20">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={staggerContainer}
+                  >
+                    <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 rounded-full backdrop-blur-md border border-red-500/40 mb-6">
+                      <AlertTriangle className="w-4 h-4 text-red-400" />
+                      <span className="text-red-400 text-xs font-bold tracking-[0.15em] uppercase">
+                        The Problem
+                      </span>
+                    </motion.div>
+
+                    <motion.h2
+                      variants={fadeInUp}
+                      className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                    >
+                      BEYOND THE
+                      <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-400">
+                        SCIENCE FICTION.
+                      </span>
+                    </motion.h2>
+
+                    <motion.p
+                      variants={fadeInUp}
+                      className="text-lg md:text-xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+                    >
+                      The world has already begun. AI for science is the next big thing—and it's inevitable.
+                    </motion.p>
+                  </motion.div>
+                </div>
+
+                {/* Bottom Corner - Documentary Label */}
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 bg-[#48cae4] rounded-full animate-pulse" />
+                    <span className="text-[#48cae4] text-xs font-bold tracking-[0.2em] uppercase">Documentary Preview</span>
+                  </div>
+                  <h3 className="text-white text-2xl font-medium tracking-tight">The Genesis of Shodh AI</h3>
+                </div>
+              </div>
             </motion.div>
+
+            {/* ============================================ */}
+            {/* CHAPTER 4: THE SOVEREIGN MOAT */}
+            {/* ============================================ */}
+            <section className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto bg-[#f0f0ff] py-32 px-6 md:px-10 border-t border-white/5 overflow-hidden">
+              <div className="max-w-7xl mx-auto">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                  className="text-center mb-20"
+                >
+                  <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#ff9933]/10 rounded-full backdrop-blur-md border border-[#ff9933]/30 mb-6">
+                    <Shield className="w-4 h-4 text-[#ff9933]" />
+                    <span className="text-[#ff9933] text-xs font-bold tracking-[0.15em] uppercase">
+                      Sovereign Advantage
+                    </span>
+                  </motion.div>
+
+                  <motion.h2
+                    variants={fadeInUp}
+                    className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-gray-900 mb-6 leading-[1.1]"
+                  >
+                    BUILT IN INDIA.
+                    <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff9933] via-[#4a5568] to-[#138808]">
+                      SCALED FOR THE WORLD.
+                    </span>
+                  </motion.h2>
+
+                  <motion.p
+                    variants={fadeInUp}
+                    className="text-xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed"
+                  >
+                    Selected by the <strong className="text-gray-900">IndiaAI Mission</strong>.
+                    The government provides the CAPEX (GPUs and Robots), allowing our capital to stay focused on <span className="text-[#4338ca]">IP and Talent</span>.
+                  </motion.p>
+                </motion.div>
+
+                {/* Three Pillars */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+                >
+                  <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/60 backdrop-blur-sm border border-[#ff9933]/30 shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-[#ff9933]/20 flex items-center justify-center mb-4">
+                      <Award className="w-6 h-6 text-[#ff9933]" />
+                    </div>
+                    <h3 className="text-xl font-medium text-gray-900 mb-3">The Mandate</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Official partner of IndiaAI Mission. Government-backed infrastructure. National priority status.
+                    </p>
+                  </motion.div>
+
+                  <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/60 backdrop-blur-sm border border-[#48cae4]/30 shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center mb-4">
+                      <Users className="w-6 h-6 text-[#48cae4]" />
+                    </div>
+                    <h3 className="text-xl font-medium text-gray-900 mb-3">The Mission</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Selected by IndiaAI to spearhead India's AI for Science mission. Leading the nation's frontier research initiative.
+                    </p>
+                  </motion.div>
+
+                  <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/60 backdrop-blur-sm border border-[#a855f7]/30 shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-[#a855f7]/20 flex items-center justify-center mb-4">
+                      <Globe className="w-6 h-6 text-[#a855f7]" />
+                    </div>
+                    <h3 className="text-xl font-medium text-gray-900 mb-3">The Partners</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Backed by NVIDIA, Google, and global energy leaders. Access to compute and distribution.
+                    </p>
+                  </motion.div>
+                </motion.div>
+
+                {/* Logos */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="border-t border-white/10 pt-16"
+                >
+                  <p className="text-center text-xs font-bold tracking-[0.2em] text-gray-400 uppercase mb-12">
+                    Backed By National & Global Leaders
+                  </p>
+
+                  <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <div className="flex items-center gap-3">
+                      <div className="text-3xl font-bold text-gray-900 tracking-tighter">
+                        India<span className="text-[#ff9933]">AI</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold text-gray-900 tracking-tight">NVIDIA</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold text-gray-900 tracking-tight">Google</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
           </div>
         </section>
 
         {/* ============================================ */}
         {/* CHAPTER 3: THE MATTER COMPILER */}
         {/* ============================================ */}
-        <section className="min-h-screen py-32 px-6 md:px-10">
+        <section className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto bg-[#f0f0ff] py-32 px-6 md:px-10 overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial="hidden"
@@ -613,9 +486,9 @@ export default function InvestorHomePage() {
                 </span>
               </motion.div>
 
-              <motion.h2 
+              <motion.h2
                 variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
+                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-gray-900 mb-6 leading-[1.1]"
               >
                 TRANSLATING INTENT
                 <br />
@@ -624,68 +497,30 @@ export default function InvestorHomePage() {
                 </span>
               </motion.h2>
 
-              <motion.p 
+              <motion.p
                 variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed mb-4"
+                className="text-xl text-gray-700 font-light max-w-3xl mx-auto leading-relaxed mb-4"
               >
-                Introducing <strong className="text-[#48cae4]">SkandaX</strong>—the first "Matter Compiler."
+                Introducing <strong className="text-gray-900">SkandaX</strong>—the first "Matter Compiler."
                 <br />
-                <span className="text-white/90">
-                  Turning a 5-year cycle into 6 months. This is the unit economics that changes everything.
+                <span className="text-gray-600">
+                  A closed-loop AI system that translates material requirements into manufacturable reality. From intent to factory-ready materials in 6 months instead of 5 years.
                 </span>
               </motion.p>
             </motion.div>
 
             {/* Interactive Diagram */}
-            <div className="pointer-events-auto mb-20">
-              <MatterCompilerDiagram />
+            <div className="pointer-events-auto mb-12">
+              <VisualWorkflow />
             </div>
 
-            {/* The Tech Stack */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 pointer-events-auto"
-            >
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#48cae4]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center mb-4">
-                  <Layers className="w-6 h-6 text-[#48cae4]" />
-                </div>
-                <h3 className="text-xl font-medium text-white mb-3">3D Diffusion Transformers</h3>
-                <p className="text-white/60 leading-relaxed">
-                  Generative AI trained on physics-first simulations. Designs materials at the mesoscale—where it actually matters.
-                </p>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#a855f7]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#a855f7]/20 flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6 text-[#a855f7]" />
-                </div>
-                <h3 className="text-xl font-medium text-white mb-3">Physics Kernels</h3>
-                <p className="text-white/60 leading-relaxed">
-                  Ground truth from first principles. No black boxes. Every prediction is rooted in thermodynamics and mechanics.
-                </p>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#22c55e]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#22c55e]/20 flex items-center justify-center mb-4">
-                  <Database className="w-6 h-6 text-[#22c55e]" />
-                </div>
-                <h3 className="text-xl font-medium text-white mb-3">Federated Learning</h3>
-                <p className="text-white/60 leading-relaxed">
-                  Factory data stays theirs. The intelligence stays ours. The moat deepens with every deployment.
-                </p>
-              </motion.div>
-            </motion.div>
           </div>
         </section>
 
         {/* ============================================ */}
-        {/* CHAPTER 4: THE SOVEREIGN MOAT */}
+        {/* CHAPTER 5: MARKET & DEPLOYMENT */}
         {/* ============================================ */}
-        <section className="relative w-full pointer-events-auto bg-[#081421] py-32 px-6 md:px-10 border-t border-white/5">
+        <section className="min-h-screen py-32 px-6 md:px-10">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial="hidden"
@@ -694,476 +529,193 @@ export default function InvestorHomePage() {
               variants={staggerContainer}
               className="text-center mb-20"
             >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#ff9933]/10 rounded-full backdrop-blur-md border border-[#ff9933]/30 mb-6">
-                <Shield className="w-4 h-4 text-[#ff9933]" />
-                <span className="text-[#ff9933] text-xs font-bold tracking-[0.15em] uppercase">
-                  Sovereign Advantage
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#48cae4]/10 rounded-full backdrop-blur-md border border-[#48cae4]/30 mb-6">
+                <Globe className="w-4 h-4 text-[#48cae4]" />
+                <span className="text-[#48cae4] text-xs font-bold tracking-[0.15em] uppercase">
+                  Market & Deployment
                 </span>
               </motion.div>
 
-              <motion.h2 
+              <motion.h2
                 variants={fadeInUp}
                 className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
               >
-                BUILT IN INDIA.
+                BUILT FOR THE
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff9933] via-white to-[#138808]">
-                  SCALED FOR THE WORLD.
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-[#a855f7] to-[#22c55e]">
+                  ENERGY VALUE CHAIN.
                 </span>
               </motion.h2>
 
-              <motion.p 
+              <motion.p
                 variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed"
+                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed mb-4"
               >
-                Selected by the <strong className="text-white">IndiaAI Mission</strong>. 
-                The government provides the CAPEX (GPUs and Robots), allowing our capital to stay focused on <span className="text-[#48cae4]">IP and Talent</span>.
+                <strong className="text-white">Current Beachhead: Energy Storage.</strong>
+                <br />
+                <span className="text-white/90">
+                  We are deploying our engine to solve the $300B bottleneck in EV batteries (Silicon, Sodium, Solid-State) before scaling to Hydrogen and Alloys.
+                </span>
               </motion.p>
             </motion.div>
 
-            {/* Three Pillars */}
+            {/* 3-Column Grid: The Who & How */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 pointer-events-auto"
             >
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-gradient-to-br from-[#ff9933]/10 to-transparent border border-[#ff9933]/30">
-                <div className="w-12 h-12 rounded-xl bg-[#ff9933]/20 flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-[#ff9933]" />
+              {/* Column 1: THE CHEMIST */}
+              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#48cae4]/30 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center mb-6">
+                  <Beaker className="w-6 h-6 text-[#48cae4]" />
                 </div>
-                <h3 className="text-xl font-medium text-white mb-3">The Mandate</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Official partner of IndiaAI Mission. Government-backed infrastructure. National priority status.
-                </p>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-gradient-to-br from-[#48cae4]/10 to-transparent border border-[#48cae4]/30">
-                <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-[#48cae4]" />
-                </div>
-                <h3 className="text-xl font-medium text-white mb-3">The Talent</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Built by the top 0.00001% of India's engineering elite. IIT + Stanford + MIT pedigree.
-                </p>
-              </motion.div>
-
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-gradient-to-br from-[#a855f7]/10 to-transparent border border-[#a855f7]/30">
-                <div className="w-12 h-12 rounded-xl bg-[#a855f7]/20 flex items-center justify-center mb-4">
-                  <Globe className="w-6 h-6 text-[#a855f7]" />
-                </div>
-                <h3 className="text-xl font-medium text-white mb-3">The Partners</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Backed by NVIDIA, Google, and global energy leaders. Access to compute and distribution.
-                </p>
-              </motion.div>
-            </motion.div>
-
-            {/* Logos */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="border-t border-white/10 pt-16"
-            >
-              <p className="text-center text-xs font-bold tracking-[0.2em] text-white/30 uppercase mb-12">
-                Backed By National & Global Leaders
-              </p>
-              
-              <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                <div className="flex items-center gap-3">
-                  <div className="text-3xl font-bold text-white tracking-tighter">
-                    India<span className="text-[#ff9933]">AI</span>
+                <h3 className="text-2xl font-bold text-white mb-4">THE CHEMIST</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                    <p className="text-white font-medium">Material Suppliers</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                    <p className="text-white/70 italic">"Is this new molecule scalable?"</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                    <p className="text-[#48cae4] font-bold">SKANDAX VALIDATE</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                    <p className="text-white/80">Validate recipes in weeks, not years.</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold text-white tracking-tight">NVIDIA</span>
+              </motion.div>
+
+              {/* Column 2: THE FACTORY */}
+              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#a855f7]/30 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-[#a855f7]/20 flex items-center justify-center mb-6">
+                  <Factory className="w-6 h-6 text-[#a855f7]" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold text-white tracking-tight">Google</span>
+                <h3 className="text-2xl font-bold text-white mb-4">THE FACTORY</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                    <p className="text-white font-medium">Gigafactories</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                    <p className="text-white/70 italic">"Yield is too low. Scrap is too high."</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                    <p className="text-[#a855f7] font-bold">SKANDAX DEPLOY</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                    <p className="text-white/80">Zero-Shot Manufacturing & Yield Guard.</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* CHAPTER 5: THE GENESIS PROTOCOL - Business Model */}
-        {/* ============================================ */}
-        <section className="min-h-screen py-32 px-6 md:px-10">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-20"
-            >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e]/10 rounded-full backdrop-blur-md border border-[#22c55e]/30 mb-6">
-                <DollarSign className="w-4 h-4 text-[#22c55e]" />
-                <span className="text-[#22c55e] text-xs font-bold tracking-[0.15em] uppercase">
-                  The Business Model
-                </span>
               </motion.div>
 
-              <motion.h2 
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
-              >
-                CAPTURING VALUE
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-[#a855f7] to-[#f59e0b]">
-                  AT EVERY SCALE.
-                </span>
-              </motion.h2>
-
-              <motion.p 
-                variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed"
-              >
-                Three revenue layers. From cash flow to recurring to exponential. 
-                <br />
-                <span className="text-white/90">
-                  We bridge the "Valley of Death" for the world's biggest conglomerates.
-                </span>
-              </motion.p>
-            </motion.div>
-
-            {/* Business Layers */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="space-y-8 pointer-events-auto"
-            >
-              {businessLayers.map((layer, index) => {
-                const Icon = layer.icon;
-                return (
-                  <motion.div
-                    key={layer.layer}
-                    variants={fadeInUp}
-                    className="p-8 rounded-2xl bg-gradient-to-r from-white/5 to-transparent border border-white/10 hover:border-white/20 transition-all"
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                      <div className="lg:col-span-1">
-                        <div 
-                          className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                          style={{ backgroundColor: `${layer.color}20` }}
-                        >
-                          <Icon className="w-8 h-8" style={{ color: layer.color }} />
-                        </div>
-                      </div>
-
-                      <div className="lg:col-span-7">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-white/40 font-mono text-sm">LAYER {layer.layer}</span>
-                          <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
-                        </div>
-                        <h3 className="text-3xl font-medium text-white mb-2">{layer.title}</h3>
-                        <p className="text-white/50 text-sm uppercase tracking-wider mb-4">{layer.subtitle}</p>
-                        <p className="text-white/70 leading-relaxed mb-4">{layer.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {layer.features.map((feature, i) => (
-                            <span 
-                              key={i} 
-                              className="px-3 py-1 rounded-full text-xs border"
-                              style={{ 
-                                borderColor: `${layer.color}40`,
-                                backgroundColor: `${layer.color}10`,
-                                color: layer.color
-                              }}
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="lg:col-span-4">
-                        <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                          <p className="text-white/50 text-sm mb-2">{layer.metricLabel}</p>
-                          <p className="text-4xl font-bold mb-4" style={{ color: layer.color }}>
-                            {layer.metric}
-                          </p>
-                          <p className="text-white/60 text-sm italic">
-                            e.g., {layer.example}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-
-            {/* Value Proposition */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-20 p-10 rounded-3xl bg-gradient-to-r from-[#22c55e]/20 via-[#48cae4]/20 to-[#a855f7]/20 border border-[#48cae4]/30 text-center pointer-events-auto"
-            >
-              <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed">
-                "We don't just sell software. <br className="hidden md:block" />
-                We sell <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] to-[#a855f7]">the future of manufacturing.</span>"
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* CHAPTER 6: THE ROADMAP - $500M Path */}
-        {/* ============================================ */}
-        <section className="min-h-screen py-32 px-6 md:px-10 bg-gradient-to-b from-transparent via-[#48cae4]/5 to-transparent">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-20"
-            >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#f59e0b]/10 rounded-full backdrop-blur-md border border-[#f59e0b]/30 mb-6">
-                <TrendingUp className="w-4 h-4 text-[#f59e0b]" />
-                <span className="text-[#f59e0b] text-xs font-bold tracking-[0.15em] uppercase">
-                  The Roadmap
-                </span>
+              {/* Column 3: THE STRATEGIST */}
+              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#22c55e]/30 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-[#22c55e]/20 flex items-center justify-center mb-6">
+                  <Zap className="w-6 h-6 text-[#22c55e]" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">THE STRATEGIST</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                    <p className="text-white font-medium">Automotive OEMs (Tesla, Tata, BMW)</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                    <p className="text-white/70 italic">"We are trapped by supplier roadmaps. We need to own our tech."</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                    <p className="text-[#22c55e] font-bold">SKANDAX GENESIS</p>
+                  </div>
+                  <div>
+                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                    <p className="text-white/80">Generate Proprietary IP. Break dependence on external suppliers. Create unique, owned chemistries in-house.</p>
+                  </div>
+                </div>
               </motion.div>
-
-              <motion.h2 
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
-              >
-                THE ROAD TO
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-[#a855f7] to-[#f59e0b]">
-                  $500M VALUATION.
-                </span>
-              </motion.h2>
-
-              <motion.p 
-                variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed"
-              >
-                <strong className="text-white">$20M fuels a 24-month high-intensity burn</strong> to hit the "Closed-Loop" milestone.
-                <br />
-                <span className="text-white/90">
-                  Strategic acquisition by a global energy/tech titan or a sovereign IPO.
-                </span>
-              </motion.p>
-            </motion.div>
-
-            {/* Roadmap Timeline */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="space-y-8 pointer-events-auto"
-            >
-              {roadmapPhases.map((phase, index) => {
-                const Icon = phase.icon;
-                return (
-                  <motion.div
-                    key={phase.phase}
-                    variants={fadeInUp}
-                    className="relative p-8 rounded-2xl border transition-all"
-                    style={{ 
-                      borderColor: `${phase.color}40`,
-                      backgroundColor: `${phase.color}05`
-                    }}
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                      <div className="lg:col-span-2">
-                        <div 
-                          className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4"
-                          style={{ backgroundColor: `${phase.color}20` }}
-                        >
-                          <Icon className="w-10 h-10" style={{ color: phase.color }} />
-                        </div>
-                        <span 
-                          className="text-xs font-bold tracking-wider uppercase"
-                          style={{ color: phase.color }}
-                        >
-                          {phase.phase}
-                        </span>
-                      </div>
-
-                      <div className="lg:col-span-6">
-                        <h3 className="text-3xl font-medium text-white mb-2">{phase.title}</h3>
-                        <p className="text-white/50 text-sm uppercase tracking-wider mb-4">{phase.focus}</p>
-                        <p className="text-white/70 leading-relaxed mb-6">{phase.description}</p>
-                        
-                        <div className="space-y-2">
-                          <p className="text-white/50 text-xs uppercase tracking-wider mb-2">Key Milestones</p>
-                          {phase.kpis.map((kpi, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                              <CheckCircle2 className="w-4 h-4" style={{ color: phase.color }} />
-                              <span className="text-white/70 text-sm">{kpi}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="lg:col-span-4">
-                        <div className="space-y-4">
-                          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                            <p className="text-white/50 text-sm mb-2">Timeline</p>
-                            <p className="text-2xl font-bold text-white">{phase.timeline}</p>
-                          </div>
-                          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                            <p className="text-white/50 text-sm mb-2">Target Valuation</p>
-                            <p className="text-3xl font-bold" style={{ color: phase.color }}>
-                              {phase.valuation}
-                            </p>
-                          </div>
-                          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                            <p className="text-white/50 text-sm mb-2">Capital Required</p>
-                            <p className="text-2xl font-bold text-white">{phase.capital}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {index < roadmapPhases.length - 1 && (
-                      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2">
-                        <ChevronRight className="w-8 h-8 text-white/20 rotate-90" />
-                      </div>
-                    )}
-                  </motion.div>
-                );
-              })}
             </motion.div>
           </div>
         </section>
 
         {/* ============================================ */}
-        {/* CHAPTER 7: THE DATA ROOM */}
+        {/* CHAPTER 6: THE DATA ROOM */}
         {/* ============================================ */}
-        <section className="min-h-screen py-32 px-6 md:px-10">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-20"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto"
+        >
+          <div className="relative w-full overflow-hidden bg-black/40">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto"
             >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full backdrop-blur-md border border-white/20 mb-6">
-                <Database className="w-4 h-4 text-white" />
-                <span className="text-white text-xs font-bold tracking-[0.15em] uppercase">
-                  Architecture & Evidence
-                </span>
+              <source src="/9.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay - Centered Content */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-black/30">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+              >
+                <motion.div variants={fadeInUp}>
+                  <Rocket className="w-16 h-16 text-[#48cae4] mx-auto mb-6" />
+                </motion.div>
+
+                <motion.h2
+                  variants={fadeInUp}
+                  className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                >
+                  JOIN THE
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-white to-[#a855f7]">
+                    MISSION.
+                  </span>
+                </motion.h2>
+
+                <motion.p
+                  variants={fadeInUp}
+                  className="text-lg md:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg mb-8"
+                >
+                  We're building the future of materials. Get full access to our data room and see why India's sovereign AI bet is unstoppable.
+                </motion.p>
+
+                <motion.div variants={fadeInUp}>
+                  <Link
+                    href="/data-room"
+                    className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-white text-gray-900 text-lg font-bold hover:shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all"
+                  >
+                    <Rocket className="w-5 h-5" />
+                    ACCESS THE DATA ROOM
+                    <ArrowUpRight className="w-5 h-5" />
+                  </Link>
+                  <p className="text-white/70 text-sm mt-4 drop-shadow-lg">
+                    For serious investors ready to move fast
+                  </p>
+                </motion.div>
               </motion.div>
-
-              <motion.h2 
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
-              >
-                THE DATA ROOM.
-              </motion.h2>
-
-              <motion.p 
-                variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed"
-              >
-                Deep technical documentation, case studies, and protected investor materials.
-              </motion.p>
-            </motion.div>
-
-            {/* Data Room Cards */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 pointer-events-auto"
-            >
-              {dataRoomCards.map((card, index) => {
-                const Icon = card.icon;
-                return (
-                  <motion.div
-                    key={card.title}
-                    variants={scaleIn}
-                    className="group relative p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all overflow-hidden"
-                  >
-                    {card.locked && (
-                      <div className="absolute top-4 right-4">
-                        <div className="w-8 h-8 rounded-lg bg-[#f59e0b]/20 flex items-center justify-center">
-                          <Lock className="w-4 h-4 text-[#f59e0b]" />
-                        </div>
-                      </div>
-                    )}
-
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                      style={{ backgroundColor: `${card.color}20` }}
-                    >
-                      <Icon className="w-6 h-6" style={{ color: card.color }} />
-                    </div>
-
-                    <h3 className="text-2xl font-medium text-white mb-2">{card.title}</h3>
-                    <p className="text-white/50 text-sm uppercase tracking-wider mb-4">{card.subtitle}</p>
-                    <p className="text-white/70 leading-relaxed mb-6">{card.description}</p>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/40 text-sm">{card.pages}</span>
-                      {!card.locked ? (
-                        <Link
-                          href={card.link}
-                          className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
-                          style={{ color: card.color }}
-                        >
-                          Read More
-                          <ArrowUpRight className="w-4 h-4" />
-                        </Link>
-                      ) : (
-                        <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#f59e0b]/20 text-[#f59e0b] text-sm font-medium hover:bg-[#f59e0b]/30 transition-all">
-                          <Lock className="w-3 h-3" />
-                          Request Access
-                        </button>
-                      )}
-                    </div>
-
-                    <div 
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                      style={{
-                        background: `radial-gradient(circle at center, ${card.color}10, transparent 70%)`
-                      }}
-                    />
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-
-            {/* Investor Portal CTA */}
-            <motion.div
-              id="investor-portal"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-20 p-12 rounded-3xl bg-gradient-to-br from-[#48cae4]/20 via-[#a855f7]/20 to-[#f59e0b]/20 border-2 border-[#48cae4]/30 text-center pointer-events-auto"
-            >
-              <Lock className="w-16 h-16 text-[#48cae4] mx-auto mb-6" />
-              <h3 className="text-3xl md:text-4xl font-medium text-white mb-4">
-                Ready to See the Full Picture?
-              </h3>
-              <p className="text-white/70 leading-relaxed mb-8 max-w-2xl mx-auto">
-                Access our complete investor data room: patents, team credentials, cap table, financial projections, and technical architecture.
-              </p>
-              <button className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-[#48cae4] to-[#a855f7] text-white text-lg font-medium hover:shadow-lg hover:shadow-[#48cae4]/30 transition-all">
-                <Lock className="w-5 h-5" />
-                REQUEST DATA ROOM ACCESS
-                <ArrowUpRight className="w-5 h-5" />
-              </button>
-              <p className="text-white/40 text-sm mt-4">
-                NDA required • Qualified investors only
-              </p>
-            </motion.div>
+            </div>
           </div>
-        </section>
+        </motion.div>
 
         <Footer />
       </main>

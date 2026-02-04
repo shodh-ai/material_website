@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@neondatabase/serverless": "^1.0.2",
     "@react-three/drei": "^9.121.0",
     "@react-three/fiber": "^8.17.12",
     "framer-motion": "^12.31.0",
