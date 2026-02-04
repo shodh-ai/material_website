@@ -520,133 +520,151 @@ export default function InvestorHomePage() {
         {/* ============================================ */}
         {/* CHAPTER 5: MARKET & DEPLOYMENT */}
         {/* ============================================ */}
-        <section className="min-h-screen py-32 px-6 md:px-10">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="text-center mb-20"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto"
+        >
+          <div className="relative w-full overflow-hidden bg-black/40">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto"
             >
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#48cae4]/10 rounded-full backdrop-blur-md border border-[#48cae4]/30 mb-6">
-                <Globe className="w-4 h-4 text-[#48cae4]" />
-                <span className="text-[#48cae4] text-xs font-bold tracking-[0.15em] uppercase">
-                  Market & Deployment
-                </span>
-              </motion.div>
+              <source src="/13815479_3840_2160_100fps.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-              <motion.h2
-                variants={fadeInUp}
-                className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1]"
+            {/* Overlay - Centered Content */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10 py-32 bg-black/40">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+                className="max-w-7xl mx-auto w-full"
               >
-                BUILT FOR THE
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-[#a855f7] to-[#22c55e]">
-                  ENERGY VALUE CHAIN.
-                </span>
-              </motion.h2>
+                {/* Header */}
+                <div className="text-center mb-16">
+                  <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full backdrop-blur-md border border-white/20 mb-6">
+                    <Globe className="w-4 h-4 text-white" />
+                    <span className="text-white text-xs font-bold tracking-[0.15em] uppercase">
+                      Market & Deployment
+                    </span>
+                  </motion.div>
 
-              <motion.p
-                variants={fadeInUp}
-                className="text-xl text-white/60 font-light max-w-3xl mx-auto leading-relaxed mb-4"
-              >
-                <strong className="text-white">Current Beachhead: Energy Storage.</strong>
-                <br />
-                <span className="text-white/90">
-                  We are deploying our engine to solve the $300B bottleneck in EV batteries (Silicon, Sodium, Solid-State) before scaling to Hydrogen and Alloys.
-                </span>
-              </motion.p>
-            </motion.div>
+                  <motion.h2
+                    variants={fadeInUp}
+                    className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                  >
+                    BUILT FOR THE
+                    <br />
+                    ENERGY VALUE CHAIN.
+                  </motion.h2>
 
-            {/* 3-Column Grid: The Who & How */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 pointer-events-auto"
-            >
-              {/* Column 1: THE CHEMIST */}
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#48cae4]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center mb-6">
-                  <Beaker className="w-6 h-6 text-[#48cae4]" />
+                  <motion.p
+                    variants={fadeInUp}
+                    className="text-lg md:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+                  >
+                    <strong className="text-white">Current Beachhead: Energy Storage.</strong>
+                    <br />
+                    We are deploying our engine to solve the $300B bottleneck in EV batteries (Silicon, Sodium, Solid-State) before scaling to Hydrogen and Alloys.
+                  </motion.p>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">THE CHEMIST</h3>
-                <div className="space-y-4 text-sm">
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
-                    <p className="text-white font-medium">Material Suppliers</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
-                    <p className="text-white/70 italic">"Is this new molecule scalable?"</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
-                    <p className="text-[#48cae4] font-bold">SKANDAX VALIDATE</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
-                    <p className="text-white/80">Validate recipes in weeks, not years.</p>
-                  </div>
-                </div>
+
+                {/* 3-Column Grid: The Who & How */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+                >
+                  {/* Column 1: THE CHEMIST */}
+                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                      <Beaker className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">THE CHEMIST</h3>
+                    <div className="space-y-4 text-sm">
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                        <p className="text-white font-medium">Material Suppliers</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                        <p className="text-white/80 italic">"Is this new molecule scalable?"</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                        <p className="text-white font-bold">SKANDAX VALIDATE</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                        <p className="text-white/90">Validate recipes in weeks, not years.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Column 2: THE FACTORY */}
+                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                      <Factory className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">THE FACTORY</h3>
+                    <div className="space-y-4 text-sm">
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                        <p className="text-white font-medium">Gigafactories</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                        <p className="text-white/80 italic">"Yield is too low. Scrap is too high."</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                        <p className="text-white font-bold">SKANDAX DEPLOY</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                        <p className="text-white/90">Zero-Shot Manufacturing & Yield Guard.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Column 3: THE STRATEGIST */}
+                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">THE STRATEGIST</h3>
+                    <div className="space-y-4 text-sm">
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
+                        <p className="text-white font-medium">Automotive OEMs (Tesla, Tata, BMW)</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
+                        <p className="text-white/80 italic">"We are trapped by supplier roadmaps. We need to own our tech."</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
+                        <p className="text-white font-bold">SKANDAX GENESIS</p>
+                      </div>
+                      <div>
+                        <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
+                        <p className="text-white/90">Generate Proprietary IP. Break dependence on external suppliers. Create unique, owned chemistries in-house.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
-
-              {/* Column 2: THE FACTORY */}
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#a855f7]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#a855f7]/20 flex items-center justify-center mb-6">
-                  <Factory className="w-6 h-6 text-[#a855f7]" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">THE FACTORY</h3>
-                <div className="space-y-4 text-sm">
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
-                    <p className="text-white font-medium">Gigafactories</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
-                    <p className="text-white/70 italic">"Yield is too low. Scrap is too high."</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
-                    <p className="text-[#a855f7] font-bold">SKANDAX DEPLOY</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
-                    <p className="text-white/80">Zero-Shot Manufacturing & Yield Guard.</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Column 3: THE STRATEGIST */}
-              <motion.div variants={scaleIn} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#22c55e]/30 transition-all">
-                <div className="w-12 h-12 rounded-xl bg-[#22c55e]/20 flex items-center justify-center mb-6">
-                  <Zap className="w-6 h-6 text-[#22c55e]" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">THE STRATEGIST</h3>
-                <div className="space-y-4 text-sm">
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
-                    <p className="text-white font-medium">Automotive OEMs (Tesla, Tata, BMW)</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Pain</p>
-                    <p className="text-white/70 italic">"We are trapped by supplier roadmaps. We need to own our tech."</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Product</p>
-                    <p className="text-[#22c55e] font-bold">SKANDAX GENESIS</p>
-                  </div>
-                  <div>
-                    <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Value</p>
-                    <p className="text-white/80">Generate Proprietary IP. Break dependence on external suppliers. Create unique, owned chemistries in-house.</p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+            </div>
           </div>
-        </section>
+        </motion.div>
 
         {/* ============================================ */}
         {/* CHAPTER 6: THE DATA ROOM */}
