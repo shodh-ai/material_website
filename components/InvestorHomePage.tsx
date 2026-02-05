@@ -249,6 +249,20 @@ export default function InvestorHomePage() {
                 <span className="text-[#48cae4]"> Shodh AI is India's sovereign answer</span> to the global race for material dominance.
               </motion.p>
 
+              <motion.div
+                variants={fadeInUp}
+                className="mt-8"
+              >
+                <Link
+                  href="/demo"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-gray-900 text-lg font-bold hover:bg-gray-100 hover:shadow-xl transition-all border border-gray-200"
+                >
+                  <Zap className="w-5 h-5" />
+                  Try the Demo
+                  <ArrowUpRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
+
             </motion.div>
 
             {/* 3D Visual placeholder - right side */}
