@@ -314,36 +314,36 @@ export default function InvestorHomePage() {
               viewport={{ once: true }}
               className="relative w-screen left-[50%] right-[50%] -mx-[50vw] mb-32 pointer-events-auto"
             >
-              <div className="relative w-full overflow-hidden bg-black/40">
+              <div className="relative w-full overflow-hidden bg-black/40 min-h-[500px] sm:min-h-[600px] md:min-h-0">
                 <video
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-auto"
+                  className="w-full h-auto min-h-[500px] sm:min-h-[600px] md:min-h-0 object-cover"
                 >
                   <source src="/video.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
 
                 {/* Overlay - Centered Title */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-black/20">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-16 bg-black/30">
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={staggerContainer}
                   >
-                    <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 rounded-full backdrop-blur-md border border-red-500/40 mb-6">
-                      <AlertTriangle className="w-4 h-4 text-red-400" />
-                      <span className="text-red-400 text-xs font-bold tracking-[0.15em] uppercase">
+                    <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500/20 rounded-full backdrop-blur-md border border-red-500/40 mb-4 sm:mb-6">
+                      <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 text-red-400" />
+                      <span className="text-red-400 text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase">
                         The Problem
                       </span>
                     </motion.div>
 
                     <motion.h2
                       variants={fadeInUp}
-                      className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-medium uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                      className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-medium uppercase tracking-tight text-white mb-4 sm:mb-6 leading-[1.1] drop-shadow-2xl px-2"
                     >
                       BEYOND THE
                       <br />
@@ -354,7 +354,7 @@ export default function InvestorHomePage() {
 
                     <motion.p
                       variants={fadeInUp}
-                      className="text-lg md:text-xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+                      className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2"
                     >
                       The world has already begun. AI for science is the next big thing—and it's inevitable.
                     </motion.p>
@@ -538,22 +538,22 @@ export default function InvestorHomePage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto"
+          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto my-16 sm:my-24 md:my-32"
         >
-          <div className="relative w-full overflow-hidden bg-black/40">
+          <div className="relative w-full overflow-hidden bg-black/40 min-h-[1400px] sm:min-h-[1200px] md:min-h-0">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-auto"
+              className="w-full h-auto min-h-[1400px] sm:min-h-[1200px] md:min-h-0 object-cover"
             >
               <source src="/13815479_3840_2160_100fps.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
             {/* Overlay - Centered Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-10 py-32 bg-black/40">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 md:px-10 py-16 sm:py-24 md:py-32 bg-black/40">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -562,17 +562,17 @@ export default function InvestorHomePage() {
                 className="max-w-7xl mx-auto w-full"
               >
                 {/* Header */}
-                <div className="text-center mb-16">
-                  <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full backdrop-blur-md border border-white/20 mb-6">
-                    <Globe className="w-4 h-4 text-white" />
-                    <span className="text-white text-xs font-bold tracking-[0.15em] uppercase">
+                <div className="text-center mb-8 sm:mb-12 md:mb-16">
+                  <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-full backdrop-blur-md border border-white/20 mb-4 sm:mb-6">
+                    <Globe className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                    <span className="text-white text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase">
                       Market & Deployment
                     </span>
                   </motion.div>
 
                   <motion.h2
                     variants={fadeInUp}
-                    className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                    className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-white mb-4 sm:mb-6 leading-[1.1] drop-shadow-2xl px-2"
                   >
                     BUILT FOR THE
                     <br />
@@ -581,7 +581,7 @@ export default function InvestorHomePage() {
 
                   <motion.p
                     variants={fadeInUp}
-                    className="text-lg md:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+                    className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2"
                   >
                     <strong className="text-white">Current Beachhead: Energy Storage.</strong>
                     <br />
@@ -595,15 +595,15 @@ export default function InvestorHomePage() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={staggerContainer}
-                  className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+                  className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
                 >
                   {/* Column 1: THE CHEMIST */}
-                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-                      <Beaker className="w-6 h-6 text-white" />
+                  <motion.div variants={scaleIn} className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 sm:mb-6">
+                      <Beaker className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">THE CHEMIST</h3>
-                    <div className="space-y-4 text-sm">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">THE CHEMIST</h3>
+                    <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                       <div>
                         <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
                         <p className="text-white font-medium">Material Suppliers</p>
@@ -624,12 +624,12 @@ export default function InvestorHomePage() {
                   </motion.div>
 
                   {/* Column 2: THE FACTORY */}
-                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-                      <Factory className="w-6 h-6 text-white" />
+                  <motion.div variants={scaleIn} className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 sm:mb-6">
+                      <Factory className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">THE FACTORY</h3>
-                    <div className="space-y-4 text-sm">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">THE FACTORY</h3>
+                    <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                       <div>
                         <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
                         <p className="text-white font-medium">Gigafactories</p>
@@ -650,12 +650,12 @@ export default function InvestorHomePage() {
                   </motion.div>
 
                   {/* Column 3: THE STRATEGIST */}
-                  <motion.div variants={scaleIn} className="p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-                      <Zap className="w-6 h-6 text-white" />
+                  <motion.div variants={scaleIn} className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 sm:mb-6">
+                      <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">THE STRATEGIST</h3>
-                    <div className="space-y-4 text-sm">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">THE STRATEGIST</h3>
+                    <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                       <div>
                         <p className="text-white/50 uppercase tracking-wider text-xs mb-1">Who</p>
                         <p className="text-white font-medium">Automotive OEMs (Tesla, Tata, BMW)</p>
@@ -687,22 +687,22 @@ export default function InvestorHomePage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto"
+          className="relative w-screen left-[50%] right-[50%] -mx-[50vw] pointer-events-auto mt-16 sm:mt-24 md:mt-32"
         >
-          <div className="relative w-full overflow-hidden bg-black/40">
+          <div className="relative w-full overflow-hidden bg-black/40 min-h-[500px] sm:min-h-[600px] md:min-h-0">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-auto"
+              className="w-full h-auto min-h-[500px] sm:min-h-[600px] md:min-h-0 object-cover"
             >
               <source src="/9.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
             {/* Overlay - Centered Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-black/30">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-16 bg-black/30">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -710,12 +710,12 @@ export default function InvestorHomePage() {
                 variants={staggerContainer}
               >
                 <motion.div variants={fadeInUp}>
-                  <Rocket className="w-16 h-16 text-[#48cae4] mx-auto mb-6" />
+                  <Rocket className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-[#48cae4] mx-auto mb-4 sm:mb-6" />
                 </motion.div>
 
                 <motion.h2
                   variants={fadeInUp}
-                  className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight text-white mb-6 leading-[1.1] drop-shadow-2xl"
+                  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight text-white mb-4 sm:mb-6 leading-[1.1] drop-shadow-2xl px-2"
                 >
                   JOIN THE
                   <br />
@@ -726,7 +726,7 @@ export default function InvestorHomePage() {
 
                 <motion.p
                   variants={fadeInUp}
-                  className="text-lg md:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg mb-8"
+                  className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-lg mb-6 sm:mb-8 px-2"
                 >
                   We're building the future of materials. Get full access to our data room and see why India's sovereign AI bet is unstoppable.
                 </motion.p>
@@ -734,13 +734,13 @@ export default function InvestorHomePage() {
                 <motion.div variants={fadeInUp}>
                   <Link
                     href="/data-room"
-                    className="inline-flex items-center gap-3 px-10 py-5 rounded-xl bg-white text-gray-900 text-lg font-bold hover:shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-lg sm:rounded-xl bg-white text-gray-900 text-sm sm:text-base md:text-lg font-bold hover:shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all"
                   >
-                    <Rocket className="w-5 h-5" />
+                    <Rocket className="w-4 h-4 sm:w-5 sm:h-5" />
                     ACCESS THE DATA ROOM
-                    <ArrowUpRight className="w-5 h-5" />
+                    <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
-                  <p className="text-white/70 text-sm mt-4 drop-shadow-lg">
+                  <p className="text-white/70 text-xs sm:text-sm mt-3 sm:mt-4 drop-shadow-lg">
                     For serious investors ready to move fast
                   </p>
                 </motion.div>

@@ -117,17 +117,17 @@ export default function DataRoomPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#081421] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#111111] to-[#0a0a0a] text-white">
       {/* Header */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-white/5 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm font-medium">Back to Home</span>
+          <Link href="/" className="flex items-center gap-2 text-white/50 hover:text-white/80 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm font-light">Back to Home</span>
           </Link>
           <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#48cae4] rounded-full animate-pulse" />
-            <span className="text-sm font-bold tracking-wider uppercase">Shodh AI Data Room</span>
+            <div className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+            <span className="text-sm font-light tracking-[0.2em] uppercase text-white/60">Shodh AI Data Room</span>
           </div>
         </div>
       </header>
@@ -144,19 +144,19 @@ export default function DataRoomPage() {
               transition={{ duration: 0.5 }}
             >
               <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#48cae4]/10 rounded-full border border-[#48cae4]/30 mb-6">
-                  <Lock className="w-4 h-4 text-[#48cae4]" />
-                  <span className="text-[#48cae4] text-xs font-bold tracking-wider uppercase">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6">
+                  <Lock className="w-4 h-4 text-white/60" />
+                  <span className="text-white/60 text-xs font-light tracking-[0.2em] uppercase">
                     Protected Access
                   </span>
                 </div>
-                <h1 className="text-4xl md:text-6xl font-medium mb-6">
+                <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">
                   Welcome to the <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] to-[#a855f7]">
+                  <span className="text-white font-normal">
                     Investor Data Room
                   </span>
                 </h1>
-                <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-lg text-white/40 max-w-2xl mx-auto leading-relaxed font-light">
                   Access our complete investor materials including technical whitepapers,
                   financial projections, and strategic roadmaps.
                 </p>
@@ -169,11 +169,11 @@ export default function DataRoomPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm">
+                <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
                   <div className="space-y-6">
                     {/* Name Field */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-white/70 mb-2">
+                      <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <User className="w-4 h-4" />
                         Full Name
                       </label>
@@ -183,13 +183,13 @@ export default function DataRoomPage() {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:bg-white/10 transition-all"
+                        className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
 
                     {/* Email Field */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-white/70 mb-2">
+                      <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Mail className="w-4 h-4" />
                         Email Address
                       </label>
@@ -199,14 +199,14 @@ export default function DataRoomPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="john@example.com"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:bg-white/10 transition-all"
+                        className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
 
 
                     {/* Firm Field */}
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-medium text-white/70 mb-2">
+                      <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Building2 className="w-4 h-4" />
                         Firm / Organization
                       </label>
@@ -216,14 +216,14 @@ export default function DataRoomPage() {
                         value={formData.firm}
                         onChange={(e) => setFormData({ ...formData, firm: e.target.value })}
                         placeholder="Acme Ventures"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:bg-white/10 transition-all"
+                        className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
                   </div>
 
                   {/* Error Message */}
                   {error && (
-                    <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-3 text-red-500 text-sm">
+                    <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm font-light">
                       <AlertCircle className="w-5 h-5 flex-shrink-0" />
                       {error}
                     </div>
@@ -232,17 +232,17 @@ export default function DataRoomPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-8 px-6 py-4 rounded-xl bg-gradient-to-r from-[#48cae4] to-[#a855f7] text-white font-medium hover:shadow-lg hover:shadow-[#48cae4]/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full mt-8 px-6 py-4 rounded-lg bg-white text-black font-light hover:bg-white/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                     ) : (
                       "Access Data Room"
                     )}
                     {!isSubmitting && <ArrowLeft className="w-5 h-5 rotate-180" />}
                   </button>
 
-                  <p className="text-center text-white/40 text-sm mt-6">
+                  <p className="text-center text-white/30 text-sm mt-6 font-light">
                     Your information is encrypted and stored securely
                   </p>
                 </div>
@@ -265,47 +265,154 @@ export default function DataRoomPage() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2, type: "spring" }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e]/10 rounded-full border border-[#22c55e]/30 mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 mb-6"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#22c55e]" />
-                  <span className="text-[#22c55e] text-xs font-bold tracking-wider uppercase">
+                  <CheckCircle2 className="w-4 h-4 text-white/60" />
+                  <span className="text-white/60 text-xs font-light tracking-[0.2em] uppercase">
                     Access Granted
                   </span>
                 </motion.div>
-                <h1 className="text-4xl md:text-6xl font-medium mb-6">
+                <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">
                   Welcome, <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] to-[#a855f7]">
+                  <span className="text-white font-normal">
                     {formData.name.split(' ')[0]}
                   </span>
                 </h1>
-                <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                  You now have full access to our investor materials. All documents are confidential and protected under NDA.
+                <p className="text-lg text-white/40 max-w-2xl mx-auto leading-relaxed font-light">
+                  You now have full access to our investor materials.
                 </p>
               </div>
 
               {/* User Info Card */}
-              <div className="max-w-4xl mx-auto mb-12 p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/[0.02] border border-white/10">
+              <div className="max-w-4xl mx-auto mb-12 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#48cae4]/20 flex items-center justify-center">
-                      <User className="w-5 h-5 text-[#48cae4]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                      <User className="w-5 h-5 text-white/60" />
                     </div>
                     <div>
-                      <p className="text-white/50 text-xs">Investor</p>
-                      <p className="text-white font-medium">{formData.name}</p>
+                      <p className="text-white/40 text-xs font-light">Investor</p>
+                      <p className="text-white font-light">{formData.name}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#a855f7]/20 flex items-center justify-center">
-                      <Building2 className="w-5 h-5 text-[#a855f7]" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                      <Building2 className="w-5 h-5 text-white/60" />
                     </div>
                     <div>
-                      <p className="text-white/50 text-xs">Organization</p>
-                      <p className="text-white font-medium">{formData.firm}</p>
+                      <p className="text-white/40 text-xs font-light">Organization</p>
+                      <p className="text-white font-light">{formData.firm}</p>
                     </div>
                   </div>
                 </div>
               </div>
+
+              {/* Founder's Letter */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="max-w-5xl mx-auto mb-16"
+              >
+                <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5">
+                  {/* Header */}
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl md:text-5xl font-light text-white mb-4 uppercase tracking-tight">
+                      TO PERISH IN ARROGANT PRESUMPTIONS.
+                    </h2>
+                  </div>
+
+                  {/* Founder Photo Placeholder */}
+                  <div className="flex justify-center mb-8">
+                    <div className="w-32 h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                      <img 
+                        src="/founder-photo.jpg" 
+                        alt="Arastu, CEO" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                      <User className="w-16 h-16 text-white/40" />
+                    </div>
+                  </div>
+
+                  {/* Letter Content */}
+                  <div className="prose prose-invert max-w-none">
+                    <p className="text-white/80 text-lg leading-relaxed mb-6">
+                      <strong className="text-white">To our Future Partners,</strong>
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      There is a reason this industry is empty.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets"—industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      Our competitors, Lila Science ($550M) and Radical AI ($55M), have raised massive war chests to solve the "Lab Problem." They are building brilliant tools for scientists to discover molecules.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      <strong className="text-white">But discovery is not delivery.</strong>
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      We are playing a different game. We are not just building a tool for the Lab; we are building the <strong className="text-white">Foundation Model for the Physical World.</strong>
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      This is not "Predictive Maintenance" or simple factory optimization. We are not just tweaking the temperature of a furnace.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      <strong className="text-white">Invention will not be luck, but by design.</strong>
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist—a battery that is both cheaper and energy-dense—and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      We are giving nations and industries the sovereign power to invent their own energy future, breaking the reliance on decades of slow academic trial-and-error.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      We have chosen the hardest path. We operate at the intersection of Mesoscale Physics, Generative AI, and Heavy Manufacturing. It is painful. It requires suffering. But as we say internally: <em className="text-white/90">To perish in arrogant presumptions is our motto.</em>
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-4">
+                      We'd rather fail trying to build a Type 1 Civilization than succeed at building another SaaS app.
+                    </p>
+
+                    <p className="text-white/70 leading-relaxed mb-6">
+                      If you believe that the next Trillion-Dollar company will be built in the physical world, not the digital one...
+                    </p>
+
+                    <p className="text-white text-lg font-medium mb-8">
+                      Welcome to Shodh AI.
+                    </p>
+
+                    {/* Signature Placeholder */}
+                    <div className="mt-8 pt-6 border-t border-white/10">
+                      <div className="mb-4">
+                        <img 
+                          src="/founder-signature.png" 
+                          alt="Arastu Signature" 
+                          className="h-16 w-auto"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                      <p className="text-white font-medium text-lg">Arastu</p>
+                      <p className="text-white/50 text-sm">CEO, Shodh AI</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* Documents Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -317,42 +424,25 @@ export default function DataRoomPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index }}
-                      className="group relative p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-white/20 transition-all overflow-hidden"
+                      className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all overflow-hidden"
                     >
-                      {/* Background Glow */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                        style={{
-                          background: `radial-gradient(circle at center, ${doc.color}10, transparent 70%)`
-                        }}
-                      />
-
                       {/* Category Badge */}
                       <div className="flex items-center justify-between mb-4">
-                        <span
-                          className="text-xs font-bold tracking-wider uppercase px-2 py-1 rounded"
-                          style={{
-                            backgroundColor: `${doc.color}20`,
-                            color: doc.color
-                          }}
-                        >
+                        <span className="text-xs font-light tracking-[0.2em] uppercase px-2 py-1 rounded bg-white/5 text-white/50 border border-white/10">
                           {doc.category}
                         </span>
-                        <div
-                          className="w-10 h-10 rounded-xl flex items-center justify-center"
-                          style={{ backgroundColor: `${doc.color}20` }}
-                        >
-                          <Icon className="w-5 h-5" style={{ color: doc.color }} />
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 border border-white/10">
+                          <Icon className="w-5 h-5 text-white/60" />
                         </div>
                       </div>
 
                       {/* Content */}
-                      <h3 className="text-xl font-medium text-white mb-2">{doc.title}</h3>
-                      <p className="text-white/50 text-sm mb-3">{doc.subtitle}</p>
-                      <p className="text-white/70 text-sm leading-relaxed mb-4">{doc.description}</p>
+                      <h3 className="text-xl font-light text-white mb-2">{doc.title}</h3>
+                      <p className="text-white/40 text-sm mb-3 font-light">{doc.subtitle}</p>
+                      <p className="text-white/60 text-sm leading-relaxed mb-4 font-light">{doc.description}</p>
 
                       {/* Meta Info */}
-                      <div className="flex items-center gap-4 text-xs text-white/40 mb-4">
+                      <div className="flex items-center gap-4 text-xs text-white/30 mb-4 font-light">
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {doc.readTime}
@@ -367,19 +457,14 @@ export default function DataRoomPage() {
                       <div className="flex gap-2">
                         <Link
                           href={`/data-room/${doc.id}`}
-                          className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-medium hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                          className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                         >
                           <Eye className="w-4 h-4" />
                           Read
                         </Link>
                         <button
                           onClick={() => handleDownload(doc.id)}
-                          className="px-4 py-2 rounded-lg border text-sm font-medium transition-all flex items-center justify-center gap-2"
-                          style={{
-                            borderColor: `${doc.color}40`,
-                            backgroundColor: `${doc.color}10`,
-                            color: doc.color
-                          }}
+                          className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                         >
                           <Download className="w-4 h-4" />
                         </button>
@@ -390,20 +475,20 @@ export default function DataRoomPage() {
               </div>
 
               {/* Additional Resources */}
-              <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-r from-[#48cae4]/10 via-[#a855f7]/10 to-[#f59e0b]/10 border border-[#48cae4]/30">
+              <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-white/[0.02] border border-white/5">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#48cae4]/20 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-6 h-6 text-[#48cae4]" />
+                  <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 border border-white/10">
+                    <Shield className="w-6 h-6 text-white/60" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-medium text-white mb-2">Need More Information?</h3>
-                    <p className="text-white/70 leading-relaxed mb-4">
+                    <h3 className="text-xl font-light text-white mb-2">Need More Information?</h3>
+                    <p className="text-white/60 leading-relaxed mb-4 font-light">
                       For additional materials, financial models, or to schedule a deep-dive session with our founding team,
                       please contact us directly.
                     </p>
                     <a
                       href="mailto:investors@shodh.ai"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#48cae4] to-[#a855f7] text-white font-medium hover:shadow-lg hover:shadow-[#48cae4]/30 transition-all"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-light hover:bg-white/90 transition-all"
                     >
                       <Mail className="w-4 h-4" />
                       Contact Investor Relations
