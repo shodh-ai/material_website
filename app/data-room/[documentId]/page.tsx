@@ -160,12 +160,32 @@ By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop
     color: "#22c55e",
     content: `# **The Skanda Protocol: Universal "Matter Compiler" for Material Discovery and Manufacturing**
 
-## **Architecture: The 10M Synthetic "Physics Brain."**
+## **THE SKANDA STACK: ONE FOUNDATION MODEL, THREE INTERFACES**
 
-* Architecture: The 10M Synthetic "Physics Brain."
-* Calibration: The "Parent-Child" Lab Loop.
-* Validator: Why we are mastering Silicon first.
-* Product: The "Matter Compiler" and Factory Revenue.
+We do not build separate AI models for every problem. We have built a single **"Physics Foundation Model"** (The SkandaX Foundation Model) that powers three distinct application layers:
+
+### **The Core (The Brain):** 
+The Pre-Trained Physics Hypercube (10M Scenarios).
+
+### **The Kernel (The Engines):** 
+The Forward/Inverse Models that handle logic.
+
+### **The Interface (The Products):**
+
+* **VALIDATE:** For Suppliers (The "Virtual Cycler" App).
+* **DEPLOY:** For Factories (The "Factory Guard" App).
+* **OPTIMIZE:** For OEMs (The "Inventor" App).
+
+> **Analogy:** SkandaX is the 'GPT-4' of Matter. Validate, Deploy, and Optimize are the 'ChatGPT' or 'API' wrappers built on top of it.
+
+---
+
+## **DOCUMENT OVERVIEW**
+
+* **Architecture:** The 10M Synthetic "Physics Brain."
+* **Calibration:** The "Parent-Child" Lab Loop.
+* **Validator:** Why we are mastering Silicon first.
+* **Product:** The "Matter Compiler" and Factory Revenue.
 
 ---
 
@@ -178,19 +198,6 @@ By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop
 Current AI models are built for words and images. Shodh AI is building the first **Foundation Model for Physics.** We have moved beyond "Black Box" predictions to create a system that understands the fundamental laws of thermodynamics, kinetics, and mechanics.
 
 We call this the **Meso-Foundation Model**—the world's first large-scale transformer trained to bridge the gap between atomic chemistry and industrial manufacturing.
-
-**THE SKANDA STACK: ONE FOUNDATION MODEL, THREE INTERFACES**
-
-We do not build separate AI models for every problem. We have built a single **"Physics Foundation Model"** (The SkandaX Foundation Model) that powers three distinct application layers:
-
-* **The Core (The Brain):** The Pre-Trained Physics Hypercube (10M Scenarios).
-* **The Kernel (The Engines):** The Forward/Inverse Models that handle logic.
-* **The Interface (The Products):**
-  * **VALIDATE:** For Suppliers (The "Virtual Cycler" App).
-  * **DEPLOY:** For Factories (The "Factory Guard" App).
-  * **OPTIMIZE:** For OEMs (The "Inventor" App).
-
-*Analogy: SkandaX is the 'GPT-4' of Matter. Validate, Deploy, and Optimize are the 'ChatGPT' or 'API' wrappers built on top of it.*
 
 ---
 
@@ -540,19 +547,28 @@ export default function DocumentPage() {
       >
         <div className="prose prose-invert prose-lg max-w-none">
           <div 
-            className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10"
+            className="space-y-6"
             dangerouslySetInnerHTML={{ 
               __html: doc.content
-                .replace(/###\s+(.+)/g, '<h3 class="text-2xl font-medium text-white mt-12 mb-4">$1</h3>')
-                .replace(/##\s+(.+)/g, '<h2 class="text-3xl font-medium text-white mt-16 mb-6">$1</h2>')
-                .replace(/#\s+(.+)/g, '<h1 class="text-4xl font-medium text-white mt-20 mb-8">$1</h1>')
-                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white font-medium">$1</strong>')
-                .replace(/\*(.+?)\*/g, '<em class="text-white/80">$1</em>')
-                .replace(/^\* (.+)/gm, '<li class="text-white/70 leading-relaxed mb-2">$1</li>')
-                .replace(/^(\d+)\. (.+)/gm, '<li class="text-white/70 leading-relaxed mb-2">$2</li>')
-                .replace(/\n\n/g, '</p><p class="text-white/70 leading-relaxed mb-4">')
-                .replace(/^(?!<[h|l|p])/gm, '<p class="text-white/70 leading-relaxed mb-4">')
-                .replace(/---/g, '<hr class="my-12 border-white/10" />')
+                // Blockquotes (for the analogy)
+                .replace(/^>\s+(.+)/gm, '<blockquote class="border-l-4 border-white/20 pl-6 py-3 my-6 bg-white/[0.03] rounded-r-lg italic text-white/80">$1</blockquote>')
+                // Headings with better hierarchy
+                .replace(/####\s+(.+)/g, '<h4 class="text-lg font-semibold text-white/90 mt-8 mb-3 tracking-wide uppercase">$1</h4>')
+                .replace(/###\s+(.+)/g, '<h3 class="text-2xl font-semibold text-white mt-12 mb-5 pb-2 border-b border-white/10">$1</h3>')
+                .replace(/##\s+(.+)/g, '<h2 class="text-3xl font-bold text-white mt-16 mb-6 pb-3 border-b-2 border-white/20">$1</h2>')
+                .replace(/#\s+(.+)/g, '<h1 class="text-4xl font-bold text-white mt-20 mb-8">$1</h1>')
+                // Bold text with highlight
+                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white font-semibold bg-white/5 px-1 rounded">$1</strong>')
+                // Italic text
+                .replace(/\*(.+?)\*/g, '<em class="text-white/90 italic">$1</em>')
+                // Lists with better spacing and styling
+                .replace(/^\* (.+)/gm, '<li class="text-white/80 leading-relaxed mb-3 ml-6 list-disc">$1</li>')
+                .replace(/^(\d+)\. (.+)/gm, '<li class="text-white/80 leading-relaxed mb-3 ml-6 list-decimal">$2</li>')
+                // Paragraphs
+                .replace(/\n\n/g, '</p><p class="text-white/75 leading-relaxed mb-5 text-lg">')
+                .replace(/^(?!<[h|l|p|b])/gm, '<p class="text-white/75 leading-relaxed mb-5 text-lg">')
+                // Horizontal rules with better styling
+                .replace(/---/g, '<hr class="my-12 border-t-2 border-white/10" />')
             }}
           />
         </div>
