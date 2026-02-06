@@ -8,6 +8,11 @@ export async function submitInvestorApplication(formData: {
     firm: string;
 }) {
     try {
+        if (!process.env.DATABASE_URL) {
+            console.log('No DATABASE_URL set — skipping DB insert (local dev mode)');
+            return { success: true };
+        }
+
         const sql = neon(`${process.env.DATABASE_URL}`);
 
         await sql`

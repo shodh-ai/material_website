@@ -244,7 +244,7 @@ We utilize **Fourier Neural Operators (FNO)** to map differential equations dire
 
 ---
 
-### **[Insight Box for Investors]**
+### **[Insight Box]**
 
 **The Competitive Advantage:**
 
@@ -465,6 +465,28 @@ We are deploying our engine to solve the $300B bottleneck in EV batteries (Silic
   }
 };
 
+function renderSlideContent(markdown: string): string {
+  return markdown
+    // Blockquotes
+    .replace(/^>\s+(.+)/gm, '<div class="border-l-4 border-gray-300 pl-5 py-2 my-4 bg-gray-50 rounded-r-lg"><p class="text-gray-600 italic text-base leading-relaxed">$1</p></div>')
+    // Headings
+    .replace(/####\s+(.+)/g, '<h4 class="text-sm font-bold text-gray-500 mt-6 mb-2 tracking-widest uppercase">$1</h4>')
+    .replace(/###\s+(.+)/g, '<h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">$1</h3>')
+    .replace(/##\s+(.+)/g, '<h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">$1</h2>')
+    .replace(/#\s+(.+)/g, '<h1 class="text-3xl font-bold text-gray-900 mb-6">$1</h1>')
+    // Bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-900 font-semibold">$1</strong>')
+    // Italic
+    .replace(/\*(.+?)\*/g, '<em class="text-gray-600 italic">$1</em>')
+    // Numbered lists
+    .replace(/^(\d+)\. (.+)/gm, '<div class="flex gap-3 mb-2 ml-2"><span class="text-gray-400 font-mono text-sm mt-0.5 shrink-0">$1.</span><span class="text-gray-700 leading-relaxed">$2</span></div>')
+    // Bullet lists
+    .replace(/^\* (.+)/gm, '<div class="flex gap-3 mb-2 ml-2"><span class="text-gray-400 mt-2 shrink-0">•</span><span class="text-gray-700 leading-relaxed">$1</span></div>')
+    // Paragraphs
+    .replace(/\n\n/g, '</p><p class="text-gray-700 leading-relaxed mb-4">')
+    .replace(/^(?!<[h|d|p|b|s])/gm, '<p class="text-gray-700 leading-relaxed mb-4">');
+}
+
 export default function DocumentPage() {
   const params = useParams();
   const documentId = params?.documentId as string;
@@ -472,7 +494,7 @@ export default function DocumentPage() {
 
   if (!doc) {
     return (
-      <div className="min-h-screen bg-[#081421] text-white flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Document Not Found</h1>
           <Link href="/data-room" className="text-[#48cae4] hover:underline">
@@ -483,11 +505,17 @@ export default function DocumentPage() {
     );
   }
 
+  // Split content into slides on ---
+  const slides = doc.content
+    .split(/\n---\n/)
+    .map((s: string) => s.trim())
+    .filter((s: string) => s.length > 0);
+
   return (
-    <div className="min-h-screen bg-[#081421] text-white">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-white/10 bg-black/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/data-room" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm font-medium">Back to Data Room</span>
@@ -507,72 +535,65 @@ export default function DocumentPage() {
         </div>
       </header>
 
-      {/* Document Header */}
+      {/* Title Slide */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mx-auto px-6 py-16"
+        className="max-w-5xl mx-auto px-6 pt-12 pb-8"
       >
-        <div 
-          className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-6"
-          style={{ 
-            backgroundColor: `${doc.color}20`,
-            color: doc.color
-          }}
-        >
-          {doc.category}
-        </div>
-        
-        <h1 className="text-4xl md:text-6xl font-medium mb-4">{doc.title}</h1>
-        <p className="text-2xl text-white/60 mb-8">{doc.subtitle}</p>
-        
-        <div className="flex items-center gap-6 text-sm text-white/40">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4" />
-            {doc.readTime}
+        <div className="bg-white rounded-2xl shadow-2xl p-10 md:p-16 text-center">
+          <div 
+            className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-8"
+            style={{ 
+              backgroundColor: `${doc.color}15`,
+              color: doc.color,
+              border: `1px solid ${doc.color}30`
+            }}
+          >
+            {doc.category}
           </div>
-          <div className="flex items-center gap-2">
-            <Eye className="w-4 h-4" />
-            Confidential
+          
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{doc.title}</h1>
+          <p className="text-xl text-gray-500 mb-8">{doc.subtitle}</p>
+          
+          <div className="flex items-center justify-center gap-6 text-sm text-gray-400">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              {doc.readTime}
+            </div>
+            <div className="flex items-center gap-2">
+              <Eye className="w-4 h-4" />
+              Confidential
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <p className="text-xs text-gray-400 tracking-widest uppercase">Shodh AI — Investor Data Room</p>
           </div>
         </div>
       </motion.div>
 
-      {/* Document Content */}
-      <motion.article
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="max-w-4xl mx-auto px-6 pb-24"
-      >
-        <div className="prose prose-invert prose-lg max-w-none">
-          <div 
-            className="space-y-6"
-            dangerouslySetInnerHTML={{ 
-              __html: doc.content
-                // Blockquotes (for the analogy)
-                .replace(/^>\s+(.+)/gm, '<blockquote class="border-l-4 border-white/20 pl-6 py-3 my-6 bg-white/[0.03] rounded-r-lg italic text-white/80">$1</blockquote>')
-                // Headings with better hierarchy
-                .replace(/####\s+(.+)/g, '<h4 class="text-lg font-semibold text-white/90 mt-8 mb-3 tracking-wide uppercase">$1</h4>')
-                .replace(/###\s+(.+)/g, '<h3 class="text-2xl font-semibold text-white mt-12 mb-5 pb-2 border-b border-white/10">$1</h3>')
-                .replace(/##\s+(.+)/g, '<h2 class="text-3xl font-bold text-white mt-16 mb-6 pb-3 border-b-2 border-white/20">$1</h2>')
-                .replace(/#\s+(.+)/g, '<h1 class="text-4xl font-bold text-white mt-20 mb-8">$1</h1>')
-                // Bold text with highlight
-                .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white font-semibold bg-white/5 px-1 rounded">$1</strong>')
-                // Italic text
-                .replace(/\*(.+?)\*/g, '<em class="text-white/90 italic">$1</em>')
-                // Lists with better spacing and styling
-                .replace(/^\* (.+)/gm, '<li class="text-white/80 leading-relaxed mb-3 ml-6 list-disc">$1</li>')
-                .replace(/^(\d+)\. (.+)/gm, '<li class="text-white/80 leading-relaxed mb-3 ml-6 list-decimal">$2</li>')
-                // Paragraphs
-                .replace(/\n\n/g, '</p><p class="text-white/75 leading-relaxed mb-5 text-lg">')
-                .replace(/^(?!<[h|l|p|b])/gm, '<p class="text-white/75 leading-relaxed mb-5 text-lg">')
-                // Horizontal rules with better styling
-                .replace(/---/g, '<hr class="my-12 border-t-2 border-white/10" />')
-            }}
-          />
-        </div>
-      </motion.article>
+      {/* Content Slides */}
+      <div className="max-w-5xl mx-auto px-6 pb-16 space-y-8">
+        {slides.map((slide: string, index: number) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 + index * 0.05 }}
+          >
+            <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
+              <div 
+                dangerouslySetInnerHTML={{ __html: renderSlideContent(slide) }}
+              />
+              <div className="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between">
+                <p className="text-xs text-gray-300 tracking-wider uppercase">Shodh AI</p>
+                <p className="text-xs text-gray-300">{index + 1} / {slides.length}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
