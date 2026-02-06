@@ -322,11 +322,11 @@ export default function DataRoomPage() {
                     </h2>
                   </div>
 
-                  {/* Founder Photo Placeholder */}
+                  {/* Founder Photo */}
                   <div className="flex justify-center mb-8">
                     <div className="w-32 h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
                       <img 
-                        src="/founder-photo.jpg" 
+                        src="/Arastu_Sharma_l.jpeg" 
                         alt="Arastu, CEO" 
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -410,6 +410,28 @@ export default function DataRoomPage() {
                       <p className="text-white font-medium text-lg">Arastu</p>
                       <p className="text-white/50 text-sm">CEO, Shodh AI</p>
                     </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Founder Photo Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="max-w-5xl mx-auto mb-16"
+              >
+                <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="flex flex-col items-center">
+                    <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-white/10 mb-6">
+                      <img 
+                        src="/Arastu_Sharma_l.jpeg" 
+                        alt="Arastu Sharma - Founder & CEO, Shodh AI" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className="text-2xl font-light text-white mb-1">Arastu Sharma</h3>
+                    <p className="text-white/50 text-sm font-light tracking-wide">Founder & CEO, Shodh AI</p>
                   </div>
                 </div>
               </motion.div>
