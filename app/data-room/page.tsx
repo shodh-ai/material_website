@@ -408,7 +408,7 @@ export default function DataRoomPage() {
                       <p className="text-white/50 text-sm">CEO, Shodh AI</p>
 
                       <div className="mt-4">
-                        <div className="w-24 h-24 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                        <div className="w-40 h-40 overflow-hidden rounded-xl border border-white/10">
                           <img
                             src="/Arastu_Sharma_l.jpeg"
                             alt="Arastu, CEO"
