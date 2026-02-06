@@ -5,6 +5,12 @@ import Link from "next/link";
 import { ArrowLeft, Download, Share2, Clock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 
+const pdfMap: Record<string, string> = {
+  "genesis-protocol": "/pdf/The Genesis Protocol 2 (1).pdf",
+  "18-month-sprint": "/pdf/THE 18-MONTH SPRINT- THE PATH TO $500M.pdf",
+  "skanda-architecture": "/pdf/Architecture- The 10M Synthetic _Physics Brain.pdf",
+};
+
 const documentContent: Record<string, any> = {
   "genesis-protocol": {
     title: "The Genesis Protocol 2.0",
@@ -24,9 +30,9 @@ To reach a $500M valuation in 18 months, we don't just sell software; we embed o
 
 We don't just solve "problems"; we design the future cell. By deploying **Forward Deployed Engineers (FDEs)** directly into the R&D centers of Tier-1 OEMs in Japan and Europe, we bridge the "Cultural and Technical Gap."
 
-**The Model:** Partners (e.g., Tata, BMW, Panasonic) pay **$3M-7M** for an 18-month "Design Sprint."
+**The Model:** Partners (e.g., Tata, BMW, Panasonic) pay **3M–7M** for an 18-month "Design Sprint."
 
-* **The Role:** Our engineers use SkandaX to design their next-gen Silicon or Sodium-Ion recipe on-site.  
+* **The Role:** Our engineers use SkandaX to design their next-gen Silicon or Sodium-Ion recipe on-site.
 * **The Goal:** It funds our global operations (non-dilutive) and ensures our software is the only one they trust to manufacture that design.
 
 ### **LAYER 2: THE "YIELD" OPERATING SYSTEM (SaaS)**
@@ -35,50 +41,28 @@ We don't just solve "problems"; we design the future cell. By deploying **Forwar
 
 Once the design is finalized, the customer moves to the factory. This is where **SkandaX DEPLOY** becomes mission-critical.
 
-**The Model:** A subscription fee (e.g., **$250k-500k/year**) for every production line running our "Factory Guard" Edge Node.
+**The Model:** A subscription fee (e.g., **250k–500k/year**) for every production line running our "Factory Guard" Edge Node.
 
-* **The Value:** We aren't just software; we are **Yield Insurance.** If our AI prevents even one "Bad Batch" or reduces "Ramp-up Time" by 3 months, the software pays for itself 10x over.  
+* **The Value:** We aren't just software; we are **Yield Insurance.** If our AI prevents even one "Bad Batch" or reduces "Ramp-up Time" by 3 months, the software pays for itself 10x over.
 * **The Moat:** Once SkandaX is integrated into the factory's sensors (PLC/MES), we are the "Operating System" of that facility. Switching costs become astronomical.
 
 ### **LAYER 3: THE "SOVEREIGN" ROYALTY (IP TAX)**
 
 *Revenue Stream: Production Royalties (The "Intel Inside" Model).*
 
-This is where the **$500M+ valuation** lives. Because we used SkandaX GENESIS to create the proprietary microstructure and the "Machine Recipe," we own the Intellectual Property of the material itself.
+This is where the **$500M+ valuation** lives. Because we used **SkandaX GENESIS** to create the proprietary microstructure and the "Machine Recipe," we own the Intellectual Property of the material itself.
 
-* **The Model:** We take a small "Technology Tax" (e.g., **$0.50 – $1.50 per kWh**) on every battery produced using a Shodh-proprietary design.  
-* **The Logic:** This is **Exponential Upside.** As our partners scale from 1 GWh to 100 GWh, our revenue explodes with **Zero Marginal Cost.**  
+* **The Model:** We take a small "Technology Tax" (e.g., **$0.50 – $1.50 per kWh**) on every battery produced using a Shodh-proprietary design.
+* **The Logic:** This is **Exponential Upside.** As our partners scale from 1 GWh to 100 GWh, our revenue explodes with **Zero Marginal Cost.**
 * **Investor Note:** This layer turns Shodh AI into an **IP Powerhouse**, similar to ARM in semiconductors or Qualcomm in mobile.
 
 ---
 
 ### **THE GO-TO-MARKET (GTM) STRATEGY: 18-MONTH BLITZ**
 
-1. **Months 0-6 (India):** Leverage the **IndiaAI Mission** to perfect the "Sovereign Prototype." Use domestic partners (Tata/Exide) as the initial proof-of-concept.  
-2. **Months 6-12 (Global Deployment):** Open the **Munich and Tokyo "Frontier Offices."** Deploy FDE teams to secure 3 pilot partnerships with global OEMs.  
-3. **Months 12-18 (Scaling):** Transition pilots into **Layer 2 (SaaS)** deployments and lock in **Layer 3 (Royalty)** contracts for next-gen models.
-
----
-
-## **KEY TAKEAWAYS FOR INVESTORS**
-
-### **Why This Model Works**
-
-1. **Immediate Cash Flow:** Layer 1 provides non-dilutive funding from day one
-2. **Predictable Revenue:** Layer 2 creates recurring SaaS revenue with 90%+ gross margins
-3. **Exponential Scale:** Layer 3 captures unlimited upside as production scales globally
-
-### **Competitive Moat**
-
-- **Technical Lock-in:** Once integrated into factory systems, switching costs are prohibitive
-- **Data Advantage:** Every deployment feeds our AI, making it smarter and more valuable
-- **IP Protection:** Proprietary material designs create patent-protected revenue streams
-
-### **Risk Mitigation**
-
-- **Diversified Revenue:** Three independent revenue streams reduce dependency risk
-- **Government Support:** IndiaAI Mission backing provides infrastructure and credibility
-- **Global Expansion:** Multi-geography strategy reduces single-market risk`
+* **Months 0–6 (India):** Leverage the **IndiaAI Mission** to perfect the "Sovereign Prototype." Use domestic partners (Tata/Exide) as the initial proof-of-concept.
+* **Months 6–12 (Global Deployment):** Open the **Munich and Tokyo "Frontier Offices."** Deploy FDE teams to secure 3 pilot partnerships with global OEMs.
+* **Months 12–18 (Scaling):** Transition pilots into **Layer 2 (SaaS)** deployments and lock in **Layer 3 (Royalty)** contracts for next-gen models.`
   },
   "18-month-sprint": {
     title: "The 18-Month Sprint",
@@ -94,69 +78,58 @@ This is where the **$500M+ valuation** lives. Because we used SkandaX GENESIS to
 
 Our execution is capital-efficient. By partnering with the **IndiaAI Mission**, our core **Capex is covered**:
 
-* **Compute:** Priority access to H100 GPU clusters is secured.  
-* **Infrastructure:** The Autonomous Materials Lab is government-backed.  
+* **Compute:** Priority access to H100 GPU clusters is secured.
+* **Infrastructure:** The Autonomous Materials Lab is government-backed.
 * **The Mandate:** $20M is deployed exclusively for high-density talent (Physics/AI) and **Global Forward Deployment** in key manufacturing hubs (Japan/Europe).
 
 ---
 
 ### **PHASE 1: THE PHYSICS VALIDATOR (0 – 6 MONTHS)**
 
-**Mission: Master the "Hardest" Physics (Silicon Anodes).**  
+**Mission: Master the "Hardest" Physics (Silicon Anodes).**
+
 We don't start with easy wins. We solve the industry's primary bottleneck: Silicon-Graphite expansion.
 
-* **The Execution:**  
-  * Training SkandaX on a 10M-point **Physics Hypercube** (Synthetic Data).  
-  * Running the **Parent-Child Protocol** in the autonomous lab to generate 1,000 "Ground Truth" data points.  
-* **Value Inflection:** We prove that SkandaX can predict the "Physics of Failure" (cracking/expansion) with >95% accuracy.  
-* **Status:** **Scientific De-risking.**
+**The Execution:**
 
-**Key Milestones:**
-- Complete 10M synthetic simulation dataset
-- Achieve >95% prediction accuracy on silicon anode failure
-- Publish validation results in peer-reviewed journal
-- Secure first pilot partner (Tata/Exide)
+1. Training SkandaX on a 10M-point **Physics Hypercube** (Synthetic Data).
+2. Running the **Parent-Child Protocol** in the autonomous lab to generate 1,000 "Ground Truth" data points.
+
+* **Value Inflection:** We prove that SkandaX can predict the "Physics of Failure" (cracking/expansion) with >95% accuracy.
+* **Status: Scientific De-risking.**
 
 ---
 
 ### **PHASE 2: PLATFORM SCALABILITY (6 – 12 MONTHS)**
 
-**Mission: Demonstrate the "Transfer Learning" Advantage.**  
+**Mission: Demonstrate the "Transfer Learning" Advantage.**
+
 We prove that Shodh AI is a universal platform, not a single-chemistry company.
 
-* **The Execution:**  
-  * Expand SkandaX to **Cathodes (NMC/LFP).**  
-  * **The Data Flex:** Because the "Physics Backbone" is already trained on Silicon, Phase 2 requires **70% less data** than Phase 1.  
-* **Global Expansion:** Deployment of **Forward-Deployed Engineers (FDE)** to Japan (Cell Manufacturers) and Europe (Automotive OEMs) to begin data-integration audits.  
-* **Value Inflection:** We prove that the marginal cost of discovering a new material system drops by >50% per iteration.  
-* **Status:** **Economic De-risking.**
+**The Execution:**
 
-**Key Milestones:**
-- Open Munich and Tokyo offices
-- Deploy 3 FDE teams to global partners
-- Expand to 3 additional material chemistries
-- Achieve $5M in NRE revenue
+1. Expand SkandaX to **Cathodes (NMC/LFP).**
+2. **The Data Flex:** Because the "Physics Backbone" is already trained on Silicon, Phase 2 requires **70% less data** than Phase 1.
+
+* **Global Expansion:** Deployment of **Forward-Deployed Engineers (FDE)** to Japan (Cell Manufacturers) and Europe (Automotive OEMs) to begin data-integration audits.
+* **Value Inflection:** We prove that the marginal cost of discovering a new material system drops by >50% per iteration.
+* **Status: Economic De-risking.**
 
 ---
 
-### **PHASE 3: INDUSTRIAL INTEGRATION (12 – 18 MONTHS)**
+### **PHASE 3: THE FULL-SYSTEM DIGITAL TWIN PILOT (12 – 18 MONTHS)**
 
-**Mission: Full-Cell Integration & Factory Deployment.**  
-We move from the Lab to the Production Line. We deploy SkandaX DEPLOY into a partner's pilot line to create a live 'Digital Twin' of their production process.
+**Mission: Full-Cell Integration & Factory Deployment.** We move from the Lab to the Production Line. We deploy SkandaX DEPLOY into a partner's pilot line to create a live "Digital Twin" of their production process.
 
-* **The Execution:**  
-  * **SkandaX SIMULATE:** Launch the full-cell digital twin, predicting interactions between Anode, Cathode, and Electrolyte.  
-  * **SkandaX DEPLOY:** Pilot deployment of the **Factory Guard (Edge Node)** into a partner Gigafactory.  
-  * **The Shadow Loop:** The AI reads real-time sensor data from the factory coater and flags invisible micro-defects before they reach the cell.  
-* **Operational Footprint:** On-site engineering teams in Tokyo and Munich to oversee the transition from software design to factory-floor reality.  
-* **Value Inflection:** We are an **Industrial AI System.**  
-* **Status:** **Commercial De-risking.**
+**The Execution:**
 
-**Key Milestones:**
-- Deploy Factory Guard in 2 production facilities
-- Achieve 10%+ yield improvement in pilot deployments
-- Sign first Layer 3 royalty agreement
-- Reach $10M ARR
+1. **SkandaX SIMULATE:** Launch the full-cell digital twin, predicting interactions between Anode, Cathode, and Electrolyte.
+2. **SkandaX DEPLOY:** Pilot deployment of the **Factory Guard (Edge Node)** into a partner Gigafactory.
+3. **The Shadow Loop:** The AI reads real-time sensor data from the factory coater and flags invisible micro-defects before they reach the cell.
+
+* **Operational Footprint:** On-site engineering teams in Tokyo and Munich to oversee the transition from software design to factory-floor reality.
+* **Value Inflection:** We are an **Industrial AI System.**
+* **Status: Commercial De-risking.**
 
 ---
 
@@ -164,9 +137,9 @@ We move from the Lab to the Production Line. We deploy SkandaX DEPLOY into a par
 
 By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop.**
 
-1. **Technical:** We have "Pre-Solved" the physics of the world's most difficult materials (Silicon/NMC).  
-2. **Operational:** We own the world's largest proprietary dataset of Mesoscale failures.  
-3. **Commercial:** We are embedded in the production lines of the world's most strategic manufacturers.
+* **Technical:** We have "Pre-Solved" the physics of the world's most difficult materials (Silicon/NMC).
+* **Operational:** We own the world's largest proprietary dataset of Mesoscale failures.
+* **Commercial:** We are embedded in the production lines of the world's most strategic manufacturers.
 
 **Historically, deeptech platforms that successfully cross the "Sim-to-Real" chasm—moving from laboratory discovery to industrial deployment—command strategic valuations of $500M+.**
 
@@ -174,32 +147,10 @@ By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop
 
 ### **CAPITAL ALLOCATION: THE $20M USE OF FUNDS**
 
-* **45% – Elite Engineering Talent:** Securing the top 0.01% of Mesoscale Physicists and AI Architects globally.  
-* **25% – Global Forward Deployment:** Establishing technical on-sites in Japan and Europe to secure Tier-1 industrial partnerships.  
-* **20% – Model Training & Refinement:** High-intensity Opex for massive-scale pre-training of the "Large Physics Model."  
-* **10% – Intellectual Property:** Global patent filing of our "Process Recipes" and "Matter Compiler" architecture.
-
----
-
-## **INVESTMENT THESIS**
-
-### **Why Now?**
-
-1. **Market Timing:** Global battery demand growing 30% YoY, creating urgent need for faster R&D
-2. **Technology Readiness:** AI and compute infrastructure finally capable of physics-scale problems
-3. **Government Support:** IndiaAI Mission provides unprecedented infrastructure backing
-
-### **Competitive Advantages**
-
-1. **First-Mover:** Only company with production-ready mesoscale AI platform
-2. **Data Moat:** Proprietary physics dataset impossible to replicate
-3. **Government Partnership:** IndiaAI backing provides credibility and resources
-
-### **Exit Strategy**
-
-- **Strategic Acquisition:** Target acquirers include Tesla, CATL, LG Energy, Samsung SDI
-- **Sovereign IPO:** Indian government may support domestic IPO for strategic asset
-- **Continued Growth:** Platform economics support $1B+ standalone valuation`
+* **45% – Elite Engineering Talent:** Securing the top 0.01% of Mesoscale Physicists and AI Architects globally.
+* **25% – Global Forward Deployment:** Establishing technical on-sites in Japan and Europe to secure Tier-1 industrial partnerships.
+* **20% – Model Training & Refinement:** High-intensity Opex for massive-scale pre-training of the "Large Physics Model."
+* **10% – Intellectual Property:** Global patent filing of our "Process Recipes" and "Matter Compiler" architecture.`
   },
   "skanda-architecture": {
     title: "The Skanda Protocol",
@@ -207,9 +158,18 @@ By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop
     category: "Technology",
     readTime: "25 min read",
     color: "#22c55e",
-    content: `# The Skanda Protocol: Universal "Matter Compiler" for Material Discovery and Manufacturing
+    content: `# **The Skanda Protocol: Universal "Matter Compiler" for Material Discovery and Manufacturing**
 
-## Architecture: The 10M Synthetic "Physics Brain"
+## **Architecture: The 10M Synthetic "Physics Brain."**
+
+* Architecture: The 10M Synthetic "Physics Brain."
+* Calibration: The "Parent-Child" Lab Loop.
+* Validator: Why we are mastering Silicon first.
+* Product: The "Matter Compiler" and Factory Revenue.
+
+---
+
+## **SECTION 01: THE ARCHITECTURE**
 
 ### **THE MESO-FOUNDATION MODEL**
 
@@ -219,15 +179,16 @@ Current AI models are built for words and images. Shodh AI is building the first
 
 We call this the **Meso-Foundation Model**—the world's first large-scale transformer trained to bridge the gap between atomic chemistry and industrial manufacturing.
 
-**THE SKANDA STACK: ONE Foundation Model, THREE INTERFACES**  
+**THE SKANDA STACK: ONE FOUNDATION MODEL, THREE INTERFACES**
+
 We do not build separate AI models for every problem. We have built a single **"Physics Foundation Model"** (The SkandaX Foundation Model) that powers three distinct application layers:
 
-* **The Core (The Brain):** The Pre-Trained Physics Hypercube (10M Scenarios).  
-* **The Kernel (The Engines):** The Forward/Inverse Models that handle logic.  
-* **The Interface (The Products):**  
-  1. **VALIDATE:** For Suppliers (The "Virtual Cycler" App).  
-  2. **DEPLOY:** For Factories (The "Factory Guard" App).  
-  3. **OPTIMIZE:** For OEMs (The "Inventor" App).
+* **The Core (The Brain):** The Pre-Trained Physics Hypercube (10M Scenarios).
+* **The Kernel (The Engines):** The Forward/Inverse Models that handle logic.
+* **The Interface (The Products):**
+  * **VALIDATE:** For Suppliers (The "Virtual Cycler" App).
+  * **DEPLOY:** For Factories (The "Factory Guard" App).
+  * **OPTIMIZE:** For OEMs (The "Inventor" App).
 
 *Analogy: SkandaX is the 'GPT-4' of Matter. Validate, Deploy, and Optimize are the 'ChatGPT' or 'API' wrappers built on top of it.*
 
@@ -267,10 +228,10 @@ To solve the inverse design problem, the AI must be able to "check its own work"
 
 We utilize **Fourier Neural Operators (FNO)** to map differential equations directly into the neural architecture. This allows SkandaX to simulate complex physics in the Fourier domain, bypassing the need for iterative solvers.
 
-#### **BENCHMARK: 100,000x ACCELERATION**
+**BENCHMARK: 100,000x ACCELERATION**
 
-* **Traditional Solvers (GeoDict/COMSOL):** 4–6 Hours per 128³ voxel simulation.  
-* **SkandaX (Shodh AI):** **50 Milliseconds.**
+* **Traditional Solvers (GeoDict/COMSOL):** 4–6 Hours per 128³ voxel simulation.
+* **SkandaX (Shodh AI): 50 Milliseconds.**
 
 **The Impact:** We have achieved a **100,000x speedup**. This allows our Inverse Model to "hallucinate" and validate millions of candidate microstructures in minutes to find the one that survives the factory.
 
@@ -278,7 +239,8 @@ We utilize **Fourier Neural Operators (FNO)** to map differential equations dire
 
 ### **[Insight Box for Investors]**
 
-**The Competitive Advantage:**  
+**The Competitive Advantage:**
+
 While competitors like Google GNoME focus on discovering new *crystals*, Shodh AI focuses on the **architecture of the material**. By combining the **Physics Hypercube** for intuition and **FNOs** for validation, we have built a "Physics-Engine-on-a-Chip" that allows factories to design and manufacture proprietary materials at 1/100th the current cost.
 
 ---
@@ -287,7 +249,7 @@ While competitors like Google GNoME focus on discovering new *crystals*, Shodh A
 
 ### **THE DATA FACTORY & SIM-TO-REAL LOOP**
 
-#### **Simulations are perfect. Reality is messy.**
+**Simulations are perfect. Reality is messy.**
 
 The biggest failure in Deeptech is "Domain Drift"—where an AI trained in a perfect simulation fails when it hits a real-world factory.
 
@@ -299,54 +261,200 @@ Shodh AI has solved this by building a **Closed-Loop Data Factory**. We don't ju
 
 To train a foundational model, you need clean, standardized data. Traditional academic labs are too inconsistent for AI. We have industrialized the lab process using our **Parent-Child Protocol**:
 
-1. **Standardization (The Parent):** We create one high-precision "Parent" recipe (e.g., a specific Silicon-Graphite ratio, binder chemistry, and particle size).  
-2. **Fabrication (The Children):** We fabricate 20 identical "Child" cells using automated electric crimpers and inert atmosphere gloveboxes. This eliminates "Human Error" as a variable.  
-3. **Parallel Stress Testing:** The "Children" are split into streams. Some run to total failure (800+ cycles), while others are stopped early (at cycle 10, 50, or 100) for "Autopsy."
+* **Standardization (The Parent):** We create one high-precision "Parent" recipe (e.g., a specific Silicon-Graphite ratio, binder chemistry, and particle size).
+* **Fabrication (The Children):** We fabricate 20 identical "Child" cells using automated electric crimpers and inert atmosphere gloveboxes. This eliminates "Human Error" as a variable.
+* **Parallel Stress Testing:** The "Children" are split into streams. Some run to total failure (800+ cycles), while others are stopped early (at cycle 10, 50, or 100) for "Autopsy."
+
+**The Result:** We compress 2 years of serial testing into 4 months of parallel intelligence gathering.
 
 ---
 
-## **TECHNICAL SPECIFICATIONS**
+**BENCHMARK: THE ECONOMICS OF DATA**
 
-### **Model Architecture**
+* **Democratizing Discovery:** Traditional R&D: ~$500 per high-fidelity data point (Labor + Material + Time).
+* **Shodh Data Factory:** ~$15 per data point.
 
-- **Base Model:** 3D Vision Transformer with physics-informed attention
-- **Parameters:** 175M trainable parameters
-- **Training Data:** 10M synthetic simulations + 50K real-world validations
-- **Inference Speed:** 50ms per microstructure evaluation
-- **Accuracy:** >95% on failure prediction tasks
-
-### **Infrastructure Requirements**
-
-- **Training:** 8x H100 GPUs (80GB each)
-- **Inference:** Single A100 GPU or edge deployment
-- **Storage:** 500TB for full physics hypercube
-- **Compute Cost:** $2M one-time training, $50K/month inference
-
-### **Patent Portfolio**
-
-1. **US Patent Pending:** "Method for Mesoscale Material Design Using Physics-Informed Neural Networks"
-2. **EU Patent Pending:** "Autonomous Calibration System for Sim-to-Real Material Transfer"
-3. **India Patent Filed:** "Federated Learning System for Industrial Material Optimization"
+**The Hook:** We have commoditized discovery. By automating the feedback loop between the lab and the AI, we can saturate an entire chemical design space for the cost of a laptop. This efficiency is why $20M in India achieves more than $100M in Silicon Valley.
 
 ---
 
-## **COMPETITIVE LANDSCAPE**
+### **02 / The Autopsy (Multimodal Characterization)**
 
-### **How We Compare**
+When a battery fails, the "Voltage Curve" only tells half the story. To know why it failed, the AI needs to see inside.
 
-| Company | Focus | Approach | Limitation |
-|---------|-------|----------|------------|
-| **Google GNoME** | Crystal discovery | Atomic-scale DFT | Can't predict manufacturing |
-| **Citrine Informatics** | Materials database | Statistical ML | No physics understanding |
-| **Materials Project** | Open database | Academic research | Not production-ready |
-| **Shodh AI** | **Factory-ready materials** | **Physics Foundation Model** | **None - full stack** |
+We disassemble the "Child" cells in a vacuum to prevent oxidation and scan them using SEM (Microstructure) and XRD (Crystallography).
 
-### **Our Unique Position**
+* **The "Eyes" (SEM):** The AI sees binder detachment and particle cracking.
+* **The "Phase Detector" (XRD):** The AI detects invisible atomic phase changes that trigger mechanical stress.
 
-1. **Only company** with mesoscale-focused AI platform
-2. **Only company** with closed-loop lab validation
-3. **Only company** with government infrastructure backing
-4. **Only company** with production deployment experience`
+**The Output:** A comprehensive, linked dataset that connects Recipe (Ingredients) + Microstructure (Shape) + Performance (Life). No such database exists anywhere else in the world.
+
+---
+
+### **03 / Domain Adaptation (Unifying Simulation & Reality)**
+
+We use a technique called **Domain Adaptation** to map our 10 Million Synthetic Simulations (Stream A) and our Real Lab Data (Stream B) into a **Shared Latent Space**.
+
+* **The Physics Manifold:** The AI learns the "Perfect" version of the physics from our simulations.
+* **The Reality Shift:** The AI learns how far the "Real World" (humidity, impurities, gravity) drifts from that manifold.
+
+**The Result:** Our Forward Model becomes Reality-Calibrated. It gains the ability to see a raw SEM image from a factory and predict its remaining life with the precision of a laboratory scientist.
+
+**[The Unit Economics of Discovery]**
+
+**The 20M Multiplier:** By owning this automated infrastructure, our cost per high-fidelity data point drops from the industry average of $500 to just $25.
+
+We can map an entire material design space (1,000 points) for <$50k OPEX. This efficiency allows us to "Saturate" the physics of any material system while competitors are still waiting for their first batch of lab results.
+
+---
+
+## **SECTION 03: THE VALIDATOR**
+
+### **THE VALIDATOR: WHY SILICON? (STRESS-TESTING THE MODEL)**
+
+**The Silicon Stress Test**
+
+To prove a foundational engine is universal, you don't test it on an easy problem. You test it on the "Holy Grail" of battery science: **The Silicon-Graphite Anode.**
+
+Silicon can store 10x more lithium than graphite, but it is a "Physics Nightmare." It expands by 300% during charging, causing particles to crack, the structure to crumble, and the battery to die in weeks.
+
+**Shodh AI chose Silicon Anode as our first "Validator" chemistry.** If we can master the physics of Silicon, we have mastered the hardest transport and mechanical problems in material science.
+
+---
+
+### **01 / Solving the High-Variance Problem**
+
+Silicon failure is "High Variance." Two batteries made with the same recipe can have 2x difference in life because of tiny, invisible defects in the Mesoscale structure.
+
+* **Traditional R&D:** Uses "Trial and Error" to find a stable recipe. It takes years and usually fails to scale.
+* **The Shodh Way:** We use SkandaX to digitize the failure. We don't just ask "What is the recipe?" We ask "What is the specific 3D architecture that can survive 300% expansion without cracking?"
+
+---
+
+### **02 / De-Risking the Platform**
+
+By using the Parent-Child Protocol on Silicon-Graphite chemistries, we are proving that our "Physics Brain" can handle:
+
+* **Extreme Mechanical Stress:** Predicting cracks before they happen.
+* **Volatile Chemistry:** Managing the instability of the SEI layer.
+* **Complex Transport:** Ensuring lithium ions can navigate a rapidly changing pore network.
+
+**The Logic:** Once SkandaX achieves a 95% accuracy rate on Silicon—the industry's most difficult "Exam"—it is effectively "Pre-Validated" for easier chemistries like Sodium-ion, LFP, and Solid-State.
+
+---
+
+### **03 / From Discovery to "Zero-Shot" Manufacturing**
+
+Our work on Silicon Anodes is the final step before full-scale factory integration. We are proving that our Inverse Model can generate a "Recipe + Microstructure" that works the first time it is built in the lab.
+
+* **Virtual Success:** We fail 10 million times in the Physics Hypercube.
+* **Physical Success:** We build the "Optimal" structure in our lab.
+* **The Result:** We prove that we have deleted the 5-year iteration loop. This "Zero-Shot" capability is the core value proposition we sell to the Gigafactory.
+
+**[The Platform Flex]**
+
+*"We aren't a Silicon company. We are the company that made Silicon work."*
+
+By solving for Silicon, we have built a Proprietary Library of high-expansion physics. This library is a massive asset. Any company in the world looking to move to high-capacity anodes must now go through the Shodh AI engine to ensure their factory yield doesn't collapse.
+
+---
+
+## **SECTION 04: THE PRODUCT**
+
+### **THE MATTER COMPILER & THE GENESIS PROTOCOL**
+
+**Mastering the Factory Line**
+
+Discovery is only half the battle. The "Valley of Death" exists because a material that works in a beaker often fails on the production line.
+
+Shodh AI has built the **Matter Compiler**—the first software suite that translates abstract performance targets into machine-executable factory instructions. We don't just find the needle in the haystack; we provide the blueprint to build the magnet.
+
+---
+
+### **01 / The SkandaX Product Suite**
+
+We engage the industrial value chain through three specific API-driven products:
+
+* **SKANDAX VALIDATE (The Virtual Cycler):** For material suppliers. Upload a new recipe and early-cycle data; we predict long-term cycle life in 2 weeks, not 6 months.
+* **SKANDAX OPTIMIZE (The Designer Studio):** For R&D teams. Input targets (e.g., "A battery that works at -40°C"); the AI generates non-intuitive microstructures and the recipes to achieve them.
+* **SKANDAX DEPLOY (The Factory Guard):** For Gigafactories. We connect directly to factory logs to flag invisible micro-defects and "bad batches" in real-time, preventing million-dollar yield losses.
+
+---
+
+### **02 / Zero-Shot Manufacturing**
+
+Just as a software compiler turns high-level code into machine-readable binary, the Skanda Compiler turns "Intent" into "Process."
+
+* **Input (The Intent):** "I need a High-Energy Anode for a 10-minute fast charge."
+* **The Intelligence:** SkandaX generates the 3D microstructure and simulates the manufacturing violence (mixing, shearing, drying).
+* **Output (The Instruction):** The model outputs specific Machine Code—the exact Mixing Speed, Drying Temperature, and Calendering Pressure required for the factory line.
+
+**This is "Zero-Shot Manufacturing." The recipe works the first time it hits the production line.**
+
+**BENCHMARK: ZERO-SHOT PRECISION**
+
+* **De-Risking the Factory Floor:** Legacy Factory Ramp-up: 50+ trial batches to reach 90% yield for a new chemistry.
+* **Shodh Zero-Shot:** 2 trial batches to reach 90% yield.
+
+**The Hook:** We delete the "Trial and Error" phase of manufacturing. Our Matter Compiler ensures the recipe is factory-ready before the first machine is even turned on, saving OEMs millions in wasted material and months of lost time.
+
+---
+
+### **03 / The Federated Moat (Edge Intelligence)**
+
+Industrial data is a matter of national and corporate security. Tier-1 factories will never upload their raw logs to the cloud.
+
+* **The Solution:** We deploy Skanda-Edge Nodes (powered by NVIDIA Orin/IGX) directly on the production line.
+* **Federated Learning:** The AI learns from local factory defects and sends only the mathematical "Gradients" back to our central brain.
+* **The Result:** Proprietary data never leaves the factory floor, but the Shodh Global Brain gets smarter with every battery produced worldwide.
+
+---
+
+### **04 / The Revenue Engine: The Genesis Protocol**
+
+We capture value across three scalable layers:
+
+* **THE BRIDGE (NRE Fees):** Large partners pay 2M–5M upfront to solve "Impossible Problems" using our Generative Engine. This provides Non-Dilutive Capital to fund our growth.
+* **THE RENT (SaaS):** We charge an annual recurring fee per production line for the "Compiler" software. We become the Operating System of the factory.
+* **THE EMPIRE (Royalties):** We take a small "Intel Inside" tax (e.g., $1/kWh) for every unit produced using a Shodh-proprietary recipe. This provides Exponential Upside with zero marginal cost.
+
+---
+
+**[The Exit Vision]**
+
+*"We aren't just building a company; we are building a new asset class."*
+
+By owning the IP of the "Process Recipe" and the "Machine Instructions," Shodh AI becomes the indispensable layer of the physical world. Whether the world moves to Sodium, Solid-State, or Fusion—they will need the Skanda Compiler to build it.
+
+---
+
+## **BUILT FOR THE ENERGY VALUE CHAIN.**
+
+**Current Beachhead: Energy Storage.**
+
+We are deploying our engine to solve the $300B bottleneck in EV batteries (Silicon, Sodium, Solid-State) before scaling to Hydrogen and Alloys.
+
+---
+
+### **THE 3-COLUMN GRID: THE "WHO & HOW"**
+
+**Column 1: THE CHEMIST**
+* **Who:** Material Suppliers
+* **Pain:** "Is this new molecule scalable?"
+* **Product:** SKANDAX VALIDATE
+* **Value:** Validate recipes in weeks, not years.
+
+**Column 2: THE FACTORY**
+* **Who:** Gigafactories
+* **Pain:** "Yield is too low. Scrap is too high."
+* **Product:** SKANDAX DEPLOY
+* **Value:** Zero-Shot Manufacturing & Yield Guard.
+
+**Column 3: THE STRATEGIST**
+* **Who:** Automotive OEMs (Tesla, Tata, BMW)
+* **Pain:** "We are trapped by supplier roadmaps. We need to own our tech."
+* **Product:** SKANDAX GENESIS (The Inventor)
+* **Value:** Generate Proprietary IP. Break dependence on external suppliers. Create unique, owned chemistries in-house.`
   }
 };
 
@@ -381,9 +489,13 @@ export default function DocumentPage() {
             <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
               <Share2 className="w-5 h-5" />
             </button>
-            <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+            <a
+              href={pdfMap[documentId] || "#"}
+              download
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors inline-flex"
+            >
               <Download className="w-5 h-5" />
-            </button>
+            </a>
           </div>
         </div>
       </header>
