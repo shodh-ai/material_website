@@ -1,5 +1,5 @@
 import InvestorHomePage from "@/components/InvestorHomePage";
 
 export default function Page() {
-  return <InvestorHomePage />;
+  return <InvestorHomePage showDataRoomCTA={false} />;
 }

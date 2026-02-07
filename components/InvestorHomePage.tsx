@@ -199,7 +199,7 @@ const dataRoomCards = [
 // ============================================
 // MAIN COMPONENT
 // ============================================
-export default function InvestorHomePage() {
+export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataRoomCTA?: boolean }) {
   return (
     <div className="relative min-h-screen w-full text-[#f0f0ff] selection:bg-[#48cae4] selection:text-[#081421] overflow-x-hidden">
       <CanvasLayer />
@@ -683,6 +683,7 @@ export default function InvestorHomePage() {
         {/* ============================================ */}
         {/* CHAPTER 6: THE DATA ROOM */}
         {/* ============================================ */}
+        {showDataRoomCTA && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -748,6 +749,7 @@ export default function InvestorHomePage() {
             </div>
           </div>
         </motion.div>
+        )}
 
         <Footer />
       </main>

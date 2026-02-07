@@ -71,7 +71,7 @@ export default function Footer() {
                 Manifesto
               </Link>
               <Link
-                href="#careers"
+                href="/careers"
                 className="text-[#f0f0ff] text-sm sm:text-base capitalize hover:opacity-80 transition-opacity"
               >
                 Careers
