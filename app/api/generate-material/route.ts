@@ -1,36 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Client } from '@gradio/client';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
-const HUGGINGFACE_MODEL_URL = process.env.HUGGINGFACE_MODEL_URL || 'https://api-inference.huggingface.co/models/YOUR_MODEL_ID';
+const DIFFUSION_SPACE = process.env.DIFFUSION_SPACE || 'Ellwil/battery-microstructure-demo';
 
-const SYSTEM_PROMPT = `You are Skanda, an expert Battery Material Scientist.
-Your job is to translate User Requirements into a JSON Configuration for a Generative Physics Model.
+const SYSTEM_PROMPT = `You are Skanda, a Battery Material Architect.
+Translate user requests into target physics parameters.
+Output JSON ONLY.
 
-The Generative Model accepts a vector of 3 targets:
-1. target_cycle_life (Range: 500 - 3000 cycles)
-2. target_capacity_fade_rate (Range: 0.0001 - 0.001 Ah/cycle. Lower is better.)
-3. target_power_demand (Range: 0.0 - 1.0. 1.0 = Racing/Drone, 0.0 = Grid Storage)
+Output Schema:
+{
+  "projected_cycle_life": float (500-5000),
+  "capacity_fade_rate": float (0.0001-0.002),
+  "target_power_demand": float (0.0-1.0),
+  "porosity": float (0.2-0.6),
+  "reasoning": "string explaining your choices"
+}
 
 RULES:
 - If the user asks for "Fast Charging" or "Drone", set target_power_demand > 0.8.
-- If the user asks for "Long Life" or "Grid", set target_cycle_life > 2000.
-- If the user mentions "Hypercar" or "Racing", set target_power_demand > 0.9 and target_cycle_life around 800.
-- If the user mentions "Electric Vehicle" or "EV", balance parameters: target_cycle_life around 1500, target_power_demand around 0.6.
-- Output ONLY valid JSON in this exact format:
-{
-  "target_cycle_life": <number>,
-  "target_capacity_fade_rate": <number>,
-  "target_power_demand": <number>,
-  "reasoning": "<explanation of your parameter choices>"
-}
+- If the user asks for "Long Life" or "Grid", set projected_cycle_life > 2000.
+- If the user mentions "Hypercar" or "Racing", set target_power_demand > 0.9 and projected_cycle_life around 800.
+- If the user mentions "Electric Vehicle" or "EV", balance parameters: projected_cycle_life around 1500, target_power_demand around 0.6.
 
 Example Input: "I need a battery for a hypercar."
 Example Output:
 {
-  "target_cycle_life": 800,
-  "target_capacity_fade_rate": 0.0005,
+  "projected_cycle_life": 800,
+  "capacity_fade_rate": 0.0005,
   "target_power_demand": 0.95,
+  "porosity": 0.45,
   "reasoning": "Hypercars require maximum power output (low tortuosity) and moderate life."
 }`;
 
@@ -46,16 +46,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 1: Call Gemini to interpret the user's request (or use fallback)
-    let parameters;
+    let parameters: {
+      projected_cycle_life: number;
+      capacity_fade_rate: number;
+      target_power_demand: number;
+      porosity: number;
+      reasoning: string;
+    };
 
     if (GEMINI_API_KEY) {
       const geminiResponse = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             contents: [
               {
@@ -114,91 +118,115 @@ export async function POST(request: NextRequest) {
       let cycleLife = 1500;
       let powerDemand = 0.5;
       let fadeRate = 0.0005;
+      let porosity = 0.35;
       let reasoning = 'Balanced configuration for general-purpose battery application.';
 
       if (isDrone || isFast) {
-        cycleLife = 2000; powerDemand = 0.88; fadeRate = 0.0003;
-        reasoning = 'High-power application detected. Prioritizing fast charge capability with low tortuosity and high porosity. Cycle life set high for commercial viability.';
+        cycleLife = 2000; powerDemand = 0.88; fadeRate = 0.0003; porosity = 0.45;
+        reasoning = 'High-power application detected. Prioritizing fast charge capability with low tortuosity and high porosity.';
       } else if (isRacing) {
-        cycleLife = 800; powerDemand = 0.95; fadeRate = 0.0005;
-        reasoning = 'Racing/hypercar application requires maximum power output (minimal tortuosity) with moderate cycle life expectations.';
+        cycleLife = 800; powerDemand = 0.95; fadeRate = 0.0005; porosity = 0.45;
+        reasoning = 'Racing/hypercar application requires maximum power output with moderate cycle life.';
       } else if (isGrid) {
-        cycleLife = 2800; powerDemand = 0.15; fadeRate = 0.0001;
-        reasoning = 'Grid storage prioritizes extreme cycle life and minimal degradation over power density. Dense, well-connected microstructure.';
+        cycleLife = 2800; powerDemand = 0.15; fadeRate = 0.0001; porosity = 0.30;
+        reasoning = 'Grid storage prioritizes extreme cycle life and minimal degradation over power density.';
       } else if (isEV) {
-        cycleLife = 1800; powerDemand = 0.6; fadeRate = 0.0004;
-        reasoning = 'Electric vehicle application requires balanced performance: good cycle life for warranty, moderate fast-charge capability, and controlled degradation.';
+        cycleLife = 1800; powerDemand = 0.6; fadeRate = 0.0004; porosity = 0.38;
+        reasoning = 'Electric vehicle application requires balanced performance: good cycle life, moderate fast-charge.';
       }
 
       parameters = {
-        target_cycle_life: cycleLife,
-        target_capacity_fade_rate: fadeRate,
+        projected_cycle_life: cycleLife,
+        capacity_fade_rate: fadeRate,
         target_power_demand: powerDemand,
+        porosity,
         reasoning,
       };
       console.log('Using fallback parameters (no GEMINI_API_KEY):', parameters);
     }
 
-    // Step 2: Call HuggingFace model with the parameters
-    let imageUrl = null;
-    if (HUGGINGFACE_API_KEY) {
-      try {
-        const hfResponse = await fetch(HUGGINGFACE_MODEL_URL, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${HUGGINGFACE_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            inputs: {
-              target_cycle_life: parameters.target_cycle_life,
-              target_capacity_fade_rate: parameters.target_capacity_fade_rate,
-              target_power_demand: parameters.target_power_demand,
-            }
-          }),
-        });
+    // Step 2: Call HuggingFace Gradio Space via @gradio/client
+    // The Python backend handles normalization_stats.json → 20-dim vector internally
+    let gifUrl: string | null = null;
+    let modelInfo = '';
+    let tiffUrl: string | null = null;
 
-        if (hfResponse.ok) {
-          const blob = await hfResponse.blob();
-          const buffer = await blob.arrayBuffer();
-          const base64 = Buffer.from(buffer).toString('base64');
-          imageUrl = `data:image/png;base64,${base64}`;
-        } else {
-          console.error('HuggingFace API error:', await hfResponse.text());
-        }
-      } catch (hfError) {
-        console.error('HuggingFace request failed:', hfError);
+    try {
+      const client = await Client.connect(DIFFUSION_SPACE, {
+        token: HUGGINGFACE_API_KEY as `hf_${string}`,
+      });
+
+      const result = await client.predict('/generate_microstructure', [
+        parameters.projected_cycle_life,   // cycle_life
+        parameters.capacity_fade_rate,     // fade_rate
+        parameters.target_power_demand,    // power_demand
+        parameters.porosity,               // porosity
+      ]);
+
+      const data = result.data as any[];
+      // Returns: [gif_path, info_json, tiff_path]
+
+      // data[0] = GIF image (object with url)
+      if (data[0]?.url) {
+        gifUrl = data[0].url;
+      } else if (typeof data[0] === 'string') {
+        gifUrl = data[0];
       }
+
+      // data[1] = info JSON string
+      if (data[1] && typeof data[1] === 'string') {
+        modelInfo = data[1];
+      }
+
+      // data[2] = TIFF file (object with url)
+      if (data[2]?.url) {
+        tiffUrl = data[2].url;
+      } else if (typeof data[2] === 'string') {
+        tiffUrl = data[2];
+      }
+
+      console.log('Gradio result:', { gifUrl: !!gifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!tiffUrl });
+    } catch (hfError) {
+      console.error('HuggingFace Space request failed:', hfError);
     }
 
-    // Fallback: generate a gyroid-style SVG placeholder when no HF model is connected
-    if (!imageUrl) {
-      imageUrl = generateGyroidFallback(parameters);
+    // Fallback: generate a gyroid-style SVG placeholder when HF model is unavailable
+    if (!gifUrl) {
+      gifUrl = generateGyroidFallback(parameters);
     }
 
     // Step 3: Generate response content
+    const chargeTime = calculateChargeTime(parameters.target_power_demand);
+    let parsedInfo = '';
+    try {
+      const infoObj = JSON.parse(modelInfo);
+      parsedInfo = `\n- Actual Porosity: ${(infoObj.porosity_actual * 100).toFixed(1)}%\n- Solid Voxels: ${infoObj.solid_voxels?.toLocaleString()} / ${infoObj.total_voxels?.toLocaleString()}`;
+    } catch { /* modelInfo might not be valid JSON */ }
+
     const responseContent = `I've analyzed your requirements and designed an optimized battery electrode microstructure.
 
 **Application Analysis:**
 ${parameters.reasoning}
 
 **Generated Microstructure:**
-The model has generated a 3D voxel structure optimized for your specifications. The visualization shows the porous electrode architecture with calculated tortuosity and porosity values.
+The model has generated a 3D voxel structure (128×128×128) optimized for your specifications.${parsedInfo}
 
 **Predicted Performance:**
-- Estimated Charge Time: ${calculateChargeTime(parameters.target_power_demand)} minutes
-- Predicted Cycle Life: ${parameters.target_cycle_life} cycles
-- Capacity Fade Rate: ${parameters.target_capacity_fade_rate} Ah/cycle`;
+- Estimated Charge Time: ${chargeTime} minutes
+- Predicted Cycle Life: ${parameters.projected_cycle_life} cycles
+- Capacity Fade Rate: ${parameters.capacity_fade_rate} Ah/cycle`;
 
     return NextResponse.json({
       content: responseContent,
       reasoning: parameters.reasoning,
       parameters: {
-        target_cycle_life: parameters.target_cycle_life,
-        target_capacity_fade_rate: parameters.target_capacity_fade_rate,
+        projected_cycle_life: parameters.projected_cycle_life,
+        capacity_fade_rate: parameters.capacity_fade_rate,
         target_power_demand: parameters.target_power_demand,
+        porosity: parameters.porosity,
       },
-      imageUrl: imageUrl,
+      imageUrl: gifUrl,
+      tiffUrl: tiffUrl,
     });
 
   } catch (error) {
@@ -217,22 +245,19 @@ function calculateChargeTime(powerDemand: number): string {
 }
 
 function generateGyroidFallback(params: {
-  target_cycle_life: number;
-  target_capacity_fade_rate: number;
+  projected_cycle_life: number;
+  capacity_fade_rate: number;
   target_power_demand: number;
 }): string {
-  // Map parameters to visual properties
   const power = params.target_power_demand;
-  const life = params.target_cycle_life;
+  const life = params.projected_cycle_life;
 
-  // Porosity-like density: higher power → more open structure
-  const cellCount = Math.round(6 + power * 6); // 6-12 cells
-  const hue1 = Math.round(200 + power * 60);   // blue → purple shift with power
-  const hue2 = Math.round(160 + (1 - power) * 40); // teal range
+  const cellCount = Math.round(6 + power * 6);
+  const hue1 = Math.round(200 + power * 60);
+  const hue2 = Math.round(160 + (1 - power) * 40);
   const porosity = (30 + power * 20).toFixed(0);
   const tortuosity = (1.2 + (1 - power) * 2.0).toFixed(2);
 
-  // Build gyroid-like pattern as SVG paths
   const size = 400;
   const cellSize = size / cellCount;
   let paths = '';
@@ -242,20 +267,16 @@ function generateGyroidFallback(params: {
       const cx = col * cellSize + cellSize / 2;
       const cy = row * cellSize + cellSize / 2;
       const r = cellSize * 0.38;
-      // Alternate pattern to create gyroid-like interconnected look
       const phase = (row + col) % 2 === 0;
       if (phase) {
-        // Rounded blob
         paths += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#g1)" opacity="0.85"/>`;
       } else {
-        // Connecting channel
         const r2 = r * 0.55;
         paths += `<rect x="${cx - r2}" y="${cy - r2}" width="${r2 * 2}" height="${r2 * 2}" rx="${r2 * 0.4}" fill="url(#g2)" opacity="0.7"/>`;
       }
     }
   }
 
-  // Overlay grid lines for voxel look
   let gridLines = '';
   for (let i = 1; i < cellCount; i++) {
     const pos = i * cellSize;

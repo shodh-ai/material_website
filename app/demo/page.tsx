@@ -15,12 +15,14 @@ interface Message {
   content: string;
   reasoning?: string;
   parameters?: {
-    target_cycle_life: number;
-    target_capacity_fade_rate: number;
+    projected_cycle_life: number;
+    capacity_fade_rate: number;
     target_power_demand: number;
+    porosity: number;
   };
   imageUrl?: string;
   generatedImage?: string;
+  tiffUrl?: string;
   analysis?: {
     cycle_life: number;
     warnings: string[];
@@ -108,6 +110,7 @@ export default function DemoPage() {
         setMessages(prev => prev.filter(m => !m.isLoading).concat({
           id: Date.now().toString(), role: 'model', content: data.content,
           reasoning: data.reasoning, parameters: data.parameters, generatedImage: data.imageUrl,
+          tiffUrl: data.tiffUrl,
         }));
       }
     } catch {
@@ -218,11 +221,12 @@ export default function DemoPage() {
                     <div className="mt-4 rounded-xl p-5"
                       style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                       <p className="text-xs font-semibold uppercase tracking-wider text-purple-400 mb-4">Physics Parameters</p>
-                      <div className="grid grid-cols-3 gap-6">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                         {[
-                          { label: 'Cycle Life', value: msg.parameters.target_cycle_life, unit: 'cycles' },
-                          { label: 'Fade Rate', value: msg.parameters.target_capacity_fade_rate, unit: 'Ah/cycle' },
+                          { label: 'Cycle Life', value: msg.parameters.projected_cycle_life, unit: 'cycles' },
+                          { label: 'Fade Rate', value: msg.parameters.capacity_fade_rate, unit: 'Ah/cycle' },
                           { label: 'Power Demand', value: msg.parameters.target_power_demand, unit: '' },
+                          { label: 'Porosity', value: msg.parameters.porosity, unit: '' },
                         ].map(p => (
                           <div key={p.label}>
                             <p className="text-xs text-gray-500">{p.label}</p>
@@ -241,6 +245,14 @@ export default function DemoPage() {
                       <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Generated Microstructure</p>
                       <img src={msg.generatedImage} alt="Generated"
                         className="rounded-xl max-w-lg border border-white/10" />
+                      {msg.tiffUrl && (
+                        <a href={msg.tiffUrl} download="microstructure_128x128x128.tif"
+                          className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg text-sm font-medium text-emerald-300 transition-colors hover:bg-emerald-500/10"
+                          style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)' }}>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                          Download Full 3D TIFF (128×128×128)
+                        </a>
+                      )}
                     </div>
                   )}
 
