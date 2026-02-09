@@ -1,0 +1,18 @@
+body { font-family: system-ui, -apple-system, sans-serif; color: #1f2937; line-height: 1.7; font-size: 11pt; }
+h1 { font-size: 24pt; font-weight: 700; color: #111827; margin-top: 2em; margin-bottom: 0.5em; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.3em; }
+h2 { font-size: 18pt; font-weight: 600; color: #111827; margin-top: 1.8em; margin-bottom: 0.4em; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.2em; }
+h3 { font-size: 14pt; font-weight: 600; color: #1f2937; margin-top: 1.5em; margin-bottom: 0.3em; }
+h4 { font-size: 11pt; font-weight: 600; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1.3em; }
+p { margin-bottom: 0.8em; color: #374151; }
+strong { color: #111827; font-weight: 600; }
+em { color: #6b7280; }
+ul, ol { margin-bottom: 1em; padding-left: 1.5em; }
+li { margin-bottom: 0.3em; color: #374151; }
+blockquote { border-left: 3px solid #d1d5db; padding: 0.5em 1em; margin: 1em 0; background: #f9fafb; border-radius: 0 6px 6px 0; color: #6b7280; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: 10pt; }
+thead th { background: #f9fafb; border: 1px solid #e5e7eb; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.03em; color: #6b7280; }
+tbody td { border: 1px solid #e5e7eb; padding: 8px 12px; color: #374151; }
+tbody tr:nth-child(even) { background: #fafafa; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 2em 0; }
+code { background: #f3f4f6; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+a { color: #2563eb; text-decoration: none; }

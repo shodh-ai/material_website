@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -19,7 +19,8 @@ import {
   TrendingUp,
   Zap,
   Layers,
-  AlertCircle
+  AlertCircle,
+  ChevronDown
 } from "lucide-react";
 import { submitInvestorApplication } from "./actions";
 import DataRoomManifesto from "@/components/DataRoomManifesto";
@@ -101,11 +102,30 @@ export default function DataRoomPage() {
     }
   };
 
-  const handleDownload = (docId: string) => {
-    const pdfMap: Record<string, string> = {
-      "genesis-protocol": "/pdf/The Genesis Protocol 2 (1).pdf",
-      "skanda-architecture": "/pdf/Architecture- The 10M Synthetic _Physics Brain.pdf",
-    };
+  const [openDownloadMenu, setOpenDownloadMenu] = useState<string | null>(null);
+  const downloadMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (downloadMenuRef.current && !downloadMenuRef.current.contains(e.target as Node)) {
+        setOpenDownloadMenu(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const pdfMap: Record<string, string> = {
+    "genesis-protocol": "/pdf/The-Genesis-Protocol-2.0.pdf",
+    "skanda-architecture": "/pdf/The-SkandaX-Protocol.pdf",
+  };
+
+  const mdMap: Record<string, { url: string; filename: string }> = {
+    "genesis-protocol": { url: "/md/GTM-and-18-Month-Sprint.md", filename: "The-Genesis-Protocol-2.0.md" },
+    "skanda-architecture": { url: "/md/Architecture-Deep-Dive.md", filename: "The-SkandaX-Protocol.md" },
+  };
+
+  const handleDownloadPdf = (docId: string) => {
     const pdfUrl = pdfMap[docId];
     if (pdfUrl) {
       const link = document.createElement("a");
@@ -115,6 +135,20 @@ export default function DataRoomPage() {
       link.click();
       document.body.removeChild(link);
     }
+    setOpenDownloadMenu(null);
+  };
+
+  const handleDownloadMd = (docId: string) => {
+    const md = mdMap[docId];
+    if (md) {
+      const link = document.createElement("a");
+      link.href = md.url;
+      link.download = md.filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    setOpenDownloadMenu(null);
   };
 
   return (
@@ -461,12 +495,39 @@ export default function DataRoomPage() {
                           <Eye className="w-4 h-4" />
                           Read
                         </Link>
-                        <button
-                          onClick={() => handleDownload(doc.id)}
-                          className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-                        >
-                          <Download className="w-4 h-4" />
-                        </button>
+                        <div className="relative" ref={openDownloadMenu === doc.id ? downloadMenuRef : undefined}>
+                          <button
+                            onClick={() => setOpenDownloadMenu(openDownloadMenu === doc.id ? null : doc.id)}
+                            className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-1.5"
+                          >
+                            <Download className="w-4 h-4" />
+                            <ChevronDown className="w-3 h-3" />
+                          </button>
+                          {openDownloadMenu === doc.id && (
+                            <div className="absolute right-0 bottom-full mb-2 w-48 rounded-xl bg-[#1a1a1a] border border-white/10 shadow-2xl overflow-hidden z-50">
+                              <button
+                                onClick={() => handleDownloadMd(doc.id)}
+                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-left"
+                              >
+                                <FileText className="w-4 h-4 text-white/50" />
+                                <div>
+                                  <p className="text-sm text-white">Markdown</p>
+                                  <p className="text-xs text-white/40">.md file</p>
+                                </div>
+                              </button>
+                              <button
+                                onClick={() => handleDownloadPdf(doc.id)}
+                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors border-t border-white/5 text-left"
+                              >
+                                <Download className="w-4 h-4 text-white/50" />
+                                <div>
+                                  <p className="text-sm text-white">PDF Document</p>
+                                  <p className="text-xs text-white/40">Branded version</p>
+                                </div>
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </motion.div>
                   );

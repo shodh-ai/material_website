@@ -9,8 +9,8 @@ import { genesisProtocolDoc } from "../content/gtm-content";
 import { skandaArchitectureDoc } from "../content/architecture-content";
 
 const pdfMap: Record<string, string> = {
-  "genesis-protocol": "/pdf/The Genesis Protocol 2 (1).pdf",
-  "skanda-architecture": "/pdf/Architecture- The 10M Synthetic _Physics Brain.pdf",
+  "genesis-protocol": "/pdf/The-Genesis-Protocol-2.0.pdf",
+  "skanda-architecture": "/pdf/The-SkandaX-Protocol.pdf",
 };
 
 const documentContent: Record<string, any> = {
