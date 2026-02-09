@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     if (GEMINI_API_KEY) {
       try {
         const geminiResponse = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
