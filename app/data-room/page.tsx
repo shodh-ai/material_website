@@ -22,41 +22,31 @@ import {
   AlertCircle
 } from "lucide-react";
 import { submitInvestorApplication } from "./actions";
+import DataRoomManifesto from "@/components/DataRoomManifesto";
 
 // Document metadata
 const documents = [
   {
     id: "genesis-protocol",
     title: "The Genesis Protocol 2.0",
-    subtitle: "Global Value Capture Strategy",
-    description: "Deep dive into our 3-layer revenue model: Strategic Design Partnerships, SaaS Operating System, and Sovereign Royalties.",
+    subtitle: "GTM Strategy & 18-Month Execution Plan",
+    description: "Complete go-to-market strategy across four compounding revenue layers, detailed 18-month execution plan, capital allocation, competitive landscape, and path to $40-60B.",
     pages: "Strategic GTM",
     icon: TrendingUp,
     color: "#48cae4",
-    category: "Business Model",
-    readTime: "12 min read"
-  },
-  {
-    id: "18-month-sprint",
-    title: "The 18-Month Sprint",
-    subtitle: "The Path to $500M Valuation",
-    description: "Detailed execution roadmap across 3 phases: Physics Validator, Platform Scalability, and Industrial Integration.",
-    pages: "Execution Plan",
-    icon: Zap,
-    color: "#a855f7",
-    category: "Roadmap",
-    readTime: "15 min read"
+    category: "Business & GTM",
+    readTime: "35 min read"
   },
   {
     id: "skanda-architecture",
-    title: "The Skanda Protocol",
-    subtitle: "Universal Matter Compiler Architecture",
-    description: "Technical deep-dive into our 10M Synthetic Physics Brain, Fourier Neural Operators, and 100,000x acceleration.",
+    title: "The SkandaX Protocol",
+    subtitle: "Technical Architecture Deep-Dive",
+    description: "Complete technical architecture: Mesoscale Foundation Model, Fourier Neural Operators (100,000x speedup), Sim-to-Real calibration, the Matter Compiler, and product suite.",
     pages: "Technical Whitepaper",
     icon: Layers,
     color: "#22c55e",
     category: "Technology",
-    readTime: "25 min read"
+    readTime: "40 min read"
   }
 ];
 
@@ -114,7 +104,6 @@ export default function DataRoomPage() {
   const handleDownload = (docId: string) => {
     const pdfMap: Record<string, string> = {
       "genesis-protocol": "/pdf/The Genesis Protocol 2 (1).pdf",
-      "18-month-sprint": "/pdf/THE 18-MONTH SPRINT- THE PATH TO $500M.pdf",
       "skanda-architecture": "/pdf/Architecture- The 10M Synthetic _Physics Brain.pdf",
     };
     const pdfUrl = pdfMap[docId];
@@ -421,8 +410,11 @@ export default function DataRoomPage() {
                 </div>
               </motion.div>
 
+              {/* Manifesto Section */}
+              <DataRoomManifesto />
+
               {/* Documents Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {documents.map((doc, index) => {
                   const Icon = doc.icon;
                   return (
@@ -494,7 +486,7 @@ export default function DataRoomPage() {
                       please contact us directly.
                     </p>
                     <a
-                      href="mailto:investors@shodh.ai"
+                      href="mailto:arastu@shodh.ai"
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-light hover:bg-white/90 transition-all"
                     >
                       <Mail className="w-4 h-4" />
