@@ -307,6 +307,7 @@ export async function POST(request: NextRequest) {
         let gifUrl: string | null = null;
         let modelInfo = '';
         let tiffUrl: string | null = null;
+        const authHeaders: Record<string, string> = HUGGINGFACE_API_KEY ? { 'Authorization': `Bearer ${HUGGINGFACE_API_KEY}` } : {};
 
         try {
           const client = await Client.connect(DIFFUSION_SPACE, {
@@ -321,13 +322,36 @@ export async function POST(request: NextRequest) {
           ]);
 
           const data = result.data as any[];
-          if (data[0]?.url) gifUrl = data[0].url;
-          else if (typeof data[0] === 'string') gifUrl = data[0];
+          let rawGifUrl = data[0]?.url || (typeof data[0] === 'string' ? data[0] : null);
           if (data[1] && typeof data[1] === 'string') modelInfo = data[1];
-          if (data[2]?.url) tiffUrl = data[2].url;
-          else if (typeof data[2] === 'string') tiffUrl = data[2];
+          let rawTiffUrl = data[2]?.url || (typeof data[2] === 'string' ? data[2] : null);
 
-          console.log('Gradio result:', { gifUrl: !!gifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!tiffUrl });
+          console.log('Gradio result:', { gifUrl: !!rawGifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!rawTiffUrl });
+
+          // Convert HF temporary URLs to base64 data URLs (they require auth and expire)
+
+          if (rawGifUrl) {
+            try {
+              const gifResp = await fetch(rawGifUrl, { headers: authHeaders });
+              if (gifResp.ok) {
+                const gifBuf = Buffer.from(await gifResp.arrayBuffer());
+                const contentType = rawGifUrl.endsWith('.png') ? 'image/png' : 'image/gif';
+                gifUrl = `data:${contentType};base64,${gifBuf.toString('base64')}`;
+                console.log(`GIF proxied: ${gifBuf.length} bytes → base64`);
+              }
+            } catch (e) { console.error('Failed to proxy GIF:', e); }
+          }
+
+          if (rawTiffUrl) {
+            try {
+              const tiffResp = await fetch(rawTiffUrl, { headers: authHeaders });
+              if (tiffResp.ok) {
+                const tiffBuf = Buffer.from(await tiffResp.arrayBuffer());
+                tiffUrl = `data:image/tiff;base64,${tiffBuf.toString('base64')}`;
+                console.log(`TIFF proxied: ${tiffBuf.length} bytes → base64`);
+              }
+            } catch (e) { console.error('Failed to proxy TIFF:', e); }
+          }
         } catch (hfError) {
           console.error('HuggingFace Space request failed:', hfError);
         }
@@ -351,19 +375,23 @@ export async function POST(request: NextRequest) {
         let forwardResult: any = null;
         if (tiffUrl) {
           try {
-            console.log('Downloading TIFF for forward model...');
-            const tiffResp = await fetch(tiffUrl, {
-              headers: HUGGINGFACE_API_KEY ? { 'Authorization': `Bearer ${HUGGINGFACE_API_KEY}` } : {},
-            });
-            const tiffBuf = Buffer.from(await tiffResp.arrayBuffer());
+            // Extract TIFF buffer (from base64 data URL or raw URL)
+            let tiffBuf: Buffer;
+            if (tiffUrl.startsWith('data:')) {
+              const b64 = tiffUrl.split(',')[1];
+              tiffBuf = Buffer.from(b64, 'base64');
+            } else {
+              const tiffResp = await fetch(tiffUrl, { headers: authHeaders });
+              tiffBuf = Buffer.from(await tiffResp.arrayBuffer());
+            }
 
-            console.log(`TIFF downloaded: ${tiffBuf.length} bytes, connecting to forward model...`);
+            console.log(`TIFF for forward model: ${tiffBuf.length} bytes, connecting...`);
             const fwdClient = await Client.connect(FORWARD_SPACE, {
               token: HUGGINGFACE_API_KEY as `hf_${string}`,
             });
 
             const fwdResult = await fwdClient.predict('/analyze_structure', [
-              new Blob([tiffBuf], { type: 'application/octet-stream' }),
+              new Blob([new Uint8Array(tiffBuf)], { type: 'application/octet-stream' }),
             ]);
             const fwdData = fwdResult.data as any[];
             if (fwdData[0] && typeof fwdData[0] === 'string') {
