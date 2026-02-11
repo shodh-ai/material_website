@@ -52,55 +52,56 @@ const documents = [
 ];
 
 export default function DataRoomPage() {
-  const [step, setStep] = useState<"form" | "access">("form");
+  // Form gate removed — investors access data room directly
+  const [step, setStep] = useState<"form" | "access">("access");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     firm: ""
   });
-  const [accessGranted, setAccessGranted] = useState(false);
+  const [accessGranted, setAccessGranted] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Restore access state from localStorage on mount
-  useEffect(() => {
-    const savedAccess = localStorage.getItem('dataRoomAccess');
-    if (savedAccess) {
-      const { accessGranted: granted, formData: savedFormData } = JSON.parse(savedAccess);
-      if (granted) {
-        setAccessGranted(true);
-        setFormData(savedFormData);
-        setStep('access');
-      }
-    }
-  }, []);
+  // // Restore access state from localStorage on mount
+  // useEffect(() => {
+  //   const savedAccess = localStorage.getItem('dataRoomAccess');
+  //   if (savedAccess) {
+  //     const { accessGranted: granted, formData: savedFormData } = JSON.parse(savedAccess);
+  //     if (granted) {
+  //       setAccessGranted(true);
+  //       setFormData(savedFormData);
+  //       setStep('access');
+  //     }
+  //   }
+  // }, []);
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
-    try {
-      const result = await submitInvestorApplication(formData);
-
-      if (result.success) {
-        setAccessGranted(true);
-        setStep("access");
-        // Persist access state to localStorage
-        localStorage.setItem('dataRoomAccess', JSON.stringify({
-          accessGranted: true,
-          formData
-        }));
-      } else {
-        setError("Failed to save your application. Please try again.");
-      }
-    } catch (err) {
-      setError("An unexpected error occurred. Please try again later.");
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // const handleFormSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   setError(null);
+  //
+  //   try {
+  //     const result = await submitInvestorApplication(formData);
+  //
+  //     if (result.success) {
+  //       setAccessGranted(true);
+  //       setStep("access");
+  //       // Persist access state to localStorage
+  //       localStorage.setItem('dataRoomAccess', JSON.stringify({
+  //         accessGranted: true,
+  //         formData
+  //       }));
+  //     } else {
+  //       setError("Failed to save your application. Please try again.");
+  //     }
+  //   } catch (err) {
+  //     setError("An unexpected error occurred. Please try again later.");
+  //     console.error(err);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const [openDownloadMenu, setOpenDownloadMenu] = useState<string | null>(null);
   const downloadMenuRef = useRef<HTMLDivElement>(null);
@@ -169,8 +170,9 @@ export default function DataRoomPage() {
 
       <main className="max-w-6xl mx-auto px-6 py-16">
         <AnimatePresence mode="wait">
-          {/* STEP 1: INVESTOR ONBOARDING FORM */}
-          {step === "form" && (
+          {/* STEP 1: INVESTOR ONBOARDING FORM — COMMENTED OUT */}
+          {/* Form gate removed per investor feedback — direct access now */}
+          {/* {step === "form" && (
             <motion.div
               key="form"
               initial={{ opacity: 0, y: 20 }}
@@ -206,7 +208,6 @@ export default function DataRoomPage() {
               >
                 <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
                   <div className="space-y-6">
-                    {/* Name Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <User className="w-4 h-4" />
@@ -221,8 +222,6 @@ export default function DataRoomPage() {
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
-
-                    {/* Email Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Mail className="w-4 h-4" />
@@ -237,9 +236,6 @@ export default function DataRoomPage() {
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
-
-
-                    {/* Firm Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Building2 className="w-4 h-4" />
@@ -255,15 +251,12 @@ export default function DataRoomPage() {
                       />
                     </div>
                   </div>
-
-                  {/* Error Message */}
                   {error && (
                     <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm font-light">
                       <AlertCircle className="w-5 h-5 flex-shrink-0" />
                       {error}
                     </div>
                   )}
-
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -276,14 +269,13 @@ export default function DataRoomPage() {
                     )}
                     {!isSubmitting && <ArrowLeft className="w-5 h-5 rotate-180" />}
                   </button>
-
                   <p className="text-center text-white/30 text-sm mt-6 font-light">
                     Your information is encrypted and stored securely
                   </p>
                 </div>
               </motion.form>
             </motion.div>
-          )}
+          )} */}
 
 
           {/* STEP 3: DATA ROOM ACCESS */}
@@ -308,38 +300,14 @@ export default function DataRoomPage() {
                   </span>
                 </motion.div>
                 <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">
-                  Welcome, <br />
+                  Welcome to the <br />
                   <span className="text-white font-normal">
-                    {formData.name.split(' ')[0]}
+                    Investor Data Room
                   </span>
                 </h1>
                 <p className="text-lg text-white/40 max-w-2xl mx-auto leading-relaxed font-light">
                   You now have full access to our investor materials.
                 </p>
-              </div>
-
-              {/* User Info Card */}
-              <div className="max-w-4xl mx-auto mb-12 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                      <User className="w-5 h-5 text-white/60" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs font-light">Investor</p>
-                      <p className="text-white font-light">{formData.name}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                      <Building2 className="w-5 h-5 text-white/60" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs font-light">Organization</p>
-                      <p className="text-white font-light">{formData.firm}</p>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               {/* Founder's Letter */}
