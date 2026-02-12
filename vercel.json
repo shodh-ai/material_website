@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "app/api/generate-material/route.ts": {
+      "maxDuration": 300
+    },
+    "app/api/analyze-image/route.ts": {
+      "maxDuration": 300
+    }
+  }
+}

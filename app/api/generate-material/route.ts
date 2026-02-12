@@ -1,10 +1,68 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Client } from '@gradio/client';
+import { Client as SSHClient } from 'ssh2';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
 const DIFFUSION_SPACE = process.env.DIFFUSION_SPACE || 'Ellwil/battery-microstructure-demo';
 const FORWARD_SPACE = process.env.FORWARD_SPACE || 'Ellwil/battery-forward-demo';
+
+// H100 GPU cluster SSH config (set these to use H100 instead of HF Space)
+const H100_SSH_HOST = process.env.H100_SSH_HOST; // e.g. 103.42.51.218
+const H100_SSH_PORT = parseInt(process.env.H100_SSH_PORT || '2224');
+const H100_SSH_USER = process.env.H100_SSH_USER || 'shodhai.admin';
+const H100_SSH_PASSWORD = process.env.H100_SSH_PASSWORD;
+const H100_PROXY_PORT = process.env.H100_PROXY_PORT || '8000';
+
+// Helper: call H100 diffusion model via SSH
+async function callH100Diffusion(params: {
+  projected_cycle_life: number;
+  capacity_fade_rate: number;
+  target_power_demand: number;
+  porosity: number;
+}): Promise<{ gifUrl: string | null; modelInfo: string; tiffUrl: string | null }> {
+  return new Promise((resolve, reject) => {
+    const conn = new SSHClient();
+    const payload = JSON.stringify({
+      cycle_life: params.projected_cycle_life,
+      fade_rate: params.capacity_fade_rate,
+      power_demand: params.target_power_demand,
+      porosity: params.porosity,
+    });
+    // Escape single quotes in JSON for shell
+    const escapedPayload = payload.replace(/'/g, "'\\''" );
+
+    conn.on('ready', () => {
+      const cmd = `curl -s --max-time 280 -X POST http://localhost:${H100_PROXY_PORT}/generate -H 'Content-Type: application/json' -d '${escapedPayload}'`;
+      conn.exec(cmd, (err, stream) => {
+        if (err) { conn.end(); return reject(err); }
+        let data = '';
+        stream.on('data', (chunk: Buffer) => { data += chunk.toString(); });
+        stream.on('close', () => {
+          conn.end();
+          try {
+            const result = JSON.parse(data);
+            resolve({
+              gifUrl: result.image || null,
+              modelInfo: result.info || '',
+              tiffUrl: result.tiff || null,
+            });
+          } catch (e) {
+            reject(new Error(`Failed to parse H100 response: ${data.slice(0, 200)}`));
+          }
+        });
+      });
+    });
+    conn.on('error', reject);
+    conn.connect({
+      host: H100_SSH_HOST!,
+      port: H100_SSH_PORT,
+      username: H100_SSH_USER,
+      password: H100_SSH_PASSWORD,
+      readyTimeout: 10000,
+    });
+  });
+}
 
 const SYSTEM_PROMPT = `You are Skanda, a Battery Material Architect AI.
 You translate natural-language battery requirements into physics-constrained microstructure designs.
@@ -303,57 +361,72 @@ export async function POST(request: NextRequest) {
         };
         controller.enqueue(encoder.encode(JSON.stringify(thinkingChunk) + '\n'));
 
-        // CHUNK 2 — HF diffusion model (takes ~50-60s)
+        // CHUNK 2 — Diffusion model (H100 via SSH or HF Space fallback)
         let gifUrl: string | null = null;
         let modelInfo = '';
         let tiffUrl: string | null = null;
         const authHeaders: Record<string, string> = HUGGINGFACE_API_KEY ? { 'Authorization': `Bearer ${HUGGINGFACE_API_KEY}` } : {};
 
-        try {
-          const client = await Client.connect(DIFFUSION_SPACE, {
-            token: HUGGINGFACE_API_KEY as `hf_${string}`,
-          });
-
-          const result = await client.predict('/generate_microstructure', [
-            params.projected_cycle_life,
-            params.capacity_fade_rate,
-            params.target_power_demand,
-            params.porosity,
-          ]);
-
-          const data = result.data as any[];
-          let rawGifUrl = data[0]?.url || (typeof data[0] === 'string' ? data[0] : null);
-          if (data[1] && typeof data[1] === 'string') modelInfo = data[1];
-          let rawTiffUrl = data[2]?.url || (typeof data[2] === 'string' ? data[2] : null);
-
-          console.log('Gradio result:', { gifUrl: !!rawGifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!rawTiffUrl });
-
-          // Convert HF temporary URLs to base64 data URLs (they require auth and expire)
-
-          if (rawGifUrl) {
-            try {
-              const gifResp = await fetch(rawGifUrl, { headers: authHeaders });
-              if (gifResp.ok) {
-                const gifBuf = Buffer.from(await gifResp.arrayBuffer());
-                const contentType = rawGifUrl.endsWith('.png') ? 'image/png' : 'image/gif';
-                gifUrl = `data:${contentType};base64,${gifBuf.toString('base64')}`;
-                console.log(`GIF proxied: ${gifBuf.length} bytes → base64`);
-              }
-            } catch (e) { console.error('Failed to proxy GIF:', e); }
+        if (H100_SSH_HOST && H100_SSH_PASSWORD) {
+          // ── H100 GPU path (via SSH → login node proxy → compute node Gradio) ──
+          console.log('Using H100 GPU cluster for diffusion model...');
+          try {
+            const h100Result = await callH100Diffusion(params);
+            gifUrl = h100Result.gifUrl;
+            modelInfo = h100Result.modelInfo;
+            tiffUrl = h100Result.tiffUrl;
+            console.log('H100 result:', { gifUrl: !!gifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!tiffUrl });
+          } catch (h100Error) {
+            console.error('H100 SSH call failed, falling back to HF Space:', h100Error);
           }
+        }
 
-          if (rawTiffUrl) {
-            try {
-              const tiffResp = await fetch(rawTiffUrl, { headers: authHeaders });
-              if (tiffResp.ok) {
-                const tiffBuf = Buffer.from(await tiffResp.arrayBuffer());
-                tiffUrl = `data:image/tiff;base64,${tiffBuf.toString('base64')}`;
-                console.log(`TIFF proxied: ${tiffBuf.length} bytes → base64`);
-              }
-            } catch (e) { console.error('Failed to proxy TIFF:', e); }
+        if (!gifUrl) {
+          // ── HF Space fallback ──
+          try {
+            const client = await Client.connect(DIFFUSION_SPACE, {
+              token: HUGGINGFACE_API_KEY as `hf_${string}`,
+            });
+
+            const result = await client.predict('/generate_microstructure', [
+              params.projected_cycle_life,
+              params.capacity_fade_rate,
+              params.target_power_demand,
+              params.porosity,
+            ]);
+
+            const data = result.data as any[];
+            let rawGifUrl = data[0]?.url || (typeof data[0] === 'string' ? data[0] : null);
+            if (data[1] && typeof data[1] === 'string') modelInfo = data[1];
+            let rawTiffUrl = data[2]?.url || (typeof data[2] === 'string' ? data[2] : null);
+
+            console.log('Gradio result:', { gifUrl: !!rawGifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!rawTiffUrl });
+
+            if (rawGifUrl) {
+              try {
+                const gifResp = await fetch(rawGifUrl, { headers: authHeaders });
+                if (gifResp.ok) {
+                  const gifBuf = Buffer.from(await gifResp.arrayBuffer());
+                  const contentType = rawGifUrl.endsWith('.png') ? 'image/png' : 'image/gif';
+                  gifUrl = `data:${contentType};base64,${gifBuf.toString('base64')}`;
+                  console.log(`GIF proxied: ${gifBuf.length} bytes → base64`);
+                }
+              } catch (e) { console.error('Failed to proxy GIF:', e); }
+            }
+
+            if (rawTiffUrl) {
+              try {
+                const tiffResp = await fetch(rawTiffUrl, { headers: authHeaders });
+                if (tiffResp.ok) {
+                  const tiffBuf = Buffer.from(await tiffResp.arrayBuffer());
+                  tiffUrl = `data:image/tiff;base64,${tiffBuf.toString('base64')}`;
+                  console.log(`TIFF proxied: ${tiffBuf.length} bytes → base64`);
+                }
+              } catch (e) { console.error('Failed to proxy TIFF:', e); }
+            }
+          } catch (hfError) {
+            console.error('HuggingFace Space request failed:', hfError);
           }
-        } catch (hfError) {
-          console.error('HuggingFace Space request failed:', hfError);
         }
 
         if (!gifUrl) {
