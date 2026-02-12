@@ -20,7 +20,9 @@ import {
   Radio,
   Wrench,
   FlaskConical,
-  Server
+  Server,
+  Banknote,
+  Briefcase
 } from "lucide-react";
 import Link from "next/link";
 
@@ -923,6 +925,109 @@ export default function DataRoomManifesto() {
               </p>
             </div>
           </section>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          THE STRATEGIC ROUND — DEPLOYMENT STRATEGY (USE OF FUNDS)
+          ═══════════════════════════════════════════════════════════════════ */}
+      <div className="mt-8 rounded-2xl border border-white/[0.06] bg-[#0a0a0a] overflow-hidden">
+        {/* Header */}
+        <div className="px-8 md:px-12 pt-10 pb-8 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#48cae4]/10 border border-[#48cae4]/20 mb-6">
+            <Banknote className="w-4 h-4 text-[#48cae4]" />
+            <span className="text-sm text-[#48cae4] font-medium uppercase tracking-wider">Strategic Round</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-extralight text-white mb-4">
+            The Deployment Strategy
+          </h2>
+          <div className="h-px w-24 bg-white/20 mx-auto mb-6" />
+          <p className="text-xl text-white/80 font-light leading-relaxed max-w-3xl mx-auto mb-4">
+            We are opening a <strong className="text-white">$15M strategic round</strong> to accelerate deployment and industrial integration.
+          </p>
+          <p className="text-base text-white/50 font-light leading-relaxed max-w-2xl mx-auto">
+            We leverage the <strong className="text-white/70">IndiaAI Mission</strong> and <strong className="text-white/70">ANRF mandates</strong> to offset heavy compute and wet-lab CAPEX — structural cost-efficiency built into the model.
+          </p>
+        </div>
+
+        {/* Use of Funds */}
+        <div className="px-8 md:px-12 pb-12">
+          <h4 className="text-base text-white font-medium uppercase tracking-wider mb-6 text-center">Use of Funds</h4>
+
+          <div className="space-y-5">
+            {/* 50% — Platform Engineering */}
+            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#48cae4]" />
+              <div className="pl-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl font-light text-[#48cae4] font-mono">50%</span>
+                  <h4 className="text-white text-base font-medium">Platform Engineering (The SaaS Layer)</h4>
+                </div>
+                <ul className="space-y-2 list-none">
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
+                    <span className="text-base">Building the &quot;Factory Guard&quot; Edge AI infrastructure</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
+                    <span className="text-base">Scaling the API for self-service (Layer 0 in Genesis Protocol)</span>
+                  </li>
+                </ul>
+                <div className="mt-3 p-3 rounded-lg bg-[#48cae4]/[0.06] border border-[#48cae4]/10">
+                  <p className="text-white/70 text-base font-light">
+                    <strong className="text-[#48cae4]">Impact:</strong> Drives massive cloud-native consumption and recurring SaaS revenue.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* 35% — Forward Deployed Engineering */}
+            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#a855f7]" />
+              <div className="pl-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl font-light text-[#a855f7] font-mono">35%</span>
+                  <h4 className="text-white text-base font-medium">Forward Deployed Engineering (The Bridge)</h4>
+                </div>
+                <ul className="space-y-2 list-none">
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#a855f7] mt-0.5 shrink-0" />
+                    <span className="text-base">Deploying FDE teams to <strong className="text-white">Munich (Auto)</strong> and <strong className="text-white">Tokyo (Battery)</strong></span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#a855f7] mt-0.5 shrink-0" />
+                    <span className="text-base">Executing high-value FDE partnerships (<strong className="text-white">$3–7M contracts</strong>) with OEMs</span>
+                  </li>
+                </ul>
+                <div className="mt-3 p-3 rounded-lg bg-[#a855f7]/[0.06] border border-[#a855f7]/10">
+                  <p className="text-white/70 text-base font-light">
+                    <strong className="text-[#a855f7]">Impact:</strong> Converts pilot programs into long-term IP royalties.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* 15% — Global Operations */}
+            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#f59e0b]" />
+              <div className="pl-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl font-light text-[#f59e0b] font-mono">15%</span>
+                  <h4 className="text-white text-base font-medium">Global Operations</h4>
+                </div>
+                <ul className="space-y-2 list-none">
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#f59e0b] mt-0.5 shrink-0" />
+                    <span className="text-base">IP Legal Defense (Aggressive Patent Portfolio)</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
+                    <ChevronRight className="w-5 h-5 text-[#f59e0b] mt-0.5 shrink-0" />
+                    <span className="text-base">Business Development for US/EU expansion</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

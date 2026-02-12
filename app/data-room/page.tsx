@@ -385,16 +385,6 @@ export default function DataRoomPage() {
 
                     {/* Signature Placeholder */}
                     <div className="mt-8 pt-6 border-t border-white/10">
-                      <div className="mb-4">
-                        <img 
-                          src="/founder-signature.png" 
-                          alt="Arastu Signature" 
-                          className="h-16 w-auto"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                      </div>
                       <p className="text-white font-medium text-lg">Arastu</p>
                       <p className="text-white/50 text-sm">CEO, Shodh AI</p>
 
