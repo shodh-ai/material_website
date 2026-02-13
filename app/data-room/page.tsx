@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -19,104 +19,114 @@ import {
   TrendingUp,
   Zap,
   Layers,
-  AlertCircle
+  AlertCircle,
+  ChevronDown
 } from "lucide-react";
 import { submitInvestorApplication } from "./actions";
+import DataRoomManifesto from "@/components/DataRoomManifesto";
 
 // Document metadata
 const documents = [
   {
     id: "genesis-protocol",
     title: "The Genesis Protocol 2.0",
-    subtitle: "Global Value Capture Strategy",
-    description: "Deep dive into our 3-layer revenue model: Strategic Design Partnerships, SaaS Operating System, and Sovereign Royalties.",
+    subtitle: "GTM Strategy & 18-Month Execution Plan",
+    description: "Complete go-to-market strategy across four compounding revenue layers, detailed 18-month execution plan, capital allocation, competitive landscape, and path to $40-60B.",
     pages: "Strategic GTM",
     icon: TrendingUp,
     color: "#48cae4",
-    category: "Business Model",
-    readTime: "12 min read"
-  },
-  {
-    id: "18-month-sprint",
-    title: "The 18-Month Sprint",
-    subtitle: "The Path to $500M Valuation",
-    description: "Detailed execution roadmap across 3 phases: Physics Validator, Platform Scalability, and Industrial Integration.",
-    pages: "Execution Plan",
-    icon: Zap,
-    color: "#a855f7",
-    category: "Roadmap",
-    readTime: "15 min read"
+    category: "Business & GTM",
+    readTime: "35 min read"
   },
   {
     id: "skanda-architecture",
-    title: "The Skanda Protocol",
-    subtitle: "Universal Matter Compiler Architecture",
-    description: "Technical deep-dive into our 10M Synthetic Physics Brain, Fourier Neural Operators, and 100,000x acceleration.",
+    title: "The SkandaX Protocol",
+    subtitle: "Technical Architecture Deep-Dive",
+    description: "Complete technical architecture: Mesoscale Foundation Model, Fourier Neural Operators (100,000x speedup), Sim-to-Real calibration, the Matter Compiler, and product suite.",
     pages: "Technical Whitepaper",
     icon: Layers,
     color: "#22c55e",
     category: "Technology",
-    readTime: "25 min read"
+    readTime: "40 min read"
   }
 ];
 
 export default function DataRoomPage() {
-  const [step, setStep] = useState<"form" | "access">("form");
+  // Form gate removed — investors access data room directly
+  const [step, setStep] = useState<"form" | "access">("access");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     firm: ""
   });
-  const [accessGranted, setAccessGranted] = useState(false);
+  const [accessGranted, setAccessGranted] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Restore access state from localStorage on mount
+  // // Restore access state from localStorage on mount
+  // useEffect(() => {
+  //   const savedAccess = localStorage.getItem('dataRoomAccess');
+  //   if (savedAccess) {
+  //     const { accessGranted: granted, formData: savedFormData } = JSON.parse(savedAccess);
+  //     if (granted) {
+  //       setAccessGranted(true);
+  //       setFormData(savedFormData);
+  //       setStep('access');
+  //     }
+  //   }
+  // }, []);
+
+  // const handleFormSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   setError(null);
+  //
+  //   try {
+  //     const result = await submitInvestorApplication(formData);
+  //
+  //     if (result.success) {
+  //       setAccessGranted(true);
+  //       setStep("access");
+  //       // Persist access state to localStorage
+  //       localStorage.setItem('dataRoomAccess', JSON.stringify({
+  //         accessGranted: true,
+  //         formData
+  //       }));
+  //     } else {
+  //       setError("Failed to save your application. Please try again.");
+  //     }
+  //   } catch (err) {
+  //     setError("An unexpected error occurred. Please try again later.");
+  //     console.error(err);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
+  const [openDownloadMenu, setOpenDownloadMenu] = useState<string | null>(null);
+  const downloadMenuRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const savedAccess = localStorage.getItem('dataRoomAccess');
-    if (savedAccess) {
-      const { accessGranted: granted, formData: savedFormData } = JSON.parse(savedAccess);
-      if (granted) {
-        setAccessGranted(true);
-        setFormData(savedFormData);
-        setStep('access');
+    function handleClickOutside(e: MouseEvent) {
+      if (downloadMenuRef.current && !downloadMenuRef.current.contains(e.target as Node)) {
+        setOpenDownloadMenu(null);
       }
     }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
-    try {
-      const result = await submitInvestorApplication(formData);
-
-      if (result.success) {
-        setAccessGranted(true);
-        setStep("access");
-        // Persist access state to localStorage
-        localStorage.setItem('dataRoomAccess', JSON.stringify({
-          accessGranted: true,
-          formData
-        }));
-      } else {
-        setError("Failed to save your application. Please try again.");
-      }
-    } catch (err) {
-      setError("An unexpected error occurred. Please try again later.");
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const pdfMap: Record<string, string> = {
+    "genesis-protocol": "/pdf/The-Genesis-Protocol-2.0.pdf",
+    "skanda-architecture": "/pdf/The-SkandaX-Protocol.pdf",
   };
 
-  const handleDownload = (docId: string) => {
-    const pdfMap: Record<string, string> = {
-      "genesis-protocol": "/pdf/The Genesis Protocol 2 (1).pdf",
-      "18-month-sprint": "/pdf/THE 18-MONTH SPRINT- THE PATH TO $500M.pdf",
-      "skanda-architecture": "/pdf/Architecture- The 10M Synthetic _Physics Brain.pdf",
-    };
+  const mdMap: Record<string, { url: string; filename: string }> = {
+    "genesis-protocol": { url: "/md/GTM-and-18-Month-Sprint.md", filename: "The-Genesis-Protocol-2.0.md" },
+    "skanda-architecture": { url: "/md/Architecture-Deep-Dive.md", filename: "The-SkandaX-Protocol.md" },
+  };
+
+  const handleDownloadPdf = (docId: string) => {
     const pdfUrl = pdfMap[docId];
     if (pdfUrl) {
       const link = document.createElement("a");
@@ -126,6 +136,20 @@ export default function DataRoomPage() {
       link.click();
       document.body.removeChild(link);
     }
+    setOpenDownloadMenu(null);
+  };
+
+  const handleDownloadMd = (docId: string) => {
+    const md = mdMap[docId];
+    if (md) {
+      const link = document.createElement("a");
+      link.href = md.url;
+      link.download = md.filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    setOpenDownloadMenu(null);
   };
 
   return (
@@ -146,8 +170,9 @@ export default function DataRoomPage() {
 
       <main className="max-w-6xl mx-auto px-6 py-16">
         <AnimatePresence mode="wait">
-          {/* STEP 1: INVESTOR ONBOARDING FORM */}
-          {step === "form" && (
+          {/* STEP 1: INVESTOR ONBOARDING FORM — COMMENTED OUT */}
+          {/* Form gate removed per investor feedback — direct access now */}
+          {/* {step === "form" && (
             <motion.div
               key="form"
               initial={{ opacity: 0, y: 20 }}
@@ -183,7 +208,6 @@ export default function DataRoomPage() {
               >
                 <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
                   <div className="space-y-6">
-                    {/* Name Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <User className="w-4 h-4" />
@@ -198,8 +222,6 @@ export default function DataRoomPage() {
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
-
-                    {/* Email Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Mail className="w-4 h-4" />
@@ -214,9 +236,6 @@ export default function DataRoomPage() {
                         className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:border-white/20 focus:bg-white/[0.05] transition-all font-light"
                       />
                     </div>
-
-
-                    {/* Firm Field */}
                     <div>
                       <label className="flex items-center gap-2 text-sm font-light text-white/50 mb-2">
                         <Building2 className="w-4 h-4" />
@@ -232,15 +251,12 @@ export default function DataRoomPage() {
                       />
                     </div>
                   </div>
-
-                  {/* Error Message */}
                   {error && (
                     <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-400 text-sm font-light">
                       <AlertCircle className="w-5 h-5 flex-shrink-0" />
                       {error}
                     </div>
                   )}
-
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -253,14 +269,13 @@ export default function DataRoomPage() {
                     )}
                     {!isSubmitting && <ArrowLeft className="w-5 h-5 rotate-180" />}
                   </button>
-
                   <p className="text-center text-white/30 text-sm mt-6 font-light">
                     Your information is encrypted and stored securely
                   </p>
                 </div>
               </motion.form>
             </motion.div>
-          )}
+          )} */}
 
 
           {/* STEP 3: DATA ROOM ACCESS */}
@@ -285,38 +300,14 @@ export default function DataRoomPage() {
                   </span>
                 </motion.div>
                 <h1 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">
-                  Welcome, <br />
+                  Welcome to the <br />
                   <span className="text-white font-normal">
-                    {formData.name.split(' ')[0]}
+                    Investor Data Room
                   </span>
                 </h1>
                 <p className="text-lg text-white/40 max-w-2xl mx-auto leading-relaxed font-light">
                   You now have full access to our investor materials.
                 </p>
-              </div>
-
-              {/* User Info Card */}
-              <div className="max-w-4xl mx-auto mb-12 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                      <User className="w-5 h-5 text-white/60" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs font-light">Investor</p>
-                      <p className="text-white font-light">{formData.name}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                      <Building2 className="w-5 h-5 text-white/60" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs font-light">Organization</p>
-                      <p className="text-white font-light">{formData.firm}</p>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               {/* Founder's Letter */}
@@ -394,16 +385,6 @@ export default function DataRoomPage() {
 
                     {/* Signature Placeholder */}
                     <div className="mt-8 pt-6 border-t border-white/10">
-                      <div className="mb-4">
-                        <img 
-                          src="/founder-signature.png" 
-                          alt="Arastu Signature" 
-                          className="h-16 w-auto"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                      </div>
                       <p className="text-white font-medium text-lg">Arastu</p>
                       <p className="text-white/50 text-sm">CEO, Shodh AI</p>
 
@@ -421,8 +402,11 @@ export default function DataRoomPage() {
                 </div>
               </motion.div>
 
+              {/* Manifesto Section */}
+              <DataRoomManifesto />
+
               {/* Documents Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {documents.map((doc, index) => {
                   const Icon = doc.icon;
                   return (
@@ -469,12 +453,39 @@ export default function DataRoomPage() {
                           <Eye className="w-4 h-4" />
                           Read
                         </Link>
-                        <button
-                          onClick={() => handleDownload(doc.id)}
-                          className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-                        >
-                          <Download className="w-4 h-4" />
-                        </button>
+                        <div className="relative" ref={openDownloadMenu === doc.id ? downloadMenuRef : undefined}>
+                          <button
+                            onClick={() => setOpenDownloadMenu(openDownloadMenu === doc.id ? null : doc.id)}
+                            className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white/60 text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-1.5"
+                          >
+                            <Download className="w-4 h-4" />
+                            <ChevronDown className="w-3 h-3" />
+                          </button>
+                          {openDownloadMenu === doc.id && (
+                            <div className="absolute right-0 bottom-full mb-2 w-48 rounded-xl bg-[#1a1a1a] border border-white/10 shadow-2xl overflow-hidden z-50">
+                              <button
+                                onClick={() => handleDownloadMd(doc.id)}
+                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-left"
+                              >
+                                <FileText className="w-4 h-4 text-white/50" />
+                                <div>
+                                  <p className="text-sm text-white">Markdown</p>
+                                  <p className="text-xs text-white/40">.md file</p>
+                                </div>
+                              </button>
+                              <button
+                                onClick={() => handleDownloadPdf(doc.id)}
+                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors border-t border-white/5 text-left"
+                              >
+                                <Download className="w-4 h-4 text-white/50" />
+                                <div>
+                                  <p className="text-sm text-white">PDF Document</p>
+                                  <p className="text-xs text-white/40">Branded version</p>
+                                </div>
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </motion.div>
                   );
@@ -494,7 +505,7 @@ export default function DataRoomPage() {
                       please contact us directly.
                     </p>
                     <a
-                      href="mailto:investors@shodh.ai"
+                      href="mailto:arastu@shodh.ai"
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-black font-light hover:bg-white/90 transition-all"
                     >
                       <Mail className="w-4 h-4" />
