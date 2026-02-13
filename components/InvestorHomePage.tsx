@@ -220,7 +220,14 @@ export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataR
               <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-6">
                 <div className="bg-[#24292F]/80 backdrop-blur-sm rounded-lg px-3 py-2 flex items-center gap-3">
                   <div className="w-2.5 h-2.5 bg-[#48cae4] rounded-sm shadow-[0_0_8px_#48cae4] animate-pulse" />
-                  <span className="text-[#ffffff] text-xs font-bold tracking-[0.2em] uppercase">Shodh AI</span>
+                  <Image
+                    src="/shodhai_logo.svg"
+                    alt="Shodh AI"
+                    width={136}
+                    height={32}
+                    priority
+                    className="h-3.5 md:h-4 w-auto"
+                  />
                 </div>
                 <div className="bg-[#48cae4]/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-[#48cae4]/30">
                   <span className="text-[#48cae4] text-xs font-bold tracking-[0.2em] uppercase">IndiaAI Mission</span>

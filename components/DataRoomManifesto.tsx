@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   FileText,
   Cpu,
@@ -142,9 +143,16 @@ export default function DataRoomManifesto() {
 
         {/* Hero Banner */}
         <div className="relative p-10 md:p-16 text-center bg-gradient-to-b from-white/[0.04] to-transparent">
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-4 tracking-tight">
-            Shodh AI
-          </h2>
+          <div className="flex justify-center mb-6">
+            <Image
+              src="/shodhai_logo.svg"
+              alt="Shodh AI"
+              width={136}
+              height={32}
+              priority
+              className="h-8 md:h-9 w-auto opacity-95"
+            />
+          </div>
           <p className="text-lg md:text-xl text-white/50 font-light mb-8">
             AI Infrastructure Company for Physical Matter
           </p>
