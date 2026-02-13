@@ -367,6 +367,7 @@ export async function POST(request: NextRequest) {
         let tiffUrl: string | null = null;
         const authHeaders: Record<string, string> = HUGGINGFACE_API_KEY ? { 'Authorization': `Bearer ${HUGGINGFACE_API_KEY}` } : {};
 
+        console.log('H100 config check:', { host: !!H100_SSH_HOST, password: !!H100_SSH_PASSWORD, port: H100_SSH_PORT, user: H100_SSH_USER });
         if (H100_SSH_HOST && H100_SSH_PASSWORD) {
           // ── H100 GPU path (via SSH → login node proxy → compute node Gradio) ──
           console.log('Using H100 GPU cluster for diffusion model...');
@@ -376,9 +377,11 @@ export async function POST(request: NextRequest) {
             modelInfo = h100Result.modelInfo;
             tiffUrl = h100Result.tiffUrl;
             console.log('H100 result:', { gifUrl: !!gifUrl, modelInfo: modelInfo.slice(0, 100), tiffUrl: !!tiffUrl });
-          } catch (h100Error) {
-            console.error('H100 SSH call failed, falling back to HF Space:', h100Error);
+          } catch (h100Error: any) {
+            console.error('H100 SSH call failed, falling back to HF Space:', h100Error?.message || h100Error);
           }
+        } else {
+          console.log('H100 not configured, skipping SSH path');
         }
 
         if (!gifUrl) {
@@ -552,6 +555,20 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+// Diagnostic endpoint to check H100 config
+export async function GET() {
+  const h100Configured = !!(H100_SSH_HOST && H100_SSH_PASSWORD);
+  return NextResponse.json({
+    h100_configured: h100Configured,
+    h100_host_set: !!H100_SSH_HOST,
+    h100_password_set: !!H100_SSH_PASSWORD,
+    h100_port: H100_SSH_PORT,
+    h100_user: H100_SSH_USER,
+    h100_proxy_port: H100_PROXY_PORT,
+    diffusion_space: DIFFUSION_SPACE,
+  });
 }
 
 function calculateChargeTime(powerDemand: number): string {
