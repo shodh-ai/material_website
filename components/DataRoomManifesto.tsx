@@ -148,19 +148,7 @@ export default function DataRoomManifesto() {
           <p className="text-lg md:text-xl text-white/50 font-light mb-8">
             AI Infrastructure Company for Physical Matter
           </p>
-          <div className="h-px w-24 bg-white/20 mx-auto mb-8" />
-          <div className="text-left max-w-3xl mx-auto space-y-4">
-            <p className="text-lg md:text-xl text-white/80 font-light leading-relaxed">
-              The AI revolution conquered the digital world. ChatGPT generates text. Midjourney generates images. Claude generates code.{" "}
-              <strong className="text-white">But they all stop at the screen.</strong>
-            </p>
-            <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed">
-              The physical world is still designed by trial-and-error. Developing a new material takes 5-10 years and $10M+.
-            </p>
-            <p className="text-lg md:text-xl text-white/80 font-light leading-relaxed">
-              <strong className="text-white">Shodh AI bridges the gap.</strong> We&apos;re building the AI that builds the physical world: The battery that powers the EV. The membrane that produces green hydrogen. The cement that sequesters CO&#8322;. The alloy that withstands Mach 5.
-            </p>
-          </div>
+          <div className="h-px w-24 bg-white/20 mx-auto" />
         </div>
 
         <div className="px-8 md:px-12 pb-12 space-y-14">
@@ -334,25 +322,12 @@ export default function DataRoomManifesto() {
             <SectionHeader icon={FlaskConical} title="The Data Factory: The Autonomous Lab" />
 
             <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5">
-              <ul className="space-y-3 list-none mb-4">
-                <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                  <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base">High-throughput robotic fabrication of <strong className="text-white">10,000 cells per week</strong> — massive-scale pouch cell data generation</span>
-                </li>
-                <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                  <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base"><strong className="text-white">100% inert, robotic environments</strong> for exotic chemistries (Lithium Metal, Solid-State) where humans cannot safely go</span>
-                </li>
-                <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                  <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base">Solving <strong className="text-white">&quot;Battery Physics&quot; as a whole</strong></span>
-                </li>
-              </ul>
-              <div className="p-4 rounded-lg bg-[#48cae4]/[0.06] border border-[#48cae4]/10">
-                <p className="text-white/70 text-base font-light">
-                  <strong className="text-[#48cae4]">Lab-on-a-Cloud:</strong> Partners test new R&amp;D via our API, validate recipes remotely before touching the factory floor, and every experiment updates the global LMM — making the entire network smarter.
-                </p>
-              </div>
+              <p className="text-white/70 text-base font-light leading-relaxed">
+                High-throughput robotic fabrication of <strong className="text-white">10,000 cells per week</strong> in 100% inert environments — handling exotic chemistries where humans cannot safely go.
+              </p>
+              <p className="text-white/50 text-base font-light leading-relaxed mt-3">
+                Every experiment feeds the global LMM, compounding the model&apos;s intelligence with each cycle.
+              </p>
             </div>
           </section>
 
@@ -917,11 +892,8 @@ export default function DataRoomManifesto() {
             </div>
 
             <div className="mt-6 p-5 rounded-xl bg-[#22c55e]/[0.06] border border-[#22c55e]/15 text-center">
-              <p className="text-white text-xl font-light mb-2">
+              <p className="text-white text-xl font-light">
                 18-Month Sprint → <strong>$500M–1B Valuation</strong>
-              </p>
-              <p className="text-white/50 text-base font-light leading-relaxed max-w-2xl mx-auto">
-                Historically, deeptech platforms that successfully cross the &quot;Sim-to-Real&quot; chasm — moving from laboratory discovery to industrial deployment — command strategic valuations of $500M+.
               </p>
             </div>
           </section>
@@ -948,86 +920,6 @@ export default function DataRoomManifesto() {
           <p className="text-base text-white/50 font-light leading-relaxed max-w-2xl mx-auto">
             We leverage the <strong className="text-white/70">IndiaAI Mission</strong> and <strong className="text-white/70">ANRF mandates</strong> to offset heavy compute and wet-lab CAPEX — structural cost-efficiency built into the model.
           </p>
-        </div>
-
-        {/* Use of Funds */}
-        <div className="px-8 md:px-12 pb-12">
-          <h4 className="text-base text-white font-medium uppercase tracking-wider mb-6 text-center">Use of Funds</h4>
-
-          <div className="space-y-5">
-            {/* 50% — Platform Engineering */}
-            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#48cae4]" />
-              <div className="pl-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl font-light text-[#48cae4] font-mono">50%</span>
-                  <h4 className="text-white text-base font-medium">Platform Engineering (The SaaS Layer)</h4>
-                </div>
-                <ul className="space-y-2 list-none">
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                    <span className="text-base">Building the &quot;Factory Guard&quot; Edge AI infrastructure</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                    <span className="text-base">Scaling the API for self-service (Layer 0 in Genesis Protocol)</span>
-                  </li>
-                </ul>
-                <div className="mt-3 p-3 rounded-lg bg-[#48cae4]/[0.06] border border-[#48cae4]/10">
-                  <p className="text-white/70 text-base font-light">
-                    <strong className="text-[#48cae4]">Impact:</strong> Drives massive cloud-native consumption and recurring SaaS revenue.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* 35% — Forward Deployed Engineering */}
-            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#a855f7]" />
-              <div className="pl-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl font-light text-[#a855f7] font-mono">35%</span>
-                  <h4 className="text-white text-base font-medium">Forward Deployed Engineering (The Bridge)</h4>
-                </div>
-                <ul className="space-y-2 list-none">
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#a855f7] mt-0.5 shrink-0" />
-                    <span className="text-base">Deploying FDE teams to <strong className="text-white">Munich (Auto)</strong> and <strong className="text-white">Tokyo (Battery)</strong></span>
-                  </li>
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#a855f7] mt-0.5 shrink-0" />
-                    <span className="text-base">Executing high-value FDE partnerships (<strong className="text-white">$3–7M contracts</strong>) with OEMs</span>
-                  </li>
-                </ul>
-                <div className="mt-3 p-3 rounded-lg bg-[#a855f7]/[0.06] border border-[#a855f7]/10">
-                  <p className="text-white/70 text-base font-light">
-                    <strong className="text-[#a855f7]">Impact:</strong> Converts pilot programs into long-term IP royalties.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* 15% — Global Operations */}
-            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#f59e0b]" />
-              <div className="pl-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl font-light text-[#f59e0b] font-mono">15%</span>
-                  <h4 className="text-white text-base font-medium">Global Operations</h4>
-                </div>
-                <ul className="space-y-2 list-none">
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#f59e0b] mt-0.5 shrink-0" />
-                    <span className="text-base">IP Legal Defense (Aggressive Patent Portfolio)</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
-                    <ChevronRight className="w-5 h-5 text-[#f59e0b] mt-0.5 shrink-0" />
-                    <span className="text-base">Business Development for US/EU expansion</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </motion.div>
