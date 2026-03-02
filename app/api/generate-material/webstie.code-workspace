@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../jataka/battery-forward-demo"
+		},
+		{
+			"path": "../../../../../jataka/battery-microstructure-demo"
+		}
+	],
+	"settings": {}
+}
