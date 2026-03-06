@@ -38,7 +38,7 @@ export default function BioconPage() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-light tracking-tight leading-tight">
-            Strategic Pilot for <br />
+            Co-Creation / Strategic Pilot for <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400">
               Disruptive Biotransformation
             </span>

@@ -38,7 +38,7 @@ export default function AartiPage() {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-light tracking-tight leading-tight">
-            Strategic Pilot for <br />
+            Co-Creation / Strategic Pilot for <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400">
               AI-Driven Process Intensification & Scale-Up
             </span>
@@ -171,28 +171,37 @@ export default function AartiPage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center space-y-8"
+          className="p-10 md:p-16 rounded-3xl bg-white/[0.02] border border-white/5"
         >
-          <span className="text-xs font-light tracking-[0.2em] uppercase text-blue-400 block">4. The Impact</span>
-          <h2 className="text-3xl md:text-5xl font-light text-white">"Digital Pilot Plants" & Suitcase Factories</h2>
+          <div className="mb-12 text-center">
+            <span className="text-xs font-light tracking-[0.2em] uppercase text-blue-400 mb-4 block">4. The Impact</span>
+            <h2 className="text-3xl md:text-5xl font-light text-white mb-6">Co-Creating a Global Industry Standard</h2>
+            <p className="text-white/70 font-light leading-relaxed max-w-3xl mx-auto text-lg">
+              As Mirik suggested, we are proposing a <strong className="text-white font-medium">Co-Creation Partnership</strong>. By combining Aarti's deep expertise in chemical scale-up with Shodh AI's generative physics platform, we can build the world's first Foundation Model for Chemical Scale-Up.
+            </p>
+          </div>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 py-8">
-            <div className="p-6 rounded-xl border border-white/10 bg-white/[0.02]">
-              <div className="text-white/50 text-sm mb-2">From</div>
-              <div className="text-xl text-white font-light">Hazardous, Trial-and-Error</div>
-              <div className="text-white/40 text-sm mt-1">Batch Expansions</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div className="p-8 rounded-2xl bg-blue-500/10 border border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.05)]">
+              <h3 className="text-blue-300 font-medium mb-4 text-xl flex items-center gap-3">
+                <Zap className="w-6 h-6 text-blue-400" />
+                The Aarti Advantage
+              </h3>
+              <p className="text-white/80 font-light leading-relaxed">
+                You gain an unbeatable time-to-market advantage by replacing physical pilot plants with digital twins, unlocking massive CapEx savings and accelerating production timelines.
+              </p>
             </div>
-            <ArrowLeft className="w-6 h-6 text-white/20 rotate-180 rotate-90 md:rotate-180 md:rotate-0" />
-            <div className="p-6 rounded-xl border border-blue-500/30 bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
-              <div className="text-blue-400/70 text-sm mb-2">To</div>
-              <div className="text-xl text-white font-medium">Predictable, AI-Validated</div>
-              <div className="text-blue-300/80 text-sm mt-1">Continuous-Flow "Suitcase Factories"</div>
+            
+            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
+              <h3 className="text-white font-medium mb-4 text-xl flex items-center gap-3">
+                <Goal className="w-6 h-6 text-white/40" />
+                The Global Upside
+              </h3>
+              <p className="text-white/60 font-light leading-relaxed">
+                Together, we co-create a "Scale-Up AI" product that has the potential to become the gold standard for the global chemical engineering sector.
+              </p>
             </div>
           </div>
-
-          <p className="text-white/70 font-light leading-relaxed max-w-3xl mx-auto text-lg">
-            We help transform massive, hazardous, trial-and-error batch expansions into highly predictable, AI-validated processes. By replacing physical pilot plants with Digital Pilot Plants, we drastically reduce scale-up CapEx, accelerate time-to-market, and optimize energy use in separation towers. Ultimately, this paves the way for modular, continuous-flow "Suitcase Factories" that run highly exothermic reactions 100x faster and safer than traditional batch vats.
-          </p>
         </motion.section>
 
         {/* 5. The Distributive Pilot */}
