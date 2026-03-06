@@ -505,10 +505,10 @@ export default function EnterprisePage() {
           </h2>
           
           <div className="py-8">
-            <button className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-full font-medium transition-colors inline-flex items-center gap-2">
+            <a href="mailto:arastu@shodh.ai" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-full font-medium transition-colors inline-flex items-center gap-2">
               <PlayCircle className="w-5 h-5" />
-              Schedule 15-Min Exploratory Sync
-            </button>
+              Connect with Founder
+            </a>
             <p className="text-white/40 text-sm mt-4 font-light">Reply to discuss your bottleneck and launch a zero-risk pilot.</p>
           </div>
 

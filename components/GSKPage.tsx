@@ -33,15 +33,15 @@ export default function EnterprisePage() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12">
             <div className="text-2xl md:text-3xl font-light tracking-widest text-white/80">SHODH AI</div>
             <div className="text-white/20 text-xl md:text-2xl font-light">×</div>
-            <div className="text-2xl md:text-3xl font-light tracking-widest text-white border-b border-white/20 pb-1 px-4 text-emerald-400 text-center">
-              SANDOZ
+            <div className="text-2xl md:text-3xl font-light tracking-widest text-white border-b border-white/20 pb-1 px-4 text-orange-400 text-center uppercase">
+              GSK
             </div>
           </div>
           
           <h1 className="text-4xl md:text-6xl font-light tracking-tight leading-tight mb-6">
             The Generative Physics Engine <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400">
-              for Biosimilar Scale-Up.
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400">
+              for Biopharma Scale-Up.
             </span>
           </h1>
 
@@ -344,19 +344,19 @@ export default function EnterprisePage() {
           viewport={{ once: true }}
           className="text-center space-y-8"
         >
-          <span className="text-xs font-light tracking-[0.2em] uppercase text-emerald-400 block">The Value to Sandoz</span>
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-8">Eliminating Scale-Up Bottlenecks for Global Supply.</h2>
+          <span className="text-xs font-light tracking-[0.2em] uppercase text-emerald-400 block">The Value to GSK</span>
+          <h2 className="text-3xl md:text-5xl font-light text-white mb-8">Accelerating Global Supply. Maximizing API & Biologic Yields.</h2>
           
           <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 max-w-3xl mx-auto text-left mb-8 relative">
             <ul className="space-y-8">
               <li className="flex gap-4 items-start">
                 <div className="w-10 h-10 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 mt-1 shadow-[0_0_20px_rgba(59,130,246,0.1)]">
-                  <Activity className="w-5 h-5 text-blue-400" />
+                  <Factory className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="text-white font-medium mb-2 text-lg">Flawless Scale-Up Prediction</h4>
+                  <h4 className="text-white font-medium mb-2 text-lg">Batch-to-Continuous Flow</h4>
                   <p className="text-white/70 font-light leading-relaxed">
-                    Moving a molecule from a 1L lab to a 10kL vat warps the physics entirely. Our AI predicts these thermal and flow shifts in-silico, rescuing "failed" lab materials and bypassing physical pilot plants.
+                    We generate mathematically perfect mesoscale architectures, allowing GSK to transition complex API and biologic manufacturing from legacy batch-vats into high-yield, continuous "Suitcase Factories."
                   </p>
                 </div>
               </li>
@@ -366,9 +366,9 @@ export default function EnterprisePage() {
                   <Zap className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <h4 className="text-white font-medium mb-2 text-lg">Process Intensification</h4>
+                  <h4 className="text-white font-medium mb-2 text-lg">Zero-Shot Scale-Up</h4>
                   <p className="text-white/70 font-light leading-relaxed">
-                    Generative optimization of your current distillation and mixing units to increase yields and lower the CapEx of global generic/biosimilar manufacturing.
+                    We eliminate the trial-and-error of physical pilot plants. Our AI predicts exact thermal and mixing shifts when moving from a 1L lab to a 10kL factory, rescuing "failed" lab formulations and drastically cutting time-to-market.
                   </p>
                 </div>
               </li>

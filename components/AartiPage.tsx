@@ -314,11 +314,23 @@ export default function AartiPage() {
             With IndiaAI compute and NVIDIA partnership, we're building ethical, AI-native industrial sovereignty. Partnering with Aarti Industries positions India as the global hub for AI-driven Process Intensification and advanced materials—transforming chemical sustainability, safety, and economic resilience worldwide.
           </p>
 
-          <div className="pt-16 border-t border-white/10 max-w-3xl mx-auto text-left">
-            <p className="text-white/80 font-light mb-6 text-lg">Looking forward to working with you,</p>
+          <div className="pt-16 border-t border-white/10 max-w-3xl mx-auto text-left flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div className="flex flex-col">
+              <p className="text-white/80 font-light mb-6 text-lg">Looking forward to working with you,</p>
               <span className="text-white font-medium text-xl">Arastu Sharma, PhD</span>
               <span className="text-white/50 font-light mt-1">Founder & CEO, Shodh AI</span>
+            </div>
+            
+            <div className="flex flex-col md:items-end gap-4">
+              <a href="mailto:arastu@shodh.ai" className="bg-blue-500 hover:bg-blue-400 text-white px-8 py-3 rounded-full font-medium transition-colors inline-flex items-center justify-center gap-2">
+                Connect with Founder
+              </a>
+              <div className="flex flex-col md:items-end gap-2 text-sm">
+                <a href="mailto:arastu@shodh.ai" className="text-blue-400 hover:text-blue-300 transition-colors">arastu@shodh.ai</a>
+                <Link href="/demo" className="text-white/50 hover:text-white transition-colors underline underline-offset-4">
+                  Watch 60-second Shodh AI Demo Video
+                </Link>
+              </div>
             </div>
           </div>
         </motion.section>
