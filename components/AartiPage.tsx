@@ -53,7 +53,7 @@ export default function AartiPage() {
           </div>
         </motion.section>
 
-        {/* 1. About Shodh AI */}
+        {/* 1. About Shodh AI & The Macro Shift */}
         <motion.section 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -63,23 +63,54 @@ export default function AartiPage() {
           <div className="absolute -right-20 -top-20 opacity-5">
             <BrainCircuit className="w-96 h-96" />
           </div>
-          <div className="mb-12 relative z-10">
-            <span className="text-xs font-light tracking-[0.2em] uppercase text-blue-400 mb-4 block">1. About Shodh AI</span>
-            <h2 className="text-3xl md:text-4xl font-light text-white leading-tight">
+          
+          {/* Intro */}
+          <div className="mb-16 relative z-10 space-y-6">
+            <span className="text-xs font-light tracking-[0.2em] uppercase text-blue-400 block">1. About Shodh AI</span>
+            <h2 className="text-3xl md:text-4xl font-light text-white leading-tight mb-6">
               India's Sovereign Generative Physics Platform
             </h2>
+            <p className="text-xl text-white/80 font-light leading-relaxed max-w-3xl">
+              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale—<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
+            </p>
+            <p className="text-white/60 font-light leading-relaxed max-w-4xl">
+              We've launched our foundational mesoscale physics model (Project Skanda, in collaboration with NVIDIA), backed by the <strong className="text-white/80 font-medium">India AI Mission</strong>. Our platform scales across chemicals, batteries, and pharma, with early validation in a mesoscale battery model now proving <strong className="text-white/80 font-medium">70-80% lab accuracy</strong>. As one of 12 IndiaAI foundational model companies, we're positioned to build sovereign deep-tech IP, complementing atomic discovery models by acting as the <strong className="text-white/80 font-medium">intelligence layer for physical factory scale-up.</strong>
+            </p>
           </div>
-          
-          <div className="space-y-8 relative z-10">
-            <p className="text-xl text-white/80 font-light leading-relaxed">
-              What generative AI did for discovering new molecules, <strong className="text-white font-medium">Shodh AI is doing for physical manufacturing.</strong>
-            </p>
-            <p className="text-white/60 font-light leading-relaxed">
-              We're building India's first Large Material Model (LMM) that understands the fundamental physics of the mesoscale—fluid dynamics, heat transfer, and mass transport.
-            </p>
-            <p className="text-white/60 font-light leading-relaxed">
-              We've launched our foundational mesoscale physics model (Project Skanda, in collaboration with NVIDIA), backed by the India AI Mission. Our platform scales across chemicals, batteries, and pharma, with early validation in a mesoscale battery model now proving 70-80% lab accuracy. As one of 12 IndiaAI foundational model companies, we're positioned to build sovereign deep-tech IP, complementing atomic discovery models by acting as the intelligence layer for physical factory scale-up.
-            </p>
+
+          {/* The Macro Shift */}
+          <div className="relative z-10 pt-12 border-t border-white/10">
+            <h3 className="text-2xl font-light text-white leading-tight mb-8">
+              AI Conquered Language. Then Discovery. <span className="text-blue-400 font-medium">Now, Manufacturing.</span>
+            </h3>
+            
+            <div className="space-y-6">
+              <div className="flex gap-6 items-start">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-white/40 font-medium">1</div>
+                <div>
+                  <h4 className="text-lg text-white font-medium mb-1">Era 1: AI for Information <span className="text-white/40 font-light text-sm">(2020-2023)</span></h4>
+                  <p className="text-white/60 font-light">Models like ChatGPT learned the rules of language to generate text and code.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-6 items-start">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-white/40 font-medium">2</div>
+                <div>
+                  <h4 className="text-lg text-white font-medium mb-1">Era 2: AI for Digital Discovery <span className="text-white/40 font-light text-sm">(2024-2025)</span></h4>
+                  <p className="text-white/60 font-light">Models like AlphaFold and Isomorphic learned the rules of biology to invent miracle molecules and new materials in silico.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-6 items-start p-6 -mx-6 rounded-2xl bg-blue-500/5 border border-blue-500/20">
+                <div className="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 font-medium">3</div>
+                <div>
+                  <h4 className="text-lg text-white font-medium mb-2">Era 3: AI for Physical Realization <span className="text-blue-400/80 text-sm ml-2 font-light">(Shodh AI)</span></h4>
+                  <p className="text-white/80 font-light leading-relaxed">
+                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities—simulating infinite "what if" physical designs without physical trials.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.section>
 
