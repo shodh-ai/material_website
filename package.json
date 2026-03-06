@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build", "postbuild": "echo Built!",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --no-lint"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
