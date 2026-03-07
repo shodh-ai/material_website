@@ -28,8 +28,12 @@ import {
   Database,
   Cpu,
   Network,
-  Users
+  Users,
+  Settings,
+  TrendingDown,
+  Box
 } from "lucide-react";
+import LineChart from "./LineChart";
 
 export default function PitchPage() {
   return (
@@ -91,7 +95,7 @@ export default function PitchPage() {
                 {/* Header */}
                 <div className="text-center mb-8">
                   <h2 className="text-3xl md:text-5xl font-light text-white mb-4 uppercase tracking-tight">
-                    TO PERISH IN ARROGANT PRESUMPTIONS.
+                    BEYOND THE ATOM: THE FINAL FRONTIER OF AI.
                   </h2>
                 </div>
 
@@ -186,18 +190,15 @@ export default function PitchPage() {
                   Chapter 1: The AI Evolution
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight">
-                  Language &rarr; Code &rarr; <span className="font-normal">Physical World</span>
+                  Shodh AI — <span className="font-normal">Build in India. Made for the World.</span>
                 </h2>
                 
                 <div className="prose prose-invert max-w-none text-white/70 font-light leading-relaxed space-y-6">
                   <p>
-                    In 2022, AI mastered Language (ChatGPT). In 2024, AI mastered Code (Copilot). Today, in 2026, the final and largest frontier is <strong className="text-white font-medium">Science and the Physical World</strong>.
+                    We are Shodh AI, one of the 12 elite companies mandated by the IndiaAI Mission to build the country's sovereign foundational models.
                   </p>
                   <p>
-                    Everyone knows this. That's why billions are pouring into AI for Science. But there is a massive, trillion-dollar lie in the industry right now: <em className="text-white/90">People think discovering a new molecule solves the problem.</em>
-                  </p>
-                  <p className="text-xl text-white font-medium mt-8 border-l-2 border-white/20 pl-6 py-2">
-                    It doesn't.
+                    While Western AI labs compete over standard text and language models, our mandate is the physical world. Backed by priority access to India's massive 2 Lakh (200,000) GPU cluster and $60M in sovereign/RDI structuring, we are building the world's first Large Physical Model (LPM). We are translating India's unparalleled manufacturing scale and deep-tech talent into the definitive AI operating system for global industrial discovery and scale-up.
                   </p>
                 </div>
               </motion.section>
@@ -365,7 +366,7 @@ export default function PitchPage() {
                 </div>
               </motion.section>
 
-              {/* Chapter 6: The Proof */}
+              {/* Chapter 6: Our AlphaFold Moment */}
               <motion.section 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -375,24 +376,123 @@ export default function PitchPage() {
                 <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
                   Chapter 6: The Proof
                 </div>
-                <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight">
-                  The Science Moat
+                <h2 className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
+                  Our AlphaFold Moment
                 </h2>
-                
-                <p className="text-lg text-white/60 font-light mb-8 italic">
-                  "You might be thinking, 'This sounds like magic, does the AI actually work?'"
+                <p className="text-lg text-white/70 font-light leading-relaxed max-w-3xl mb-12">
+                  We ran a blind 25-day "Sim-to-Real" sprint to prove our AI can generate a material and the exact factory recipe to build it.
                 </p>
-                
-                <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center space-y-6">
-                  <h3 className="text-2xl font-medium text-white uppercase tracking-widest">Yes.</h3>
-                  <div className="h-px w-16 bg-white/20 mx-auto" />
-                  <p className="text-white/70 font-light leading-relaxed max-w-3xl mx-auto">
-                    We just ran a 25-day sprint (The AlphaFold Matrix). We used our AI to predict the physical failure rates and structural degradation of 30 battery cells before they were ever built. We then built them in the lab. Our AI's digital 3D models perfectly matched the physical microscopic scans.
-                  </p>
-                  <p className="text-white font-medium text-lg pt-4">
-                    We have mathematically proven that our AI understands physical reality.
+
+                {/* 3-Step Visual Pipeline */}
+                <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-12">
+                  
+                  {/* STEP 1: The AI Prediction */}
+                  <div className="relative p-6 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-2xl h-full flex flex-col">
+                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30 text-blue-400 font-medium text-sm">1</div>
+                    <h3 className="text-xl font-medium text-white mb-6 pl-4">The AI Prediction</h3>
+                    
+                    <div className="bg-white/5 rounded-lg p-4 mb-6 border border-white/10">
+                      <p className="text-white/60 text-sm font-mono mb-2">/prompt</p>
+                      <p className="text-white text-sm">"Generate 5 unique battery architectures and their manufacturing recipes."</p>
+                    </div>
+                    
+                    <div className="space-y-4 mb-6 flex-grow">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mt-1">
+                          <Settings className="w-4 h-4 text-white/70" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Process Generated</p>
+                          <p className="text-sm text-white/90">Calendering pressure, binder %, mixing ratios.</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mt-1">
+                          <TrendingDown className="w-4 h-4 text-white/70" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Prediction Made</p>
+                          <p className="text-sm text-white/90">AI blind-predicts exact failure point (Cycle 1,420).</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-white/10 mt-auto text-center">
+                      <p className="text-blue-400 text-sm font-medium tracking-wide">Zero historical data used. 100% Zero-Shot.</p>
+                    </div>
+                  </div>
+
+                  {/* STEP 2: The Physical Build */}
+                  <div className="relative p-6 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-2xl h-full flex flex-col">
+                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 text-emerald-400 font-medium text-sm">2</div>
+                    <h3 className="text-xl font-medium text-white mb-6 pl-4">The Physical Build</h3>
+                    
+                    <div className="space-y-4 mb-6 flex-grow flex flex-col justify-center">
+                      <div>
+                        <p className="text-xs text-white/50 uppercase tracking-wider mb-2">Digital: AI-Generated</p>
+                        <div className="grid grid-cols-5 gap-2">
+                          {[0, 1, 2, 3, 4].map(i => (
+                            <div key={`digital-${i}`} className="aspect-square rounded-md bg-gradient-to-br from-indigo-500/40 to-purple-500/40 border border-white/10 relative overflow-hidden flex items-center justify-center">
+                              <Box className="w-4 h-4 text-white/30" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="pt-2">
+                        <p className="text-xs text-white/50 uppercase tracking-wider mb-2">Physical: Actual SEM</p>
+                        <div className="grid grid-cols-5 gap-2">
+                          {[0, 1, 2, 3, 4].map(i => (
+                            <div key={`physical-${i}`} className="aspect-square rounded-md bg-black border border-white/10 overflow-hidden">
+                              <img 
+                                src={`/REAL_SEM/sample_00${i}_20260206_125915_sem_isosurface.png`} 
+                                alt={`SEM image ${i}`}
+                                className="w-full h-full object-cover grayscale opacity-80"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-white/10 mt-auto text-center">
+                      <p className="text-emerald-400 text-sm font-medium leading-relaxed">
+                        The Sim-to-Real Match: The AI's digital imagination perfectly translated into physical reality.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* STEP 3: The Real-World Test */}
+                  <div className="relative p-6 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-2xl h-full flex flex-col">
+                    <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center border border-rose-500/30 text-rose-400 font-medium text-sm">3</div>
+                    <h3 className="text-xl font-medium text-white mb-6 pl-4">The Real-World Test</h3>
+                    
+                    <div className="relative bg-white/5 border border-white/10 rounded-xl p-4 mb-6 flex-grow min-h-[200px] flex items-center justify-center overflow-hidden">
+                      <div className="absolute top-2 right-2 bg-rose-500/20 border border-rose-500/30 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-lg z-10 backdrop-blur-sm">
+                        <Zap className="w-4 h-4 text-rose-400" />
+                        <span className="text-rose-400 font-medium text-xs">~70% Zero-Shot Accuracy</span>
+                      </div>
+                      
+                      <LineChart />
+                    </div>
+                    
+                    <div className="pt-4 border-t border-white/10 mt-auto text-center">
+                      <p className="text-rose-400 text-sm font-medium leading-relaxed">
+                        Actual Wet-Lab Physical Results matched AI's Blind Prediction.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Footer - The Mic Drop */}
+                <div className="mt-8 p-8 rounded-xl bg-gradient-to-r from-blue-900/30 via-purple-900/30 to-emerald-900/30 border border-white/20 text-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-white/5 mix-blend-overlay"></div>
+                  <p className="text-lg md:text-xl text-white font-light leading-relaxed relative z-10 max-w-4xl mx-auto">
+                    <strong className="font-medium text-white">The Takeaway:</strong> We didn't just guess the material; our AI wrote the physical instructions to scale it. If we can predict battery degradation with 70% accuracy today, we can generate perfect, 100% accurate factory blueprints for the world's largest industrial giants tomorrow.
                   </p>
                 </div>
+
               </motion.section>
 
               {/* Chapter 7: The Ask */}
@@ -435,7 +535,7 @@ export default function PitchPage() {
                   <h2 className="text-2xl md:text-4xl font-light text-white leading-tight mb-10">
                     Language came. Code came. Science is here. <br/>
                     <strong className="font-normal text-white/80 mt-4 block">
-                      Shodh AI is building the operating system for the physical world.
+                      Shodh AI is building the Multi-Scale Foundation Model for the physical world.
                     </strong>
                   </h2>
                   
