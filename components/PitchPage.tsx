@@ -232,7 +232,7 @@ export default function PitchPage() {
                   Anchored on India AI and sovereign/RDI structuring, we are building the world&apos;s first <span className="font-semibold">Large Physical Model (LPM)</span>
                 </p>
                 <p className="text-white text-lg font-medium">
-                  Translating India&apos;s deep-tech talent into Global - <span className="font-semibold">zero shot discovery, engineering and manufacturing.</span>
+                  Translating India&apos;s deep-tech talent into Global - <span className="font-semibold">ZERO SHOT DISCOVERY, ENGINEERING AND MANUFACTURING.</span>
                 </p>
                 <div className="p-6 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-white text-lg font-light leading-relaxed">
@@ -607,7 +607,7 @@ export default function PitchPage() {
                         <Maximize2 className="w-3.5 h-3.5" />
                         Click to Expand Data
                       </button>
-                      <div className="absolute top-2 right-2 bg-rose-500/20 border border-rose-500/30 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-lg z-10 backdrop-blur-sm">
+                      <div className="absolute top-14 left-3 sm:top-3 sm:left-auto sm:right-2 bg-rose-500/20 border border-rose-500/30 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-lg z-10 backdrop-blur-sm">
                         <Zap className="w-4 h-4 text-rose-400" />
                         <span className="text-rose-400 font-medium text-xs">~70% Zero-Shot Accuracy</span>
                       </div>

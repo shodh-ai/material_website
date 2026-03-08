@@ -18,10 +18,12 @@ type Recipe = {
   label: string;
   color: string;
   predictionColor: string;
-  failureCycle: number;
-  kneeStart: number;
-  kneeCapacity: number;
-  endFloor: number;
+  predictedFailureCycle: number;
+  actualFailureCycle: number;
+  predictedKneeStart: number;
+  actualKneeStart: number;
+  predictedKneeCapacity: number;
+  actualKneeCapacity: number;
   noiseAmplitude: number;
 };
 
@@ -32,10 +34,12 @@ const RECIPES: Recipe[] = [
     label: "Intended Fast-Failure Cell",
     color: "#f97316",
     predictionColor: "#fdba74",
-    failureCycle: 300,
-    kneeStart: 190,
-    kneeCapacity: 91,
-    endFloor: 58,
+    predictedFailureCycle: 300,
+    actualFailureCycle: 325,
+    predictedKneeStart: 190,
+    actualKneeStart: 208,
+    predictedKneeCapacity: 91,
+    actualKneeCapacity: 90,
     noiseAmplitude: 0.75,
   },
   {
@@ -44,10 +48,12 @@ const RECIPES: Recipe[] = [
     label: "Standard Commercial Baseline",
     color: "#22c55e",
     predictionColor: "#86efac",
-    failureCycle: 800,
-    kneeStart: 600,
-    kneeCapacity: 88,
-    endFloor: 58,
+    predictedFailureCycle: 800,
+    actualFailureCycle: 862,
+    predictedKneeStart: 600,
+    actualKneeStart: 628,
+    predictedKneeCapacity: 88,
+    actualKneeCapacity: 87,
     noiseAmplitude: 0.58,
   },
   {
@@ -56,10 +62,12 @@ const RECIPES: Recipe[] = [
     label: "AI-Optimized Architecture",
     color: "#38bdf8",
     predictionColor: "#93c5fd",
-    failureCycle: 1420,
-    kneeStart: 1080,
-    kneeCapacity: 86,
-    endFloor: 60,
+    predictedFailureCycle: 1420,
+    actualFailureCycle: 1360,
+    predictedKneeStart: 1080,
+    actualKneeStart: 1010,
+    predictedKneeCapacity: 86,
+    actualKneeCapacity: 84,
     noiseAmplitude: 0.48,
   },
 ];
@@ -67,31 +75,41 @@ const RECIPES: Recipe[] = [
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 const generateSeries = (recipe: Recipe, isPrediction: boolean) => {
-  return Array.from({ length: 161 }, (_, index) => {
-    const cycle = (index / 160) * 1600;
-    const preKneeSlope = (100 - recipe.kneeCapacity) / recipe.kneeStart;
+  const failureCycle = isPrediction ? recipe.predictedFailureCycle : recipe.actualFailureCycle;
+  const kneeStart = isPrediction ? recipe.predictedKneeStart : recipe.actualKneeStart;
+  const kneeCapacity = isPrediction ? recipe.predictedKneeCapacity : recipe.actualKneeCapacity;
+  const pointCount = Math.max(48, Math.round((failureCycle / 1600) * 140));
+
+  return Array.from({ length: pointCount + 1 }, (_, index) => {
+    const cycle = (index / pointCount) * failureCycle;
+    const preKneeSlope = (100 - kneeCapacity) / kneeStart;
     let capacity: number;
 
-    if (cycle <= recipe.kneeStart) {
+    if (cycle <= kneeStart) {
       capacity = 100 - preKneeSlope * cycle;
     } else {
-      const kneeProgress = clamp((cycle - recipe.kneeStart) / (recipe.failureCycle - recipe.kneeStart), 0, 1.3);
-      const tailDrop = (recipe.kneeCapacity - recipe.endFloor) * Math.pow(kneeProgress, 2.45);
-      capacity = recipe.kneeCapacity - tailDrop;
+      const kneeProgress = clamp((cycle - kneeStart) / Math.max(failureCycle - kneeStart, 1), 0, 1);
+      const tailDrop = (kneeCapacity - 60) * Math.pow(kneeProgress, isPrediction ? 2.18 : 2.42);
+      capacity = kneeCapacity - tailDrop;
     }
 
-    const ratio = cycle / Math.max(recipe.failureCycle, 1);
-    const baseNoise = Math.sin(index * 0.92 + recipe.failureCycle * 0.01) * recipe.noiseAmplitude;
-    const microNoise = Math.cos(index * 2.35 + recipe.kneeStart * 0.013) * (recipe.noiseAmplitude * 0.38);
-    const lateStress = cycle > recipe.kneeStart ? Math.sin(index * 1.4) * recipe.noiseAmplitude * 0.55 : 0;
+    const ratio = cycle / Math.max(failureCycle, 1);
+    const deviationBias = recipe.key === "hero"
+      ? -1.1
+      : recipe.key === "baseline"
+        ? 0.55
+        : 0.8;
 
     const noise = isPrediction
-      ? Math.sin(index * 0.45 + recipe.failureCycle * 0.004) * 0.16 - Math.pow(clamp(ratio, 0, 1), 2) * 0.22
-      : baseNoise + microNoise + lateStress - Math.pow(clamp(ratio, 0, 1.1), 1.8) * 0.35;
+      ? 0
+      : Math.sin(index * 0.9 + failureCycle * 0.012) * recipe.noiseAmplitude
+        + Math.cos(index * 2.6 + kneeStart * 0.01) * (recipe.noiseAmplitude * 0.42)
+        + (cycle > kneeStart ? Math.sin(index * 1.45) * recipe.noiseAmplitude * 0.45 : 0)
+        + deviationBias * Math.pow(clamp(ratio, 0, 1), 1.4);
 
     return {
       x: cycle,
-      y: clamp(capacity + noise, 56, 101),
+      y: clamp(capacity + noise, 60, 101),
     };
   });
 };
@@ -228,10 +246,10 @@ export default function LineChart({ className, detailed = false }: LineChartProp
 
       datasets.forEach(({ recipe, prediction }) => {
         const markerPoint = prediction.reduce((closest, point) => {
-          return Math.abs(point.x - recipe.failureCycle) < Math.abs(closest.x - recipe.failureCycle) ? point : closest;
+          return Math.abs(point.x - recipe.predictedFailureCycle) < Math.abs(closest.x - recipe.predictedFailureCycle) ? point : closest;
         }, prediction[0]);
 
-        const failureX = mapX(recipe.failureCycle);
+        const failureX = mapX(recipe.predictedFailureCycle);
 
         ctx.save();
         ctx.beginPath();
