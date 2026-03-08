@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -31,11 +31,14 @@ import {
   Users,
   Settings,
   TrendingDown,
-  Box
+  Maximize2,
+  X
 } from "lucide-react";
 import LineChart from "./LineChart";
 
 export default function PitchPage() {
+  const [expandedAlphaFoldView, setExpandedAlphaFoldView] = useState<"chart" | "matrices" | null>(null);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#111111] to-[#0a0a0a] text-white">
       {/* Header */}
@@ -489,7 +492,7 @@ export default function PitchPage() {
                     
                     <div className="bg-white/5 rounded-lg p-4 mb-6 border border-white/10">
                       <p className="text-white/60 text-sm font-mono mb-2">/prompt</p>
-                      <p className="text-white text-sm">"Generate 5 unique battery architectures and their manufacturing recipes."</p>
+                      <p className="text-white text-sm font-mono">"Generate 5 unique battery architectures and their manufacturing recipes."</p>
                     </div>
                     
                     <div className="space-y-4 mb-6 flex-grow">
@@ -515,7 +518,7 @@ export default function PitchPage() {
                     </div>
                     
                     <div className="pt-4 border-t border-white/10 mt-auto text-center">
-                      <p className="text-blue-400 text-sm font-medium tracking-wide">Zero historical data used. 100% Zero-Shot.</p>
+                      <p className="text-white/80 text-sm font-medium tracking-wide">Zero historical data used. 100% Zero-Shot.</p>
                     </div>
                   </div>
 
@@ -525,35 +528,46 @@ export default function PitchPage() {
                     <h3 className="text-xl font-medium text-white mb-6 pl-4">The Physical Build</h3>
                     
                     <div className="space-y-4 mb-6 flex-grow flex flex-col justify-center">
-                      <div>
-                        <p className="text-xs text-white/50 uppercase tracking-wider mb-2">Digital: AI-Generated</p>
-                        <div className="grid grid-cols-5 gap-2">
-                          {[0, 1, 2, 3, 4].map(i => (
-                            <div key={`digital-${i}`} className="aspect-square rounded-md bg-gradient-to-br from-indigo-500/40 to-purple-500/40 border border-white/10 relative overflow-hidden flex items-center justify-center">
-                              <Box className="w-4 h-4 text-white/30" />
-                            </div>
-                          ))}
+                      <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr] items-center">
+                        <div className="space-y-2">
+                          <p className="text-xs text-white/50 uppercase tracking-wider">Digital: AI-Generated</p>
+                          <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black/40">
+                            <img
+                              src="/GIFs_Microstrcuture/sample_003_20260206_125915_3d_render.gif"
+                              alt="AI-generated microstructure render"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="hidden lg:flex items-center justify-center pt-6">
+                          <div className="w-14 h-px bg-gradient-to-r from-indigo-300/70 to-emerald-300/70" />
+                        </div>
+
+                        <div className="space-y-2">
+                          <p className="text-xs text-white/50 uppercase tracking-wider">Physical: Actual SEM</p>
+                          <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 bg-black">
+                            <img
+                              src="/REAL_SEM/sample_003_20260206_125915_sem_isosurface.png"
+                              alt="Physical SEM cross-section"
+                              className="w-full h-full object-cover grayscale"
+                            />
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="pt-2">
-                        <p className="text-xs text-white/50 uppercase tracking-wider mb-2">Physical: Actual SEM</p>
-                        <div className="grid grid-cols-5 gap-2">
-                          {[0, 1, 2, 3, 4].map(i => (
-                            <div key={`physical-${i}`} className="aspect-square rounded-md bg-black border border-white/10 overflow-hidden">
-                              <img 
-                                src={`/REAL_SEM/sample_00${i}_20260206_125915_sem_isosurface.png`} 
-                                alt={`SEM image ${i}`}
-                                className="w-full h-full object-cover grayscale opacity-80"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setExpandedAlphaFoldView("matrices")}
+                        className="self-start inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-colors text-xs uppercase tracking-[0.18em]"
+                      >
+                        <Maximize2 className="w-3.5 h-3.5" />
+                        View all 5 generated matrices
+                      </button>
                     </div>
                     
                     <div className="pt-4 border-t border-white/10 mt-auto text-center">
-                      <p className="text-emerald-400 text-sm font-medium leading-relaxed">
+                      <p className="text-white/80 text-sm font-medium leading-relaxed">
                         The Sim-to-Real Match: The AI's digital imagination perfectly translated into physical reality.
                       </p>
                     </div>
@@ -564,17 +578,25 @@ export default function PitchPage() {
                     <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center border border-rose-500/30 text-rose-400 font-medium text-sm">3</div>
                     <h3 className="text-xl font-medium text-white mb-6 pl-4">The Real-World Test</h3>
                     
-                    <div className="relative bg-white/5 border border-white/10 rounded-xl p-4 mb-6 flex-grow min-h-[200px] flex items-center justify-center overflow-hidden">
+                    <div className="relative bg-white/5 border border-white/10 rounded-xl p-4 mb-6 flex-grow min-h-[260px] flex items-center justify-center overflow-hidden">
+                      <button
+                        type="button"
+                        onClick={() => setExpandedAlphaFoldView("chart")}
+                        className="absolute top-3 left-3 rounded-lg border border-white/10 bg-black/35 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-white/70 hover:text-white hover:bg-black/50 transition-colors z-10 inline-flex items-center gap-2"
+                      >
+                        <Maximize2 className="w-3.5 h-3.5" />
+                        Click to Expand Data
+                      </button>
                       <div className="absolute top-2 right-2 bg-rose-500/20 border border-rose-500/30 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-lg z-10 backdrop-blur-sm">
                         <Zap className="w-4 h-4 text-rose-400" />
                         <span className="text-rose-400 font-medium text-xs">~70% Zero-Shot Accuracy</span>
                       </div>
                       
-                      <LineChart />
+                      <LineChart className="w-full h-full min-h-[260px]" />
                     </div>
                     
                     <div className="pt-4 border-t border-white/10 mt-auto text-center">
-                      <p className="text-rose-400 text-sm font-medium leading-relaxed">
+                      <p className="text-white/80 text-sm font-medium leading-relaxed">
                         Actual Wet-Lab Physical Results matched AI's Blind Prediction.
                       </p>
                     </div>
@@ -588,6 +610,99 @@ export default function PitchPage() {
                     <strong className="font-medium text-white">The Takeaway:</strong> We didn't just guess the material; our AI wrote the physical instructions to scale it. If we can predict battery degradation with 70% accuracy today, we can generate perfect, 100% accurate factory blueprints for the world's largest industrial giants tomorrow.
                   </p>
                 </div>
+
+                <AnimatePresence>
+                  {expandedAlphaFoldView === "chart" && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl p-6 md:p-10"
+                    >
+                      <div className="relative h-full max-w-6xl mx-auto rounded-3xl border border-white/10 bg-[#0b0b0b] shadow-2xl overflow-hidden flex flex-col">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedAlphaFoldView(null)}
+                          className="absolute top-5 right-5 z-10 inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+
+                        <div className="p-8 md:p-10 border-b border-white/10">
+                          <p className="text-xs text-white/45 uppercase tracking-[0.22em] mb-3">Expanded Data View</p>
+                          <h3 className="text-2xl md:text-4xl font-light text-white mb-3">The Real-World Test</h3>
+                          <p className="text-white/60 max-w-3xl leading-relaxed">
+                            AI prediction versus wet-lab result across cycle life, with the predicted failure point called out at Cycle 1,420.
+                          </p>
+                        </div>
+
+                        <div className="flex-1 p-6 md:p-10 min-h-0">
+                          <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+                            <LineChart detailed className="w-full h-full min-h-[420px]" />
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {expandedAlphaFoldView === "matrices" && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl p-6 md:p-10 overflow-y-auto"
+                    >
+                      <div className="relative max-w-6xl mx-auto rounded-3xl border border-white/10 bg-[#0b0b0b] shadow-2xl overflow-hidden">
+                        <button
+                          type="button"
+                          onClick={() => setExpandedAlphaFoldView(null)}
+                          className="absolute top-5 right-5 z-10 inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+
+                        <div className="p-8 md:p-10 border-b border-white/10">
+                          <p className="text-xs text-white/45 uppercase tracking-[0.22em] mb-3">Expanded Sim-to-Real View</p>
+                          <h3 className="text-2xl md:text-4xl font-light text-white mb-3">All 5 Generated Matrices</h3>
+                          <p className="text-white/60 max-w-3xl leading-relaxed">
+                            Side-by-side comparison of the AI-generated voxel structures and the matching real SEM outputs from the wet-lab build.
+                          </p>
+                        </div>
+
+                        <div className="p-6 md:p-10 grid gap-6 md:grid-cols-2">
+                          {[0, 1, 2, 3, 4].map((i) => (
+                            <div key={`matrix-pair-${i}`} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+                              <p className="text-xs text-white/45 uppercase tracking-[0.18em] mb-4">Sample {i + 1}</p>
+                              <div className="grid gap-4 sm:grid-cols-2 items-center">
+                                <div className="space-y-2">
+                                  <p className="text-[11px] text-white/50 uppercase tracking-[0.16em]">AI Generated</p>
+                                  <div className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-black/50">
+                                    <img
+                                      src={`/GIFs_Microstrcuture/sample_00${i}_20260206_125915_3d_render.gif`}
+                                      alt={`AI-generated structure ${i + 1}`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                  <p className="text-[11px] text-white/50 uppercase tracking-[0.16em]">Real SEM</p>
+                                  <div className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-black">
+                                    <img
+                                      src={`/REAL_SEM/sample_00${i}_20260206_125915_sem_isosurface.png`}
+                                      alt={`Real SEM structure ${i + 1}`}
+                                      className="w-full h-full object-cover grayscale"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
               </motion.section>
 
