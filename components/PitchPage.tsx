@@ -607,15 +607,15 @@ export default function PitchPage() {
                         <Maximize2 className="w-3.5 h-3.5" />
                         Click to Expand Data
                       </button>
-                      <div className="absolute top-14 left-3 sm:top-3 sm:left-auto sm:right-2 bg-rose-500/20 border border-rose-500/30 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-lg z-10 backdrop-blur-sm">
-                        <Zap className="w-4 h-4 text-rose-400" />
-                        <span className="text-rose-400 font-medium text-xs">~70% Zero-Shot Accuracy</span>
-                      </div>
-                      
+
                       <LineChart className="w-full h-full min-h-[260px]" />
                     </div>
                     
-                    <div className="pt-4 border-t border-white/10 mt-auto text-center">
+                    <div className="pt-4 border-t border-white/10 mt-auto text-center space-y-3">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-medium tracking-[0.12em] uppercase">
+                        <Zap className="w-3.5 h-3.5" />
+                        <span>~70% Zero-Shot Accuracy</span>
+                      </div>
                       <p className="text-white/80 text-sm font-medium leading-relaxed">
                         The model didn't just find the best battery; it accurately predicted the exact physical failure point of all 5 diverse architectural recipes.
                       </p>
