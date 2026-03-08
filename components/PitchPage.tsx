@@ -190,22 +190,38 @@ export default function PitchPage() {
                   Chapter 1: The AI Evolution
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight">
-                  Shodh AI — <span className="font-normal">Build in India. Made for the World.</span>
-                </h2>
-                
-                <div className="prose prose-invert max-w-none text-white/70 font-light leading-relaxed space-y-6">
-                  <p>
-                    We are Shodh AI, one of the 12 elite companies mandated by the IndiaAI Mission to build the country's sovereign foundational models.
-                  </p>
-                  <p>
-                    While Western AI labs compete over standard text and language models, our mandate is the physical world. Backed by priority access to India's massive 2 Lakh (200,000) GPU cluster and $60M in sovereign/RDI structuring, we are building the world's first Large Physical Model (LPM). We are translating India's unparalleled manufacturing scale and deep-tech talent into the definitive AI operating system for global industrial discovery and scale-up.
+                Shodh AI — <span className="font-normal">Build in India. Made for the World.</span>
+              </h2>
+              
+              <div className="space-y-4 text-white/70 font-light leading-relaxed max-w-4xl">
+                <p>
+                  One of the 12 companies mandated by the IndiaAI Mission to build foundational models
+                </p>
+                <p>
+                  Indian Govt Is building a capacity of 200,000 GPU clusters, we get first priority access to it, free of cost.
+                </p>
+                <div className="p-5 rounded-xl bg-white/5 border border-white/10">
+                  <p className="text-white/90">
+                    We are going for $25M equivalent GPU access from India AI (At world’s lowest cost)
                   </p>
                 </div>
-              </motion.section>
+                <p className="text-white text-lg font-medium">
+                  Anchored on India AI and sovereign/RDI structuring, we are building the world&apos;s first <span className="font-semibold">Large Physical Model (LPM)</span>
+                </p>
+                <p className="text-white text-lg font-medium">
+                  Translating India&apos;s deep-tech talent into Global - <span className="font-semibold">zero shot discovery, engineering and manufacturing.</span>
+                </p>
+                <div className="p-6 rounded-xl bg-white/5 border border-white/10">
+                  <p className="text-white text-lg font-light leading-relaxed">
+                    “We have the cost-structure of a sovereign Indian project, but the revenue ceiling of a global Silicon Valley monopoly.”
+                  </p>
+                </div>
+              </div>
+            </motion.section>
 
-              {/* Chapter 2: The "Aha!" Moment */}
-              <motion.section 
-                initial={{ opacity: 0, y: 20 }}
+            {/* Chapter 2: The "Aha!" Moment */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
@@ -214,25 +230,31 @@ export default function PitchPage() {
                   Chapter 2: The "Aha!" Moment
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-10 tracking-tight">
-                  The Scale-Up Bottleneck
-                </h2>
+                The Scale-Up Bottleneck
+              </h2>
+              
+              <div className="grid gap-8">
+                <div className="space-y-5 text-white/70 font-light leading-relaxed">
+                  <p>
+                    Real example from our partner, Kiran Mazumdar-Shaw at Biocon / Syngene.
+                  </p>
+                  <p>
+                    Making a life-saving drug takes a 16-step chemical batch process
+                  </p>
+                  <p>
+                    Slow and insanely expensive
+                  </p>
+                  <p>
+                    Biocon can use novel bio-enzymes, can cut that 16-step process down to just 3 steps.
+                  </p>
+                  <p className="text-white font-medium text-lg border-l-2 border-white/20 pl-4 py-1">So what&apos;s the problem? Scale-up.</p>
+                  <p>
+                    When you take delicate bio-enzyme out of lab and put into massive, industrial steel reactor, the fluid dynamics and heat kill the enzyme. The drug fails.
+                  </p>
+                </div>
                 
-                <div className="grid md:grid-cols-2 gap-12">
-                  <div className="space-y-6 text-white/70 font-light leading-relaxed">
-                    <p>
-                      Let me give you a real example from our partner, Kiran Mazumdar-Shaw at Biocon.
-                    </p>
-                    <p>
-                      Right now, making a life-saving drug takes a 16-step chemical batch process. It's slow and insanely expensive. Biocon knows that if they use novel bio-enzymes, they can cut that 16-step process down to just 3 steps.
-                    </p>
-                    <p className="text-white font-medium text-lg border-l-2 border-white/20 pl-4 py-1">So what's the problem? Scale-up.</p>
-                    <p>
-                      When you take that delicate bio-enzyme out of a tiny lab test-tube and put it into a massive, industrial steel reactor, the fluid dynamics and heat kill the enzyme. The drug fails.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-8 flex flex-col justify-center">
-                    <div className="space-y-6">
+                <div className="bg-white/5 border border-white/10 rounded-xl p-8 md:p-10 flex flex-col justify-center">
+                  <div className="space-y-8">
                       <div className="flex items-center gap-4 text-white/40 line-through">
                         <Beaker className="w-6 h-6" />
                         <span className="text-lg">Discovery Bottleneck</span>
@@ -241,8 +263,8 @@ export default function PitchPage() {
                         <Factory className="w-6 h-6" />
                         <span className="text-xl font-medium">Engineering Bottleneck</span>
                       </div>
-                      <p className="text-sm text-white/50 italic pt-4 border-t border-white/10 mt-4 leading-relaxed">
-                        "There are thousands of miracle molecules, better batteries, and super-enzymes sitting on shelves right now. We already discovered them! But we can't commercialize them because we don't know how to physically manufacture them at scale."
+                      <p className="text-lg md:text-xl text-white/85 pt-5 border-t border-white/10 mt-2 leading-relaxed font-light max-w-4xl">
+                        "There are THOUSANDS of miracle molecules, better batteries, and super-enzymes sitting on shelves right now. We already discovered them! But we can&apos;t COMMERCIALISE them because we don&apos;t know how to physically manufacture them at scale."
                       </p>
                     </div>
                   </div>
@@ -260,130 +282,204 @@ export default function PitchPage() {
                   Chapter 3: The Competitor Landscape
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-10 tracking-tight">
-                  Why Everyone Else Is Stuck
-                </h2>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <h3 className="text-xl font-medium text-white mb-1">The "Architects"</h3>
-                    <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Isomorphic, Recursion</p>
-                    <p className="text-white/60 font-light text-sm leading-relaxed">
-                      They use AI to discover new atoms and molecules. They draw brilliant blueprints. But they don't know how to build the house. They hand the molecule to J&J or Novartis and say, "Good luck figuring out how to manufacture this."
-                    </p>
-                  </div>
-                  
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <h3 className="text-xl font-medium text-white mb-1">The "Landlords"</h3>
-                    <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Lila Sciences</p>
-                    <p className="text-white/60 font-light text-sm leading-relaxed">
-                      They built cool, automated robotic labs and they rent them out to other companies. It's a great "lab-for-hire" business, but they are just selling pickaxes. They don't own the gold.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <h3 className="text-xl font-medium text-white mb-1">The "Dreamers"</h3>
-                    <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Radical AI</p>
-                    <p className="text-white/60 font-light text-sm leading-relaxed">
-                      They want to discover materials and manufacture them autonomously. But they have a "Cold Start" problem. How do you train an AI to manufacture things if no giant pharma or chemical company will share their secret factory data with you?
-                    </p>
+                Why Everyone Else Is Stuck
+              </h2>
+              
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                  <h3 className="text-xl font-medium text-white mb-1">The "Architects"</h3>
+                  <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Isomorphic, Recursion</p>
+                  <div className="space-y-3 text-white/60 font-light text-sm leading-relaxed">
+                    <p>Use AI to discover new atoms and molecules. Draw brilliant blueprints.</p>
+                    <p className="text-white/90 font-medium tracking-wide">BUT</p>
+                    <p>Don&apos;t know how to build. They hand the molecule to J&amp;J or Novartis and say, "Good luck figuring out how to manufacture this."</p>
                   </div>
                 </div>
-              </motion.section>
+                
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                  <h3 className="text-xl font-medium text-white mb-1">The "Landlords"</h3>
+                  <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Lila Sciences</p>
+                  <div className="space-y-3 text-white/60 font-light text-sm leading-relaxed">
+                    <p>Built cool, automated robotic labs and they rent them out to other companies.</p>
+                    <p className="text-white/90 font-medium tracking-wide">BUT</p>
+                    <p>It&apos;s a great "lab-for-hire" business, they are just selling pickaxes.</p>
+                  </div>
+                </div>
+                
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                  <h3 className="text-xl font-medium text-white mb-1">The "Dreamers"</h3>
+                  <p className="text-xs text-white/40 mb-4 uppercase tracking-widest">Radical AI</p>
+                  <div className="space-y-3 text-white/60 font-light text-sm leading-relaxed">
+                    <p>Want to discover materials and manufacture them autonomously.</p>
+                    <p className="text-white/90 font-medium tracking-wide">BUT</p>
+                    <p>have a "Cold Start" problem.</p>
+                  </div>
+                </div>
+              </div>
 
-              {/* Chapter 4: The Masterplan */}
-              <motion.section 
-                initial={{ opacity: 0, y: 20 }}
+              <div className="mt-8 p-6 rounded-xl bg-white/5 border border-white/10">
+                <p className="text-white/90 font-medium leading-relaxed">
+                  Our Thesis: You can’t start the AI Discovery cycle from lab, start it from making it manufacturable and then come back.
+                </p>
+              </div>
+            </motion.section>
+
+            {/* Chapter 4: The Masterplan */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5 relative overflow-hidden"
               >
                 <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6 relative z-10">
-                  Chapter 4: The Masterplan
-                </div>
-                <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight relative z-10">
-                  The Wedge
-                </h2>
-                
-                <div className="space-y-8 text-white/70 font-light leading-relaxed relative z-10">
-                  <p className="text-xl text-white font-medium">
-                    We bypass all of this. We are not starting at discovery, we are starting at Scale-Up (The Mesoscale).
-                  </p>
-                  
-                  <p>
-                    We go to Aarti Industries and Syngene and say: "You have molecules you can't scale. We have the AI to simulate the fluid dynamics, porous structures, and physical reactors to scale them for you."
-                  </p>
-                  
-                  <p>
-                    We deploy our engineers to sit inside their secure servers (Federated Data Environments). We solve their $500M manufacturing headaches.
-                  </p>
-                  
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-6 mt-8">
-                    <p className="text-white/90 font-medium">
-                      But here is the magic: As our AI solves their scale-up problems, our AI learns the deep physics of how the real world works. They pay us, and we get the most valuable, proprietary sim-to-real physics data on earth. We solve Radical AI's cold-start problem because the world's biggest industrial giants are literally feeding us the data.
-                    </p>
-                  </div>
-                </div>
-              </motion.section>
-
-              {/* Chapter 5: The Grand Business Model */}
-              <motion.section 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
-              >
-                <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
-                  Chapter 5: The Grand Business Model
-                </div>
-                <h2 className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
-                  How we make the billions
-                </h2>
-                <p className="text-lg text-white/50 font-light italic mb-10">
-                  "VCs always ask: 'Are you just going to be a software tool that takes a tiny 2% cut while Novartis makes $10 Billion?' Absolutely not."
+                Chapter 4: The Masterplan
+              </div>
+              <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight relative z-10">
+                SHODH AI : The Wedge
+              </h2>
+              
+              <div className="space-y-8 text-white/70 font-light leading-relaxed relative z-10">
+                <p className="text-xl text-white font-medium">
+                  We bypass all of this. We are not starting at discovery, we are starting at Scale-Up (The MESOSCALE).
                 </p>
-                
+
                 <div className="space-y-6">
-                  <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                    <h3 className="text-xl font-medium text-white mb-2">Phase 1: Co-Creation & FDEs <span className="text-white/40 text-sm font-light uppercase tracking-wider ml-2">(Years 1-2)</span></h3>
-                    <p className="text-white/60 font-light leading-relaxed">
-                      We deploy teams to 10 anchor partners (like Syngene and Aarti). We charge them for the scale-up, and we capture the physics data.
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 space-y-5">
+                    <p className="text-white/90 font-medium uppercase tracking-[0.2em] text-xs">
+                      CO-CREATION PILOTS WITH 2 Anchor Clients
                     </p>
+                    <ul className="space-y-5 text-base md:text-lg leading-relaxed">
+                      <li className="pl-5 relative space-y-4">
+                        <span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-white/60" />
+                        <p>
+                          <span className="text-white font-medium">Biocon / Syngene (Anchor Client)</span> : Kiran Mazumdar-Shaw officially agreed to co-create with us. She is super excited to guide hands on
+                        </p>
+                        <ul className="space-y-3 text-white/70 text-sm md:text-base ml-2">
+                          <li className="pl-5 relative">
+                            <span className="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-white/35" />
+                            Has offered her Syngene wet-labs for our physical compiler loop
+                          </li>
+                          <li className="pl-5 relative">
+                            <span className="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-white/35" />
+                            Is in discussions to join our advisory board.
+                          </li>
+                        </ul>
+                      </li>
+                      <li className="pl-5 relative space-y-4">
+                        <span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-white/60" />
+                        <p>
+                          <span className="text-white font-medium">Aarti Industries ($3B+ Chem Giant):</span> Mirik Gogri has agreed to co-create our chem AI product.
+                        </p>
+                        <ul className="space-y-3 text-white/70 text-sm md:text-base ml-2">
+                          <li className="pl-5 relative">
+                            <span className="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-white/35" />
+                            Instead of just internal use, we are jointly building a product that can be deployed to their global clients (BASF, Dow, DuPont, etc.).
+                          </li>
+                        </ul>
+                      </li>
+                      <li className="pl-5 relative">
+                        <span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-white/60" />
+                        <span className="text-white font-medium">Board-Level LOI Pipeline:</span> Currently in active, board-level LOI discussions with <span className="text-white font-medium">Sandoz, Dr. Reddy’s, LG Chem, and a major Chinese battery manufacturer.</span>
+                      </li>
+                    </ul>
                   </div>
-                  
-                  <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                    <h3 className="text-xl font-medium text-white mb-2">Phase 2: The Isomorphic Catch-up <span className="text-white/40 text-sm font-light uppercase tracking-wider ml-2">(Years 3-4)</span></h3>
-                    <p className="text-white/60 font-light leading-relaxed">
-                      Because we solved the scale-up, J&J and Novartis will come to us with Isomorphic's discoveries and say, "Scale this for us." At this point, we don't charge a software fee. We say: <strong className="text-white font-medium">"We will scale this, but we want a 10% royalty on the global drug sales."</strong>
+
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 space-y-4">
+                    <p className="text-white/90 font-medium uppercase tracking-[0.2em] text-xs">
+                      Our Play
                     </p>
-                  </div>
-                  
-                  <div className="p-6 rounded-xl bg-white/10 border border-white/20">
-                    <h3 className="text-xl font-medium text-white mb-2">Phase 3: The Endgame <span className="text-white/60 text-sm font-light uppercase tracking-wider ml-2">(Zero-Shot Discovery to Mfg)</span></h3>
-                    <p className="text-white/70 font-light leading-relaxed">
-                      Once our model is fully trained, we do both. We discover the molecule (Atomic level) AND we generate the exact factory blueprint to make it (Mesoscale). We patent the drug/material ourselves. <span className="text-white font-medium">We don't take a cut; we own the asset.</span>
+                    <p>
+                      Go to Aarti Industries and Syngene and say:
+                    </p>
+                    <p className="text-white border-l-2 border-white/20 pl-4 py-1">
+                      "You have molecules you can&apos;t scale. We have the AI to simulate the fluid dynamics, porous structures, and physical reactors to scale them for you."
+                    </p>
+                    <p>
+                      Deploy our engineers to sit inside their secure servers (Federated Data Environments).
+                    </p>
+                    <p>
+                      We solve their $500M manufacturing headaches.
                     </p>
                   </div>
                 </div>
-              </motion.section>
 
-              {/* Chapter 6: Our AlphaFold Moment */}
-              <motion.section 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
-              >
-                <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
-                  Chapter 6: The Proof
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6 mt-8">
+                  <div className="space-y-3 text-white/90 font-medium leading-relaxed">
+                    <p>
+                      But here is the magic:
+                    </p>
+                    <p>
+                      As our AI solves their scale-up problems, our AI learns the deep physics of how the real world works.
+                    </p>
+                    <p>
+                      They pay us, and we get the most valuable, proprietary sim-to-real physics data on earth. We solve Cold-start problem because the world&apos;s biggest industrial giants are literally feeding us the data.
+                    </p>
+                  </div>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
-                  Our AlphaFold Moment
-                </h2>
-                <p className="text-lg text-white/70 font-light leading-relaxed max-w-3xl mb-12">
-                  We ran a blind 25-day "Sim-to-Real" sprint to prove our AI can generate a material and the exact factory recipe to build it.
-                </p>
+              </div>
+            </motion.section>
 
-                {/* 3-Step Visual Pipeline */}
+            {/* Chapter 5: The Grand Business Model */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
+            >
+              <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
+                Chapter 5: The Grand Business Model
+              </div>
+              <h2 className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
+                The Commercial Engine: <span className="font-normal">From Nodes to IP</span>
+              </h2>
+              <p className="text-lg text-white/50 font-light italic mb-10">
+                "Question: &apos;Are you just going to be a software tool that takes a tiny 2% cut while Novartis makes $10 Billion?&apos; Absolutely not. This is frontier AI"
+              </p>
+              
+              <div className="space-y-6">
+                <div className="p-6 rounded-xl bg-white/5 border border-white/10">
+                  <h3 className="text-xl font-medium text-white mb-3">Phase 1: Co-Creation &amp; FDEs <span className="text-white/40 text-sm font-light uppercase tracking-wider ml-2">(Years 1)</span></h3>
+                  <div className="space-y-3 text-white/60 font-light leading-relaxed">
+                    <p>Deploy teams to 10 anchor partners (like Syngene and Aarti). We charge them for the scale-up, and we capture the physics data.</p>
+                  </div>
+                </div>
+                
+                <div className="p-6 rounded-xl bg-white/5 border border-white/10">
+                  <h3 className="text-xl font-medium text-white mb-3">Phase 2: The Isomorphic Catch-up <span className="text-white/40 text-sm font-light uppercase tracking-wider ml-2">(Years 2)</span></h3>
+                  <div className="space-y-3 text-white/60 font-light leading-relaxed">
+                    <p>Because we solved the scale-up, J&amp;J and Novartis will come to us with Isomorphic&apos;s discoveries and say, "Scale this for us." At this point, we don&apos;t charge a software fee. We say: "We will scale this, but we want a 10% royalty on the global drug sales."</p>
+                  </div>
+                </div>
+                
+                <div className="p-6 rounded-xl bg-white/10 border border-white/20">
+                  <h3 className="text-xl font-medium text-white mb-3">Phase 3: The Endgame <span className="text-white/60 text-sm font-light uppercase tracking-wider ml-2">(Zero-Shot Discovery to Mfg)</span></h3>
+                  <div className="space-y-3 text-white/70 font-light leading-relaxed">
+                    <p>Once our model is fully trained, we do both.</p>
+                    <p>We discover the molecule (Atomic level) AND we generate the exact factory blueprint to make it (Mesoscale).</p>
+                    <p className="text-white font-medium">We patent the drug/material ourselves. We don&apos;t take a cut; we own the asset.</p>
+                  </div>
+                </div>
+              </div>
+            </motion.section>
+
+            {/* Chapter 6: Our AlphaFold Moment */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
+            >
+              <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
+                Chapter 6: The Proof
+              </div>
+              <h2 className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
+                Our AlphaFold Moment
+              </h2>
+              <p className="text-lg text-white/70 font-light leading-relaxed max-w-3xl mb-12">
+                We ran a blind 25-day "Sim-to-Real" sprint to prove our AI can generate a material and the exact factory recipe to build it.
+              </p>
+
+              {/* 3-Step Visual Pipeline */}
                 <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-12">
                   
                   {/* STEP 1: The AI Prediction */}
@@ -495,6 +591,112 @@ export default function PitchPage() {
 
               </motion.section>
 
+              <motion.section 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5"
+              >
+                <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-6">
+                  The Shodh AI Endgame
+                </div>
+                <h2 className="text-3xl md:text-5xl font-light text-white mb-4 tracking-tight">
+                  The Future of <span className="font-normal">Software-Defined Manufacturing</span>
+                </h2>
+                <p className="text-lg text-white/60 font-light leading-relaxed max-w-4xl mb-12">
+                  Once our Multi-Scale Foundation Model maps the physics of scale-up, we stop just optimizing old industries. We unlock the impossible.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                  <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                    <div className="h-56 md:h-64 bg-gradient-to-br from-cyan-500/20 via-sky-500/10 to-transparent border-b border-white/10 p-6 flex items-end justify-between relative">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_45%)]" />
+                      <div className="relative z-10 max-w-[75%]">
+                        <p className="text-xs text-cyan-300/80 uppercase tracking-[0.2em] mb-3">Decentralized Healthcare</p>
+                        <h3 className="text-2xl text-white font-medium">Suitcase Pharma</h3>
+                      </div>
+                      <div className="relative z-10 w-20 h-20 rounded-2xl border border-white/15 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                        <Building2 className="w-9 h-9 text-cyan-200/80" />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-white/65 font-light leading-relaxed text-sm md:text-base">
+                        <li>End reliance on massive API factories.</li>
+                        <li>Generate blueprints for hyper-compact, continuous-flow reactors.</li>
+                        <li>Let hospitals or defense bases produce antibiotics, chemotherapy, and anti-venoms on-demand.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                    <div className="h-56 md:h-64 bg-gradient-to-br from-orange-500/20 via-rose-500/10 to-transparent border-b border-white/10 p-6 flex items-end justify-between relative">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_45%)]" />
+                      <div className="relative z-10 max-w-[75%]">
+                        <p className="text-xs text-orange-200/80 uppercase tracking-[0.2em] mb-3">Aerospace & Defense</p>
+                        <h3 className="text-2xl text-white font-medium">Zero-Defect Hypersonic &amp; Space Alloys</h3>
+                      </div>
+                      <div className="relative z-10 w-20 h-20 rounded-2xl border border-white/15 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                        <Zap className="w-9 h-9 text-orange-200/80" />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-white/65 font-light leading-relaxed text-sm md:text-base">
+                        <li>Traditional mills fail for hypersonic and deep-space materials.</li>
+                        <li>Generate exact laser paths for 3D printing High-Entropy Alloys.</li>
+                        <li>License zero-defect manufacturing codes to ISRO, SpaceX, and defense primes.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                    <div className="h-56 md:h-64 bg-gradient-to-br from-emerald-500/20 via-lime-500/10 to-transparent border-b border-white/10 p-6 flex items-end justify-between relative">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_45%)]" />
+                      <div className="relative z-10 max-w-[75%]">
+                        <p className="text-xs text-emerald-200/80 uppercase tracking-[0.2em] mb-3">Synthetic Biology</p>
+                        <h3 className="text-2xl text-white font-medium">Programmable Bio-Scaffolds</h3>
+                      </div>
+                      <div className="relative z-10 w-20 h-20 rounded-2xl border border-white/15 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                        <Layers className="w-9 h-9 text-emerald-200/80" />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-white/65 font-light leading-relaxed text-sm md:text-base">
+                        <li>Synthetic biology needs the right physical environment to survive.</li>
+                        <li>Design microscopic, generative breathing scaffolds.</li>
+                        <li>Build the physical homes for spider-silk, mycelium leather, and synthetic organs.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+                    <div className="h-56 md:h-64 bg-gradient-to-br from-violet-500/20 via-indigo-500/10 to-transparent border-b border-white/10 p-6 flex items-end justify-between relative">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_45%)]" />
+                      <div className="relative z-10 max-w-[75%]">
+                        <p className="text-xs text-violet-200/80 uppercase tracking-[0.2em] mb-3">Sovereign Resilience</p>
+                        <h3 className="text-2xl text-white font-medium">The Self-Healing Supply Chain</h3>
+                      </div>
+                      <div className="relative z-10 w-20 h-20 rounded-2xl border border-white/15 bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                        <Network className="w-9 h-9 text-violet-200/80" />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-white/65 font-light leading-relaxed text-sm md:text-base">
+                        <li>Act as sovereign defense when supply chains break.</li>
+                        <li>Discover alternative chemistry from local materials in 48 hours.</li>
+                        <li>Generate factory CAD files fast enough to keep a country running.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-8 rounded-xl bg-gradient-to-r from-blue-900/30 via-purple-900/30 to-emerald-900/30 border border-white/20 text-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-white/5 mix-blend-overlay"></div>
+                  <p className="text-lg md:text-xl text-white font-light leading-relaxed relative z-10 max-w-4xl mx-auto">
+                    <strong className="font-medium text-white">The Ultimate Moat:</strong> Software ate the world of information. Shodh AI is writing the code to eat the physical world. We are transitioning humanity from discovering matter to compiling it.
+                  </p>
+                </div>
+              </motion.section>
+
               {/* Chapter 7: The Ask */}
               <motion.section 
                 initial={{ opacity: 0, y: 20 }}
@@ -515,11 +717,11 @@ export default function PitchPage() {
                     <p className="text-sm text-white/50 font-light">Indian Government guaranteed NVIDIA GPU compute.</p>
                   </div>
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center">
-                    <h4 className="text-2xl font-medium text-white mb-2">$35M</h4>
+                    <h4 className="text-2xl font-medium text-white mb-2">$25M</h4>
                     <p className="text-sm text-white/50 font-light">ANRF RDI funds for physical autonomous robotic lab.</p>
                   </div>
                   <div className="p-6 rounded-xl bg-white/10 border border-white/20 flex flex-col items-center">
-                    <h4 className="text-2xl font-medium text-white mb-2">$40M</h4>
+                    <h4 className="text-2xl font-medium text-white mb-2">$50M</h4>
                     <p className="text-sm text-white/80 font-medium">Equity Round. We are raising from you.</p>
                   </div>
                 </div>
