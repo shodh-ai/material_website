@@ -7,6 +7,95 @@ type LineChartProps = {
   detailed?: boolean;
 };
 
+type Point = {
+  x: number;
+  y: number;
+};
+
+type Recipe = {
+  key: string;
+  shortLabel: string;
+  label: string;
+  color: string;
+  predictionColor: string;
+  failureCycle: number;
+  kneeStart: number;
+  kneeCapacity: number;
+  endFloor: number;
+  noiseAmplitude: number;
+};
+
+const RECIPES: Recipe[] = [
+  {
+    key: "brittle",
+    shortLabel: "Recipe B",
+    label: "Intended Fast-Failure Cell",
+    color: "#f97316",
+    predictionColor: "#fdba74",
+    failureCycle: 300,
+    kneeStart: 190,
+    kneeCapacity: 91,
+    endFloor: 58,
+    noiseAmplitude: 0.75,
+  },
+  {
+    key: "baseline",
+    shortLabel: "Recipe A",
+    label: "Standard Commercial Baseline",
+    color: "#22c55e",
+    predictionColor: "#86efac",
+    failureCycle: 800,
+    kneeStart: 600,
+    kneeCapacity: 88,
+    endFloor: 58,
+    noiseAmplitude: 0.58,
+  },
+  {
+    key: "hero",
+    shortLabel: "Recipe E",
+    label: "AI-Optimized Architecture",
+    color: "#38bdf8",
+    predictionColor: "#93c5fd",
+    failureCycle: 1420,
+    kneeStart: 1080,
+    kneeCapacity: 86,
+    endFloor: 60,
+    noiseAmplitude: 0.48,
+  },
+];
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+const generateSeries = (recipe: Recipe, isPrediction: boolean) => {
+  return Array.from({ length: 161 }, (_, index) => {
+    const cycle = (index / 160) * 1600;
+    const preKneeSlope = (100 - recipe.kneeCapacity) / recipe.kneeStart;
+    let capacity: number;
+
+    if (cycle <= recipe.kneeStart) {
+      capacity = 100 - preKneeSlope * cycle;
+    } else {
+      const kneeProgress = clamp((cycle - recipe.kneeStart) / (recipe.failureCycle - recipe.kneeStart), 0, 1.3);
+      const tailDrop = (recipe.kneeCapacity - recipe.endFloor) * Math.pow(kneeProgress, 2.45);
+      capacity = recipe.kneeCapacity - tailDrop;
+    }
+
+    const ratio = cycle / Math.max(recipe.failureCycle, 1);
+    const baseNoise = Math.sin(index * 0.92 + recipe.failureCycle * 0.01) * recipe.noiseAmplitude;
+    const microNoise = Math.cos(index * 2.35 + recipe.kneeStart * 0.013) * (recipe.noiseAmplitude * 0.38);
+    const lateStress = cycle > recipe.kneeStart ? Math.sin(index * 1.4) * recipe.noiseAmplitude * 0.55 : 0;
+
+    const noise = isPrediction
+      ? Math.sin(index * 0.45 + recipe.failureCycle * 0.004) * 0.16 - Math.pow(clamp(ratio, 0, 1), 2) * 0.22
+      : baseNoise + microNoise + lateStress - Math.pow(clamp(ratio, 0, 1.1), 1.8) * 0.35;
+
+    return {
+      x: cycle,
+      y: clamp(capacity + noise, 56, 101),
+    };
+  });
+};
+
 export default function LineChart({ className, detailed = false }: LineChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -27,12 +116,11 @@ export default function LineChart({ className, detailed = false }: LineChartProp
       const width = rect.width;
       const height = rect.height;
       const padding = detailed
-        ? { top: 44, right: 28, bottom: 64, left: 68 }
-        : { top: 34, right: 24, bottom: 54, left: 58 };
+        ? { top: 76, right: 36, bottom: 68, left: 72 }
+        : { top: 54, right: 24, bottom: 54, left: 58 };
       const chartWidth = width - padding.left - padding.right;
       const chartHeight = height - padding.top - padding.bottom;
       const xMax = 1600;
-      const failurePoint = 1420;
       const yMin = 58;
       const yMax = 102;
 
@@ -44,29 +132,16 @@ export default function LineChart({ className, detailed = false }: LineChartProp
         return padding.top + (1 - scaled) * chartHeight;
       };
 
-      const generateData = (isPrediction = false) => {
-        return Array.from({ length: 121 }, (_, index) => {
-          const cycle = (index / 120) * xMax;
-          const ratio = cycle / xMax;
-          const baseline = 100 - 4.5 * ratio - 5.5 * Math.pow(ratio, 1.4) - 24 * Math.pow(ratio, 3.15);
-          const deviation = isPrediction
-            ? 0.8 * Math.sin(ratio * 6.2) - 0.6 * Math.pow(ratio, 1.8)
-            : -1.4 - 1.1 * Math.sin(ratio * 7.4 + 0.35) - 2.1 * Math.pow(ratio, 1.55) + 0.9 * Math.exp(-Math.pow((ratio - 0.72) / 0.12, 2));
-
-          return {
-            x: cycle,
-            y: baseline + deviation,
-          };
-        });
-      };
-
-      const predictionData = generateData(true);
-      const realData = generateData(false);
+      const datasets = RECIPES.map((recipe) => ({
+        recipe,
+        prediction: generateSeries(recipe, true),
+        real: generateSeries(recipe, false),
+      }));
 
       ctx.clearRect(0, 0, width, height);
 
       const background = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
-      background.addColorStop(0, "rgba(255,255,255,0.02)");
+      background.addColorStop(0, "rgba(255,255,255,0.025)");
       background.addColorStop(1, "rgba(255,255,255,0)");
       ctx.fillStyle = background;
       ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
@@ -79,7 +154,7 @@ export default function LineChart({ className, detailed = false }: LineChartProp
         ctx.moveTo(padding.left, y);
         ctx.lineTo(width - padding.right, y);
       });
-      [0, 350, 700, 1050, 1420].forEach((value) => {
+      [0, 300, 800, 1200, 1420].forEach((value) => {
         const x = mapX(value);
         ctx.moveTo(x, padding.top);
         ctx.lineTo(x, height - padding.bottom);
@@ -104,7 +179,7 @@ export default function LineChart({ className, detailed = false }: LineChartProp
 
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
-      [0, 700, 1420].forEach((value) => {
+      [0, 300, 800, 1420].forEach((value) => {
         ctx.fillText(`${value}`, mapX(value), height - padding.bottom + 10);
       });
 
@@ -120,16 +195,16 @@ export default function LineChart({ className, detailed = false }: LineChartProp
       ctx.fillText("Capacity Retention %", 0, 0);
       ctx.restore();
 
-      const drawLine = (data: { x: number; y: number }[], color: string, dashed = false) => {
+      const drawLine = (data: Point[], color: string, dashed: boolean, widthMultiplier = 1) => {
         ctx.save();
         ctx.beginPath();
         ctx.strokeStyle = color;
-        ctx.lineWidth = detailed ? 3.4 : 2.8;
+        ctx.lineWidth = (detailed ? 3.2 : 2.5) * widthMultiplier;
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
-        ctx.shadowColor = color;
-        ctx.shadowBlur = detailed ? 16 : 10;
-        ctx.setLineDash(dashed ? [8, 7] : []);
+        ctx.shadowColor = dashed ? "transparent" : color;
+        ctx.shadowBlur = dashed ? 0 : detailed ? 14 : 8;
+        ctx.setLineDash(dashed ? [8, 6] : []);
 
         data.forEach((point, index) => {
           const px = mapX(point.x);
@@ -146,67 +221,87 @@ export default function LineChart({ className, detailed = false }: LineChartProp
         ctx.restore();
       };
 
-      drawLine(predictionData, "#60a5fa", true);
-      drawLine(realData, "#22c55e");
+      datasets.forEach(({ recipe, prediction, real }) => {
+        drawLine(prediction, recipe.predictionColor, true, 0.92);
+        drawLine(real, recipe.color, false, recipe.key === "hero" ? 1.04 : 1);
+      });
 
-      const failureX = mapX(failurePoint);
-      const predictedFailure = predictionData.reduce((closest, point) => {
-        return Math.abs(point.x - failurePoint) < Math.abs(closest.x - failurePoint) ? point : closest;
-      }, predictionData[0]);
+      datasets.forEach(({ recipe, prediction }) => {
+        const markerPoint = prediction.reduce((closest, point) => {
+          return Math.abs(point.x - recipe.failureCycle) < Math.abs(closest.x - recipe.failureCycle) ? point : closest;
+        }, prediction[0]);
 
-      ctx.save();
-      ctx.beginPath();
-      ctx.strokeStyle = "rgba(248, 113, 113, 0.9)";
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([6, 6]);
-      ctx.moveTo(failureX, padding.top + 8);
-      ctx.lineTo(failureX, height - padding.bottom);
-      ctx.stroke();
-      ctx.restore();
+        const failureX = mapX(recipe.failureCycle);
 
-      ctx.beginPath();
-      ctx.fillStyle = "#f87171";
-      ctx.arc(failureX, mapY(predictedFailure.y), detailed ? 4.5 : 3.5, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = `${recipe.predictionColor}80`;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([5, 5]);
+        ctx.moveTo(failureX, padding.top + 8);
+        ctx.lineTo(failureX, height - padding.bottom);
+        ctx.stroke();
+        ctx.restore();
 
-      const labelWidth = detailed ? 154 : 112;
-      const labelX = Math.min(Math.max(failureX - labelWidth / 2, padding.left + 4), width - padding.right - labelWidth - 4);
-      const labelY = padding.top + 10;
+        ctx.beginPath();
+        ctx.fillStyle = recipe.predictionColor;
+        ctx.arc(failureX, mapY(markerPoint.y), detailed ? 3.8 : 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
-      ctx.fillStyle = "rgba(127, 29, 29, 0.88)";
-      ctx.fillRect(labelX, labelY, labelWidth, detailed ? 42 : 32);
-      ctx.strokeStyle = "rgba(248, 113, 113, 0.5)";
-      ctx.strokeRect(labelX, labelY, labelWidth, detailed ? 42 : 32);
-      ctx.fillStyle = "rgba(255,255,255,0.95)";
-      ctx.font = `${detailed ? 11.5 : 10}px Inter, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(detailed ? "AI Predicted Failure Point" : "Predicted Failure", labelX + labelWidth / 2, labelY + 13);
-      ctx.fillStyle = "rgba(254, 202, 202, 0.92)";
-      ctx.fillText("Cycle 1,420", labelX + labelWidth / 2, labelY + (detailed ? 29 : 21));
-
-      ctx.setLineDash([]);
-      ctx.lineWidth = 2;
-      ctx.font = `${detailed ? 12 : 11}px Inter, sans-serif`;
-      ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
+      ctx.font = `${detailed ? 11.5 : 10.5}px Inter, sans-serif`;
       ctx.textAlign = "left";
       ctx.textBaseline = "middle";
 
-      ctx.beginPath();
-      ctx.strokeStyle = "#60a5fa";
-      ctx.setLineDash([8, 7]);
-      ctx.moveTo(padding.left + 6, padding.top - 18);
-      ctx.lineTo(padding.left + 34, padding.top - 18);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillText("AI Prediction", padding.left + 42, padding.top - 18);
+      const legendStartX = padding.left + 6;
+      const legendStartY = padding.top - (detailed ? 42 : 28);
 
-      ctx.beginPath();
-      ctx.strokeStyle = "#22c55e";
-      ctx.moveTo(padding.left + 150, padding.top - 18);
-      ctx.lineTo(padding.left + 178, padding.top - 18);
-      ctx.stroke();
-      ctx.fillText("Real World", padding.left + 186, padding.top - 18);
+      RECIPES.forEach((recipe, index) => {
+        const y = legendStartY + index * (detailed ? 18 : 14);
+
+        ctx.beginPath();
+        ctx.strokeStyle = recipe.predictionColor;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([8, 6]);
+        ctx.moveTo(legendStartX, y);
+        ctx.lineTo(legendStartX + 20, y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.strokeStyle = recipe.color;
+        ctx.setLineDash([]);
+        ctx.moveTo(legendStartX + 26, y);
+        ctx.lineTo(legendStartX + 46, y);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.84)";
+        ctx.fillText(`${recipe.shortLabel}: ${recipe.label}`, legendStartX + 54, y);
+      });
+
+      if (detailed) {
+        ctx.font = "11px Inter, sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+
+        const annotationPositions = [
+          { x: 322, y: 63, text: "Predicted fail ~300" },
+          { x: 822, y: 69, text: "Predicted fail ~800" },
+          { x: 1430, y: 76, text: "Predicted fail ~1,420" },
+        ];
+
+        annotationPositions.forEach((annotation, index) => {
+          const x = mapX(annotation.x);
+          const y = mapY(annotation.y);
+          const boxWidth = index === 2 ? 126 : 118;
+
+          ctx.fillStyle = "rgba(8, 12, 20, 0.88)";
+          ctx.fillRect(x - 8, y - 14, boxWidth, 24);
+          ctx.strokeStyle = `${RECIPES[index].predictionColor}66`;
+          ctx.strokeRect(x - 8, y - 14, boxWidth, 24);
+          ctx.fillStyle = "rgba(255,255,255,0.92)";
+          ctx.fillText(annotation.text, x + 2, y - 2);
+        });
+      }
     };
 
     drawChart();
@@ -218,8 +313,8 @@ export default function LineChart({ className, detailed = false }: LineChartProp
   }, [detailed]);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className={className ?? (detailed ? "w-full h-full min-h-[420px]" : "w-full h-full min-h-[250px]")}
       style={{ width: "100%", height: "100%" }}
     />

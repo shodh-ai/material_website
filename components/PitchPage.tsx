@@ -179,6 +179,26 @@ export default function PitchPage() {
               </div>
             </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="max-w-5xl mx-auto mb-16"
+            >
+              <div className="p-4 md:p-6 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden">
+                <div className="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black">
+                  <iframe
+                    src="https://www.youtube.com/embed/8O-aKNmuNk8"
+                    title="Shodh AI Video"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </motion.div>
+
             {/* Content Sections from Chapter 1-7 */}
             <div className="max-w-5xl mx-auto space-y-16">
               
@@ -597,7 +617,7 @@ export default function PitchPage() {
                     
                     <div className="pt-4 border-t border-white/10 mt-auto text-center">
                       <p className="text-white/80 text-sm font-medium leading-relaxed">
-                        Actual Wet-Lab Physical Results matched AI's Blind Prediction.
+                        The model didn't just find the best battery; it accurately predicted the exact physical failure point of all 5 diverse architectural recipes.
                       </p>
                     </div>
                   </div>
@@ -632,7 +652,7 @@ export default function PitchPage() {
                           <p className="text-xs text-white/45 uppercase tracking-[0.22em] mb-3">Expanded Data View</p>
                           <h3 className="text-2xl md:text-4xl font-light text-white mb-3">The Real-World Test</h3>
                           <p className="text-white/60 max-w-3xl leading-relaxed">
-                            AI prediction versus wet-lab result across cycle life, with the predicted failure point called out at Cycle 1,420.
+                            Three representative curves from the 5-recipe sweep show the full physical landscape: an intended fast-failure cell, a commercial baseline, and the AI-optimized architecture, with dotted predictions tracking the wet-lab knee and failure point in each case.
                           </p>
                         </div>
 
