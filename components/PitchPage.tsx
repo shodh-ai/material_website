@@ -910,6 +910,34 @@ export default function PitchPage() {
                 </div>
               </div>
             </div>
+
+            <div className="max-w-4xl mx-auto p-8 rounded-2xl bg-white/[0.02] border border-white/5 mt-8">
+              <div className="mb-6">
+                <div className="inline-block px-3 py-1 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-light tracking-[0.2em] uppercase mb-4">
+                  FAQ
+                </div>
+                <h3 className="text-2xl md:text-3xl font-light text-white tracking-tight">
+                  Domain hopping?
+                </h3>
+              </div>
+              <div className="rounded-xl bg-white/5 border border-white/10 p-6 space-y-4">
+                <p className="text-sm uppercase tracking-[0.16em] text-white/40 font-medium">
+                  Concern
+                </p>
+                <p className="text-white/70 font-light leading-relaxed">
+                  Batteries and bioreactors look like different sciences, so the fear is that we spread capital and focus too thin.
+                </p>
+                <p className="text-sm uppercase tracking-[0.16em] text-white/40 font-medium pt-2">
+                  Answer
+                </p>
+                <p className="text-white/80 font-light leading-relaxed">
+                  We are not modeling chemistry first. We are modeling <span className="text-white font-medium">mesoscale physics</span>: flow, diffusion, and heat transfer through porous 3D structures. Whether lithium moves through a battery scaffold or enzymes move through a continuous-flow reactor, the governing math is the same. <span className="text-white font-medium">Project Skanda learns those universal PDE mechanics</span>; changing domains mostly means changing boundary conditions.
+                </p>
+                <p className="text-white/90 font-medium leading-relaxed">
+                  To a chemist, a battery and a bioreactor are different worlds. To our physics engine, they are the same equation with different inputs.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </AnimatePresence>
       </main>
