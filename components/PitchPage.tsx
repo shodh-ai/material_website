@@ -736,7 +736,7 @@ export default function PitchPage() {
                   The Shodh AI Endgame
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-4 tracking-tight">
-                  The Future of <span className="font-normal">Software-Defined Manufacturing</span>
+                  <span className="font-normal">AI-defined manufacturing</span>
                 </h2>
                 <p className="text-lg text-white/60 font-light leading-relaxed max-w-4xl mb-12">
                   Once our Multi-Scale Foundation Model maps the physics of scale-up, we stop just optimizing old industries. We unlock the impossible.

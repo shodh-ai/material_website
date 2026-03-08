@@ -74,24 +74,80 @@ const RECIPES: Recipe[] = [
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
+const lerp = (start: number, end: number, progress: number) => start + (end - start) * progress;
+
+const getPredictedCapacity = (recipe: Recipe, cycle: number) => {
+  const failureCycle = recipe.predictedFailureCycle;
+  const ratio = clamp(cycle / Math.max(failureCycle, 1), 0, 1);
+
+  if (recipe.key === "brittle") {
+    if (cycle <= 130) return 100 - (6 / 130) * cycle;
+    if (cycle <= 220) {
+      const progress = (cycle - 130) / 90;
+      return lerp(94, 82, Math.pow(progress, 1.15));
+    }
+    const progress = clamp((cycle - 220) / 80, 0, 1);
+    return lerp(82, 60, Math.pow(progress, 1.55));
+  }
+
+  if (recipe.key === "baseline") {
+    if (cycle <= 560) return 100 - (11 / 560) * cycle;
+    const progress = clamp((cycle - 560) / 240, 0, 1);
+    return lerp(89, 60, Math.pow(progress, 1.9));
+  }
+
+  if (cycle <= 180) return 100 - (5 / 180) * cycle;
+  if (cycle <= 980) {
+    const progress = (cycle - 180) / 800;
+    return lerp(95, 86, Math.pow(progress, 1.05));
+  }
+  const progress = clamp((cycle - 980) / 440, 0, 1);
+  return lerp(86, 60, Math.pow(progress, 1.82));
+};
+
+const getActualCapacity = (recipe: Recipe, cycle: number) => {
+  const failureCycle = recipe.actualFailureCycle;
+
+  if (recipe.key === "brittle") {
+    if (cycle <= 150) return 100 - (4 / 150) * cycle;
+    if (cycle <= 235) {
+      const progress = (cycle - 150) / 85;
+      return lerp(96, 88, Math.pow(progress, 1.35));
+    }
+    const progress = clamp((cycle - 235) / Math.max(failureCycle - 235, 1), 0, 1);
+    return lerp(88, 60, Math.pow(progress, 0.5));
+  }
+
+  if (recipe.key === "baseline") {
+    if (cycle <= 590) return 100 - (10.5 / 590) * cycle;
+    const progress = clamp((cycle - 590) / Math.max(failureCycle - 590, 1), 0, 1);
+    return lerp(89.5, 60, Math.pow(progress, 2.35));
+  }
+
+  if (cycle <= 60) {
+    const progress = cycle / 60;
+    return lerp(100, 93.2, Math.pow(progress, 0.72));
+  }
+  if (cycle <= 520) {
+    const progress = (cycle - 60) / 460;
+    return lerp(93.2, 90.4, Math.pow(progress, 1.08));
+  }
+  if (cycle <= 1120) {
+    const progress = (cycle - 520) / 600;
+    return lerp(90.4, 86.8, Math.pow(progress, 0.9));
+  }
+  const progress = clamp((cycle - 1120) / Math.max(failureCycle - 1120, 1), 0, 1);
+  return lerp(86.8, 60, Math.pow(progress, 1.92));
+};
+
 const generateSeries = (recipe: Recipe, isPrediction: boolean) => {
   const failureCycle = isPrediction ? recipe.predictedFailureCycle : recipe.actualFailureCycle;
-  const kneeStart = isPrediction ? recipe.predictedKneeStart : recipe.actualKneeStart;
-  const kneeCapacity = isPrediction ? recipe.predictedKneeCapacity : recipe.actualKneeCapacity;
   const pointCount = Math.max(48, Math.round((failureCycle / 1600) * 140));
 
   return Array.from({ length: pointCount + 1 }, (_, index) => {
     const cycle = (index / pointCount) * failureCycle;
-    const preKneeSlope = (100 - kneeCapacity) / kneeStart;
-    let capacity: number;
-
-    if (cycle <= kneeStart) {
-      capacity = 100 - preKneeSlope * cycle;
-    } else {
-      const kneeProgress = clamp((cycle - kneeStart) / Math.max(failureCycle - kneeStart, 1), 0, 1);
-      const tailDrop = (kneeCapacity - 60) * Math.pow(kneeProgress, isPrediction ? 2.18 : 2.42);
-      capacity = kneeCapacity - tailDrop;
-    }
+    const kneeStart = isPrediction ? recipe.predictedKneeStart : recipe.actualKneeStart;
+    const capacity = isPrediction ? getPredictedCapacity(recipe, cycle) : getActualCapacity(recipe, cycle);
 
     const ratio = cycle / Math.max(failureCycle, 1);
     const deviationBias = recipe.key === "hero"
@@ -102,10 +158,29 @@ const generateSeries = (recipe: Recipe, isPrediction: boolean) => {
 
     const noise = isPrediction
       ? 0
-      : Math.sin(index * 0.9 + failureCycle * 0.012) * recipe.noiseAmplitude
-        + Math.cos(index * 2.6 + kneeStart * 0.01) * (recipe.noiseAmplitude * 0.42)
-        + (cycle > kneeStart ? Math.sin(index * 1.45) * recipe.noiseAmplitude * 0.45 : 0)
-        + deviationBias * Math.pow(clamp(ratio, 0, 1), 1.4);
+      : (() => {
+          const sharedNoise = Math.sin(index * 0.9 + failureCycle * 0.012) * recipe.noiseAmplitude
+            + Math.cos(index * 2.6 + kneeStart * 0.01) * (recipe.noiseAmplitude * 0.42)
+            + (cycle > kneeStart ? Math.sin(index * 1.45) * recipe.noiseAmplitude * 0.45 : 0);
+
+          if (recipe.key === "brittle") {
+            const cliffBoost = cycle > 220 ? (cycle - 220) / Math.max(failureCycle - 220, 1) : 0;
+            return sharedNoise * 0.52 + cliffBoost * 0.8;
+          }
+
+          if (recipe.key === "baseline") {
+            const sharperKnee = cycle > 650 ? Math.pow((cycle - 650) / Math.max(failureCycle - 650, 1), 1.35) * 0.65 : 0;
+            return sharedNoise * 0.46 + sharperKnee + deviationBias * Math.pow(clamp(ratio, 0, 1), 1.25) * 0.35;
+          }
+
+          const earlyPenalty = cycle <= 120 ? -1.4 * (1 - cycle / 120) : 0;
+          const crossoverLift = cycle > 360 && cycle < 1080
+            ? Math.sin(((cycle - 360) / 720) * Math.PI) * 1.75
+            : 0;
+          const finalStress = cycle > 1120 ? Math.pow((cycle - 1120) / Math.max(failureCycle - 1120, 1), 1.4) * 0.55 : 0;
+
+          return sharedNoise * 0.4 + earlyPenalty + crossoverLift - finalStress;
+        })();
 
     return {
       x: cycle,
