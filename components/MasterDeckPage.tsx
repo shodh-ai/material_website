@@ -126,7 +126,31 @@ export default function MasterDeckPage() {
   const colors = colorMap[active.color];
 
   return (
-    <div className="min-h-screen bg-[#060606] text-white" style={{ cursor: "none" }}>
+    <div className="min-h-screen bg-[#060606] text-white word-hover-effect" style={{ cursor: "none" }}>
+      <style jsx global>{`
+        .word-hover-effect p,
+        .word-hover-effect h1,
+        .word-hover-effect h2,
+        .word-hover-effect h3,
+        .word-hover-effect li,
+        .word-hover-effect span {
+          word-spacing: 0.15em;
+        }
+        .word-hover-effect p:hover,
+        .word-hover-effect h1:hover,
+        .word-hover-effect h2:hover,
+        .word-hover-effect h3:hover,
+        .word-hover-effect li:hover,
+        .word-hover-effect span:hover {
+          background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+          background-size: 200% 100%;
+          animation: wordSweep 0.6s ease-out;
+        }
+        @keyframes wordSweep {
+          0% { background-position: 0% 0%; }
+          100% { background-position: 100% 0%; }
+        }
+      `}</style>
       {/* Cursor glow */}
       <div
         className="pointer-events-none fixed z-[9999] transition-transform duration-75"
@@ -622,19 +646,25 @@ export default function MasterDeckPage() {
           {/* ── THE UNIT ECONOMICS EQUATION ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
             <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">The Core Equation — Per Asset</p>
-            <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
+            <div className="relative grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
+              {/* Arrow between columns */}
+              <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <svg width="80" height="24" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 12H78M78 12L68 2M78 12L68 22" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <div className="p-10 md:p-14 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
                 <p className="text-white/60 text-sm uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
                 <div className="space-y-3">
-                  <p className="text-[64px] md:text-[90px] font-bold text-white/10 line-through leading-none">$500M</p>
-                  <p className="text-[48px] md:text-[64px] font-bold text-white/10 line-through leading-none">7 Years</p>
+                  <p className="text-[64px] md:text-[90px] font-bold text-white/25 line-through leading-none">$500M</p>
+                  <p className="text-[48px] md:text-[64px] font-bold text-white/25 line-through leading-none">7 Years</p>
                 </div>
                 <p className="text-white/65 font-light mt-6 text-base leading-relaxed">
                   Failed syntheses, steel reactor fires, batch inconsistency, repeated physical builds. Patent life ticking down with every wasted month.
                 </p>
               </div>
               <div className="p-10 md:p-14 bg-emerald-950/20 flex flex-col justify-between">
-                <p className="text-emerald-400/70 text-sm uppercase tracking-wider mb-6">Shodh AI: LPM + Autonomous Lab</p>
+                <p className="text-emerald-400/70 text-sm uppercase tracking-wider mb-6">with Shodh AI: LPM + Autonomous Lab</p>
                 <div className="space-y-3">
                   <p className="text-[64px] md:text-[90px] font-bold text-emerald-400 leading-none">$5M</p>
                   <p className="text-[48px] md:text-[64px] font-bold text-emerald-300 leading-none">3 Months</p>
@@ -669,7 +699,7 @@ export default function MasterDeckPage() {
                 <div className="bg-[#060606] px-5 py-3">Industry Vertical</div>
                 <div className="bg-[#060606] px-5 py-3">The Bottleneck Being Solved</div>
                 <div className="bg-[#060606] px-5 py-3">Legacy Cost &amp; Time</div>
-                <div className="bg-[#060606] px-5 py-3">Shodh AI</div>
+                <div className="bg-[#060606] px-5 py-3">with Shodh AI</div>
                 <div className="bg-[#060606] px-5 py-3">Economic Value Created (per asset)</div>
               </div>
               {[
@@ -735,11 +765,9 @@ export default function MasterDeckPage() {
                 {
                   num: "01",
                   title: "Compute & Validation",
-                  sub: "SaaS + NRE",
+                  sub: "NRE",
                   label: "The Foundation",
-                  amount: "$5M – $10M",
-                  amountColor: "text-white",
-                  desc: "We charge a $5M–$10M upfront compute and non-recurring engineering (NRE) fee to our Anchor Partners to run their specific bottlenecks through our Large Physics Model. Immediate cash flow, zero customer acquisition cost.",
+                  desc: "Charge upfront compute and non-recurring engineering (NRE) fee to our Anchor Partners to run their specific bottlenecks through our Large Physics Model. Immediate cash flow, zero customer acquisition cost.",
                   model: "Upfront contract per engagement",
                 },
                 {
@@ -747,9 +775,7 @@ export default function MasterDeckPage() {
                   title: "IP Co-Ownership & Milestones",
                   sub: "The Biobucks Model",
                   label: "The Multiplier",
-                  amount: "$50M – $200M",
-                  amountColor: "text-blue-300",
-                  desc: "We do not just sell software; we co-own the physical discoveries. For every novel alloy, molecule, or battery architecture the AI generates, Shodh AI secures $50M–$200M in clinical/commercial milestone payouts and exclusive licensing fees.",
+                  desc: "We do not just sell software; we co-own the physical discoveries. For every novel alloy, molecule, or battery architecture the AI generates, Shodh AI secures clinical/commercial milestone payouts and exclusive licensing fees.",
                   model: "Co-IP + milestone payments",
                 },
                 {
@@ -757,26 +783,21 @@ export default function MasterDeckPage() {
                   title: "The Programmable Matter API",
                   sub: "Royalties",
                   label: "The Endgame",
-                  amount: "2–5% royalty",
-                  amountColor: "text-emerald-300",
-                  desc: "True Zero-Shot Manufacturing. Shodh AI transitions to a platform model. We take a 2–5% royalty on every physical product globally manufactured using a Shodh AI-generated CAD and fluid-dynamic blueprint.",
+                  desc: "True Zero-Shot Manufacturing. Shodh AI transitions to a platform model. We take royalty on every physical product globally manufactured using a Shodh AI-generated CAD and fluid-dynamic blueprint.",
                   model: "Per-unit software royalty",
                 },
               ].map((h, i) => (
                 <div key={i} className={`p-8 md:p-10 bg-[#060606] ${i > 0 ? "border-t border-white/5" : ""}`}>
-                  <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start">
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
                     <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
                       <span className="text-white/20 font-mono text-4xl md:text-5xl font-bold leading-none">{h.num}</span>
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-white/55 text-xs uppercase tracking-wider mb-1">{h.label}</p>
                       <h3 className="text-xl md:text-2xl font-light text-white mb-0.5">{h.title}</h3>
                       <p className="text-white/45 text-sm italic mb-3">{h.sub}</p>
-                      <p className="text-white/65 font-light text-base leading-relaxed max-w-2xl">{h.desc}</p>
-                    </div>
-                    <div className="md:text-right shrink-0">
-                      <p className={`text-2xl md:text-3xl font-light ${h.amountColor}`}>{h.amount}</p>
-                      <p className="text-white/50 text-xs mt-1">{h.model}</p>
+                      <p className="text-white/65 font-light text-base leading-relaxed max-w-2xl mb-4">{h.desc}</p>
+                      <p className="text-white/50 text-sm">{h.model}</p>
                     </div>
                   </div>
                 </div>
@@ -1001,7 +1022,7 @@ export default function MasterDeckPage() {
               title: "IP Monopoly",
               sub: "Proper GTM scale",
               points: [
-                "No more embedded engineers. Model operates autonomously.",
+                "No more forward deployed engineers. Model operates autonomously.",
                 "Deploy Zero-Shot Manufacturing software globally — thousands of factories.",
                 "From co-creation → pure, high-margin IP and licensing monopoly.",
               ],
