@@ -100,6 +100,7 @@ export default function MasterDeckPage() {
   const [expandedAlphaFoldView, setExpandedAlphaFoldView] = useState<"chart" | "matrices" | null>(null);
   const [activeVision, setActiveVision] = useState(0);
   const [displayedPrompt, setDisplayedPrompt] = useState("");
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const typingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -115,11 +116,43 @@ export default function MasterDeckPage() {
     return () => { if (typingRef.current) clearInterval(typingRef.current); };
   }, [activeVision]);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const active = visionItems[activeVision];
   const colors = colorMap[active.color];
 
   return (
-    <div className="min-h-screen bg-[#060606] text-white">
+    <div className="min-h-screen bg-[#060606] text-white" style={{ cursor: "none" }}>
+      {/* Cursor glow */}
+      <div
+        className="pointer-events-none fixed z-[9999] transition-transform duration-75"
+        style={{
+          left: mousePos.x,
+          top: mousePos.y,
+          transform: "translate(-50%, -50%)",
+          width: 480,
+          height: 480,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.018) 30%, transparent 70%)",
+        }}
+      />
+      {/* Custom cursor dot */}
+      <div
+        className="pointer-events-none fixed z-[9999]"
+        style={{
+          left: mousePos.x,
+          top: mousePos.y,
+          transform: "translate(-50%, -50%)",
+          width: 6,
+          height: 6,
+          borderRadius: "50%",
+          background: "rgba(255,255,255,0.7)",
+        }}
+      />
       {/* Header */}
       <header className="border-b border-white/5 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -154,18 +187,37 @@ export default function MasterDeckPage() {
             <span className="text-white/50">200,000 GPUs.</span><br />
             <span className="font-normal">Built in India. For the World.</span>
           </h2>
-          <div className="space-y-6 max-w-2xl">
+          <div className="space-y-8 max-w-3xl">
             {[
               "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
               "Mandate to build AI for Science — the foundation model for the physical world.",
-              "Building in partnership with and support of DeepMind, Google, and Nvidia.",
-              "A ragtag team — founder from Cambridge — doing what we love: making science make sense.",
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-white/50 mt-2 shrink-0" />
-                <p className="text-white/65 font-light leading-relaxed">{text}</p>
+                <div className="w-2 h-2 rounded-full bg-white/50 mt-2.5 shrink-0" />
+                <p className="text-white/70 font-light leading-relaxed text-lg md:text-xl">{text}</p>
               </div>
             ))}
+          </div>
+
+          {/* Partner logos */}
+          <div className="mt-14">
+            <p className="text-xs tracking-[0.25em] uppercase text-white/30 mb-6">Built with</p>
+            <div className="flex flex-wrap items-center gap-4">
+              {[
+                { name: "Google DeepMind", color: "#4285F4" },
+                { name: "Google", color: "#34A853" },
+                { name: "NVIDIA", color: "#76B900" },
+                { name: "IndiaAI", color: "#FF9933" },
+              ].map((p) => (
+                <div
+                  key={p.name}
+                  className="px-5 py-2.5 rounded-lg border border-white/8 bg-white/[0.03] text-sm font-light tracking-wide"
+                  style={{ color: p.color, borderColor: `${p.color}25` }}
+                >
+                  {p.name}
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </section>
@@ -374,9 +426,8 @@ export default function MasterDeckPage() {
 
               <p className="text-white/45 font-light text-sm leading-relaxed mb-5 flex-grow">{s.desc}</p>
 
-              <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"} flex items-start justify-between gap-4`}>
-                <p className={`text-xs font-light leading-relaxed ${s.gapColor} flex-1`}>{s.gap}</p>
-                <span className={`text-xs font-medium shrink-0 ${i === 2 ? "text-rose-400" : "text-white/40"}`}>{s.time}</span>
+              <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"}`}>
+                <p className={`text-xs font-light leading-relaxed ${s.gapColor}`}>{s.gap}</p>
               </div>
             </motion.div>
           ))}
@@ -1083,21 +1134,18 @@ export default function MasterDeckPage() {
                 <em className="text-white/90">To perish in arrogant presumptions is our motto.</em>
               </p>
               <p className="text-white/70 leading-relaxed">
-                We'd rather fail trying to build a Type 1 Civilization than succeed at building another SaaS app.
-              </p>
-              <p className="text-white/70 leading-relaxed">
                 If you believe that the next Trillion-Dollar company will be built in the physical world, not the digital one...
               </p>
               <p className="text-white text-lg font-medium">Welcome to Shodh AI.</p>
             </div>
 
             <div className="mt-10 pt-6 border-t border-white/10 flex items-center gap-6">
-              <div className="w-14 h-16 rounded-xl overflow-hidden border border-white/10 shrink-0">
+              <div className="w-20 h-24 rounded-xl overflow-hidden border border-white/10 shrink-0">
                 <img
                   src="/Arastu_Sharma_l.jpeg"
                   alt="Arastu, CEO"
                   className="w-full h-full object-cover"
-                  style={{ objectPosition: "50% 12%" }}
+                  style={{ objectPosition: "50% 5%" }}
                 />
               </div>
               <div>
