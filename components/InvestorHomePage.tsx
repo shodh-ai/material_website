@@ -741,7 +741,7 @@ export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataR
 
                 <motion.div variants={fadeInUp}>
                   <Link
-                    href="/data-room"
+                    href="/insider/data-room"
                     className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-lg sm:rounded-xl bg-white text-gray-900 text-sm sm:text-base md:text-lg font-bold hover:shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all"
                   >
                     <Rocket className="w-4 h-4 sm:w-5 sm:h-5" />

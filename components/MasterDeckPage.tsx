@@ -406,7 +406,7 @@ export default function MasterDeckPage() {
             {
               num: "02",
               stage: "Lab Synthesis",
-              players: ["Radical AI", "Emerald Cloud Lab", "Arcadia Science"],
+              players: ["Lila Science", "Radical AI", "Emerald Cloud Lab", "Arcadia Science"],
               desc: "Autonomous robotic labs synthesize and characterize milligrams of material. Proof of physical existence in weeks.",
               gap: "At milligram scale, the turbulence, heat, and pressure of an industrial reactor simply do not apply. The leap to production is still blind.",
               time: "Weeks",
