@@ -480,54 +480,188 @@ export default function MasterDeckPage() {
         <div className="px-6 max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">07 — Financial TAM</p>
-            <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-20 max-w-3xl">
-              The $500M nightmare.<br /><span className="font-normal">The $5M revolution.</span>
+            <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
+              We don't measure our TAM by the size<br />of manufacturing.{" "}
+              <span className="font-normal">We measure the cost of physical time.</span>
             </h2>
+            <p className="text-white/35 font-light max-w-2xl mb-20">
+              The "Lazy Trillion-Dollar TAM" kills pitches. We calculate the Cost of Inefficiency, Failed R&D, and Time-to-Market Delay across industries — and we capture the arbitrage.
+            </p>
           </motion.div>
-        </div>
 
-        {/* Full-width big number impact */}
-        <div className="px-6 max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="p-12 md:p-16 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between"
-            >
-              <p className="text-white/25 text-xs uppercase tracking-wider mb-8">Legacy CapEx — Biocon Scale-Up</p>
-              <div>
-                <p className="text-[80px] md:text-[110px] font-bold text-white/10 line-through leading-none">$500M</p>
-                <p className="text-[60px] md:text-[80px] font-bold text-white/10 line-through leading-none mt-2">5 Years</p>
+          {/* ── THE UNIT ECONOMICS EQUATION ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">The Core Equation — Per Asset</p>
+            <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
+              <div className="p-10 md:p-14 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
+                <p className="text-white/20 text-xs uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
+                <div className="space-y-3">
+                  <p className="text-[64px] md:text-[90px] font-bold text-white/10 line-through leading-none">$500M</p>
+                  <p className="text-[48px] md:text-[64px] font-bold text-white/10 line-through leading-none">7 Years</p>
+                </div>
+                <p className="text-white/25 font-light mt-6 text-sm leading-relaxed">
+                  Failed syntheses, steel reactor fires, batch inconsistency, repeated physical builds. Patent life ticking down with every wasted month.
+                </p>
               </div>
-              <p className="text-white/30 font-light mt-8 text-sm">Traditional 16-step batch plant. Steel reactors. Enzyme death. Repeated everywhere.</p>
-            </motion.div>
+              <div className="p-10 md:p-14 bg-emerald-950/20 flex flex-col justify-between">
+                <p className="text-emerald-400/40 text-xs uppercase tracking-wider mb-6">Shodh AI: LPM + Autonomous Lab</p>
+                <div className="space-y-3">
+                  <p className="text-[64px] md:text-[90px] font-bold text-emerald-400 leading-none">$5M</p>
+                  <p className="text-[48px] md:text-[64px] font-bold text-emerald-300 leading-none">3 Months</p>
+                </div>
+                <p className="text-emerald-400/40 font-light mt-6 text-sm leading-relaxed">
+                  LPM generates architecture + manufacturing CAD. Autonomous lab validates in weeks. Client receives the blueprint, not a prototype.
+                </p>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="p-12 md:p-16 bg-emerald-950/20 flex flex-col justify-between"
-            >
-              <p className="text-emerald-400/50 text-xs uppercase tracking-wider mb-8">Shodh AI — AI-Designed Micro-Reactor</p>
-              <div>
-                <p className="text-[80px] md:text-[110px] font-bold text-emerald-400 leading-none">$5M</p>
-                <p className="text-[60px] md:text-[80px] font-bold text-emerald-300 leading-none mt-2">6 Months</p>
-              </div>
-              <p className="text-emerald-400/50 font-light mt-8 text-sm">3D-printed continuous-flow Suitcase Factory. AI-sculpted to keep enzymes alive.</p>
-            </motion.div>
-          </div>
+            {/* Value Created row */}
+            <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mt-px">
+              {[
+                { label: "CapEx Saved", value: "$495M", sub: "Direct R&D cost elimination per engagement", color: "text-white" },
+                { label: "Patent Life Recovered", value: "+6.75 yrs", sub: "Patents last 20 years. At $200M/yr profit → $1.35B in new monopoly revenue", color: "text-white" },
+                { label: "Shodh AI Revenue", value: "$5M + 3–5%", sub: "Upfront compute fee + royalty on manufactured product. $50M+ per successful discovery.", color: "text-emerald-300" },
+              ].map((item, i) => (
+                <div key={i} className="bg-[#060606] p-7 md:p-9">
+                  <p className="text-white/20 text-xs uppercase tracking-wider mb-3">{item.label}</p>
+                  <p className={`text-2xl md:text-3xl font-light mb-2 ${item.color}`}>{item.value}</p>
+                  <p className="text-white/35 text-xs font-light leading-relaxed">{item.sub}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-          <div className="mt-12 grid md:grid-cols-4 gap-4">
-            {["Global Pharmaceuticals", "Solid-State Batteries", "Green Chemicals", "Industrial Alloys"].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-white/40 font-light text-sm p-3">
-                <div className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
-                {item}
+          {/* ── THREE HORIZONS ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">Three Business Model Horizons</p>
+            <div className="space-y-px rounded-2xl overflow-hidden border border-white/5">
+              {[
+                {
+                  horizon: "H1",
+                  title: "Compute & Synthesis",
+                  label: "Serviceable Obtainable Market",
+                  tam: "$100B / yr",
+                  tamColor: "text-white",
+                  desc: "Companies paying to run their existing R&D through our LPM and Autonomous Labs. Global R&D spend in heavy industry, materials, and pharma is ~$1.5 Trillion/yr. 70% is wasted on failed physical experiments. We replace that waste with AI compute.",
+                  model: "Contract fees per engagement",
+                },
+                {
+                  horizon: "H2",
+                  title: "IP & Milestone Licensing",
+                  label: "Serviceable Addressable Market",
+                  tam: "$250B / yr",
+                  tamColor: "text-blue-300",
+                  desc: "Shodh AI co-owns the intellectual property. We discover the molecule/alloy, license the patent to Boeing, Pfizer, or Tesla, and receive milestone payouts. The Isomorphic Labs / Schrödinger model: $1B–$3B per asset in biobucks. Replicated across batteries, space, and bio.",
+                  model: "Co-IP + milestone payments",
+                },
+                {
+                  horizon: "H3",
+                  title: "Programmable Matter API",
+                  label: "Total Addressable Market",
+                  tam: "$1T+",
+                  tamColor: "text-emerald-300",
+                  desc: "Every time a localized micro-reactor prints a cancer drug, or a 3D printer builds a hypersonic part using our zero-defect CAD file, our software takes a microscopic royalty — an API call for the physical world. We become the AWS of physical goods.",
+                  model: "Per-unit software royalty",
+                },
+              ].map((h, i) => (
+                <div key={i} className={`p-8 md:p-10 bg-[#060606] ${i > 0 ? "border-t border-white/5" : ""}`}>
+                  <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start">
+                    <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
+                      <span className="text-white/15 font-mono text-4xl md:text-5xl font-bold leading-none">{h.horizon}</span>
+                      <div className="md:hidden w-px h-8 bg-white/5" />
+                    </div>
+                    <div>
+                      <p className="text-white/25 text-xs uppercase tracking-wider mb-1">{h.label}</p>
+                      <h3 className="text-xl md:text-2xl font-light text-white mb-3">{h.title}</h3>
+                      <p className="text-white/45 font-light text-sm leading-relaxed max-w-2xl">{h.desc}</p>
+                    </div>
+                    <div className="md:text-right shrink-0">
+                      <p className={`text-2xl md:text-3xl font-light ${h.tamColor}`}>{h.tam}</p>
+                      <p className="text-white/25 text-xs mt-1">{h.model}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── VALUE COMPRESSION MATRIX ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">Value Compression Matrix</p>
+            <div className="rounded-2xl overflow-hidden border border-white/5">
+              {/* Header */}
+              <div className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5 text-xs text-white/25 uppercase tracking-wider">
+                <div className="bg-[#060606] px-5 py-3">Industry</div>
+                <div className="bg-[#060606] px-5 py-3">Legacy Cost / Time</div>
+                <div className="bg-[#060606] px-5 py-3">Shodh AI</div>
+                <div className="bg-[#060606] px-5 py-3">Economic Value Created</div>
               </div>
-            ))}
-          </div>
-          <p className="text-white/50 font-light mt-4">Apply that CapEx reduction across all four verticals → <span className="text-white">multi-trillion-dollar infrastructure TAM.</span></p>
+              {[
+                {
+                  industry: "Solid-State Batteries",
+                  bottleneck: "Electrolyte that prevents dendrites at scale",
+                  legacy: "$1B / 10 Yrs",
+                  shodh: "$10M / 8 Mo",
+                  value: "$990M saved + 9 yrs early-to-market ($10B+ EV share)",
+                  valueColor: "text-blue-300",
+                },
+                {
+                  industry: "Aerospace & Defense",
+                  bottleneck: "Heat-resistant alloy surviving Mach 15 reentry",
+                  legacy: "$400M / 6 Yrs",
+                  shodh: "$3M / 3 Mo",
+                  value: "$397M saved + instant qualification for next-gen defense contracts",
+                  valueColor: "text-violet-300",
+                },
+                {
+                  industry: "Bio-Manufacturing",
+                  bottleneck: "Continuous-flow micro-reactors for unstable biologics",
+                  legacy: "$800M / 8 Yrs",
+                  shodh: "$8M / 6 Mo",
+                  value: "$792M saved + 7.5 extra patent monopoly years before generics",
+                  valueColor: "text-emerald-300",
+                },
+                {
+                  industry: "Climate Tech (Carbon)",
+                  bottleneck: "Catalyst for economically viable room-temp DAC",
+                  legacy: "$250M / 5 Yrs",
+                  shodh: "$2M / 2 Mo",
+                  value: "$248M saved + unlocks billions in government green tax credits",
+                  valueColor: "text-lime-300",
+                },
+              ].map((row, i) => (
+                <div key={i} className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5">
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-white/80 font-light text-sm">{row.industry}</p>
+                    <p className="text-white/30 text-xs mt-1">{row.bottleneck}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-white/30 font-light text-sm line-through">{row.legacy}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-emerald-400 font-medium text-sm">{row.shodh}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className={`font-light text-sm leading-relaxed ${row.valueColor}`}>{row.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── THE ONE-LINER ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="rounded-2xl border border-white/5 bg-white/[0.015] p-10 md:p-14 text-center">
+              <p className="text-white/25 text-xs uppercase tracking-wider mb-6">The TAM One-Liner</p>
+              <p className="text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-4xl mx-auto">
+                "We do not measure our TAM by the size of the manufacturing sector. We measure our TAM by the{" "}
+                <span className="text-white font-normal">Trillions of dollars of GDP destroyed every year by the speed of physical time.</span>
+                {" "}By turning physical trial-and-error into a compiled software problem, we capture the arbitrage between a{" "}
+                <span className="text-white font-normal">10-year legacy supply chain</span> and a{" "}
+                <span className="text-emerald-300 font-normal">10-day AI generation loop."</span>
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
