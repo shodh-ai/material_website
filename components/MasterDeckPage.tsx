@@ -137,7 +137,7 @@ export default function MasterDeckPage() {
           width: 480,
           height: 480,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.02) 50%, transparent 75%)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.24) 15%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.03) 55%, transparent 75%)",
         }}
       />
       {/* Custom cursor dot */}
@@ -202,19 +202,22 @@ export default function MasterDeckPage() {
           {/* Partner logos */}
           <div className="mt-14">
             <p className="text-xs tracking-[0.25em] uppercase text-white/30 mb-6">Built with</p>
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="flex items-center justify-center h-10 opacity-80 hover:opacity-100 transition-opacity">
-                <img src="/logos/deepmind-logo.svg" alt="DeepMind" className="h-full w-auto" />
-              </div>
-              <div className="flex items-center justify-center h-9 opacity-80 hover:opacity-100 transition-opacity">
-                <img src="/logos/google-logo.svg" alt="Google" className="h-full w-auto" />
-              </div>
-              <div className="flex items-center justify-center h-8 opacity-80 hover:opacity-100 transition-opacity">
-                <img src="/logos/nvidia-logo.svg" alt="NVIDIA" className="h-full w-auto" />
-              </div>
-              <div className="flex items-center justify-center h-8 opacity-80 hover:opacity-100 transition-opacity">
-                <img src="/logos/indiaai-logo.svg" alt="IndiaAI" className="h-full w-auto" />
-              </div>
+            <div className="flex flex-wrap items-center gap-8">
+              {[
+                { src: "/DeepMind_logo.png", alt: "Google DeepMind" },
+                { src: "/logos/google-logo.svg", alt: "Google" },
+                { src: "/demo/nvidia-partner-logo.png", alt: "NVIDIA" },
+                { src: "/india-ai-logo-650x311.png", alt: "IndiaAI" },
+              ].map((logo) => (
+                <div key={logo.alt} className="h-8 flex items-center opacity-55 hover:opacity-80 transition-opacity duration-200">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-full w-auto max-w-[120px] object-contain"
+                    style={{ filter: "brightness(0) invert(1)" }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -340,7 +343,7 @@ export default function MasterDeckPage() {
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Where every molecule<br />goes to die.
           </h2>
-          <p className="text-white/35 font-light max-w-xl mb-20">
+          <p className="text-white/60 font-light max-w-xl mb-20">
             Three sequential stages take a new material from idea to industrial reality. AI has transformed the first two. The third remains completely unsolved.
           </p>
         </motion.div>
@@ -355,7 +358,7 @@ export default function MasterDeckPage() {
         </div>
         <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
           {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
-            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/60" : "text-white/35"}`}>{l}</p>
+            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/80" : "text-white/60"}`}>{l}</p>
           ))}
         </div>
 
@@ -373,8 +376,8 @@ export default function MasterDeckPage() {
               bg: "bg-white/[0.01]",
               numColor: "text-white/5",
               tagBorder: "border-white/8",
-              tagText: "text-white/30",
-              gapColor: "text-white/35",
+              tagText: "text-white/60",
+              gapColor: "text-white/65",
             },
             {
               num: "02",
@@ -387,8 +390,8 @@ export default function MasterDeckPage() {
               bg: "bg-white/[0.01]",
               numColor: "text-white/5",
               tagBorder: "border-white/8",
-              tagText: "text-white/30",
-              gapColor: "text-white/35",
+              tagText: "text-white/60",
+              gapColor: "text-white/65",
             },
             {
               num: "03",
@@ -422,7 +425,7 @@ export default function MasterDeckPage() {
                 ))}
               </div>
 
-              <p className="text-white/45 font-light text-sm leading-relaxed mb-5 flex-grow">{s.desc}</p>
+              <p className="text-white/70 font-light text-base leading-relaxed mb-5 flex-grow">{s.desc}</p>
 
               <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"}`}>
                 <p className={`text-xs font-light leading-relaxed ${s.gapColor}`}>{s.gap}</p>
@@ -611,7 +614,7 @@ export default function MasterDeckPage() {
             <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
               Every wasted year in a lab<br />is a <span className="font-normal">destroyed billion in value.</span>
             </h2>
-            <p className="text-white/35 font-light max-w-2xl mb-20">
+            <p className="text-white/60 font-light max-w-2xl mb-20 text-lg">
               Our market is not the size of manufacturing. It is the R&D capital burned and the patent life lost because the physical world has no compiler. We built the compiler.
             </p>
           </motion.div>
@@ -621,22 +624,22 @@ export default function MasterDeckPage() {
             <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">The Core Equation — Per Asset</p>
             <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
               <div className="p-10 md:p-14 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
-                <p className="text-white/35 text-xs uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
+                <p className="text-white/60 text-sm uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
                 <div className="space-y-3">
                   <p className="text-[64px] md:text-[90px] font-bold text-white/10 line-through leading-none">$500M</p>
                   <p className="text-[48px] md:text-[64px] font-bold text-white/10 line-through leading-none">7 Years</p>
                 </div>
-                <p className="text-white/40 font-light mt-6 text-sm leading-relaxed">
+                <p className="text-white/65 font-light mt-6 text-base leading-relaxed">
                   Failed syntheses, steel reactor fires, batch inconsistency, repeated physical builds. Patent life ticking down with every wasted month.
                 </p>
               </div>
               <div className="p-10 md:p-14 bg-emerald-950/20 flex flex-col justify-between">
-                <p className="text-emerald-400/40 text-xs uppercase tracking-wider mb-6">Shodh AI: LPM + Autonomous Lab</p>
+                <p className="text-emerald-400/70 text-sm uppercase tracking-wider mb-6">Shodh AI: LPM + Autonomous Lab</p>
                 <div className="space-y-3">
                   <p className="text-[64px] md:text-[90px] font-bold text-emerald-400 leading-none">$5M</p>
                   <p className="text-[48px] md:text-[64px] font-bold text-emerald-300 leading-none">3 Months</p>
                 </div>
-                <p className="text-emerald-400/40 font-light mt-6 text-sm leading-relaxed">
+                <p className="text-emerald-400/70 font-light mt-6 text-base leading-relaxed">
                   LPM generates architecture + manufacturing CAD. Autonomous lab validates in weeks. Client receives the blueprint, not a prototype.
                 </p>
               </div>
@@ -649,9 +652,9 @@ export default function MasterDeckPage() {
                 { label: "Patent Life Recovered", value: "+6.75 yrs", sub: "Patents last 20 years. At $200M/yr profit → $1.35B in new monopoly revenue", color: "text-white" },
               ].map((item, i) => (
                 <div key={i} className="bg-[#060606] p-7 md:p-9">
-                  <p className="text-white/35 text-xs uppercase tracking-wider mb-3">{item.label}</p>
+                  <p className="text-white/60 text-sm uppercase tracking-wider mb-3">{item.label}</p>
                   <p className={`text-2xl md:text-3xl font-light mb-2 ${item.color}`}>{item.value}</p>
-                  <p className="text-white/35 text-xs font-light leading-relaxed">{item.sub}</p>
+                  <p className="text-white/60 text-sm font-light leading-relaxed">{item.sub}</p>
                 </div>
               ))}
             </div>
@@ -659,7 +662,7 @@ export default function MasterDeckPage() {
 
           {/* ── VALUE COMPRESSION MATRIX ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Value Compression Matrix</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/60 mb-8">Value Compression Matrix</p>
             <div className="rounded-2xl overflow-hidden border border-white/5">
               {/* Header */}
               <div className="grid grid-cols-[1.1fr_1.4fr_0.9fr_0.9fr_1.4fr] gap-px bg-white/5 text-xs text-white/40 uppercase tracking-wider">
@@ -708,10 +711,10 @@ export default function MasterDeckPage() {
                     <p className="text-white/80 font-light text-sm">{row.industry}</p>
                   </div>
                   <div className="bg-[#060606] px-5 py-5">
-                    <p className="text-white/45 font-light text-xs leading-relaxed">{row.bottleneck}</p>
+                    <p className="text-white/70 font-light text-sm leading-relaxed">{row.bottleneck}</p>
                   </div>
                   <div className="bg-[#060606] px-5 py-5">
-                    <p className="text-white/35 font-light text-sm line-through">{row.legacy}</p>
+                    <p className="text-white/55 font-light text-sm line-through">{row.legacy}</p>
                   </div>
                   <div className="bg-[#060606] px-5 py-5">
                     <p className="text-emerald-400 font-medium text-sm">{row.shodh}</p>
@@ -724,53 +727,56 @@ export default function MasterDeckPage() {
             </div>
           </motion.div>
 
-          {/* ── THREE HORIZONS ── */}
+          {/* ── REVENUE ARCHITECTURE ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Three Business Model Horizons</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/60 mb-8">Revenue Architecture — Path to Value Capture</p>
             <div className="space-y-px rounded-2xl overflow-hidden border border-white/5">
               {[
                 {
-                  horizon: "H1",
-                  title: "Compute & Synthesis",
-                  label: "Serviceable Obtainable Market",
-                  tam: "$100B / yr",
-                  tamColor: "text-white",
-                  desc: "Companies paying to run their existing R&D through our LPM and Autonomous Labs. Global R&D spend in heavy industry, materials, and pharma is ~$1.5 Trillion/yr. 70% is wasted on failed physical experiments. We replace that waste with AI compute.",
-                  model: "Contract fees per engagement",
+                  num: "01",
+                  title: "Compute & Validation",
+                  sub: "SaaS + NRE",
+                  label: "The Foundation",
+                  amount: "$5M – $10M",
+                  amountColor: "text-white",
+                  desc: "We charge a $5M–$10M upfront compute and non-recurring engineering (NRE) fee to our Anchor Partners to run their specific bottlenecks through our Large Physics Model. Immediate cash flow, zero customer acquisition cost.",
+                  model: "Upfront contract per engagement",
                 },
                 {
-                  horizon: "H2",
-                  title: "IP & Milestone Licensing",
-                  label: "Serviceable Addressable Market",
-                  tam: "$250B / yr",
-                  tamColor: "text-blue-300",
-                  desc: "Shodh AI co-owns the intellectual property. We discover the molecule/alloy, license the patent to Boeing, Pfizer, or Tesla, and receive milestone payouts. The Isomorphic Labs / Schrödinger model: $1B–$3B per asset in biobucks. Replicated across batteries, space, and bio.",
+                  num: "02",
+                  title: "IP Co-Ownership & Milestones",
+                  sub: "The Biobucks Model",
+                  label: "The Multiplier",
+                  amount: "$50M – $200M",
+                  amountColor: "text-blue-300",
+                  desc: "We do not just sell software; we co-own the physical discoveries. For every novel alloy, molecule, or battery architecture the AI generates, Shodh AI secures $50M–$200M in clinical/commercial milestone payouts and exclusive licensing fees.",
                   model: "Co-IP + milestone payments",
                 },
                 {
-                  horizon: "H3",
-                  title: "Programmable Matter API",
-                  label: "Total Addressable Market",
-                  tam: "$1T+",
-                  tamColor: "text-emerald-300",
-                  desc: "Every time a localized micro-reactor prints a cancer drug, or a 3D printer builds a hypersonic part using our zero-defect CAD file, our software takes a microscopic royalty — an API call for the physical world. We become the AWS of physical goods.",
+                  num: "03",
+                  title: "The Programmable Matter API",
+                  sub: "Royalties",
+                  label: "The Endgame",
+                  amount: "2–5% royalty",
+                  amountColor: "text-emerald-300",
+                  desc: "True Zero-Shot Manufacturing. Shodh AI transitions to a platform model. We take a 2–5% royalty on every physical product globally manufactured using a Shodh AI-generated CAD and fluid-dynamic blueprint.",
                   model: "Per-unit software royalty",
                 },
               ].map((h, i) => (
                 <div key={i} className={`p-8 md:p-10 bg-[#060606] ${i > 0 ? "border-t border-white/5" : ""}`}>
                   <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start">
                     <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
-                      <span className="text-white/30 font-mono text-4xl md:text-5xl font-bold leading-none">{h.horizon}</span>
-                      <div className="md:hidden w-px h-8 bg-white/5" />
+                      <span className="text-white/20 font-mono text-4xl md:text-5xl font-bold leading-none">{h.num}</span>
                     </div>
                     <div>
-                      <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{h.label}</p>
-                      <h3 className="text-xl md:text-2xl font-light text-white mb-3">{h.title}</h3>
-                      <p className="text-white/45 font-light text-sm leading-relaxed max-w-2xl">{h.desc}</p>
+                      <p className="text-white/55 text-xs uppercase tracking-wider mb-1">{h.label}</p>
+                      <h3 className="text-xl md:text-2xl font-light text-white mb-0.5">{h.title}</h3>
+                      <p className="text-white/45 text-sm italic mb-3">{h.sub}</p>
+                      <p className="text-white/65 font-light text-base leading-relaxed max-w-2xl">{h.desc}</p>
                     </div>
                     <div className="md:text-right shrink-0">
-                      <p className={`text-2xl md:text-3xl font-light ${h.tamColor}`}>{h.tam}</p>
-                      <p className="text-white/40 text-xs mt-1">{h.model}</p>
+                      <p className={`text-2xl md:text-3xl font-light ${h.amountColor}`}>{h.amount}</p>
+                      <p className="text-white/50 text-xs mt-1">{h.model}</p>
                     </div>
                   </div>
                 </div>
@@ -1097,58 +1103,63 @@ export default function MasterDeckPage() {
               </h2>
             </div>
 
-            <div className="space-y-5 max-w-3xl mx-auto">
-              <p className="text-white/80 text-lg leading-relaxed">
-                <strong className="text-white">To our Future Partners,</strong>
-              </p>
-              <p className="text-white/70 leading-relaxed">There is a reason this industry is empty.</p>
-              <p className="text-white/70 leading-relaxed">
-                We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets" — industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                Our competitors, Lila Science ($550M) and Radical AI ($55M), have raised massive war chests to solve the "Lab Problem." They are building brilliant tools for scientists to discover molecules.
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                <strong className="text-white">But discovery is not delivery.</strong>
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                We are playing a different game. We are not just building a tool for the Lab; we are building the{" "}
-                <strong className="text-white">Foundation Model for the Physical World.</strong>
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                This is not "Predictive Maintenance" or simple factory optimization. We are not just tweaking the temperature of a furnace.
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                <strong className="text-white">Invention will not be luck, but by design.</strong>
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist — a battery that is both cheaper and energy-dense — and then generates both the molecular recipe to invent it and the machine code to manufacture it.
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                We are giving nations and industries the sovereign power to invent their own energy future, breaking the reliance on decades of slow academic trial-and-error.
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                We have chosen the hardest path. We operate at the intersection of Mesoscale Physics, Generative AI, and Heavy Manufacturing. It is painful. It requires suffering. But as we say internally:{" "}
-                <em className="text-white/90">To perish in arrogant presumptions is our motto.</em>
-              </p>
-              <p className="text-white/70 leading-relaxed">
-                If you believe that the next Trillion-Dollar company will be built in the physical world, not the digital one...
-              </p>
-              <p className="text-white text-lg font-medium">Welcome to Shodh AI.</p>
-            </div>
-
-            <div className="mt-10 pt-6 border-t border-white/10 flex items-center gap-6">
-              <div className="w-20 h-24 rounded-xl overflow-hidden border border-white/10 shrink-0">
-                <img
-                  src="/Arastu_Sharma_l.jpeg"
-                  alt="Arastu, CEO"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: "50% 5%" }}
-                />
+            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+              {/* Left: photo + signature */}
+              <div className="flex flex-row md:flex-col items-center md:items-start gap-5 md:gap-4 shrink-0 md:w-40">
+                <div className="w-28 h-32 md:w-full md:h-44 rounded-xl overflow-hidden border border-white/10 shrink-0">
+                  <img
+                    src="/Arastu_Sharma_l.jpeg"
+                    alt="Arastu Sharma"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: "50% 5%" }}
+                  />
+                </div>
+                <div>
+                  <p className="text-white font-medium text-sm leading-snug">Arastu Sharma, PhD</p>
+                  <p className="text-white/50 text-xs mt-1">Cambridge, ex-Microsoft</p>
+                  <p className="text-white/50 text-xs">CEO, Shodh AI</p>
+                </div>
               </div>
-              <div>
-                <p className="text-white font-medium">Arastu</p>
-                <p className="text-white/50 text-sm">CEO, Shodh AI</p>
+
+              {/* Right: letter text */}
+              <div className="space-y-5 flex-1">
+                <p className="text-white/80 text-lg leading-relaxed">
+                  <strong className="text-white">To our Future Partners,</strong>
+                </p>
+                <p className="text-white/70 leading-relaxed">There is a reason this industry is empty.</p>
+                <p className="text-white/70 leading-relaxed">
+                  We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets" — industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  Our competitors, Lila Science ($550M) and Radical AI ($55M), have raised massive war chests to solve the "Lab Problem." They are building brilliant tools for scientists to discover molecules.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  <strong className="text-white">But discovery is not delivery.</strong>
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  We are playing a different game. We are not just building a tool for the Lab; we are building the{" "}
+                  <strong className="text-white">Foundation Model for the Physical World.</strong>
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  This is not "Predictive Maintenance" or simple factory optimization. We are not just tweaking the temperature of a furnace.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  <strong className="text-white">Invention will not be luck, but by design.</strong>
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist — a battery that is both cheaper and energy-dense — and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  We are giving nations and industries the sovereign power to invent their own energy future, breaking the reliance on decades of slow academic trial-and-error.
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  We have chosen the hardest path. We operate at the intersection of Mesoscale Physics, Generative AI, and Heavy Manufacturing. It is painful. It requires suffering. But as we say internally:{" "}
+                  <em className="text-white/90">To perish in arrogant presumptions is our motto.</em>
+                </p>
+                <p className="text-white/70 leading-relaxed">
+                  If you believe that the next Trillion-Dollar company will be built in the physical world, not the digital one...
+                </p>
+                <p className="text-white text-lg font-medium">Welcome to Shodh AI.</p>
               </div>
             </div>
           </div>
