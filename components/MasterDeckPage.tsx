@@ -137,7 +137,7 @@ export default function MasterDeckPage() {
           width: 480,
           height: 480,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.018) 30%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.02) 50%, transparent 75%)",
         }}
       />
       {/* Custom cursor dot */}
@@ -202,21 +202,19 @@ export default function MasterDeckPage() {
           {/* Partner logos */}
           <div className="mt-14">
             <p className="text-xs tracking-[0.25em] uppercase text-white/30 mb-6">Built with</p>
-            <div className="flex flex-wrap items-center gap-4">
-              {[
-                { name: "Google DeepMind", color: "#4285F4" },
-                { name: "Google", color: "#34A853" },
-                { name: "NVIDIA", color: "#76B900" },
-                { name: "IndiaAI", color: "#FF9933" },
-              ].map((p) => (
-                <div
-                  key={p.name}
-                  className="px-5 py-2.5 rounded-lg border border-white/8 bg-white/[0.03] text-sm font-light tracking-wide"
-                  style={{ color: p.color, borderColor: `${p.color}25` }}
-                >
-                  {p.name}
-                </div>
-              ))}
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center justify-center h-10 opacity-80 hover:opacity-100 transition-opacity">
+                <img src="/logos/deepmind-logo.svg" alt="DeepMind" className="h-full w-auto" />
+              </div>
+              <div className="flex items-center justify-center h-9 opacity-80 hover:opacity-100 transition-opacity">
+                <img src="/logos/google-logo.svg" alt="Google" className="h-full w-auto" />
+              </div>
+              <div className="flex items-center justify-center h-8 opacity-80 hover:opacity-100 transition-opacity">
+                <img src="/logos/nvidia-logo.svg" alt="NVIDIA" className="h-full w-auto" />
+              </div>
+              <div className="flex items-center justify-center h-8 opacity-80 hover:opacity-100 transition-opacity">
+                <img src="/logos/indiaai-logo.svg" alt="IndiaAI" className="h-full w-auto" />
+              </div>
             </div>
           </div>
         </motion.div>
