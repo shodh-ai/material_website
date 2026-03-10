@@ -594,11 +594,10 @@ export default function MasterDeckPage() {
             </div>
 
             {/* Value Created row */}
-            <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mt-px">
+            <div className="grid md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden mt-px">
               {[
                 { label: "CapEx Saved", value: "$495M", sub: "Direct R&D cost elimination per engagement", color: "text-white" },
                 { label: "Patent Life Recovered", value: "+6.75 yrs", sub: "Patents last 20 years. At $200M/yr profit → $1.35B in new monopoly revenue", color: "text-white" },
-                { label: "Shodh AI Revenue", value: "$5M + 3–5%", sub: "Upfront compute fee + royalty on manufactured product. $50M+ per successful discovery.", color: "text-emerald-300" },
               ].map((item, i) => (
                 <div key={i} className="bg-[#060606] p-7 md:p-9">
                   <p className="text-white/35 text-xs uppercase tracking-wider mb-3">{item.label}</p>
@@ -1021,46 +1020,89 @@ export default function MasterDeckPage() {
           </div>
         </motion.div>
       </section>
-      {/* ─── FOUNDER'S LETTER ─── */}
-      <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-4xl mx-auto">
+      {/* ─── YOUTUBE VIDEO ─── */}
+      <section className="px-6 pb-0 pt-16 border-t border-white/5 max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-16">A Note from the Founder</p>
+          <div className="rounded-2xl overflow-hidden border border-white/5 bg-white/[0.01]">
+            <div className="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/8O-aKNmuNk8"
+                title="Shodh AI Video"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </motion.div>
+      </section>
 
-          <div className="grid md:grid-cols-[160px_1fr] gap-12 md:gap-16 items-start">
-            {/* Photo */}
-            <div className="shrink-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-white/10">
-                <img
-                  src="/Arastu_Sharma_l.jpeg"
-                  alt="Arastu Sharma"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <p className="text-white/70 font-light text-sm mt-4">Arastu Sharma</p>
-              <p className="text-white/35 text-xs mt-0.5">Founder, Shodh AI</p>
-              <p className="text-white/25 text-xs mt-0.5">Cambridge Engineering</p>
+      {/* ─── FOUNDER'S LETTER ─── */}
+      <section className="px-6 py-28 md:py-36 border-white/5 max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <div className="p-8 md:p-12 rounded-2xl bg-white/[0.02] border border-white/5">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-4xl font-light text-white mb-0 uppercase tracking-tight">
+                BEYOND THE ATOM: THE FINAL FRONTIER OF AI.
+              </h2>
             </div>
 
-            {/* Letter */}
-            <div className="space-y-6">
-              <p className="text-white/50 font-light leading-relaxed text-lg">
-                I grew up watching India produce some of the world's most brilliant scientists and engineers. And watching them leave.
+            <div className="space-y-5 max-w-3xl mx-auto">
+              <p className="text-white/80 text-lg leading-relaxed">
+                <strong className="text-white">To our Future Partners,</strong>
               </p>
-              <p className="text-white/45 font-light leading-relaxed">
-                The problem was never talent. It was infrastructure. We never had the tools to translate a discovery made in a lab into a factory that works at scale. That translation — from milligrams to megatons — has always been guesswork. Expensive, dangerous, decade-long guesswork.
+              <p className="text-white/70 leading-relaxed">There is a reason this industry is empty.</p>
+              <p className="text-white/70 leading-relaxed">
+                We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets" — industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
               </p>
-              <p className="text-white/45 font-light leading-relaxed">
-                At Cambridge I studied the physics of how materials behave under extreme industrial conditions. What I found was that the physical world is not chaotic. It follows a small, tightly coupled set of governing equations. Equations that can be learned.
+              <p className="text-white/70 leading-relaxed">
+                Our competitors, Lila Science ($550M) and Radical AI ($55M), have raised massive war chests to solve the "Lab Problem." They are building brilliant tools for scientists to discover molecules.
               </p>
-              <p className="text-white/45 font-light leading-relaxed">
-                We built Shodh AI to make that translation exact. To give every scientist and every factory the ability to collapse years of physical trial-and-error into a software calculation — and to do it from India, for the world.
+              <p className="text-white/70 leading-relaxed">
+                <strong className="text-white">But discovery is not delivery.</strong>
               </p>
-              <p className="text-white/50 font-light leading-relaxed">
-                This is not a company chasing a market. It is a scientific mission. We are building the infrastructure that the next century of human progress depends on.
+              <p className="text-white/70 leading-relaxed">
+                We are playing a different game. We are not just building a tool for the Lab; we are building the{" "}
+                <strong className="text-white">Foundation Model for the Physical World.</strong>
               </p>
-              <div className="pt-6 border-t border-white/5">
-                <p className="text-white font-light text-lg">Thank you for your time and consideration.</p>
-                <p className="text-white/40 text-sm font-light mt-1">arastu@shodh.ai</p>
+              <p className="text-white/70 leading-relaxed">
+                This is not "Predictive Maintenance" or simple factory optimization. We are not just tweaking the temperature of a furnace.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                <strong className="text-white">Invention will not be luck, but by design.</strong>
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist — a battery that is both cheaper and energy-dense — and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                We are giving nations and industries the sovereign power to invent their own energy future, breaking the reliance on decades of slow academic trial-and-error.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                We have chosen the hardest path. We operate at the intersection of Mesoscale Physics, Generative AI, and Heavy Manufacturing. It is painful. It requires suffering. But as we say internally:{" "}
+                <em className="text-white/90">To perish in arrogant presumptions is our motto.</em>
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                We'd rather fail trying to build a Type 1 Civilization than succeed at building another SaaS app.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                If you believe that the next Trillion-Dollar company will be built in the physical world, not the digital one...
+              </p>
+              <p className="text-white text-lg font-medium">Welcome to Shodh AI.</p>
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-white/10 flex items-center gap-6">
+              <div className="w-14 h-16 rounded-xl overflow-hidden border border-white/10 shrink-0">
+                <img
+                  src="/Arastu_Sharma_l.jpeg"
+                  alt="Arastu, CEO"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: "50% 12%" }}
+                />
+              </div>
+              <div>
+                <p className="text-white font-medium">Arastu</p>
+                <p className="text-white/50 text-sm">CEO, Shodh AI</p>
               </div>
             </div>
           </div>
