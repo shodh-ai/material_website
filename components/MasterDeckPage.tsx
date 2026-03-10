@@ -287,39 +287,72 @@ export default function MasterDeckPage() {
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">04 — The Landscape</p>
-          <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-20 max-w-3xl">
-            The Timeline<br />of a Molecule.
+          <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
+            Where every molecule<br />goes to die.
           </h2>
+          <p className="text-white/35 font-light max-w-xl mb-20">
+            Three sequential stages take a new material from idea to industrial reality. AI has transformed the first two. The third remains completely unsolved.
+          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-0">
+        {/* Timeline track — desktop only */}
+        <div className="hidden lg:flex items-center mb-3">
+          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
+          <div className="flex-1 h-px bg-white/10" />
+          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
+          <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-rose-500/40" />
+          <div className="w-5 h-5 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.5)] shrink-0" />
+        </div>
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
+          {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
+            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/60" : "text-white/20"}`}>{l}</p>
+          ))}
+        </div>
+
+        {/* Stage cards */}
+        <div className="grid lg:grid-cols-3 gap-6 mb-16">
           {[
             {
               num: "01",
               stage: "Digital Discovery",
-              who: "Isomorphic Labs",
+              players: ["Isomorphic Labs", "Schrödinger", "Recursion"],
+              desc: "AI models predict molecular structures, binding affinities, and material properties entirely in silico. Billions of candidates screened in days.",
+              gap: "The output is a digital prediction. The physical behaviour of that molecule at scale remains completely untested.",
               time: "Days",
-              desc: "AI invents a new molecule on a computer. The blueprint exists. The dream is born.",
-              status: "Solved",
-              statusColor: "text-white/40",
+              border: "border-white/5",
+              bg: "bg-white/[0.01]",
+              numColor: "text-white/5",
+              tagBorder: "border-white/8",
+              tagText: "text-white/30",
+              gapColor: "text-white/20",
             },
             {
               num: "02",
               stage: "Lab Synthesis",
-              who: "Radical AI",
+              players: ["Radical AI", "Emerald Cloud Lab", "Arcadia Science"],
+              desc: "Autonomous robotic labs synthesize and characterize milligrams of material. Proof of physical existence in weeks.",
+              gap: "At milligram scale, the turbulence, heat, and pressure of an industrial reactor simply do not apply. The leap to production is still blind.",
               time: "Weeks",
-              desc: "Robotic cloud-labs synthesize 1 gram of the material in a test tube. Proof of existence.",
-              status: "Solved",
-              statusColor: "text-white/40",
+              border: "border-white/5",
+              bg: "bg-white/[0.01]",
+              numColor: "text-white/5",
+              tagBorder: "border-white/8",
+              tagText: "text-white/30",
+              gapColor: "text-white/20",
             },
             {
               num: "03",
               stage: "Industrial Scale-Up",
-              who: "Shodh AI",
-              time: "5–7 Years",
-              desc: "Building the massive continuous-flow factory to produce 10,000 tons. This is where it dies.",
-              status: "The Wall",
-              statusColor: "text-rose-400",
+              players: ["Shodh AI"],
+              desc: "The LPM generates the complete manufacturing blueprint: reactor geometry, fluid dynamics, thermal profiles, and process parameters for 10,000-ton production.",
+              gap: "Ours to own.",
+              time: "Months — not years",
+              border: "border-rose-500/20",
+              bg: "bg-rose-950/10",
+              numColor: "text-rose-500/10",
+              tagBorder: "border-rose-500/25",
+              tagText: "text-rose-300/60",
+              gapColor: "text-rose-400/50",
             },
           ].map((s, i) => (
             <motion.div
@@ -327,26 +360,42 @@ export default function MasterDeckPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`p-8 md:p-10 border-t ${i < 2 ? "border-r border-white/5" : ""} border-white/5 ${i === 2 ? "bg-white/[0.02]" : ""}`}
+              transition={{ delay: i * 0.12 }}
+              className={`rounded-xl border ${s.border} ${s.bg} p-7 md:p-9 flex flex-col`}
             >
-              <p className="text-[60px] md:text-[80px] font-extralight text-white/5 leading-none mb-6">{s.num}</p>
-              <p className="text-white/30 text-xs uppercase tracking-wider mb-2">{s.who}</p>
-              <h3 className="text-xl md:text-2xl font-light text-white mb-4">{s.stage}</h3>
-              <p className="text-white/50 font-light leading-relaxed text-sm mb-6">{s.desc}</p>
-              <div className="flex items-center justify-between">
-                <span className={`text-xs font-medium uppercase tracking-wider ${s.statusColor}`}>{s.status}</span>
-                <span className={`text-sm font-light ${i === 2 ? "text-rose-400 font-medium" : "text-white/30"}`}>{s.time}</span>
+              <p className={`text-[52px] font-extralight leading-none mb-5 ${s.numColor}`}>{s.num}</p>
+              <h3 className={`text-lg md:text-xl font-light mb-4 ${i === 2 ? "text-white" : "text-white/70"}`}>{s.stage}</h3>
+
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {s.players.map((p, j) => (
+                  <span key={j} className={`text-xs px-2.5 py-1 rounded-full border ${s.tagBorder} ${s.tagText} bg-white/[0.02]`}>{p}</span>
+                ))}
+              </div>
+
+              <p className="text-white/45 font-light text-sm leading-relaxed mb-5 flex-grow">{s.desc}</p>
+
+              <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"} flex items-start justify-between gap-4`}>
+                <p className={`text-xs font-light leading-relaxed ${s.gapColor} flex-1`}>{s.gap}</p>
+                <span className={`text-xs font-medium shrink-0 ${i === 2 ? "text-rose-400" : "text-white/25"}`}>{s.time}</span>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-12 pt-12 border-t border-white/5">
-          <p className="text-white/40 font-light max-w-2xl">
-            GV and Big Tech have conquered Stages 1 and 2. The entire industry is now crashing into Stage 3. What works in a 1-gram test tube completely fails when exposed to the turbulent fluid dynamics and extreme heat of an industrial factory.
-          </p>
-          <p className="text-white text-xl font-light mt-4">Shodh AI operates at Stage 3.</p>
+        {/* Complementarity narrative */}
+        <div className="pt-10 border-t border-white/5 grid md:grid-cols-2 gap-12">
+          <div>
+            <p className="text-white/25 text-xs uppercase tracking-wider mb-4">How we fit together</p>
+            <p className="text-white/50 font-light leading-relaxed">
+              Isomorphic Labs and Radical AI are not our competitors — they are our upstream. They hand us the molecule. We build the factory. The entire AI drug discovery and materials pipeline converges on Stage 3 as its bottleneck. We are the only team working on it.
+            </p>
+          </div>
+          <div>
+            <p className="text-white/25 text-xs uppercase tracking-wider mb-4">Our structural advantage</p>
+            <p className="text-white/50 font-light leading-relaxed">
+              Every dollar invested in Isomorphic, Schrödinger, or Recursion creates more demand for Shodh AI. As Stage 1 and Stage 2 accelerate, the Stage 3 bottleneck becomes more acute. We are the only exit for the pipeline.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -409,35 +458,65 @@ export default function MasterDeckPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">06 — The Science</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            The Secret Sauce:<br /><span className="font-normal">One universal equation.</span>
+            One model.<br /><span className="font-normal">Every industry.</span>
           </h2>
-          <p className="text-white/40 font-light max-w-2xl mb-20">
-            Every multi-trillion-dollar industry — pharma, batteries, chemicals, green hydrogen — boils down to one exact physical interaction.
-          </p>
         </motion.div>
 
-        <div className="mb-16 p-10 md:p-14 rounded-2xl bg-white/[0.015] border border-white/5 text-center">
-          <p className="text-2xl md:text-4xl font-light text-white/80 leading-relaxed">
-            A fluid moving through a<br /><span className="text-white font-normal text-3xl md:text-5xl">microscopic, sponge-like solid.</span>
-          </p>
-        </div>
+        {/* Central unified concept — animated wave gradient */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-14 rounded-2xl border border-white/5 overflow-hidden"
+        >
+          <motion.div
+            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+            style={{
+              backgroundSize: "400% 400%",
+              backgroundImage: "linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(16,185,129,0.06) 25%, rgba(99,102,241,0.04) 50%, rgba(59,130,246,0.06) 75%, rgba(16,185,129,0.03) 100%)",
+            }}
+            className="p-10 md:p-16"
+          >
+            <div className="max-w-4xl">
+              <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-8">Why one model can solve pharma, batteries, chemicals, and aerospace</p>
+              <p className="text-xl md:text-2xl font-light text-white/50 leading-relaxed mb-3">
+                These industries look completely different on paper.
+              </p>
+              <p className="text-2xl md:text-4xl font-light text-white leading-relaxed mb-3">
+                Physically, they are the same problem:
+              </p>
+              <p className="text-3xl md:text-5xl font-light leading-tight mb-8">
+                <span className="text-white">a fluid moving through</span>{" "}
+                <span className="text-white/50">a porous solid</span>{" "}
+                <span className="text-white">under heat,</span>{" "}
+                <span className="text-white/50">pressure, and</span>{" "}
+                <span className="text-white">chemical reaction.</span>
+              </p>
+              <p className="text-white/35 font-light text-base md:text-lg leading-relaxed">
+                A drug bioreactor. A battery electrode. A carbon membrane. A steel catalyst. Strip away the industry names and the physics is identical. We coupled the five governing equations that describe this interaction into one unified model — the LPM. That is why it generalizes across everything.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-6">The Physics We Couple</p>
-            <div className="space-y-4">
+            <p className="text-white/25 text-xs uppercase tracking-wider mb-5">The Five Governing Equations</p>
+            <p className="text-white/30 text-xs font-light mb-6">Hover to explore each layer.</p>
+            <div className="space-y-1.5">
               {[
-                { eq: "Navier-Stokes & Fick's Law", desc: "Fluid flow and chemical diffusion through pores." },
-                { eq: "Phase Field / Cahn-Hilliard", desc: "How materials separate, solidify, and grow dendrites." },
-                { eq: "Solid Mechanics & Fourier's Law", desc: "How materials crack, swell, and distribute heat." },
-                { eq: "Maxwell's Equations", desc: "Electrical fields and ion transport." },
-                { eq: "Arrhenius Equation", desc: "Reaction kinetics — how fast chemistry happens." },
+                { eq: "Navier-Stokes & Fick's Law", desc: "Fluid flow and chemical diffusion through pores.", hoverText: "hover:text-blue-300", hoverBox: "hover:bg-blue-500/5 hover:border-blue-500/20" },
+                { eq: "Phase Field / Cahn-Hilliard", desc: "How materials separate, solidify, and grow dendrites.", hoverText: "hover:text-violet-300", hoverBox: "hover:bg-violet-500/5 hover:border-violet-500/20" },
+                { eq: "Solid Mechanics & Fourier's Law", desc: "How materials crack, swell, and distribute heat.", hoverText: "hover:text-orange-300", hoverBox: "hover:bg-orange-500/5 hover:border-orange-500/20" },
+                { eq: "Maxwell's Equations", desc: "Electrical fields and ion transport.", hoverText: "hover:text-cyan-300", hoverBox: "hover:bg-cyan-500/5 hover:border-cyan-500/20" },
+                { eq: "Arrhenius Equation", desc: "Reaction kinetics — how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20" },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 py-3 border-b border-white/5">
-                  <span className="text-white/15 font-mono text-xs mt-1 w-4 shrink-0">{i + 1}</span>
+                <div key={i} className={`group flex items-start gap-4 p-4 rounded-xl border border-transparent transition-all duration-200 cursor-default ${item.hoverBox}`}>
+                  <span className="text-white/15 font-mono text-xs mt-0.5 w-4 shrink-0 group-hover:text-white/30 transition-colors">{i + 1}</span>
                   <div>
-                    <p className="text-white/70 font-light text-sm">{item.eq}</p>
-                    <p className="text-white/30 text-xs mt-0.5">{item.desc}</p>
+                    <p className={`font-light text-sm text-white/65 transition-colors duration-200 ${item.hoverText}`}>{item.eq}</p>
+                    <p className="text-white/25 text-xs mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -445,7 +524,7 @@ export default function MasterDeckPage() {
           </div>
 
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-6">The AlphaFold Blueprint — How We Train</p>
+            <p className="text-white/25 text-xs uppercase tracking-wider mb-6">Training Method — The AlphaFold Blueprint</p>
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-white font-light">DeepMind's secret was Self-Distillation.</p>
@@ -481,11 +560,10 @@ export default function MasterDeckPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">07 — Financial TAM</p>
             <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
-              We don't measure our TAM by the size<br />of manufacturing.{" "}
-              <span className="font-normal">We measure the cost of physical time.</span>
+              Every wasted year in a lab<br />is a <span className="font-normal">destroyed billion in value.</span>
             </h2>
             <p className="text-white/35 font-light max-w-2xl mb-20">
-              The "Lazy Trillion-Dollar TAM" kills pitches. We calculate the Cost of Inefficiency, Failed R&D, and Time-to-Market Delay across industries — and we capture the arbitrage.
+              Our market is not the size of manufacturing. It is the R&D capital burned and the patent life lost because the physical world has no compiler. We built the compiler.
             </p>
           </motion.div>
 
@@ -903,27 +981,26 @@ export default function MasterDeckPage() {
           <p className="text-white/30 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
           <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-4">Science is here.</h2>
           <p className="text-xl text-white/40 font-light mb-20 max-w-xl mx-auto">
-            We are structuring a $100M War Chest to build the foundation model for the physical world.
+            We are building the foundation model for the physical world. This is the capital structure.
           </p>
 
           <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-4xl mx-auto mb-20">
             {[
-              { amount: "$25M", source: "Indian Government", desc: "Sovereign NVIDIA GPU compute", status: "Secured", statusColor: "text-emerald-400" },
-              { amount: "$35M", source: "ANRF", desc: "Autonomous robotic lab infrastructure", status: "Secured", statusColor: "text-emerald-400" },
-              { amount: "$40M", source: "Equity Round", desc: "Talent, engineering teams, global market capture", status: "Raising Now", statusColor: "text-white" },
+              { amount: "$25M", source: "IndiaAI Mission", desc: "Sovereign NVIDIA GPU compute" },
+              { amount: "$25M", source: "ANRF", desc: "Autonomous robotic lab infrastructure" },
+              { amount: "$50M", source: "Equity Round", desc: "Talent, engineering teams, global market capture" },
             ].map((item, i) => (
               <div key={i} className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.03]" : ""}`}>
                 <p className="text-4xl md:text-5xl font-light text-white mb-2">{item.amount}</p>
                 <p className="text-white/50 text-sm font-light mb-1">{item.source}</p>
-                <p className="text-white/25 text-xs mb-4">{item.desc}</p>
-                <p className={`text-xs font-medium uppercase tracking-wider ${item.statusColor}`}>{item.status}</p>
+                <p className="text-white/25 text-xs">{item.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="max-w-2xl mx-auto space-y-8">
             <p className="text-white/50 font-light leading-relaxed">
-              The compute and the labs are secured. We are raising $40M in equity to capture the world's best talent, scale our Federated Data Engineering teams, and lock in the global market before Big Tech realizes they are fighting the wrong war.
+              We are raising $50M in equity to hire the world's best AI researchers, deploy Federated Data Engineering teams into our first anchor partners, and lock in the global market.
             </p>
             <div className="pt-8 border-t border-white/5">
               <h3 className="text-2xl md:text-4xl font-light text-white mb-8">
