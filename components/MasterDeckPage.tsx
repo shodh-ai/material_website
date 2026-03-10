@@ -148,22 +148,22 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 1: IDENTITY ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">01 — Identity</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">01 — Identity</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
             Backed by the IndiaAI Mission.<br />
             <span className="text-white/50">200,000 GPUs.</span><br />
-            Physical engineering<br />as a <span className="font-normal">software calculation.</span>
+            <span className="font-normal">Built in India. For the World.</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden">
+          <div className="space-y-6 max-w-2xl">
             {[
-              { label: "GPU Cluster", value: "200,000", sub: "Sovereign Indian compute — priority access, free of cost" },
-              { label: "GPU Value", value: "$25M", sub: "Equivalent compute secured from IndiaAI Mission" },
-              { label: "Mandate", value: "1 of 12", sub: "Companies selected by IndiaAI Mission for foundational models" },
-            ].map((s, i) => (
-              <div key={i} className="bg-[#060606] p-8 md:p-10">
-                <p className="text-xs text-white/25 uppercase tracking-wider mb-3">{s.label}</p>
-                <p className="text-4xl md:text-5xl font-light text-white mb-3">{s.value}</p>
-                <p className="text-sm text-white/40 font-light leading-relaxed">{s.sub}</p>
+              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
+              "Mandate to build AI for Science — the foundation model for the physical world.",
+              "Building in partnership with and support of DeepMind, Google, and Nvidia.",
+              "A ragtag team — founder from Cambridge — doing what we love: making science make sense.",
+            ].map((text, i) => (
+              <div key={i} className="flex items-start gap-4">
+                <div className="w-1.5 h-1.5 rounded-full bg-white/50 mt-2 shrink-0" />
+                <p className="text-white/65 font-light leading-relaxed">{text}</p>
               </div>
             ))}
           </div>
@@ -173,14 +173,14 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 2: PARADIGM ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-t border-white/5">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">02 — Paradigm</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">02 — Paradigm</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
             LLMs learned the<br />grammar of <span className="text-white/40">text.</span><br />
             We learn the grammar<br />of the <span className="font-normal">physical world.</span>
           </h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
             <div className="space-y-2">
-              <p className="text-white/25 text-sm uppercase tracking-wider mb-4">2022 — LLMs</p>
+              <p className="text-white/40 text-sm uppercase tracking-wider mb-4">2022 — LLMs</p>
               <p className="text-white/50 text-xl font-light">Ingested the entire internet.</p>
               <p className="text-white/30 font-light">Scaling law: more text → better language.</p>
             </div>
@@ -197,7 +197,7 @@ export default function MasterDeckPage() {
       <section className="py-28 md:py-36 border-t border-white/5">
         <div className="px-6 max-w-6xl mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">03 — The 10-Year Vision</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">03 — The 10-Year Vision</p>
             <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
               Programmable<br /><span className="font-normal">Matter.</span>
             </h2>
@@ -245,13 +245,13 @@ export default function MasterDeckPage() {
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
-                <span className="text-xs text-white/20 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
+                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
               </div>
 
               <div className="p-6 md:p-10 space-y-8 font-mono">
                 {/* Prompt */}
                 <div>
-                  <p className="text-white/25 text-xs mb-3 uppercase tracking-wider">User Prompt</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">User Prompt</p>
                   <p className="text-xs text-white/30 mb-1">&gt; input:</p>
                   <p className={`text-base md:text-lg ${colors.text} leading-relaxed`}>
                     "{displayedPrompt}
@@ -261,11 +261,11 @@ export default function MasterDeckPage() {
 
                 {/* Physics */}
                 <div>
-                  <p className="text-white/25 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
                   <div className="space-y-1.5">
                     {active.physics.map((p, i) => (
                       <div key={i} className="flex items-center gap-2 text-sm text-white/60">
-                        <span className="text-white/20">◆</span>
+                        <span className="text-white/35">◆</span>
                         {p}
                       </div>
                     ))}
@@ -274,7 +274,7 @@ export default function MasterDeckPage() {
 
                 {/* Impact */}
                 <div className={`rounded-xl ${colors.bg} border ${colors.border} p-5`}>
-                  <p className="text-white/25 text-xs mb-3 uppercase tracking-wider font-sans">10-Year Grand Impact</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider font-sans">10-Year Grand Impact</p>
                   <p className={`text-base font-sans font-light ${colors.text} leading-relaxed`}>{active.impact}</p>
                 </div>
               </div>
@@ -286,7 +286,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 4: LANDSCAPE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">04 — The Landscape</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">04 — The Landscape</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Where every molecule<br />goes to die.
           </h2>
@@ -305,7 +305,7 @@ export default function MasterDeckPage() {
         </div>
         <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
           {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
-            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/60" : "text-white/20"}`}>{l}</p>
+            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/60" : "text-white/35"}`}>{l}</p>
           ))}
         </div>
 
@@ -324,7 +324,7 @@ export default function MasterDeckPage() {
               numColor: "text-white/5",
               tagBorder: "border-white/8",
               tagText: "text-white/30",
-              gapColor: "text-white/20",
+              gapColor: "text-white/35",
             },
             {
               num: "02",
@@ -338,7 +338,7 @@ export default function MasterDeckPage() {
               numColor: "text-white/5",
               tagBorder: "border-white/8",
               tagText: "text-white/30",
-              gapColor: "text-white/20",
+              gapColor: "text-white/35",
             },
             {
               num: "03",
@@ -376,7 +376,7 @@ export default function MasterDeckPage() {
 
               <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"} flex items-start justify-between gap-4`}>
                 <p className={`text-xs font-light leading-relaxed ${s.gapColor} flex-1`}>{s.gap}</p>
-                <span className={`text-xs font-medium shrink-0 ${i === 2 ? "text-rose-400" : "text-white/25"}`}>{s.time}</span>
+                <span className={`text-xs font-medium shrink-0 ${i === 2 ? "text-rose-400" : "text-white/40"}`}>{s.time}</span>
               </div>
             </motion.div>
           ))}
@@ -385,13 +385,13 @@ export default function MasterDeckPage() {
         {/* Complementarity narrative */}
         <div className="pt-10 border-t border-white/5 grid md:grid-cols-2 gap-12">
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-4">How we fit together</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">How we fit together</p>
             <p className="text-white/50 font-light leading-relaxed">
               Isomorphic Labs and Radical AI are not our competitors — they are our upstream. They hand us the molecule. We build the factory. The entire AI drug discovery and materials pipeline converges on Stage 3 as its bottleneck. We are the only team working on it.
             </p>
           </div>
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-4">Our structural advantage</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Our structural advantage</p>
             <p className="text-white/50 font-light leading-relaxed">
               Every dollar invested in Isomorphic, Schrödinger, or Recursion creates more demand for Shodh AI. As Stage 1 and Stage 2 accelerate, the Stage 3 bottleneck becomes more acute. We are the only exit for the pipeline.
             </p>
@@ -402,7 +402,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 5: THE BOTTLENECK ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">05 — The Bottleneck</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">05 — The Bottleneck</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Cures on a shelf.<br />
             <span className="font-normal">The Biocon Problem.</span>
@@ -415,11 +415,11 @@ export default function MasterDeckPage() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-8">
             <div>
-              <p className="text-white/25 text-xs uppercase tracking-wider mb-4">The Situation</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Situation</p>
               <p className="text-white/70 font-light leading-relaxed">Biocon's bio-enzymes can cut a 16-step drug process down to just 3 steps.</p>
             </div>
             <div>
-              <p className="text-white/25 text-xs uppercase tracking-wider mb-4">The Problem</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Problem</p>
               <p className="text-white/70 font-light leading-relaxed">Pump those fragile enzymes into an industrial steel reactor. The heat and fluid dynamics tear them apart. The scale-up fails. Every time.</p>
             </div>
             <div className="border-l-2 border-white/10 pl-6 py-2">
@@ -429,7 +429,7 @@ export default function MasterDeckPage() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-4">
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-6">The Cost of Failure</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-6">The Cost of Failure</p>
             {[
               { label: "Legacy US plant", cost: "$500M", time: "5 years", highlight: false },
               { label: "Legacy India plant", cost: "$100M", time: "Years of delays", highlight: false },
@@ -456,7 +456,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 6: THE SCIENCE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">06 — The Science</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">06 — The Science</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             One model.<br /><span className="font-normal">Every industry.</span>
           </h2>
@@ -502,8 +502,8 @@ export default function MasterDeckPage() {
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-5">The Five Governing Equations</p>
-            <p className="text-white/30 text-xs font-light mb-6">Hover to explore each layer.</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-5">The Five Governing Equations</p>
+            <p className="text-white/45 text-xs font-light mb-6">Hover to explore each layer.</p>
             <div className="space-y-1.5">
               {[
                 { eq: "Navier-Stokes & Fick's Law", desc: "Fluid flow and chemical diffusion through pores.", hoverText: "hover:text-blue-300", hoverBox: "hover:bg-blue-500/5 hover:border-blue-500/20" },
@@ -513,10 +513,10 @@ export default function MasterDeckPage() {
                 { eq: "Arrhenius Equation", desc: "Reaction kinetics — how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20" },
               ].map((item, i) => (
                 <div key={i} className={`group flex items-start gap-4 p-4 rounded-xl border border-transparent transition-all duration-200 cursor-default ${item.hoverBox}`}>
-                  <span className="text-white/15 font-mono text-xs mt-0.5 w-4 shrink-0 group-hover:text-white/30 transition-colors">{i + 1}</span>
+                  <span className="text-white/30 font-mono text-xs mt-0.5 w-4 shrink-0 group-hover:text-white/30 transition-colors">{i + 1}</span>
                   <div>
                     <p className={`font-light text-sm text-white/65 transition-colors duration-200 ${item.hoverText}`}>{item.eq}</p>
-                    <p className="text-white/25 text-xs mt-0.5">{item.desc}</p>
+                    <p className="text-white/40 text-xs mt-0.5">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -524,7 +524,7 @@ export default function MasterDeckPage() {
           </div>
 
           <div>
-            <p className="text-white/25 text-xs uppercase tracking-wider mb-6">Training Method — The AlphaFold Blueprint</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-6">Training Method — The AlphaFold Blueprint</p>
             <div className="space-y-6">
               <div className="space-y-3">
                 <p className="text-white font-light">DeepMind's secret was Self-Distillation.</p>
@@ -558,7 +558,7 @@ export default function MasterDeckPage() {
       <section className="py-28 md:py-36 border-t border-white/5">
         <div className="px-6 max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">07 — Financial TAM</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">07 — Financial TAM</p>
             <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
               Every wasted year in a lab<br />is a <span className="font-normal">destroyed billion in value.</span>
             </h2>
@@ -569,15 +569,15 @@ export default function MasterDeckPage() {
 
           {/* ── THE UNIT ECONOMICS EQUATION ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">The Core Equation — Per Asset</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">The Core Equation — Per Asset</p>
             <div className="grid lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/5">
               <div className="p-10 md:p-14 bg-white/[0.01] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
-                <p className="text-white/20 text-xs uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
+                <p className="text-white/35 text-xs uppercase tracking-wider mb-6">Legacy: Physical Trial-and-Error</p>
                 <div className="space-y-3">
                   <p className="text-[64px] md:text-[90px] font-bold text-white/10 line-through leading-none">$500M</p>
                   <p className="text-[48px] md:text-[64px] font-bold text-white/10 line-through leading-none">7 Years</p>
                 </div>
-                <p className="text-white/25 font-light mt-6 text-sm leading-relaxed">
+                <p className="text-white/40 font-light mt-6 text-sm leading-relaxed">
                   Failed syntheses, steel reactor fires, batch inconsistency, repeated physical builds. Patent life ticking down with every wasted month.
                 </p>
               </div>
@@ -601,7 +601,7 @@ export default function MasterDeckPage() {
                 { label: "Shodh AI Revenue", value: "$5M + 3–5%", sub: "Upfront compute fee + royalty on manufactured product. $50M+ per successful discovery.", color: "text-emerald-300" },
               ].map((item, i) => (
                 <div key={i} className="bg-[#060606] p-7 md:p-9">
-                  <p className="text-white/20 text-xs uppercase tracking-wider mb-3">{item.label}</p>
+                  <p className="text-white/35 text-xs uppercase tracking-wider mb-3">{item.label}</p>
                   <p className={`text-2xl md:text-3xl font-light mb-2 ${item.color}`}>{item.value}</p>
                   <p className="text-white/35 text-xs font-light leading-relaxed">{item.sub}</p>
                 </div>
@@ -611,7 +611,7 @@ export default function MasterDeckPage() {
 
           {/* ── THREE HORIZONS ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">Three Business Model Horizons</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Three Business Model Horizons</p>
             <div className="space-y-px rounded-2xl overflow-hidden border border-white/5">
               {[
                 {
@@ -645,17 +645,17 @@ export default function MasterDeckPage() {
                 <div key={i} className={`p-8 md:p-10 bg-[#060606] ${i > 0 ? "border-t border-white/5" : ""}`}>
                   <div className="grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start">
                     <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
-                      <span className="text-white/15 font-mono text-4xl md:text-5xl font-bold leading-none">{h.horizon}</span>
+                      <span className="text-white/30 font-mono text-4xl md:text-5xl font-bold leading-none">{h.horizon}</span>
                       <div className="md:hidden w-px h-8 bg-white/5" />
                     </div>
                     <div>
-                      <p className="text-white/25 text-xs uppercase tracking-wider mb-1">{h.label}</p>
+                      <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{h.label}</p>
                       <h3 className="text-xl md:text-2xl font-light text-white mb-3">{h.title}</h3>
                       <p className="text-white/45 font-light text-sm leading-relaxed max-w-2xl">{h.desc}</p>
                     </div>
                     <div className="md:text-right shrink-0">
                       <p className={`text-2xl md:text-3xl font-light ${h.tamColor}`}>{h.tam}</p>
-                      <p className="text-white/25 text-xs mt-1">{h.model}</p>
+                      <p className="text-white/40 text-xs mt-1">{h.model}</p>
                     </div>
                   </div>
                 </div>
@@ -665,10 +665,10 @@ export default function MasterDeckPage() {
 
           {/* ── VALUE COMPRESSION MATRIX ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/20 mb-8">Value Compression Matrix</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Value Compression Matrix</p>
             <div className="rounded-2xl overflow-hidden border border-white/5">
               {/* Header */}
-              <div className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5 text-xs text-white/25 uppercase tracking-wider">
+              <div className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5 text-xs text-white/40 uppercase tracking-wider">
                 <div className="bg-[#060606] px-5 py-3">Industry</div>
                 <div className="bg-[#060606] px-5 py-3">Legacy Cost / Time</div>
                 <div className="bg-[#060606] px-5 py-3">Shodh AI</div>
@@ -730,7 +730,7 @@ export default function MasterDeckPage() {
           {/* ── THE ONE-LINER ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="rounded-2xl border border-white/5 bg-white/[0.015] p-10 md:p-14 text-center">
-              <p className="text-white/25 text-xs uppercase tracking-wider mb-6">The TAM One-Liner</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-6">The TAM One-Liner</p>
               <p className="text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-4xl mx-auto">
                 "We do not measure our TAM by the size of the manufacturing sector. We measure our TAM by the{" "}
                 <span className="text-white font-normal">Trillions of dollars of GDP destroyed every year by the speed of physical time.</span>
@@ -746,7 +746,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 8: ALPHAFOLD MOMENT ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">08 — The Proof</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">08 — The Proof</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-4 max-w-3xl">
             Our AlphaFold Moment.
           </h2>
@@ -910,7 +910,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 9: GTM ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-8">09 — Go-To-Market</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 — Go-To-Market</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-20 max-w-3xl">
             The Co-Creation<br /><span className="font-normal">Flywheel.</span>
           </h2>
@@ -958,13 +958,13 @@ export default function MasterDeckPage() {
               transition={{ delay: i * 0.1 }}
               className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.02]" : ""}`}
             >
-              <p className="text-white/25 text-xs uppercase tracking-wider mb-1">{p.phase}</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{p.phase}</p>
               <h3 className="text-xl font-medium text-white mb-1">{p.title}</h3>
               <p className="text-white/30 text-xs mb-6">{p.sub}</p>
               <ul className="space-y-3">
                 {p.points.map((pt, j) => (
                   <li key={j} className="flex items-start gap-2 text-sm text-white/50 font-light leading-relaxed">
-                    <ChevronRight className="w-4 h-4 text-white/20 mt-0.5 shrink-0" />
+                    <ChevronRight className="w-4 h-4 text-white/35 mt-0.5 shrink-0" />
                     {pt}
                   </li>
                 ))}
@@ -977,7 +977,7 @@ export default function MasterDeckPage() {
       {/* ─── SECTION 10: THE ASK ─── */}
       <section className="px-6 py-28 md:py-40 border-t border-white/5 max-w-6xl mx-auto text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/25 mb-12">10 — The Ask</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">10 — The Ask</p>
           <p className="text-white/30 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
           <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-4">Science is here.</h2>
           <p className="text-xl text-white/40 font-light mb-20 max-w-xl mx-auto">
@@ -993,7 +993,7 @@ export default function MasterDeckPage() {
               <div key={i} className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.03]" : ""}`}>
                 <p className="text-4xl md:text-5xl font-light text-white mb-2">{item.amount}</p>
                 <p className="text-white/50 text-sm font-light mb-1">{item.source}</p>
-                <p className="text-white/25 text-xs">{item.desc}</p>
+                <p className="text-white/40 text-xs">{item.desc}</p>
               </div>
             ))}
           </div>
