@@ -609,6 +609,73 @@ export default function MasterDeckPage() {
             </div>
           </motion.div>
 
+          {/* ── VALUE COMPRESSION MATRIX ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
+            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Value Compression Matrix</p>
+            <div className="rounded-2xl overflow-hidden border border-white/5">
+              {/* Header */}
+              <div className="grid grid-cols-[1.1fr_1.4fr_0.9fr_0.9fr_1.4fr] gap-px bg-white/5 text-xs text-white/40 uppercase tracking-wider">
+                <div className="bg-[#060606] px-5 py-3">Industry Vertical</div>
+                <div className="bg-[#060606] px-5 py-3">The Bottleneck Being Solved</div>
+                <div className="bg-[#060606] px-5 py-3">Legacy Cost &amp; Time</div>
+                <div className="bg-[#060606] px-5 py-3">Shodh AI</div>
+                <div className="bg-[#060606] px-5 py-3">Economic Value Created (per asset)</div>
+              </div>
+              {[
+                {
+                  industry: "Solid-State Batteries",
+                  bottleneck: "Discovering an electrolyte that doesn't form dendrites and scaling its production.",
+                  legacy: "$1B / 10 Yrs",
+                  shodh: "$10M / 8 Mo",
+                  value: "$990M saved + 9 yrs early-to-market EV market share ($10B+ value)",
+                  valueColor: "text-blue-300",
+                },
+                {
+                  industry: "Aerospace & Defense",
+                  bottleneck: "Creating a lightweight, heat-resistant alloy that survives 3D printing without micro-fractures.",
+                  legacy: "$400M / 6 Yrs",
+                  shodh: "$3M / 3 Mo",
+                  value: "$397M saved + ability to win next-gen government defense contracts instantly",
+                  valueColor: "text-violet-300",
+                },
+                {
+                  industry: "Bio-Manufacturing",
+                  bottleneck: "Designing continuous-flow micro-reactors to synthesize unstable biologics at scale.",
+                  legacy: "$800M / 8 Yrs",
+                  shodh: "$8M / 6 Mo",
+                  value: "$792M saved + an extra 7.5 years of patent monopoly before generics hit",
+                  valueColor: "text-emerald-300",
+                },
+                {
+                  industry: "Climate Tech (Carbon)",
+                  bottleneck: "Finding a catalyst that makes Direct Air Capture economically viable at room temperature.",
+                  legacy: "$250M / 5 Yrs",
+                  shodh: "$2M / 2 Mo",
+                  value: "$248M saved + immediately unlocking billions in government green tax credits",
+                  valueColor: "text-lime-300",
+                },
+              ].map((row, i) => (
+                <div key={i} className="grid grid-cols-[1.1fr_1.4fr_0.9fr_0.9fr_1.4fr] gap-px bg-white/5">
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-white/80 font-light text-sm">{row.industry}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-white/45 font-light text-xs leading-relaxed">{row.bottleneck}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-white/35 font-light text-sm line-through">{row.legacy}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className="text-emerald-400 font-medium text-sm">{row.shodh}</p>
+                  </div>
+                  <div className="bg-[#060606] px-5 py-5">
+                    <p className={`font-light text-sm leading-relaxed ${row.valueColor}`}>{row.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* ── THREE HORIZONS ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
             <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Three Business Model Horizons</p>
@@ -657,70 +724,6 @@ export default function MasterDeckPage() {
                       <p className={`text-2xl md:text-3xl font-light ${h.tamColor}`}>{h.tam}</p>
                       <p className="text-white/40 text-xs mt-1">{h.model}</p>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── VALUE COMPRESSION MATRIX ── */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-20">
-            <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-8">Value Compression Matrix</p>
-            <div className="rounded-2xl overflow-hidden border border-white/5">
-              {/* Header */}
-              <div className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5 text-xs text-white/40 uppercase tracking-wider">
-                <div className="bg-[#060606] px-5 py-3">Industry</div>
-                <div className="bg-[#060606] px-5 py-3">Legacy Cost / Time</div>
-                <div className="bg-[#060606] px-5 py-3">Shodh AI</div>
-                <div className="bg-[#060606] px-5 py-3">Economic Value Created</div>
-              </div>
-              {[
-                {
-                  industry: "Solid-State Batteries",
-                  bottleneck: "Electrolyte that prevents dendrites at scale",
-                  legacy: "$1B / 10 Yrs",
-                  shodh: "$10M / 8 Mo",
-                  value: "$990M saved + 9 yrs early-to-market ($10B+ EV share)",
-                  valueColor: "text-blue-300",
-                },
-                {
-                  industry: "Aerospace & Defense",
-                  bottleneck: "Heat-resistant alloy surviving Mach 15 reentry",
-                  legacy: "$400M / 6 Yrs",
-                  shodh: "$3M / 3 Mo",
-                  value: "$397M saved + instant qualification for next-gen defense contracts",
-                  valueColor: "text-violet-300",
-                },
-                {
-                  industry: "Bio-Manufacturing",
-                  bottleneck: "Continuous-flow micro-reactors for unstable biologics",
-                  legacy: "$800M / 8 Yrs",
-                  shodh: "$8M / 6 Mo",
-                  value: "$792M saved + 7.5 extra patent monopoly years before generics",
-                  valueColor: "text-emerald-300",
-                },
-                {
-                  industry: "Climate Tech (Carbon)",
-                  bottleneck: "Catalyst for economically viable room-temp DAC",
-                  legacy: "$250M / 5 Yrs",
-                  shodh: "$2M / 2 Mo",
-                  value: "$248M saved + unlocks billions in government green tax credits",
-                  valueColor: "text-lime-300",
-                },
-              ].map((row, i) => (
-                <div key={i} className="grid grid-cols-[1.5fr_1fr_1fr_1.5fr] gap-px bg-white/5">
-                  <div className="bg-[#060606] px-5 py-5">
-                    <p className="text-white/80 font-light text-sm">{row.industry}</p>
-                    <p className="text-white/30 text-xs mt-1">{row.bottleneck}</p>
-                  </div>
-                  <div className="bg-[#060606] px-5 py-5">
-                    <p className="text-white/30 font-light text-sm line-through">{row.legacy}</p>
-                  </div>
-                  <div className="bg-[#060606] px-5 py-5">
-                    <p className="text-emerald-400 font-medium text-sm">{row.shodh}</p>
-                  </div>
-                  <div className="bg-[#060606] px-5 py-5">
-                    <p className={`font-light text-sm leading-relaxed ${row.valueColor}`}>{row.value}</p>
                   </div>
                 </div>
               ))}
@@ -986,7 +989,7 @@ export default function MasterDeckPage() {
 
           <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-4xl mx-auto mb-20">
             {[
-              { amount: "$25M", source: "IndiaAI Mission", desc: "Sovereign NVIDIA GPU compute" },
+              { amount: "$25M", source: "IndiaAI Mission", desc: "Sovereign GPU/TPU compute" },
               { amount: "$25M", source: "ANRF", desc: "Autonomous robotic lab infrastructure" },
               { amount: "$50M", source: "Equity Round", desc: "Talent, engineering teams, global market capture" },
             ].map((item, i) => (
@@ -1014,6 +1017,51 @@ export default function MasterDeckPage() {
                 <Mail className="w-5 h-5" />
                 Partner with Us
               </a>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+      {/* ─── FOUNDER'S LETTER ─── */}
+      <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-16">A Note from the Founder</p>
+
+          <div className="grid md:grid-cols-[160px_1fr] gap-12 md:gap-16 items-start">
+            {/* Photo */}
+            <div className="shrink-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-white/10">
+                <img
+                  src="/Arastu_Sharma_l.jpeg"
+                  alt="Arastu Sharma"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <p className="text-white/70 font-light text-sm mt-4">Arastu Sharma</p>
+              <p className="text-white/35 text-xs mt-0.5">Founder, Shodh AI</p>
+              <p className="text-white/25 text-xs mt-0.5">Cambridge Engineering</p>
+            </div>
+
+            {/* Letter */}
+            <div className="space-y-6">
+              <p className="text-white/50 font-light leading-relaxed text-lg">
+                I grew up watching India produce some of the world's most brilliant scientists and engineers. And watching them leave.
+              </p>
+              <p className="text-white/45 font-light leading-relaxed">
+                The problem was never talent. It was infrastructure. We never had the tools to translate a discovery made in a lab into a factory that works at scale. That translation — from milligrams to megatons — has always been guesswork. Expensive, dangerous, decade-long guesswork.
+              </p>
+              <p className="text-white/45 font-light leading-relaxed">
+                At Cambridge I studied the physics of how materials behave under extreme industrial conditions. What I found was that the physical world is not chaotic. It follows a small, tightly coupled set of governing equations. Equations that can be learned.
+              </p>
+              <p className="text-white/45 font-light leading-relaxed">
+                We built Shodh AI to make that translation exact. To give every scientist and every factory the ability to collapse years of physical trial-and-error into a software calculation — and to do it from India, for the world.
+              </p>
+              <p className="text-white/50 font-light leading-relaxed">
+                This is not a company chasing a market. It is a scientific mission. We are building the infrastructure that the next century of human progress depends on.
+              </p>
+              <div className="pt-6 border-t border-white/5">
+                <p className="text-white font-light text-lg">Thank you for your time and consideration.</p>
+                <p className="text-white/40 text-sm font-light mt-1">arastu@shodh.ai</p>
+              </div>
             </div>
           </div>
         </motion.div>
