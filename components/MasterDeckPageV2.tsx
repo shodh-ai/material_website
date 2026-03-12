@@ -622,22 +622,29 @@ export default function MasterDeckPageV2() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
             <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Breakthrough — Fourier Neural Operators</p>
             <p className="text-white/70 font-light leading-relaxed mb-5">
-              Recent advances in Continuous Neural Operators (FNOs) prove that AI can learn continuous partial differential equations — simulating industrial physics{" "}
-              <span className="text-emerald-300 font-medium">10,000× faster</span> than legacy software.
+              Continuous 3D Fourier Neural Operators (FNOs) can learn continuous partial differential equations — simulating industrial physics{" "}
+              <span className="text-emerald-300 font-medium">10,000× faster</span> than legacy software, and critically, the problem becomes <span className="text-white/90">invertible</span>.
             </p>
             <p className="text-emerald-300/70 text-sm font-mono italic">&quot;We need this fluid to survive scale-up. What exact shape should the reactor be?&quot;</p>
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-12 rounded-2xl bg-white/[0.015] border border-white/5 text-center">
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-4">We Are Building This</p>
-          <p className="text-3xl md:text-4xl font-extralight text-white leading-tight mb-4">
-            The <span className="font-normal">Inverse Engine.</span>
-          </p>
-          <p className="text-white/50 font-light max-w-2xl mx-auto">
-            Prompt the AI with the required physics outcome. It imagines the exact physical reactor geometry needed to achieve it.
-          </p>
-        </motion.div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.015] border border-white/5">
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Where We Are — V0 Proof</p>
+            <p className="text-white/70 font-light leading-relaxed">
+              We closed the sim-to-real loop. Our V0 proxy engine predicted physical degradation with{" "}
+              <span className="text-white font-normal">70% zero-shot accuracy.</span>{" "}The loop works. But 70% is not enough for an industrial giant to bet a $100M pilot plant on.
+            </p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 md:p-10 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
+            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">Where We&apos;re Going — Skanda V1.0</p>
+            <p className="text-white/70 font-light leading-relaxed">
+              We are using the $50M Series A and our synthetic data to train <span className="text-white font-normal">Skanda V1.0</span> — a Continuous 3D FNO. Our explicit technical milestone: push accuracy from{" "}
+              <span className="text-white/60 line-through">70%</span> to <span className="text-emerald-300 font-semibold">90%</span>, predicting scale-up fluid dynamics 10,000× faster than legacy software.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* ─── SECTION 08: THE ULTIMATE MOAT ─── */}
@@ -667,7 +674,7 @@ export default function MasterDeckPageV2() {
               num: "5%",
               title: "Physical Ground-Truth",
               sub: "The Anchor",
-              desc: "We route the AI's predictions to our autonomous robotic wet-lab to physically synthesize and stress-test the extremes. Reality anchors the simulation.",
+              desc: "Skanda V1.0 gets us to 90% accuracy, narrowing the search space from thousands of configurations to just five viable candidates. Our Bengaluru Autonomous Wet-Lab physically synthesizes those top five to bridge the final 10%.",
               color: "text-emerald-300",
               border: "border-emerald-500/20",
               bg: "bg-emerald-950/10",
@@ -676,7 +683,7 @@ export default function MasterDeckPageV2() {
               num: "∞",
               title: "Proprietary Feedback",
               sub: "The Closed Loop",
-              desc: "The physical degradation data — ground-truth reality — is fed back into the model's weights. Software can be distilled. Reality cannot.",
+              desc: "Every physical synthesis result — pass or fail — is fed back into the model's weights. The AI learns from the lab. The lab learns from the AI. This closed loop is unreplicable.",
               color: "text-rose-300",
               border: "border-rose-500/20",
               bg: "bg-rose-950/10",
@@ -691,11 +698,16 @@ export default function MasterDeckPageV2() {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.02] border border-white/5 text-center">
-          <p className="text-xl md:text-2xl font-light text-white leading-relaxed max-w-3xl mx-auto">
-            He who owns the physical sim-to-real failure data{" "}
-            <span className="font-normal text-emerald-300">owns the market.</span>
-          </p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.02] border border-white/5">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
+            <p className="text-xl md:text-2xl font-light text-white leading-relaxed max-w-2xl">
+              The AI + The Lab = <span className="font-normal text-emerald-300">100% guaranteed, lab-validated client success.</span>
+            </p>
+            <div className="shrink-0 text-center">
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-1">The Conclusion</p>
+              <p className="text-white/60 font-light text-sm max-w-xs">We own the closed-loop failure data. Therefore, we own the market.</p>
+            </div>
+          </div>
         </motion.div>
       </section>
 
@@ -1036,8 +1048,8 @@ export default function MasterDeckPageV2() {
               months: "Months 1–8",
               title: "Infra & The Base Model",
               points: [
-                "Deploy capital to expand the Bengaluru Autonomous Validation Lab and our dedicated GPU clusters.",
-                "Train Skanda V1.0. Release the open data. Establish the Layer 1 global standard.",
+                "Hit the Technical KPI: Deploy capital to scale the Autonomous Validation Lab and train Skanda V1.0 — upgrading simulation accuracy from our proven 70% baseline to a commercially dominant 90%.",
+                "Release the open-source base model. Establish the Layer 1 global standard across academia.",
               ],
               color: "border-blue-500/30",
               numColor: "text-blue-300/40",
