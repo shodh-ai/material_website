@@ -358,6 +358,7 @@ export default function MasterDeckPageV2() {
         <div className="grid md:grid-cols-3 gap-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 flex flex-col justify-between">
             <div>
+              <p className="text-white/60 font-light text-sm leading-relaxed mb-4">By compressing the 7-year scale-up phase into 3 months, we give pharmaceutical and chemical companies their patent life back.</p>
               <p className="text-white/40 text-xs uppercase tracking-wider mb-3">Patent Life Recovered</p>
               <p className="text-5xl font-extralight text-emerald-300 mb-1">+6.75 <span className="text-2xl">yrs</span></p>
             </div>
@@ -615,13 +616,6 @@ export default function MasterDeckPageV2() {
               Too slow, computationally expensive, and fail to adapt to real-world complexities. Months to simulate one configuration. <span className="text-white/90">Mathematically impossible to invert.</span>
             </p>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 md:p-10 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">Our Compression</p>
-            <p className="text-white/70 font-light leading-relaxed">
-              We are compressing <span className="text-white/60 line-through">6 years</span> of R&amp;D and scale-up engineering into{" "}
-              <span className="text-emerald-300 font-semibold">6 months.</span>
-            </p>
-          </motion.div>
         </div>
       </section>
 
@@ -696,8 +690,11 @@ export default function MasterDeckPageV2() {
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-4 max-w-3xl">
             Our AlphaFold Moment.
           </h2>
-          <p className="text-white/40 font-light max-w-xl mb-16">
+          <p className="text-white/40 font-light max-w-xl mb-6">
             We ran a blind 25-day &quot;Sim-to-Real&quot; sprint. We didn&apos;t just simulate — we generated the recipe, physically built it, and predicted the degradation.
+          </p>
+          <p className="text-white/55 font-light max-w-xl mb-16 text-sm border-l-2 border-white/10 pl-4">
+            We proved the core physics engine first on complex battery matrices; we are now deploying the same Navier-Stokes/Fluid architecture to Jubilant and Biocon&apos;s bioreactors.
           </p>
         </motion.div>
 
@@ -853,105 +850,18 @@ export default function MasterDeckPageV2() {
         </AnimatePresence>
       </section>
 
-      {/* ─── SECTION 09: UNIT ECONOMICS ─── */}
+      {/* ─── SECTION 10: THE BUSINESS MODEL ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 — The Execution</p>
-          <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            From NRE to<br /><span className="font-normal">Global Standard.</span>
-          </h2>
-          <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            We are raising $50 Million to achieve total market dominance in the AI-for-Science scale-up layer.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Open Source Trojan Horse</p>
-            <p className="text-white/70 font-light leading-relaxed mb-4">
-              We will open-source the base LPM to instantly replace legacy engineering software systems worldwide, establishing our framework as the global default.
-            </p>
-            <p className="text-white/35 text-sm font-mono italic">Starving legacy software competitors (COMSOL, ANSYS) of their future user base.</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Enterprise Revenue Engine</p>
-            <p className="text-white/70 font-light leading-relaxed mb-4">
-              We monetize through proprietary, fine-tuned models trained on real industry failure data. Software can be open-sourced. <span className="text-white font-normal">Physical reality cannot.</span>
-            </p>
-            <p className="text-emerald-300/70 text-sm font-mono italic">The open-source community gets the base physics solver. The enterprise gets the proprietary scale-up blueprint.</p>
-          </motion.div>
-        </div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-12 rounded-2xl bg-white/[0.015] border border-white/5">
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Horizontal Moat</p>
-          <p className="text-2xl md:text-3xl font-extralight text-white leading-tight mb-4">
-            The physics of scale-up is universal.
-          </p>
-          <p className="text-white/65 font-light max-w-3xl text-lg leading-relaxed">
-            Use three zero-to-billion case studies to lock in the next <span className="text-emerald-300 font-normal">10 global Tier-1 manufacturing giants.</span> Every industry that manufactures anything is a future customer.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ─── SECTION 10: GTM ─── */}
-      <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">10 — The Go-To-Market</p>
-          <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Anchor NREs.<br /><span className="font-normal">Global Scaling.</span>
-          </h2>
-          <p className="text-white/60 font-light max-w-2xl mb-4 text-lg">
-            Convert our 3 initial pilot partners into NRE contracts. Use those case studies to lock in the next 10 global Tier-1 giants.
-          </p>
-          <p className="text-white/45 font-light max-w-2xl mb-16">
-            We solve their most complex scale-up bottlenecks in exchange for milestone-based IP payments.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-white/20 font-mono text-3xl font-bold leading-none">1</span>
-              <div>
-                <p className="text-white font-light text-lg">Deliver the 10B Model</p>
-                <p className="text-white/40 text-xs italic">Core Training Pipeline</p>
-              </div>
-            </div>
-            <p className="text-white/65 font-light leading-relaxed flex-grow">
-              Execute the core training pipeline using our <span className="text-white/90">sovereign GPU allocation</span> from the IndiaAI Mission. Build and open-source the base LPM to establish the global default standard.
-            </p>
-            <div className="mt-6 pt-4 border-t border-white/5">
-              <p className="text-white/35 text-sm italic">Non-dilutive. Government-funded. Zero VC burn on compute.</p>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-violet-950/20 border border-violet-500/20 flex flex-col">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-violet-300/40 font-mono text-3xl font-bold leading-none">2</span>
-              <div>
-                <p className="text-white font-light text-lg">Anchor NREs</p>
-                <p className="text-white/40 text-xs italic">Milestone-Based IP Payments</p>
-              </div>
-            </div>
-            <p className="text-white/65 font-light leading-relaxed flex-grow">
-              Convert our 3 initial pilot partners (Biocon, Jubilant Ingrevia, Aarti Industries) into Non-Recurring Engineering contracts. We solve their most complex scale-up bottlenecks in exchange for <span className="text-white/90">milestone-based IP payments.</span>
-            </p>
-            <div className="mt-6 pt-4 border-t border-violet-500/10">
-              <p className="text-violet-300/50 text-sm italic">We solve the bottleneck. They pay for the blueprint.</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 11: REVENUE ARCHITECTURE ─── */}
-      <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">11 — Revenue Architecture</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">10 — The Business Model</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Path to<br /><span className="font-normal">Value Capture.</span>
           </h2>
-          <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            Three compounding revenue layers — from immediate cash flow to perpetual royalties on global physical output.
+          <p className="text-white/60 font-light max-w-2xl mb-4 text-lg">
+            Software can be open-sourced. Physical reality cannot. The open-source community gets the base physics solver. The enterprise gets the proprietary scale-up blueprint.
+          </p>
+          <p className="text-white/40 font-light max-w-2xl mb-16">
+            Three compounding revenue layers.
           </p>
         </motion.div>
 
@@ -959,30 +869,30 @@ export default function MasterDeckPageV2() {
           {[
             {
               num: "01",
-              title: "Upfront NRE",
-              sub: "Compute & Validation",
+              title: "Immediate Cash Flow: NRE & Compute",
+              sub: "Break-even or better from Day 1",
               label: "Immediate Cash Flow",
-              desc: "Partners pay an upfront NRE contract fee to run their specific bottlenecks through the LPM. This covers GPU compute and wet-lab burn. We operate at break-even or better from Day 1.",
+              desc: "Partners pay an upfront fee to run their specific bottlenecks through the LPM. Operates at break-even or better from Day 1.",
               model: "$2M – $5M per engagement",
               color: "text-blue-300",
               bg: "bg-blue-950/5",
             },
             {
               num: "02",
-              title: "IP Co-Ownership & Milestones",
-              sub: "The Biobucks Model",
+              title: "The Multiplier: Biobucks & Milestones",
+              sub: "IP Co-Ownership",
               label: "The Multiplier",
-              desc: "We co-own the physical discoveries. When the Shodh AI blueprint successfully scales in the partner's physical pilot plant, we secure clinical and commercial milestone payouts.",
+              desc: "We co-own the physical discoveries. When the Shodh AI blueprint successfully scales in the partner's physical pilot plant, we secure commercial milestone payouts.",
               model: "$5M – $15M per milestone",
               color: "text-violet-300",
               bg: "bg-violet-950/5",
             },
             {
               num: "03",
-              title: "The Endgame",
-              sub: "Royalties on Physical Production",
+              title: "True Zero-Shot Manufacturing: Royalties",
+              sub: "Perpetual Revenue Streams",
               label: "True Zero-Shot Manufacturing",
-              desc: "A single-digit software royalty on every physical product globally manufactured using a Shodh AI-generated blueprint. Every factory we design becomes a perpetual revenue stream.",
+              desc: "A software royalty on every physical product globally manufactured using a Shodh AI-generated blueprint. Every factory we design becomes a perpetual revenue stream.",
               model: "% royalty on manufactured output",
               color: "text-emerald-300",
               bg: "bg-emerald-950/10",
@@ -1006,15 +916,15 @@ export default function MasterDeckPageV2() {
         </div>
       </section>
 
-      {/* ─── SECTION 12: MILESTONES & THE ASK ─── */}
+      {/* ─── SECTION 11: THE GO-TO-MARKET TIMELINE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">12 — The $50M Ask</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">11 — The Go-To-Market Timeline</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Total Market<br /><span className="font-normal">Dominance.</span>
+            From NRE to<br /><span className="font-normal">Global Standard.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            We are raising $50M to achieve total market dominance in the AI-for-Science scale-up layer.
+            Three tightly sequenced phases to move from pilot to planetary infrastructure.
           </p>
         </motion.div>
 
@@ -1023,10 +933,10 @@ export default function MasterDeckPageV2() {
             {
               phase: "Phase 1",
               months: "Months 1–8",
-              title: "Infra & The Base Model",
+              title: "The Open Source Trojan Horse",
               points: [
-                "Train and deliver the 10-Billion parameter LPM. Deploy capital to scale the Autonomous Validation Lab and push accuracy from our proven 70% baseline to a commercially dominant 90%.",
-                "Release the open-source base model. Establish the global default standard, replacing legacy solvers (COMSOL, ANSYS) across academia.",
+                "Train and open-source the 10-Billion parameter base LPM. Instantly replace legacy solvers (COMSOL, ANSYS) across academia to establish the global default standard.",
+                "Push zero-shot accuracy from 70% to 90%.",
               ],
               color: "border-blue-500/30",
               numColor: "text-blue-300/40",
@@ -1034,10 +944,10 @@ export default function MasterDeckPageV2() {
             {
               phase: "Phase 2",
               months: "Months 9–16",
-              title: "Anchor Delivery & Revenue Conversion",
+              title: "Anchor Conversion",
               points: [
-                "Deliver the first fully-scaled digital blueprints for anchor partners (Biocon, Jubilant Ingrevia, Aarti Industries).",
-                "Convert early pilots into paid NRE contracts. Collect first milestone-based IP payments as blueprints hit pilot scale.",
+                "Deliver the first fully-scaled digital blueprints for our initial anchors (Biocon, Jubilant Ingrevia, Aarti).",
+                "Convert pilots into paid NRE contracts and collect first milestone IP payments as blueprints hit pilot scale.",
               ],
               color: "border-violet-500/30",
               numColor: "text-violet-300/40",
@@ -1045,9 +955,10 @@ export default function MasterDeckPageV2() {
             {
               phase: "Phase 3",
               months: "Months 17–24",
-              title: "Generalization",
+              title: "The Horizontal Sweep",
               points: [
-                "Use three zero-to-billion case studies to lock in the next 10 global Tier-1 manufacturing giants across adjacent physical domains.",
+                "Use our first three zero-to-billion case studies to lock in the next 10 global Tier-1 manufacturing giants.",
+                "Set up the $500M Mega-Round to generalize the LPM across all physical supply chains globally.",
               ],
               color: "border-emerald-500/30",
               numColor: "text-emerald-300/40",
@@ -1074,47 +985,58 @@ export default function MasterDeckPageV2() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-emerald-950/30 via-transparent to-blue-950/20 border border-white/10 text-center">
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Endgame</p>
-          <p className="text-2xl md:text-3xl font-extralight text-white leading-tight mb-4 max-w-3xl mx-auto">
-            By Month 24, we will have commercial proof that our AI successfully generated physical factories across multiple trillion-dollar industries.
-          </p>
-          <p className="text-white/55 font-light max-w-2xl mx-auto">
-            With that undeniable traction, we set up the{" "}
-            <span className="text-emerald-300 font-normal">$500M Phase 2 Mega-Round</span> to generalize the LPM across all physics globally.
-          </p>
-        </motion.div>
       </section>
 
-      {/* ─── SECTION 10: THE ASK ─── */}
+      {/* ─── SECTION 12: THE $100M CAPITAL STACK ─── */}
       <section className="px-6 py-28 md:py-40 border-t border-white/5 max-w-6xl mx-auto text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">10 — The Ask</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">12 — The $100M Capital Stack</p>
           <p className="text-white/30 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
           <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-4">Science is here.</h2>
-          <p className="text-xl text-white/40 font-light mb-20 max-w-xl mx-auto">
-            We are raising $50M to build the foundation model for the physical world. This is the capital structure.
+          <p className="text-xl text-white/40 font-light mb-4 max-w-xl mx-auto">
+            We are structuring a $100M capitalization to build the foundation model for the physical world.
+          </p>
+          <p className="text-white/30 font-light max-w-xl mx-auto mb-20">
+            $50M in sovereign, non-dilutive backing is already secured — your $50M equity check punches like a $100M check.
           </p>
 
           <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-4xl mx-auto mb-20">
             {[
-              { amount: "$25M", source: "IndiaAI Mission", desc: "Sovereign GPU/TPU compute" },
-              { amount: "$25M", source: "ANRF", desc: "Autonomous robotic lab infrastructure" },
-              { amount: "$50M", source: "Equity Round", desc: "Talent, engineering teams, global market capture" },
+              {
+                amount: "$25M",
+                source: "Sovereign Compute",
+                tag: "Secured",
+                desc: "IndiaAI Mission allocation for priority national GPU/TPU clusters. Zero VC burn on compute.",
+                tagColor: "text-emerald-300",
+                tagBg: "bg-emerald-950/40 border-emerald-500/30",
+              },
+              {
+                amount: "$25M",
+                source: "Autonomous Lab Infra",
+                tag: "Secured",
+                desc: "ANRF funding for wet-lab validation and robotic infrastructure.",
+                tagColor: "text-emerald-300",
+                tagBg: "bg-emerald-950/40 border-emerald-500/30",
+              },
+              {
+                amount: "$50M",
+                source: "The Equity Raise",
+                tag: "Active",
+                desc: "Hire the world's elite AI researchers, deploy Federated Data Engineering teams to anchor partners, and execute global market capture.",
+                tagColor: "text-white",
+                tagBg: "bg-white/5 border-white/20",
+              },
             ].map((item, i) => (
               <div key={i} className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.03]" : ""}`}>
                 <p className="text-4xl md:text-5xl font-light text-white mb-2">{item.amount}</p>
-                <p className="text-white/50 text-sm font-light mb-1">{item.source}</p>
-                <p className="text-white/40 text-xs">{item.desc}</p>
+                <p className="text-white/70 text-sm font-light mb-2">{item.source}</p>
+                <span className={`inline-block text-xs px-2.5 py-0.5 rounded-full border ${item.tagBg} ${item.tagColor} mb-3`}>{item.tag}</span>
+                <p className="text-white/40 text-xs leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="max-w-2xl mx-auto space-y-8">
-            <p className="text-white/50 font-light leading-relaxed">
-              We are raising $50M in equity to hire the world's best AI researchers, deploy Federated Data Engineering teams into our first anchor partners, and lock in the global market.
-            </p>
+          <div className="max-w-2xl mx-auto">
             <div className="pt-8 border-t border-white/5">
               <h3 className="text-2xl md:text-4xl font-light text-white mb-8">
                 We are not just discovering the future.<br />
