@@ -197,7 +197,7 @@ export default function MasterDeckPageV2() {
             The Large<br /><span className="font-normal text-white">Physics Model</span>
           </h1>
           <p className="text-lg md:text-xl text-white/40 font-light max-w-xl mx-auto mt-8">
-            Shodh AI · Built in India · Made for the World
+            Building the foundation model for the physical world at the mesoscale.
           </p>
         </motion.div>
       </section>
@@ -208,7 +208,6 @@ export default function MasterDeckPageV2() {
           <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">01 — Identity</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
             Backed by the IndiaAI Mission.<br />
-            <span className="text-white/50">200,000 GPUs.</span><br />
             <span className="font-normal">Built in India. For the World.</span>
           </h2>
           <div className="space-y-8 max-w-3xl">
@@ -250,36 +249,141 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 2: PARADIGM ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-t border-white/5">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">02 — Paradigm</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">02 — The Trillion-Dollar Bottleneck</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
-            LLMs learned the<br />grammar of <span className="text-white/40">text.</span><br />
-            We are learning the<br /><span className="font-normal">physics of the real world.</span>
+            The bottleneck is<br /><span className="text-white/40">not only</span> discovery.<br />
+            The deeper bottleneck is<br /><span className="font-normal">the mesoscale.</span>
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
-            <div className="space-y-2">
-              <p className="text-white/40 text-sm uppercase tracking-wider mb-4">2022 — LLMs</p>
-              <p className="text-white/50 text-xl font-light">Ingested the entire internet.</p>
-              <p className="text-white/30 font-light">Scaling law: more text → better language.</p>
+          <div className="space-y-8 max-w-4xl">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <p className="text-white/40 text-sm uppercase tracking-wider mb-4">The Atomic Layer — Accelerating</p>
+                <p className="text-white/50 text-xl font-light">AI for science is split into two layers.</p>
+                <p className="text-white/30 font-light">The atomic layer — focused on discovery — is already dominated by models like AlphaFold and Isomorphic Labs.</p>
+              </div>
+              <div className="space-y-2 border-l border-white/10 pl-8">
+                <p className="text-white/50 text-sm uppercase tracking-wider mb-4">The Mesoscale — Unsolved</p>
+                <p className="text-white text-xl font-light">90% of discovered molecules will never see the market.</p>
+                <p className="text-white/60 font-light">Moving from lab-scale discovery to commercial continuous manufacturing takes 6 to 8 years of expensive, physical trial-and-error.</p>
+              </div>
             </div>
-            <div className="space-y-2 border-l border-white/10 pl-8">
-              <p className="text-white/50 text-sm uppercase tracking-wider mb-4">Today — Shodh AI</p>
-              <p className="text-white text-xl font-light">Ingesting millions of physical simulations and real-world degradation data.</p>
-              <p className="text-white/60 font-light">Scaling law: more physical failure data → deeper manufacturing understanding.</p>
+            <div className="border-l-2 border-white/10 pl-6 py-2">
+              <p className="text-white/60 font-light text-lg">Today, industries possess millions of digitally discovered molecules, bio-enzymes, and novel materials. Industries don&apos;t just need new discoveries; they need to know <span className="text-white font-normal">how to manufacture them at scale.</span></p>
             </div>
           </div>
         </motion.div>
+      </section>
+
+      {/* ─── SECTION 2b: THE PIPELINE LANDSCAPE ─── */}
+      <section className="px-6 py-16 md:py-24 border-t border-white/5 max-w-6xl mx-auto">
+        {/* Timeline track — desktop only */}
+        <div className="hidden lg:flex items-center mb-3">
+          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
+          <div className="flex-1 h-px bg-white/10" />
+          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
+          <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-rose-500/40" />
+          <div className="w-5 h-5 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.5)] shrink-0" />
+        </div>
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
+          {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
+            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/80" : "text-white/60"}`}>{l}</p>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6 mb-12">
+          {[
+            {
+              num: "01",
+              stage: "Digital Discovery",
+              players: ["Isomorphic Labs", "Schrödinger"],
+              desc: "AI predicts molecular structures in silico. Billions of candidates screened in days.",
+              gap: "The output is a digital prediction — not a manufacturing blueprint.",
+              border: "border-white/5",
+              bg: "bg-white/[0.01]",
+              numColor: "text-white/5",
+              tagBorder: "border-white/8",
+              tagText: "text-white/60",
+              gapColor: "text-white/65",
+            },
+            {
+              num: "02",
+              stage: "Lab Synthesis",
+              players: ["Emerald Cloud Lab", "Radical AI"],
+              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence — but not proof of scale.",
+              gap: "The industry spends 7 years and $500M building blind physical pilot plants trying to figure out how to manufacture it.",
+              border: "border-white/5",
+              bg: "bg-white/[0.01]",
+              numColor: "text-white/5",
+              tagBorder: "border-white/8",
+              tagText: "text-white/60",
+              gapColor: "text-white/65",
+            },
+            {
+              num: "03",
+              stage: "Industrial Scale-Up",
+              players: ["Shodh AI — The Bottleneck"],
+              desc: "At the 10,000-litre scale, the turbulence, heat transfer, and pressure of an industrial reactor tear novel molecules apart.",
+              gap: "Ours to own.",
+              border: "border-rose-500/20",
+              bg: "bg-rose-950/10",
+              numColor: "text-rose-500/10",
+              tagBorder: "border-rose-500/25",
+              tagText: "text-rose-300/60",
+              gapColor: "text-rose-400/50",
+            },
+          ].map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12 }}
+              className={`rounded-xl border ${s.border} ${s.bg} p-7 md:p-9 flex flex-col`}
+            >
+              <p className={`text-[52px] font-extralight leading-none mb-5 ${s.numColor}`}>{s.num}</p>
+              <h3 className={`text-lg md:text-xl font-light mb-4 ${i === 2 ? "text-white" : "text-white/70"}`}>{s.stage}</h3>
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {s.players.map((p, j) => (
+                  <span key={j} className={`text-xs px-2.5 py-1 rounded-full border ${s.tagBorder} ${s.tagText} bg-white/[0.02]`}>{p}</span>
+                ))}
+              </div>
+              <p className="text-white/70 font-light text-base leading-relaxed mb-5 flex-grow">{s.desc}</p>
+              <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"}`}>
+                <p className={`text-xs font-light leading-relaxed ${s.gapColor}`}>{s.gap}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 flex flex-col justify-between">
+            <div>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-3">Patent Life Recovered</p>
+              <p className="text-5xl font-extralight text-emerald-300 mb-1">+6.75 <span className="text-2xl">yrs</span></p>
+            </div>
+            <p className="text-white/60 font-light text-sm leading-relaxed mt-4">Patents last 20 years. At $200M/yr profit → <span className="text-white font-normal">$1.35B in new monopoly revenue</span> per engagement.</p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">How We Fit Together</p>
+            <p className="text-white/65 font-light text-sm leading-relaxed">Isomorphic Labs and Radical AI are not our competitors — they are our upstream. They hand us the molecule. We build the factory. The entire AI discovery pipeline converges on Stage 3 as its bottleneck. <span className="text-white font-normal">We are the only team working on it.</span></p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Our Structural Advantage</p>
+            <p className="text-white/65 font-light text-sm leading-relaxed">Every dollar invested in Isomorphic, Schrödinger, or Recursion creates more demand for Shodh AI. As Stage 1 and Stage 2 accelerate, the Stage 3 bottleneck becomes more acute. <span className="text-white font-normal">We are the only exit for the pipeline.</span></p>
+          </motion.div>
+        </div>
       </section>
 
       {/* ─── SECTION 3: 10-YEAR VISION / TERMINAL ─── */}
       <section className="py-28 md:py-36 border-t border-white/5">
         <div className="px-6 max-w-6xl mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">03 — The 10-Year Vision</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">03 — The Solution</p>
             <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
-              Programmable<br /><span className="font-normal">Matter.</span>
+              One Math Architecture<br /><span className="font-normal">for the Physical World.</span>
             </h2>
             <p className="text-white/40 font-light max-w-xl">
-              Once our LPM achieves true generalization, we stop optimizing legacy factories. We unlock the ability to prompt the physical world.
+              By transitioning from deterministic solvers to AI-driven Neural Operators, we are compressing 6 years of R&amp;D and scale-up engineering into 6 months.
             </p>
           </motion.div>
         </div>
@@ -363,113 +467,27 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 4: LANDSCAPE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">04 — The Landscape</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">04 — The Technology</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Where every molecule<br />goes to die.
+            Engineering the<br /><span className="font-normal">10-Billion Parameter SOTA.</span>
           </h2>
           <p className="text-white/60 font-light max-w-xl mb-20">
-            Three sequential stages take a new material from idea to industrial reality. AI has transformed the first two. The third remains completely unsolved.
+            Neural operators have reached an inflection point, proving AI can beat traditional solvers. We are scaling this to unprecedented levels.
           </p>
         </motion.div>
-
-        {/* Timeline track — desktop only */}
-        <div className="hidden lg:flex items-center mb-3">
-          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
-          <div className="flex-1 h-px bg-white/10" />
-          <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
-          <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-rose-500/40" />
-          <div className="w-5 h-5 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.5)] shrink-0" />
-        </div>
-        <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
-          {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
-            <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/80" : "text-white/60"}`}>{l}</p>
-          ))}
-        </div>
-
-        {/* Stage cards */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              num: "01",
-              stage: "Digital Discovery",
-              players: ["Isomorphic Labs", "Schrödinger"],
-              desc: "AI predicts molecular structures in silico. Billions of candidates screened in days.",
-              gap: "The output is a digital prediction — not a manufacturing blueprint.",
-              time: "Days",
-              border: "border-white/5",
-              bg: "bg-white/[0.01]",
-              numColor: "text-white/5",
-              tagBorder: "border-white/8",
-              tagText: "text-white/60",
-              gapColor: "text-white/65",
-            },
-            {
-              num: "02",
-              stage: "Lab Synthesis",
-              players: ["Emerald Cloud Lab", "Radical AI"],
-              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence — but not proof of scale.",
-              gap: "The industry spends 7 years and $500M building blind physical pilot plants trying to figure out how to manufacture it.",
-              time: "Weeks",
-              border: "border-white/5",
-              bg: "bg-white/[0.01]",
-              numColor: "text-white/5",
-              tagBorder: "border-white/8",
-              tagText: "text-white/60",
-              gapColor: "text-white/65",
-            },
-            {
-              num: "03",
-              stage: "Industrial Scale-Up",
-              players: ["Shodh AI — The Bottleneck"],
-              desc: "At the 10,000-litre scale, the turbulence, heat transfer, and pressure of an industrial reactor tear novel molecules apart.",
-              gap: "Ours to own.",
-              time: "Months — not years",
-              border: "border-rose-500/20",
-              bg: "bg-rose-950/10",
-              numColor: "text-rose-500/10",
-              tagBorder: "border-rose-500/25",
-              tagText: "text-rose-300/60",
-              gapColor: "text-rose-400/50",
-            },
-          ].map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              className={`rounded-xl border ${s.border} ${s.bg} p-7 md:p-9 flex flex-col`}
-            >
-              <p className={`text-[52px] font-extralight leading-none mb-5 ${s.numColor}`}>{s.num}</p>
-              <h3 className={`text-lg md:text-xl font-light mb-4 ${i === 2 ? "text-white" : "text-white/70"}`}>{s.stage}</h3>
-
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {s.players.map((p, j) => (
-                  <span key={j} className={`text-xs px-2.5 py-1 rounded-full border ${s.tagBorder} ${s.tagText} bg-white/[0.02]`}>{p}</span>
-                ))}
-              </div>
-
-              <p className="text-white/70 font-light text-base leading-relaxed mb-5 flex-grow">{s.desc}</p>
-
-              <div className={`pt-4 border-t ${i === 2 ? "border-rose-500/10" : "border-white/5"}`}>
-                <p className={`text-xs font-light leading-relaxed ${s.gapColor}`}>{s.gap}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* Structural Advantage narrative */}
         <div className="pt-10 border-t border-white/5 grid md:grid-cols-2 gap-12">
           <div>
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Our Structural Advantage</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Scale Leap</p>
             <p className="text-white/60 font-light leading-relaxed">
-              Isomorphic and Schrödinger are not our competitors; they are our upstream pipeline. They hand us the molecule. We build the blueprint for the factory. Every dollar invested in AI drug discovery creates more bottleneck demand for Shodh AI.
+              Current state-of-the-art AI weather models sit at 150M parameters. Advanced science models sit at 500M. We are building the world&apos;s first <span className="text-white font-normal">10-Billion parameter</span> physics foundation model.
             </p>
           </div>
           <div>
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Bottleneck We Own</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Our Sovereign Infrastructure</p>
             <p className="text-white/60 font-light leading-relaxed">
-              The industry spends 7 years and $500M building blind physical pilot plants. Every dollar invested in Stage 1 and Stage 2 AI accelerates the pipeline — and makes the Stage 3 bottleneck more acute. We are the only exit.
+              Backed by direct technical collaboration with Google&apos;s JAX team, DeepMind, and Nvidia&apos;s Nemo Modulus team. We built a proprietary JAX/FLAX-based data and training engine to overcome the cold-start problem of physical data.
             </p>
           </div>
         </div>
@@ -478,43 +496,43 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 5: THE BOTTLENECK ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">05 — The Bottleneck</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">05 — The Data Engine</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Cures on a shelf.<br />
-            <span className="font-normal">The Biocon Problem.</span>
+            Solving the<br />
+            <span className="font-normal">Cold-Start Problem.</span>
           </h2>
           <p className="text-white/40 font-light max-w-xl mb-20">
-            New cancer solutions and miracle molecules are discovered every day. They never reach the market. The reason is always the same.
+            Physical data doesn&apos;t exist on the internet. We built the infrastructure to generate it at scale.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-8">
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Situation</p>
-              <p className="text-white/70 font-light leading-relaxed">Biocon's bio-enzymes can cut a 16-step drug process down to just 3 steps.</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Proprietary 3D Microstructure Generation</p>
+              <p className="text-white/70 font-light leading-relaxed">We algorithmically generate synthetic physical structures with <span className="text-white font-normal">95% morphological accuracy</span> compared to real-world Scanning Electron Microscope (SEM) data.</p>
             </div>
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Problem</p>
-              <p className="text-white/70 font-light leading-relaxed">Pump those fragile enzymes into an industrial steel reactor. The heat and fluid dynamics tear them apart. The scale-up fails. Every time.</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Massive DNS Data Engine</p>
+              <p className="text-white/70 font-light leading-relaxed">We run highly advanced Direct Numerical Simulations (DNS) across priority GPU clusters to create massive, high-fidelity synthetic training data.</p>
             </div>
             <div className="border-l-2 border-white/10 pl-6 py-2">
-              <p className="text-white text-xl font-light">Discovery is solved.</p>
-              <p className="text-rose-400 text-xl font-light">Engineering is broken.</p>
+              <p className="text-white text-xl font-light">Legacy solvers: months per simulation.</p>
+              <p className="text-emerald-400 text-xl font-light">Our Neural Operators: milliseconds.</p>
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Industry Reality</p>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-4">State-of-the-Art Architecture</p>
               <p className="text-white/70 font-light leading-relaxed">
-                The industry spends 7 years and $500M building blind physical pilot plants to figure out how to manufacture it. The reactor tears the molecule apart. The scale-up fails. Every time.
+                Advancing from standard FNOs (Fourier Neural Operators) to UPT (Universal Physics Transformers) with cutting-edge compression. Starting with LBM for porous media and fluids, expanding to JAX-based FEM for solids and FDTD for electromagnetics.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/15">
-              <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Shodh AI Answer</p>
+              <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Unified Architecture</p>
               <p className="text-white/70 font-light leading-relaxed">
-                We generate the complete manufacturing blueprint before a single physical reactor is built. Reactor geometry, fluid dynamics, thermal profiles — all computed.
+                Ultimately unified in a <span className="text-white font-normal">Mixture of Experts (MoE)</span> architecture — a single model that routes each physical problem to its specialist expert layer.
               </p>
             </div>
           </motion.div>
@@ -526,68 +544,28 @@ export default function MasterDeckPageV2() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">06 — The Science</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            One model.<br /><span className="font-normal">Every industry.</span>
+            Why one model solves<br /><span className="font-normal">Pharma, Batteries, and Specialty Chemicals.</span>
           </h2>
         </motion.div>
 
-        {/* Central unified concept — animated wave gradient */}
-        {/* LPM intro */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
-          <p className="text-white/70 font-light text-xl md:text-2xl leading-relaxed max-w-4xl mb-6">
-            We are building a <span className="text-white font-normal">Large Physics Model (LPM)</span> that masters the underlying math. By unifying the governing equations — Navier-Stokes, Fourier's Law, Fick's Law — we are building a single AI architecture that can scale a pharma bioreactor today and a solid-state battery tomorrow.
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 max-w-4xl">
+          <p className="text-white/70 font-light text-lg md:text-xl leading-relaxed mb-4">
+            These industries look completely different on paper. Physically, they are the exact same problem: <span className="text-white font-normal">a fluid moving through a porous solid under heat, pressure, and chemical reaction.</span>
           </p>
-          <p className="text-white/50 font-light leading-relaxed max-w-3xl">
-            We coupled the five governing equations that describe this interaction into one unified model — the LPM. That is why it generalizes across every industry.
+          <p className="text-white/50 font-light leading-relaxed">
+            A drug bioreactor. A solid-state battery. A carbon membrane. Strip away the industry names, and the physics is identical. We coupled the five governing equations into one unified model—the LPM.
           </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-14 rounded-2xl border border-white/5 overflow-hidden"
-        >
-          <motion.div
-            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-            style={{
-              backgroundSize: "400% 400%",
-              backgroundImage: "linear-gradient(135deg, rgba(59,130,246,0.04) 0%, rgba(16,185,129,0.06) 25%, rgba(99,102,241,0.04) 50%, rgba(59,130,246,0.06) 75%, rgba(16,185,129,0.03) 100%)",
-            }}
-            className="p-10 md:p-16"
-          >
-            <div className="max-w-4xl">
-              <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-8">Why one model can solve pharma, batteries, chemicals, and aerospace</p>
-              <p className="text-xl md:text-2xl font-light text-white/50 leading-relaxed mb-3">
-                These industries look completely different on paper.
-              </p>
-              <p className="text-2xl md:text-4xl font-light text-white leading-relaxed mb-3">
-                Physically, they are the same problem:
-              </p>
-              <p className="text-3xl md:text-5xl font-light leading-tight mb-8">
-                <span className="text-white">a fluid moving through</span>{" "}
-                <span className="text-white/50">a porous solid</span>{" "}
-                <span className="text-white">under heat,</span>{" "}
-                <span className="text-white/50">pressure, and</span>{" "}
-                <span className="text-white">chemical reaction.</span>
-              </p>
-              <p className="text-white/35 font-light text-base md:text-lg leading-relaxed">
-                A drug bioreactor. A battery electrode. A carbon membrane. A steel catalyst. Strip away the industry names and the physics is identical. We coupled the five governing equations that describe this interaction into one unified model — the LPM. That is why it generalizes across everything.
-              </p>
-            </div>
-          </motion.div>
         </motion.div>
 
         <div className="mb-16">
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-6">The Five Governing Equations</p>
-          <p className="text-white/50 text-sm font-light mb-8">Hover to explore each layer of the physics stack.</p>
+          <p className="text-white/40 text-xs uppercase tracking-wider mb-6">The Unified Physics Stack</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { eq: "Navier-Stokes & Fick's Law", desc: "Fluid flow and chemical diffusion through pores.", hoverText: "hover:text-blue-300", hoverBox: "hover:bg-blue-500/5 hover:border-blue-500/20", num: "1" },
-              { eq: "Phase Field / Cahn-Hilliard", desc: "How materials separate, solidify, and grow dendrites.", hoverText: "hover:text-violet-300", hoverBox: "hover:bg-violet-500/5 hover:border-violet-500/20", num: "2" },
-              { eq: "Solid Mechanics & Fourier's Law", desc: "How materials crack, swell, and distribute heat.", hoverText: "hover:text-orange-300", hoverBox: "hover:bg-orange-500/5 hover:border-orange-500/20", num: "3" },
+              { eq: "Navier-Stokes & Fick's Law", desc: "Fluid flow and chemical diffusion.", hoverText: "hover:text-blue-300", hoverBox: "hover:bg-blue-500/5 hover:border-blue-500/20", num: "1" },
+              { eq: "Phase Field / Cahn-Hilliard", desc: "How materials separate and solidify.", hoverText: "hover:text-violet-300", hoverBox: "hover:bg-violet-500/5 hover:border-violet-500/20", num: "2" },
+              { eq: "Solid Mechanics & Fourier's Law", desc: "How materials crack and distribute heat.", hoverText: "hover:text-orange-300", hoverBox: "hover:bg-orange-500/5 hover:border-orange-500/20", num: "3" },
               { eq: "Maxwell's Equations", desc: "Electrical fields and ion transport.", hoverText: "hover:text-cyan-300", hoverBox: "hover:bg-cyan-500/5 hover:border-cyan-500/20", num: "4" },
-              { eq: "Arrhenius Equation", desc: "Reaction kinetics — how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20", num: "5" },
+              { eq: "Arrhenius Equation", desc: "Reaction kinetics—how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20", num: "5" },
             ].map((item, i) => (
               <div key={i} className={`group flex flex-col gap-3 p-6 rounded-2xl border border-white/5 transition-all duration-200 cursor-default ${item.hoverBox}`}>
                 <span className="text-white/20 font-mono text-3xl font-bold leading-none">{item.num}</span>
@@ -602,46 +580,46 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 07: THE INFLECTION POINT ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">07 — The Inflection Point</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">07 — Two Engines</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Science has crossed<br />the <span className="font-normal">threshold.</span>
+            Forward Validation<br />&amp; <span className="font-normal">Inverse Generation.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            Moving from slow simulation to instant Inverse Design.
+            The LPM operates as a complete operating system for physical R&amp;D.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Legacy — 40 Years</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Forward Model — Predictive</p>
             <p className="text-white/70 font-light leading-relaxed mb-5">
-              Simulating fluid dynamics required CPU-bound legacy solvers — COMSOL, OpenFOAM. Months to simulate one configuration. Mathematically impossible to invert.
+              Validates R&amp;D instantly. It predicts physical outcomes and system failures at{" "}
+              <span className="text-white font-medium">95% accuracy,</span> bridging the sim-to-real gap.
             </p>
-            <p className="text-white/40 text-sm font-mono italic">&quot;What happens if we put this fluid in this reactor?&quot;</p>
+            <p className="text-white/40 text-sm font-mono italic">&quot;What will happen when we scale this molecule to an industrial reactor?&quot;</p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Breakthrough — Fourier Neural Operators</p>
+            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Inverse Model — Generative Process Compiler</p>
             <p className="text-white/70 font-light leading-relaxed mb-5">
-              Continuous 3D Fourier Neural Operators (FNOs) can learn continuous partial differential equations — simulating industrial physics{" "}
-              <span className="text-emerald-300 font-medium">10,000× faster</span> than legacy software, and critically, the problem becomes <span className="text-white/90">invertible</span>.
+              A true generative engineering engine. You input the desired material or chemical outcome, and the model works backward to output the exact{" "}
+              <span className="text-emerald-300 font-medium">manufacturability parameters</span> — flow rates, thermal limits, pressures — required to build it in the real world.
             </p>
-            <p className="text-emerald-300/70 text-sm font-mono italic">&quot;We need this fluid to survive scale-up. What exact shape should the reactor be?&quot;</p>
+            <p className="text-emerald-300/70 text-sm font-mono italic">&quot;We need this outcome. What exact process parameters produce it?&quot;</p>
           </motion.div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.015] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Where We Are — V0 Proof</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Legacy Solvers — COMSOL, Ansys</p>
             <p className="text-white/70 font-light leading-relaxed">
-              We closed the sim-to-real loop. Our V0 proxy engine predicted physical degradation with{" "}
-              <span className="text-white font-normal">70% zero-shot accuracy.</span>{" "}The loop works. But 70% is not enough for an industrial giant to bet a $100M pilot plant on.
+              Too slow, computationally expensive, and fail to adapt to real-world complexities. Months to simulate one configuration. <span className="text-white/90">Mathematically impossible to invert.</span>
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 md:p-10 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">Where We&apos;re Going — Skanda V1.0</p>
+            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">Our Compression</p>
             <p className="text-white/70 font-light leading-relaxed">
-              We are using the $50M Series A and our synthetic data to train <span className="text-white font-normal">Skanda V1.0</span> — a Continuous 3D FNO. Our explicit technical milestone: push accuracy from{" "}
-              <span className="text-white/60 line-through">70%</span> to <span className="text-emerald-300 font-semibold">90%</span>, predicting scale-up fluid dynamics 10,000× faster than legacy software.
+              We are compressing <span className="text-white/60 line-through">6 years</span> of R&amp;D and scale-up engineering into{" "}
+              <span className="text-emerald-300 font-semibold">6 months.</span>
             </p>
           </motion.div>
         </div>
@@ -650,40 +628,40 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 08: THE ULTIMATE MOAT ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">08 — The Ultimate Moat</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">08 — Validated by Industry Titans</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Why we cannot be<br /><span className="font-normal">open-sourced or distilled.</span>
+            The physics of scale-up<br /><span className="font-normal">is universal.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            A $5B LLM can be distilled for $10M — because language is free on the internet. Physics is not on the internet.
+            We are proving the cross-industry scalability of the LPM by co-developing proprietary applications with three global anchor partners across three distinct verticals.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-6 mb-12">
           {[
             {
-              num: "95%",
-              title: "Synthetic Physics",
-              sub: "The GPU Data Factory",
-              desc: "We generate millions of mathematically perfect 3D microstructures and run highly advanced Direct Numerical Simulations across our sovereign GPU compute clusters — via IndiaAI.",
+              num: "Biocon",
+              title: "Bio-enzymes & Biologicals",
+              sub: "Biotransformation Scale-Up",
+              desc: "Co-developing the AI blueprint to scale bio-enzymes and complex biologicals from lab synthesis to commercial continuous manufacturing.",
               color: "text-blue-300",
               border: "border-blue-500/20",
               bg: "bg-blue-950/10",
             },
             {
-              num: "5%",
-              title: "Physical Ground-Truth",
-              sub: "The Anchor",
-              desc: "Skanda V1.0 gets us to 90% accuracy, narrowing the search space from thousands of configurations to just five viable candidates. Our Bengaluru Autonomous Wet-Lab physically synthesizes those top five to bridge the final 10%.",
+              num: "Jubilant",
+              title: "Agro-Pharma & CDMO",
+              sub: "Continuous Manufacturing (Flow Chemistry)",
+              desc: "Accelerating Continuous Manufacturing for Jubilant Ingrevia — transforming batch reactions to continuous flow chemistry at industrial scale.",
               color: "text-emerald-300",
               border: "border-emerald-500/20",
               bg: "bg-emerald-950/10",
             },
             {
-              num: "∞",
-              title: "Proprietary Feedback",
-              sub: "The Closed Loop",
-              desc: "Every physical synthesis result — pass or fail — is fed back into the model's weights. The AI learns from the lab. The lab learns from the AI. This closed loop is unreplicable.",
+              num: "Aarti",
+              title: "Specialty Chemicals",
+              sub: "High-Stress Batch Reactions",
+              desc: "Solving the most complex scale-up bottlenecks in specialty chemicals and high-stress batch reactions for Aarti Industries.",
               color: "text-rose-300",
               border: "border-rose-500/20",
               bg: "bg-rose-950/10",
@@ -701,11 +679,11 @@ export default function MasterDeckPageV2() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.02] border border-white/5">
           <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
             <p className="text-xl md:text-2xl font-light text-white leading-relaxed max-w-2xl">
-              The AI + The Lab = <span className="font-normal text-emerald-300">100% guaranteed, lab-validated client success.</span>
+              Advisory Board &amp; Early Backers: <span className="font-normal text-emerald-300">Guided by industry veterans.</span>
             </p>
             <div className="shrink-0 text-center">
-              <p className="text-white/30 text-xs uppercase tracking-wider mb-1">The Conclusion</p>
-              <p className="text-white/60 font-light text-sm max-w-xs">We own the closed-loop failure data. Therefore, we own the market.</p>
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-1">Our Advisors</p>
+              <p className="text-white/60 font-light text-sm max-w-xs">Arun Seth · Kiran Mazumdar-Shaw (Founder, Biocon) · Deepak Jain (CEO, Jubilant Ingrevia)</p>
             </div>
           </div>
         </motion.div>
@@ -878,40 +856,39 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 09: UNIT ECONOMICS ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 — The Unit Economics</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 — The Execution</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            The Deep Tech Equation:<br /><span className="font-normal">Time is Monopoly.</span>
+            From NRE to<br /><span className="font-normal">Global Standard.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            We do not sell &quot;cost savings.&quot; We sell Zero-to-Billion market capture.
+            We are raising $50 Million to achieve total market dominance in the AI-for-Science scale-up layer.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Old Economics</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Open Source Trojan Horse</p>
             <p className="text-white/70 font-light leading-relaxed mb-4">
-              Amortize $500M over 7 years of blind physical pilot builds. Batch failure after batch failure. Patent life ticks down with every wasted month of trial-and-error.
+              We will open-source the base LPM to instantly replace legacy engineering software systems worldwide, establishing our framework as the global default.
             </p>
-            <p className="text-white/35 text-sm font-mono italic">7-year scale-up × 20-year patent = only 13 years of monopoly left.</p>
+            <p className="text-white/35 text-sm font-mono italic">Starving legacy software competitors (COMSOL, ANSYS) of their future user base.</p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Shodh AI Economics</p>
+            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Enterprise Revenue Engine</p>
             <p className="text-white/70 font-light leading-relaxed mb-4">
-              We front-load the heavy CapEx. We absorb the massive upfront cost of GPU model training and autonomous robotic validation. We compress the 7-year physical scale-up into a 6-month digital-to-physical loop.
+              We monetize through proprietary, fine-tuned models trained on real industry failure data. Software can be open-sourced. <span className="text-white font-normal">Physical reality cannot.</span>
             </p>
-            <p className="text-emerald-300/70 text-sm font-mono italic">6-month scale-up × 20-year patent = <span className="text-emerald-300 font-semibold">19.5 years of monopoly.</span></p>
+            <p className="text-emerald-300/70 text-sm font-mono italic">The open-source community gets the base physics solver. The enterprise gets the proprietary scale-up blueprint.</p>
           </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-12 rounded-2xl bg-white/[0.015] border border-white/5">
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Ultimate ROI</p>
+          <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Horizontal Moat</p>
           <p className="text-2xl md:text-3xl font-extralight text-white leading-tight mb-4">
-            We don&apos;t just save a client money.
+            The physics of scale-up is universal.
           </p>
           <p className="text-white/65 font-light max-w-3xl text-lg leading-relaxed">
-            We hand them a validated factory blueprint <span className="text-emerald-300 font-normal">6.5 years early</span> — effectively recovering +6.5 years of global patent monopoly. At $200M/yr in monopoly profit, that is{" "}
-            <span className="text-white font-normal">$1.3 billion in new revenue</span> we unlock per engagement.
+            Use three zero-to-billion case studies to lock in the next <span className="text-emerald-300 font-normal">10 global Tier-1 manufacturing giants.</span> Every industry that manufactures anything is a future customer.
           </p>
         </motion.div>
       </section>
@@ -921,13 +898,13 @@ export default function MasterDeckPageV2() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">10 — The Go-To-Market</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Open Core.<br /><span className="font-normal">Proprietary Scale.</span>
+            Anchor NREs.<br /><span className="font-normal">Global Scaling.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-4 text-lg">
-            How we capture the ecosystem and the enterprise simultaneously.
+            Convert our 3 initial pilot partners into NRE contracts. Use those case studies to lock in the next 10 global Tier-1 giants.
           </p>
           <p className="text-white/45 font-light max-w-2xl mb-16">
-            We are deploying a &quot;Red Hat&quot; strategy — open the standard, monetize the enterprise.
+            We solve their most complex scale-up bottlenecks in exchange for milestone-based IP payments.
           </p>
         </motion.div>
 
@@ -936,12 +913,12 @@ export default function MasterDeckPageV2() {
             <div className="flex items-center gap-3 mb-6">
               <span className="text-white/20 font-mono text-3xl font-bold leading-none">1</span>
               <div>
-                <p className="text-white font-light text-lg">The Open Standard</p>
-                <p className="text-white/40 text-xs italic">Porous Media V1.0</p>
+                <p className="text-white font-light text-lg">Deliver the 10B Model</p>
+                <p className="text-white/40 text-xs italic">Core Training Pipeline</p>
               </div>
             </div>
             <p className="text-white/65 font-light leading-relaxed flex-grow">
-              We leverage our sovereign <span className="text-white/90">IndiaAI compute grants</span> to train and open-source the base Skanda V1.0 porous media solver. We make Skanda the default computational standard across global academia — starving legacy software competitors (COMSOL, ANSYS) of their future user base and building a massive developer ecosystem.
+              Execute the core training pipeline using our <span className="text-white/90">sovereign GPU allocation</span> from the IndiaAI Mission. Build and open-source the base LPM to establish the global default standard.
             </p>
             <div className="mt-6 pt-4 border-t border-white/5">
               <p className="text-white/35 text-sm italic">Non-dilutive. Government-funded. Zero VC burn on compute.</p>
@@ -952,15 +929,15 @@ export default function MasterDeckPageV2() {
             <div className="flex items-center gap-3 mb-6">
               <span className="text-violet-300/40 font-mono text-3xl font-bold leading-none">2</span>
               <div>
-                <p className="text-white font-light text-lg">The Venture Monopoly</p>
-                <p className="text-white/40 text-xs italic">Asset-Level Co-Creation</p>
+                <p className="text-white font-light text-lg">Anchor NREs</p>
+                <p className="text-white/40 text-xs italic">Milestone-Based IP Payments</p>
               </div>
             </div>
             <p className="text-white/65 font-light leading-relaxed flex-grow">
-              The open-source community gets the base physics solver. But a base model doesn&apos;t know the proprietary chemical kinetics of Biocon&apos;s specific cancer enzyme. We freeze the base model and fine-tune it in a <span className="text-white/90">closed loop using proprietary wet-lab data</span> from our Anchor Partners. We retain exclusive commercial IP on these bespoke, highly lucrative scale-up blueprints.
+              Convert our 3 initial pilot partners (Biocon, Jubilant Ingrevia, Aarti Industries) into Non-Recurring Engineering contracts. We solve their most complex scale-up bottlenecks in exchange for <span className="text-white/90">milestone-based IP payments.</span>
             </p>
             <div className="mt-6 pt-4 border-t border-violet-500/10">
-              <p className="text-violet-300/50 text-sm italic">Software can be open-sourced. Physical reality cannot.</p>
+              <p className="text-violet-300/50 text-sm italic">We solve the bottleneck. They pay for the blueprint.</p>
             </div>
           </motion.div>
         </div>
@@ -974,7 +951,7 @@ export default function MasterDeckPageV2() {
             Path to<br /><span className="font-normal">Value Capture.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            How we monetize the Layer 2 Co-Creation. Because we do heavy model training and physical lab validation, our unit economics must reflect the value of invention — not a SaaS subscription.
+            Three compounding revenue layers — from immediate cash flow to perpetual royalties on global physical output.
           </p>
         </motion.div>
 
@@ -985,7 +962,7 @@ export default function MasterDeckPageV2() {
               title: "Upfront NRE",
               sub: "Compute & Validation",
               label: "Immediate Cash Flow",
-              desc: "Anchor partners pay a $2M–$5M upfront contract fee to run their specific bottlenecks through our LPM and autonomous lab. This covers our massive GPU compute and wet-lab burn. We operate at break-even or better from Day 1.",
+              desc: "Partners pay an upfront NRE contract fee to run their specific bottlenecks through the LPM. This covers GPU compute and wet-lab burn. We operate at break-even or better from Day 1.",
               model: "$2M – $5M per engagement",
               color: "text-blue-300",
               bg: "bg-blue-950/5",
@@ -995,7 +972,7 @@ export default function MasterDeckPageV2() {
               title: "IP Co-Ownership & Milestones",
               sub: "The Biobucks Model",
               label: "The Multiplier",
-              desc: "We do not just sell software — we co-own the physical discoveries. When the Shodh AI blueprint successfully scales in the partner's physical pilot plant, we secure clinical and commercial milestone payouts.",
+              desc: "We co-own the physical discoveries. When the Shodh AI blueprint successfully scales in the partner's physical pilot plant, we secure clinical and commercial milestone payouts.",
               model: "$5M – $15M per milestone",
               color: "text-violet-300",
               bg: "bg-violet-950/5",
@@ -1005,7 +982,7 @@ export default function MasterDeckPageV2() {
               title: "The Endgame",
               sub: "Royalties on Physical Production",
               label: "True Zero-Shot Manufacturing",
-              desc: "We take a single-digit software royalty on every physical product globally manufactured using a Shodh AI-generated blueprint. Every factory we design becomes a perpetual revenue stream.",
+              desc: "A single-digit software royalty on every physical product globally manufactured using a Shodh AI-generated blueprint. Every factory we design becomes a perpetual revenue stream.",
               model: "% royalty on manufactured output",
               color: "text-emerald-300",
               bg: "bg-emerald-950/10",
@@ -1032,12 +1009,12 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 12: MILESTONES & THE ASK ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">12 — The Milestones &amp; The $50M Ask</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">12 — The $50M Ask</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            The Series A<br /><span className="font-normal">Execution Plan.</span>
+            Total Market<br /><span className="font-normal">Dominance.</span>
           </h2>
           <p className="text-white/60 font-light max-w-2xl mb-16 text-lg">
-            Path to the Mega-Round. We are raising $50M to build the foundation model for the physical world.
+            We are raising $50M to achieve total market dominance in the AI-for-Science scale-up layer.
           </p>
         </motion.div>
 
@@ -1048,8 +1025,8 @@ export default function MasterDeckPageV2() {
               months: "Months 1–8",
               title: "Infra & The Base Model",
               points: [
-                "Hit the Technical KPI: Deploy capital to scale the Autonomous Validation Lab and train Skanda V1.0 — upgrading simulation accuracy from our proven 70% baseline to a commercially dominant 90%.",
-                "Release the open-source base model. Establish the Layer 1 global standard across academia.",
+                "Train and deliver the 10-Billion parameter LPM. Deploy capital to scale the Autonomous Validation Lab and push accuracy from our proven 70% baseline to a commercially dominant 90%.",
+                "Release the open-source base model. Establish the global default standard, replacing legacy solvers (COMSOL, ANSYS) across academia.",
               ],
               color: "border-blue-500/30",
               numColor: "text-blue-300/40",
@@ -1059,8 +1036,8 @@ export default function MasterDeckPageV2() {
               months: "Months 9–16",
               title: "Anchor Delivery & Revenue Conversion",
               points: [
-                "Deliver the first fully-scaled digital blueprints for anchor partners (Biocon, Aarti Industries).",
-                "Convert early pilots into paid NRE contracts. Transition to first multi-million dollar IP Milestone Payouts as they hit pilot scale.",
+                "Deliver the first fully-scaled digital blueprints for anchor partners (Biocon, Jubilant Ingrevia, Aarti Industries).",
+                "Convert early pilots into paid NRE contracts. Collect first milestone-based IP payments as blueprints hit pilot scale.",
               ],
               color: "border-violet-500/30",
               numColor: "text-violet-300/40",
@@ -1070,7 +1047,7 @@ export default function MasterDeckPageV2() {
               months: "Months 17–24",
               title: "Generalization",
               points: [
-                "Leverage the validated FNO architecture to sign 3 net-new global Tier-1 partners in adjacent physical domains (Aerospace alloys, Next-Gen EV Batteries).",
+                "Use three zero-to-billion case studies to lock in the next 10 global Tier-1 manufacturing giants across adjacent physical domains.",
               ],
               color: "border-emerald-500/30",
               numColor: "text-emerald-300/40",
@@ -1104,8 +1081,8 @@ export default function MasterDeckPageV2() {
             By Month 24, we will have commercial proof that our AI successfully generated physical factories across multiple trillion-dollar industries.
           </p>
           <p className="text-white/55 font-light max-w-2xl mx-auto">
-            With that undeniable traction, we will set up the{" "}
-            <span className="text-emerald-300 font-normal">$500M Phase 2 Mega-Round</span> to generalize the LPM across all physics globally — achieving true Programmable Matter.
+            With that undeniable traction, we set up the{" "}
+            <span className="text-emerald-300 font-normal">$500M Phase 2 Mega-Round</span> to generalize the LPM across all physics globally.
           </p>
         </motion.div>
       </section>
@@ -1117,7 +1094,7 @@ export default function MasterDeckPageV2() {
           <p className="text-white/30 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
           <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-4">Science is here.</h2>
           <p className="text-xl text-white/40 font-light mb-20 max-w-xl mx-auto">
-            We are building the foundation model for the physical world. This is the capital structure.
+            We are raising $50M to build the foundation model for the physical world. This is the capital structure.
           </p>
 
           <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-4xl mx-auto mb-20">
@@ -1140,8 +1117,8 @@ export default function MasterDeckPageV2() {
             </p>
             <div className="pt-8 border-t border-white/5">
               <h3 className="text-2xl md:text-4xl font-light text-white mb-8">
-                Shodh AI is built in India.<br />
-                <span className="text-white/50">We are making it for the world.</span>
+                We are not just discovering the future.<br />
+                <span className="text-white/50">We are manufacturing it.</span>
               </h3>
               <a
                 href="mailto:arastu@shodh.ai"
