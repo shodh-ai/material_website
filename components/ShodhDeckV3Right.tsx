@@ -700,36 +700,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         </motion.div>
         )}
 
-        {isFront && (
-          <motion.div {...fade} className="mb-14">
-            <div className="rounded-3xl border border-rose-500/15 bg-rose-950/8 p-6 md:p-8">
-              <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-6 items-center">
-                <div>
-                  <p className="text-white/35 text-xs uppercase tracking-[0.22em] mb-4">The Fabless Physical Economy</p>
-                  <h3 className="text-2xl md:text-4xl font-extralight text-white leading-tight mb-3">TSMC did not invent every chip.<br /><span className="font-normal">It made them manufacturable.</span></h3>
-                  <p className="text-white/55 font-light text-base leading-relaxed">NVIDIA, AMD, and Apple live in the design layer. TSMC owns the process layer that makes the fabless world possible. Shodh is building that same enabling layer for the rest of the physical economy.</p>
-                </div>
-                <div className="hidden lg:flex items-center justify-center">
-                  <ArrowRight className="w-7 h-7 text-rose-300/50" />
-                </div>
-                <div className="grid gap-3">
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
-                    <p className="text-white/35 text-xs uppercase tracking-wider mb-1">Discovery / Design layer</p>
-                    <p className="text-white/75 font-light text-sm">Invent the molecule, material, or device.</p>
-                  </div>
-                  <div className="rounded-2xl border border-rose-500/20 bg-rose-950/15 p-4">
-                    <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-1">Shodh process layer</p>
-                    <p className="text-white font-light text-sm">Compile the manufacturing blueprint so others can ship without years of pilot-plant iteration.</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
-                    <p className="text-white/35 text-xs uppercase tracking-wider mb-1">Result</p>
-                    <p className="text-white/75 font-light text-sm">A fabless model for deep tech: less CapEx, faster commercialization, and far better margins.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
 
         {/* 5-Step Workflow Diagram — Skandax Style Redesign */}
         <motion.div {...fade} className="mb-14 pb-4">
@@ -989,53 +959,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         )}
       </section>
 
-      {/* ─── WHY BIG TECH CAN'T TOUCH US ─── */}
-      {!isFront && (
-      <section className="px-6 py-28 md:py-36 border-b border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <motion.div {...fade}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">Competitive Moat</p>
-            <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-16 max-w-3xl">
-              Why Big Tech<br /><span className="font-normal">won&apos;t build this.</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <motion.div {...fade} className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
-              <p className="text-white/30 text-xs uppercase tracking-wider mb-6">Why Big Tech Can&apos;t</p>
-              <div className="space-y-4">
-                {[
-                  "Paranoid, Dirty-Hands B2B",
-                  "No Public Data — Every process is a trade secret",
-                  "Wrong Business Model — SaaS vs. outcome contracts",
-                ].map((title, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 shrink-0" />
-                    <p className="text-white/70 font-light text-sm">{title}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
-              <p className="text-emerald-400/60 text-xs uppercase tracking-wider mb-6">Our Architecture Solves It</p>
-              <div className="space-y-4">
-                {[
-                  "Federated Enclave Deployment",
-                  "Base-Model + Edge Fine-Tuning",
-                  "Outcome-as-a-Service — Process Licensing",
-                ].map((title, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400/40 shrink-0" />
-                    <p className="text-white/70 font-light text-sm">{title}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* ─── 03: TECHNOLOGY & DATA ENGINE ─── */}
       {!isFront && (
@@ -1324,33 +1247,61 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
       </section>
       )}
 
-      {/* ─── PROOF: OUR "ALPHAFOLD" MOMENT ─── */}
+      {/* ─── PROOF: TRAINING ARCHITECTURE & ALPHAFOLD MOMENT ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
         <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px w-8 bg-white/15 shrink-0" />
-            <p className="text-xs uppercase tracking-[0.25em] text-white/55">Early Work — Demo Proof</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Proof — Early Work</p>
           </div>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            {isFront ? <>Proof that the<br /><span className="font-normal">physics stack works.</span></> : <>The Proof: Our<br /><span className="font-normal">&ldquo;AlphaFold&rdquo; Moment.</span></>}
+            {isFront ? <>Proof that the<br /><span className="font-normal">physics stack works.</span></> : <>How it will<br /><span className="font-normal">be done.</span></>}
           </h2>
-          <p className="text-white/55 font-light text-lg max-w-2xl mb-4 leading-relaxed">
-            {isFront ? <>We already demonstrated the core architecture with a compressed <span className="text-white font-normal">300M parameter model</span> in one of the hardest multiphysics environments: solid-state batteries.</> : <>At the recent Global AI Summit, we unveiled our V0 foundational physics engine: a highly compressed, <span className="text-white font-normal">300-Million parameter model.</span></>}
+          {isFront && (
+          <p className="text-white/55 font-light text-lg max-w-2xl mb-16 leading-relaxed">
+            We already demonstrated the core architecture with a compressed <span className="text-white font-normal">300M parameter model</span> in one of the hardest multiphysics environments: silicon anode.
           </p>
-          <p className="text-white/40 font-light text-base max-w-2xl mb-16 leading-relaxed">
-            {isFront ? "This is not just a story about future possibility. It is evidence that the sim-to-real loop can already close." : <>To validate it, we didn&apos;t use clean datasets. We ran a 25-day blind Sim2Real sprint on one of the most chaotic multiphysics environments in the world: <span className="text-white/60 font-normal">Solid-State Batteries.</span></>}
-          </p>
+          )}
+          {!isFront && <div className="mb-16" />}
         </motion.div>
 
-        {/* Part 1: Synthetic Data Engine */}
+        {/* Slide 1: The Training Architecture */}
         <motion.div {...fade} className="mb-16">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-white/25 font-mono text-sm">1.</span>
-            <h3 className="text-xl md:text-2xl font-light text-white">The Synthetic Data Engine: 95% Morphological Accuracy</h3>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-white/25 font-mono text-sm">01</span>
+            <h3 className="text-xl md:text-2xl font-light text-white">The Training Architecture</h3>
           </div>
-          <p className="text-white/35 font-light text-sm mb-6 max-w-2xl">The bottleneck in physical AI is the lack of 3D training data. We algorithmically generate our own.</p>
+          <p className="text-white font-light text-xl max-w-3xl mb-2 leading-relaxed">How We Build It: The 80/20 Data Strategy</p>
+          <p className="text-white/50 font-light text-sm max-w-2xl mb-8">How do we actually build a 10B parameter physics model?</p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-6 rounded-2xl bg-blue-950/10 border border-blue-500/20">
+              <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-2">The 80% Foundation — Pure Physics</p>
+              <p className="text-white/75 font-light text-sm leading-relaxed">We train the base LPM on millions of synthetically generated 3D fluid and thermodynamic simulations. The AI learns the universal laws of physics — Navier-Stokes, Fick&apos;s Law.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-emerald-950/10 border border-emerald-500/20">
+              <p className="text-emerald-300/70 text-xs uppercase tracking-wider mb-2">The 20% Fine-Tuning — The Domain Expert</p>
+              <p className="text-white/75 font-light text-sm leading-relaxed">We deploy that foundational physics brain via federated learning on Aarti&apos;s or Biocon&apos;s servers. We fine-tune the final layers using their highly classified, historical failure data.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/8">
+              <p className="text-white/60 text-xs uppercase tracking-wider mb-2">The 90%+ Output</p>
+              <p className="text-white/75 font-light text-sm leading-relaxed">The resulting &ldquo;Expert Model&rdquo; hits 90%+ accuracy on their specific chemical processes. Their IP never leaves their walls.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-amber-950/10 border border-amber-500/20">
+              <p className="text-amber-300/70 text-xs uppercase tracking-wider mb-2">Why 90% is a Revolution</p>
+              <p className="text-white/75 font-light text-sm leading-relaxed">Partners simulate 10,000 scale-up scenarios in minutes, discard 9,997 dead-ends, and physically build only the top 3. We compress 7 years of trial-and-error into 1 targeted pilot.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Slide 2: The Core Moat — 3D Data Factory */}
+        <motion.div {...fade} className="mb-16 border-t border-white/5 pt-12">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-white/25 font-mono text-sm">02</span>
+            <h3 className="text-xl md:text-2xl font-light text-white">The Secret Weapon: Our Proprietary 3D Data Factory</h3>
+          </div>
+          <p className="text-white/50 font-light text-sm mb-8 max-w-2xl">You cannot scrape the internet for 3D factory physics. We had to invent the data engine.</p>
           <p className="text-white/55 font-light text-base max-w-3xl mb-10 leading-relaxed">
-            Our AI algorithmically generated thousands of synthetic 3D microstructures. Cross-referenced against real-world Scanning Electron Microscope (SEM) data, our synthetic topologies achieved a <span className="text-white font-normal">95% morphological match to physical reality.</span> We generate the physical training ground in milliseconds.
+            We built an algorithmic 3D microstructure generation pipeline. Cross-referenced against real-world Scanning Electron Microscope (SEM) tomography, our synthetic structures achieved a <span className="text-white font-normal">95% morphological match to physical reality.</span> We generate the infinite training ground in milliseconds, completely in-house.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -1398,13 +1349,23 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           </div>
         </motion.div>
 
-        {/* Part 2: The Sprint */}
+        {/* Slide 3: The Early Pilot */}
         <motion.div {...fade} className="mb-10 border-t border-white/5 pt-12">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-white/25 font-mono text-sm">2.</span>
-            <h3 className="text-xl md:text-2xl font-light text-white">The 25-Day Blind Sim2Real Sprint</h3>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-white/25 font-mono text-sm">03</span>
+            <h3 className="text-xl md:text-2xl font-light text-white">Our &ldquo;AlphaFold&rdquo; Moment: The Sandbox Pilot</h3>
           </div>
-          <p className="text-white/35 font-light text-sm mb-10 max-w-2xl">We put the 300M parameter model to the ultimate test. Zero historical data. 5 unique battery architectures generated, built, and validated.</p>
+          <p className="text-white/55 font-light text-sm mb-6 max-w-2xl">Before raising $50M to scale the 10B LPM, we ran a ruthless Sandbox Pilot to prove this architecture actually learns physics.</p>
+          <div className="grid md:grid-cols-2 gap-4 mb-10">
+            <div className="p-5 rounded-xl bg-white/[0.02] border border-white/8">
+              <p className="text-white/50 text-xs uppercase tracking-wider mb-2">The Sandbox</p>
+              <p className="text-white/70 font-light text-sm leading-relaxed">We chose the silicon anode — the biggest unsolved problem in next-gen lithium batteries, and one of the most chaotic, degradation-heavy environments in the physical world.</p>
+            </div>
+            <div className="p-5 rounded-xl bg-white/[0.02] border border-white/8">
+              <p className="text-white/50 text-xs uppercase tracking-wider mb-2">The Digital Training</p>
+              <p className="text-white/70 font-light text-sm leading-relaxed">Using our 3D Data Factory, we generated 100,000 synthetic microstructures and trained a lightweight AI model on mechanical stress and capacity fade physics.</p>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-6 items-stretch mb-12">
@@ -1491,14 +1452,19 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           </div>
         </div>
 
-        {/* Scaling Law Guarantee */}
+        {/* Slide 4: The Hero Slide */}
+        <motion.div {...fade} className="mt-12 border-t border-white/5 pt-12 mb-8">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-white/25 font-mono text-sm">04</span>
+            <h3 className="text-xl md:text-2xl font-light text-white">The Wet-Lab Validation: Closing the Sim2Real Gap</h3>
+          </div>
+          <p className="text-white/40 font-light text-sm max-w-2xl mb-10">We took the AI&apos;s 5 digital recipes into a physical wet-lab — mixed the chemicals, coated the foils, manufactured the physical cells, and put them on stress-testers until they broke.</p>
+        </motion.div>
+
         <div className="p-8 rounded-xl bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-emerald-900/20 border border-white/10 mb-0">
-          <p className="text-white/35 text-xs uppercase tracking-wider mb-4">The Scaling Law Guarantee — Why we need $50M</p>
+          <p className="text-white/35 text-xs uppercase tracking-wider mb-4">The Scaling Law Guarantee</p>
           <p className="text-lg md:text-xl text-white font-light leading-relaxed max-w-4xl">
-            70% zero-shot accuracy from a 300M parameter model is a <span className="font-medium">scientific breakthrough.</span> It proves the foundational neural architecture works.
-          </p>
-          <p className="text-white/55 font-light text-base max-w-4xl mt-4 leading-relaxed">
-            Applying standard AI scaling laws: 300M → 10B parameters (powered by our secured sovereign GPU compute) mathematically bridges from 70% lab accuracy to <span className="text-white font-normal">99.9% commercial factory accuracy.</span>
+            The physical reality matched the AI&apos;s digital prediction. <span className="font-medium">~70% zero-shot accuracy.</span> We successfully digitized physical failure.
           </p>
         </div>
 
@@ -1562,6 +1528,73 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
       </section>
 
 
+
+      {/* ─── WHY BIG TECH CAN'T TOUCH US ─── */}
+      {!isFront && (
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fade}>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">Competitive Moat</p>
+            <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-3 max-w-3xl">
+              The Competitive Moat<br /><span className="font-normal">&amp; Revenue Engine.</span>
+            </h2>
+            <p className="text-white/45 font-light text-lg max-w-2xl mb-16 leading-relaxed">Why Big Tech won&apos;t build this, and how we monetize it.</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <motion.div {...fade} className="p-8 rounded-2xl border border-white/8 bg-white/[0.02]">
+              <p className="text-white/50 text-xs uppercase tracking-wider mb-6">🛑 The Big Tech Blindspot</p>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "No Public Data",
+                    desc: "AI models require data. Industrial manufacturing data is highly classified. There is no internet to scrape for chemical scale-up failures.",
+                  },
+                  {
+                    title: "The \"Dirty-Hands\" B2B Gap",
+                    desc: "Big Tech sells zero-marginal-cost software APIs. They will not integrate deeply into legacy 1990s factory systems.",
+                  },
+                  {
+                    title: "Wrong Business Model",
+                    desc: "Big Tech wants cheap SaaS subscriptions. Industrial giants demand shared-risk, IP-secured, outcome-based contracts.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="space-y-1">
+                    <p className="text-white font-light text-sm">{item.title}</p>
+                    <p className="text-white/50 font-light text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
+              <p className="text-emerald-400/60 text-xs uppercase tracking-wider mb-6">🟢 The Shodh AI Playbook</p>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "Base-Model + Edge Fine-Tuning",
+                    desc: "We pre-train the 80% physics foundation on our sovereign GPUs. We fine-tune the last 20% locally at the client's site.",
+                  },
+                  {
+                    title: "Federated Enclave Deployment",
+                    desc: "Client IP never leaves their walls. Our model only extracts the physics gradients, satisfying elite corporate paranoia.",
+                  },
+                  {
+                    title: "Outcome-as-a-Service (Licensing)",
+                    desc: "We don't sell SaaS. If we compress a 7-year scale-up into 6 months, we take an NRE fee + a perpetual royalty on the factory's physical yield.",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="space-y-1">
+                    <p className="text-emerald-300/90 font-light text-sm">{item.title}</p>
+                    <p className="text-white/55 font-light text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      )}
 
       {/* ─── 06: VALIDATION & ANCHORS ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
@@ -1730,30 +1763,11 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
 
         </div>
 
-        <motion.div {...fade} transition={{ delay: 0.3 }} className="p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-3">Advisory Board & Early Backers</p>
-          <p className="text-white/65 font-light leading-relaxed">
-            Arun Seth &nbsp;·&nbsp; <span className="text-white font-normal">Kiran Mazumdar-Shaw</span> (Founder, Biocon) &nbsp;·&nbsp; <span className="text-white font-normal">Deepak Jain</span> (CEO, Jubilant Ingrevia)
-          </p>
-        </motion.div>
       </section>
 
 
       {/* ─── 08: REVENUE ARCHITECTURE ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
-        <motion.div {...fade}>
-          <div className="flex items-center gap-4 mb-10">
-            <span className="text-white/40 font-mono text-base">08</span>
-            <div className="h-px w-8 bg-white/15 shrink-0" />
-            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Revenue Architecture</p>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            Three compounding<br /><span className="font-normal">revenue layers.</span>
-          </h2>
-          <p className="text-white/55 font-light text-lg max-w-2xl mb-16 leading-relaxed">
-            We operate on three layers for enterprise partners — from immediate NRE cash flow to perpetual royalties on global physical output.
-          </p>
-        </motion.div>
 
         <div className="space-y-px rounded-2xl overflow-hidden border border-white/5">
           {REVENUE_TIERS.map((t, i) => (
@@ -1774,85 +1788,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         </div>
       </section>
 
-      {/* ─── THE VISION: FABLESS PHYSICAL ECONOMY ─── */}
-      {!isFront && (
-      <section className="px-6 py-28 md:py-36 border-b border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <motion.div {...fade}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">The Vision</p>
-            <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
-              The Fabless<br /><span className="font-normal">Physical Economy.</span>
-            </h2>
-            <p className="text-white/50 font-light text-xl max-w-3xl mb-4 leading-relaxed">
-              In the 1990s, TSMC told chip designers: &ldquo;You just design the chip. We will handle the brutal physics of manufacturing it.&rdquo;
-            </p>
-            <p className="text-white/35 font-light text-lg max-w-3xl mb-16 leading-relaxed">
-              That created the Fabless era — birthing Apple and NVIDIA without them owning a single factory. <span className="text-white/55">Shodh AI is doing the same for the entire physical world.</span>
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <motion.div {...fade} className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
-              <p className="text-white/30 text-xs uppercase tracking-wider mb-6">Old World — Deep Tech Today</p>
-              <div className="space-y-5">
-                {[
-                  { step: "01", label: "AI-discovery company invents a drug", outcome: "Wait 8 years for FDA revenue" },
-                  { step: "02", label: "Battery startup discovers new chemistry", outcome: "Raise $100M to build a pilot plant. 10 years to market." },
-                  { step: "03", label: "Chemical company has a new molecule", outcome: "7 years of physical trial-and-error. $500M wasted." },
-                ].map((s, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <span className="text-white/20 font-mono text-sm shrink-0 mt-0.5">{s.step}</span>
-                    <div>
-                      <p className="text-white/50 font-light text-sm">{s.label}</p>
-                      <p className="text-white/25 text-xs mt-1">→ {s.outcome}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/5">
-              <p className="text-rose-400/60 text-xs uppercase tracking-wider mb-6">The Shodh AI World</p>
-              <div className="space-y-5">
-                {[
-                  { step: "01", label: "Take your digital discovery", outcome: "The upstream AI hands us the molecule" },
-                  { step: "02", label: "Run it through our process compiler", outcome: "Get a zero-defect manufacturing blueprint" },
-                  { step: "03", label: "Hand it to a toll-manufacturer", outcome: "No pilot plant. No $100M CapEx. Ship in months." },
-                ].map((s, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <span className="text-rose-400/40 font-mono text-sm shrink-0 mt-0.5">{s.step}</span>
-                    <div>
-                      <p className="text-white/65 font-light text-sm">{s.label}</p>
-                      <p className="text-white/35 text-xs mt-1">→ {s.outcome}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4 mb-14">
-            {[
-              { from: "10 years", to: "1 year", label: "Deep-tech time-to-market", color: "text-rose-300" },
-              { from: "$100M", to: "$5M", label: "CapEx to prove manufacturing", color: "text-blue-300" },
-              { from: "Luck", to: "Design", label: "How manufacturing works", color: "text-emerald-300" },
-            ].map((stat, i) => (
-              <motion.div key={i} {...fade} transition={{ delay: i * 0.08 }} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 text-center">
-                <p className="text-white/20 font-light text-base line-through mb-1">{stat.from}</p>
-                <p className={`text-3xl md:text-4xl font-extralight ${stat.color} mb-2`}>{stat.to}</p>
-                <p className="text-white/35 font-light text-xs uppercase tracking-wider">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div {...fade} className="border-l-2 border-rose-500/30 pl-6 py-2 max-w-3xl">
-            <p className="text-white/65 font-light text-xl leading-relaxed">
-              We are building the foundational infrastructure for the next industrial revolution. Not a tool. <span className="text-white font-normal">The platform.</span>
-            </p>
-          </motion.div>
-        </div>
-      </section>
-      )}
 
       {/* ─── 09: THE ASK & CAPITAL STACK ─── */}
       <section className="px-6 py-28 md:py-40 max-w-6xl mx-auto">
@@ -1899,25 +1834,48 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           ))}
         </div>
 
-        {/* GTM Timeline */}
+        {/* Execution Roadmap */}
         <div className="mb-16 space-y-3">
-          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">Go-To-Market Roadmap — What the $50M buys</p>
-          {GTM_PHASES.map((p, i) => (
-            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`p-6 md:p-8 rounded-2xl border-l-2 border ${p.color} bg-white/[0.015]`}>
+          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">The Execution Roadmap (24 Months)</p>
+          {[
+            {
+              phase: "Phase 1", months: "Months 1–12", title: "The Anchor Proof",
+              borderL: "border-blue-500/40", border: "border-blue-500/15", numColor: "text-blue-300",
+              execution: "Deliver the 10B parameter foundational LPM. Deploy federated engineering teams directly into first 3 Anchor Partners (Aarti, Biocon, Jubilant).",
+              outcome: "Convert pilots into paid NRE (Non-Recurring Engineering) contracts. Achieve 90%+ commercial accuracy in production. Lock in milestone-based IP royalty agreements.",
+            },
+            {
+              phase: "Phase 2", months: "Months 13–24", title: "The Global 10",
+              borderL: "border-violet-500/40", border: "border-violet-500/15", numColor: "text-violet-300",
+              execution: "Weaponize the initial anchor case studies to target the Tier 1 global manufacturers.",
+              outcome: "Sign 10 global Tier-1 manufacturing giants (e.g., BASF, Pfizer, A123) to high-ticket NRE contracts.",
+            },
+            {
+              phase: "Phase 3", months: "Post-Round", title: "The Monopoly Scale",
+              borderL: "border-emerald-500/40", border: "border-emerald-500/15", numColor: "text-emerald-300",
+              execution: null as string | null,
+              outcome: "With the physics proven and the GTM economics validated, we transition from bespoke deployments to hyper-scalable Process Licensing. Ready for a massive growth round to map all global physical supply chains. Shodh AI will have proven the science, validated the business model, and established the definitive Go-To-Market playbook for industrial AI.",
+            },
+          ].map((p, i) => (
+            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`p-6 md:p-8 rounded-2xl border-l-2 ${p.borderL} border ${p.border} bg-white/[0.015]`}>
               <div className="flex flex-col md:flex-row gap-4 md:gap-10">
                 <div className="md:w-40 shrink-0">
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{p.phase}</p>
                   <p className={`text-sm font-mono ${p.numColor} mb-1`}>{p.months}</p>
                   <p className="text-white font-light text-sm">{p.title}</p>
                 </div>
-                <ul className="flex-1 space-y-2">
-                  {p.points.map((pt, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-white/50 font-light leading-relaxed">
-                      <ChevronRight className="w-4 h-4 text-white/25 mt-0.5 shrink-0" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
+                <div className="flex-1 space-y-3">
+                  {p.execution && (
+                    <div>
+                      <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Execution</p>
+                      <p className="text-white/55 font-light text-sm leading-relaxed">{p.execution}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Outcome</p>
+                    <p className="text-white/70 font-light text-sm leading-relaxed">{p.outcome}</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
