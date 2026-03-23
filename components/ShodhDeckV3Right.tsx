@@ -109,7 +109,7 @@ const colorMap: Record<string, { bg: string; border: string; text: string }> = {
 
 const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
-export default function ShodhDeckV3Down() {
+export default function ShodhDeckV3Right() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeVision, setActiveVision] = useState(0);
   const [displayedPrompt, setDisplayedPrompt] = useState("");
@@ -190,6 +190,46 @@ export default function ShodhDeckV3Down() {
         </motion.div>
       </section>
 
+      {/* ─── 00: BITS VS. ATOMS ─── */}
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fade}>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">The Macro Reality</p>
+            <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-10 max-w-5xl">
+              OpenAI is fighting for<br /><span className="text-white/35">20% of the economy.</span><br />
+              <span className="font-normal">We are building for the other 80%.</span>
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mb-12">
+              <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+                <p className="text-white/30 text-xs uppercase tracking-wider mb-3">The Digital Economy — Bits</p>
+                <p className="text-5xl font-extralight text-white/25 mb-4">20%</p>
+                <p className="text-white/45 font-light text-sm leading-relaxed mb-4">Text, code, and digital workflows. This is what OpenAI, Anthropic, and every foundation model lab is fighting over.</p>
+                <div className="flex flex-wrap gap-2">
+                  {["GPT", "Claude", "Gemini", "Llama"].map((m) => (
+                    <span key={m} className="text-xs px-2.5 py-1 rounded-full border border-white/8 text-white/30">{m}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
+                <p className="text-rose-400/70 text-xs uppercase tracking-wider mb-3">The Physical Economy — Atoms</p>
+                <p className="text-5xl font-extralight text-white mb-4">80%</p>
+                <p className="text-white/65 font-light text-sm leading-relaxed mb-4">Manufacturing, energy, chemicals, materials, defense. Applying AI to this is called AI for Science — and it will create <span className="text-white font-normal">much larger companies</span> than AI for the digital world.</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Pharma", "Batteries", "Chemicals", "Defense", "Materials"].map((m) => (
+                    <span key={m} className="text-xs px-2.5 py-1 rounded-full border border-rose-500/20 text-rose-300/60">{m}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="max-w-3xl border-l-2 border-rose-500/30 pl-6 py-2">
+              <p className="text-white/60 font-light text-xl leading-relaxed">
+                Building the AI for the physical world will be <span className="text-white font-normal">vastly more consequential</span> — and create <span className="text-white font-normal">vastly larger companies</span> — than AI for the digital world.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ─── IDENTITY ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
         <motion.div {...fade}>
@@ -225,6 +265,36 @@ export default function ShodhDeckV3Down() {
               ))}
             </div>
           </div>
+
+          {/* Why Us — Three Pillars */}
+          <div className="mt-16 border-t border-white/5 pt-16">
+            <p className="text-xs tracking-[0.25em] uppercase text-white/30 mb-4">Why Us — The Unique Combination</p>
+            <p className="text-white/50 font-light text-base max-w-2xl mb-10 leading-relaxed">
+              To win this market requires a freakish combination of three things that we uniquely possess.
+            </p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                {
+                  num: "01", label: "Elite Math", color: "text-blue-300", border: "border-blue-500/20", bg: "bg-blue-950/5",
+                  desc: "Deep AI physics capability — JAX, Fourier Neural Operators, Mixture of Experts. We build the architecture from physics first principles, not software abstraction.",
+                },
+                {
+                  num: "02", label: "Domain Authority", color: "text-violet-300", border: "border-violet-500/20", bg: "bg-violet-950/5",
+                  desc: "Cambridge PhD in Material Science & Photonics. We understand thermodynamics and physical constraints — not just software. We know the difference between turbulence and a hallucination.",
+                },
+                {
+                  num: "03", label: "Sovereign Geopolitics", color: "text-emerald-300", border: "border-emerald-500/20", bg: "bg-emerald-950/5",
+                  desc: "Backed by the IndiaAI Mission. The world is building \u2018China Plus One\u2019 sovereign supply chains. We are the AI brain ensuring these sovereign factories run at zero defect rates.",
+                },
+              ].map((pill, i) => (
+                <motion.div key={i} {...fade} transition={{ delay: i * 0.08 }} className={`p-6 rounded-2xl border ${pill.border} ${pill.bg}`}>
+                  <p className={`text-3xl font-extralight ${pill.color} opacity-40 mb-3`}>{pill.num}</p>
+                  <p className="text-white font-light text-lg mb-3">{pill.label}</p>
+                  <p className="text-white/50 font-light text-sm leading-relaxed">{pill.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </section>
 
@@ -237,6 +307,14 @@ export default function ShodhDeckV3Down() {
               <div className="h-px w-8 bg-white/15 shrink-0" />
               <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Problem: The Mesoscale Valley of Death</p>
             </div>
+
+            <div className="mb-10 p-6 rounded-2xl bg-amber-950/10 border border-amber-500/20">
+              <p className="text-amber-400/70 text-xs uppercase tracking-wider mb-3">The Investor Misconception</p>
+              <p className="text-white/70 font-light text-base leading-relaxed">
+                The entire VC ecosystem misunderstands AI for Science. They think it is one big market. <span className="text-white font-normal">It is not.</span> Billions have been poured into Discovery — but Discovery is rapidly becoming a commodity. When Google DeepMind and open-source models make discovery free, the value <span className="text-white font-normal">completely shifts to whoever controls the manufacturing process.</span>
+              </p>
+            </div>
+
             <p className="text-white/50 font-light text-lg md:text-xl mb-6">
               90% of global GDP is in the physical world—manufacturing.
             </p>
@@ -365,6 +443,81 @@ export default function ShodhDeckV3Down() {
             </div>
           </div>
         </motion.div>
+        </div>
+      </section>
+
+      {/* ─── THE SECRET: PROCESS IS THE PRODUCT ─── */}
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fade}>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">The Secret</p>
+            <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
+              Once Discovery is commoditized,<br /><span className="font-normal">Process becomes everything.</span>
+            </h2>
+            <p className="text-white/50 font-light text-xl max-w-3xl mb-16 leading-relaxed">
+              In the physical world, <span className="text-white font-normal">Process IS the Product.</span> Knowing the formula is worthless without knowing how to make it at scale.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-12">
+            {[
+              {
+                industry: "Semiconductors", stat: "99%",
+                color: "text-blue-300", border: "border-blue-500/20", bg: "bg-blue-950/5",
+                body: "TSMC controls the world because they mastered process physics. Everyone knows the circuit design. No one else can print it.",
+              },
+              {
+                industry: "Batteries", stat: "90%",
+                color: "text-emerald-300", border: "border-emerald-500/20", bg: "bg-emerald-950/5",
+                body: "We\u2019ve known about solid-state for a decade. The winner is whoever can mass-produce them without defects at $50/kWh — breaking China\u2019s monopoly.",
+              },
+              {
+                industry: "Space & Defense", stat: "90%",
+                color: "text-violet-300", border: "border-violet-500/20", bg: "bg-violet-950/5",
+                body: "Knowing the superalloy mix is useless without the exact thermal cooling gradient to forge it without micro-cracks. This is why SpaceX kept blowing up Raptor engines.",
+              },
+              {
+                industry: "Specialty Chemicals", stat: "80%",
+                color: "text-amber-300", border: "border-amber-500/20", bg: "bg-amber-950/5",
+                body: "Everyone knows the molecules. The winner achieves 99.9% purity in continuous flow with the lowest heat waste. That operational secret is worth billions.",
+              },
+            ].map((item, i) => (
+              <motion.div key={i} {...fade} transition={{ delay: i * 0.08 }} className={`p-8 rounded-2xl border ${item.border} ${item.bg}`}>
+                <div className="flex items-start justify-between mb-4">
+                  <p className="text-white/35 text-xs uppercase tracking-wider">{item.industry}</p>
+                  <p className={`text-3xl font-extralight ${item.color}`}>{item.stat}</p>
+                </div>
+                <p className={`font-light text-sm mb-2 ${item.color}`}>Process is {item.stat} of the value.</p>
+                <p className="text-white/50 font-light text-sm leading-relaxed">{item.body}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div {...fade} className="p-8 md:p-10 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-white/35 text-xs uppercase tracking-wider mb-4">The Insight That Changes Everything</p>
+                <p className="text-white/50 font-light text-lg leading-relaxed mb-3">Discovery gives you a digital blueprint.</p>
+                <p className="text-2xl md:text-3xl font-extralight text-white leading-tight">Our Large Physics Model gives you the <span className="font-normal">exact factory process</span> to actually build it.</p>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 p-5 rounded-xl bg-white/[0.02] border border-white/5">
+                  <span className="text-2xl">&#x1F9EA;</span>
+                  <div>
+                    <p className="text-white/30 text-xs uppercase tracking-wider">Discovery Layer</p>
+                    <p className="text-white/55 font-light">Everyone is building the Recipe</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 p-5 rounded-xl bg-rose-950/20 border border-rose-500/20">
+                  <span className="text-2xl">&#x1F525;</span>
+                  <div>
+                    <p className="text-rose-300/60 text-xs uppercase tracking-wider">Process Layer — Shodh AI</p>
+                    <p className="text-white font-light">We are building the Oven</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -652,6 +805,61 @@ export default function ShodhDeckV3Down() {
           <p className="text-4xl font-extralight text-emerald-300">+6.75 <span className="text-xl">yrs</span></p>
           <p className="text-white/40 font-light text-xs mt-1">At $200M/yr revenue → <span className="text-emerald-300/70 font-normal">$1.35B in monopoly revenue</span> unlocked per engagement</p>
         </motion.div>
+      </section>
+
+      {/* ─── WHY BIG TECH CAN'T TOUCH US ─── */}
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fade}>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">Competitive Moat</p>
+            <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
+              Why Google won&apos;t<br /><span className="font-normal">just build this.</span>
+            </h2>
+            <p className="text-white/50 font-light text-lg max-w-2xl mb-16 leading-relaxed">
+              Big Tech&apos;s entire moat relies on public data and zero-marginal-cost software. Industrial manufacturing breaks both of those assumptions.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <motion.div {...fade} className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-6">Why Big Tech Can&apos;t</p>
+              <div className="space-y-6">
+                {[
+                  { title: "Paranoid, Dirty-Hands B2B", body: "Industrial manufacturing is a high-trust, high-stakes enterprise sale. Big Tech refuses to do the grueling work of integrating with legacy 1990s SCADA systems inside a chemical plant." },
+                  { title: "No Public Data", body: "Every industrial process is a closely guarded trade secret. Google\u2019s moat requires public data. There is no public dataset for how Biocon\u2019s bioreactors fail at 10,000L." },
+                  { title: "Wrong Business Model", body: "Big Tech sells cheap SaaS subscriptions. Industrial manufacturing demands outcome-based contracts, on-site deployment, and IP co-ownership. That is not their muscle." },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-2 shrink-0" />
+                    <div>
+                      <p className="text-white/65 font-light text-sm mb-1">{item.title}</p>
+                      <p className="text-white/35 font-light text-xs leading-relaxed">{item.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
+              <p className="text-emerald-400/60 text-xs uppercase tracking-wider mb-6">Our Architecture Solves It</p>
+              <div className="space-y-6">
+                {[
+                  { title: "Federated Enclave Deployment", body: "We deploy the model locally inside their secure environment. They keep their chemistry IP. Our model extracts only the physics gradients — no confidential data ever leaves their walls." },
+                  { title: "Base-Model + Edge Fine-Tuning", body: "We train a sovereign base model on physics first principles. Then fine-tune on their historical failure data — which stays in their enclave. Zero data paranoia." },
+                  { title: "Outcome-as-a-Service", body: "We don\u2019t sell SaaS. We use Process Licensing. If we optimize their continuous-flow reactor, we take a share of the yield improvements. Our incentives are perfectly aligned." },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400/40 mt-2 shrink-0" />
+                    <div>
+                      <p className="text-white/65 font-light text-sm mb-1">{item.title}</p>
+                      <p className="text-white/35 font-light text-xs leading-relaxed">{item.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ─── 03: TECHNOLOGY & DATA ENGINE ─── */}
@@ -1391,6 +1599,84 @@ export default function ShodhDeckV3Down() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ─── THE VISION: FABLESS PHYSICAL ECONOMY ─── */}
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fade}>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">The Vision</p>
+            <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
+              The Fabless<br /><span className="font-normal">Physical Economy.</span>
+            </h2>
+            <p className="text-white/50 font-light text-xl max-w-3xl mb-4 leading-relaxed">
+              In the 1990s, TSMC told chip designers: &ldquo;You just design the chip. We will handle the brutal physics of manufacturing it.&rdquo;
+            </p>
+            <p className="text-white/35 font-light text-lg max-w-3xl mb-16 leading-relaxed">
+              That created the Fabless era — birthing Apple and NVIDIA without them owning a single factory. <span className="text-white/55">Shodh AI is doing the same for the entire physical world.</span>
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <motion.div {...fade} className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
+              <p className="text-white/30 text-xs uppercase tracking-wider mb-6">Old World — Deep Tech Today</p>
+              <div className="space-y-5">
+                {[
+                  { step: "01", label: "AI-discovery company invents a drug", outcome: "Wait 8 years for FDA revenue" },
+                  { step: "02", label: "Battery startup discovers new chemistry", outcome: "Raise $100M to build a pilot plant. 10 years to market." },
+                  { step: "03", label: "Chemical company has a new molecule", outcome: "7 years of physical trial-and-error. $500M wasted." },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <span className="text-white/20 font-mono text-sm shrink-0 mt-0.5">{s.step}</span>
+                    <div>
+                      <p className="text-white/50 font-light text-sm">{s.label}</p>
+                      <p className="text-white/25 text-xs mt-1">→ {s.outcome}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/5">
+              <p className="text-rose-400/60 text-xs uppercase tracking-wider mb-6">The Shodh AI World</p>
+              <div className="space-y-5">
+                {[
+                  { step: "01", label: "Take your digital discovery", outcome: "The upstream AI hands us the molecule" },
+                  { step: "02", label: "Run it through our process compiler", outcome: "Get a zero-defect manufacturing blueprint" },
+                  { step: "03", label: "Hand it to a toll-manufacturer", outcome: "No pilot plant. No $100M CapEx. Ship in months." },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <span className="text-rose-400/40 font-mono text-sm shrink-0 mt-0.5">{s.step}</span>
+                    <div>
+                      <p className="text-white/65 font-light text-sm">{s.label}</p>
+                      <p className="text-white/35 text-xs mt-1">→ {s.outcome}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-14">
+            {[
+              { from: "10 years", to: "1 year", label: "Deep-tech time-to-market", color: "text-rose-300" },
+              { from: "$100M", to: "$5M", label: "CapEx to prove manufacturing", color: "text-blue-300" },
+              { from: "Luck", to: "Design", label: "How manufacturing works", color: "text-emerald-300" },
+            ].map((stat, i) => (
+              <motion.div key={i} {...fade} transition={{ delay: i * 0.08 }} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 text-center">
+                <p className="text-white/20 font-light text-base line-through mb-1">{stat.from}</p>
+                <p className={`text-3xl md:text-4xl font-extralight ${stat.color} mb-2`}>{stat.to}</p>
+                <p className="text-white/35 font-light text-xs uppercase tracking-wider">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div {...fade} className="border-l-2 border-rose-500/30 pl-6 py-2 max-w-3xl">
+            <p className="text-white/65 font-light text-xl leading-relaxed">
+              We are building the foundational infrastructure for the next industrial revolution. Not a tool. <span className="text-white font-normal">The platform.</span>
+            </p>
+          </motion.div>
         </div>
       </section>
 
