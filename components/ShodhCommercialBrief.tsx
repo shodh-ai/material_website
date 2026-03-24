@@ -62,7 +62,7 @@ const colorMap: Record<string, { bg: string; border: string; text: string }> = {
 
 const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
-const INVESTOR_MENU = [
+const COMMERCIAL_MENU = [
   {
     label: "The Thesis",
     href: "#thesis",
@@ -101,20 +101,20 @@ const INVESTOR_MENU = [
     ],
   },
   {
-    label: "The Capital Stack",
-    href: "#capital-stack",
+    label: "Strategic Partnership",
+    href: "#strategic-partnership",
     links: [
-      { label: "The $100M Structure", href: "#capital-structure" },
-      { label: "Sovereign Compute", href: "#sovereign-compute" },
-      { label: "The $50M Ask", href: "#fifty-million-ask" },
-      { label: "The Roadmap", href: "#capital-roadmap" },
+      { label: "Anchor Partnership Model", href: "#anchor-partnership-model" },
+      { label: "Aerospace", href: "#anchor-sector-aerospace" },
+      { label: "Energy", href: "#anchor-sector-energy" },
+      { label: "Chemicals", href: "#anchor-sector-chemicals" },
     ],
   },
 ] as const;
 
 type DeckVariant = "right" | "front";
 
-export default function ShodhDeckV3Right({ variant = "right" }: { variant?: DeckVariant }) {
+export default function ShodhCommercialBrief({ variant = "right" }: { variant?: DeckVariant }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeVision, setActiveVision] = useState(0);
   const [displayedPrompt, setDisplayedPrompt] = useState("");
@@ -160,7 +160,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Investor Briefing</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Commercial Briefing</span>
         </div>
       </header>
 
@@ -168,11 +168,11 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         <div className="rounded-[28px] border border-white/10 bg-black/45 backdrop-blur-2xl shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
           <div className="px-5 py-4 border-b border-white/8 bg-gradient-to-b from-white/[0.06] to-transparent">
             <p className="text-[10px] uppercase tracking-[0.32em] text-white/30 mb-2">Deck Map</p>
-            <p className="text-white/80 text-sm font-light leading-relaxed">Navigate the investor story from thesis to capital stack.</p>
+            <p className="text-white/80 text-sm font-light leading-relaxed">Navigate the commercial brief from thesis to strategic partnership.</p>
           </div>
           <nav className="px-3 py-3 max-h-[calc(100vh-160px)] overflow-y-auto">
             <div className="space-y-2">
-              {INVESTOR_MENU.map((item) => (
+              {COMMERCIAL_MENU.map((item) => (
                 <div key={item.label} className="rounded-2xl border border-white/6 bg-white/[0.02] px-3 py-3 hover:bg-white/[0.04] transition-colors">
                   <a href={item.href} className="block text-sm text-white/90 font-light tracking-[0.01em] mb-2 hover:text-white transition-colors">
                     {item.label}
@@ -208,7 +208,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-10">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white">Confidential Investor Briefing</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white">Confidential Commercial Briefing</span>
           </div>
           
           <h1 className="text-6xl md:text-9xl font-medium tracking-tighter mb-4 leading-[0.9] text-white drop-shadow-2xl">
@@ -1799,103 +1799,44 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
       </section>
 
 
-      {/* ─── 09: THE ASK & CAPITAL STACK ─── */}
-      <section id="capital-stack" className="px-6 py-28 md:py-40 max-w-6xl mx-auto scroll-mt-40">
-        <motion.div {...fade} id="capital-structure" className="scroll-mt-40">
+      {/* ─── 09: THE ANCHOR PARTNERSHIP MODEL ─── */}
+      <section id="strategic-partnership" className="px-6 py-28 md:py-40 max-w-6xl mx-auto scroll-mt-40">
+        <motion.div {...fade} id="anchor-partnership-model" className="scroll-mt-40">
           <div className="flex items-center gap-4 mb-10">
             <span className="text-white/40 font-mono text-base">09</span>
             <div className="h-px w-8 bg-white/15 shrink-0" />
-            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Ask & The $100M Capital Stack</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/55">Strategic Partnership</p>
           </div>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            $100M to prove the<br /><span className="font-normal">scaling laws of physical AI.</span>
+            The Anchor<br /><span className="font-normal">Partnership Model.</span>
           </h2>
-          <p className="text-white/55 font-light text-lg max-w-2xl mb-4 leading-relaxed">
-            We are structuring a $100M capitalization to build the 10B parameter foundation for the physical world and capture the global enterprise market.
+          <p className="text-white/55 font-light text-xl max-w-3xl mb-12 leading-relaxed">
+            We are actively onboarding global Anchor Partners in Aerospace, Energy, and Chemicals. Partners provide historical, non-confidential physical scale-up data. Shodh AI deploys federated compute enclaves to prove &gt;90% Sim2Real accuracy, compressing your manufacturing scale-up timelines from years to months.
           </p>
         </motion.div>
 
-        {/* Capital table */}
-        <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mb-16">
-          {[
-            {
-              amount: "$25M", source: "Sovereign Compute", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
-              desc: "IndiaAI Mission allocation for priority national GPU clusters. Covering burn on core model training.", note: "",
-            },
-            {
-              amount: "$25M", source: "Autonomous Lab Infrastructure", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
-              desc: "ANRF funding for model training, wet-lab validation and robotic synthesis infrastructure. Covering burn on hardware.", note: "",
-            },
-            {
-              amount: "$50M", source: "The Equity Raise", tag: "Active", tagColor: "text-white", tagBg: "bg-white/5 border-white/20",
-              desc: "Hire elite global AI researchers. Prove the 10B parameter scaling laws, perfect the 3D synthetic data factory, and deploy secure enterprise inference infrastructure across our anchor partners. 100% deployed on model talent and GTM.", note: "",
-            },
-          ].map((item, i) => (
-            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} id={i === 0 ? "sovereign-compute" : i === 2 ? "fifty-million-ask" : undefined} className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.02]" : ""} ${i === 0 || i === 2 ? "scroll-mt-40" : ""}`}>
-              <p className="text-4xl md:text-5xl font-light text-white mb-2">{item.amount}</p>
-              <p className="text-white/65 text-sm font-light mb-2">{item.source}</p>
-              {item.tag && <span className={`inline-block text-xs px-2.5 py-0.5 rounded-full border ${item.tagBg} ${item.tagColor} mb-4`}>{item.tag}</span>}
-              <p className="text-white/40 text-xs leading-relaxed mb-2">{item.desc}</p>
-              {item.note && <p className="text-white/25 text-xs italic">{item.note}</p>}
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Execution Roadmap */}
-        <div id="capital-roadmap" className="mb-16 space-y-3 scroll-mt-40">
-          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">The Execution Roadmap (24 Months)</p>
-          {[
-            {
-              phase: "Phase 1", months: "Months 1–12", title: "The Anchor Proof",
-              borderL: "border-blue-500/40", border: "border-blue-500/15", numColor: "text-blue-300",
-              execution: "Deliver the 10B parameter 3D-Tensor LPM (10× larger than current physics SOTA). Deploy federated compute enclaves directly into the first 3 anchor partners (Aarti, Biocon, Jubilant).",
-              outcome: "Convert pilots into 7-figure Enterprise Foundation Model Access fees. Achieve ~90%+ commercial accuracy in production. Lock in milestone-based IP royalty agreements.",
-            },
-            {
-              phase: "Phase 2", months: "Months 13–24", title: "The Global 10",
-              borderL: "border-violet-500/40", border: "border-violet-500/15", numColor: "text-violet-300",
-              execution: "Weaponize the initial anchor case studies to target the Tier 1 global manufacturers.",
-              outcome: "Sign 10 global Tier-1 manufacturing giants (e.g., BASF, Pfizer, A123) to multi-million dollar Enterprise Licensing and process-royalty structures.",
-            },
-            {
-              phase: "Phase 3", months: "Post-Round", title: "The Monopoly Scale",
-              borderL: "border-emerald-500/40", border: "border-emerald-500/15", numColor: "text-emerald-300",
-              execution: null as string | null,
-              outcome: "With the 10B physics proven at scale, we transition from Anchor Edge-Deployments to a hyper-scalable Global Process API. Having de-risked the Sim-to-Real math, we will trigger a multi-billion-dollar mega-round to scale compute, train the 100B+ Universal Model, and map the entire global physical supply chain. Shodh AI will have proven the science, validated the business model, and established the definitive Go-To-Market playbook for industrial AI.",
-            },
-          ].map((p, i) => (
-            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`p-6 md:p-8 rounded-2xl border-l-2 ${p.borderL} border ${p.border} bg-white/[0.015]`}>
-              <div className="flex flex-col md:flex-row gap-4 md:gap-10">
-                <div className="md:w-40 shrink-0">
-                  <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{p.phase}</p>
-                  <p className={`text-sm font-mono ${p.numColor} mb-1`}>{p.months}</p>
-                  <p className="text-white font-light text-sm">{p.title}</p>
-                </div>
-                <div className="flex-1 space-y-3">
-                  {p.execution && (
-                    <div>
-                      <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Execution</p>
-                      <p className="text-white/55 font-light text-sm leading-relaxed">{p.execution}</p>
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Outcome</p>
-                    <p className="text-white/70 font-light text-sm leading-relaxed">{p.outcome}</p>
-                  </div>
-                </div>
+        <motion.div {...fade} transition={{ delay: 0.1 }} className="pt-16 border-t border-white/5">
+          <div className="grid md:grid-cols-3 gap-4 mb-12">
+            {[
+              "Aerospace",
+              "Energy",
+              "Chemicals",
+            ].map((sector, i) => (
+              <div key={i} id={i === 0 ? "anchor-sector-aerospace" : i === 1 ? "anchor-sector-energy" : "anchor-sector-chemicals"} className="p-6 rounded-2xl border border-white/8 bg-white/[0.02] scroll-mt-40">
+                <p className="text-white/30 text-xs uppercase tracking-[0.22em] mb-2">Anchor Sector</p>
+                <p className="text-white font-light text-xl">{sector}</p>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Closing */}
-        <motion.div {...fade} transition={{ delay: 0.1 }} className="text-center pt-16 border-t border-white/5">
-          <p className="text-white/25 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
-          <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-6">Science is here.</h2>
-          <p className="text-white/40 font-light text-lg max-w-lg mx-auto mb-12 leading-relaxed">
-            We are not just discovering the future.<br />
-            <span className="text-white">We are manufacturing it.</span>
-          </p>
+          <div className="text-center">
+            <p className="text-white/25 font-light tracking-[0.2em] mb-4">Strategic Partnership</p>
+            <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-6">Compress years into months.</h2>
+            <p className="text-white/40 font-light text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
+              Historical data in. Secure federated compute enclave deployed. &gt;90% Sim2Real accuracy proven. Manufacturing scale-up timelines collapse.
+            </p>
+          </div>
+
           <a
             href="mailto:arastu@shodh.ai"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
