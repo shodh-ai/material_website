@@ -114,22 +114,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         </div>
       </header>
 
-      {/* Side Menu Navigation */}
-      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col gap-6 p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/5">
-        {[
-          { label: "1. The Thesis", href: "#thesis", desc: "Bits vs Atoms, The Valley of Death" },
-          { label: "2. The LPM", href: "#lpm", desc: "Generative workflow, Zero-shot" },
-          { label: "3. Sim-to-Real Proof", href: "#proof", desc: "3D Data factory, Silicon Anode" },
-          { label: "4. Enterprise Anchors", href: "#anchors", desc: "Big Tech Moat, Anchor Partners" },
-          { label: "5. The Capital Stack", href: "#capital", desc: "The $100M structure, Roadmap" }
-        ].map((item, i) => (
-          <a key={i} href={item.href} className="group flex flex-col items-start gap-1 text-left">
-            <span className="text-xs font-mono tracking-widest text-white/40 group-hover:text-white transition-colors">{item.label}</span>
-            <span className="text-[10px] text-white/20 group-hover:text-white/40 transition-colors max-w-[140px] leading-tight">{item.desc}</span>
-          </a>
-        ))}
-      </nav>
-
       {/* ─── HERO ─── */}
       <section className="min-h-[85vh] flex flex-col items-center justify-center px-6 text-center relative overflow-hidden border-b border-white/5">
         
@@ -162,6 +146,24 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         </motion.div>
       </section>
 
+      <div className="relative xl:pl-72 2xl:pl-80">
+        <div className="hidden xl:block absolute left-4 top-10 bottom-0 w-56 pointer-events-none 2xl:left-6">
+          <nav className="sticky top-28 z-40 flex flex-col gap-6 p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/5 pointer-events-auto">
+            {[
+              { label: "1. The Thesis", href: "#thesis", desc: "Bits vs Atoms, Valley of Death" },
+              { label: "2. The LPM", href: "#lpm", desc: "Generative workflow, Zero-shot" },
+              { label: "3. Sim-to-Real Proof", href: "#proof", desc: "3D Data factory, Silicon Anode" },
+              { label: "4. Enterprise Anchors", href: "#anchors", desc: "Big Tech Moat, Anchor Partners" },
+              { label: "5. The Capital Stack", href: "#capital", desc: "The $100M structure, Roadmap" }
+            ].map((item, i) => (
+              <a key={i} href={item.href} className="group flex flex-col items-start gap-1 text-left">
+                <span className="text-xs font-mono tracking-widest text-white/40 group-hover:text-white transition-colors">{item.label}</span>
+                <span className="text-[10px] text-white/20 group-hover:text-white/40 transition-colors max-w-[140px] leading-tight">{item.desc}</span>
+              </a>
+            ))}
+          </nav>
+        </div>
+
       {/* ─── 00: BITS VS. ATOMS ─── */}
       <section id="thesis" className="px-6 py-28 md:py-36 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
@@ -175,7 +177,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
                 </>
               ) : (
                 <>
-                  OpenAI/Anthropic is fighting for<br /><span className="text-white/35">20% of the economy.</span><br />
+                  OpenAI/Anthropic fighting for<br /><span className="text-white/35">20% of the economy.</span><br />
                   <span className="font-normal">AI-for-science unlocks the other 80%.</span>
                 </>
               )}
@@ -236,13 +238,13 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
             <p className="text-xs tracking-[0.25em] uppercase text-white/30 mb-6">Built with</p>
             <div className="flex flex-wrap items-center gap-8">
               {[
-                { src: "/DeepMind_logo.png", alt: "Google DeepMind" },
-                { src: "/logos/google-logo.svg", alt: "Google" },
-                { src: "/demo/nvidia-partner-logo.png", alt: "NVIDIA" },
+                { src: "/demo/nvidia-partner-logo.png", alt: "NVIDIA", className: "h-10 max-w-[168px]" },
+                { src: "/DeepMind_logo.png", alt: "Google DeepMind", className: "h-8 max-w-[120px]" },
+                { src: "/logos/google-logo.svg", alt: "Google", className: "h-8 max-w-[120px]" },
                 { src: "/india-ai-logo-650x311.png", alt: "IndiaAI" },
               ].map((logo) => (
-                <div key={logo.alt} className="h-8 flex items-center opacity-55 hover:opacity-80 transition-opacity duration-200">
-                  <img src={logo.src} alt={logo.alt} className="h-full w-auto max-w-[120px] object-contain" style={{ filter: "brightness(0) invert(1)" }} />
+                <div key={logo.alt} className={`${logo.alt === "NVIDIA" ? "h-10" : "h-8"} flex items-center opacity-55 hover:opacity-80 transition-opacity duration-200`}>
+                  <img src={logo.src} alt={logo.alt} className={`${logo.className ?? "h-8 max-w-[120px]"} w-auto object-contain`} style={{ filter: "brightness(0) invert(1)" }} />
                 </div>
               ))}
             </div>
@@ -344,7 +346,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
                   </div>
 
                   <div className="rounded-3xl border border-white/8 bg-white/[0.02] p-6 md:p-8">
-                    <p className="text-white/35 text-xs uppercase tracking-[0.22em] mb-6">The Valley of Death</p>
+                    <p className="text-white/35 text-xs uppercase tracking-[0.22em] mb-6">Valley of Death</p>
                     <div className="space-y-5">
                       <div className="grid grid-cols-[1fr_auto_1fr_auto_1.2fr] items-center gap-3 text-center">
                         <div className="rounded-2xl border border-white/10 bg-black/25 px-4 py-5">
@@ -1146,7 +1148,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           <div className="mt-10 grid md:grid-cols-2 gap-4">
             <div className="p-6 rounded-xl bg-white/[0.02] border border-white/8 space-y-2">
               <p className="text-rose-300/70 text-xs uppercase tracking-wider">Why 3D is harder than 1D</p>
-              <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 1-trillion-parameter LLM.</p>
+              <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
             </div>
             <div className="p-6 rounded-xl bg-white/[0.015] border border-white/5 space-y-2">
               <p className="text-white/40 text-xs uppercase tracking-wider">Where we stand</p>
@@ -1163,12 +1165,12 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           <div className="mb-6 p-8 rounded-2xl border border-blue-500/20 bg-blue-950/10">
             <div className="mb-5">
               <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 — Now</p>
-              <h4 className="text-white font-light text-2xl">The 10B 3D-Foundation Model</h4>
+              <h4 className="text-white font-light text-2xl">The 50B 3D-Foundation Model</h4>
               <p className="text-blue-300/50 text-xs mt-1">Anchor-Partner Deployment</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                <p>The universal base model — validated at the edge. The 10B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
+                <p>The universal base model — validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
                 <p>Achieves <span className="text-white font-normal">90% accuracy</span> on their specific process environments. First commercial deployments in Year 1.</p>
                 <p className="text-white/30 font-mono text-xs">JAX/FLAX · FNO/UPT · Mixture of Experts</p>
               </div>
@@ -1187,14 +1189,14 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
 
           <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
             <div className="mb-5">
-              <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">Stage 2 — The Vision</p>
-              <h4 className="text-white font-light text-2xl">The 100B+ Foundation Model</h4>
+              <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 — The Vision</p>
+              <h4 className="text-white font-light text-2xl">The 500B+ Foundation Model</h4>
               <p className="text-rose-300/50 text-xs mt-1">Universal Manufacturing Intelligence</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
                 <p>A client brings a completely novel molecule, composite, or device — never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
-                <p>The 10B model handles known process families well. The 100B model handles the <span className="text-white font-normal">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
+                <p>The 50B model handles known process families well. The 500B model handles the <span className="text-white font-normal">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
               </div>
               <div className="space-y-3">
                 <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
@@ -1513,7 +1515,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             <motion.div {...fade} className="p-8 rounded-2xl border border-white/8 bg-white/[0.02]">
-              <p className="text-white/50 text-xs uppercase tracking-wider mb-6">🛑 The Big Tech Blindspot</p>
               <div className="space-y-6">
                 {[
                   {
@@ -1538,7 +1539,6 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
             </motion.div>
 
             <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
-              <p className="text-emerald-400/60 text-xs uppercase tracking-wider mb-6">🟢 The Shodh AI Playbook</p>
               <div className="space-y-6">
                 {[
                   {
@@ -1842,6 +1842,7 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
           </a>
         </motion.div>
       </section>
+      </div>
     </div>
   );
 }

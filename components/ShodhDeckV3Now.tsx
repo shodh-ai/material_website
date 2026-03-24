@@ -64,7 +64,7 @@ const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }
 
 type DeckVariant = "right" | "front";
 
-export default function ShodhCommercialBrief({ variant = "right" }: { variant?: DeckVariant }) {
+export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVariant }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeVision, setActiveVision] = useState(0);
   const [displayedPrompt, setDisplayedPrompt] = useState("");
@@ -95,13 +95,13 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
   const colors = colorMap[active.color];
 
   return (
-    <div className="min-h-screen bg-[#060606] text-white" style={{ cursor: "none" }}>
+    <div className="deck-now min-h-screen bg-[#f3f5fb] text-[#081421]" style={{ cursor: "none" }}>
       {/* Cursor glow */}
       <div className="pointer-events-none fixed z-[9999] transition-transform duration-75"
         style={{ left: mousePos.x, top: mousePos.y, transform: "translate(-50%,-50%)", width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.18) 15%, rgba(255,255,255,0.06) 40%, transparent 70%)" }} />
+          background: "radial-gradient(circle, rgba(72,202,228,0.22) 0%, rgba(72,202,228,0.1) 18%, rgba(72,202,228,0.04) 42%, transparent 70%)" }} />
       <div className="pointer-events-none fixed z-[9999]"
-        style={{ left: mousePos.x, top: mousePos.y, transform: "translate(-50%,-50%)", width: 5, height: 5, borderRadius: "50%", background: "rgba(255,255,255,0.8)" }} />
+        style={{ left: mousePos.x, top: mousePos.y, transform: "translate(-50%,-50%)", width: 5, height: 5, borderRadius: "50%", background: "rgba(8,20,33,0.55)" }} />
 
       {/* Header */}
       <header className="border-b border-white/5 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
@@ -110,7 +110,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Commercial Briefing</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Investor Briefing</span>
         </div>
       </header>
 
@@ -122,14 +122,14 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
           <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60 mix-blend-screen" style={{ filter: 'brightness(1.5) contrast(1.2)' }}>
             <source src="/video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#060606]/50 to-[#060606] pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(6,6,6,0.8)_100%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#060606]/50 to-[#dfe7f4] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(6,6,6,0.72)_100%)] pointer-events-none" />
         </div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-10">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white">Confidential Commercial Briefing</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white">Confidential Investor Briefing</span>
           </div>
           
           <h1 className="text-6xl md:text-9xl font-medium tracking-tighter mb-4 leading-[0.9] text-white drop-shadow-2xl">
@@ -146,7 +146,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         </motion.div>
       </section>
 
-      <div className="relative xl:pl-72 2xl:pl-80">
+      <div className="deck-light-shell relative xl:pl-72 2xl:pl-80">
         <div className="hidden xl:block absolute left-4 top-10 bottom-0 w-56 pointer-events-none 2xl:left-6">
           <nav className="sticky top-28 z-40 flex flex-col gap-6 p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/5 pointer-events-auto">
             {[
@@ -244,7 +244,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
                 { src: "/india-ai-logo-650x311.png", alt: "IndiaAI" },
               ].map((logo) => (
                 <div key={logo.alt} className={`${logo.alt === "NVIDIA" ? "h-10" : "h-8"} flex items-center opacity-55 hover:opacity-80 transition-opacity duration-200`}>
-                  <img src={logo.src} alt={logo.alt} className={`${logo.className ?? "h-8 max-w-[120px]"} w-auto object-contain`} style={{ filter: "brightness(0) invert(1)" }} />
+                  <img src={logo.src} alt={logo.alt} className={`${logo.className ?? "h-8 max-w-[120px]"} w-auto object-contain`} />
                 </div>
               ))}
             </div>
@@ -1412,7 +1412,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
                 <Maximize2 className="w-3.5 h-3.5" />
                 Click to Expand Data
               </button>
-              <LineChart className="w-full h-full min-h-[260px]" />
+              <LineChart theme="light" className="w-full h-full min-h-[260px]" />
             </div>
             <div className="pt-4 border-t border-white/10 mt-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-medium tracking-[0.12em] uppercase">
@@ -1455,7 +1455,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
                 </div>
                 <div className="flex-1 p-6 md:p-10 min-h-0">
                   <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
-                    <LineChart detailed className="w-full h-full min-h-[420px]" />
+                    <LineChart theme="light" detailed className="w-full h-full min-h-[420px]" />
                   </div>
                 </div>
               </div>
@@ -1736,44 +1736,103 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       </section>
 
 
-      {/* ─── 09: THE ANCHOR PARTNERSHIP MODEL ─── */}
-      <section id="partnership" className="px-6 py-28 md:py-40 max-w-6xl mx-auto">
+      {/* ─── 09: THE ASK & CAPITAL STACK ─── */}
+      <section id="capital" className="px-6 py-28 md:py-40 max-w-6xl mx-auto">
         <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <span className="text-white/40 font-mono text-base">09</span>
             <div className="h-px w-8 bg-white/15 shrink-0" />
-            <p className="text-xs uppercase tracking-[0.25em] text-white/55">Strategic Partnership</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Ask & The $100M Capital Stack</p>
           </div>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
-            The Anchor<br /><span className="font-normal">Partnership Model.</span>
+            $100M to prove the<br /><span className="font-normal">scaling laws of physical AI.</span>
           </h2>
-          <p className="text-white/55 font-light text-xl max-w-3xl mb-12 leading-relaxed">
-            We are actively onboarding global Anchor Partners in Aerospace, Energy, and Chemicals. Partners provide historical, non-confidential physical scale-up data. Shodh AI deploys federated compute enclaves to prove &gt;90% Sim2Real accuracy, compressing your manufacturing scale-up timelines from years to months.
+          <p className="text-white/55 font-light text-lg max-w-2xl mb-4 leading-relaxed">
+            We are structuring a $100M capitalization to build the 10B parameter foundation for the physical world and capture the global enterprise market.
           </p>
         </motion.div>
 
-        <motion.div {...fade} transition={{ delay: 0.1 }} className="pt-16 border-t border-white/5">
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
-            {[
-              "Aerospace",
-              "Energy",
-              "Chemicals",
-            ].map((sector, i) => (
-              <div key={i} className="p-6 rounded-2xl border border-white/8 bg-white/[0.02]">
-                <p className="text-white/30 text-xs uppercase tracking-[0.22em] mb-2">Anchor Sector</p>
-                <p className="text-white font-light text-xl">{sector}</p>
+        {/* Capital table */}
+        <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden mb-16">
+          {[
+            {
+              amount: "$25M", source: "Sovereign Compute", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
+              desc: "IndiaAI Mission allocation for priority national GPU clusters. Covering burn on core model training.", note: "",
+            },
+            {
+              amount: "$25M", source: "Autonomous Lab Infrastructure", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
+              desc: "ANRF funding for model training, wet-lab validation and robotic synthesis infrastructure. Covering burn on hardware.", note: "",
+            },
+            {
+              amount: "$50M", source: "The Equity Raise", tag: "Active", tagColor: "text-white", tagBg: "bg-white/5 border-white/20",
+              desc: "Hire elite global AI researchers. Prove the 10B parameter scaling laws, perfect the 3D synthetic data factory, and deploy secure enterprise inference infrastructure across our anchor partners. 100% deployed on model talent and GTM.", note: "",
+            },
+          ].map((item, i) => (
+            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`bg-[#060606] p-8 md:p-10 ${i === 2 ? "bg-white/[0.02]" : ""}`}>
+              <p className="text-4xl md:text-5xl font-light text-white mb-2">{item.amount}</p>
+              <p className="text-white/65 text-sm font-light mb-2">{item.source}</p>
+              {item.tag && <span className={`inline-block text-xs px-2.5 py-0.5 rounded-full border ${item.tagBg} ${item.tagColor} mb-4`}>{item.tag}</span>}
+              <p className="text-white/40 text-xs leading-relaxed mb-2">{item.desc}</p>
+              {item.note && <p className="text-white/25 text-xs italic">{item.note}</p>}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Execution Roadmap */}
+        <div className="mb-16 space-y-3">
+          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">The Execution Roadmap (24 Months)</p>
+          {[
+            {
+              phase: "Phase 1", months: "Months 1–12", title: "The Anchor Proof",
+              borderL: "border-blue-500/40", border: "border-blue-500/15", numColor: "text-blue-300",
+              execution: "Deliver the 10B parameter 3D-Tensor LPM (10× larger than current physics SOTA). Deploy federated compute enclaves directly into the first 3 anchor partners (Aarti, Biocon, Jubilant).",
+              outcome: "Convert pilots into 7-figure Enterprise Foundation Model Access fees. Achieve ~90%+ commercial accuracy in production. Lock in milestone-based IP royalty agreements.",
+            },
+            {
+              phase: "Phase 2", months: "Months 13–24", title: "The Global 10",
+              borderL: "border-violet-500/40", border: "border-violet-500/15", numColor: "text-violet-300",
+              execution: "Weaponize the initial anchor case studies to target the Tier 1 global manufacturers.",
+              outcome: "Sign 10 global Tier-1 manufacturing giants (e.g., BASF, Pfizer, A123) to multi-million dollar Enterprise Licensing and process-royalty structures.",
+            },
+            {
+              phase: "Phase 3", months: "Post-Round", title: "The Monopoly Scale",
+              borderL: "border-emerald-500/40", border: "border-emerald-500/15", numColor: "text-emerald-300",
+              execution: null as string | null,
+              outcome: "With the 10B physics proven at scale, we transition from Anchor Edge-Deployments to a hyper-scalable Global Process API. Having de-risked the Sim-to-Real math, we will trigger a multi-billion-dollar mega-round to scale compute, train the 100B+ Universal Model, and map the entire global physical supply chain. Shodh AI will have proven the science, validated the business model, and established the definitive Go-To-Market playbook for industrial AI.",
+            },
+          ].map((p, i) => (
+            <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`p-6 md:p-8 rounded-2xl border-l-2 ${p.borderL} border ${p.border} bg-white/[0.015]`}>
+              <div className="flex flex-col md:flex-row gap-4 md:gap-10">
+                <div className="md:w-40 shrink-0">
+                  <p className="text-white/40 text-xs uppercase tracking-wider mb-1">{p.phase}</p>
+                  <p className={`text-sm font-mono ${p.numColor} mb-1`}>{p.months}</p>
+                  <p className="text-white font-light text-sm">{p.title}</p>
+                </div>
+                <div className="flex-1 space-y-3">
+                  {p.execution && (
+                    <div>
+                      <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Execution</p>
+                      <p className="text-white/55 font-light text-sm leading-relaxed">{p.execution}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-white/35 text-xs uppercase tracking-wider mb-1">The Outcome</p>
+                    <p className="text-white/70 font-light text-sm leading-relaxed">{p.outcome}</p>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
+        </div>
 
-          <div className="text-center">
-            <p className="text-white/25 font-light tracking-[0.2em] mb-4">Strategic Partnership</p>
-            <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-6">Compress years into months.</h2>
-            <p className="text-white/40 font-light text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-              Historical data in. Secure federated compute enclave deployed. &gt;90% Sim2Real accuracy proven. Manufacturing scale-up timelines collapse.
-            </p>
-          </div>
-
+        {/* Closing */}
+        <motion.div {...fade} transition={{ delay: 0.1 }} className="text-center pt-16 border-t border-white/5">
+          <p className="text-white/25 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
+          <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-6">Science is here.</h2>
+          <p className="text-white/40 font-light text-lg max-w-lg mx-auto mb-12 leading-relaxed">
+            We are not just discovering the future.<br />
+            <span className="text-white">We are manufacturing it.</span>
+          </p>
           <a
             href="mailto:arastu@shodh.ai"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
@@ -1784,6 +1843,130 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         </motion.div>
       </section>
       </div>
+
+      <style jsx global>{`
+        .deck-now {
+          background:
+            radial-gradient(circle at top left, rgba(26, 115, 232, 0.14), transparent 26%),
+            radial-gradient(circle at top right, rgba(161, 66, 244, 0.1), transparent 22%),
+            radial-gradient(circle at bottom right, rgba(52, 168, 83, 0.12), transparent 26%),
+            linear-gradient(180deg, #f7f9fc 0%, #f2f5fb 46%, #edf3fb 100%);
+          color: #081421;
+        }
+
+        .deck-light-shell section,
+        .deck-light-shell nav {
+          border-color: rgba(8, 20, 33, 0.08) !important;
+        }
+
+        .deck-light-shell nav {
+          background: rgba(255, 255, 255, 0.78) !important;
+          backdrop-filter: blur(18px);
+          box-shadow: 0 18px 50px rgba(8, 20, 33, 0.08);
+        }
+
+        .deck-light-shell [class*="bg-[#060606]"],
+        .deck-light-shell [class*="bg-[#0a0a0a]"],
+        .deck-light-shell [class*="bg-[#0b0b0b]"],
+        .deck-light-shell [class*="bg-black/20"],
+        .deck-light-shell [class*="bg-black/25"],
+        .deck-light-shell [class*="bg-black/30"],
+        .deck-light-shell [class*="bg-black/35"],
+        .deck-light-shell [class*="bg-black/40"],
+        .deck-light-shell [class*="bg-black/50"],
+        .deck-light-shell [class*="bg-black/60"] {
+          background-color: rgba(255, 255, 255, 0.82) !important;
+        }
+
+        .deck-light-shell [class*="bg-white/[0.0"],
+        .deck-light-shell [class*="bg-white/5"],
+        .deck-light-shell [class*="bg-white/10"] {
+          background-color: rgba(255, 255, 255, 0.76) !important;
+        }
+
+        .deck-light-shell [class*="bg-blue-950/"] {
+          background-color: rgba(26, 115, 232, 0.1) !important;
+        }
+
+        .deck-light-shell [class*="bg-emerald-950/"] {
+          background-color: rgba(52, 168, 83, 0.1) !important;
+        }
+
+        .deck-light-shell [class*="bg-violet-950/"] {
+          background-color: rgba(161, 66, 244, 0.1) !important;
+        }
+
+        .deck-light-shell [class*="bg-rose-950/"] {
+          background-color: rgba(234, 67, 53, 0.1) !important;
+        }
+
+        .deck-light-shell [class*="bg-amber-950/"] {
+          background-color: rgba(251, 188, 4, 0.12) !important;
+        }
+
+        .deck-light-shell [class*="bg-cyan-950/"] {
+          background-color: rgba(0, 172, 193, 0.1) !important;
+        }
+
+        .deck-light-shell [class*="border-blue-500/"] {
+          border-color: rgba(26, 115, 232, 0.28) !important;
+        }
+
+        .deck-light-shell [class*="border-emerald-500/"] {
+          border-color: rgba(52, 168, 83, 0.26) !important;
+        }
+
+        .deck-light-shell [class*="border-violet-500/"] {
+          border-color: rgba(161, 66, 244, 0.24) !important;
+        }
+
+        .deck-light-shell [class*="border-rose-500/"] {
+          border-color: rgba(234, 67, 53, 0.24) !important;
+        }
+
+        .deck-light-shell [class*="border-amber-500/"] {
+          border-color: rgba(251, 188, 4, 0.28) !important;
+        }
+
+        .deck-light-shell [class*="border-cyan-500/"] {
+          border-color: rgba(0, 172, 193, 0.24) !important;
+        }
+
+        .deck-light-shell [class*="text-white"] {
+          color: #081421 !important;
+        }
+
+        .deck-light-shell [class*="text-white/20"] { color: rgba(8, 20, 33, 0.26) !important; }
+        .deck-light-shell [class*="text-white/25"] { color: rgba(8, 20, 33, 0.3) !important; }
+        .deck-light-shell [class*="text-white/30"] { color: rgba(8, 20, 33, 0.36) !important; }
+        .deck-light-shell [class*="text-white/35"] { color: rgba(8, 20, 33, 0.42) !important; }
+        .deck-light-shell [class*="text-white/40"] { color: rgba(8, 20, 33, 0.48) !important; }
+        .deck-light-shell [class*="text-white/45"] { color: rgba(8, 20, 33, 0.54) !important; }
+        .deck-light-shell [class*="text-white/50"] { color: rgba(8, 20, 33, 0.6) !important; }
+        .deck-light-shell [class*="text-white/55"] { color: rgba(8, 20, 33, 0.64) !important; }
+        .deck-light-shell [class*="text-white/60"] { color: rgba(8, 20, 33, 0.68) !important; }
+        .deck-light-shell [class*="text-white/65"] { color: rgba(8, 20, 33, 0.72) !important; }
+        .deck-light-shell [class*="text-white/70"] { color: rgba(8, 20, 33, 0.76) !important; }
+        .deck-light-shell [class*="text-white/75"] { color: rgba(8, 20, 33, 0.8) !important; }
+        .deck-light-shell [class*="text-white/80"] { color: rgba(8, 20, 33, 0.84) !important; }
+        .deck-light-shell [class*="text-white/85"] { color: rgba(8, 20, 33, 0.88) !important; }
+        .deck-light-shell [class*="text-white/90"] { color: rgba(8, 20, 33, 0.92) !important; }
+
+        .deck-light-shell [class*="text-blue-300"] { color: #1a73e8 !important; }
+        .deck-light-shell [class*="text-cyan-300"] { color: #00acc1 !important; }
+        .deck-light-shell [class*="text-emerald-300"] { color: #34a853 !important; }
+        .deck-light-shell [class*="text-violet-300"] { color: #a142f4 !important; }
+        .deck-light-shell [class*="text-rose-300"] { color: #ea4335 !important; }
+        .deck-light-shell [class*="text-orange-300"] { color: #f29900 !important; }
+        .deck-light-shell [class*="text-amber-300"] { color: #fbbc04 !important; }
+        .deck-light-shell [class*="text-sky-300"] { color: #1a73e8 !important; }
+
+        .deck-light-shell [class*="shadow-[0_0_18px"],
+        .deck-light-shell [class*="shadow-[0_0_30px"],
+        .deck-light-shell [class*="shadow-[0_0_40px"] {
+          box-shadow: 0 0 22px rgba(26, 115, 232, 0.16) !important;
+        }
+      `}</style>
     </div>
   );
 }

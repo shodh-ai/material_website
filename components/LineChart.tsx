@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 type LineChartProps = {
   className?: string;
   detailed?: boolean;
+  theme?: "dark" | "light";
 };
 
 type Point = {
@@ -189,7 +190,7 @@ const generateSeries = (recipe: Recipe, isPrediction: boolean) => {
   });
 };
 
-export default function LineChart({ className, detailed = false }: LineChartProps) {
+export default function LineChart({ className, detailed = false, theme = "dark" }: LineChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -217,6 +218,30 @@ export default function LineChart({ className, detailed = false }: LineChartProp
       const yMin = 58;
       const yMax = 102;
 
+      const palette = theme === "light"
+        ? {
+            backgroundTop: "rgba(26, 115, 232, 0.05)",
+            backgroundBottom: "rgba(255, 255, 255, 0)",
+            grid: "rgba(8, 20, 33, 0.08)",
+            axis: "rgba(8, 20, 33, 0.22)",
+            tick: "rgba(8, 20, 33, 0.56)",
+            label: "rgba(8, 20, 33, 0.72)",
+            legend: "rgba(8, 20, 33, 0.84)",
+            annotationBg: "rgba(255, 255, 255, 0.94)",
+            annotationText: "rgba(8, 20, 33, 0.82)",
+          }
+        : {
+            backgroundTop: "rgba(255,255,255,0.025)",
+            backgroundBottom: "rgba(255,255,255,0)",
+            grid: "rgba(255, 255, 255, 0.07)",
+            axis: "rgba(255, 255, 255, 0.24)",
+            tick: "rgba(255, 255, 255, 0.55)",
+            label: "rgba(255, 255, 255, 0.68)",
+            legend: "rgba(255, 255, 255, 0.84)",
+            annotationBg: "rgba(8, 12, 20, 0.88)",
+            annotationText: "rgba(255,255,255,0.92)",
+          };
+
       if (chartWidth <= 0 || chartHeight <= 0) return;
 
       const mapX = (x: number) => padding.left + (x / xMax) * chartWidth;
@@ -234,13 +259,13 @@ export default function LineChart({ className, detailed = false }: LineChartProp
       ctx.clearRect(0, 0, width, height);
 
       const background = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
-      background.addColorStop(0, "rgba(255,255,255,0.025)");
-      background.addColorStop(1, "rgba(255,255,255,0)");
+      background.addColorStop(0, palette.backgroundTop);
+      background.addColorStop(1, palette.backgroundBottom);
       ctx.fillStyle = background;
       ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
 
       ctx.beginPath();
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.07)";
+      ctx.strokeStyle = palette.grid;
       ctx.lineWidth = 1;
       [60, 70, 80, 90, 100].forEach((value) => {
         const y = mapY(value);
@@ -255,14 +280,14 @@ export default function LineChart({ className, detailed = false }: LineChartProp
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.24)";
+      ctx.strokeStyle = palette.axis;
       ctx.lineWidth = 1.2;
       ctx.moveTo(padding.left, padding.top);
       ctx.lineTo(padding.left, height - padding.bottom);
       ctx.lineTo(width - padding.right, height - padding.bottom);
       ctx.stroke();
 
-      ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
+      ctx.fillStyle = palette.tick;
       ctx.font = `${detailed ? 12 : 11}px Inter, sans-serif`;
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
@@ -276,7 +301,7 @@ export default function LineChart({ className, detailed = false }: LineChartProp
         ctx.fillText(`${value}`, mapX(value), height - padding.bottom + 10);
       });
 
-      ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
+      ctx.fillStyle = palette.label;
       ctx.font = `${detailed ? 13 : 12}px Inter, sans-serif`;
       ctx.fillText("Cycles (Time)", padding.left + chartWidth / 2, height - 18);
 
@@ -367,7 +392,7 @@ export default function LineChart({ className, detailed = false }: LineChartProp
         ctx.lineTo(legendStartX + 46, y);
         ctx.stroke();
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.84)";
+        ctx.fillStyle = palette.legend;
         ctx.fillText(`${recipe.shortLabel}: ${recipe.label}`, legendStartX + 54, y);
       });
 
@@ -387,11 +412,11 @@ export default function LineChart({ className, detailed = false }: LineChartProp
           const y = mapY(annotation.y);
           const boxWidth = index === 2 ? 126 : 118;
 
-          ctx.fillStyle = "rgba(8, 12, 20, 0.88)";
+          ctx.fillStyle = palette.annotationBg;
           ctx.fillRect(x - 8, y - 14, boxWidth, 24);
           ctx.strokeStyle = `${RECIPES[index].predictionColor}66`;
           ctx.strokeRect(x - 8, y - 14, boxWidth, 24);
-          ctx.fillStyle = "rgba(255,255,255,0.92)";
+          ctx.fillStyle = palette.annotationText;
           ctx.fillText(annotation.text, x + 2, y - 2);
         });
       }
@@ -403,7 +428,7 @@ export default function LineChart({ className, detailed = false }: LineChartProp
     return () => {
       window.removeEventListener("resize", drawChart);
     };
-  }, [detailed]);
+  }, [detailed, theme]);
 
   return (
     <canvas
