@@ -62,56 +62,6 @@ const colorMap: Record<string, { bg: string; border: string; text: string }> = {
 
 const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
-const COMMERCIAL_MENU = [
-  {
-    label: "The Thesis",
-    href: "#thesis",
-    links: [
-      { label: "Bits vs Atoms", href: "#bits-vs-atoms" },
-      { label: "The Valley of Death", href: "#valley-of-death" },
-      { label: "Process is the Product", href: "#process-is-the-product" },
-    ],
-  },
-  {
-    label: "The LPM",
-    href: "#lpm",
-    links: [
-      { label: "The Generative Workflow", href: "#generative-workflow" },
-      { label: "Zero-Shot Manufacturing", href: "#zero-shot-manufacturing" },
-      { label: "The Physics Equations", href: "#physics-equations" },
-    ],
-  },
-  {
-    label: "Sim-to-Real Proof",
-    href: "#sim-to-real-proof",
-    links: [
-      { label: "The 3D Data Factory", href: "#data-factory-3d" },
-      { label: "The 10B/100B Architecture", href: "#architecture-10b-100b" },
-      { label: "The Silicon Anode Wet-Lab Results", href: "#silicon-anode-results" },
-    ],
-  },
-  {
-    label: "Enterprise Anchors",
-    href: "#enterprise-anchors",
-    links: [
-      { label: "Big Tech Moat", href: "#big-tech-moat" },
-      { label: "Biocon", href: "#biocon" },
-      { label: "Aarti Industries", href: "#aarti-industries" },
-      { label: "Jubilant", href: "#jubilant" },
-    ],
-  },
-  {
-    label: "Strategic Partnership",
-    href: "#strategic-partnership",
-    links: [
-      { label: "Anchor Partnership Model", href: "#anchor-partnership-model" },
-      { label: "Aerospace", href: "#anchor-sector-aerospace" },
-      { label: "Energy", href: "#anchor-sector-energy" },
-      { label: "Chemicals", href: "#anchor-sector-chemicals" },
-    ],
-  },
-] as const;
-
 type DeckVariant = "right" | "front";
 
 export default function ShodhCommercialBrief({ variant = "right" }: { variant?: DeckVariant }) {
@@ -164,34 +114,21 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         </div>
       </header>
 
-      <aside className="hidden xl:block fixed left-6 top-[112px] z-40 w-60">
-        <div className="rounded-[28px] border border-white/10 bg-black/45 backdrop-blur-2xl shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
-          <div className="px-5 py-4 border-b border-white/8 bg-gradient-to-b from-white/[0.06] to-transparent">
-            <p className="text-[10px] uppercase tracking-[0.32em] text-white/30 mb-2">Deck Map</p>
-            <p className="text-white/80 text-sm font-light leading-relaxed">Navigate the commercial brief from thesis to strategic partnership.</p>
-          </div>
-          <nav className="px-3 py-3 max-h-[calc(100vh-160px)] overflow-y-auto">
-            <div className="space-y-2">
-              {COMMERCIAL_MENU.map((item) => (
-                <div key={item.label} className="rounded-2xl border border-white/6 bg-white/[0.02] px-3 py-3 hover:bg-white/[0.04] transition-colors">
-                  <a href={item.href} className="block text-sm text-white/90 font-light tracking-[0.01em] mb-2 hover:text-white transition-colors">
-                    {item.label}
-                  </a>
-                  <div className="space-y-1.5 border-l border-white/8 pl-3">
-                    {item.links.map((link) => (
-                      <a key={link.href} href={link.href} className="block text-[11px] uppercase tracking-[0.18em] text-white/35 hover:text-white/70 transition-colors leading-relaxed">
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </nav>
-        </div>
-      </aside>
-
-      <div className="xl:pl-[18rem]">
+      {/* Side Menu Navigation */}
+      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col gap-6 p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/5">
+        {[
+          { label: "1. The Thesis", href: "#thesis", desc: "Bits vs Atoms, The Valley of Death" },
+          { label: "2. The LPM", href: "#lpm", desc: "Generative workflow, Zero-shot" },
+          { label: "3. Sim-to-Real Proof", href: "#proof", desc: "3D Data factory, Silicon Anode" },
+          { label: "4. Enterprise Anchors", href: "#anchors", desc: "Big Tech Moat, Anchor Partners" },
+          { label: "5. Strategic Partnership", href: "#partnership", desc: "Compress years into months" }
+        ].map((item, i) => (
+          <a key={i} href={item.href} className="group flex flex-col items-start gap-1 text-left">
+            <span className="text-xs font-mono tracking-widest text-white/40 group-hover:text-white transition-colors">{item.label}</span>
+            <span className="text-[10px] text-white/20 group-hover:text-white/40 transition-colors max-w-[140px] leading-tight">{item.desc}</span>
+          </a>
+        ))}
+      </nav>
 
       {/* ─── HERO ─── */}
       <section className="min-h-[85vh] flex flex-col items-center justify-center px-6 text-center relative overflow-hidden border-b border-white/5">
@@ -226,9 +163,9 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       </section>
 
       {/* ─── 00: BITS VS. ATOMS ─── */}
-      <section id="bits-vs-atoms" className="px-6 py-28 md:py-36 border-b border-white/5 scroll-mt-40">
+      <section id="thesis" className="px-6 py-28 md:py-36 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
-          <motion.div {...fade} id="thesis" className="scroll-mt-40">
+          <motion.div {...fade}>
             <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">{isFront ? "Why This Matters Now" : "The Macro Reality"}</p>
             <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-10 max-w-5xl">
               {isFront ? (
@@ -315,7 +252,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       </section>
 
       {/* ─── 01: THE PROBLEM ─── */}
-      <section id="valley-of-death" className="px-6 py-28 md:py-36 border-b border-white/5 scroll-mt-40">
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fade}>
             <div className="flex items-center gap-4 mb-10">
@@ -603,7 +540,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       )}
 
       {/* ─── THE SECRET: PROCESS IS THE PRODUCT ─── */}
-      <section id="process-is-the-product" className="px-6 py-28 md:py-36 border-b border-white/5 scroll-mt-40">
+      <section className="px-6 py-28 md:py-36 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fade}>
             <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">The Secret</p>
@@ -705,7 +642,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       </section>
 
       {/* ─── 02: THE SOLUTION ─── */}
-      <section id="lpm" className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5 scroll-mt-40">
+      <section id="lpm" className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
         <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <span className="text-white/40 font-mono text-base">02</span>
@@ -735,7 +672,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
 
 
         {/* 5-Step Workflow Diagram — Skandax Style Redesign */}
-        <motion.div {...fade} id="generative-workflow" className="mb-14 pb-4 scroll-mt-40">
+        <motion.div {...fade} className="mb-14 pb-4">
           {/* Main Diagram Grid */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_24px_1fr_24px_1fr_24px_1fr_24px_1fr] items-center gap-y-6">
 
@@ -857,7 +794,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         {/* Towards Zero Shot Manufacturing */}
         {!isFront && (
         <>
-        <div id="zero-shot-manufacturing" className="border-t border-white/5 pt-16 mb-10 scroll-mt-40">
+        <div className="border-t border-white/5 pt-16 mb-10">
           <motion.div {...fade} className="mb-14">
             <h3 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-3 max-w-4xl">
               Towards Zero Shot<br /><span className="font-normal">Manufacturing.</span>
@@ -941,7 +878,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
           </p>
 
           {/* Equations → LPM convergence */}
-          <div id="physics-equations" className="mb-10 scroll-mt-40">
+          <div className="mb-10">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
               {[
                 { domain: "Fluid Flow", name: "Navier-Stokes", color: "text-blue-300", border: "border-blue-500/20", bg: "bg-blue-950/5" },
@@ -1281,8 +1218,8 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       )}
 
       {/* ─── PROOF: TRAINING ARCHITECTURE & ALPHAFOLD MOMENT ─── */}
-      <section id="sim-to-real-proof" className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5 scroll-mt-40">
-        <motion.div {...fade} id="architecture-10b-100b" className="scroll-mt-40">
+      <section id="proof" className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
+        <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px w-8 bg-white/15 shrink-0" />
             <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Proof — Early Work</p>
@@ -1327,7 +1264,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         </motion.div>
 
         {/* Slide 2: The Core Moat — 3D Data Factory */}
-        <motion.div {...fade} id="data-factory-3d" className="mb-16 border-t border-white/5 pt-12 scroll-mt-40">
+        <motion.div {...fade} className="mb-16 border-t border-white/5 pt-12">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-white/25 font-mono text-sm">02</span>
             <h3 className="text-xl md:text-2xl font-light text-white">The Secret Weapon: Our Proprietary 3D Data Factory</h3>
@@ -1486,7 +1423,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         </div>
 
         {/* Slide 4: The Hero Slide */}
-        <motion.div {...fade} id="silicon-anode-results" className="mt-12 border-t border-white/5 pt-12 mb-8 scroll-mt-40">
+        <motion.div {...fade} className="mt-12 border-t border-white/5 pt-12 mb-8">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-white/25 font-mono text-sm">04</span>
             <h3 className="text-xl md:text-2xl font-light text-white">The Wet-Lab Validation: Closing the Sim2Real Gap</h3>
@@ -1564,7 +1501,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
 
       {/* ─── WHY BIG TECH CAN'T TOUCH US ─── */}
       {!isFront && (
-      <section id="big-tech-moat" className="px-6 py-28 md:py-36 border-b border-white/5 scroll-mt-40">
+      <section id="anchors" className="px-6 py-28 md:py-36 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fade}>
             <p className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8">Competitive Moat</p>
@@ -1630,7 +1567,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
       )}
 
       {/* ─── 06: VALIDATION & ANCHORS ─── */}
-      <section id="enterprise-anchors" className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5 scroll-mt-40">
+      <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-b border-white/5">
         <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <span className="text-white/40 font-mono text-base">06</span>
@@ -1648,7 +1585,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
         <div className="space-y-6 mb-10">
 
           {/* ── Biocon ── */}
-          <motion.div {...fade} id="biocon" className="p-8 md:p-10 rounded-2xl border border-blue-500/20 bg-blue-950/5 scroll-mt-40">
+          <motion.div {...fade} className="p-8 md:p-10 rounded-2xl border border-blue-500/20 bg-blue-950/5">
             <div className="flex flex-col md:flex-row md:items-start gap-4 mb-8">
               <p className="text-4xl md:text-5xl font-bold text-blue-300 shrink-0">Biocon</p>
               <div className="md:pt-2">
@@ -1697,7 +1634,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
           </motion.div>
 
           {/* ── Aarti Industries ── */}
-          <motion.div {...fade} transition={{ delay: 0.1 }} id="aarti-industries" className="p-8 md:p-10 rounded-2xl border border-rose-500/20 bg-rose-950/5 scroll-mt-40">
+          <motion.div {...fade} transition={{ delay: 0.1 }} className="p-8 md:p-10 rounded-2xl border border-rose-500/20 bg-rose-950/5">
             <div className="flex flex-col md:flex-row md:items-start gap-4 mb-8">
               <p className="text-4xl md:text-5xl font-bold text-rose-300 shrink-0">Aarti Industries</p>
               <div className="md:pt-2">
@@ -1746,7 +1683,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
           </motion.div>
 
           {/* ── Jubilant Ingrevia ── */}
-          <motion.div {...fade} transition={{ delay: 0.2 }} id="jubilant" className="p-8 md:p-10 rounded-2xl border border-emerald-500/20 bg-emerald-950/5 scroll-mt-40">
+          <motion.div {...fade} transition={{ delay: 0.2 }} className="p-8 md:p-10 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
             <div className="flex flex-col md:flex-row md:items-start gap-4 mb-8">
               <p className="text-4xl md:text-5xl font-bold text-emerald-300 shrink-0">Jubilant Ingrevia</p>
               <div className="md:pt-2">
@@ -1800,8 +1737,8 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
 
 
       {/* ─── 09: THE ANCHOR PARTNERSHIP MODEL ─── */}
-      <section id="strategic-partnership" className="px-6 py-28 md:py-40 max-w-6xl mx-auto scroll-mt-40">
-        <motion.div {...fade} id="anchor-partnership-model" className="scroll-mt-40">
+      <section id="partnership" className="px-6 py-28 md:py-40 max-w-6xl mx-auto">
+        <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <span className="text-white/40 font-mono text-base">09</span>
             <div className="h-px w-8 bg-white/15 shrink-0" />
@@ -1822,7 +1759,7 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
               "Energy",
               "Chemicals",
             ].map((sector, i) => (
-              <div key={i} id={i === 0 ? "anchor-sector-aerospace" : i === 1 ? "anchor-sector-energy" : "anchor-sector-chemicals"} className="p-6 rounded-2xl border border-white/8 bg-white/[0.02] scroll-mt-40">
+              <div key={i} className="p-6 rounded-2xl border border-white/8 bg-white/[0.02]">
                 <p className="text-white/30 text-xs uppercase tracking-[0.22em] mb-2">Anchor Sector</p>
                 <p className="text-white font-light text-xl">{sector}</p>
               </div>
@@ -1846,7 +1783,6 @@ export default function ShodhCommercialBrief({ variant = "right" }: { variant?: 
           </a>
         </motion.div>
       </section>
-      </div>
     </div>
   );
 }
