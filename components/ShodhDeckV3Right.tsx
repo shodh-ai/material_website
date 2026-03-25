@@ -950,52 +950,52 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
         </motion.div>
 
         {/* ── Inflection Point Graph (1D vs 3D Physical Complexity) ── */}
-        <motion.div {...fade} className="mb-16 rounded-2xl border border-white/8 bg-[#060606] p-8 md:p-12 overflow-hidden relative">
+        <motion.div {...fade} className="mb-16 rounded-2xl border border-gray-200/20 bg-gray-50 p-8 md:p-12 overflow-hidden relative">
           
-          <div className="absolute inset-0 bg-gradient-to-t from-white/[0.03] to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-100/50 to-transparent pointer-events-none" />
           
-          <p className="text-white/30 text-sm uppercase tracking-[0.2em] mb-4 text-center relative z-10">The Physical Complexity View</p>
-          <p className="text-white/50 text-base mb-12 text-center relative z-10 max-w-3xl mx-auto">1D Discovery Models (Sequences) vs. 3D Physical Models (Multi-Physics Tensors)</p>
+          <p className="text-gray-600 text-sm uppercase tracking-[0.2em] mb-4 text-center relative z-10">The Physical Complexity View</p>
+          <p className="text-gray-700 text-base mb-12 text-center relative z-10 max-w-3xl mx-auto">1D Discovery Models (Sequences) vs. 3D Physical Models (Multi-Physics Tensors)</p>
           
-          <div className="relative h-[650px] w-full max-w-6xl mx-auto border border-white/20 bg-white/[0.05] rounded-xl pl-20 backdrop-blur-sm">
+          <div className="relative h-[700px] w-full max-w-6xl mx-auto border border-gray-300 bg-white rounded-xl pl-24 backdrop-blur-sm shadow-lg">
             {/* Grid Lines */}
-            <div className="absolute inset-0 left-20">
+            <div className="absolute inset-0 left-24">
               {[0, 50, 100].map((pct, i) => (
-                <div key={`h2-${i}`} className="absolute w-full border-b border-white/20" style={{ top: `${pct}%` }} />
+                <div key={`h2-${i}`} className="absolute w-full border-b border-gray-200" style={{ top: `${pct}%` }} />
               ))}
               {[0, 16.7, 33.3, 50, 66.7, 83.3, 100].map((pct, i) => (
-                <div key={`v2-${i}`} className="absolute h-full border-r border-white/10 border-dashed" style={{ left: `${pct}%` }} />
+                <div key={`v2-${i}`} className="absolute h-full border-r border-gray-200 border-dashed" style={{ left: `${pct}%` }} />
               ))}
             </div>
 
             {/* Layer Labels on Left */}
-            <div className="absolute left-2 top-[25%] -translate-y-1/2 text-xs text-white/60 font-bold pr-3">
-              <p className="text-rose-400 text-sm mb-1">3D Physical Layer</p>
-              <p className="text-white/40 text-[10px]">Tensors</p>
-              <p className="text-white/40 text-[10px]">(Manufacturing / Sim)</p>
+            <div className="absolute left-0 top-[25%] -translate-y-1/2 text-xs text-gray-700 font-bold pr-3">
+              <p className="text-rose-600 text-sm mb-1">3D Physical Layer</p>
+              <p className="text-gray-500 text-[10px]">Tensors</p>
+              <p className="text-gray-500 text-[10px]">(Manufacturing / Sim)</p>
             </div>
-            <div className="absolute left-2 top-[75%] -translate-y-1/2 text-xs text-white/60 font-bold pr-3">
-              <p className="text-emerald-400 text-sm mb-1">1D Discovery Layer</p>
-              <p className="text-white/40 text-[10px]">Sequences</p>
-              <p className="text-white/40 text-[10px]">(In Silico)</p>
+            <div className="absolute left-0 top-[75%] -translate-y-1/2 text-xs text-gray-700 font-bold pr-3">
+              <p className="text-emerald-600 text-sm mb-1">1D Discovery Layer</p>
+              <p className="text-gray-500 text-[10px]">Sequences</p>
+              <p className="text-gray-500 text-[10px]">(In Silico)</p>
             </div>
 
             {/* X-Axis Labels */}
-            <div className="absolute -bottom-10 left-20 right-0 flex justify-between text-xs text-white/60 font-mono px-4">
+            <div className="absolute -bottom-12 left-24 right-0 flex justify-between text-xs text-gray-600 font-mono px-4">
               <span>2018</span><span>2020</span><span>2022</span><span>2024</span><span>2026</span><span>2028</span>
             </div>
-            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 text-xs text-white/50 tracking-widest uppercase">
+            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 text-xs text-gray-500 tracking-widest uppercase">
               Year
             </div>
 
             {/* Zone Background Highlights */}
-            <div className="absolute inset-0 left-20 pointer-events-none">
-              <div className="absolute top-0 left-0 right-0 h-[50%] bg-rose-500/5 border-b border-rose-500/20" />
-              <div className="absolute top-[50%] left-0 right-0 h-[50%] bg-emerald-500/5" />
+            <div className="absolute inset-0 left-24 pointer-events-none">
+              <div className="absolute top-0 left-0 right-0 h-[50%] bg-rose-100/30 border-b border-rose-200/40" />
+              <div className="absolute top-[50%] left-0 right-0 h-[50%] bg-emerald-100/30" />
             </div>
 
             {/* SVG for Trend Lines connecting all points in order */}
-            <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0" style={{ left: '5rem', width: 'calc(100% - 5rem)' }} preserveAspectRatio="none">
+            <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0" style={{ left: '6rem', width: 'calc(100% - 6rem)' }} preserveAspectRatio="none">
               <defs>
                 <filter id="glowGreen">
                   <feGaussianBlur stdDeviation="3" result="blur" />
@@ -1035,44 +1035,44 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
             </svg>
 
             {/* Nodes & Annotations */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none z-10" style={{ left: '5rem', width: 'calc(100% - 5rem)' }}>
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-10" style={{ left: '6rem', width: 'calc(100% - 6rem)' }}>
               
               {/* ===== LAYER 2: 1D SEQUENCES (BOTTOM) ===== */}
               
               {/* AlphaFold 2 (2020, ~1B params) */}
               <div className="absolute left-[33.3%] top-[83%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 rounded-full bg-emerald-400 border-2 border-white shadow-[0_0_14px_#10b981]" />
+                <div className="w-4 h-4 rounded-full bg-emerald-500 border-2 border-gray-800 shadow-[0_0_14px_#10b981]" />
                 <div className="absolute -top-16 -left-20 w-44">
-                  <p className="text-emerald-300 text-xs leading-tight font-semibold">AlphaFold 2</p>
-                  <p className="text-white/70 text-[11px]">Protein Structure Prediction</p>
+                  <p className="text-emerald-700 text-xs leading-tight font-semibold">AlphaFold 2</p>
+                  <p className="text-gray-600 text-[11px]">Protein Structure Prediction</p>
                 </div>
               </div>
 
               {/* AlphaFold 3 (2024, enhanced) - positioned slightly after AF2 */}
               <div className="absolute left-[50%] top-[78%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-300 border-2 border-white shadow-[0_0_12px_#10b981]" />
+                <div className="w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-gray-800 shadow-[0_0_12px_#10b981]" />
                 <div className="absolute top-4 -left-16 w-40">
-                  <p className="text-emerald-200 text-[11px] leading-tight font-medium">AlphaFold 3</p>
-                  <p className="text-white/60 text-[10px]">Drug Discovery (Multi-modal)</p>
+                  <p className="text-emerald-600 text-[11px] leading-tight font-medium">AlphaFold 3</p>
+                  <p className="text-gray-500 text-[10px]">Drug Discovery (Multi-modal)</p>
                 </div>
               </div>
 
               {/* C2S (2024, 27B params) - FIXED: Moved to 1D Layer */}
               <div className="absolute left-[66.7%] top-[75%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-5 h-5 rounded-full bg-emerald-400 border-2 border-white shadow-[0_0_16px_#10b981]" />
+                <div className="w-5 h-5 rounded-full bg-emerald-500 border-2 border-gray-800 shadow-[0_0_16px_#10b981]" />
                 <div className="absolute -top-16 -left-12 w-44">
-                  <p className="text-emerald-300 text-sm leading-tight font-semibold">C2S (Google)</p>
-                  <p className="text-white/70 text-xs">27B • Scientific Discovery</p>
+                  <p className="text-emerald-700 text-sm leading-tight font-semibold">C2S (Google)</p>
+                  <p className="text-gray-600 text-xs">27B • Scientific Discovery</p>
                 </div>
               </div>
 
               {/* Evo 2 (2025, 40B params) */}
               <div className="absolute left-[75%] top-[72%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-[0_0_18px_#10b981] animate-pulse" />
+                <div className="w-5 h-5 rounded-full bg-emerald-600 border-2 border-gray-800 shadow-[0_0_18px_#10b981] animate-pulse" />
                 <div className="absolute -top-16 left-4 w-52">
-                  <p className="text-emerald-400 text-sm leading-tight font-bold">Evo 2 (Arc/NVIDIA)</p>
-                  <p className="text-white/70 text-xs">40B • Genomics Foundation Model</p>
-                  <p className="text-white/50 text-[10px] mt-1">9.3T nucleotides trained</p>
+                  <p className="text-emerald-700 text-sm leading-tight font-bold">Evo 2 (Arc/NVIDIA)</p>
+                  <p className="text-gray-600 text-xs">40B • Genomics Foundation Model</p>
+                  <p className="text-gray-500 text-[10px] mt-1">9.3T nucleotides trained</p>
                 </div>
               </div>
 
@@ -1080,51 +1080,51 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
               
               {/* FNO */}
               <div className="absolute left-[25%] top-[45%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-3.5 h-3.5 rounded-full bg-rose-400 border-2 border-white shadow-[0_0_12px_#fb7185]" />
+                <div className="w-3.5 h-3.5 rounded-full bg-rose-500 border-2 border-gray-800 shadow-[0_0_12px_#fb7185]" />
                 <div className="absolute top-4 -left-12 w-36">
-                  <p className="text-rose-300 text-[11px] leading-tight font-medium">FNO</p>
-                  <p className="text-white/70 text-[10px]">Neural Operators</p>
+                  <p className="text-rose-700 text-[11px] leading-tight font-medium">FNO</p>
+                  <p className="text-gray-600 text-[10px]">Neural Operators</p>
                 </div>
               </div>
 
               {/* GraphCast */}
               <div className="absolute left-[50%] top-[40%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 rounded-full bg-rose-400 border-2 border-white shadow-[0_0_14px_#fb7185]" />
+                <div className="w-4 h-4 rounded-full bg-rose-500 border-2 border-gray-800 shadow-[0_0_14px_#fb7185]" />
                 <div className="absolute -top-14 -left-16 w-40">
-                  <p className="text-rose-300 text-xs leading-tight font-semibold">GraphCast</p>
-                  <p className="text-white/70 text-[11px]">Weather Forecasting</p>
+                  <p className="text-rose-700 text-xs leading-tight font-semibold">GraphCast</p>
+                  <p className="text-gray-600 text-[11px]">Weather Forecasting</p>
                 </div>
               </div>
 
               {/* FourCastNet */}
               <div className="absolute left-[58.3%] top-[42%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-3 h-3 rounded-full bg-rose-300 border border-white shadow-[0_0_10px_#fb7185]" />
+                <div className="w-3 h-3 rounded-full bg-rose-400 border border-gray-800 shadow-[0_0_10px_#fb7185]" />
                 <div className="absolute top-4 -left-10 w-32">
-                  <p className="text-rose-200 text-[10px] leading-tight">FourCastNet</p>
-                  <p className="text-white/60 text-[9px]">Extreme Weather</p>
+                  <p className="text-rose-600 text-[10px] leading-tight">FourCastNet</p>
+                  <p className="text-gray-500 text-[9px]">Extreme Weather</p>
                 </div>
               </div>
 
               {/* Aurora */}
               <div className="absolute left-[66.7%] top-[35%] -translate-x-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 rounded-full bg-rose-400 border-2 border-white shadow-[0_0_14px_#fb7185]" />
+                <div className="w-4 h-4 rounded-full bg-rose-500 border-2 border-gray-800 shadow-[0_0_14px_#fb7185]" />
                 <div className="absolute -top-16 -left-12 w-48">
-                  <p className="text-rose-300 text-xs leading-tight font-semibold">Aurora</p>
-                  <p className="text-white/70 text-[11px]">1.3B • Earth System</p>
+                  <p className="text-rose-700 text-xs leading-tight font-semibold">Aurora</p>
+                  <p className="text-gray-600 text-[11px]">1.3B • Earth System</p>
                 </div>
               </div>
 
               {/* Shodh AI LPM - simple dot marker */}
               <div className="absolute left-[75%] top-[16.6%] -translate-x-1/2 -translate-y-1/2">
                 <div className="relative">
-                  <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 bg-rose-500/20 rounded-full animate-ping" />
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-pink-600 border-2 border-white shadow-[0_0_30px_#fb7185] relative z-10 flex items-center justify-center">
-                    <div className="w-3 h-3 bg-white rounded-full opacity-60" />
+                  <div className="absolute inset-0 w-16 h-16 -translate-x-1/2 -translate-y-1/2 bg-rose-400/30 rounded-full animate-ping" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-rose-500 to-rose-700 border-2 border-gray-800 shadow-[0_0_30px_#fb7185] relative z-10 flex items-center justify-center">
+                    <div className="w-3 h-3 bg-gray-800 rounded-full opacity-60" />
                   </div>
                 </div>
                 <div className="absolute top-10 left-10 w-28">
-                  <p className="text-rose-300 text-xs font-bold leading-tight">Shodh AI LPM</p>
-                  <p className="text-white/50 text-[10px]">10B → Target</p>
+                  <p className="text-rose-700 text-xs font-bold leading-tight">Shodh AI LPM</p>
+                  <p className="text-gray-500 text-[10px]">10B → Target</p>
                 </div>
               </div>
 
@@ -1137,85 +1137,81 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
                 </defs>
                 <path d="M 0 0 Q -30 -150, 0 -330" stroke="#fb7185" strokeWidth="2.5" fill="none" strokeDasharray="6 4" markerEnd="url(#arrowhead)" />
               </svg>
-              <div className="absolute left-[77%] top-[50%] w-40 bg-[#060606]/80 p-2 rounded border border-rose-500/20 backdrop-blur-sm z-20">
-                <p className="text-rose-300 text-[10px] leading-tight italic font-medium text-center">Discovery flows UP to Manufacturing</p>
+              <div className="absolute left-[77%] top-[50%] w-40 bg-white/90 p-2 rounded border border-rose-300/40 backdrop-blur-sm z-20 shadow-lg">
+                <p className="text-rose-700 text-[10px] leading-tight italic font-medium text-center">Discovery flows UP to Manufacturing</p>
               </div>
 
             </div>
           </div>
 
           {/* Graph explanation */}
-          <div className="mt-10 grid md:grid-cols-2 gap-4">
-            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/8 space-y-2">
-              <p className="text-rose-300/70 text-xs uppercase tracking-wider">Why 3D is harder than 1D</p>
-              <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-3 shadow-sm">
+              <p className="text-rose-700 text-xs uppercase tracking-wider font-semibold">Why 3D is harder than 1D</p>
+              <p className="text-gray-700 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-gray-900 font-semibold">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
             </div>
-            <div className="p-6 rounded-xl bg-white/[0.015] border border-white/5 space-y-2">
-              <p className="text-white/40 text-xs uppercase tracking-wider">Where we stand</p>
-              <p className="text-white/55 font-light text-sm leading-relaxed">FNO proved AI can solve physics PDEs. The 3D track is now accelerating. We are building on this with <span className="text-white font-normal">Google JAX</span> and <span className="text-white font-normal">NVIDIA Physics NeMo.</span></p>
+            <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-3 shadow-sm">
+              <p className="text-gray-700 text-xs uppercase tracking-wider font-semibold">Where we stand</p>
+              <p className="text-gray-600 font-light text-sm leading-relaxed">FNO proved AI can solve physics PDEs. The 3D track is now accelerating. We are building on this with <span className="text-gray-900 font-semibold">Google JAX</span> and <span className="text-gray-900 font-semibold">NVIDIA Physics NeMo.</span></p>
             </div>
           </div>
         </motion.div>
 
         {/* ── Two-Stage Model Architecture ── */}
         <motion.div {...fade} className="mb-16">
-          <h3 className="text-2xl md:text-4xl font-extralight text-white mb-2 max-w-3xl">Engineering the SOTA.</h3>
-          <p className="text-white/40 font-light text-sm max-w-2xl mb-10">Two stages. Two milestones. One architecture.</p>
+          <h3 className="text-2xl md:text-4xl font-extralight text-gray-900 mb-2 max-w-3xl">Engineering the SOTA.</h3>
+          <p className="text-gray-600 font-light text-sm max-w-2xl mb-10">Two stages. Two milestones. One architecture.</p>
 
-          <div className="mb-6 p-8 rounded-2xl border border-blue-500/20 bg-blue-950/10">
+          <div className="mb-6 p-8 rounded-2xl border border-blue-200 bg-blue-50">
             <div className="mb-5">
-              <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 — Now</p>
-              <h4 className="text-white font-light text-2xl">The 50B 3D-Foundation Model</h4>
-              <p className="text-blue-300/50 text-xs mt-1">Anchor-Partner Deployment</p>
+              <p className="text-blue-700 text-xs uppercase tracking-wider mb-1 font-semibold">Stage 1 — Now</p>
+              <h4 className="text-gray-900 font-light text-2xl">The 50B 3D-Foundation Model</h4>
+              <p className="text-blue-600 text-xs mt-1">Anchor-Partner Deployment</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
+              <div className="space-y-3 text-gray-700 font-light text-sm leading-relaxed">
                 <p>The universal base model — validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
-                <p>Achieves <span className="text-white font-normal">90% accuracy</span> on their specific process environments. First commercial deployments in Year 1.</p>
-                <p className="text-white/30 font-mono text-xs">JAX/FLAX · FNO/UPT · Mixture of Experts</p>
+                <p>Achieves <span className="text-gray-900 font-semibold">90% accuracy</span> on their specific process environments. First commercial deployments in Year 1.</p>
+                <p className="text-gray-500 font-mono text-xs">JAX/FLAX · FNO/UPT · Mixture of Experts</p>
               </div>
               <div className="space-y-3">
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
-                  <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-3">The Milestones</p>
-                  <ul className="space-y-2 text-white/70 font-light text-sm">
-                    <li className="flex items-start gap-2"><span className="text-blue-300/60">→</span> <span><span className="text-white font-normal">Architecture validated</span> on real industrial data</span></li>
-                    <li className="flex items-start gap-2"><span className="text-blue-300/60">→</span> <span><span className="text-white font-normal">3 × $10M NRE contracts</span> triggered on proven outcomes</span></li>
-                    <li className="flex items-start gap-2"><span className="text-blue-300/60">→</span> <span><span className="text-white font-normal">Sim-to-Real loop</span> closes at commercial accuracy</span></li>
+                <div className="p-4 rounded-xl bg-white border border-gray-200">
+                  <p className="text-blue-700 text-xs uppercase tracking-wider mb-3 font-semibold">The Milestones</p>
+                  <ul className="space-y-2 text-gray-700 font-light text-sm">
+                    <li className="flex items-start gap-2"><span className="text-blue-600">→</span> <span><span className="text-gray-900 font-semibold">Architecture validated</span> on real industrial data</span></li>
+                    <li className="flex items-start gap-2"><span className="text-blue-600">→</span> <span><span className="text-gray-900 font-semibold">3 × $10M NRE contracts</span> triggered on proven outcomes</span></li>
+                    <li className="flex items-start gap-2"><span className="text-blue-600">→</span> <span><span className="text-gray-900 font-semibold">Sim-to-Real loop</span> closes at commercial accuracy</span></li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
+          <div className="p-8 rounded-2xl border border-rose-200 bg-rose-50">
             <div className="mb-5">
-              <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 — The Vision</p>
-              <h4 className="text-white font-light text-2xl">The 500B+ Foundation Model</h4>
-              <p className="text-rose-300/50 text-xs mt-1">Universal Manufacturing Intelligence</p>
+              <p className="text-rose-700 text-xs uppercase tracking-wider mb-1 font-semibold">And Stage 2 — The Vision</p>
+              <h4 className="text-gray-900 font-light text-2xl">The 500B+ Foundation Model</h4>
+              <p className="text-rose-600 text-xs mt-1">Universal Manufacturing Intelligence</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
+              <div className="space-y-3 text-gray-700 font-light text-sm leading-relaxed">
                 <p>A client brings a completely novel molecule, composite, or device — never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
-                <p>The 50B model handles known process families well. The 500B model handles the <span className="text-white font-normal">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
+                <p>The 50B model handles known process families well. The 500B model handles the <span className="text-gray-900 font-semibold">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
               </div>
               <div className="space-y-3">
-                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
-                  <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-3">Industries Unlocked</p>
-                  <ul className="space-y-1.5 text-white/70 font-light text-sm">
-                    <li className="flex items-start gap-2"><span className="text-rose-300/60">→</span> Aerospace composites</li>
-                    <li className="flex items-start gap-2"><span className="text-rose-300/60">→</span> Semiconductor lithography</li>
-                    <li className="flex items-start gap-2"><span className="text-rose-300/60">→</span> Nuclear fusion materials</li>
+                <div className="p-4 rounded-xl bg-white border border-gray-200">
+                  <p className="text-rose-700 text-xs uppercase tracking-wider mb-3 font-semibold">Industries Unlocked</p>
+                  <ul className="space-y-1.5 text-gray-700 font-light text-sm">
+                    <li className="flex items-start gap-2"><span className="text-rose-600">→</span> <span>Quantum Computing Photonic Chips</span></li>
+                    <li className="flex items-start gap-2"><span className="text-rose-600">→</span> <span>Hypersonic Vehicle Materials</span></li>
+                    <li className="flex items-start gap-2"><span className="text-rose-600">→</span> <span>Room-Temperature Superconductors</span></li>
+                    <li className="flex items-start gap-2"><span className="text-rose-600">→</span> <span>Carbon Capture at Scale</span></li>
                   </ul>
-                </div>
-                <div className="p-4 rounded-xl bg-rose-950/20 border border-rose-500/10">
-                  <p className="text-white/40 text-xs uppercase tracking-wider mb-1">What it requires</p>
-                  <p className="text-white/60 font-light text-sm">Scale-up in sovereign compute. Powered by the Sim-to-Real flywheel built in Stage 1.</p>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-
       </section>
       )}
 
