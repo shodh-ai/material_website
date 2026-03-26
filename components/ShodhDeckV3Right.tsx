@@ -1833,13 +1833,22 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
             We are not just discovering the future.<br />
             <span className="text-white">We are manufacturing it.</span>
           </p>
-          <a
-            href="mailto:arastu@shodh.ai"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
-          >
-            <Mail className="w-5 h-5" />
-            Partner with Us — arastu@shodh.ai
-          </a>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/insider/deckright/why-this-raise"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.05] text-white font-medium hover:bg-white/[0.1] transition-all text-base"
+            >
+              <ArrowRight className="w-5 h-5" />
+              Why This Raise Is Structured This Way
+            </Link>
+            <a
+              href="mailto:arastu@shodh.ai"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
+            >
+              <Mail className="w-5 h-5" />
+              Partner with Us — arastu@shodh.ai
+            </a>
+          </div>
         </motion.div>
       </section>
       </div>
