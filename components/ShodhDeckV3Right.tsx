@@ -1760,11 +1760,11 @@ export default function ShodhDeckV3Right({ variant = "right" }: { variant?: Deck
               desc: "IndiaAI Mission allocation for priority national GPU clusters. Covering burn on core model training.", note: "",
             },
             {
-              amount: "$25M", source: "Autonomous Lab Infrastructure", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
+              amount: "$10M", source: "Autonomous Lab Infrastructure", tag: "", tagColor: "text-emerald-300", tagBg: "bg-emerald-950/40 border-emerald-500/30",
               desc: "ANRF funding for model training, wet-lab validation and robotic synthesis infrastructure. Covering burn on hardware.", note: "",
             },
             {
-              amount: "$50M", source: "The Equity Raise", tag: "Active", tagColor: "text-white", tagBg: "bg-white/5 border-white/20",
+              amount: "$60M", source: "The Equity Raise", tag: "Active", tagColor: "text-white", tagBg: "bg-white/5 border-white/20",
               desc: "Hire elite global AI researchers. Prove the 10B parameter scaling laws, perfect the 3D synthetic data factory, and deploy secure enterprise inference infrastructure across our anchor partners. 100% deployed on model talent and GTM.", note: "",
             },
           ].map((item, i) => (
