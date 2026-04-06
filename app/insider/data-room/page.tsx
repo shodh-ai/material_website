@@ -20,7 +20,8 @@ import {
   Zap,
   Layers,
   AlertCircle,
-  ChevronDown
+  ChevronDown,
+  DollarSign
 } from "lucide-react";
 import { submitInvestorApplication } from "./actions";
 import DataRoomManifesto from "@/components/DataRoomManifesto";
@@ -48,6 +49,18 @@ const documents = [
     color: "#22c55e",
     category: "Technology",
     readTime: "40 min read"
+  },
+  {
+    id: "commercialization",
+    title: "Commercialization & Scaling Thesis",
+    subtitle: "Unit Economics, Revenue Engine & 5-Year Financial Profile",
+    description: "Comprehensive memorandum on PMF definition, Outcome-as-a-Service revenue tiers (NRE fees, milestone bounties, process royalties), 5-year scaling economics, and enterprise value anchors (Palantir, Scale AI, ARM comparables).",
+    pages: "Investor Memorandum",
+    icon: DollarSign,
+    color: "#f43f5e",
+    category: "Financials",
+    readTime: "25 min read",
+    href: "/insider/data-room/commercialization"
   }
 ];
 
@@ -447,7 +460,7 @@ export default function DataRoomPage() {
                       {/* Actions */}
                       <div className="flex gap-2">
                         <Link
-                          href={`/data-room/${doc.id}`}
+                          href={doc.href || `/data-room/${doc.id}`}
                           className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-light hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                         >
                           <Eye className="w-4 h-4" />
