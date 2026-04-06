@@ -176,8 +176,9 @@ export default function TeaserDeckPage() {
           <motion.div {...fade} className="text-center">
             <div className="p-6 rounded-2xl border border-rose-500/15 bg-rose-950/5 max-w-3xl mx-auto">
               <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-3">The Insight</p>
-              <p className="text-lg md:text-xl text-white font-light leading-relaxed">
-                We are the infrastructure to scale the next generation of physical technology—turning lab-scale miracles into billion-dollar commercial realities.
+              <p className="text-lg md:text-xl text-white font-light">
+                Automating the digital world saves <span className="text-white font-medium">billions.</span><br />
+                Compiling the physical world creates <span className="text-rose-300 font-medium">trillions.</span>
               </p>
             </div>
           </motion.div>
@@ -245,44 +246,24 @@ export default function TeaserDeckPage() {
           {/* Industry Examples */}
           <motion.div {...fade} className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
             <div className="p-6 rounded-2xl border border-blue-500/20 bg-blue-950/5">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-white/60 text-xs uppercase tracking-wider">Semiconductors</p>
-                <p className="text-2xl font-extralight text-blue-300">99%</p>
-              </div>
-              <p className="text-blue-300/70 text-xs mb-2">Process is 99% of the value.</p>
-              <p className="text-white/70 font-light text-sm">TSMC controls the world because they mastered lithography physics.</p>
+              <p className="text-blue-300 font-medium text-sm mb-3">Semiconductors</p>
+              <p className="text-white/80 font-light text-sm">TSMC controls the world because they mastered lithography physics.</p>
             </div>
             <div className="p-6 rounded-2xl border border-emerald-500/20 bg-emerald-950/5">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-white/60 text-xs uppercase tracking-wider">Batteries</p>
-                <p className="text-2xl font-extralight text-emerald-300">90%</p>
-              </div>
-              <p className="text-emerald-300/70 text-xs mb-2">Process is 90% of the value.</p>
-              <p className="text-white/70 font-light text-sm">The chemistry is known; the winner is whoever can mass-produce it defect-free.</p>
+              <p className="text-emerald-300 font-medium text-sm mb-3">Batteries</p>
+              <p className="text-white/80 font-light text-sm">The chemistry is known; the winner is whoever can mass-produce it defect-free.</p>
             </div>
             <div className="p-6 rounded-2xl border border-violet-500/20 bg-violet-950/5">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-white/60 text-xs uppercase tracking-wider">Aerospace, Defense & Nuclear</p>
-                <p className="text-2xl font-extralight text-violet-300">90%</p>
-              </div>
-              <p className="text-violet-300/70 text-xs mb-2">Process is 90% of the value.</p>
-              <p className="text-white/70 font-light text-sm">Knowing the superalloy mix is useless without the exact thermal cooling gradient to forge it.</p>
+              <p className="text-violet-300 font-medium text-sm mb-3">Aerospace, Defense & Nuclear</p>
+              <p className="text-white/80 font-light text-sm">Knowing the superalloy mix is useless without the exact thermal cooling gradient to forge it.</p>
             </div>
             <div className="p-6 rounded-2xl border border-amber-500/20 bg-amber-950/5">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-white/60 text-xs uppercase tracking-wider">Specialty Chemicals</p>
-                <p className="text-2xl font-extralight text-amber-300">80%</p>
-              </div>
-              <p className="text-amber-300/70 text-xs mb-2">Process is 80% of the value.</p>
-              <p className="text-white/70 font-light text-sm">Everyone knows the public molecules. The winner achieves 99.9% purity in continuous flow.</p>
+              <p className="text-amber-300 font-medium text-sm mb-3">Specialty Chemicals</p>
+              <p className="text-white/80 font-light text-sm">Everyone knows the public molecules. The winner achieves 99.9% purity in continuous flow.</p>
             </div>
             <div className="p-6 rounded-2xl border border-rose-500/20 bg-rose-950/5">
-              <div className="flex items-start justify-between mb-3">
-                <p className="text-white/60 text-xs uppercase tracking-wider">Biopharma</p>
-                <p className="text-2xl font-extralight text-rose-300">40%</p>
-              </div>
-              <p className="text-rose-300/70 text-xs mb-2">Process is 40% of the value.</p>
-              <p className="text-white/70 font-light text-sm">The FDA's literal regulatory rule is: "The Process is the Product."</p>
+              <p className="text-rose-300 font-medium text-sm mb-3">Biopharma</p>
+              <p className="text-white/80 font-light text-sm">The FDA's literal regulatory rule is: "The Process is the Product."</p>
             </div>
           </motion.div>
 
