@@ -53,7 +53,7 @@ export default function NvidiaPage() {
         <div className="hidden xl:block absolute left-4 top-10 bottom-0 w-56 pointer-events-none 2xl:left-6">
           <nav className="sticky top-28 z-40 flex flex-col gap-5 p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/5 pointer-events-auto">
             {[
-              { label: "01 Physical Complexity", href: "#s1",  desc: "1D -> 3D, AlphaFold -> Shodh" },
+              { label: "01 Physical Complexity", href: "#s1",  desc: "1D &rarr; 3D, AlphaFold &rarr; Shodh" },
               { label: "01b The LPM",            href: "#lpm", desc: "Neural Operator, Invertible Design" },
               { label: "02 Data Engine",         href: "#s2",  desc: "STR-GEN, PyBaMM, 95% Match" },
               { label: "03 Neural Surrogate",    href: "#s3", desc: "Sim-to-Real, Wet-Lab Proof" },
@@ -367,12 +367,12 @@ export default function NvidiaPage() {
                       <p className="text-blue-300 text-[10px] font-semibold tracking-wide mb-1">Microstructure Params</p>
                       <p className="text-white/35 text-[10px] font-mono">e - t - D - L</p>
                     </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">-></div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">&rarr;</div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-purple-600/55 bg-purple-900/15 text-center flex flex-col justify-center">
                       <p className="text-purple-300 text-[10px] font-semibold tracking-wide mb-1">Encoder</p>
                       <p className="text-white/35 text-[10px] font-mono">CNN</p>
                     </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">-></div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">&rarr;</div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-indigo-500/55 bg-indigo-900/15 text-center flex flex-col justify-center">
                       <p className="text-indigo-300 text-[10px] font-semibold tracking-wide mb-1">Prediction</p>
                       <p className="text-white/35 text-[10px]">mlp-based</p>
@@ -394,33 +394,17 @@ export default function NvidiaPage() {
                   </div>
                   <p className="text-white/20 text-[10px] font-mono text-center">skanda_sem2charge</p>
                 </div>
-                <p className="text-white/65 font-light text-sm leading-relaxed mb-3">CNN -> MLP architecture mapping microstructure parameters <span className="font-mono text-white/80 text-xs">(e, t, D, L)</span> to full electrochemical time-series outputs <span className="font-mono text-white/80 text-xs">(V(t), Qfade, Z(w), SEI)</span>.</p>
+                <p className="text-white/65 font-light text-sm leading-relaxed mb-3">CNN &rarr; MLP architecture mapping microstructure parameters <span className="font-mono text-white/80 text-xs">(e, t, D, L)</span> to full electrochemical time-series outputs <span className="font-mono text-white/80 text-xs">(V(t), Qfade, Z(w), SEI)</span>.</p>
                 <div className="flex items-start gap-3 p-3 rounded-lg bg-emerald-950/20 border border-emerald-500/20">
                   <div className="w-2 h-2 mt-1 rounded-full bg-emerald-400 shrink-0"/>
                   <p className="text-emerald-300 font-medium text-sm">Result: Achieved R2 = 0.99 on held-out test sets, matching PyBaMM simulator dynamics at a fraction of compute.</p>
                 </div>
-              </div>
-              <div className="rounded-2xl border border-violet-500/20 bg-violet-950/5 p-6">
-                <p className="text-violet-300/70 text-xs uppercase tracking-widest mb-4">The Inverse Design (Diffusion)</p>
-                <div className="mb-5 space-y-2">
-                  <div className="flex justify-center mb-1">
-                    <div className="flex flex-col items-center gap-0.5">
-                      <p className="text-white/30 text-[10px] italic">Gaussian noise z</p>
-                      <div className="w-px h-3 bg-white/20"/>
-                      <svg width="8" height="5" viewBox="0 0 8 5"><path d="M0 0L4 5L8 0" fill="rgba(255,255,255,0.25)"/></svg>
-                    </div>
+                <div className="flex justify-center mb-1">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <p className="text-white/30 text-[10px] italic">Denoising steps</p>
+                    <div className="w-px h-3 bg-white/20"/>
+                    <svg width="8" height="5" viewBox="0 0 8 5"><path d="M0 0L4 5L8 0" fill="rgba(255,255,255,0.25)"/></svg>
                   </div>
-                  <div className="flex items-stretch gap-1.5">
-                    <div className="flex-1 px-2 py-4 rounded-xl border-2 border-green-600/55 bg-green-900/15 text-center flex flex-col justify-center">
-                      <p className="text-green-300 text-[10px] font-semibold tracking-wide mb-1">Target Performance</p>
-                      <p className="text-white/35 text-[10px] font-mono">V(t) - Q-fade - Z(u)</p>
-                    </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">-></div>
-                    <div className="flex-1 px-2 py-4 rounded-xl border-2 border-purple-600/55 bg-purple-900/15 text-center flex flex-col justify-center">
-                      <p className="text-purple-300 text-[10px] font-semibold tracking-wide mb-1">Conditional Diffusion</p>
-                      <p className="text-white/35 text-[10px]">denoising - conditioned on target</p>
-                    </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">-></div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-blue-600/55 bg-blue-900/15 text-center flex flex-col justify-center">
                       <p className="text-blue-300 text-[10px] font-semibold tracking-wide mb-1">Microstructure Config</p>
                       <p className="text-white/35 text-[10px] font-mono">e - t - D - L</p>
@@ -643,7 +627,7 @@ export default function NvidiaPage() {
                 </div>
                 <div className="w-80 px-5 py-3 rounded-xl border-2 border-green-600/60 bg-green-900/15 text-center">
                   <p className="text-green-300 text-sm font-semibold">Physics Fields</p>
-                  <p className="text-white/35 text-[11px] mt-0.5 font-mono">t_eff - D_eff - wetting fraction -> microstructure features</p>
+                  <p className="text-white/35 text-[11px] mt-0.5 font-mono">t_eff &bull; D_eff &bull; wetting fraction &rarr; microstructure features</p>
                 </div>
                 <div className="flex flex-col items-center py-1"><div className="w-px h-4 bg-white/20"/><svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L5 6L10 0" fill="rgba(255,255,255,0.25)"/></svg></div>
                 <div className="px-7 py-3 rounded-xl border-2 border-amber-600/60 bg-amber-900/15 text-center">
