@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Zap, Building2, Factory, Beaker, Cpu, Shield, Battery, Leaf, Droplets, BrainCircuit, Mail } from "lucide-react";
+import { ArrowLeft, Zap, Building2, Factory, Beaker, Cpu, Shield, Battery, Leaf, Droplets, BrainCircuit, Mail, X } from "lucide-react";
 import LineChart from "@/components/LineChart";
 
 const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
@@ -34,6 +34,7 @@ export default function TeaserDeckPage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeVision, setActiveVision] = useState(0);
   const [displayedPrompt, setDisplayedPrompt] = useState("");
+  const [showLandscapePopup, setShowLandscapePopup] = useState(false);
   const typingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -227,8 +228,180 @@ export default function TeaserDeckPage() {
               <p className="text-white/70 font-light text-sm">Scale-up relies on human intuition and blind trial-and-error in expensive physical pilot plants</p>
             </div>
           </motion.div>
+
+          {/* Button for AI for Science Landscape */}
+          <motion.div {...fade} className="text-center">
+            <button
+              onClick={() => setShowLandscapePopup(true)}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-gray-900 hover:bg-gray-100 transition-all text-sm font-medium shadow-lg hover:shadow-xl"
+            >
+              <span>Current Landscape of the AI for Science World</span>
+              <ArrowLeft className="w-4 h-4 rotate-180" />
+            </button>
+          </motion.div>
         </div>
       </section>
+
+      {/* Light-themed Popup for Physical Complexity View */}
+      <AnimatePresence>
+        {showLandscapePopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowLandscapePopup(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-auto rounded-2xl bg-white text-gray-900 shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowLandscapePopup(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
+
+              <div className="p-8 md:p-12">
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-gray-400 font-mono text-sm">01</span>
+                  <p className="text-xs uppercase tracking-[0.25em] text-gray-500">The Physical Complexity View</p>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">
+                  AI for Science: From Sequences to <span className="text-rose-500 font-light">3D Tensors</span>
+                </h2>
+                <p className="text-gray-500 font-light text-lg mb-8">The missing layer in the AI-for-Science stack: Industrial Mesoscale.</p>
+
+                {/* Three layers */}
+                <div className="space-y-4 mb-10 max-w-3xl">
+                  {[
+                    { c: "emerald", title: "The 1D World", body: "AlphaFold mapped biological sequences to solve protein discovery." },
+                    { c: "blue",    title: "The Macro World", body: "GraphCast mapped the planetary icosahedral grid to learn atmospheric dynamics." },
+                    { c: "rose",    title: "The Mesoscale World", body: "Shodh AI maps microscopic pores and chemical reactors to a 3D voxel grid to learn the dynamics of industrial manufacturing." },
+                  ].map((row) => (
+                    <div key={row.title} className={`flex items-start gap-4 p-5 rounded-xl border border-${row.c}-200 bg-${row.c}-50`}>
+                      <div className={`w-2 h-2 mt-2 rounded-full bg-${row.c}-500 shrink-0`} />
+                      <div>
+                        <p className={`text-${row.c}-600 text-sm font-medium mb-1`}>{row.title}</p>
+                        <p className="text-gray-600 font-light text-sm leading-relaxed">{row.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Light-themed Graph */}
+                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-10 overflow-hidden relative">
+                  <p className="text-gray-400 text-sm uppercase tracking-[0.2em] mb-4 text-center">The Physical Complexity View</p>
+                  <p className="text-gray-500 text-base mb-10 text-center max-w-3xl mx-auto">1D Discovery Models (Sequences) vs. 3D Physical Models (Multi-Physics Tensors)</p>
+                  
+                  <div className="relative h-[500px] w-full max-w-5xl mx-auto border border-gray-300 bg-white rounded-xl pl-20">
+                    {/* Grid lines */}
+                    <div className="absolute inset-0 left-20">
+                      {[0,50,100].map((p,i) => <div key={`h${i}`} className="absolute w-full border-b border-gray-200" style={{top:`${p}%`}} />)}
+                      {[0,16.7,33.3,50,66.7,83.3,100].map((p,i) => <div key={`v${i}`} className="absolute h-full border-r border-gray-100 border-dashed" style={{left:`${p}%`}} />)}
+                    </div>
+                    
+                    {/* Y-axis labels */}
+                    <div className="absolute left-2 top-[25%] -translate-y-1/2 pr-3">
+                      <p className="text-rose-500 text-sm mb-1 font-bold">3D Physical Layer</p>
+                      <p className="text-gray-400 text-[10px]">Tensors (Manufacturing / Sim)</p>
+                    </div>
+                    <div className="absolute left-2 top-[75%] -translate-y-1/2 pr-3">
+                      <p className="text-emerald-500 text-sm mb-1 font-bold">1D Discovery Layer</p>
+                      <p className="text-gray-400 text-[10px]">Sequences (In Silico)</p>
+                    </div>
+                    
+                    {/* X-axis labels */}
+                    <div className="absolute -bottom-8 left-20 right-0 flex justify-between text-xs text-gray-400 font-mono px-4">
+                      <span>2018</span><span>2020</span><span>2022</span><span>2024</span><span>2026</span><span>2028</span>
+                    </div>
+                    <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 text-xs text-gray-400 tracking-widest uppercase">Year</div>
+                    
+                    {/* Colored zones */}
+                    <div className="absolute inset-0 left-20 pointer-events-none">
+                      <div className="absolute top-0 left-0 right-0 h-[50%] bg-rose-50 border-b border-rose-200" />
+                      <div className="absolute top-[50%] left-0 right-0 h-[50%] bg-emerald-50" />
+                    </div>
+                    
+                    {/* SVG paths */}
+                    <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0" style={{left:"5rem",width:"calc(100% - 5rem)"}} preserveAspectRatio="none">
+                      <defs>
+                        <filter id="ggLight"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                        <filter id="grLight"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                      </defs>
+                      <path d="M 33.3% 83% L 50% 78% L 66.7% 75% L 75% 72%" fill="none" stroke="#10b981" strokeWidth="4" strokeDasharray="6 6" filter="url(#ggLight)" vectorEffect="non-scaling-stroke" className="opacity-80"/>
+                      <path d="M 25% 45% L 50% 40% L 58.3% 42% L 66.7% 35% L 75% 16.6%" fill="none" stroke="#f43f5e" strokeWidth="4" strokeDasharray="6 6" filter="url(#grLight)" vectorEffect="non-scaling-stroke" className="opacity-80"/>
+                    </svg>
+                    
+                    {/* Data points */}
+                    <div className="absolute inset-0 w-full h-full pointer-events-none z-10" style={{left:"5rem",width:"calc(100% - 5rem)"}}>
+                      {/* Emerald points - 1D Discovery */}
+                      <div className="absolute left-[33.3%] top-[83%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-4 h-4 rounded-full bg-emerald-400 border-2 border-white shadow-lg"/>
+                        <div className="absolute -top-16 -left-20 w-44"><p className="text-emerald-600 text-xs font-semibold">AlphaFold 2</p><p className="text-gray-500 text-[11px]">Protein Structure Prediction</p></div>
+                      </div>
+                      <div className="absolute left-[50%] top-[78%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-300 border-2 border-white shadow-lg"/>
+                        <div className="absolute top-4 -left-16 w-40"><p className="text-emerald-500 text-[11px] font-medium">AlphaFold 3</p><p className="text-gray-400 text-[10px]">Drug Discovery (Multi-modal)</p></div>
+                      </div>
+                      <div className="absolute left-[66.7%] top-[75%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-5 h-5 rounded-full bg-emerald-400 border-2 border-white shadow-lg"/>
+                        <div className="absolute -top-16 -left-12 w-44"><p className="text-emerald-600 text-sm font-semibold">C2S (Google)</p><p className="text-gray-500 text-xs">27B • Scientific Discovery</p></div>
+                      </div>
+                      <div className="absolute left-[75%] top-[72%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-lg animate-pulse"/>
+                        <div className="absolute -top-16 left-4 w-52"><p className="text-emerald-600 text-sm font-bold">Evo 2 (Arc/NVIDIA)</p><p className="text-gray-500 text-xs">40B • Genomics Foundation Model</p></div>
+                      </div>
+                      
+                      {/* Rose points - 3D Physical */}
+                      <div className="absolute left-[25%] top-[45%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-3.5 h-3.5 rounded-full bg-rose-400 border-2 border-white shadow-lg"/>
+                        <div className="absolute top-4 -left-12 w-36"><p className="text-rose-500 text-[11px] font-medium">FNO</p><p className="text-gray-500 text-[10px]">Neural Operators</p></div>
+                      </div>
+                      <div className="absolute left-[50%] top-[40%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-4 h-4 rounded-full bg-rose-400 border-2 border-white shadow-lg"/>
+                        <div className="absolute -top-14 -left-16 w-40"><p className="text-rose-500 text-xs font-semibold">GraphCast</p><p className="text-gray-500 text-[11px]">Weather Forecasting</p></div>
+                      </div>
+                      <div className="absolute left-[58.3%] top-[42%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-3 h-3 rounded-full bg-rose-300 border border-white shadow-lg"/>
+                        <div className="absolute top-4 -left-10 w-32"><p className="text-rose-400 text-[10px]">FourCastNet</p><p className="text-gray-400 text-[9px]">Extreme Weather</p></div>
+                      </div>
+                      <div className="absolute left-[66.7%] top-[35%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-4 h-4 rounded-full bg-rose-400 border-2 border-white shadow-lg"/>
+                        <div className="absolute -top-16 -left-12 w-48"><p className="text-rose-500 text-xs font-semibold">Aurora</p><p className="text-gray-500 text-[11px]">1.3B • Earth System</p></div>
+                      </div>
+                      <div className="absolute left-[75%] top-[16.6%] -translate-x-1/2 -translate-y-1/2">
+                        <div className="relative">
+                          <div className="absolute inset-0 w-24 h-24 -translate-x-1/2 -translate-y-1/2 bg-rose-200 rounded-full animate-ping"/>
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 border-2 border-white shadow-xl relative z-10 flex items-center justify-center">
+                            <div className="w-4 h-4 bg-white rounded-full opacity-70"/>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-full right-0 mb-3 w-52 bg-white border border-rose-200 rounded-xl p-3 shadow-lg">
+                          <p className="text-rose-500 text-sm font-bold mb-1">SHODH AI — LPM</p>
+                          <p className="text-gray-600 text-xs leading-snug">Aimed at 10B–50B 3D Multi-Physics neural operator for mesoscale inverse manufacturing</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom narrative */}
+                <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-rose-50 via-white to-emerald-50 border border-rose-200">
+                  <p className="text-rose-500 text-xs font-bold uppercase tracking-wider mb-2">The Physics / Science Narrative</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">AlphaFold and Evo 2 operate in <span className="text-emerald-600 font-semibold">1D sequence space</span> for discovery. GraphCast, Aurora, and Shodh AI operate in <span className="text-rose-500 font-semibold">3D tensor space</span> for physical simulation and manufacturing. Shodh AI is the only one mastering 3D multi-physics inverse design at the mesoscale.</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Slide 4: The Paradigm Shift */}
       <section className="py-24 px-6 md:px-10 border-t border-white/5">
