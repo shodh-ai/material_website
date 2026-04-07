@@ -29,7 +29,7 @@ export default function NvidiaPage() {
           <div className="flex items-center gap-3">
             <span className="text-white/80 font-light text-sm tracking-tight">Shodh AI</span>
             <span className="text-white/30 text-lg">×</span>
-            <img src="/Nvidia_logo.png" alt="NVIDIA" className="h-5 opacity-70" />
+            <img src="/demo/nvidia-partner-logo.png" alt="NVIDIA" className="h-8 opacity-70" style={{ filter: "brightness(0) invert(1)" }} />
           </div>
           <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Technical Discussion</span>
         </div>
