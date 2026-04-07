@@ -405,11 +405,12 @@ export default function NvidiaPage() {
                     <div className="w-px h-3 bg-white/20"/>
                     <svg width="8" height="5" viewBox="0 0 8 5"><path d="M0 0L4 5L8 0" fill="rgba(255,255,255,0.25)"/></svg>
                   </div>
+                </div>
+                <div className="flex items-stretch gap-1.5">
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-blue-600/55 bg-blue-900/15 text-center flex flex-col justify-center">
                       <p className="text-blue-300 text-[10px] font-semibold tracking-wide mb-1">Microstructure Config</p>
                       <p className="text-white/35 text-[10px] font-mono">e - t - D - L</p>
                     </div>
-                  </div>
                   <div className="flex flex-col items-center gap-1 pt-1">
                     <div className="px-5 py-2 rounded-lg border border-amber-600/50 bg-amber-900/15">
                       <p className="text-amber-300 text-xs font-bold">87% Accuracy</p>
