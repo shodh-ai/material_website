@@ -344,7 +344,7 @@ export default function NvidiaPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">03</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 - The Neural Surrogate & Wet-Lab Validation</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 — The Neural Surrogate & Wet-Lab Validation</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Phase 1 Sandbox: Natively Learning PDEs & <span className="text-blue-300 font-light">Closing the Sim-to-Real Gap</span></h2>
               <p className="text-white/45 font-light text-xl mb-8">Digital predictions mean nothing without physical validation.</p>
@@ -352,8 +352,8 @@ export default function NvidiaPage() {
                 <div className="p-5 rounded-xl border border-blue-500/15 bg-blue-950/5">
                   <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-3">The Digital Surrogate (Training on the Data)</p>
                   <ul className="space-y-2 text-white/65 font-light text-sm leading-relaxed">
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
                   </ul>
                 </div>
               </div>
@@ -365,14 +365,14 @@ export default function NvidiaPage() {
                   <div className="flex items-stretch gap-1.5">
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-blue-600/55 bg-blue-900/15 text-center flex flex-col justify-center">
                       <p className="text-blue-300 text-[10px] font-semibold tracking-wide mb-1">Microstructure Params</p>
-                      <p className="text-white/35 text-[10px] font-mono">e - t - D - L</p>
+                      <p className="text-white/35 text-[10px] font-mono">ε · τ · D · L</p>
                     </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">&rarr;</div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">→</div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-purple-600/55 bg-purple-900/15 text-center flex flex-col justify-center">
                       <p className="text-purple-300 text-[10px] font-semibold tracking-wide mb-1">Encoder</p>
                       <p className="text-white/35 text-[10px] font-mono">CNN</p>
                     </div>
-                    <div className="flex items-center text-white/25 text-sm px-0.5">&rarr;</div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">→</div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-indigo-500/55 bg-indigo-900/15 text-center flex flex-col justify-center">
                       <p className="text-indigo-300 text-[10px] font-semibold tracking-wide mb-1">Prediction</p>
                       <p className="text-white/35 text-[10px]">mlp-based</p>
@@ -381,11 +381,11 @@ export default function NvidiaPage() {
                   <div className="flex items-start gap-2 px-1">
                     <div className="flex-1 flex justify-start">
                       <div className="px-4 py-2 rounded-lg border border-amber-600/50 bg-amber-900/15">
-                        <p className="text-amber-300 text-xs font-bold">R2 = 0.99</p>
+                        <p className="text-amber-300 text-xs font-bold">R² = 0.99</p>
                       </div>
                     </div>
                     <div className="flex-1 grid grid-cols-2 gap-1.5">
-                      {["V(t)", "Q-fade", "Z(w)", "SEI"].map(o => (
+                      {["V(t)", "Q-fade", "Z(ω)", "SEI"].map(o => (
                         <div key={o} className="px-2 py-1.5 rounded-lg border border-green-600/40 bg-green-900/10 text-center">
                           <p className="text-green-300 text-[10px] font-mono">{o}</p>
                         </div>
@@ -394,23 +394,38 @@ export default function NvidiaPage() {
                   </div>
                   <p className="text-white/20 text-[10px] font-mono text-center">skanda_sem2charge</p>
                 </div>
-                <p className="text-white/65 font-light text-sm leading-relaxed mb-3">CNN &rarr; MLP architecture mapping microstructure parameters <span className="font-mono text-white/80 text-xs">(e, t, D, L)</span> to full electrochemical time-series outputs <span className="font-mono text-white/80 text-xs">(V(t), Qfade, Z(w), SEI)</span>.</p>
+                <p className="text-white/65 font-light text-sm leading-relaxed mb-3">CNN → MLP architecture mapping microstructure parameters <span className="font-mono text-white/80 text-xs">(ε, τ, D, L)</span> to full electrochemical time-series outputs <span className="font-mono text-white/80 text-xs">(V(t), Qfade, Z(ω), SEI)</span>.</p>
                 <div className="flex items-start gap-3 p-3 rounded-lg bg-emerald-950/20 border border-emerald-500/20">
                   <div className="w-2 h-2 mt-1 rounded-full bg-emerald-400 shrink-0"/>
-                  <p className="text-emerald-300 font-medium text-sm">Result: Achieved R2 = 0.99 on held-out test sets, matching PyBaMM simulator dynamics at a fraction of compute.</p>
+                  <p className="text-emerald-300 font-medium text-sm">Result: Achieved R² = 0.99 on held-out test sets, matching PyBaMM simulator dynamics at a fraction of compute.</p>
                 </div>
-                <div className="flex justify-center mb-1">
-                  <div className="flex flex-col items-center gap-0.5">
-                    <p className="text-white/30 text-[10px] italic">Denoising steps</p>
-                    <div className="w-px h-3 bg-white/20"/>
-                    <svg width="8" height="5" viewBox="0 0 8 5"><path d="M0 0L4 5L8 0" fill="rgba(255,255,255,0.25)"/></svg>
+              </div>
+              <div className="rounded-2xl border border-violet-500/20 bg-violet-950/5 p-6">
+                <p className="text-violet-300/70 text-xs uppercase tracking-widest mb-4">The Inverse Design (Diffusion)</p>
+                <div className="mb-5 space-y-2">
+                  <div className="flex justify-center mb-1">
+                    <div className="flex flex-col items-center gap-0.5">
+                      <p className="text-white/30 text-[10px] italic">Gaussian noise z</p>
+                      <div className="w-px h-3 bg-white/20"/>
+                      <svg width="8" height="5" viewBox="0 0 8 5"><path d="M0 0L4 5L8 0" fill="rgba(255,255,255,0.25)"/></svg>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-stretch gap-1.5">
+                  <div className="flex items-stretch gap-1.5">
+                    <div className="flex-1 px-2 py-4 rounded-xl border-2 border-green-600/55 bg-green-900/15 text-center flex flex-col justify-center">
+                      <p className="text-green-300 text-[10px] font-semibold tracking-wide mb-1">Target Performance</p>
+                      <p className="text-white/35 text-[10px] font-mono">V(t) · Q-fade · Z(u)</p>
+                    </div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">→</div>
+                    <div className="flex-1 px-2 py-4 rounded-xl border-2 border-purple-600/55 bg-purple-900/15 text-center flex flex-col justify-center">
+                      <p className="text-purple-300 text-[10px] font-semibold tracking-wide mb-1">Conditional Diffusion</p>
+                      <p className="text-white/35 text-[10px]">denoising · conditioned on target</p>
+                    </div>
+                    <div className="flex items-center text-white/25 text-sm px-0.5">→</div>
                     <div className="flex-1 px-2 py-4 rounded-xl border-2 border-blue-600/55 bg-blue-900/15 text-center flex flex-col justify-center">
                       <p className="text-blue-300 text-[10px] font-semibold tracking-wide mb-1">Microstructure Config</p>
-                      <p className="text-white/35 text-[10px] font-mono">e - t - D - L</p>
+                      <p className="text-white/35 text-[10px] font-mono">ε · τ · D · L</p>
                     </div>
+                  </div>
                   <div className="flex flex-col items-center gap-1 pt-1">
                     <div className="px-5 py-2 rounded-lg border border-amber-600/50 bg-amber-900/15">
                       <p className="text-amber-300 text-xs font-bold">87% Accuracy</p>
@@ -430,21 +445,21 @@ export default function NvidiaPage() {
                 <p className="text-violet-300/70 text-xs uppercase tracking-wider mb-4">The Wet-Lab Physical Validation (Ongoing Blind Study)</p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Rigorous Testing Protocol</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">To isolate true chemical performance from random lab variance (e.g., poor cell crimping), we are actively executing an N=6 coin cell physical blind study across 5 distinct matrix recipes.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">The Matrix</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">We prompted the AI to generate both baseline formulations and boundary-pushing recipes <span className="text-white/80">(The AI Safe Bet vs. The AI Hero)</span>. We also built intentionally flawed physical designs (brittle/choked cells) to force specific mechanical cracking (LAM) and high-resistance failures.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Early Signals</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">Initial physical stress-tests are successfully tracking the AI&apos;s predicted trend lines. The physical cells are failing exactly in the extreme modes <span className="text-white/80">(Loss of Active Material, porosity bottlenecks)</span> that the digital diffusion model predicted.</p>
