@@ -266,7 +266,7 @@ export default function NvidiaPage() {
             <motion.div {...fade} className="grid md:grid-cols-2 gap-6">
               <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
                 <p className="text-white/25 text-xs uppercase tracking-widest mb-1 text-center">The Synthetic Pipeline</p>
-                <p className="text-white/20 text-[10px] text-center mb-5 font-mono">STR-GEN {'->'} PyBaMM {'->'} Training Dataset</p>
+                <p className="text-white/20 text-[10px] text-center mb-5 font-mono">STR-GEN &rarr; PyBaMM &rarr; Training Dataset</p>
                 <div className="flex flex-col items-center">
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-red-800/60 bg-red-900/15 text-center">
                     <p className="text-red-300 text-sm font-medium">No Open-Source Data</p>
@@ -274,17 +274,17 @@ export default function NvidiaPage() {
                   <div className="flex flex-col items-center py-1"><div className="w-px h-4 bg-white/20"/><svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L5 6L10 0" fill="rgba(255,255,255,0.25)"/></svg></div>
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-blue-600/60 bg-blue-900/15 text-center">
                     <p className="text-blue-300 text-sm font-semibold">STR-GEN</p>
-                    <p className="text-white/35 text-[11px] mt-0.5 font-mono">e - t - D - L</p>
+                    <p className="text-white/35 text-[11px] mt-0.5 font-mono">ε &bull; τ &bull; D &bull; L</p>
                   </div>
                   <div className="flex flex-col items-center py-1"><div className="w-px h-4 bg-white/20"/><svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L5 6L10 0" fill="rgba(255,255,255,0.25)"/></svg></div>
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-purple-600/60 bg-purple-900/15 text-center">
                     <p className="text-purple-300 text-sm font-semibold">PyBaMM Simulation</p>
-                    <p className="text-white/35 text-[11px] mt-0.5 font-mono">DFN - V(t) - Q-fade - Z(w) - SEI</p>
+                    <p className="text-white/35 text-[11px] mt-0.5 font-mono">DFN &bull; V(t) &bull; Q-fade &bull; Z(ω) &bull; SEI</p>
                   </div>
                   <div className="flex flex-col items-center py-1"><div className="w-px h-4 bg-white/20"/><svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L5 6L10 0" fill="rgba(255,255,255,0.25)"/></svg></div>
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-green-600/60 bg-green-900/15 text-center">
                     <p className="text-green-300 text-sm font-semibold">Synthetic Dataset</p>
-                    <p className="text-white/35 text-[11px] mt-0.5">microstructure -> performance pairs</p>
+                    <p className="text-white/35 text-[11px] mt-0.5">microstructure &rarr; performance pairs</p>
                   </div>
                   <div className="flex flex-col items-center py-1"><div className="w-px h-4 bg-white/20"/><svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L5 6L10 0" fill="rgba(255,255,255,0.25)"/></svg></div>
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-amber-600/60 bg-amber-900/15 text-center">
