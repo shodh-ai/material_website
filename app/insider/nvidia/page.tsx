@@ -29,7 +29,7 @@ export default function NvidiaPage() {
           <div className="flex items-center gap-3">
             <span className="text-white/80 font-light text-sm tracking-tight">Shodh AI</span>
             <span className="text-white/30 text-lg">×</span>
-            <img src="/demo/nvidia-partner-logo.png" alt="NVIDIA" className="h-8 opacity-70" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src="/Nvidia_logo.png" alt="NVIDIA" className="h-5 opacity-70" />
           </div>
           <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Technical Discussion</span>
         </div>
@@ -266,7 +266,7 @@ export default function NvidiaPage() {
             <motion.div {...fade} className="grid md:grid-cols-2 gap-6">
               <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6">
                 <p className="text-white/25 text-xs uppercase tracking-widest mb-1 text-center">The Synthetic Pipeline</p>
-                <p className="text-white/20 text-[10px] text-center mb-5 font-mono">STR-GEN -> PyBaMM -> Training Dataset</p>
+                <p className="text-white/20 text-[10px] text-center mb-5 font-mono">STR-GEN {'->'} PyBaMM {'->'} Training Dataset</p>
                 <div className="flex flex-col items-center">
                   <div className="w-64 px-5 py-3 rounded-xl border-2 border-red-800/60 bg-red-900/15 text-center">
                     <p className="text-red-300 text-sm font-medium">No Open-Source Data</p>
