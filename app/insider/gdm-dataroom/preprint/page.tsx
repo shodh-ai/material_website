@@ -12,7 +12,7 @@ export default function PreprintPage() {
       classification="Viewer Only · Do Not Distribute"
     >
       <div
-        className="rounded-2xl border border-white/10 bg-black/60 overflow-hidden shadow-2xl"
+        className="rounded-2xl border border-white/10 bg-black/60 overflow-hidden"
         onContextMenu={(e) => e.preventDefault()}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.03]">
@@ -32,7 +32,6 @@ export default function PreprintPage() {
             title="Academic Preprint — Mesoscale Battery Sim2Real"
             className="absolute inset-0 w-full h-full border-0"
           />
-          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_80px_rgba(0,0,0,0.6)]" />
         </div>
         <div className="px-4 py-3 border-t border-white/10 bg-white/[0.02] text-[11px] text-white/40 font-light">
           This document is displayed in a view-only mode within the Shodh AI
