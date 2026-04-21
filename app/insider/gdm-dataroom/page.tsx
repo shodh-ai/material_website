@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, FileText, Lock, Eye, Cpu, FlaskConical, Beaker } from "lucide-react";
+import { FileText, Lock, Eye, Cpu, FlaskConical, Beaker } from "lucide-react";
 
 const fade = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
@@ -53,9 +53,6 @@ export default function GdmDataRoomPage() {
     <div className="min-h-screen bg-[#060606] text-white">
       <header className="border-b border-white/5 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/insider/deepmind" className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors">
-            <ArrowLeft className="w-4 h-4" /><span className="text-sm font-light">Back</span>
-          </Link>
           <div className="flex items-center gap-3">
             <span className="text-white/80 font-light text-sm tracking-tight">Shodh AI</span>
             <span className="text-white/30 text-lg">×</span>

@@ -35,6 +35,7 @@ function RedactedPreview({
             src={`${src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
             title={title}
             className="absolute inset-0 w-full h-full border-0"
+            style={{ pointerEvents: "none" }}
           />
           {/* Soft vignette so the dialog reads on top, but file stays visible */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30 pointer-events-none" />
