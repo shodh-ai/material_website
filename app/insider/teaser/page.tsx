@@ -73,31 +73,42 @@ const layers = [
 
 const pillarExamples = [
   {
-    title: "Pharma",
-    text: "Translating batch bioreactors into continuous production flow.",
+    title: "Pharma / Biologics",
+    lines: ["Batch → continuous flow", "2–3 years → months", "Biologics manufacturing unlock"],
     icon: Beaker,
   },
   {
-    title: "Energy",
-    text: "Solving coating and drying instability in battery gigafactories.",
+    title: "Batteries",
+    lines: ["Coating, drying, thermal risk", "Scrap reduction + faster qualification", "EV battery yield unlock"],
     icon: Zap,
   },
   {
     title: "Chemicals",
-    text: "Predicting reactor dynamics to safely scale up catalysts.",
+    lines: ["Catalyst + reactor scale-up", "Fewer pilot iterations", "Capex risk reduction"],
     icon: FlaskConical,
   },
   {
-    title: "Aerospace",
-    text: "Modeling thermal stress to prevent 3D-printed parts from fracturing.",
-    icon: Rocket,
+    title: "Gene Delivery",
+    lines: ["LNP / mRNA stability", "Faster formulation scale-up", "Genomics manufacturing unlock"],
+    icon: Atom,
+  },
+  {
+    title: "Carbon Capture",
+    lines: ["Multiphase porous flow", "Faster field validation", "Energy transition unlock"],
+    icon: Globe2,
+  },
+  {
+    title: "Industrial Materials",
+    lines: ["Crystallization + particle morphology", "Repeatable production recipes", "Specialty materials manufacturing unlock"],
+    icon: Factory,
   },
 ];
 
 const partners = [
   ["Biocon & Jubilant", "Pharma / biologics scale-up"],
   ["Aarti Industries", "Chemical meso-scale production"],
-  ["Leading Battery Manufacturer", "Quantum-to-macro cell stability"],
+  ["Tier 1 US Battery Manufacturer", "Cell stability, coating, and production-scale failure prediction"],
+  ["GE Aerospace", "Structural and thermal dynamics"],
 ];
 
 const generatedOutputs = [
@@ -200,21 +211,30 @@ export default function InsiderTeaserPage() {
               <motion.p variants={fadeInUp} className="mt-7 max-w-4xl text-xl font-light leading-relaxed text-white/88 md:text-3xl">
                 From Molecule Discovery to Physical Factory Production
               </motion.p>
-              <motion.p variants={fadeInUp} className="mt-6 max-w-3xl text-base leading-relaxed text-white/72 md:text-xl">
-                Shodh AI is building the frontier physics AI system that connects discovery, mesoscale piloting, process control, and real-world factory production.
-              </motion.p>
-              <motion.div variants={fadeInUp} className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/45">Built With</p>
-                  <p className="mt-2 text-2xl font-medium text-white">NVIDIA & Google</p>
-                </div>
-                <div className="rounded-2xl border border-[#ff9933]/25 bg-black/55 p-5 backdrop-blur-xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff9933]/80">Backed By</p>
-                  <p className="mt-2 text-lg font-medium leading-snug text-white">Sovereign IndiaAI Mission — Priority National Compute</p>
-                </div>
-              </motion.div>
             </motion.div>
             <div className="pointer-events-auto relative z-10 min-h-[320px] lg:col-span-4" />
+          </motion.div>
+        </section>
+
+        <section className="px-4 pb-20 sm:px-6 md:px-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="pointer-events-auto mx-auto max-w-7xl rounded-[2rem] border border-white/12 bg-black/45 p-6 shadow-2xl backdrop-blur-xl md:p-8">
+            <motion.p variants={fadeInUp} className="max-w-5xl text-xl font-light leading-relaxed text-white/82 md:text-3xl">
+              Shodh AI is building the frontier physics AI system that connects discovery, mesoscale piloting, process control, and real-world factory production.
+            </motion.p>
+            <div className="mt-8 grid gap-3 md:grid-cols-3">
+              <motion.div variants={scaleIn} className="rounded-2xl border border-purple-300/20 bg-black/55 p-5 backdrop-blur-xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200/70">Founder Pedigree</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-white">PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.</p>
+              </motion.div>
+              <motion.div variants={scaleIn} className="rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/45">Built With</p>
+                <p className="mt-2 text-2xl font-medium text-white">NVIDIA & Google</p>
+              </motion.div>
+              <motion.div variants={scaleIn} className="rounded-2xl border border-[#ff9933]/25 bg-black/55 p-5 backdrop-blur-xl">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff9933]/80">Backed By</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-white">Sovereign IndiaAI Mission — Priority National Compute</p>
+              </motion.div>
+            </div>
           </motion.div>
         </section>
 
@@ -223,13 +243,13 @@ export default function InsiderTeaserPage() {
             <motion.div variants={scaleIn} className="rounded-2xl border border-white/12 bg-black/50 p-6 backdrop-blur-xl">
               <Microscope className="mb-5 h-8 w-8 text-red-300" />
               <h3 className="mb-3 text-2xl font-medium text-white">The Disconnect</h3>
-              <p className="leading-relaxed text-white/72">Foundation models like Evo 2 for biology and GNoME for materials can propose promising molecules, materials, proteins, electrolytes, catalysts, and chemicals at unprecedented speed.</p>
-              <p className="mt-4 leading-relaxed text-white/72">But moving that candidate into a bioreactor, chemical reactor, battery line, or factory still requires manual, multi-stage experimentation.</p>
+              <p className="leading-relaxed text-white/72">Foundation models like <span className="font-medium text-white">Evo 2</span> for biology and <span className="font-medium text-white">GNoME</span> for materials can propose promising <span className="text-[#48cae4]">molecules, materials, proteins, electrolytes, catalysts, and chemicals</span> at unprecedented speed.</p>
+              <p className="mt-4 leading-relaxed text-white/72">But moving that candidate into a <span className="font-medium text-white">bioreactor, chemical reactor, battery line, or factory</span> still requires <span className="text-red-300">manual, multi-stage experimentation</span>.</p>
             </motion.div>
             <motion.div variants={scaleIn} className="rounded-2xl border border-red-400/25 bg-red-950/20 p-6 backdrop-blur-xl">
               <TrendingDown className="mb-5 h-8 w-8 text-red-300" />
               <h3 className="mb-3 text-2xl font-medium text-white">The Cost</h3>
-              <p className="leading-relaxed text-white/72">This creates a Valley of Death between the quantum/micro scale and the factory floor.</p>
+              <p className="leading-relaxed text-white/72">This creates a <span className="font-medium text-white">Valley of Death</span> between the <span className="text-red-300">quantum/micro scale</span> and the <span className="text-orange-300">factory floor</span>.</p>
               <p className="mt-6 text-sm font-bold uppercase tracking-[0.18em] text-white/45">Industry average to cross the gap:</p>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div className="rounded-xl border border-white/10 bg-black/35 p-4"><p className="text-3xl font-medium text-white">2.5 years</p></div>
@@ -240,9 +260,9 @@ export default function InsiderTeaserPage() {
               <Factory className="mb-5 h-8 w-8 text-orange-300" />
               <h3 className="mb-3 text-2xl font-medium text-white">The Reality</h3>
               <div className="space-y-4 leading-relaxed text-white/72">
-                <p>A battery can work on a computer screen and fail on the factory line.</p>
-                <p>A biologic can work in a flask and collapse in a bioreactor.</p>
-                <p>A material can pass lab tests and fracture during industrial production.</p>
+                <p>A battery can work on a <span className="font-medium text-white">computer screen</span> and fail on the <span className="text-orange-300">factory line</span>.</p>
+                <p>A biologic can work in a <span className="font-medium text-white">flask</span> and collapse in a <span className="text-orange-300">bioreactor</span>.</p>
+                <p>A material can pass <span className="font-medium text-white">lab tests</span> and fracture during <span className="text-orange-300">industrial production</span>.</p>
                 <p className="text-xl font-medium text-white">Physics is currently siloed.</p>
               </div>
             </motion.div>
@@ -270,23 +290,33 @@ export default function InsiderTeaserPage() {
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">The ROI</p>
             <p className="mt-3 text-3xl font-medium text-gray-900 md:text-5xl">2.5 years today → less than 3 months with Saving over $1M</p>
           </motion.div>
+          <motion.div variants={fadeInUp} className="mt-5 rounded-2xl border border-[#48cae4]/20 bg-[#48cae4]/10 p-6 backdrop-blur-xl">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#48cae4]">Strategic Value</p>
+            <p className="mt-3 text-xl leading-relaxed text-gray-700">Shodh AI helps companies capture more of their patent-protected revenue window by reducing the time between discovery, scale-up, and commercialization.</p>
+          </motion.div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 4 — The Technology" title="The Moat: Generating the Physical World" subtitle="You cannot scrape the internet for factory physics." tone="lightCyan">
-          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <SlideShell eyebrow="Slide 4 — The Technology" title="A Model That Learns Physics" subtitle="LLMs learned language. Shodh AI is learning physics." tone="lightCyan">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
             <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
-              <p className="text-lg leading-relaxed text-gray-600">While the internet is full of theory and textbooks, it lacks the dynamic, operational ground-truth data needed to teach an AI how fluids, molecules, and materials actually scale inside physical reactors, production lines, and factories.</p>
-              <p className="mt-5 text-2xl font-medium leading-snug text-gray-900">To build the World Foundational Model, we have to create the data ourselves.</p>
+              <p className="text-lg leading-relaxed text-gray-600">You cannot scrape the internet for factory physics.</p>
+              <p className="mt-4 text-2xl font-medium leading-snug text-gray-900">So we create physics data ourselves and benchmark it against reality.</p>
             </motion.div>
-            <motion.div variants={fadeInUp} className="rounded-2xl border border-purple-200 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
-              <h3 className="text-3xl font-medium text-gray-900">Our Secret Weapon: The JAX-Native Physics Engine</h3>
+            <motion.div variants={fadeInUp} className="rounded-2xl border border-red-200 bg-red-50/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-red-500">The Core Challenge</p>
+              <h3 className="mt-3 text-3xl font-medium text-gray-900">The Reality Gap</h3>
+              <p className="mt-4 leading-relaxed text-gray-600">The hard part is making it predict what actually happens in a lab, reactor, pilot plant, or factory.</p>
             </motion.div>
           </div>
+          <motion.div variants={fadeInUp} className="mt-6 rounded-2xl border border-purple-200 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
+            <p className="text-xl leading-relaxed text-gray-700">That gap between simulated physics and physical reality is the Reality Gap.</p>
+            <p className="mt-3 text-2xl font-medium leading-snug text-gray-900">Shodh AI’s moat is closing this gap.</p>
+          </motion.div>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {[
-              ["We Simulate Reality", "We built a proprietary engine that generates massive amounts of synthetic physics data across the micro and meso layers, including molecular dynamics, Brownian dynamics, fluid dynamics, and mesoscale process physics."],
-              ["We Ground It in Truth", "We merge simulated data with real-world ground truth from partners: lab experiments, pilot runs, reactor data, and factory logs."],
-              ["The Result: Reality-Benchmarked AI", "The model does not just guess. Every prediction is physics-constrained, uncertainty-bounded, and reality-calibrated."],
+              ["1. Synthetic Physics Engine", "Our proprietary JAX-native engine generates large-scale physics data across molecular dynamics, Brownian dynamics, fluid dynamics, and mesoscale process physics."],
+              ["2. Reality Benchmark", "Partner ground truth from labs, reactors, pilot runs, and factories calibrates the model against the real world."],
+              ["3. Continuous Improvement", "Every industrial deployment reduces the Reality Gap and makes the model more general."],
             ].map(([title, text]) => (
               <motion.div key={title} variants={scaleIn} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl">
                 <Database className="mb-5 h-7 w-7 text-[#48cae4]" />
@@ -297,38 +327,48 @@ export default function InsiderTeaserPage() {
           </div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 5 — The Strategy" title="The 25 Billion-Dollar Pillars" subtitle="We are not boiling the ocean on Day 1." tone="lightAmber">
-          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-            <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
-              <p className="leading-relaxed text-gray-600">You cannot build a model of the entire physical world all at once. Instead, we have divided industrial manufacturing into 25 specific, high-ROI physics bottlenecks.</p>
-              <p className="mt-5 text-3xl font-medium text-gray-900">We call these our Pillars.</p>
-            </motion.div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {pillarExamples.map((pillar) => {
-                const Icon = pillar.icon;
-                return (
-                  <motion.div key={pillar.title} variants={scaleIn} className="rounded-2xl border border-amber-200 bg-white/70 p-6 shadow-lg backdrop-blur-xl">
-                    <Icon className="mb-4 h-7 w-7 text-amber-300" />
-                    <h3 className="text-xl font-medium text-gray-900">{pillar.title}</h3>
-                    <p className="mt-3 leading-relaxed text-gray-600">{pillar.text}</p>
-                  </motion.div>
-                );
-              })}
+        <SlideShell eyebrow="Slide 5 — Commercial Strategy" title="The 25 Billion-Dollar Pillars" subtitle="One base physics model. Twenty-five industrial adapters. One compounding World Model." tone="lightAmber">
+          <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
+            <p className="text-xl font-medium leading-relaxed text-gray-900">Each Pillar is a paid industrial deployment:</p>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-600">Revenue</p>
+                <p className="mt-2 text-lg font-medium text-gray-900">NRE + milestones + platform license</p>
+              </div>
+              <div className="rounded-xl border border-purple-200 bg-purple-50/70 p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-purple-600">Future Upside</p>
+                <p className="mt-2 text-lg font-medium text-gray-900">royalty / value-share on process and material IP</p>
+              </div>
             </div>
+          </motion.div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {pillarExamples.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div key={pillar.title} variants={scaleIn} className="rounded-2xl border border-amber-200 bg-white/70 p-5 shadow-lg backdrop-blur-xl">
+                  <div className="mb-4 flex items-center gap-3">
+                    <Icon className="h-7 w-7 text-amber-300" />
+                  </div>
+                  <h3 className="text-xl font-medium text-gray-900">{pillar.title}</h3>
+                  <div className="mt-4 space-y-2">
+                    {pillar.lines.map((line) => (
+                      <p key={line} className="rounded-xl border border-black/10 bg-white/75 p-3 leading-relaxed text-gray-700">{line}</p>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-          <motion.div variants={fadeInUp} className="mt-8 rounded-2xl border border-[#48cae4]/20 bg-white/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#48cae4]">The Master Plan</p>
-            <p className="mt-3 text-xl leading-relaxed text-gray-600">Each Pillar is a commercially valuable standalone product.</p>
-            <p className="mt-3 text-2xl font-medium leading-snug text-gray-900">But like puzzle pieces, as we build them, they converge to form the overarching World Foundational Model.</p>
+          <motion.div variants={fadeInUp} className="mt-6 rounded-2xl border border-[#48cae4]/20 bg-[#48cae4]/10 p-6 backdrop-blur-xl">
+            <p className="text-xl font-medium leading-relaxed text-gray-900">...and 19 additional Pillars spanning Semiconductors, Advanced Manufacturing, Metamaterials, Tissue Engineering, Nuclear Materials, Hypersonic Materials, Industrial Heat Flow, and Smart Manufacturing.</p>
           </motion.div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 6 — Traction & The Flywheel" title="Traction & Anchor Partners" subtitle="We are solving these Pillars for the world’s biggest companies today." tone="lightCyan">
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <SlideShell eyebrow="Slide 6 — Traction & Why We Win" title="Traction & Why We Win" subtitle="We are validating the Pillars with major industrial partners." tone="lightCyan">
+          <div className="grid gap-6">
             <motion.div variants={fadeInUp} className="rounded-2xl border border-emerald-200 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
-              <p className="text-lg leading-relaxed text-gray-600">We do not build theoretical software. Our model is being validated on real industrial systems where scale-up failure is expensive.</p>
-              <h3 className="mt-8 text-2xl font-medium text-gray-900">Anchor Partners</h3>
-              <div className="mt-5 space-y-4">
+              <h3 className="text-2xl font-medium text-gray-900">Anchor Partners</h3>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
                 {partners.map(([name, text]) => (
                   <div key={name} className="rounded-xl border border-black/10 bg-white/75 p-4">
                     <p className="font-medium text-gray-900">{name}</p>
@@ -337,36 +377,11 @@ export default function InsiderTeaserPage() {
                 ))}
               </div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
-              <h3 className="text-2xl font-medium text-gray-900">How the Data Flywheel Works</h3>
-              <div className="mt-6 space-y-4">
-                {[
-                  "Industrial partners bring highly guarded, proprietary scale-up data.",
-                  "Shodh AI uses its physics engine to solve urgent, million-dollar production bottlenecks.",
-                  "Customers realize major savings in time, cost, and failed experimentation.",
-                  "The learnings from each collaborative deployment permanently strengthen the World Model.",
-                ].map((text, index) => (
-                  <div key={text} className="flex gap-4 rounded-xl border border-black/10 bg-white/75 p-4">
-                    <span className="text-[#48cae4]">{index + 1}.</span>
-                    <p className="text-gray-600">{text}</p>
-                  </div>
-                ))}
-              </div>
-              <h3 className="mt-10 text-2xl font-medium text-gray-900">How the Data Flywheel Works:</h3>
-              <div className="mt-6 space-y-4">
-                {[
-                  "Industrial giants bring us their highly-guarded, proprietary scale-up data.",
-                  "We use our physics engine to solve their urgent, million-dollar production bottlenecks.",
-                  "We deliver millions in savings, and in return, the learnings from these collaborative deployments permanently strengthen our World Model.",
-                ].map((text, index) => (
-                  <div key={text} className="flex gap-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
-                    <p className="text-gray-600">{index + 1}. {text}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
+          <motion.div variants={fadeInUp} className="mt-6 rounded-2xl border border-[#48cae4]/20 bg-white/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
+            <h3 className="text-2xl font-medium text-gray-900">The Compounding Flywheel</h3>
+            <p className="mt-4 text-2xl font-medium leading-snug text-gray-900">Customers pay us to solve bottlenecks. Each deployment creates ground truth. Each solved Pillar strengthens the World Model.</p>
+          </motion.div>
         </SlideShell>
 
         <SlideShell eyebrow="Slide 7 — The End Game" title="Generative Physical IP" tone="cyan">
@@ -396,10 +411,11 @@ export default function InsiderTeaserPage() {
           </motion.div>
           <motion.div variants={fadeInUp} className="mt-8 rounded-2xl border border-purple-400/20 bg-purple-950/15 p-6 backdrop-blur-xl md:p-8">
             <Globe2 className="mb-5 h-8 w-8 text-purple-300" />
-            <h3 className="text-3xl font-medium text-white">The business</h3>
-            <p className="mt-4 text-lg leading-relaxed text-white/75">We begin as enterprise physics AI.</p>
-            <p className="mt-3 text-lg leading-relaxed text-white/75">We expand into the generative industrial realization. the engine that takes physical IP from zero to a billion-dollar commercial scale.</p>
+            <h3 className="text-3xl font-medium text-white">The Business & Vision</h3>
+            <p className="mt-4 text-lg leading-relaxed text-white/75">We begin as enterprise physics AI and expand into the zero-to-billion engine for physical IP.</p>
             <p className="mt-3 text-lg leading-relaxed text-white/75">Long term, Shodh AI participates in the physical IP layer of the next industrial century through licensing, royalties, joint ventures, and co-development.</p>
+            <p className="mt-3 text-lg leading-relaxed text-white/75">We give companies and nations the ability to imagine, validate, and manufacture.</p>
+            <p className="mt-3 text-2xl font-medium leading-snug text-white">Just as LLMs made intelligence programmable, Shodh AI makes physical invention programmable.</p>
           </motion.div>
         </SlideShell>
 
@@ -413,8 +429,20 @@ export default function InsiderTeaserPage() {
           </motion.div>
         </section>
 
-        <footer className="pointer-events-auto border-t border-black/10 bg-[#f0f0ff]/90 px-4 py-10 text-center backdrop-blur-xl sm:px-6 md:px-10">
-          <p className="text-sm font-bold uppercase tracking-[0.3em] text-gray-700">Shodh AI</p>
+        <footer className="pointer-events-auto relative w-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0d1f3c] to-[#081421]">
+            <div className="absolute inset-0 bg-black/30" />
+          </div>
+          <div className="relative z-10 px-4 pb-8 pt-12 sm:px-6 sm:pt-16 md:px-10 md:pt-20">
+            <div className="mb-10 overflow-hidden">
+              <h1 className="w-full select-none whitespace-nowrap text-[clamp(4.5rem,22vw,24rem)] font-normal leading-[0.9] text-[#f0f0ff]">
+                Shodh AI
+              </h1>
+            </div>
+            <div className="pb-2 text-xs uppercase tracking-wider text-[#f0f0ff]">
+              2026 Shodh AI. All rights reserved
+            </div>
+          </div>
         </footer>
       </main>
     </div>
