@@ -219,11 +219,11 @@ export default function InsiderTeaserPage() {
         <section className="px-4 pb-20 sm:px-6 md:px-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer} className="pointer-events-auto mx-auto max-w-7xl rounded-[2rem] border border-white/12 bg-black/45 p-6 shadow-2xl backdrop-blur-xl md:p-8">
             <motion.p variants={fadeInUp} className="max-w-5xl text-xl font-light leading-relaxed text-white/82 md:text-3xl">
-              Shodh AI is building the frontier physics AI system that connects discovery, mesoscale piloting, process control, and real-world factory production.
+              Frontier Physics-AI system that links discovery, mesoscale piloting, process control, and a “digital brain”, delivering a production-ready blueprint for scalable industrial deployment
             </motion.p>
             <div className="mt-8 grid gap-3 md:grid-cols-3">
               <motion.div variants={scaleIn} className="rounded-2xl border border-purple-300/20 bg-black/55 p-5 backdrop-blur-xl">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200/70">Founder Pedigree</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200/70">Founder</p>
                 <p className="mt-2 text-lg font-medium leading-snug text-white">PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.</p>
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">

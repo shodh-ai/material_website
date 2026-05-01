@@ -1,0 +1,236 @@
+SHODH AI — INSIDER TEASER PAGE COPY
+=====================================
+
+HEADER
+------
+Shodh AI
+Insider Teaser
+
+
+SLIDE 1 — TITLE
+---------------
+Confidential
+
+The World Foundational Model
+
+From Molecule Discovery to Physical Factory Production
+
+
+INTRODUCTION BAND
+-----------------
+Shodh AI is building the frontier physics AI system that connects discovery, mesoscale piloting, process control, and real-world factory production.
+
+Founder Pedigree
+PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.
+
+Built With
+NVIDIA & Google
+
+Backed By
+Sovereign IndiaAI Mission — Priority National Compute
+
+
+SLIDE 2 — THE PROBLEM
+---------------------
+The Trillion-Dollar “Valley of Death”
+
+AI has accelerated discovery. But physical production is still slow, manual, and expensive.
+
+The Disconnect
+Foundation models like Evo 2 for biology and GNoME for materials can propose promising molecules, materials, proteins, electrolytes, catalysts, and chemicals at unprecedented speed.
+
+But moving that candidate into a bioreactor, chemical reactor, battery line, or factory still requires manual, multi-stage experimentation.
+
+The Cost
+This creates a Valley of Death between the quantum/micro scale and the factory floor.
+
+Industry average to cross the gap:
+- 2.5 years
+- $1.5M+ per iteration
+
+The Reality
+A battery can work on a computer screen and fail on the factory line.
+
+A biologic can work in a flask and collapse in a bioreactor.
+
+A material can pass lab tests and fracture during industrial production.
+
+Physics is currently siloed.
+
+
+SLIDE 3 — THE SOLUTION
+----------------------
+The World Foundational Model
+
+We are building a continuous physics AI model that learns the thread of physics connecting molecules, materials, processes, and factories.
+
+It operates across four continuous layers:
+
+01 — Discovery Layer
+Integrates atomic, molecular, biological, and material discovery.
+
+02 — Mesoscale Physics Engine
+The core bridge. Simulates the lab-to-production gap where most failures emerge: mixing, shear, heat transfer, mass transfer, reaction kinetics, phase behavior, degradation, impurities, and instability.
+
+03 — Control Layer
+Translates physics predictions into process parameters, operating windows, control policies, and experiment plans.
+
+04 — Digital Twin Layer
+Creates dynamic, physics-enabled twins for reactors, production lines, and factory-scale systems.
+
+The ROI
+2.5 years today → less than 3 months with Saving over $1M
+
+Strategic Value
+Shodh AI helps companies capture more of their patent-protected revenue window by reducing the time between discovery, scale-up, and commercialization.
+
+
+SLIDE 4 — THE TECHNOLOGY
+------------------------
+A Model That Learns Physics
+
+LLMs learned language. Shodh AI is learning physics.
+
+You cannot scrape the internet for factory physics.
+
+So we create physics data ourselves and benchmark it against reality.
+
+The Core Challenge
+The Reality Gap
+
+The hard part is making it predict what actually happens in a lab, reactor, pilot plant, or factory.
+
+That gap between simulated physics and physical reality is the Reality Gap.
+
+Shodh AI’s moat is closing this gap.
+
+1. Synthetic Physics Engine
+Our proprietary JAX-native engine generates large-scale physics data across molecular dynamics, Brownian dynamics, fluid dynamics, and mesoscale process physics.
+
+2. Reality Benchmark
+Partner ground truth from labs, reactors, pilot runs, and factories calibrates the model against the real world.
+
+3. Continuous Improvement
+Every industrial deployment reduces the Reality Gap and makes the model more general.
+
+
+SLIDE 5 — COMMERCIAL STRATEGY
+-----------------------------
+The 25 Billion-Dollar Pillars
+
+One base physics model. Twenty-five industrial adapters. One compounding World Model.
+
+Each Pillar is a paid industrial deployment:
+
+Revenue
+NRE + milestones + platform license
+
+Future Upside
+royalty / value-share on process and material IP
+
+Pharma / Biologics
+- Batch → continuous flow
+- 2–3 years → months
+- Biologics manufacturing unlock
+
+Batteries
+- Coating, drying, thermal risk
+- Scrap reduction + faster qualification
+- EV battery yield unlock
+
+Chemicals
+- Catalyst + reactor scale-up
+- Fewer pilot iterations
+- Capex risk reduction
+
+Gene Delivery
+- LNP / mRNA stability
+- Faster formulation scale-up
+- Genomics manufacturing unlock
+
+Carbon Capture
+- Multiphase porous flow
+- Faster field validation
+- Energy transition unlock
+
+Industrial Materials
+- Crystallization + particle morphology
+- Repeatable production recipes
+- Specialty materials manufacturing unlock
+
+...and 19 additional Pillars spanning Semiconductors, Advanced Manufacturing, Metamaterials, Tissue Engineering, Nuclear Materials, Hypersonic Materials, Industrial Heat Flow, and Smart Manufacturing.
+
+
+SLIDE 6 — TRACTION & WHY WE WIN
+-------------------------------
+Traction & Why We Win
+
+We are validating the Pillars with major industrial partners.
+
+Anchor Partners
+
+Biocon & Jubilant
+Pharma / biologics scale-up
+
+Aarti Industries
+Chemical meso-scale production
+
+Tier 1 US Battery Manufacturer
+Cell stability, coating, and production-scale failure prediction
+
+GE Aerospace
+Structural and thermal dynamics
+
+The Compounding Flywheel
+Customers pay us to solve bottlenecks. Each deployment creates ground truth. Each solved Pillar strengthens the World Model.
+
+
+SLIDE 7 — THE END GAME
+----------------------
+Generative Physical IP
+
+The first phase is predictive:
+Will this molecule, material, or process scale?
+
+The second phase is prescriptive:
+What process conditions should we run?
+
+The third phase is generative:
+Design the product, process, and factory together.
+
+Future interface
+A user prompts:
+
+“Design a carbon-negative concrete optimized for Indian climate, local feedstock, low cost, and scalable manufacturing.”
+
+The World Model generates:
+- the material composition,
+- the mesoscale manufacturing route,
+- the process parameters,
+- the factory operating window,
+- the quality-control plan,
+- the cost and carbon profile,
+- the dynamic production twin.
+
+The Business & Vision
+We begin as enterprise physics AI and expand into the zero-to-billion engine for physical IP.
+
+Long term, Shodh AI participates in the physical IP layer of the next industrial century through licensing, royalties, joint ventures, and co-development.
+
+We give companies and nations the ability to imagine, validate, and manufacture.
+
+Just as LLMs made intelligence programmable, Shodh AI makes physical invention programmable.
+
+
+FINAL SECTION
+-------------
+The World Foundational Model
+
+From discovery to mesoscale piloting to process control to real-world factory production.
+
+
+FOOTER
+------
+Shodh AI
+
+2026 Shodh AI. All rights reserved
