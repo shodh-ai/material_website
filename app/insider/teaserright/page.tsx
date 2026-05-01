@@ -100,7 +100,7 @@ function LightSlideShell({
 
 function ProductionValleyInfographic() {
   return (
-    <section className="relative mx-auto min-h-[620px] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border border-[#0b2338]/10 bg-[#f6f5ef] shadow-[0_30px_90px_rgba(8,20,33,0.22)] md:aspect-[16/9] md:min-h-0">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-[#0b2338]/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_22%,rgba(72,202,228,0.16),transparent_28%),radial-gradient(circle_at_76%_18%,rgba(181,255,72,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,240,236,0.92))]" />
       <svg
         className="absolute inset-0 h-full w-full"
@@ -176,7 +176,12 @@ function ProductionValleyInfographic() {
         <rect x="1040" y="0" width="560" height="900" fill="url(#teaserupMountainFadeProduction)" />
       </svg>
 
-      <div className="absolute left-[7%] top-[49%] max-w-[300px] sm:max-w-[430px]">
+      <div className="relative z-10 w-full text-left md:absolute md:left-[7%] md:top-[8%] md:w-[700px] md:max-w-[52%]">
+        <h1 className="text-3xl font-medium uppercase leading-none tracking-tight text-[#111] sm:text-4xl lg:text-5xl">The Missing Model Between Discovery and Factory</h1>
+        <p className="mt-4 text-base font-bold uppercase tracking-[0.18em] text-[#4b6b00] sm:text-lg">Trillion-Dollar Valley of Death</p>
+      </div>
+
+      <div className="relative z-10 mt-8 max-w-none rounded-2xl border border-black/10 bg-white/65 p-4 backdrop-blur-xl md:absolute md:left-[7%] md:top-[49%] md:mt-0 md:max-w-[430px] md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#4b6b00] sm:text-xs">Discovery</p>
         <h2 className="mt-3 text-2xl font-medium uppercase leading-none tracking-tight text-[#111] sm:text-3xl lg:text-4xl">AI has accelerated discovery</h2>
         <div className="mt-4 space-y-2 text-sm font-light leading-snug text-black/66 sm:text-base">
@@ -185,25 +190,20 @@ function ProductionValleyInfographic() {
         </div>
       </div>
 
-      <div className="absolute right-[7%] top-[48%] max-w-[280px] text-right sm:max-w-[410px]">
+      <div className="relative z-10 mt-4 max-w-none rounded-2xl border border-black/10 bg-white/65 p-4 text-left backdrop-blur-xl md:absolute md:right-[7%] md:top-[48%] md:mt-0 md:max-w-[410px] md:border-0 md:bg-transparent md:p-0 md:text-right md:backdrop-blur-none">
         <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#4b6b00] sm:text-xs">Industrial Deployment</p>
         <h2 className="mt-3 text-2xl font-medium uppercase leading-none tracking-tight text-[#111] sm:text-3xl lg:text-4xl">Physical production still lags</h2>
         <p className="ml-auto mt-4 max-w-[350px] text-sm font-medium leading-snug text-[#0b2338]/70 sm:text-base">Scale-up breaks across batteries, biologics, catalysts, materials, semiconductors industrial lines.</p>
       </div>
 
-      <div className="absolute left-[7%] top-[8%] w-[560px] max-w-[78%] text-left md:w-[700px] md:max-w-[52%]">
-        <h1 className="text-3xl font-medium uppercase leading-none tracking-tight text-[#111] sm:text-4xl lg:text-5xl">The Missing Model Between Discovery and Factory</h1>
-        <p className="mt-4 text-base font-bold uppercase tracking-[0.18em] text-[#4b6b00] sm:text-lg">Trillion-Dollar Valley of Death</p>
-      </div>
-
-      <div className="absolute left-1/2 top-[48%] w-[280px] max-w-[44%] -translate-x-1/2 text-center md:w-[380px] md:max-w-[30%]">
+      <div className="relative z-10 mt-4 w-full rounded-2xl border border-black/10 bg-white/65 p-4 text-center backdrop-blur-xl md:absolute md:left-1/2 md:top-[48%] md:mt-0 md:w-[380px] md:max-w-[30%] md:-translate-x-1/2 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
         <div className="mx-auto space-y-2 text-sm font-light leading-tight tracking-tight text-black/62 sm:text-base">
           <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#4b6b00] sm:text-xs">The Missing Layer</p>
           <p className="font-medium text-[#0b2338]/72">Discoveries fail when physics changes across scale, process, and factory conditions.</p>
         </div>
       </div>
 
-      <div className="absolute bottom-[9%] left-1/2 w-[340px] max-w-[72%] -translate-x-1/2 rounded-[1.25rem] border border-black/10 bg-white/68 px-5 py-4 text-center shadow-lg backdrop-blur-xl md:bottom-[16%] md:w-[440px] md:max-w-[36%]">
+      <div className="relative z-10 mt-4 w-full rounded-[1.25rem] border border-black/10 bg-white/68 px-5 py-4 text-center shadow-lg backdrop-blur-xl md:absolute md:bottom-[16%] md:left-1/2 md:mt-0 md:w-[440px] md:max-w-[36%] md:-translate-x-1/2">
         <p className="mt-3 text-base font-medium uppercase leading-tight tracking-tight text-[#111] sm:text-lg">Crossing from discovery to factory can cost ~$50M and 2.5 years</p>
         <p className="mt-3 text-sm font-medium leading-snug text-[#0b2338]/72 sm:text-base">driven by 30+ manual pilot iterations.at $1.5M+ each.</p>
       </div>
@@ -240,26 +240,26 @@ function WorldFoundationalModelInfographic() {
   ];
 
   return (
-    <section className="relative mx-auto min-h-[620px] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#f6f5ef] shadow-[0_30px_90px_rgba(8,20,33,0.22)] md:aspect-[16/9] md:min-h-0">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <Image
         src="/can_you_make_it_super_202605011206.jpeg"
         alt="Physics AI architecture panels from molecule to factory"
         fill
         priority={false}
         sizes="(max-width: 1500px) 100vw, 1500px"
-        className="object-cover"
+        className="object-cover opacity-45 md:opacity-100"
       />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(246,245,239,0.74),rgba(246,245,239,0.08)_34%,rgba(246,245,239,0.18)),linear-gradient(90deg,rgba(246,245,239,0.28),rgba(246,245,239,0.02)_36%,rgba(246,245,239,0.26))]" />
 
-      <div className="absolute left-[7%] top-[8%] max-w-[630px]">
+      <div className="relative z-10 max-w-[630px] md:absolute md:left-[7%] md:top-[8%]">
         <p className="text-xs font-black uppercase tracking-[0.3em] text-[#4b6b00]">The Solution</p>
         <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338] md:text-5xl">The World Foundation Model</h2>
         <p className="mt-4 max-w-[560px] text-base font-semibold leading-tight text-black/70 md:text-lg">One continuous model that learns the thread between discovery and factory</p>
       </div>
 
-      <div className="absolute bottom-[7%] left-[5%] grid w-[90%] grid-cols-4 gap-4">
+      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 md:absolute md:bottom-[7%] md:left-[5%] md:mt-0 md:w-[90%] md:grid-cols-4">
         {cards.map((card) => (
-        <div key={card.title} className="min-h-[160px] rounded-3xl border border-[#0b2338]/10 bg-white/64 p-5 shadow-[0_22px_70px_rgba(11,35,56,0.12)] backdrop-blur-xl">
+        <div key={card.title} className="min-h-[160px] rounded-3xl border border-[#0b2338]/10 bg-white/78 p-5 shadow-[0_22px_70px_rgba(11,35,56,0.12)] backdrop-blur-xl md:bg-white/64">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">{card.tag}</p>
@@ -283,61 +283,63 @@ function PhysicsAiArchitectureImageInfographic() {
       title: "Physical Data Engine",
       tag: "Physical data engine",
       copy: "Turns physics priors, expert process knowledge, simulations, experiments, and industrial ground truth into foundational-scale physical datasets.",
-      className: "left-[4.5%] top-[34%] w-[32%] text-left",
+      className: "md:left-[4.5%] md:top-[34%] md:w-[32%] md:text-left",
     },
     {
       number: "02",
       title: "World Model Pretraining",
       tag: "World model pretraining",
       copy: "Learns cross-scale physical behavior from quantum and molecular systems to mesoscale processes and factory-scale production.",
-      className: "left-1/2 bottom-[7%] w-[36%] -translate-x-1/2 text-center",
+      className: "md:left-1/2 md:bottom-[7%] md:w-[36%] md:-translate-x-1/2 md:text-left",
     },
     {
       number: "03",
       title: "Deployment Learning Loop",
       tag: "Deployment learning loop",
       copy: "Every partner deployment returns ground-truth production data, improving the model and increasing defensibility.",
-      className: "right-[4.5%] top-[34%] w-[32%] text-right",
+      className: "md:right-[4.5%] md:top-[34%] md:w-[32%] md:text-right",
     },
   ];
 
   return (
-    <section className="relative mx-auto min-h-[620px] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#f6f5ef] shadow-[0_30px_90px_rgba(8,20,33,0.22)] md:aspect-[16/9] md:min-h-0">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <Image
         src="/make_them_much_larger_covering_202605011255.jpeg"
         alt="Physics-AI architecture loop system"
         fill
         priority={false}
         sizes="(max-width: 1500px) 100vw, 1500px"
-        className="object-cover opacity-70 saturate-[0.78]"
+        className="object-cover opacity-35 saturate-[0.78] md:opacity-70"
       />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(246,245,239,0.82),rgba(246,245,239,0.18)_34%,rgba(246,245,239,0.22)_68%,rgba(246,245,239,0.82)),linear-gradient(90deg,rgba(246,245,239,0.5),rgba(246,245,239,0.08)_50%,rgba(246,245,239,0.5))]" />
 
-      <div className="absolute left-1/2 top-[5%] w-[860px] max-w-[76%] -translate-x-1/2 text-center">
+      <div className="relative z-10 mx-auto max-w-[860px] text-center md:absolute md:left-1/2 md:top-[5%] md:w-[860px] md:max-w-[76%] md:-translate-x-1/2">
         <p className="text-xs font-black uppercase tracking-[0.3em] text-[#4b6b00]">Our Enablement Strategy</p>
         <h2 className="mt-3 text-3xl font-black uppercase leading-none tracking-tight text-[#0b2338] sm:text-4xl lg:text-5xl">The Physical-World Pretraining Engine</h2>
         <p className="mx-auto mt-4 max-w-[760px] text-base font-bold leading-tight text-black/70 sm:text-lg">Our IP flywheel turns physics, experiments, partner know-how, and deployments into compounding physical intelligence.</p>
       </div>
 
+      <div className="relative z-10 mt-8 grid gap-4 md:static md:z-auto md:mt-0 md:block">
       {cards.map((card) => (
-        <div key={card.title} className={`absolute ${card.className} min-h-[178px] rounded-3xl border border-[#0b2338]/12 bg-[#f7f5ea]/88 p-7 shadow-[0_28px_90px_rgba(11,35,56,0.18)] backdrop-blur-xl`}>
+        <div key={card.title} className={`relative md:absolute ${card.className} min-h-[178px] rounded-3xl border border-[#0b2338]/12 bg-[#f7f5ea]/88 p-5 text-left shadow-[0_28px_90px_rgba(11,35,56,0.18)] backdrop-blur-xl sm:p-7`}>
           <div className="flex items-start justify-between gap-4">
-            <div className={card.className.includes("text-right") ? "order-2" : ""}>
+            <div className={card.number === "03" ? "md:order-2" : ""}>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-[#4b6b00]">{card.number} / {card.tag}</p>
               <h3 className="mt-3 text-2xl font-black uppercase leading-none tracking-tight text-[#0b2338] lg:text-3xl">{card.title}</h3>
             </div>
             <p className="text-5xl font-black leading-none tracking-tight text-[#48cae4]">{card.number}</p>
           </div>
-          <p className={`mt-5 text-base font-semibold leading-tight text-[#0b2338]/72 ${card.className.includes("text-right") ? "ml-auto max-w-[390px]" : card.className.includes("text-center") ? "mx-auto max-w-[390px]" : "max-w-[390px]"}`}>{card.copy}</p>
+          <p className={`mt-5 text-base font-semibold leading-tight text-[#0b2338]/72 ${card.className.includes("text-right") ? "md:ml-auto md:max-w-[390px]" : card.className.includes("text-center") ? "md:mx-auto md:max-w-[390px]" : "md:max-w-[390px]"}`}>{card.copy}</p>
         </div>
       ))}
+      </div>
     </section>
   );
 }
 
 function PillarsInfographic() {
   return (
-    <section className="relative mx-auto min-h-[620px] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#f6f5ef] shadow-[0_30px_90px_rgba(8,20,33,0.22)] md:aspect-[16/9] md:min-h-0">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(72,202,228,0.14),transparent_30%),radial-gradient(circle_at_50%_75%,rgba(181,255,72,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.95),rgba(232,244,245,0.96))]" />
 
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="The 25 Billion-Dollar Pillars industrial deployment infographic">
@@ -417,13 +419,13 @@ function PillarsInfographic() {
         </g>
       </svg>
 
-      <div className="absolute left-1/2 top-[5%] w-[900px] max-w-[82%] -translate-x-1/2 text-center">
+      <div className="relative z-10 mx-auto max-w-[900px] text-center md:absolute md:left-1/2 md:top-[5%] md:w-[900px] md:max-w-[82%] md:-translate-x-1/2">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4b6b00]">GTM &amp; Deployment Strategy</p>
         <h2 className="text-4xl font-bold uppercase leading-none tracking-tight text-[#0b2338] md:text-5xl">25+ Billion-Dollar Industrial Pillars</h2>
         <p className="mx-auto mt-3 max-w-[920px] text-lg font-light leading-tight text-black/64">One base physics model. Many industrial problems. One compounding World Model.</p>
       </div>
 
-      <div className="absolute left-[14%] top-[63%] grid w-[72%] grid-cols-4 gap-3">
+      <div className="relative z-10 mt-72 grid gap-3 sm:grid-cols-2 md:absolute md:left-[14%] md:top-[63%] md:mt-0 md:w-[72%] md:grid-cols-4">
         {[
           ["Pharma / Biologics", "Batch → continuous flow", "Biologics manufacturing unlock"],
           ["Batteries", "Coating, drying, thermal risk", "EV battery yield unlock"],
@@ -438,7 +440,7 @@ function PillarsInfographic() {
         ))}
       </div>
 
-      <div className="absolute bottom-[5%] left-1/2 w-[1000px] max-w-[86%] -translate-x-1/2 text-center">
+      <div className="relative z-10 mx-auto mt-6 max-w-[1000px] text-center md:absolute md:bottom-[5%] md:left-1/2 md:mt-0 md:w-[1000px] md:max-w-[86%] md:-translate-x-1/2">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#4b6b00]">and other potential pillars</p>
         <p className="mx-auto mt-2 max-w-[960px] text-lg font-semibold leading-snug text-[#0b2338]/72">Semiconductors, advanced manufacturing, metamaterials, tissue engineering, nuclear materials, hypersonic materials, industrial heat flow, LNP / mRNA stability, Carbon Capture, and smart manufacturing.</p>
       </div>
@@ -448,7 +450,7 @@ function PillarsInfographic() {
 
 function TractionInfographic() {
   return (
-    <section className="relative mx-auto min-h-[620px] w-full max-w-[1500px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#f6f5ef] shadow-[0_30px_90px_rgba(8,20,33,0.22)] md:aspect-[16/9] md:min-h-0">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_22%_34%,rgba(72,202,228,0.16),transparent_28%),radial-gradient(circle_at_78%_68%,rgba(181,255,72,0.18),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.96),rgba(232,244,245,0.96))]" />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Traction and compounding flywheel infographic">
         <defs>
@@ -484,13 +486,13 @@ function TractionInfographic() {
         ))}
       </svg>
 
-      <div className="absolute left-1/2 top-[6%] w-[940px] max-w-[84%] -translate-x-1/2 text-center">
+      <div className="relative z-10 mx-auto max-w-[940px] text-center md:absolute md:left-1/2 md:top-[6%] md:w-[940px] md:max-w-[84%] md:-translate-x-1/2">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4b6b00]">Traction</p>
         <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338] md:text-5xl">Industrial design partners across four pillars</h2>
         <p className="mx-auto mt-4 max-w-[780px] text-lg font-semibold leading-tight text-black/64">Partners are bringing proprietary production data and high-value manufacturing problems to ground the World Model in real factory physics.</p>
       </div>
 
-      <div className="absolute left-[6%] top-[34%] grid w-[88%] grid-cols-4 gap-4">
+      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 md:absolute md:left-[6%] md:top-[34%] md:mt-0 md:w-[88%] md:grid-cols-4">
         {partners.map(([pillar, name, text], index) => (
           <div key={name} className="min-h-[220px] rounded-3xl border border-[#0b2338]/10 bg-white/68 p-5 shadow-[0_22px_70px_rgba(11,35,56,0.1)] backdrop-blur-xl">
             <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">{String(index + 1).padStart(2, "0")} / {pillar}</p>
@@ -522,10 +524,14 @@ export default function InsiderTeaserUpPage() {
               <motion.div variants={fadeInUp} className="mb-7 flex flex-wrap gap-3">
                 <span className="rounded-full border border-[#0b2338]/10 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0b2338]/70 backdrop-blur-md">Confidential</span>
               </motion.div>
-              <motion.h1 variants={fadeInUp} className="text-5xl font-black uppercase leading-[1.02] tracking-tight text-[#0b2338] sm:text-7xl md:text-8xl lg:text-9xl">
-                World Model for
+              <motion.h1 variants={fadeInUp} className="text-[2.65rem] font-black uppercase leading-[1.02] tracking-tight text-[#0b2338] sm:text-7xl md:text-8xl lg:text-9xl">
+                World Model<span className="hidden sm:inline"> for</span>
                 <br />
-                <span className="bg-gradient-to-r from-[#0b2338] via-[#48cae4] to-[#4b6b00] bg-clip-text text-transparent">Physical Invention</span>
+                <span className="bg-gradient-to-r from-[#0b2338] via-[#48cae4] to-[#4b6b00] bg-clip-text text-transparent">
+                  <span className="sm:hidden">for Physical<br /></span>
+                  <span className="hidden sm:inline">Physical </span>
+                  Invention
+                </span>
               </motion.h1>
               <motion.p variants={fadeInUp} className="mt-7 max-w-4xl text-xl font-semibold leading-relaxed text-black/68 md:text-3xl">
                 A frontier AI model that turns discoveries into manufacturable products
