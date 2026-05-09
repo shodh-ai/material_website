@@ -555,12 +555,12 @@ export default function InsiderTeaserUpPage() {
                 <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">PhD, Cambridge Materials Science &amp; Photonic Engineering. Former Microsoft Research.</p>
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#0b2338]/10 bg-white/78 p-5 backdrop-blur-xl">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0b2338]/45">Built With</p>
-                <p className="mt-2 text-2xl font-medium text-[#0b2338]">NVIDIA & Google</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0b2338]/45">WORLD'S FIRST</p>
+                <p className="mt-2 text-2xl font-medium text-[#0b2338]">Unified Multi-Physics Foundation Model.</p>
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#b5ff48]/30 bg-[#f4ffe7]/75 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b6b00]">National-scale compute backing</p>
-                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">Priority compute through the Sovereign IndiaAI Mission</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">~1M compute hours from IndiaAI</p>
               </motion.div>
             </div>
           </motion.div>
