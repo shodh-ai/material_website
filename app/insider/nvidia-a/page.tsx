@@ -981,22 +981,7 @@ export default function InsiderNvidiaAPage() {
           </motion.div>
         </section>
 
-        {/* ── SLIDE 3: ENGINEERING BOTTLENECKS ── */}
-        <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.16 }}
-            variants={staggerContainer}
-            className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
-          >
-            <motion.div variants={scaleIn}>
-              <EngineeringBottlenecksInfographic />
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── SLIDE 4: MERMAID REFERENCE ARCHITECTURE ──} */}
+        {/* ── SLIDE 3: MERMAID REFERENCE ARCHITECTURE ──} */}
         <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
           <motion.div
             initial="hidden"
@@ -1026,15 +1011,7 @@ export default function InsiderNvidiaAPage() {
           </motion.div>
         </section>
 
-        {/* ── APPENDIX ──} */}
-        <section className="pointer-events-auto px-4 pb-24 pt-8 sm:px-6 md:px-10 md:pb-32">
-          <div className="mx-auto max-w-[1040px] text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4b6b00]">Appendix</p>
-            <h2 className="mt-3 text-3xl font-bold uppercase leading-none tracking-tight text-[#0b2338] md:text-4xl">Additional Details</h2>
-          </div>
-        </section>
-
-        {/* ── APPENDIX SLIDE 1: PRODUCTION VALLEY ── */}
+        {/* ── SLIDE 5: SHODH AI TARGET BENCHMARKS ── */}
         <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
           <motion.div
             initial="hidden"
@@ -1044,34 +1021,7 @@ export default function InsiderNvidiaAPage() {
             className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
           >
             <motion.div variants={scaleIn}>
-              <ProductionValleyInfographic />
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* ── APPENDIX SLIDE 2: GENERATIVE PHYSICAL IP ── */}
-        <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.16 }}
-            variants={staggerContainer}
-            className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
-          >
-            <motion.div variants={scaleIn}>
-              <LightSlideShell eyebrow="The End Game" title="Generative Physical IP" tone="cyan">
-                <motion.div variants={fadeInUp} className="rounded-2xl border border-[#0b2338]/10 bg-white/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#48cae4]">The New Interface for Invention</p>
-                  <p className="mt-4 text-gray-700">A user asks the World Model:</p>
-                  <p className="mt-3 rounded-2xl border border-[#0b2338]/10 bg-[#f6f5ef]/80 p-5 text-xl font-light italic leading-relaxed text-[#0b2338] md:text-3xl">"Design a fusion-reactor material optimized for extreme heat flux, radiation tolerance, long operating life, and scalable manufacturing."</p>
-                  <p className="mt-6 text-gray-700">The World Model returns a production-ready blueprint:</p>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {generatedOutputs.map((output) => (
-                      <div key={output} className="rounded-xl border border-[#48cae4]/15 bg-[#48cae4]/10 px-4 py-3 text-gray-700">{output}</div>
-                    ))}
-                  </div>
-                </motion.div>
-              </LightSlideShell>
+              <EngineeringBottlenecksInfographic />
             </motion.div>
           </motion.div>
         </section>
