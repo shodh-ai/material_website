@@ -131,6 +131,16 @@ function ProductionValleyInfographic() {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <radialGradient id="teaserMountWoodPulleyFace" cx="38%" cy="30%" r="70%">
+            <stop offset="0" stopColor="#f7d9a4" />
+            <stop offset="0.48" stopColor="#b97b3d" />
+            <stop offset="1" stopColor="#6f3f1f" />
+          </radialGradient>
+          <linearGradient id="teaserMountRopeFiber" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#d9b071" />
+            <stop offset="0.52" stopColor="#f6d494" />
+            <stop offset="1" stopColor="#9d6a35" />
+          </linearGradient>
         </defs>
 
         <rect width="1600" height="900" fill="#f6f5ef" />
@@ -157,58 +167,67 @@ function ProductionValleyInfographic() {
           opacity="0.22"
         />
 
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#teaserMountShodhBridge)" strokeWidth="30" strokeLinecap="round" opacity="0.2" filter="url(#teaserMountBridgeGlow)" />
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#teaserMountShodhBridge)" strokeWidth="8" strokeLinecap="round" opacity="0.98" />
-        <path d="M 1074 318 C 1168 302 1258 278 1360 230" fill="none" stroke="url(#teaserMountShodhBridge)" strokeWidth="30" strokeLinecap="round" opacity="0.18" filter="url(#teaserMountBridgeGlow)" />
-        <path d="M 1074 318 C 1168 302 1258 278 1360 230" fill="none" stroke="url(#teaserMountShodhBridge)" strokeWidth="8" strokeLinecap="round" opacity="0.98" />
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="#d9ff9d" strokeWidth="4" strokeDasharray="22 18" strokeLinecap="round" opacity="0.7">
-          <animate attributeName="stroke-dashoffset" from="80" to="0" dur="1.2s" repeatCount="indefinite" />
-        </path>
-        <g filter="url(#teaserMountBridgeGlow)">
-          <path d="M 1038 252 L 1002 318 L 1078 318 Z" fill="#d9ff9d" stroke="#4b6b00" strokeOpacity="0.28" strokeWidth="4" />
-          <g>
-            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 1040 318" to="360 1040 318" dur="2.4s" repeatCount="indefinite" />
-            <circle cx="1040" cy="318" r="66" fill="#eaffd5" stroke="#b5ff48" strokeWidth="14" opacity="0.98" />
-            <circle cx="1040" cy="318" r="42" fill="none" stroke="#4b6b00" strokeWidth="8" strokeDasharray="48 24" opacity="0.72" />
-            <circle cx="1040" cy="318" r="15" fill="#4b6b00" opacity="0.9" />
-            <path d="M 1040 252 L 1040 384" stroke="#7ee85f" strokeWidth="6" strokeLinecap="round" opacity="0.72" />
-            <path d="M 974 318 L 1106 318" stroke="#7ee85f" strokeWidth="6" strokeLinecap="round" opacity="0.72" />
-          </g>
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#teaserMountRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.1" />
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#teaserMountRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.38" />
+        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#teaserMountRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.08" />
+        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#teaserMountRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.3" />
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="#fff0bf" strokeWidth="2" strokeDasharray="18 18" strokeLinecap="round" opacity="0.24" />
+        <g opacity="0.34">
+          <circle cx="1040" cy="318" r="76" fill="#5a3319" opacity="0.08" />
+          <circle cx="1040" cy="318" r="68" fill="url(#teaserMountWoodPulleyFace)" stroke="#4f2d17" strokeWidth="7" />
+          <circle cx="1040" cy="318" r="49" fill="none" stroke="#f2cc8f" strokeWidth="7" opacity="0.56" />
+          <circle cx="1040" cy="318" r="31" fill="#75451f" stroke="#2f1b0f" strokeWidth="4" opacity="0.72" />
+          <circle cx="1040" cy="318" r="11" fill="#1f140b" stroke="#e7bb78" strokeWidth="4" />
+          <path d="M 1040 250 L 1040 386" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
+          <path d="M 972 318 L 1108 318" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
+          <path d="M 992 270 L 1088 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
+          <path d="M 1088 270 L 992 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
+          <path d="M 996 292 C 1018 280 1066 278 1088 292" fill="none" stroke="#f8dca8" strokeWidth="3" strokeLinecap="round" opacity="0.28" />
+          <path d="M 992 344 C 1018 359 1068 358 1090 342" fill="none" stroke="#3a2112" strokeWidth="3" strokeLinecap="round" opacity="0.18" />
         </g>
-        <path d="M 1360 230 L 1286 225 L 1332 284 Z" fill="#b5ff48" opacity="0.96" filter="url(#teaserMountBridgeGlow)" />
         <path d="M 235 704 L 318 660 L 402 704 L 318 748 Z" fill="#ffffff" stroke="#ef4444" strokeOpacity="0.28" strokeWidth="3" />
         <path d="M 256 722 L 318 756 L 318 820 L 256 786 Z" fill="#fee2e2" opacity="0.88" />
         <path d="M 318 756 L 380 722 L 380 786 L 318 820 Z" fill="#fecaca" opacity="0.88" />
       </svg>
 
       <div className="relative z-10 w-full text-left md:absolute md:left-[6%] md:top-[8%] md:w-[680px] md:max-w-[48%]">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-[#4b6b00]">Case Study</p>
-        <h1 className="mt-3 text-3xl font-black uppercase leading-none tracking-tight text-[#111] sm:text-4xl lg:text-6xl">GE Aerospace - Pilot</h1>
-        <div className="mt-6 max-w-[560px] text-[#0b2338]/78">
-          <p className="text-base font-black uppercase tracking-[0.22em] text-[#4b6b00] sm:text-lg">GE’s Needs</p>
-          <div className="mt-4 space-y-3 text-lg font-semibold leading-snug sm:text-xl">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#4b6b00] sm:text-xs">Case Study</p>
+        <h1 className="mt-3 text-3xl font-black uppercase leading-none tracking-tight text-[#111] sm:text-4xl lg:text-5xl">GE Aerospace - Pilot</h1>
+        <div className="mt-5 max-w-[560px] text-[#0b2338]/78">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-[#4b6b00] sm:text-base">GE’s Needs</p>
+          <div className="mt-3 space-y-2 text-base font-semibold leading-snug sm:text-lg">
             <p>99% purity on a specialty chemical buffer</p>
             <p>Alternative to Taiwan supplier</p>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 mt-8 max-w-none rounded-2xl border border-red-500/30 bg-red-50/90 p-5 text-left shadow-[0_18px_60px_rgba(239,68,68,0.18)] backdrop-blur-xl md:absolute md:left-[6%] md:bottom-[10%] md:mt-0 md:max-w-[390px]">
+      <div className="relative z-10 mt-8 max-w-none rounded-2xl border border-red-500/30 bg-red-50/90 p-4 text-left shadow-[0_18px_60px_rgba(239,68,68,0.18)] backdrop-blur-xl md:absolute md:left-[6%] md:bottom-[12%] md:mt-0 md:max-w-[360px]">
         <p className="text-[10px] font-black uppercase tracking-[0.22em] text-red-700 sm:text-xs">The Valley</p>
-        <h2 className="mt-3 text-2xl font-black uppercase leading-none tracking-tight text-red-950 sm:text-3xl">Indian CDMO is stuck</h2>
+        <h2 className="mt-3 text-xl font-black uppercase leading-none tracking-tight text-red-950 sm:text-2xl">Indian CDMO is stuck</h2>
       </div>
 
-      <div className="relative z-10 mt-4 max-w-none rounded-2xl border border-[#0b2338]/10 bg-white/86 p-5 text-left shadow-[0_22px_70px_rgba(11,35,56,0.14)] backdrop-blur-xl md:absolute md:right-[5%] md:top-[39%] md:mt-0 md:max-w-[430px]">
-        <div className="max-w-[390px] text-left text-[#0b2338]/78">
-          <h3 className="text-2xl font-black uppercase leading-none tracking-tight text-[#0b2338] sm:text-3xl">Shodh AI + CDMO</h3>
-          <div className="mt-4 space-y-3 text-sm font-medium leading-snug sm:text-base">
-            <p><span className="font-black uppercase tracking-[0.08em] text-[#0b2338]">The Input:</span> “Target 99.9% Purity” + Real-world CDMO ground truth (3D Factory CAD, exact friction, rust, and thermal limits of failing pilot batches.).</p>
-            <p><span className="font-black uppercase tracking-[0.08em] text-[#0b2338]">The SOTA Engine:</span> Our Multi-Physics AI builds a perfect Digital Twin of the factory, then computes in reverse (Inverse Design).</p>
-            <p><span className="font-black uppercase tracking-[0.08em] text-[#0b2338]">The Output:</span> Generative 3D-printable CAD files for custom reactor hardware that mathematically guarantees the yield.</p>
+      <div className="relative z-10 mt-4 max-w-none text-left md:absolute md:right-[6%] md:top-[34%] md:mt-0 md:max-w-[395px]">
+        <div className="rounded-[1.7rem] border border-[#0b2338]/10 bg-white/86 p-4 shadow-[0_24px_80px_rgba(11,35,56,0.16)] backdrop-blur-xl">
+          <h3 className="text-lg font-black uppercase leading-none tracking-tight text-[#0b2338] sm:text-xl">SHODH AI + CDMO</h3>
+          <div className="mt-3 rounded-2xl border border-[#48cae4]/25 bg-[#e8fbff]/70 p-3 shadow-inner">
+            <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">The Prompt</p>
+            <p className="mt-2 text-base font-black leading-tight tracking-tight text-[#0b2338] sm:text-lg">"Redesign this failing reactor to guarantee 99.9% aerospace-grade purity."</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["3D Factory CAD", "Rust logs", "Friction data", "Heat data"].map((item) => (
+                <span key={item} className="rounded-full border border-[#0b2338]/10 bg-white/78 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#0b2338]/68 shadow-sm">{item}</span>
+              ))}
+            </div>
           </div>
-          <p className="mt-4 text-sm font-bold leading-snug text-[#0b2338] sm:text-base">Shodh earns ongoing chemical royalties and co-owns the hardware IP.</p>
+          <div className="mt-3 rounded-2xl border border-[#b5ff48]/35 bg-[#f4ffe7]/78 p-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#4b6b00]">Impact</p>
+            <p className="mt-2 text-lg font-black leading-tight text-[#0b2338]">50 → 5 pilot iterations</p>
+            <p className="mt-1 text-xs font-bold leading-snug text-[#0b2338]/70 sm:text-sm">saving millions while compressing aerospace-grade qualification.</p>
+          </div>
         </div>
       </div>
+
+      <p className="relative z-10 mx-auto mt-6 max-w-[760px] px-5 text-center text-sm font-black leading-snug text-[#0b2338] md:absolute md:bottom-[4.5%] md:left-1/2 md:mt-0 md:-translate-x-1/2 sm:text-base">Shodh earns ongoing chemical royalties &amp; co-owns the hardware IP.</p>
     </section>
   );
 }
