@@ -518,56 +518,300 @@ function PillarsInfographic() {
   );
 }
 
-function TractionInfographic() {
+function GEAerospacePilotInfographic() {
   return (
-    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_22%_34%,rgba(72,202,228,0.16),transparent_28%),radial-gradient(circle_at_78%_68%,rgba(181,255,72,0.18),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.96),rgba(232,244,245,0.96))]" />
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Traction and compounding flywheel infographic">
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-[#0b2338]/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_22%,rgba(72,202,228,0.16),transparent_28%),radial-gradient(circle_at_76%_18%,rgba(181,255,72,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.82),rgba(238,240,236,0.92))]" />
+      <svg
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 1600 900"
+        preserveAspectRatio="none"
+        role="img"
+        aria-label="GE Aerospace Pilot case study diagram"
+      >
         <defs>
-          <linearGradient id="tractionBridge" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0" stopColor="#48cae4" />
-            <stop offset="0.5" stopColor="#b5ff48" />
-            <stop offset="1" stopColor="#48cae4" />
+          <linearGradient id="geAerospaceRightMountain" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#8fbfb6" />
+            <stop offset="0.58" stopColor="#b8d9ad" />
+            <stop offset="1" stopColor="#d9f3b5" />
           </linearGradient>
-          <radialGradient id="tractionGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stopColor="#b5ff48" stopOpacity="0.26" />
-            <stop offset="0.58" stopColor="#48cae4" stopOpacity="0.08" />
+          <radialGradient id="geAerospaceSunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stopColor="#ccefb6" stopOpacity="0.28" />
+            <stop offset="0.46" stopColor="#8fc9c1" stopOpacity="0.1" />
             <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
           </radialGradient>
+          <linearGradient id="geAerospaceBridge" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#48cae4" />
+            <stop offset="0.42" stopColor="#7ee85f" />
+            <stop offset="1" stopColor="#b5ff48" />
+          </linearGradient>
+          <radialGradient id="geAerospaceWoodPulleyFace" cx="38%" cy="30%" r="70%">
+            <stop offset="0" stopColor="#f7d9a4" />
+            <stop offset="0.48" stopColor="#b97b3d" />
+            <stop offset="1" stopColor="#6f3f1f" />
+          </radialGradient>
+          <linearGradient id="geAerospaceRopeFiber" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#d9b071" />
+            <stop offset="0.52" stopColor="#f6d494" />
+            <stop offset="1" stopColor="#9d6a35" />
+          </linearGradient>
         </defs>
+
         <rect width="1600" height="900" fill="#f6f5ef" />
-        <g stroke="#cde0df" strokeWidth="1" opacity="0.42">
-          {Array.from({ length: 14 }, (_, index) => (
-            <path key={`traction-grid-a-${index}`} d={`M ${-140 + index * 140} 820 L ${420 + index * 140} 500`} />
+        <g stroke="#cfd6d4" strokeWidth="1" opacity="0.42">
+          {Array.from({ length: 15 }, (_, index) => (
+            <path key={`ge-aerospace-grid-a-${index}`} d={`M ${-260 + index * 140} 840 L ${500 + index * 140} 410`} />
           ))}
-          {Array.from({ length: 14 }, (_, index) => (
-            <path key={`traction-grid-b-${index}`} d={`M ${60 + index * 140} 500 L ${620 + index * 140} 820`} />
+          {Array.from({ length: 15 }, (_, index) => (
+            <path key={`ge-aerospace-grid-b-${index}`} d={`M ${-120 + index * 140} 400 L ${640 + index * 140} 840`} />
           ))}
         </g>
-        <circle cx="800" cy="560" r="430" fill="url(#tractionGlow)" />
-        <path d="M 235 615 C 390 465 540 455 700 565 C 860 675 1015 662 1190 505 C 1250 452 1318 420 1390 410" fill="none" stroke="url(#tractionBridge)" strokeWidth="18" strokeLinecap="round" opacity="0.28" />
-        <path d="M 235 615 C 390 465 540 455 700 565 C 860 675 1015 662 1190 505 C 1250 452 1318 420 1390 410" fill="none" stroke="#0b2338" strokeWidth="2" strokeDasharray="12 16" strokeLinecap="round" opacity="0.28" />
-        {[260, 515, 800, 1085, 1340].map((cx, index) => (
-          <g key={cx} opacity={0.65}>
-            <path d={`M ${cx - 72} ${650 - (index % 2) * 60} L ${cx} ${610 - (index % 2) * 60} L ${cx + 72} ${650 - (index % 2) * 60} L ${cx} ${690 - (index % 2) * 60} Z`} fill="#ffffff" stroke="#0b2338" strokeOpacity="0.18" strokeWidth="2" />
-            <path d={`M ${cx - 46} ${668 - (index % 2) * 60} L ${cx} ${694 - (index % 2) * 60} L ${cx} 790 L ${cx - 46} 764 Z`} fill="#d9eeee" opacity="0.72" />
-            <path d={`M ${cx} ${694 - (index % 2) * 60} L ${cx + 46} ${668 - (index % 2) * 60} L ${cx + 46} 764 L ${cx} 790 Z`} fill="#dbe8f7" opacity="0.76" />
+        <circle cx="1135" cy="222" r="250" fill="url(#geAerospaceSunGlow)" />
+        <circle cx="1135" cy="222" r="128" fill="#ccefb6" opacity="0.1" />
+
+        <path
+          d="M 650 820 L 720 742 L 802 604 L 900 524 L 988 500 L 1058 350 C 1088 286 1118 210 1165 144 C 1215 74 1292 44 1360 78 C 1428 112 1476 194 1518 286 C 1558 372 1582 458 1600 520 L 1600 820 Z"
+          fill="url(#geAerospaceRightMountain)"
+          opacity="0.76"
+        />
+        <path d="M 650 820 L 720 742 L 802 604 L 900 524 L 988 500 L 944 642 L 842 756 L 770 820 Z" fill="#7b8e8c" opacity="0.26" />
+        <path
+          d="M 1058 355 C 1080 310 1102 262 1124 205 C 1150 137 1190 98 1244 98 C 1288 98 1328 124 1362 168 C 1322 238 1280 304 1232 372 C 1188 435 1142 489 1094 522 L 1008 536 Z"
+          fill="#ffffff"
+          opacity="0.22"
+        />
+
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.1" />
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.38" />
+        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.08" />
+        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.3" />
+        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="#fff0bf" strokeWidth="2" strokeDasharray="18 18" strokeLinecap="round" opacity="0.24" />
+        <g opacity="0.34">
+          <circle cx="1040" cy="318" r="76" fill="#5a3319" opacity="0.08" />
+          <circle cx="1040" cy="318" r="68" fill="url(#geAerospaceWoodPulleyFace)" stroke="#4f2d17" strokeWidth="7" />
+          <circle cx="1040" cy="318" r="49" fill="none" stroke="#f2cc8f" strokeWidth="7" opacity="0.56" />
+          <circle cx="1040" cy="318" r="31" fill="#75451f" stroke="#2f1b0f" strokeWidth="4" opacity="0.72" />
+          <circle cx="1040" cy="318" r="11" fill="#1f140b" stroke="#e7bb78" strokeWidth="4" />
+          <path d="M 1040 250 L 1040 386" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
+          <path d="M 972 318 L 1108 318" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
+          <path d="M 992 270 L 1088 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
+          <path d="M 1088 270 L 992 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
+          <path d="M 996 292 C 1018 280 1066 278 1088 292" fill="none" stroke="#f8dca8" strokeWidth="3" strokeLinecap="round" opacity="0.28" />
+          <path d="M 992 344 C 1018 359 1068 358 1090 342" fill="none" stroke="#3a2112" strokeWidth="3" strokeLinecap="round" opacity="0.18" />
+        </g>
+        <path d="M 235 704 L 318 660 L 402 704 L 318 748 Z" fill="#ffffff" stroke="#ef4444" strokeOpacity="0.28" strokeWidth="3" />
+        <path d="M 256 722 L 318 756 L 318 820 L 256 786 Z" fill="#fee2e2" opacity="0.88" />
+        <path d="M 318 756 L 380 722 L 380 786 L 318 820 Z" fill="#fecaca" opacity="0.88" />
+      </svg>
+
+      <div className="relative z-10 w-full text-left md:absolute md:left-[6%] md:top-[8%] md:w-[680px] md:max-w-[48%]">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#4b6b00] sm:text-xs">Case Study</p>
+        <h1 className="mt-3 text-3xl font-black uppercase leading-none tracking-tight text-[#111] sm:text-4xl lg:text-5xl">GE Aerospace - Pilot</h1>
+        <div className="mt-5 max-w-[560px] text-[#0b2338]/78">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-[#4b6b00] sm:text-base">GE's Needs</p>
+          <div className="mt-3 space-y-2 text-base font-semibold leading-snug sm:text-lg">
+            <p>99% purity on a specialty chemical buffer</p>
+            <p>Alternative to Taiwan supplier</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mt-8 max-w-none rounded-2xl border border-red-500/30 bg-red-50/90 p-4 text-left shadow-[0_18px_60px_rgba(239,68,68,0.18)] backdrop-blur-xl md:absolute md:left-[6%] md:bottom-[12%] md:mt-0 md:max-w-[360px]">
+        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-red-700 sm:text-xs">The Valley</p>
+        <h2 className="mt-3 text-xl font-black uppercase leading-none tracking-tight text-red-950 sm:text-2xl">Indian CDMO is stuck</h2>
+      </div>
+
+      <div className="relative z-10 mt-4 max-w-none text-left md:absolute md:right-[6%] md:top-[34%] md:mt-0 md:max-w-[395px]">
+        <div className="rounded-[1.7rem] border border-[#0b2338]/10 bg-white/86 p-4 shadow-[0_24px_80px_rgba(11,35,56,0.16)] backdrop-blur-xl">
+          <h3 className="text-lg font-black uppercase leading-none tracking-tight text-[#0b2338] sm:text-xl">SHODH AI + CDMO</h3>
+          <div className="mt-3 rounded-2xl border border-[#48cae4]/25 bg-[#e8fbff]/70 p-3 shadow-inner">
+            <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">The Prompt</p>
+            <p className="mt-2 text-base font-black leading-tight tracking-tight text-[#0b2338] sm:text-lg">"Redesign this failing reactor to guarantee 99.9% aerospace-grade purity."</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["3D Factory CAD", "Rust logs", "Friction data", "Heat data"].map((item) => (
+                <span key={item} className="rounded-full border border-[#0b2338]/10 bg-white/78 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.12em] text-[#0b2338]/68 shadow-sm">{item}</span>
+              ))}
+            </div>
+          </div>
+          <div className="mt-3 rounded-2xl border border-[#b5ff48]/35 bg-[#f4ffe7]/78 p-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#4b6b00]">Impact</p>
+            <p className="mt-2 text-lg font-black leading-tight text-[#0b2338]">50 → 5 pilot iterations</p>
+            <p className="mt-1 text-xs font-bold leading-snug text-[#0b2338]/70 sm:text-sm">saving millions while compressing aerospace-grade qualification.</p>
+          </div>
+        </div>
+      </div>
+
+      <p className="relative z-10 mx-auto mt-6 max-w-[760px] px-5 text-center text-sm font-black leading-snug text-[#0b2338] md:absolute md:bottom-[4.5%] md:left-1/2 md:mt-0 md:-translate-x-1/2 sm:text-base">Shodh earns ongoing chemical royalties &amp; co-owns the hardware IP.</p>
+    </section>
+  );
+}
+
+function IterationPurposeInfographic() {
+  const steps = [
+    {
+      number: "01",
+      tag: "Current reality",
+      title: "Manual Pilot Iterations",
+      copy: "Factory teams burn months on repeated physical trials, failed batches, and disconnected process learnings.",
+      className: "md:left-[5%] md:bottom-[8%]",
+    },
+    {
+      number: "02",
+      tag: "Shodh loop",
+      title: "Physics-Guided Simulation",
+      copy: "The World Model tests operating windows in latent space before hardware, reducing expensive trial-and-error.",
+      className: "md:left-[28%] md:bottom-[14%]",
+    },
+    {
+      number: "03",
+      tag: "Optimization",
+      title: "Zero-Iteration Recipe",
+      copy: "Model outputs converge into process settings, CAD changes, and executable factory instructions.",
+      className: "md:left-[52%] md:bottom-[11%]",
+    },
+    {
+      number: "04",
+      tag: "Deployment",
+      title: "Factory-Ready Scale-Up",
+      copy: "Each deployment returns sensor data, yield data, and failure modes that make the next deployment faster.",
+      className: "md:right-[4%] md:bottom-[16%]",
+    },
+  ];
+
+  return (
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
+      <Image
+        src="/can_you_make_it_super_202605011206.jpeg"
+        alt="Iteration compression architecture background"
+        fill
+        priority={false}
+        sizes="(max-width: 1500px) 100vw, 1500px"
+        className="object-cover opacity-45 md:opacity-85"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(246,245,239,0.82),rgba(246,245,239,0.2)_34%,rgba(246,245,239,0.18)_70%,rgba(246,245,239,0.86)),linear-gradient(90deg,rgba(246,245,239,0.44),rgba(246,245,239,0.06)_42%,rgba(246,245,239,0.34))]" />
+
+      <svg className="pointer-events-none absolute inset-0 hidden h-full w-full md:block" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="iterationThread" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#48cae4" />
+            <stop offset="0.46" stopColor="#7ee85f" />
+            <stop offset="1" stopColor="#b5ff48" />
+          </linearGradient>
+          <filter id="iterationThreadGlow" x="-20%" y="-80%" width="140%" height="260%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path d="M 80 548 C 230 486 318 500 420 555 C 540 620 620 610 735 535 C 860 454 948 458 1055 520 C 1180 592 1285 568 1502 440" fill="none" stroke="url(#iterationThread)" strokeWidth="9" strokeLinecap="round" opacity="0.86" filter="url(#iterationThreadGlow)" />
+        <path d="M 80 548 C 230 486 318 500 420 555 C 540 620 620 610 735 535 C 860 454 948 458 1055 520 C 1180 592 1285 568 1502 440" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" opacity="0.72" />
+        {[380, 740, 1080].map((x, index) => (
+          <g key={x} transform={`translate(${x} ${index === 1 ? 535 : index === 2 ? 520 : 555})`}>
+            <circle r="24" fill="#ffffff" opacity="0.94" />
+            <path d="M -7 -10 L 9 0 L -7 10 Z" fill="#4b6b00" />
           </g>
         ))}
       </svg>
 
-      <div className="relative z-10 mx-auto max-w-[940px] text-center md:absolute md:left-1/2 md:top-[6%] md:w-[940px] md:max-w-[84%] md:-translate-x-1/2">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4b6b00]">Traction</p>
-        <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338] md:text-5xl">Industrial design partners across four pillars</h2>
-        <p className="mx-auto mt-4 max-w-[780px] text-lg font-semibold leading-tight text-black/64">Partners are bringing proprietary production data and high-value manufacturing problems to ground the World Model in real factory physics.</p>
+      <div className="relative z-10 max-w-[760px] md:absolute md:left-[6%] md:top-[7%]">
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-[#4b6b00]">Iteration Compression</p>
+        <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338] md:text-6xl">From Pilot Iterations to Factory Certainty</h2>
+        <p className="mt-4 max-w-[650px] text-base font-bold leading-tight text-[#0b2338]/70 md:text-lg">Shodh replaces repeated manual trials with a closed-loop system that learns from every deployment.</p>
       </div>
 
-      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 md:absolute md:left-[6%] md:top-[34%] md:mt-0 md:w-[88%] md:grid-cols-4">
-        {partners.map(([pillar, name, text], index) => (
-          <div key={name} className="min-h-[220px] rounded-3xl border border-[#0b2338]/10 bg-white/68 p-5 shadow-[0_22px_70px_rgba(11,35,56,0.1)] backdrop-blur-xl">
-            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">{String(index + 1).padStart(2, "0")} / {pillar}</p>
-            <h3 className="mt-3 text-lg font-black uppercase leading-none tracking-tight text-[#0b2338] lg:text-xl">{name}</h3>
-            <p className="mt-4 text-sm font-semibold leading-tight text-black/62">{text}</p>
+      <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 md:static md:mt-0 md:block">
+        {steps.map((step) => (
+          <div key={step.title} className={`relative rounded-3xl border border-[#0b2338]/10 bg-white/78 p-5 text-left shadow-[0_24px_80px_rgba(11,35,56,0.14)] backdrop-blur-xl md:absolute md:w-[22%] md:min-h-[210px] md:bg-white/72 ${step.className}`}>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">{step.tag}</p>
+                <h3 className="mt-2 text-xl font-black uppercase leading-tight tracking-tight text-[#0b2338]">{step.title}</h3>
+              </div>
+              <p className="text-4xl font-black leading-none tracking-tight text-[#48cae4]">{step.number}</p>
+            </div>
+            <p className="mt-4 text-sm font-bold leading-snug text-[#0b2338]/68">{step.copy}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TractionInfographic() {
+  const flywheelBlocks = [
+    {
+      title: "50+ Paid NREs",
+      names: [],
+      action: "Solve critical industrial bottlenecks.",
+      yield: "Upfront revenue + factory data.",
+      tone: "cyan",
+    },
+    {
+      title: "The Universal Merge",
+      names: [],
+      action: "Ingest factory data to generalize the Foundation Model.",
+      yield: "AI masters “sim-to-real” physics across all domains.",
+      tone: "green",
+    },
+    {
+      title: "Software Scale & Royalties",
+      names: [],
+      action: "Deploy the model as a zero-iteration API.",
+      yield: "High-margin ARR + long-term IP royalties.",
+      tone: "amber",
+    },
+  ];
+
+  const getToneClass = (tone: string) => {
+    if (tone === "cyan") return "border-[#48cae4]/30 bg-[#e8fbff]/78";
+    if (tone === "green") return "border-[#b5ff48]/35 bg-[#f4ffe7]/78";
+    return "border-[#f5c451]/35 bg-[#fff7df]/82";
+  };
+
+  return (
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
+      <Image
+        src="/can_you_make_it_super_202605011206.jpeg"
+        alt="Data flywheel business model architecture background"
+        fill
+        priority={false}
+        sizes="(max-width: 1500px) 100vw, 1500px"
+        className="object-contain opacity-35 md:scale-[0.86] md:opacity-68"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(246,245,239,0.9),rgba(246,245,239,0.34)_32%,rgba(246,245,239,0.26)_68%,rgba(246,245,239,0.92)),linear-gradient(90deg,rgba(246,245,239,0.52),rgba(246,245,239,0.14)_44%,rgba(246,245,239,0.42))]" />
+      <div className="relative z-10 mx-auto max-w-[1060px] text-center md:absolute md:left-1/2 md:top-[6%] md:w-[1060px] md:max-w-[88%] md:-translate-x-1/2">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#4b6b00]">Traction</p>
+        <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338] md:text-6xl">Data Flywheel &amp; Business Model</h2>
+        <div className="mx-auto mt-4 max-w-[980px] rounded-2xl border border-[#0b2338]/10 bg-white/62 px-5 py-3 shadow-sm backdrop-blur-xl">
+          <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#4b6b00]">Current Status</p>
+          <p className="mt-2 text-sm font-bold leading-snug text-[#0b2338]/72 md:text-base">
+            Active pilots with <span className="text-[#0b2338]">Jubilant</span>, <span className="text-[#0b2338]">Aarti Industries</span>, <span className="text-[#0b2338]">GE Aerospace</span>, <span className="text-[#0b2338]">Dr. Reddy’s</span>, and a <span className="text-[#0b2338]">Tier-1 US battery supplier</span> scale into NREs that feed factory data into our foundation model.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative z-10 mt-8 grid gap-7 md:absolute md:left-[6%] md:bottom-[13%] md:mt-0 md:w-[88%] md:grid-cols-3">
+        {flywheelBlocks.map((block, index) => (
+          <div key={block.title} className={`relative min-h-[178px] rounded-3xl border p-5 shadow-[0_18px_58px_rgba(11,35,56,0.09)] backdrop-blur-xl ${getToneClass(block.tone)}`}>
+            {index < flywheelBlocks.length - 1 && (
+              <div className="pointer-events-none absolute -right-6 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#0b2338]/10 bg-white/90 text-2xl font-black text-[#4b6b00] shadow-lg md:flex">
+                →
+              </div>
+            )}
+            <h3 className="text-xl font-black uppercase leading-tight tracking-tight text-[#0b2338] lg:text-2xl">{block.title}</h3>
+            {block.names.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {block.names.map((name) => (
+                  <span key={name} className="rounded-full border border-[#0b2338]/10 bg-white/78 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] text-[#0b2338]/72 shadow-sm">{name}</span>
+                ))}
+              </div>
+            )}
+            <div className="mt-4 space-y-3">
+              <p className="text-base font-black leading-snug text-[#0b2338]">{block.action}</p>
+              <p className="text-sm font-bold leading-relaxed text-[#0b2338]/72">{block.yield}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -686,12 +930,12 @@ export default function InsiderTeaserUpPage() {
             className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
           >
             <motion.div variants={scaleIn}>
-              <PhysicsAiArchitectureImageInfographic />
+              <PillarsInfographic />
             </motion.div>
           </motion.div>
         </section>
 
-        <section className="pointer-events-auto px-4 pb-24 sm:px-6 md:px-10 md:pb-32">
+        <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -700,7 +944,7 @@ export default function InsiderTeaserUpPage() {
             className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
           >
             <motion.div variants={scaleIn}>
-              <PillarsInfographic />
+              <GEAerospacePilotInfographic />
             </motion.div>
           </motion.div>
         </section>
@@ -718,30 +962,6 @@ export default function InsiderTeaserUpPage() {
             </motion.div>
           </motion.div>
         </section>
-
-        <LightSlideShell eyebrow="The End Game" title="Generative Physical IP" tone="cyan">
-          <motion.div variants={fadeInUp} className="rounded-2xl border border-[#0b2338]/10 bg-white/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#48cae4]">The New Interface for Invention</p>
-            <p className="mt-4 text-gray-700">A user asks the World Model:</p>
-            <p className="mt-3 rounded-2xl border border-[#0b2338]/10 bg-[#f6f5ef]/80 p-5 text-xl font-light italic leading-relaxed text-[#0b2338] md:text-3xl">“Design a fusion-reactor material optimized for extreme heat flux, radiation tolerance, long operating life, and scalable manufacturing.”</p>
-            <p className="mt-6 text-gray-700">The World Model returns a production-ready blueprint:</p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {generatedOutputs.map((output) => (
-                <div key={output} className="rounded-xl border border-[#48cae4]/15 bg-[#48cae4]/10 px-4 py-3 text-gray-700">{output}</div>
-              ))}
-            </div>
-          </motion.div>
-        </LightSlideShell>
-
-        <LightSlideShell eyebrow="Business & Vision" title="The Business & Vision" tone="amber">
-          <motion.div variants={fadeInUp} className="rounded-2xl border border-[#b5ff48]/25 bg-[#f4ffe7]/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
-            <Globe2 className="mb-5 h-8 w-8 text-[#4b6b00]" />
-            <p className="mt-4 text-lg leading-relaxed text-gray-700">We begin as the foundation model for industrial scale-up — and expand into the zero-to-billion engine for physical IP.</p>
-            <p className="mt-3 text-lg leading-relaxed text-gray-700">Paid deployments and milestone-based programs fund the model’s expansion; long term, Shodh participates in the physical IP it helps generate through licensing, royalties, joint ventures, and co-development.</p>
-            <p className="mt-3 text-lg leading-relaxed text-gray-700">We give companies and nations the ability to generate, validate, and manufacture new physical technologies.</p>
-            <p className="mt-3 text-2xl font-medium leading-snug text-[#0b2338]">Just as LLMs made intelligence programmable, Shodh makes physical invention programmable.</p>
-          </motion.div>
-        </LightSlideShell>
 
         <footer className="pointer-events-auto relative w-full overflow-hidden border-t border-[#0b2338]/10 bg-[#f6f5ef]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(72,202,228,0.14),transparent_26%),radial-gradient(circle_at_82%_72%,rgba(181,255,72,0.16),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.58),rgba(246,245,239,0.96))]" />
