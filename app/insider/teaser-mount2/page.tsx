@@ -159,6 +159,12 @@ function ShodhWorldModelArchitectureInfographic() {
         </h3>
       </div>
 
+      <div className="relative z-10 mx-auto mt-4 max-w-[720px] rounded-full border border-[#0b2338]/10 bg-white/58 px-6 py-3 text-center shadow-[0_14px_45px_rgba(8,20,33,0.10)] backdrop-blur-sm md:absolute md:bottom-[22%] md:left-1/2 md:mt-0 md:w-[58%] md:-translate-x-1/2">
+        <p className="text-sm font-semibold leading-tight text-[#0b2338]/78 sm:text-base">
+          One continuous model that learns the thread between discovery and factory
+        </p>
+      </div>
+
       <div className="relative z-10 mx-auto mt-4 w-full max-w-[1180px] rounded-[1.15rem] border border-black/10 bg-white/62 px-6 py-4 text-center shadow-[0_18px_50px_rgba(8,20,33,0.10)] backdrop-blur-sm md:absolute md:bottom-[3.2%] md:left-1/2 md:mt-0 md:w-[88%] md:-translate-x-1/2">
         <p className="text-sm font-medium uppercase leading-tight tracking-tight text-[#111] sm:text-base md:whitespace-nowrap">
           Reducing Discovery to Production Ready Prototyping from 2.5 Yrs/$50M per process to 3 Months/$2M
@@ -581,27 +587,6 @@ function GEAerospacePilotInfographic() {
           opacity="0.22"
         />
 
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.1" />
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.38" />
-        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="18" strokeLinecap="round" opacity="0.08" />
-        <path d="M 1074 318 C 1162 306 1238 286 1326 250" fill="none" stroke="url(#geAerospaceRopeFiber)" strokeWidth="6" strokeLinecap="round" opacity="0.3" />
-        <path d="M 342 640 C 520 595 675 520 814 420 C 892 364 958 332 1010 318" fill="none" stroke="#fff0bf" strokeWidth="2" strokeDasharray="18 18" strokeLinecap="round" opacity="0.24" />
-        <g opacity="0.34">
-          <circle cx="1040" cy="318" r="76" fill="#5a3319" opacity="0.08" />
-          <circle cx="1040" cy="318" r="68" fill="url(#geAerospaceWoodPulleyFace)" stroke="#4f2d17" strokeWidth="7" />
-          <circle cx="1040" cy="318" r="49" fill="none" stroke="#f2cc8f" strokeWidth="7" opacity="0.56" />
-          <circle cx="1040" cy="318" r="31" fill="#75451f" stroke="#2f1b0f" strokeWidth="4" opacity="0.72" />
-          <circle cx="1040" cy="318" r="11" fill="#1f140b" stroke="#e7bb78" strokeWidth="4" />
-          <path d="M 1040 250 L 1040 386" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
-          <path d="M 972 318 L 1108 318" stroke="#4b2a15" strokeWidth="7" strokeLinecap="round" opacity="0.46" />
-          <path d="M 992 270 L 1088 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
-          <path d="M 1088 270 L 992 366" stroke="#4b2a15" strokeWidth="6" strokeLinecap="round" opacity="0.36" />
-          <path d="M 996 292 C 1018 280 1066 278 1088 292" fill="none" stroke="#f8dca8" strokeWidth="3" strokeLinecap="round" opacity="0.28" />
-          <path d="M 992 344 C 1018 359 1068 358 1090 342" fill="none" stroke="#3a2112" strokeWidth="3" strokeLinecap="round" opacity="0.18" />
-        </g>
-        <path d="M 235 704 L 318 660 L 402 704 L 318 748 Z" fill="#ffffff" stroke="#ef4444" strokeOpacity="0.28" strokeWidth="3" />
-        <path d="M 256 722 L 318 756 L 318 820 L 256 786 Z" fill="#fee2e2" opacity="0.88" />
-        <path d="M 318 756 L 380 722 L 380 786 L 318 820 Z" fill="#fecaca" opacity="0.88" />
       </svg>
 
       <div className="relative z-10 w-full text-left md:absolute md:left-[6%] md:top-[8%] md:w-[680px] md:max-w-[48%]">
@@ -734,6 +719,113 @@ function IterationPurposeInfographic() {
             <p className="mt-4 text-sm font-bold leading-snug text-[#0b2338]/68">{step.copy}</p>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function IcebergOpportunityInfographic() {
+  return (
+    <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-[#0b2338]/10 bg-[#f6f5ef] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_20%,rgba(72,202,228,0.13),transparent_30%),radial-gradient(circle_at_78%_22%,rgba(11,35,56,0.08),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.86),rgba(238,240,236,0.94))]" />
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1600 900" preserveAspectRatio="none" role="img" aria-label="Subtle iceberg opportunity landscape">
+        <defs>
+          <linearGradient id="icebergVisibleCyan" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stopColor="#f2fdff" stopOpacity="0.88" />
+            <stop offset="0.58" stopColor="#bdeff5" stopOpacity="0.7" />
+            <stop offset="1" stopColor="#73d7e8" stopOpacity="0.52" />
+          </linearGradient>
+          <linearGradient id="icebergSubmergedCyan" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stopColor="#0b2338" stopOpacity="0.46" />
+            <stop offset="0.46" stopColor="#0b2338" stopOpacity="0.28" />
+            <stop offset="1" stopColor="#48cae4" stopOpacity="0.08" />
+          </linearGradient>
+          <linearGradient id="icebergWaterBand" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stopColor="#48cae4" stopOpacity="0.16" />
+            <stop offset="1" stopColor="#48cae4" stopOpacity="0.04" />
+          </linearGradient>
+          <clipPath id="icebergAboveWater">
+            <rect x="0" y="0" width="3000" height="500" />
+          </clipPath>
+          <clipPath id="icebergBelowWater">
+            <rect x="0" y="500" width="3000" height="400" />
+          </clipPath>
+        </defs>
+
+        <rect width="1600" height="900" fill="#f6f5ef" />
+        <g stroke="#cfd6d4" strokeWidth="1" opacity="0.34">
+          {Array.from({ length: 15 }, (_, index) => (
+            <path key={`iceberg-grid-a-${index}`} d={`M ${-260 + index * 140} 840 L ${500 + index * 140} 410`} />
+          ))}
+          {Array.from({ length: 15 }, (_, index) => (
+            <path key={`iceberg-grid-b-${index}`} d={`M ${-120 + index * 140} 400 L ${640 + index * 140} 840`} />
+          ))}
+        </g>
+
+        <path d="M 0 500 C 190 476 338 464 520 478 C 720 494 884 520 1088 500 C 1284 480 1444 462 1600 492 L 1600 900 L 0 900 Z" fill="url(#icebergWaterBand)" />
+        <path d="M 0 500 C 190 476 338 464 520 478 C 720 494 884 520 1088 500 C 1284 480 1444 462 1600 492" fill="none" stroke="#48cae4" strokeWidth="3" strokeLinecap="round" opacity="0.32" />
+        <path d="M 0 522 C 220 494 390 496 590 516 C 792 536 960 536 1166 504 C 1350 476 1480 486 1600 516" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" opacity="0.48" />
+
+        <g transform="translate(1370 0) scale(-1.12 1.05)">
+          <path
+            d="M 650 820 L 720 742 L 802 604 L 900 524 L 988 500 L 1058 350 C 1088 286 1118 210 1165 144 C 1215 74 1292 44 1360 78 C 1428 112 1476 194 1518 286 C 1558 372 1582 458 1600 520 C 1655 612 1728 724 1820 820 L 650 820 Z"
+            fill="url(#icebergVisibleCyan)"
+            opacity="0.9"
+            clipPath="url(#icebergAboveWater)"
+          />
+          <path
+            d="M 520 820 L 600 738 L 700 642 L 840 560 L 988 500 L 1600 520 C 1715 600 1868 704 2140 820 L 520 820 Z"
+            fill="url(#icebergSubmergedCyan)"
+            opacity="0.92"
+            clipPath="url(#icebergBelowWater)"
+          />
+          <path d="M 650 820 L 720 742 L 802 604 L 900 524 L 988 500 L 944 642 L 842 756 L 770 820 Z" fill="#0b2338" opacity="0.08" clipPath="url(#icebergBelowWater)" />
+          <path d="M 988 500 L 1058 350 C 1088 286 1118 210 1165 144 C 1192 214 1218 302 1246 408 C 1278 528 1322 656 1390 820 L 770 820 L 842 756 L 944 642 Z" fill="#ffffff" opacity="0.16" clipPath="url(#icebergAboveWater)" />
+          <path d="M 988 500 L 840 560 L 700 642 L 600 738 L 520 820 L 2140 820 C 1868 704 1715 600 1600 520 Z" fill="#0b2338" opacity="0.12" clipPath="url(#icebergBelowWater)" />
+          <path d="M 720 820 L 850 740 L 1040 690 L 1260 724 L 1460 820 Z" fill="#0b2338" opacity="0.1" clipPath="url(#icebergBelowWater)" />
+          <path d="M 980 820 L 1160 760 L 1380 716 L 1660 762 L 1880 820 Z" fill="#48cae4" opacity="0.08" clipPath="url(#icebergBelowWater)" />
+          <path d="M 1180 820 L 1388 778 L 1640 742 L 1960 786 L 2140 820 Z" fill="#0b2338" opacity="0.08" clipPath="url(#icebergBelowWater)" />
+          <path d="M 760 790 C 960 720 1138 710 1330 754 C 1490 792 1640 794 1848 748" fill="none" stroke="#ffffff" strokeWidth="2" opacity="0.12" clipPath="url(#icebergBelowWater)" />
+          <path d="M 1010 840 C 1210 784 1400 780 1604 812 C 1740 834 1886 824 2050 780" fill="none" stroke="#48cae4" strokeWidth="2" opacity="0.1" clipPath="url(#icebergBelowWater)" />
+        </g>
+      </svg>
+      <div className="relative z-10 flex min-h-[760px] w-full flex-col px-8 py-8 md:min-h-0 md:p-12 lg:p-14">
+        <div className="ml-auto max-w-[820px]">
+          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[#4b6b00] sm:text-xs">Opportunity</p>
+          <h1 className="mt-3 text-3xl font-black uppercase leading-none tracking-tight text-[#0b2338] sm:text-4xl lg:text-5xl">
+            The Trillion-Dollar Iceberg
+          </h1>
+          <p className="mt-4 max-w-[760px] text-base font-semibold leading-snug text-[#0b2338]/72 sm:text-lg">
+            Trillions in manufacturing value are trapped behind trial-and-error R&amp;D. Our compounding World Model unlocks it all.
+          </p>
+        </div>
+
+        <div className="ml-auto mt-9 grid w-full max-w-[620px] gap-4">
+          <div className="rounded-[1.35rem] border border-[#48cae4]/28 bg-white/64 p-5 shadow-[0_18px_55px_rgba(11,35,56,0.08)] backdrop-blur-xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#48a7b8]">Immediate Targets</p>
+            <p className="mt-3 text-base font-bold leading-snug text-[#0b2338]/72">
+              Targeting high-pain scale-up failures for our first-mover NREs.
+            </p>
+            <div className="mt-4 space-y-2">
+              {[
+                ["Continuous Flow Transition", "$200B TAM"],
+                ["Batch Yield & Dead-Zone Optimization", "$150B TAM"],
+                ["Semi-Solid Battery Scale-Up", "$100B TAM"],
+              ].map(([label, tam]) => (
+                <div key={label} className="rounded-xl border border-[#0b2338]/8 bg-[#e8fbff]/70 px-4 py-2.5 text-sm font-bold leading-tight text-[#0b2338] shadow-sm">
+                  {label} <span className="font-black">({tam})</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[1.35rem] border border-[#0b2338]/14 bg-[#0b2338]/[0.07] p-5 shadow-[0_18px_55px_rgba(11,35,56,0.08)] backdrop-blur-xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#0b2338]">The 50+ NRE Expansion Platform</p>
+            <p className="mt-4 text-base font-bold leading-snug text-[#0b2338]/78">
+              Applying one generalized physics engine across <span className="font-black text-[#0b2338]">Pharma</span> (bioreactor scale-up, mRNA), <span className="font-black text-[#0b2338]">Chemicals</span> (catalysts, multiphase mixing), <span className="font-black text-[#0b2338]">Materials</span> (crystallization), and <span className="font-black text-[#0b2338]">Next-Gen Frontiers</span> (semiconductors, hypersonics, and nuclear).
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -916,26 +1008,12 @@ export default function InsiderTeaserUpPage() {
             className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
           >
             <motion.div variants={scaleIn}>
-              <WorldFoundationalModelInfographic />
+              <IcebergOpportunityInfographic />
             </motion.div>
           </motion.div>
         </section>
 
         <section className="pointer-events-auto px-4 pb-24 sm:px-6 md:px-10 md:pb-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.16 }}
-            variants={staggerContainer}
-            className="mx-auto max-w-[1540px] rounded-[2.4rem] border border-[#0b2338]/10 bg-white/68 p-3 shadow-[0_40px_120px_rgba(8,20,33,0.14)] backdrop-blur-xl sm:p-5 md:p-7"
-          >
-            <motion.div variants={scaleIn}>
-              <PillarsInfographic />
-            </motion.div>
-          </motion.div>
-        </section>
-
-        <section className="pointer-events-auto px-4 pb-24 pt-4 sm:px-6 md:px-10 md:pb-32">
           <motion.div
             initial="hidden"
             whileInView="visible"
