@@ -41,7 +41,7 @@ const pillars = [
     title: "The Foundation Brain",
     subtitle: "Multi-Physics MoE",
     icon: Cpu,
-    text: "Trained on Google TPUs and NVIDIA H100s, our differentiable engine models thermodynamics, fluid dynamics, and mass conservation together. It obeys physics, not pattern-matching.",
+    text: "Trained on Google TPUs and NVIDIA H100s, it models thermodynamics, flow, and mass conservation together.",
   },
   {
     title: "The 4D Digital Twin",
@@ -53,7 +53,7 @@ const pillars = [
     title: "The Inverse CAD Generator",
     subtitle: "MIMIC",
     icon: Factory,
-    text: "Give it the target: yield, purity, throughput. It works backward into watertight machine geometry and operating parameters.",
+    text: "Give it yield, purity, and throughput targets. It works backward into machine geometry and operating parameters.",
   },
 ];
 
@@ -68,7 +68,7 @@ const industries = [
     title: "Energy & Advanced Materials",
     icon: Atom,
     application: "High-silicon anodes, thick-gel wetting, and semi-solid battery scale-up.",
-    impact: "Cuts trial-and-error pilot iterations for next-generation gigafactories.",
+    impact: "Cuts pilot iterations for next-generation gigafactories.",
   },
   {
     title: "Heavy Industry & Aerospace",
@@ -161,7 +161,7 @@ export default function ShodhAIHomePage() {
                 href="#book-demo"
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white px-4 py-2 text-xs font-semibold text-[#081421] transition hover:bg-[#dffbff] md:px-5"
               >
-                Book a Technical Demo
+                Book Demo
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
@@ -186,7 +186,7 @@ export default function ShodhAIHomePage() {
 
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link href="#book-demo" className="inline-flex items-center gap-2 rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-[30px] bg-white px-6 py-3 text-base font-medium text-[#081421] transition hover:bg-[#dffbff]">
-                  Book a Technical Demo
+                  Book Demo
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link href="#solutions" className="inline-flex items-center gap-2 rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-[30px] border border-white/30 bg-white/5 px-6 py-3 text-base font-medium text-white backdrop-blur transition hover:bg-white/10">
@@ -233,7 +233,7 @@ export default function ShodhAIHomePage() {
             <div className="grid items-center gap-8 lg:grid-cols-12">
               <div className="lg:col-span-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Built in India. Scaled for the World.</p>
-              <h2 className="mt-4 text-3xl font-medium uppercase leading-tight text-white md:text-5xl">Backed by IndiaAI, NVIDIA, and Google.</h2>
+                <h2 className="mt-4 text-3xl font-medium uppercase leading-tight text-white md:text-5xl">Backed by IndiaAI, NVIDIA, and Google.</h2>
               </div>
               <div className="lg:col-span-7">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -270,10 +270,10 @@ export default function ShodhAIHomePage() {
 
             <div className="lg:col-span-7">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#173a68]">The Problem</p>
-              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight md:text-7xl">The trillion-dollar "reality crash"</h2>
+              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight md:text-7xl">The scale-up crash</h2>
               <p className="mt-8 text-3xl font-medium leading-tight md:text-5xl">Chemistry doesn't fail. Physics fails at scale.</p>
               <div className="mt-8 space-y-5 text-lg leading-relaxed text-black/65">
-                <p>AI and labs now discover molecules and materials fast. Scaling them from a 1L beaker to a 10,000L reactor still takes years, pilot plants, scrap, and expensive iteration.</p>
+                <p>AI and labs discover molecules fast. Scaling them from 1L to 10,000L still takes years, pilot plants, scrap, and iteration.</p>
                 <p>Fluid dynamics, shear stress, and thermal dead-zones appear at production scale. Legacy simulation cannot bridge that gap.</p>
               </div>
             </div>
@@ -284,7 +284,7 @@ export default function ShodhAIHomePage() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-14 max-w-4xl">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Physics-constrained inverse design</p>
-              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight text-white md:text-7xl">We don't simulate guesses. We engineer guarantees.</h2>
+              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight text-white md:text-7xl">From target to factory geometry.</h2>
               <p className="mt-6 text-lg leading-relaxed text-white/68 md:text-xl">Set the target: yield, purity, throughput. Shodh AI works backward into printable geometry and operating conditions that can hit it.</p>
             </div>
 
@@ -325,14 +325,14 @@ export default function ShodhAIHomePage() {
 
             <div className="grid gap-6 lg:grid-cols-3">
               {industries.map((industry) => (
-                <article key={industry.title} className="flex min-h-[430px] flex-col rounded-3xl border border-black/10 bg-white p-8 shadow-xl transition hover:-translate-y-1 hover:shadow-2xl">
+                <article key={industry.title} className="flex min-h-[340px] flex-col rounded-3xl border border-black/10 bg-white p-8 shadow-xl transition hover:-translate-y-1 hover:shadow-2xl">
                   <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#081421] text-[#48cae4]">
                     <industry.icon className="h-7 w-7" />
                   </div>
                   <h3 className="text-3xl font-medium leading-tight">{industry.title}</h3>
-                  <div className="mt-8 space-y-6 text-base leading-relaxed text-black/65">
-                    <p><span className="font-semibold text-[#081421]">The Application: </span>{industry.application}</p>
-                    <p><span className="font-semibold text-[#081421]">The Impact: </span>{industry.impact}</p>
+                  <div className="mt-8 space-y-5 text-base leading-relaxed text-black/65">
+                    <p><span className="font-semibold text-[#081421]">Application: </span>{industry.application}</p>
+                    <p><span className="font-semibold text-[#081421]">Impact: </span>{industry.impact}</p>
                   </div>
                 </article>
               ))}
@@ -352,10 +352,10 @@ export default function ShodhAIHomePage() {
             </div>
             <div className="lg:col-span-8">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Enterprise Security</p>
-              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight text-white md:text-7xl">Zero-trust architecture. Built for classified IP.</h2>
+              <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight text-white md:text-7xl">Zero-trust for classified IP.</h2>
               <div className="mt-8 space-y-5 text-lg leading-relaxed text-white/68">
                 <p className="text-2xl font-medium text-white">Your chemistry and telemetry stay inside your walls.</p>
-                <p>Shodh AI separates universal physics from trade secrets and can run air-gapped, on-premise, in Docker.</p>
+                <p>Universal physics stays separate from trade secrets. Deployment can be air-gapped and on-premise.</p>
                 <p>You retain full ownership of generated CAD, compositions, outputs, and patents.</p>
               </div>
             </div>
@@ -365,7 +365,7 @@ export default function ShodhAIHomePage() {
         <section id="research" className="pointer-events-auto bg-[#f0f0ff] px-4 py-28 text-[#081421] sm:px-6 md:px-10 scroll-mt-28">
           <div className="mx-auto max-w-7xl">
             <div className="mb-14 max-w-4xl">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#173a68]">Research & Technology</p>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#173a68]">Research</p>
               <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight md:text-7xl">Intelligence at the edge of physics</h2>
             </div>
 
@@ -373,7 +373,7 @@ export default function ShodhAIHomePage() {
               <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-xl md:p-10">
                 <FileText className="h-12 w-12 text-[#173a68]" />
                 <p className="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[#173a68]">Currently Available</p>
-                <h3 className="mt-3 text-3xl font-medium">Whitepaper: Bridging the Scale-Up Chasm with AI</h3>
+                <h3 className="mt-3 text-3xl font-medium">Whitepaper: Bridging the Scale-Up Chasm</h3>
                 <p className="mt-5 text-base leading-relaxed text-black/60">How differentiable physics can replace trial-and-error scale-up.</p>
                 <form onSubmit={handleWhitepaper} className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <input
@@ -398,7 +398,7 @@ export default function ShodhAIHomePage() {
                 <div className="relative">
                   <ShieldCheck className="h-12 w-12 text-[#48cae4]" />
                   <p className="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[#48cae4]">Coming Q4</p>
-                  <h3 className="mt-3 text-3xl font-medium">The Shodh AI V3.0 Architecture Report</h3>
+                  <h3 className="mt-3 text-3xl font-medium">Shodh AI V3.0 Architecture Report</h3>
                   <p className="mt-5 text-base leading-relaxed text-white/65">Our next model bridges quantum, atomistic, and continuum physics in one differentiable engine.</p>
                   <form onSubmit={handleWaitlist} className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <input
@@ -427,7 +427,7 @@ export default function ShodhAIHomePage() {
               <h2 className="mt-4 text-4xl font-medium uppercase leading-tight tracking-tight text-white md:text-7xl">Ready to scale your next breakthrough?</h2>
               <p className="mt-6 text-2xl font-light text-white/70">Stop guessing. Start generating.</p>
               <div className="mt-10 grid gap-4 text-white/70">
-                {["Factory geometry generation", "Air-gapped on-premise deployment", "Physics-first yield guarantees"].map((item) => (
+                {["Generated factory geometry", "Air-gapped deployment", "Physics-first yield targets"].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-[#48cae4]" />
                     <span>{item}</span>
