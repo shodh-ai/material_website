@@ -19,7 +19,6 @@ import {
   Network,
   Rocket,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import CanvasLayer from "@/components/three/CanvasLayer";
 
@@ -28,12 +27,6 @@ const navLinks = [
   { label: "Industries", href: "#industries" },
   { label: "Research", href: "#research" },
   { label: "Company", href: "#company" },
-];
-
-const partners = [
-  { name: "IndiaAI", src: "/logos/indiaai-logo.svg", className: "h-10 md:h-12" },
-  { name: "NVIDIA", src: "/logos/nvidia-logo.svg", className: "h-8 md:h-10" },
-  { name: "Google", src: "/logos/google-logo.svg", className: "h-8 md:h-10" },
 ];
 
 const pillars = [
@@ -145,8 +138,7 @@ export default function ShodhAIHomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10">
             <div className="mt-5 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/25 px-4 py-3 shadow-2xl backdrop-blur-xl">
               <Link href="#top" className="flex items-center gap-3" aria-label="Shodh AI home">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#48cae4]/30 bg-[#48cae4]/10 text-sm font-bold text-[#48cae4] shadow-[0_0_24px_rgba(72,202,228,0.18)]">S</span>
-                <span className="text-base font-semibold tracking-wide text-white">Shodh AI</span>
+                <Image src="/shodhai_logo.svg" alt="Shodh AI" width={136} height={32} className="h-5 w-auto" priority />
               </Link>
 
               <nav className="hidden items-center gap-6 text-sm text-white/70 lg:flex">
@@ -169,8 +161,8 @@ export default function ShodhAIHomePage() {
         </header>
 
         <section id="top" className="min-h-screen px-4 pb-16 pt-32 sm:px-6 md:px-10 md:pt-40">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-12">
-            <div className="pointer-events-auto lg:col-span-7">
+          <div className="mx-auto max-w-7xl">
+            <div className="pointer-events-auto max-w-5xl">
               <div className="mb-6 inline-flex items-center gap-3 rounded-lg border border-[#48cae4]/20 bg-[#48cae4]/10 px-3 py-2 backdrop-blur-md">
                 <span className="h-2.5 w-2.5 rounded-sm bg-[#48cae4] shadow-[0_0_12px_#48cae4]" />
                 <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Scale-ready physical products</span>
@@ -194,57 +186,15 @@ export default function ShodhAIHomePage() {
                 </Link>
               </div>
             </div>
-
-            <div className="pointer-events-auto lg:col-span-5">
-              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-black/35 p-6 shadow-2xl backdrop-blur-xl md:p-8">
-                <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#48cae4]/20 blur-3xl" />
-                <div className="relative grid gap-4">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-white/45">
-                      <span>Input</span>
-                      <Beaker className="h-4 w-4 text-[#48cae4]" />
-                    </div>
-                    <p className="mt-4 text-2xl font-medium text-white">1L discovery chemistry</p>
-                  </div>
-                  <div className="mx-auto h-14 w-px bg-gradient-to-b from-[#48cae4] to-white/10" />
-                  <div className="rounded-2xl border border-[#48cae4]/25 bg-[#48cae4]/10 p-5 shadow-[0_0_40px_rgba(72,202,228,0.10)]">
-                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#48cae4]">
-                      <span>Shodh AI world model</span>
-                      <Sparkles className="h-4 w-4" />
-                    </div>
-                    <p className="mt-4 text-2xl font-medium text-white">Inverse physics + generated factory geometry</p>
-                  </div>
-                  <div className="mx-auto h-14 w-px bg-gradient-to-b from-white/10 to-[#48cae4]" />
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-white/45">
-                      <span>Output</span>
-                      <Factory className="h-4 w-4 text-[#48cae4]" />
-                    </div>
-                    <p className="mt-4 text-2xl font-medium text-white">10,000L production-ready process</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
         <section id="company" className="pointer-events-auto px-4 pb-24 sm:px-6 md:px-10 scroll-mt-28">
           <div className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-[#081421]/80 p-6 shadow-2xl backdrop-blur-xl md:p-10">
-            <div className="grid items-center gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-5">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Built in India. Scaled for the World.</p>
-                <h2 className="mt-4 text-3xl font-medium uppercase leading-tight text-white md:text-5xl">Backed by IndiaAI, NVIDIA, and Google.</h2>
-              </div>
-              <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  {partners.map((partner) => (
-                    <div key={partner.name} className="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-[#48cae4]/30 hover:bg-white/[0.07]">
-                      <Image src={partner.src} alt={partner.name} width={180} height={60} className={`${partner.className} w-auto object-contain brightness-0 invert`} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#48cae4]">Built in India. Scaled for the world.</p>
+            <h2 className="mt-4 max-w-4xl text-3xl font-medium uppercase leading-tight text-white md:text-5xl">
+              Backed by IndiaAI, NVIDIA, and Google.
+            </h2>
           </div>
         </section>
 
@@ -452,14 +402,23 @@ export default function ShodhAIHomePage() {
           </div>
         </section>
 
-        <footer className="pointer-events-auto border-t border-white/10 px-4 py-10 sm:px-6 md:px-10">
-          <div className="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
-            <p>© 2026 Shodh AI. All Rights Reserved.</p>
-            <div className="flex flex-wrap gap-5">
-              <Link href={encodeMailto("Privacy Policy Request", "Please send me Shodh AI's privacy policy.")} className="hover:text-white">Privacy Policy</Link>
-              <Link href={encodeMailto("Terms of Service Request", "Please send me Shodh AI's terms of service.")} className="hover:text-white">Terms of Service</Link>
-              <Link href="mailto:contact@shodhai.com" className="hover:text-white">Contact Engineering Team</Link>
+        <footer className="pointer-events-auto relative w-full overflow-hidden border-t border-white/10 px-4 py-10 sm:px-6 md:px-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(72,202,228,0.10),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(8,20,33,0.96))]" />
+          <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 text-sm text-white/55">
+            <div className="overflow-hidden">
+              <h1 className="w-full select-none whitespace-nowrap text-[clamp(4.5rem,22vw,24rem)] font-normal leading-[0.9] text-white">
+                Shodh AI
+              </h1>
             </div>
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <Image src="/shodhai_logo.svg" alt="Shodh AI" width={136} height={32} className="h-5 w-auto" />
+              <div className="flex flex-wrap gap-5">
+                <Link href={encodeMailto("Privacy Policy Request", "Please send me Shodh AI's privacy policy.")} className="hover:text-white">Privacy Policy</Link>
+                <Link href={encodeMailto("Terms of Service Request", "Please send me Shodh AI's terms of service.")} className="hover:text-white">Terms of Service</Link>
+                <Link href="mailto:contact@shodhai.com" className="hover:text-white">Contact Engineering Team</Link>
+              </div>
+            </div>
+            <p className="text-xs font-bold uppercase tracking-wider">2026 Shodh AI. All rights reserved</p>
           </div>
         </footer>
       </main>

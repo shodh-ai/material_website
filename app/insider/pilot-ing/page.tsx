@@ -355,7 +355,7 @@ export default function PilotIngPage() {
                 <span className="rounded-full border border-[#0b2338]/10 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0b2338]/70 backdrop-blur-md">Confidential</span>
                 <span className="rounded-full border border-[#48cae4]/24 bg-[#e8fbff]/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#2498aa] backdrop-blur-md">Factory Floor Ready</span>
               </motion.div>
-              <motion.h1 variants={fadeInUp} className="text-[2.5rem] font-black uppercase leading-[1.02] tracking-tight text-[#0b2338] sm:text-7xl md:text-8xl lg:text-9xl">
+              <motion.h1 variants={fadeInUp} className="text-[2.5rem] font-black uppercase leading-[1.02] tracking-tight text-[#0b2338] sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl">
                 The World Model
                 <br />
                 <span className="bg-gradient-to-r from-[#0b2338] via-[#48cae4] to-[#4b6b00] bg-clip-text text-transparent">For Physical Manufacturing</span>
