@@ -1,5 +1,5 @@
-import InvestorHomePage from "@/components/InvestorHomePage";
+import ShodhAIHomePage from "@/components/ShodhAIHomePage";
 
 export default function Page() {
-  return <InvestorHomePage showDataRoomCTA={false} />;
+  return <ShodhAIHomePage />;
 }
