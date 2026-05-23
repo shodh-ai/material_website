@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shodh AI</title>
+  <link rel="icon" type="image/svg+xml" href="White Shodh AI Brandmark.svg">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="Syne/Syne-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fluid-config.json" as="fetch" crossorigin>
+  <link rel="preload" href="White Shodh AI Brandmark.svg" as="image">
+
+  <!-- Preload orbit images for smooth scroll -->
+  <link rel="preload" href="assets/orbit/pexels-817621-12770846_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-aliakdemir-30037320_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-keeganjchecks-36423820_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-lee-jonas-587678523-19707470_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-loic-manegarium-3855962_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-magic-k-24827758-6729421_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-matreding-11213242_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-pixabay-373543_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-stephen-leonardi-587681991-28614865_gm_optimized.jpeg" as="image">
+  <link rel="preload" href="assets/orbit/pexels-tomfisk-6754764_gm_optimized.jpeg" as="image">
+
+  <!-- Google Fonts (Plus Jakarta Sans + Space Grotesk only; Syne loaded locally) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Theme Variables (Dark = default) ── */
+    :root {
+      --bg-primary: #01050b;
+      --text-primary: #fff;
+      --text-title: #F0F0FF;
+      --text-secondary: rgba(255, 255, 255, 0.82);
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-faint: rgba(255, 255, 255, 0.35);
+      --border-color: rgba(255, 255, 255, 0.3);
+      --border-hover: rgba(255, 255, 255, 0.8);
+      --btn-hover-bg: rgba(255, 255, 255, 0.1);
+      --cta-btn-bg: #fff;
+      --cta-btn-color: #01050b;
+      --cta-btn-border: rgba(255, 255, 255, 0.9);
+      --logo-filter: none;
+      --icon-stroke: white;
+      --icon-fill: white;
+      --loader-bg: #01050b;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f5f5f7;
+      --text-primary: #1a1a2e;
+      --text-title: #000042;
+      --text-secondary: rgba(0, 0, 66, 0.75);
+      --text-muted: rgba(0, 0, 66, 0.5);
+      --text-faint: rgba(0, 0, 66, 0.3);
+      --border-color: rgba(0, 0, 66, 0.25);
+      --border-hover: rgba(0, 0, 66, 0.6);
+      --btn-hover-bg: rgba(0, 0, 66, 0.08);
+      --cta-btn-bg: #1a1a2e;
+      --cta-btn-color: #fff;
+      --cta-btn-border: rgba(0, 0, 66, 0.8);
+      --logo-filter: invert(1);
+      --icon-stroke: #1a1a2e;
+      --icon-fill: #1a1a2e;
+      --loader-bg: #f5f5f7;
+    }
+
+    /* ── Theme Toggle Button ── */
+    .hero-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+    }
+    .theme-toggle {
+      pointer-events: auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      padding: 0;
+    }
+    .theme-toggle:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--border-hover);
+    }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ── Logo theme filter ── */
+    .logo img {
+      filter: var(--logo-filter);
+      transition: filter 0.5s ease;
+    }
+
+    /* ── Loader theme-aware fill ── */
+    .loader-logo path {
+      fill: var(--text-primary);
+      transition: fill 0.5s ease;
+    }
+
+    body {
+      background: var(--bg-primary);
+      overflow-x: hidden;
+      overflow-y: auto;
+      width: 100vw;
+      font-family: 'Syne', 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--text-primary);
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    /* Hide scrollbar, keep scroll functionality */
+    body::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Scroll lock during loading */
+    body.loading-lock {
+      overflow: hidden !important;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── WebGL Background (fixed — never touched) ── */
+    #unicorn-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      /* Use large viewport height so the canvas always covers the full screen,
+         even when the mobile URL bar is hidden. Falls back gracefully. */
+      height: 100vh;
+      height: 100lvh; /* large viewport height — covers area behind URL bar */
+      z-index: 0;
+      overflow: hidden;
+    }
+    /* Ensure UnicornStudio's internally-created canvas fills the container */
+    #unicorn-bg canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    /* Safari iOS fallback */
+    @supports (-webkit-touch-callout: none) {
+      #unicorn-bg {
+        height: -webkit-fill-available;
+      }
+    }
+
+    /* ── Control Panel ── */
+    #controlPanel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 320px;
+      z-index: 100;
+      background: rgba(8, 12, 24, 0.72);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.04);
+      overflow: hidden;
+      transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    #controlPanel.collapsed { width: 52px; }
+    #controlPanel.collapsed .panel-body { display: none; }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: default;
+    }
+
+    .panel-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      background: linear-gradient(130deg, #fff 30%, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+
+    #controlPanel.collapsed .panel-title { display: none; }
+
+    .toggle-btn {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: #a5b4fc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.35s;
+    }
+    .toggle-btn:hover { background: rgba(165,180,252,0.15); }
+    .toggle-btn .icon { transition: transform 0.35s; }
+    #controlPanel.collapsed .toggle-btn .icon { transform: rotate(180deg); }
+
+    .panel-body {
+      padding: 20px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .panel-body::-webkit-scrollbar { width: 4px; }
+    .panel-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    /* ── Sections ── */
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
+    }
+
+    /* ── Color Grid ── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .color-item label {
+      display: block;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .color-swatch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 9px;
+      padding: 7px 10px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .color-swatch:hover { border-color: rgba(165,180,252,0.35); }
+
+    .color-swatch input[type="color"] {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+    }
+    .color-swatch input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    .color-swatch input[type="color"]::-webkit-color-swatch {
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 5px;
+    }
+
+    .hex-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── Sliders ── */
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .slider-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-meta label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .slider-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #818cf8;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 8px rgba(99,102,241,0.6);
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 14px rgba(99,102,241,0.9);
+    }
+
+    /* ── Reset Button ── */
+    .reset-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 11px;
+      border: 1px solid rgba(165,180,252,0.22);
+      background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(165,180,252,0.08));
+      color: #c7d2fe;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .03em;
+      transition: all 0.25s;
+    }
+    .reset-btn:hover {
+      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(165,180,252,0.15));
+      border-color: rgba(165,180,252,0.45);
+      box-shadow: 0 4px 16px rgba(99,102,241,0.25);
+    }
+    .reset-btn:active { transform: scale(.98); }
+
+    /* ── Loading indicator ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--loader-bg, #01050b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #loader.fade-out {
+      opacity: 0;
+    }
+    .loader-logo {
+      width: 480px;
+      height: 480px;
+    }
+    .loader-text {
+      position: absolute;
+      bottom: calc(50% - 280px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: loaderTextFade 1.5s 1.5s ease-in-out forwards;
+    }
+    @keyframes loaderTextFade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .loader-text {
+        bottom: calc(50% - 160px);
+        font-size: 10px;
+      }
+    }
+
+    /* ── Hide Control Panel ── */
+    #controlPanel { display: none !important; }
+
+    /* ── Custom Font ── */
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/Syne-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ── Scroll Container ── */
+    #scroll-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .scroll-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh; /* dynamic viewport height for mobile */
+    }
+
+    /* --- Hero Section --- */
+    .hero-wrapper {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 24px;
+      pointer-events: none; /* Let clicks pass through to background */
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      padding: 30px 20px 20px; /* Top: 30px, L/R: 20px, Bottom: 20px */
+    }
+
+    .hero-header {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      color: var(--text-primary);
+    }
+
+    .contact-btn {
+      pointer-events: auto; /* Re-enable clicks for button */
+      display: inline-block;
+      padding: 8px 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--border-hover);
+    }
+
+    .hero-main {
+      display: contents;
+    }
+
+    .hero-right {
+      grid-column: 7 / -1;
+      grid-row: 4;
+      align-self: end;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--text-primary);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-right strong {
+      font-weight: 600;
+    }
+
+    .hero-left {
+      grid-column: 1 / 10;
+      grid-row: 8;
+      align-self: end;
+      max-width: 900px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+    }
+
+    .mission-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: 1.2px;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+      margin-left: 3px; /* Optically align with BUILDING title */
+    }
+
+    .main-title {
+      font-size: 100px;
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1200px) {
+      .hero-right {
+        grid-column: 6 / -1; /* starts earlier (6th column) on medium screens to prevent text squishing */
+      }
+      .main-title {
+        font-size: 90px;
+      }
+      .mission-label {
+        margin-left: 2px; /* Adjusted optical alignment for 90px font */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      .hero-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .hero-right {
+        grid-column: 1 / -1;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        font-size: 20px;
+        max-width: 100%;
+      }
+      .hero-left {
+        grid-column: 1 / -1;
+      }
+      .main-title {
+        font-size: 56px;
+      }
+      .mission-label {
+        margin-left: 1px; /* Adjusted optical alignment for 56px font */
+      }
+    }
+
+    /* Reveal Text Animation Setup */
+    .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 5px; /* Prevent clipping of descending letters */
+    }
+
+    .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+    }
+
+    .animate-fade-in {
+      opacity: 0;
+    }
+
+    /* ─────────────────────────────────────────────────
+     * FONT STYLES USED IN THIS PROJECT
+     * ─────────────────────────────────────────────────
+     *
+     * 1. LABEL / EYEBROW  ("INDIAAI MISSION", "THE THESIS")
+     *    Syne 600–700 | 12–13px | letter-spacing: 1.2–1.5px
+     *    text-transform: uppercase | color: #fff
+     *
+     * 2. HERO TITLE  ("BUILDING THE TYPE 1 CIVILIZATION")
+     *    Syne 600 | 120px (90px ≤1200px, 56px ≤768px)
+     *    line-height: 0.95 | letter-spacing: -0.02em
+     *    text-transform: uppercase | color: #F0F0FF
+     *
+     * 3. SECTION HEADING  ("The Inevitable Shift")
+     *    Syne 600 | 80px | line-height: 1.2 (120%)
+     *    letter-spacing: -0.02em | color: #fff
+     *
+     * 4. BODY / DESCRIPTION  (hero-right paragraph, shift body)
+     *    Syne 400 | 28px | line-height: 1.2
+     *    letter-spacing: -0.01em | color: rgba(255,255,255,0.82)
+     *
+     * 5. MONOSPACE ACCENT  (control panel values)
+     *    Space Grotesk 600–700 | 11–12px | color: #a5b4fc
+     * ───────────────────────────────────────────────── */
+
+    /* ── Section 2: Orbit Animation ── */
+    .orbit-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      overflow: hidden;
+      contain: layout style;
+    }
+
+    .orbit-images-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+
+    .orbit-image {
+      position: absolute;
+      /* Dimensions assigned dynamically in JS (135-210px) */
+      object-fit: cover;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      /* Position assigned in JS */
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .orbit-text-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shift-content {
+      position: absolute;
+      text-align: center;
+      max-width: 1200px;
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      will-change: transform, opacity;
+    }
+
+    #shift-content-2 {
+      max-width: none;
+      pointer-events: none;
+    }
+
+    #shift-content-2 .design-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    #shift-content-2 .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 6px;
+    }
+
+    #shift-content-2 .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    /* Style 1 — Label / Eyebrow */
+    .shift-label {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Style 3 — Section Heading */
+    .shift-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    /* Style 4 — Body / Description */
+    .shift-body {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      max-width: 640px;
+    }
+
+    .design-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(24px, 3.2vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .design-heading em {
+      font-style: normal;
+    }
+
+    @media (max-width: 1200px) {
+      .shift-heading { font-size: 60px; }
+      .shift-body    { font-size: 22px; }
+    }
+
+    @media (max-width: 768px) {
+      .shift-heading { font-size: 40px; }
+      .shift-body    { font-size: 18px; }
+      .shift-content { gap: 20px; padding: 0 24px; }
+    }
+
+    /* ── Debug Grid Overlay ── */
+    .debug-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      padding: 0 20px; /* matches the horizontal padding of hero-wrapper */
+    }
+
+    .debug-grid > div {
+      height: 100%;
+      background-color: rgba(255, 100, 100, 0.08);
+      border-left: 1px solid rgba(255, 100, 100, 0.2);
+      border-right: 1px solid rgba(255, 100, 100, 0.2);
+    }
+
+    /* ── Debug Rows Overlay ── */
+    .debug-rows {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 40px 0 20px; /* matches vertical padding of hero-wrapper */
+    }
+
+    .debug-rows > div {
+      width: 100%;
+      flex: 1;
+      background-color: rgba(255, 100, 100, 0.04);
+      border-top: 1px solid rgba(255, 100, 100, 0.15);
+      border-bottom: 1px solid rgba(255, 100, 100, 0.15);
+    }
+
+    .debug-grid, .debug-rows {
+      transition: opacity 0.25s ease-in-out;
+    }
+
+    .debug-grid.hidden, .debug-rows.hidden {
+      opacity: 0;
+    }
+
+    /* ── Section 3: Process Steps (Horizontal Scroll) ── */
+    /* Toggled by JS during orbit→process transition only */
+    .process-fixed-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100vh !important;
+      z-index: 10 !important;
+    }
+
+    .process-section {
+      z-index: 5;
+      overflow: hidden;
+      position: relative;
+      contain: layout style;
+    }
+
+    .process-track {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      will-change: transform;
+      transform: translateZ(0);
+      contain: layout style;
+    }
+
+    .process-step {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+    }
+
+    .process-step-panel {
+      width: 50%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+    }
+
+    .process-body-text {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: #000042;
+      max-width: 480px;
+    }
+
+    .process-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .process-eyebrow {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #000042;
+    }
+
+    .process-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 0.8;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #000042;
+      white-space: nowrap;
+    }
+
+    .process-step-right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+
+    .process-right-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+    }
+
+    .process-right-label-top {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .process-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .process-icon img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .process-icon svg {
+      width: 80px;
+      height: 80px;
+    }
+
+    /* ── Icon Line-Drawing Animation ── */
+    .icon-animated-path {
+      fill: none;
+      stroke: var(--icon-stroke);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: var(--path-length);
+      stroke-dashoffset: var(--path-length);
+      opacity: 0;
+      transition: none;
+    }
+
+    .icon-animated-fill {
+      fill: var(--icon-fill);
+      opacity: 0;
+      transition: none;
+    }
+
+    .process-step.icon-animate .icon-animated-path {
+      animation: iconDraw 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+      animation-delay: var(--draw-delay, 0s);
+    }
+
+    .process-step.icon-animate .icon-animated-fill {
+      animation: iconFillIn 0.6s ease-out forwards;
+      animation-delay: var(--fill-delay, 1.4s);
+    }
+
+    @keyframes iconDraw {
+      0% {
+        stroke-dashoffset: var(--path-length);
+        opacity: 1;
+      }
+      100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    @keyframes iconFillIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.15;
+      }
+    }
+
+    .process-right-label-bottom {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    /* Reveal animation for process panel text */
+    .process-step-panel .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 4px;
+    }
+
+    .process-step-panel .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+    }
+
+    .process-step-panel .animate-fade-in {
+      opacity: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .process-heading {
+        font-size: 64px;
+      }
+      .process-body-text {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .process-step {
+        flex-direction: column;
+      }
+      .process-step-panel {
+        width: 100%;
+        height: 50%;
+        padding: 32px 24px;
+      }
+      .process-step-right {
+        width: 100%;
+        height: 50%;
+      }
+      .process-heading {
+        font-size: 40px;
+      }
+      .process-body-text {
+        font-size: 18px;
+      }
+    }
+    /* ── Section 4: CTA + Footer ── */
+    .footer-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cta-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 80px 80px 60px;
+    }
+
+    /* Footer contact form */
+    .footer-form {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .footer-form-intro {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin: 0 0 48px 0;
+    }
+
+    .footer-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 20px 56px;
+      align-content: center;
+    }
+
+    .footer-form .field {
+      width: 100%;
+      padding-top: 24px;
+      position: relative;
+    }
+
+    .footer-form .field--message {
+      grid-area: 1 / 2 / 4 / 3;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-form .field__label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(0);
+      pointer-events: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0;
+      padding: 0;
+      line-height: 1.3;
+      transition: top 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-form .field__input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 18px 0;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text-primary);
+      -webkit-appearance: none;
+      appearance: none;
+      resize: vertical;
+    }
+
+    .footer-form .field--message .field__input {
+      flex: 1;
+      min-height: 140px;
+    }
+
+    /* Placeholder hidden until focus */
+    .footer-form .field__input::placeholder {
+      color: var(--text-primary);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-form .field__input:focus::placeholder {
+      opacity: 0.7;
+    }
+
+    /* Underline lines */
+    .footer-form .field__line,
+    .footer-form .field__line--active {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    .footer-form .field__line {
+      width: 100%;
+      background: var(--border-color);
+      opacity: 0.55;
+    }
+
+    .footer-form .field__line--active {
+      width: 100%;
+      background: var(--text-primary);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    /* Active underline on hover, focus, or filled */
+    .footer-form .field:hover .field__line--active,
+    .footer-form .field:focus-within .field__line--active,
+    .footer-form .field.is-filled .field__line--active {
+      transform: scaleX(1);
+    }
+
+    .footer-form-messages {
+      margin-top: 24px;
+    }
+
+    .footer-form-success,
+    .footer-form-error {
+      display: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .footer-form.is-success .footer-form-intro,
+    .footer-form.is-success .footer-form-fields,
+    .footer-form.is-success .footer-form-messages .footer-form-error {
+      display: none;
+    }
+
+    .footer-form.is-success .footer-form-success {
+      display: block;
+    }
+
+    .footer-form.is-error .footer-form-error {
+      display: block;
+      color: #e85d5d;
+    }
+
+    .footer-form-send {
+      display: block;
+      margin-top: 36px;
+      margin-left: auto;
+      padding: 12px 36px;
+      border: 1.5px solid var(--cta-btn-border);
+      border-radius: 40px;
+      background: var(--cta-btn-bg);
+      color: var(--cta-btn-color);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-form-send:hover {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-color);
+      box-shadow: 0 0 24px var(--btn-hover-bg);
+    }
+
+    .footer-form.is-success .footer-form-send {
+      display: none;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 40px 10px;
+      margin-top: auto;
+      gap: 40px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-tagline {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-brand {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(64px, 10vw, 140px);
+      font-weight: 600;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
+      text-transform: uppercase;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      padding-bottom: 8px;
+    }
+
+    .footer-link {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Footer animations */
+    .footer-section .animate-footer-in {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @media (max-width: 1200px) {
+      .cta-area {
+        padding: 60px 60px 40px;
+      }
+      .footer-form-grid {
+        gap: 16px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cta-area {
+        padding: 48px 24px 32px;
+        align-items: flex-start;
+      }
+      .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 24px 32px;
+        gap: 32px;
+      }
+      .footer-right {
+        align-items: flex-start;
+      }
+    }
+
+    /* ── Section: IP Security ── */
+    .ip-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 120vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .ip-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-width: 1100px;
+      padding: 80px 60px;
+    }
+
+    /* SVG border with corner gaps */
+    .ip-border-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .ip-border-line {
+      fill: none;
+      stroke: rgba(0, 0, 66, 0.15);
+      stroke-width: 1;
+      stroke-linecap: butt;
+    }
+
+    .ip-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #000042;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .ip-body {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: rgba(0, 0, 66, 0.7);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @media (max-width: 1200px) {
+      .ip-heading {
+        font-size: 64px;
+      }
+      .ip-content {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ip-heading {
+        font-size: 40px;
+        white-space: normal;
+      }
+      .ip-content {
+        padding: 48px 24px;
+      }
+      .ip-body {
+        font-size: 18px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════
+     * MOBILE-ONLY OVERRIDES (≤ 768px)
+     * Only touches mobile layout — desktop is untouched.
+     * ═══════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* ── Loader ── */
+      .loader-logo {
+        width: 200px;
+        height: 200px;
+      }
+
+      /* ── Hero Section ── */
+      .hero-wrapper {
+        padding: 20px 20px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .hero-header {
+        flex-shrink: 0;
+      }
+
+      .hero-header .logo {
+        margin-left: 0 !important;
+      }
+
+      .hero-header .logo img {
+        height: 36px !important;
+      }
+
+      .contact-btn {
+        padding: 6px 18px;
+        font-size: 10px;
+        margin-right: 0px !important;
+      }
+
+      .hero-header-right {
+        margin-right: 0 !important;
+        gap: 8px;
+      }
+
+      .theme-toggle {
+        width: 30px;
+        height: 30px;
+      }
+
+      .theme-toggle svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .hero-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        gap: 0;
+      }
+
+      .hero-right {
+        font-size: 16px;
+        line-height: 1.35;
+        margin-top: 0;
+        margin-bottom: auto;
+        padding-top: 40px;
+        max-width: 280px;
+      }
+
+      .hero-left {
+        margin-bottom: 8px;
+        margin-left: 0;
+      }
+
+      .main-title {
+        font-size: 48px;
+        line-height: 0.92;
+      }
+
+      .mission-label {
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        margin-left: 1px;
+      }
+
+      /* ── Orbit Section: Text Blocks ── */
+      .shift-heading {
+        font-size: 32px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.15;
+      }
+
+      .shift-body {
+        font-size: 16px;
+        max-width: 320px;
+      }
+
+      .shift-body br {
+        display: none;
+      }
+
+      .shift-label {
+        font-size: 10px;
+      }
+
+      .shift-content {
+        gap: 16px;
+        padding: 0 20px;
+      }
+
+      /* Text Block 2 — "Discovery by Design" */
+      .design-heading {
+        font-size: clamp(18px, 5vw, 28px);
+        line-height: 1.3;
+        text-align: center;
+      }
+
+      #shift-content-2 .reveal-line > span {
+        white-space: normal;
+      }
+
+      /* ── IP Security Section ── */
+      .ip-section {
+        height: auto;
+        min-height: 80vh;
+        padding: 40px 0;
+      }
+
+      .ip-content {
+        max-width: 100%;
+        padding: 40px 20px;
+      }
+
+      .ip-heading {
+        font-size: 36px;
+        white-space: normal;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+
+      .ip-heading br {
+        display: none;
+      }
+
+      .ip-body {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      /* Let <br> tags in IP body collapse on mobile so text reflows naturally */
+      .ip-body br {
+        display: none;
+      }
+
+      /* ── CTA + Footer ── */
+      .footer-section {
+        min-height: auto;
+      }
+
+      .cta-area {
+        padding: 60px 20px 40px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: 50vh;
+      }
+
+      .footer-form {
+        max-width: 100%;
+      }
+
+      .footer-form-intro {
+        font-size: 20px;
+        margin-bottom: 32px;
+      }
+
+      .footer-form-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 0;
+      }
+
+      .footer-form .field--message {
+        grid-area: auto;
+        margin-top: 8px;
+      }
+
+      .footer-form .field__input {
+        font-size: 15px;
+        padding: 16px 0;
+      }
+
+      .footer-form .field--message .field__input {
+        min-height: 120px;
+      }
+
+      .footer-form-send {
+        margin-top: 28px;
+        padding: 10px 28px;
+        font-size: 11px;
+      }
+
+      .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px 24px;
+        gap: 24px;
+      }
+
+      .footer-left {
+        gap: 8px;
+      }
+
+      .footer-tagline {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
+
+      .footer-brand {
+        font-size: clamp(42px, 12vw, 80px);
+        line-height: 0.9;
+      }
+
+      .footer-right {
+        align-items: flex-start;
+        gap: 4px;
+        padding-bottom: 0;
+      }
+
+      .footer-link {
+        font-size: 10px;
+      }
+
+      .footer-copyright {
+        font-size: 10px;
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <style>
+      #logo-mask path {
+        transition: stroke-dashoffset 0.4s ease-out;
+      }
+    </style>
+    <svg class="loader-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="logo-mask">
+          <path id="mask-path-1" d="M 24.4,6.4 C 12,0 7.5,6 7.5,15 L 20,20" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" style="fill: none !important; stroke: white !important; stroke-dasharray: 40; stroke-dashoffset: 40;" />
+          <path id="mask-path-2" d="M 15.6,33.9 C 28,40 32.5,34 32.5,25 L 20,20" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" style="fill: none !important; stroke: white !important; stroke-dasharray: 40; stroke-dashoffset: 40;" />
+        </mask>
+        <g id="logo-paths">
+          <path d="M7.06178 22.9236C6.1544 22.4309 5.81821 21.2959 6.31088 20.3886L6.7569 19.5671L14.4628 23.751C14.614 23.8331 14.67 24.0223 14.5879 24.1735L13.9932 25.2688C13.6648 25.8738 12.9081 26.0979 12.3032 25.7694L7.06178 22.9236Z" fill="white"/>
+          <path d="M32.993 16.9352C33.896 17.4358 34.2223 18.5736 33.7217 19.4767L33.2686 20.2942L25.2264 15.8364C25.0759 15.753 25.0215 15.5633 25.1049 15.4128L25.7092 14.3227C26.0429 13.7207 26.8014 13.5032 27.4035 13.8369L32.993 16.9352Z" fill="white"/>
+          <path d="M15.5888 33.8841C14.6814 33.3914 14.3452 32.2564 14.8379 31.3491L15.2839 30.5276L22.8199 34.6193C22.9712 34.7014 23.0272 34.8906 22.9451 35.0418L22.3504 36.1371C22.0219 36.7421 21.2653 36.9662 20.6604 36.6377L15.5888 33.8841Z" fill="white"/>
+          <path d="M17.4016 3.47166C18.309 2.97899 19.4439 3.31518 19.9366 4.22256L20.3826 5.04404L6.96754 12.3278L6.22416 10.9587C5.89571 10.3538 6.11984 9.59714 6.72476 9.2687L17.4016 3.47166Z" fill="white"/>
+          <path d="M32.963 30.6811C33.8704 30.1885 34.2066 29.0535 33.7139 28.1461L33.2679 27.3246L19.518 34.7902L20.2614 36.1593C20.5899 36.7642 21.3465 36.9884 21.9514 36.6599L32.963 30.6811Z" fill="white"/>
+          <path d="M24.7191 26.406C25.6265 25.9134 25.9627 24.7784 25.47 23.871L25.024 23.0496L15.6442 28.1424C14.7368 28.635 14.4006 29.77 14.8933 30.6774L15.3393 31.4988L24.7191 26.406Z" fill="white"/>
+          <path d="M24.4014 11.6724C25.3088 11.1798 25.645 10.0448 25.1523 9.13742L24.7063 8.31594L15.0121 13.5795C14.4072 13.9079 14.183 14.6645 14.5115 15.2695L15.2548 16.6386L24.4014 11.6724Z" fill="white"/>
+          <path d="M24.4257 6.4021C25.3295 6.90128 25.6575 8.03863 25.1583 8.94245L24.7064 9.76069L16.8839 5.44026L17.6371 4.07651C17.9699 3.47397 18.7282 3.2553 19.3307 3.58809L24.4257 6.4021Z" fill="white"/>
+          <path d="M25.019 24.2979L25.4709 23.4797C25.9701 22.5759 25.6421 21.4385 24.7383 20.9393L15.3016 15.7273L14.5484 17.0911C14.2156 17.6936 14.4342 18.4518 15.0368 18.7846L25.019 24.2979Z" fill="white"/>
+          <path d="M6.04199 10.7587C6.04199 9.72621 6.879 8.8892 7.9115 8.8892H8.84626V23.0663H7.9115C6.879 23.0663 6.04199 22.2293 6.04199 21.1968V10.7587Z" fill="white"/>
+          <path d="M25.3965 8.09348C25.3965 7.06098 24.5595 6.22397 23.527 6.22397H22.5923V11.8325H23.527C24.5595 11.8325 25.3965 10.9955 25.3965 9.96299V8.09348Z" fill="white"/>
+          <path d="M25.7081 22.6601C25.7081 21.6276 24.8711 20.7906 23.8386 20.7906H22.9039V26.6328H23.8386C24.8711 26.6328 25.7081 25.7958 25.7081 24.7633V22.6601Z" fill="white"/>
+          <path d="M33.9478 18.6096C33.9478 17.577 33.1108 16.74 32.0783 16.74H31.1436V30.8782H32.0783C33.1108 30.8782 33.9478 30.0412 33.9478 29.0087V18.6096Z" fill="white"/>
+          <path d="M14.5517 29.8266C14.5517 28.7941 15.3887 27.9571 16.4212 27.9571H17.356V34.0719H16.4212C15.3887 34.0719 14.5517 33.2349 14.5517 32.2024V29.8266Z" fill="white"/>
+          <path d="M14.3353 14.7926C14.3353 14.1042 14.8933 13.5462 15.5816 13.5462H17.1395V18.9211H15.5816C14.8933 18.9211 14.3353 18.363 14.3353 17.6747V14.7926Z" fill="white"/>
+        </g>
+      </defs>
+      
+      <!-- Background layer (dimmed) -->
+      <use href="#logo-paths" opacity="0.25"/>
+      
+      <!-- Foreground layer (full opacity, masked) -->
+      <use href="#logo-paths" mask="url(#logo-mask)"/>
+    </svg>
+    <span class="loader-text">Loading</span>
+  </div>
+
+  <!-- WebGL Background (fixed, always visible) -->
+  <div id="unicorn-bg"></div>
+
+  <!-- ── Scroll Container ── -->
+  <div id="scroll-container">
+
+    <!-- Section 1: Hero -->
+    <div class="scroll-section">
+      <div class="hero-wrapper">
+        <header class="hero-header">
+          <div class="logo" style="margin-left: 10px;">
+            <img src="White Shodh AI Brandmark.svg" alt="Shodh AI" style="height: 48px; width: auto; pointer-events: auto;" />
+          </div>
+          <div class="hero-header-right" style="margin-right: 10px;">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light mode">
+              <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+              <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+            <a href="#" class="contact-btn">BOOK DEMO</a>
+          </div>
+        </header>
+
+        <main class="hero-main">
+          <div class="hero-right">
+            <div class="animate-text-reveal">
+              <div class="reveal-line"><span>AI for Science is the next $0→$1T market.</span></div>
+              <div class="reveal-line"><span>Shodh AI is India's sovereign play at the</span></div>
+              <div class="reveal-line"><span>Compute + Physics inflection point — turning</span></div>
+              <div class="reveal-line"><span>discoveries into manufacturable products.</span></div>
+            </div>
+          </div>
+
+          <div class="hero-left">
+            <span class="mission-label animate-fade-in"><span id="first-letter-mission">I</span>NDIAAI MISSION</span>
+            <h1 class="animate-text-reveal main-title">
+              <div class="reveal-line"><span><span id="first-letter-title">W</span>ORLD MODEL</span></div>
+              <div class="reveal-line"><span>FOR PHYSICAL</span></div>
+              <div class="reveal-line"><span>INVENTION</span></div>
+            </h1>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Section 2: Orbit Animation -->
+    <div class="scroll-section orbit-section" id="section-orbit">
+
+      <!-- Scattered/Orbit Images -->
+      <div class="orbit-images-container" id="orbit-images-container">
+        <img src="assets/orbit/pexels-817621-12770846_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 1" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-aliakdemir-30037320_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 2" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 3" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 4" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 5" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 6" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 7" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-keeganjchecks-36423820_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 8" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-lee-jonas-587678523-19707470_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 9" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-loic-manegarium-3855962_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 10" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-magic-k-24827758-6729421_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 11" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-matreding-11213242_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 12" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 13" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-pixabay-373543_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 14" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-stephen-leonardi-587681991-28614865_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 15" decoding="sync" loading="eager">
+        <img src="assets/orbit/pexels-tomfisk-6754764_gm_optimized.jpeg" class="orbit-image" alt="Orbit Image 16" decoding="sync" loading="eager">
+      </div>
+
+      <!-- Text Container (Pinned in center) -->
+      <div class="orbit-text-wrapper">
+        <!-- Text Block 1 -->
+        <div class="shift-content" id="shift-content-1">
+          <span class="shift-label" id="shift-label">The Thesis</span>
+          <h2 class="shift-heading" id="shift-heading">The Inevitable Shift</h2>
+          <p class="shift-body" id="shift-body">
+            The market is desperate. Every<br>industry needs better materials.
+          </p>
+        </div>
+
+        <!-- Text Block 2 -->
+        <div class="shift-content" id="shift-content-2">
+          <h2 class="design-heading">
+            <div class="reveal-line"><span>The world is moving from <em>Discovery by Luck</em> to</span></div>
+            <div class="reveal-line"><span><em>Discovery by Design</em>. It is inevitable.</span></div>
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Process Steps (Horizontal Scroll) -->
+    <div class="scroll-section process-section" id="section-process">
+      <div class="process-track" id="process-track">
+        <!-- Step 1 -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Defines performance targets</span></div>
+              <div class="reveal-line"><span>for energy and charging while</span></div>
+              <div class="reveal-line"><span>locking in material constraints</span></div>
+              <div class="reveal-line"><span>for sustainable hardware.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Multi-Objective Input</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>The Intent</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">The Customer's Problem</span>
+              <div class="process-icon">
+                <!-- The Intent: Two lines + single rounded rectangle -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top line (narrower) -->
+                  <line class="icon-animated-path" style="--path-length: 44; --draw-delay: 0.2s;" x1="28" y1="12" x2="72" y2="12" />
+                  <!-- Middle line (wider) -->
+                  <line class="icon-animated-path" style="--path-length: 58; --draw-delay: 0.5s;" x1="21" y1="25" x2="79" y2="25" />
+                  <!-- Single rounded rectangle -->
+                  <rect class="icon-animated-path" style="--path-length: 250; --draw-delay: 0.8s;" x="13" y="35" width="74" height="49" rx="5" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 2.0s;" x="13" y="35" width="74" height="49" rx="5" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 1</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 2: Skandax Genesis -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>AI explores billions of atomic</span></div>
+              <div class="reveal-line"><span>combinations to generate thousands</span></div>
+              <div class="reveal-line"><span>of unique candidate microstructures</span></div>
+              <div class="reveal-line"><span>for the specific goal.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Inverse Design</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Skandax</span></div>
+                <div class="reveal-line"><span>Genesis</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Generates The Material</span>
+              <div class="process-icon">
+                <!-- Skandax Genesis: Four diamond shapes in a cross -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.2s;" points="50,8 67,25 50,42 33,25" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 1.6s;" points="50,8 67,25 50,42 33,25" />
+                  <!-- Right diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.5s;" points="75,33 92,50 75,67 58,50" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 1.8s;" points="75,33 92,50 75,67 58,50" />
+                  <!-- Bottom diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.8s;" points="50,58 67,75 50,92 33,75" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 2.0s;" points="50,58 67,75 50,92 33,75" />
+                  <!-- Left diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 1.1s;" points="25,33 42,50 25,67 8,50" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 2.2s;" points="25,33 42,50 25,67 8,50" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 2</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 3: Skandax Validate -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Massive parallel simulations screen</span></div>
+              <div class="reveal-line"><span>every candidate to eliminate failures</span></div>
+              <div class="reveal-line"><span>and identify top performers through</span></div>
+              <div class="reveal-line"><span>virtual stress testing.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Physics Screening</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Skandax</span></div>
+                <div class="reveal-line"><span>Validate</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Virtual Cycler</span>
+              <div class="process-icon">
+                <!-- Skandax Validate: Focus/crop brackets with inner square -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top-left corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.2s;" points="14,33 14,14 33,14" />
+                  <!-- Top-right corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.4s;" points="67,14 86,14 86,33" />
+                  <!-- Bottom-right corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.6s;" points="86,67 86,86 67,86" />
+                  <!-- Bottom-left corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.8s;" points="33,86 14,86 14,67" />
+                  <!-- Inner square -->
+                  <rect class="icon-animated-path" style="--path-length: 160; --draw-delay: 1.0s;" x="30" y="30" width="40" height="40" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 2.2s;" x="30" y="30" width="40" height="40" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 3</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 4: Skandax Deploy -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Automatically translates complex</span></div>
+              <div class="reveal-line"><span>digital microstructures into precise</span></div>
+              <div class="reveal-line"><span>machine code for immediate</span></div>
+              <div class="reveal-line"><span>deployment on factory lines.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Process Compilation</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Skandax</span></div>
+                <div class="reveal-line"><span>Deploy</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Production Ready</span>
+              <div class="process-icon">
+                <!-- Skandax Deploy: Atom/orbital pattern -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Orbit 1 (ellipse tilted +45°) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 0.2s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(45, 50, 50)" />
+                  <!-- Orbit 2 (ellipse tilted -45°) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 0.6s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(-45, 50, 50)" />
+                  <!-- Orbit 3 (horizontal ellipse) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 1.0s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(0, 50, 50)" />
+                  <!-- Orbit 4 (vertical ellipse) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 1.4s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(90, 50, 50)" />
+                  <!-- Center dot -->
+                  <circle class="icon-animated-path" style="--path-length: 20; --draw-delay: 1.0s;" cx="50" cy="50" r="3.5" />
+                  <circle class="icon-animated-fill" style="--fill-delay: 1.8s;" cx="50" cy="50" r="3.5" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 4</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 5: The Reality -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Achieves successful physical</span></div>
+              <div class="reveal-line"><span>manufacturing on the very first try and</span></div>
+              <div class="reveal-line"><span>reduces the typical research timeline</span></div>
+              <div class="reveal-line"><span>from five years to six months.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Zero Shot Output</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>The</span></div>
+                <div class="reveal-line"><span>Reality</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Years To Months</span>
+              <div class="process-icon">
+                <!-- The Reality: Two overlapping squares -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Back square (top-left) -->
+                  <rect class="icon-animated-path" style="--path-length: 190; --draw-delay: 0.2s;" x="14" y="14" width="47" height="47" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 1.6s;" x="14" y="14" width="47" height="47" />
+                  <!-- Front square (bottom-right) -->
+                  <rect class="icon-animated-path" style="--path-length: 190; --draw-delay: 0.6s;" x="39" y="39" width="47" height="47" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 1.8s;" x="39" y="39" width="47" height="47" />
+                  <!-- Diagonal line in overlap zone -->
+                  <line class="icon-animated-path" style="--path-length: 46; --draw-delay: 1.0s;" x1="39" y1="61" x2="61" y2="39" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: IP Security -->
+    <div class="ip-section" id="section-ip">
+      <div class="ip-content" id="ip-content">
+        <!-- SVG border lines with corner gaps -->
+        <svg class="ip-border-svg" id="ip-border-svg" preserveAspectRatio="none">
+          <!-- Top line: gap at left and right corners -->
+          <line class="ip-border-line" id="ip-line-top" x1="8%" y1="0.5" x2="92%" y2="0.5" />
+          <!-- Bottom line: gap at left and right corners -->
+          <line class="ip-border-line" id="ip-line-bottom" x1="8%" y1="99.5%" x2="92%" y2="99.5%" />
+          <!-- Left line: gap at top and bottom corners -->
+          <line class="ip-border-line" id="ip-line-left" x1="0.5" y1="8%" x2="0.5" y2="92%" />
+          <!-- Right line: gap at top and bottom corners -->
+          <line class="ip-border-line" id="ip-line-right" x1="99.8%" y1="8%" x2="99.8%" y2="92%" />
+        </svg>
+        <h2 class="ip-heading" id="ip-heading">Your IP Never<br>Leaves Your Walls.</h2>
+        <p class="ip-body" id="ip-body">Air-gapped, on-premise deployment. Your chemistry, telemetry,<br>and trade secrets stay yours always. Full ownership of every<br>CAD file, composition, and patent generated.</p>
+      </div>
+    </div>
+
+    <!-- Section 5: CTA + Footer -->
+    <div class="footer-section" id="section-footer">
+      <div class="cta-area">
+        <form class="footer-form" id="footer-contact-form" action="#" method="post" novalidate>
+          <p class="footer-form-intro animate-footer-in">Connect with us</p>
+          <div class="footer-form-fields animate-footer-in">
+          <div class="footer-form-grid">
+            <div class="field">
+              <label for="footer-name" class="field__label">Name</label>
+              <input class="field__input" type="text" id="footer-name" name="name" autocomplete="name" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field">
+              <label for="footer-email" class="field__label">Email</label>
+              <input class="field__input" type="email" id="footer-email" name="email" autocomplete="email" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field">
+              <label for="footer-company" class="field__label">Company</label>
+              <input class="field__input" type="text" id="footer-company" name="company" autocomplete="organization" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field field--message">
+              <label for="footer-message" class="field__label">Message</label>
+              <textarea class="field__input" id="footer-message" name="message" required></textarea>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+          </div>
+          <button type="submit" class="footer-form-send">Send</button>
+          </div>
+          <div class="footer-form-messages">
+            <div class="footer-form-success" role="status">
+              Thank you.<br>Your message has been successfully received.<br>We will get back to you as soon as possible.
+            </div>
+            <div class="footer-form-error" role="alert">
+              Oops! Something went wrong while submitting the form.
+            </div>
+          </div>
+        </form>
+      </div>
+      <footer class="footer-bar">
+        <div class="footer-left">
+          <span class="footer-tagline animate-footer-in">Manufacturing Intelligence, Grounded in Physics.</span>
+          <h2 class="footer-brand animate-footer-in">SHODH AI</h2>
+        </div>
+        <div class="footer-right">
+          <a href="https://www.linkedin.com/company/shodh-ai/" target="_blank" rel="noopener noreferrer" class="footer-link animate-footer-in">LinkedIn</a>
+          <a href="#" class="footer-link animate-footer-in">Privacy Policy</a>
+          <a href="#" class="footer-link animate-footer-in">Terms of Service</a>
+          <span class="footer-copyright animate-footer-in">2026 Shodh AI. All Rights Reserved</span>
+        </div>
+      </footer>
+    </div>
+
+  </div><!-- /#scroll-container -->
+
+  <!-- Control Panel -->
+  <div id="controlPanel">
+    <div class="panel-header">
+      <span class="panel-title">Shader Controls</span>
+      <button class="toggle-btn" id="toggleBtn" title="Toggle panel">
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="panel-body">
+      <!-- Colors -->
+      <div>
+        <div class="section-title">Gradient Colors</div>
+        <div class="color-grid">
+          <div class="color-item">
+            <label>Deep Base</label>
+            <div class="color-swatch">
+              <input type="color" id="c0" value="#01050b">
+              <span class="hex-label" id="c0hex">#01050B</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Mid Navy</label>
+            <div class="color-swatch">
+              <input type="color" id="c1" value="#0d3864">
+              <span class="hex-label" id="c1hex">#0D3864</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Slate Blue</label>
+            <div class="color-swatch">
+              <input type="color" id="c2" value="#6b95c2">
+              <span class="hex-label" id="c2hex">#6B95C2</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Highlight</label>
+            <div class="color-swatch">
+              <input type="color" id="c3" value="#d6e9fc">
+              <span class="hex-label" id="c3hex">#D6E9FC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamics -->
+      <div>
+        <div class="section-title">Dynamics</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Animation Speed</label>
+              <span class="slider-val" id="v-speed">1.0×</span>
+            </div>
+            <input type="range" id="s-speed" min="0" max="3" step="0.05" value="1">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Fluid Distortion</label>
+              <span class="slider-val" id="v-dist">0.38</span>
+            </div>
+            <input type="range" id="s-dist" min="0" max="1.5" step="0.01" value="0.38">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Wave Scale</label>
+              <span class="slider-val" id="v-wave">0.25</span>
+            </div>
+            <input type="range" id="s-wave" min="0.05" max="1" step="0.01" value="0.25">
+          </div>
+        </div>
+      </div>
+
+      <!-- Effects -->
+      <div>
+        <div class="section-title">Post Effects</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Gaussian Blur</label>
+              <span class="slider-val" id="v-blur">0.95</span>
+            </div>
+            <input type="range" id="s-blur" min="0" max="2" step="0.05" value="0.95">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Film Grain</label>
+              <span class="slider-val" id="v-grain">0.04</span>
+            </div>
+            <input type="range" id="s-grain" min="0" max="0.2" step="0.005" value="0.04">
+          </div>
+        </div>
+      </div>
+
+      <button class="reset-btn" id="resetBtn">↺ Reset to Defaults</button>
+    </div>
+  </div>
+
+  <!-- Unicorn Studio JSON container -->
+  <script id="my-scene-json" type="application/json"></script>
+
+  <!-- Scripts -->
+  <script src="vendor/lenis.min.js" defer></script>
+  <script src="vendor/three.min.js" defer></script>
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="vendor/unicornStudio.umd.js" defer></script>
+  <script src="main.js" defer></script>
+
+  <!-- 12-Column Debug Grid Overlay (Toggle visibility with 'G' key) -->
+  <div class="debug-grid hidden">
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+  </div>
+
+  <!-- 8-Row Debug Grid Overlay (Toggle visibility with 'G' key) -->
+  <div class="debug-rows hidden">
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+  </div>
+
+
+
+</body>
+</html>
