@@ -493,7 +493,7 @@
     }
 
     .hero-right {
-      grid-column: 7 / -1;
+      grid-column: 8 / -1;
       grid-row: 4;
       align-self: end;
       font-size: 28px;
@@ -508,12 +508,13 @@
     }
 
     .hero-left {
-      grid-column: 1 / 10;
+      grid-column: 1 / -1;
       grid-row: 8;
       align-self: end;
-      max-width: 900px;
+      max-width: 980px;
       margin-bottom: 10px;
       margin-left: 10px;
+      overflow: visible;
     }
 
     .mission-label {
@@ -528,7 +529,7 @@
     }
 
     .main-title {
-      font-size: 100px;
+      font-size: 90px;
       font-weight: 600;
       line-height: 0.95;
       letter-spacing: -0.02em;
@@ -536,9 +537,14 @@
       text-transform: uppercase;
     }
 
+    .main-title .reveal-line {
+      overflow: visible;
+      padding-right: 20px;
+    }
+
     @media (max-width: 1200px) {
       .hero-right {
-        grid-column: 6 / -1; /* starts earlier (6th column) on medium screens to prevent text squishing */
+        grid-column: 7 / -1; /* starts earlier on medium screens to prevent text squishing */
       }
       .main-title {
         font-size: 90px;
@@ -581,7 +587,7 @@
     .reveal-line {
       overflow: hidden;
       display: block;
-      padding-bottom: 5px; /* Prevent clipping of descending letters */
+      padding: 4px 6px 5px 0; /* Prevent clipping of glyphs on all edges (top, right, bottom, left) */
     }
 
     .reveal-line > span {
@@ -712,7 +718,7 @@
     /* Style 3 — Section Heading */
     .shift-heading {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
-      font-size: 80px;
+      font-size: 48px;
       font-weight: 600;
       line-height: 1.2;
       letter-spacing: -0.02em;
@@ -744,7 +750,7 @@
     }
 
     @media (max-width: 1200px) {
-      .shift-heading { font-size: 60px; }
+      .shift-heading { font-size: 48px; }
       .shift-body    { font-size: 22px; }
     }
 
@@ -1662,6 +1668,160 @@
         font-size: 10px;
         margin-top: 8px;
       }
+
+      /* ── Gap Section (mobile) ── */
+      .gap-section {
+        height: 100vh;
+        min-height: 100vh;
+      }
+
+      .gap-heading-row {
+        margin-bottom: 0;
+      }
+
+      .gap-heading {
+        font-size: 36px !important;
+      }
+
+      .gap-heading-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .gap-cover {
+        width: 85vw !important;
+        height: 40vh !important;
+      }
+
+      .gap-testimonial-text {
+        font-size: 14px !important;
+        padding: 0 20px;
+      }
+    }
+
+    /* ── Section: "One Model" Gap Animation ── */
+    .gap-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .gap-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    /* ── Heading Row: two halves side by side ── */
+    .gap-heading-row {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .gap-heading-contain.is-left {
+      transform: translateY(-150px) translateX(-150px);
+    }
+
+    .gap-heading-contain.is-right {
+      transform: translateY(100px) translateX(200px);
+    }
+
+    .gap-heading-contain {
+      overflow: hidden;
+    }
+
+    .gap-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 100px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .gap-heading .gap-char {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    @media (max-width: 1200px) {
+      .gap-heading {
+        font-size: 60px;
+      }
+    }
+
+    /* ── Center Image Cover (expands via clip-path) ── */
+    .gap-cover {
+      position: relative;
+      z-index: 1;
+      width: 30vw;
+      height: 55vh;
+      margin: 0 auto;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      clip-path: inset(50% 50% 50% 50% round 0.25rem);
+      will-change: clip-path;
+    }
+
+    .gap-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+
+    .gap-image:first-child {
+      opacity: 1;
+    }
+
+    /* ── Testimonial below the image ── */
+    .gap-testimonial {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 6px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .gap-testimonial-text {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 580px;
     }
   </style>
 </head>
@@ -1745,17 +1905,18 @@
         <main class="hero-main">
           <div class="hero-right">
             <div class="animate-text-reveal">
-              <div class="reveal-line"><span>AI for Science is the next $0→$1T market.</span></div>
-              <div class="reveal-line"><span>Shodh AI is India's sovereign play at the</span></div>
-              <div class="reveal-line"><span>Compute + Physics inflection point — turning</span></div>
-              <div class="reveal-line"><span>discoveries into manufacturable products.</span></div>
+              <div class="reveal-line"><span>Shodh AI builds intelligence that helps</span></div>
+              <div class="reveal-line"><span>invent new molecules, materials, processes,</span></div>
+              <div class="reveal-line"><span>and machines - then shows how to make</span></div>
+              <div class="reveal-line"><span>them real. From atoms to factories. From</span></div>
+              <div class="reveal-line"><span>discovery to manufacturing.</span></div>
             </div>
           </div>
 
           <div class="hero-left">
             <span class="mission-label animate-fade-in"><span id="first-letter-mission">I</span>NDIAAI MISSION</span>
             <h1 class="animate-text-reveal main-title">
-              <div class="reveal-line"><span><span id="first-letter-title">W</span>ORLD MODEL</span></div>
+              <div class="reveal-line"><span><span id="first-letter-title">F</span>OUNDATION&nbsp;MODEL&nbsp;</span></div>
               <div class="reveal-line"><span>FOR PHYSICAL</span></div>
               <div class="reveal-line"><span>INVENTION</span></div>
             </h1>
@@ -1791,18 +1952,19 @@
       <div class="orbit-text-wrapper">
         <!-- Text Block 1 -->
         <div class="shift-content" id="shift-content-1">
-          <span class="shift-label" id="shift-label">The Thesis</span>
-          <h2 class="shift-heading" id="shift-heading">The Inevitable Shift</h2>
+          <span class="shift-label" id="shift-label">THE PROBLEM</span>
+          <h2 class="shift-heading" id="shift-heading">Physical invention is still too slow.</h2>
           <p class="shift-body" id="shift-body">
-            The market is desperate. Every<br>industry needs better materials.
+            The world needs better batteries, drugs,<br>chemicals, materials, reactors, & factories.
           </p>
         </div>
 
         <!-- Text Block 2 -->
         <div class="shift-content" id="shift-content-2">
           <h2 class="design-heading">
-            <div class="reveal-line"><span>The world is moving from <em>Discovery by Luck</em> to</span></div>
-            <div class="reveal-line"><span><em>Discovery by Design</em>. It is inevitable.</span></div>
+            <div class="reveal-line"><span>But every breakthrough still depends on</span></div>
+            <div class="reveal-line"><span>years of experiments, pilot plants, failed</span></div>
+            <div class="reveal-line"><span>scale-ups, &amp; expensive physical iteration.</span></div>
           </h2>
         </div>
       </div>
@@ -1815,15 +1977,15 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Defines performance targets</span></div>
-              <div class="reveal-line"><span>for energy and charging while</span></div>
-              <div class="reveal-line"><span>locking in material constraints</span></div>
-              <div class="reveal-line"><span>for sustainable hardware.</span></div>
+              <div class="reveal-line"><span>Defines the physical goal — targets,</span></div>
+              <div class="reveal-line"><span>material constraints, safety boundaries,</span></div>
+              <div class="reveal-line"><span>and manufacturability requirements —</span></div>
+              <div class="reveal-line"><span>so the model knows what to invent.</span></div>
             </div>
             <div class="process-bottom">
-              <span class="process-eyebrow animate-fade-in">Multi-Objective Input</span>
+              <span class="process-eyebrow animate-fade-in">Candidate Generation</span>
               <h2 class="process-heading">
-                <div class="reveal-line"><span>The Intent</span></div>
+                <div class="reveal-line"><span>Objective</span></div>
               </h2>
             </div>
           </div>
@@ -1850,22 +2012,21 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>AI explores billions of atomic</span></div>
-              <div class="reveal-line"><span>combinations to generate thousands</span></div>
-              <div class="reveal-line"><span>of unique candidate microstructures</span></div>
-              <div class="reveal-line"><span>for the specific goal.</span></div>
+              <div class="reveal-line"><span>AI predicts how each candidate will</span></div>
+              <div class="reveal-line"><span>behave under real-world conditions —</span></div>
+              <div class="reveal-line"><span>thermal, mechanical, chemical —</span></div>
+              <div class="reveal-line"><span>before a single experiment is run.</span></div>
             </div>
             <div class="process-bottom">
-              <span class="process-eyebrow animate-fade-in">Inverse Design</span>
+              <span class="process-eyebrow animate-fade-in">Behavior Modeling</span>
               <h2 class="process-heading">
-                <div class="reveal-line"><span>Skandax</span></div>
-                <div class="reveal-line"><span>Genesis</span></div>
+                <div class="reveal-line"><span>Simulate</span></div>
               </h2>
             </div>
           </div>
           <div class="process-step-right">
             <div class="process-right-inner">
-              <span class="process-right-label-top">Generates The Material</span>
+              <span class="process-right-label-top">Virtual Testing</span>
               <div class="process-icon">
                 <!-- Skandax Genesis: Four diamond shapes in a cross -->
                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1891,22 +2052,21 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Massive parallel simulations screen</span></div>
-              <div class="reveal-line"><span>every candidate to eliminate failures</span></div>
-              <div class="reveal-line"><span>and identify top performers through</span></div>
-              <div class="reveal-line"><span>virtual stress testing.</span></div>
+              <div class="reveal-line"><span>Maps the most viable candidates to</span></div>
+              <div class="reveal-line"><span>practical synthesis routes, identifying</span></div>
+              <div class="reveal-line"><span>the exact precursors, conditions, and</span></div>
+              <div class="reveal-line"><span>sequences needed to make them real.</span></div>
             </div>
             <div class="process-bottom">
-              <span class="process-eyebrow animate-fade-in">Physics Screening</span>
+              <span class="process-eyebrow animate-fade-in">Synthesis Planning</span>
               <h2 class="process-heading">
-                <div class="reveal-line"><span>Skandax</span></div>
-                <div class="reveal-line"><span>Validate</span></div>
+                <div class="reveal-line"><span>Synthesize</span></div>
               </h2>
             </div>
           </div>
           <div class="process-step-right">
             <div class="process-right-inner">
-              <span class="process-right-label-top">Virtual Cycler</span>
+              <span class="process-right-label-top">From Digital To Physical</span>
               <div class="process-icon">
                 <!-- Skandax Validate: Focus/crop brackets with inner square -->
                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1931,15 +2091,14 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Automatically translates complex</span></div>
-              <div class="reveal-line"><span>digital microstructures into precise</span></div>
-              <div class="reveal-line"><span>machine code for immediate</span></div>
-              <div class="reveal-line"><span>deployment on factory lines.</span></div>
+              <div class="reveal-line"><span>Translates synthesis plans into precise</span></div>
+              <div class="reveal-line"><span>process parameters ready for pilot</span></div>
+              <div class="reveal-line"><span>plants or factory lines — no manual</span></div>
+              <div class="reveal-line"><span>engineering required.</span></div>
             </div>
             <div class="process-bottom">
               <span class="process-eyebrow animate-fade-in">Process Compilation</span>
               <h2 class="process-heading">
-                <div class="reveal-line"><span>Skandax</span></div>
                 <div class="reveal-line"><span>Deploy</span></div>
               </h2>
             </div>
@@ -1971,15 +2130,14 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Achieves successful physical</span></div>
-              <div class="reveal-line"><span>manufacturing on the very first try and</span></div>
-              <div class="reveal-line"><span>reduces the typical research timeline</span></div>
-              <div class="reveal-line"><span>from five years to six months.</span></div>
+              <div class="reveal-line"><span>Validates physical outputs, delivers</span></div>
+              <div class="reveal-line"><span>a fully documented, manufacturable</span></div>
+              <div class="reveal-line"><span>product — cutting the research-to-</span></div>
+              <div class="reveal-line"><span>market timeline from years to months.</span></div>
             </div>
             <div class="process-bottom">
-              <span class="process-eyebrow animate-fade-in">Zero Shot Output</span>
+              <span class="process-eyebrow animate-fade-in">Validation & Commercialization</span>
               <h2 class="process-heading">
-                <div class="reveal-line"><span>The</span></div>
                 <div class="reveal-line"><span>Reality</span></div>
               </h2>
             </div>
@@ -2021,8 +2179,38 @@
           <!-- Right line: gap at top and bottom corners -->
           <line class="ip-border-line" id="ip-line-right" x1="99.8%" y1="8%" x2="99.8%" y2="92%" />
         </svg>
-        <h2 class="ip-heading" id="ip-heading">Your IP Never<br>Leaves Your Walls.</h2>
-        <p class="ip-body" id="ip-body">Air-gapped, on-premise deployment. Your chemistry, telemetry,<br>and trade secrets stay yours always. Full ownership of every<br>CAD file, composition, and patent generated.</p>
+        <h2 class="ip-heading" id="ip-heading" style="font-size: 48px;">Shodh turns science into<br>new physical products.</h2>
+        <p class="ip-body" id="ip-body">Give it an objective, a safer battery, a better catalyst, a scalable<br>process &amp; it reasons across chemistry, physics, &amp; manufacturing<br>constraints to generate a path from idea to reality.</p>
+      </div>
+    </div>
+
+    <!-- Section: "One Model" Gap Animation -->
+    <div class="gap-section" id="section-gap">
+      <div class="gap-inner">
+        <!-- Split headline -->
+        <div class="gap-heading-row">
+          <div class="gap-heading-contain is-left">
+            <h2 class="gap-heading is-left">One model&nbsp;</h2>
+          </div>
+          <div class="gap-heading-contain is-right">
+            <h2 class="gap-heading is-right">Infinite invention.</h2>
+          </div>
+        </div>
+
+        <!-- Center image slideshow -->
+        <div class="gap-cover" id="gap-cover">
+          <img src="assets/orbit/pexels-817621-12770846_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
+          <img src="assets/orbit/pexels-aliakdemir-30037320_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
+          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Laboratory imagery">
+          <img src="assets/orbit/pexels-magic-k-24827758-6729421_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
+          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
+          <img src="assets/orbit/pexels-stephen-leonardi-587681991-28614865_gm_optimized.jpeg" class="gap-image" alt="Technology imagery">
+        </div>
+
+        <!-- Testimonial -->
+        <div class="gap-testimonial" id="gap-testimonial">
+          <p class="gap-testimonial-text">"From molecular design to factory-ready processes, a single intelligence that bridges the gap between scientific discovery and industrial reality."</p>
+        </div>
       </div>
     </div>
 

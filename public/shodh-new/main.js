@@ -611,6 +611,9 @@ function playHeroAnimations() {
 
   // Initialize IP security section animation
   setupIPSection();
+
+  // Initialize "One Model" gap section animation
+  setupGapSection();
 }
 
 function setupOrbitAnimation() {
@@ -1116,3 +1119,118 @@ function setupIPSection() {
     }
   });
 }
+
+// ─── Section: "One Model" Gap Animation ──────────────────────────────────────
+function setupGapSection() {
+  if (typeof ScrollTrigger === 'undefined') return;
+
+  const section = document.getElementById('section-gap');
+  if (!section) return;
+
+  const cover = document.getElementById('gap-cover');
+  const testimonial = document.getElementById('gap-testimonial');
+  const images = section.querySelectorAll('.gap-image');
+  const headingLeft = section.querySelector('.gap-heading.is-left');
+  const headingRight = section.querySelector('.gap-heading.is-right');
+
+  if (!headingLeft || !headingRight) return;
+
+  // ── Manual character splitting (no SplitText plugin needed) ──
+  function splitChars(el) {
+    const text = el.textContent;
+    el.innerHTML = '';
+    const chars = [];
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.className = 'gap-char';
+      span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+      el.appendChild(span);
+      chars.push(span);
+    }
+    return chars;
+  }
+
+  const leftChars = splitChars(headingLeft);
+  const rightChars = splitChars(headingRight);
+
+  // ── Initial states ──
+  // Characters: pushed outward, invisible, slightly squished
+  gsap.set(leftChars, { x: -80, opacity: 0, scaleY: 0.95, display: 'inline-block' });
+  gsap.set(rightChars, { x: 80, opacity: 0, scaleY: 0.95, display: 'inline-block' });
+
+  // Cover: collapsed via clip-path (set in CSS)
+  // Testimonial: hidden (set in CSS)
+
+  // ── Pin the section when it reaches the top (holds it in place after animation) ──
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: '+=300',
+    pin: true,
+    invalidateOnRefresh: true
+  });
+
+  // ── Scroll-driven animation: plays as section scrolls from ~50% visible to fully visible ──
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top 60%',
+      end: 'top top',
+      scrub: 0.5,
+      invalidateOnRefresh: true
+    }
+  });
+
+  // Animation 1: Expand image cover via clip-path
+  tl.fromTo(cover,
+    { clipPath: 'inset(50% 50% 50% 50% round 0.25rem)' },
+    { clipPath: 'inset(0% 0% 0% 0% round 0.25rem)', duration: 1, ease: 'none' },
+    0
+  );
+
+  // Animation 2: Character reveal — left text (stagger from end → chars slide inward)
+  tl.to(leftChars, {
+    keyframes: {
+      '40%': { opacity: 1 },
+      '90%': { x: 0, scaleY: 1 },
+      '100%': {}
+    },
+    duration: 1,
+    ease: 'expo.out',
+    stagger: { each: 0.022, from: 'end' }
+  }, 0);
+
+  // Animation 2b: Character reveal — right text (stagger from start → chars slide inward)
+  tl.to(rightChars, {
+    keyframes: {
+      '40%': { opacity: 1 },
+      '90%': { x: 0, scaleY: 1 },
+      '100%': {}
+    },
+    duration: 1,
+    ease: 'expo.out',
+    stagger: { each: 0.022, from: 'start' }
+  }, 0);
+
+  // Animation 3: Testimonial fades in (after text + cover are mostly done)
+  tl.to(testimonial, {
+    opacity: 1,
+    y: 0,
+    duration: 0.3,
+    ease: 'power2.out'
+  }, 0.7);
+
+  // ── Image Slideshow (endless continuous loop — never stops) ──
+  let currentImg = 0;
+
+  function switchImage() {
+    if (images.length <= 1) return;
+    gsap.set(images[currentImg], { opacity: 0 });
+    currentImg = (currentImg + 1) % images.length;
+    gsap.set(images[currentImg], { opacity: 1 });
+  }
+
+  // Start the loop immediately and keep it running forever
+  setInterval(switchImage, 800);
+}
+
