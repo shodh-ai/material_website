@@ -244,13 +244,20 @@
     if (!userHasScrolled) userHasScrolled = true;
   }
 
+  function isTouchPrimary() {
+    return window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  }
+
   function initLenis() {
     if (typeof Lenis === 'undefined' || typeof gsap === 'undefined') {
       console.warn('[Sales deck] Lenis/GSAP not loaded.');
       return;
     }
 
-    if (prefersReducedMotion()) {
+    // Touch devices: Lenis only smooths the mouse wheel, and the wrapper is
+    // overflow:hidden, so native touch scrolling is blocked. Fall back to
+    // native scrolling (same path as reduced-motion) so phones can scroll.
+    if (prefersReducedMotion() || isTouchPrimary()) {
       scrollEl.style.overflowY = 'auto';
       scrollEl.style.webkitOverflowScrolling = 'touch';
       return;
