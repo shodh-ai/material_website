@@ -507,6 +507,39 @@ function initFooterForm() {
   if (!form) return;
 
   const fields = form.querySelectorAll('.field');
+  const recipientEmail = 'ellwil@shodh.ai';
+
+  const openMailClient = (formData) => {
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const company = String(formData.get('company') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const subject = `New Shodh AI footer inquiry from ${name}`;
+    const body = [
+      'New footer contact form submission',
+      '',
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Company: ${company}`,
+      '',
+      'Message:',
+      message,
+    ].join('\n');
+
+    window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const showSuccess = (message) => {
+    const successMessage = form.querySelector('.footer-form-success');
+
+    if (successMessage) {
+      successMessage.innerHTML = message;
+    }
+
+    form.classList.add('is-success');
+    form.reset();
+    fields.forEach((field) => field.classList.remove('is-filled'));
+  };
 
   fields.forEach((field) => {
     const input = field.querySelector('.field__input');
@@ -547,14 +580,16 @@ function initFooterForm() {
         }),
       });
 
-      if (!response.ok) throw new Error('Footer contact request failed');
+      if (!response.ok) {
+        const details = await response.json().catch(() => ({}));
+        throw new Error(details.error || 'Footer contact request failed');
+      }
 
-      form.classList.add('is-success');
-      form.reset();
-      fields.forEach((field) => field.classList.remove('is-filled'));
+      showSuccess('Thank you.<br>Your message has been sent.<br>We will get back to you as soon as possible.');
     } catch (error) {
       console.error(error);
-      form.classList.add('is-error');
+      openMailClient(formData);
+      showSuccess(`Thank you.<br>Your email client has opened with the message addressed to ${recipientEmail}.<br>Please send it from there.`);
     } finally {
       if (submitButton) submitButton.disabled = false;
     }
