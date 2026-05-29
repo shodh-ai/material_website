@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shodh AI Sales Deck</title>
+  <link rel="icon" type="image/svg+xml" href="../shodh-new/White Shodh AI Brandmark.svg">
+  <link rel="preload" href="../shodh-new/fluid-config.json" as="fetch" crossorigin>
+  <link rel="preload" href="../shodh-new/Syne/Syne-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="sales-deck.css">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: var(--sd-bg, #c8d8ef);
+      transition: background 0.5s ease;
+    }
+
+    #unicorn-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100lvh;
+      overflow: hidden;
+    }
+
+    #unicorn-bg canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      #unicorn-bg {
+        height: -webkit-fill-available;
+      }
+    }
+  </style>
+</head>
+<body class="sales-deck" data-theme="light">
+  <div id="unicorn-bg" aria-hidden="true"></div>
+  <button class="theme-toggle sd-theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+  <div id="sales-deck-scroll" class="sales-deck-scroll">
+  <main id="sales-deck-content" class="sales-deck-content">
+
+    <section class="sd-slide" id="slide-1" aria-label="Title">
+      <div class="sd-grid sd-grid--slide-1">
+        <span class="sd-label sd-details sd-text-line">Shodh AI Sales Deck - Model-First Version</span>
+        <h1 class="sd-h1">
+          <span class="sd-text-line">The Best Physics Model</span>
+          <span class="sd-text-line">for Physical World</span>
+          <span class="sd-text-line">Shodh AI</span>
+        </h1>
+        <h3 class="sd-h3 sd-details">
+          <span class="sd-text-line">Large Physics Model for discovery,</span>
+          <span class="sd-text-line">invention, &amp; manufacturing.</span>
+        </h3>
+        <p class="sd-body sd-details">
+          <span class="sd-text-line">Discover new molecules, materials,</span>
+          <span class="sd-text-line">processes, and products — then</span>
+          <span class="sd-text-line">make them work in the real world.</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-2" aria-label="The Problem">
+      <div class="sd-grid sd-grid--slide-2">
+        <div class="sd-headline sd-headline--slide-2">
+          <span class="sd-label sd-details sd-text-line">The Problem</span>
+          <h1 class="sd-h1">
+            <span class="sd-text-line">Physical R&amp;D is siloed &amp;</span>
+            <span class="sd-text-line">human-limited</span>
+          </h1>
+        </div>
+        <div class="sd-slide-2-lower sd-details">
+          <p class="sd-body sd-slide-2-intro">
+            <span class="sd-text-line">Today, research is still driven by:</span>
+          </p>
+          <div class="sd-problem-grid">
+            <h3 class="sd-h3 sd-problem-h3 sd-problem-h3--r1c1">Siloed tools</h3>
+            <h3 class="sd-h3 sd-problem-h3 sd-problem-h3--r1c2">Forward design only</h3>
+            <h3 class="sd-h3 sd-problem-h3 sd-problem-h3--r1c3">Human bottleneck</h3>
+            <p class="sd-body sd-problem-body sd-problem-body--r2c1">
+              <span class="sd-text-line">Chemistry, CFD, process engineering, QC,</span>
+              <span class="sd-text-line">and manufacturing data do not talk to each other.</span>
+            </p>
+            <p class="sd-body sd-problem-body sd-problem-body--r2c2">
+              <span class="sd-text-line">Teams test one idea at a time, then react to failures.</span>
+            </p>
+            <p class="sd-body sd-problem-body sd-problem-body--r2c3">
+              <span class="sd-text-line">A scientist or engineer can reason across</span>
+              <span class="sd-text-line">1–2 dominant variables at once.</span>
+            </p>
+            <h3 class="sd-h3 sd-problem-h3 sd-problem-h3--r3c1">Intuition-led search</h3>
+            <h3 class="sd-h3 sd-problem-h3 sd-problem-h3--r3c2">Result</h3>
+            <p class="sd-body sd-problem-body sd-problem-body--r4c1">
+              <span class="sd-text-line">Most process discovery still depends on</span>
+              <span class="sd-text-line">experience, guesswork, and trial-and-error.</span>
+            </p>
+            <p class="sd-body sd-problem-body sd-problem-body--r4c2">
+              <span class="sd-text-line">Great ideas die between lab, pilot line, and factory.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-3" aria-label="The Shodh Model">
+      <div class="sd-grid sd-grid--slide-3">
+        <div class="sd-headline sd-headline--slide-3">
+          <span class="sd-label sd-details sd-text-line">The Shodh Model</span>
+          <h1 class="sd-h1">
+            <span class="sd-text-line">Shodh removes</span>
+            <span class="sd-text-line">the human bottleneck</span>
+          </h1>
+        </div>
+        <div class="sd-slide-3-columns sd-details">
+          <div class="sd-slide-3-col">
+            <p class="sd-body sd-slide-3-intro">
+              <span class="sd-text-line">Shodh can reason across 100–200 coupled physical variables at once.</span>
+            </p>
+            <div class="sd-slide-3-block">
+              <p class="sd-body">It does not only ask:</p>
+              <h3 class="sd-h3">&ldquo;What happens if we try this?&rdquo;</h3>
+            </div>
+            <div class="sd-slide-3-block">
+              <p class="sd-body">It asks:</p>
+              <h3 class="sd-h3">&ldquo;What candidate, recipe, geometry, or process window should exist to hit this target?&rdquo;</h3>
+            </div>
+          </div>
+          <div class="sd-slide-3-col">
+            <p class="sd-body sd-slide-3-intro">That is inverse design.</p>
+            <div class="sd-slide-3-block">
+              <p class="sd-body">Human Workflow:</p>
+              <h3 class="sd-h3">Idea &rarr; Experiment &rarr; Failure &rarr; Iteration</h3>
+            </div>
+            <div class="sd-slide-3-block">
+              <p class="sd-body">Shodh Workflow:</p>
+              <h3 class="sd-h3">Target &rarr; Inverse design &rarr; Ranked options &rarr; Focused validation</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-4" aria-label="LPM: Input → Model → Output">
+      <div class="sd-grid sd-grid--slide-4">
+        <div class="sd-headline sd-headline--slide-4">
+          <span class="sd-label sd-details sd-text-line">LPM: Input &rarr; Model &rarr; Output</span>
+          <h1 class="sd-h1">
+            <span class="sd-text-line">A Large Physics Model</span>
+            <span class="sd-text-line">for real-world</span>
+            <span class="sd-text-line">systems</span>
+          </h1>
+        </div>
+        <div class="sd-slide-4-columns sd-details">
+          <div class="sd-slide-4-col">
+            <h3 class="sd-h3">Input</h3>
+            <p class="sd-body">Chemistry / CAD / Geometry / Recipes / Process Data / Sensor Logs / QC Outcomes / Constraints / Target Properties</p>
+          </div>
+          <div class="sd-slide-4-col">
+            <h3 class="sd-h3">LPM</h3>
+            <p class="sd-body">Shodh&rsquo;s Large Physics Model learns the shared structure of physical systems:</p>
+            <p class="sd-body">Matter / Energy / Transport / Reaction / Geometry / Time / Failure Modes</p>
+          </div>
+          <div class="sd-slide-4-col">
+            <h3 class="sd-h3">Output</h3>
+            <p class="sd-body">New Molecule Candidates / New Dopants / Formulations / New Process Windows / New Reactor Geometries / New Factory Recipes / Validation Experiments / ROI Model / Patentable IP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-5" aria-label="Base Model + Adapters">
+      <div class="sd-grid sd-grid--slide-5">
+        <div class="sd-slide-5-col sd-slide-5-col--left">
+          <div class="sd-headline sd-headline--slide-5">
+            <span class="sd-label sd-details sd-text-line">Base Model + Adapters</span>
+            <h1 class="sd-h1">
+              <span class="sd-text-line">General Physics</span>
+              <span class="sd-text-line">Intelligence,</span>
+              <span class="sd-text-line">Calibrated to</span>
+              <span class="sd-text-line">Reality</span>
+            </h1>
+          </div>
+          <div class="sd-slide-5-block sd-slide-5-block--adapter sd-details">
+            <h3 class="sd-h3">Customer Adapter</h3>
+            <p class="sd-body">The adapter learns from customer-specific data: equipment behavior / factory drift / sensor histories / defect patterns / QC outcomes / batch variability / process constraints</p>
+            <p class="sd-body">Important : customer data calibrates the adapter. It does not need to train the public base model.</p>
+          </div>
+        </div>
+        <div class="sd-slide-5-col sd-slide-5-col--right">
+          <div class="sd-slide-5-block sd-slide-5-block--base sd-details">
+            <h3 class="sd-h3">Base LPM</h3>
+            <p class="sd-body">The base model understands general physics across molecules, materials, reactions, transport, heat, flow, geometry, and manufacturing.</p>
+          </div>
+          <div class="sd-slide-5-block sd-slide-5-block--result sd-details">
+            <h3 class="sd-h3">Result</h3>
+            <p class="sd-body">Base LPM + customer adapter = customer-specific invention and scale-up engine.</p>
+            <p class="sd-body">Cheaper and faster than competitors because it works on existing factory lines before large pilot-line CapEx.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide sd-slide--tall" id="slide-6" aria-label="Case Study: Exothermic Reaction Optimization">
+      <div class="sd-grid sd-grid--slide-6">
+        <div class="sd-headline sd-headline--slide-6">
+          <span class="sd-label sd-details sd-text-line">Case Study: Exothermic Reaction Optimization</span>
+          <h1 class="sd-h1 sd-h1--right">More yield from the same plant</h1>
+        </div>
+        <div class="sd-slide-6-narrative sd-details">
+          <div class="sd-block">
+            <h3 class="sd-h3">Problem</h3>
+            <p class="sd-body">An exothermic reaction lost yield because hotspots and dead zones created secondary impurities.</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Shodh found</h3>
+            <p class="sd-body">A high-residence-time thermal zone near the feed / mixing region.</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Shodh generated</h3>
+            <p class="sd-body">New feed angle, feed rate, RPM curve, jacket temperature profile, and static insert geometry.</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Message</h3>
+            <p class="sd-body">Shodh does not only fit plant data. It finds the physical failure mode and generates a better operating policy.</p>
+          </div>
+        </div>
+        <div class="sd-slide-6-table sd-details" role="table" aria-label="Exothermic reaction metrics">
+          <div class="sd-slide-6-row sd-slide-6-row--head" role="row">
+            <span class="sd-body" role="columnheader">Metric</span>
+            <span class="sd-body" role="columnheader">Baseline</span>
+            <span class="sd-body" role="columnheader">Shodh Result</span>
+            <span class="sd-body" role="columnheader">Impact</span>
+          </div>
+          <div class="sd-slide-6-row" role="row">
+            <span class="sd-body" role="rowheader">Yield</span>
+            <span class="sd-body" role="cell">84–85%</span>
+            <span class="sd-body" role="cell">98–99%</span>
+            <span class="sd-body" role="cell">+13–15 pp</span>
+          </div>
+          <div class="sd-slide-6-row" role="row">
+            <span class="sd-body" role="rowheader">Impurity</span>
+            <span class="sd-body" role="cell">4–5%</span>
+            <span class="sd-body" role="cell">&lt;0.1%</span>
+            <span class="sd-body" role="cell">&gt;95% reduction</span>
+          </div>
+          <div class="sd-slide-6-row" role="row">
+            <span class="sd-body" role="rowheader">Thermal variance</span>
+            <span class="sd-body" role="cell">18.4°C²</span>
+            <span class="sd-body" role="cell">3.1°C²</span>
+            <span class="sd-body" role="cell">83% reduction</span>
+          </div>
+          <div class="sd-slide-6-row" role="row">
+            <span class="sd-body" role="rowheader">COGS</span>
+            <span class="sd-body" role="cell">$14.20/kg</span>
+            <span class="sd-body" role="cell">$9.65/kg</span>
+            <span class="sd-body" role="cell">32% lower</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide sd-slide--tall" id="slide-7" aria-label="Case Study: Batch to Continuous">
+      <div class="sd-grid sd-grid--slide-7">
+        <div class="sd-headline sd-headline--slide-7">
+          <span class="sd-label sd-details sd-text-line">Case Study: Batch to Continuous</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">From slow batch</span>
+            <span class="sd-text-line">process to flow</span>
+            <span class="sd-text-line">hardware</span>
+          </h1>
+        </div>
+        <div class="sd-slide-7-narrative sd-details">
+          <div class="sd-block">
+            <h3 class="sd-h3">Problem</h3>
+            <p class="sd-body">A high-value process had poor gas-liquid contact, long residence time, pressure-drop issues, and poor selectivity.</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Shodh generated</h3>
+            <p class="sd-body">A continuous-flow TPMS / gyroid-style reactor insert that increased interfacial area without creating packed-bed pressure penalties.</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Message</h3>
+            <p class="sd-body">Shodh invents process hardware, not just operating recipes.</p>
+          </div>
+        </div>
+        <div class="sd-slide-7-table sd-details" role="table" aria-label="Batch to continuous metrics">
+          <div class="sd-slide-7-row sd-slide-7-row--head" role="row">
+            <span class="sd-body" role="columnheader">Metric</span>
+            <span class="sd-body" role="columnheader">Baseline</span>
+            <span class="sd-body" role="columnheader">Shodh Result</span>
+            <span class="sd-body" role="columnheader">Impact</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">Process mode</span>
+            <span class="sd-body" role="cell">Batch / packed bed</span>
+            <span class="sd-body" role="cell">Continuous-flow insert</span>
+            <span class="sd-body" role="cell">process intensification</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">Residence time</span>
+            <span class="sd-body" role="cell">18 hours</span>
+            <span class="sd-body" role="cell">&lt;20 minutes</span>
+            <span class="sd-body" role="cell">massive cycle compression</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">Pressure drop</span>
+            <span class="sd-body" role="cell">unstable / high</span>
+            <span class="sd-body" role="cell">1.6 bar</span>
+            <span class="sd-body" role="cell">below 2 bar constraint</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">Gas-liquid interface</span>
+            <span class="sd-body" role="cell">low</span>
+            <span class="sd-body" role="cell">4.1× baseline</span>
+            <span class="sd-body" role="cell">better mass transfer</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">Purity / ee</span>
+            <span class="sd-body" role="cell">64% ee</span>
+            <span class="sd-body" role="cell">&gt;99% ee</span>
+            <span class="sd-body" role="cell">pharma-grade target</span>
+          </div>
+          <div class="sd-slide-7-row" role="row">
+            <span class="sd-body" role="rowheader">CapEx route</span>
+            <span class="sd-body" role="cell">$22M batch expansion</span>
+            <span class="sd-body" role="cell">~$7M flow route</span>
+            <span class="sd-body" role="cell">~$15M avoided</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide sd-slide--tall" id="slide-8" aria-label="Battery R&amp;D / A123 Case">
+      <div class="sd-grid sd-grid--slide-8">
+        <div class="sd-headline sd-headline--slide-8">
+          <span class="sd-label sd-details sd-text-line">Battery R&amp;D / A123 Case</span>
+          <h1 class="sd-h1 sd-h1--left">Better chemistry is useless if it cannot be manufactured</h1>
+        </div>
+        <div class="sd-slide-8-narrative sd-details">
+          <div class="sd-block sd-slide-8-intro">
+            <p class="sd-body">A battery material can look great in simulation or coin cells, then fail in the factory because of:</p>
+            <p class="sd-body">slurry agglomeration / coating instability / calendering fracture / wetting delay / formation bottlenecks / gas trapping / thermal non-uniformity</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Shodh battery output</h3>
+            <p class="sd-body">best dopant / formulation candidates / manufacturability score / slurry and coating process windows / calendering pressure bands / wetting protocol / formation-current schedule / thermal geometry suggestions / validation experiments</p>
+          </div>
+          <div class="sd-block">
+            <h3 class="sd-h3">Message</h3>
+            <p class="sd-body">Shodh designs battery chemistry around manufacturability before expensive pilot-line spend.</p>
+          </div>
+        </div>
+        <div class="sd-slide-8-side sd-details">
+          <h3 class="sd-h3">A123 pilot target</h3>
+          <div class="sd-slide-8-table" role="table" aria-label="A123 pilot targets">
+            <div class="sd-slide-8-row sd-slide-8-row--head" role="row">
+              <span class="sd-body" role="columnheader">Target</span>
+              <span class="sd-body" role="columnheader">Baseline</span>
+              <span class="sd-body" role="columnheader">Shodh Target</span>
+            </div>
+            <div class="sd-slide-8-row" role="row">
+              <span class="sd-body" role="rowheader">Scrap</span>
+              <span class="sd-body" role="cell">19.7%</span>
+              <span class="sd-body" role="cell">8.7%</span>
+            </div>
+            <div class="sd-slide-8-row" role="row">
+              <span class="sd-body" role="rowheader">Formation time</span>
+              <span class="sd-body" role="cell">72h</span>
+              <span class="sd-body" role="cell">31h</span>
+            </div>
+            <div class="sd-slide-8-row" role="row">
+              <span class="sd-body" role="rowheader">Annual value</span>
+              <span class="sd-body" role="cell">—</span>
+              <span class="sd-body" role="cell">~$4.97M / line</span>
+            </div>
+            <div class="sd-slide-8-row" role="row">
+              <span class="sd-body" role="rowheader">IP output</span>
+              <span class="sd-body" role="cell">—</span>
+              <span class="sd-body" role="cell">1–2 process or structure disclosures</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide sd-slide--tall" id="slide-9" aria-label="Business Model + Moat">
+      <div class="sd-grid sd-grid--slide-9">
+        <div class="sd-headline sd-headline--slide-9">
+          <span class="sd-label sd-details sd-text-line">Business Model + Moat</span>
+          <h1 class="sd-h1 sd-h1--right">
+            <span class="sd-text-line">The moat is the</span>
+            <span class="sd-text-line">physics-to-factory</span>
+            <span class="sd-text-line">feedback loop</span>
+          </h1>
+        </div>
+        <div class="sd-slide-9-columns sd-details">
+          <div class="sd-slide-9-col">
+            <h3 class="sd-h3">Business model</h3>
+            <div class="sd-slide-9-items">
+              <div class="sd-slide-9-item">
+                <span class="sd-label">Paid pilot</span>
+                <p class="sd-body">90-day validation on one bounded problem.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">Enterprise license</span>
+                <p class="sd-body">Customer-specific LPM + adapter for ongoing discovery and manufacturing optimization.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">AI-for-hire</span>
+                <p class="sd-body">High-value molecule, material, process, or hardware invention.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">IP co-creation</span>
+                <p class="sd-body">Shared upside when Shodh generates patentable physical IP.</p>
+              </div>
+            </div>
+          </div>
+          <div class="sd-slide-9-col">
+            <h3 class="sd-h3">Moat</h3>
+            <div class="sd-slide-9-items">
+              <div class="sd-slide-9-item">
+                <span class="sd-label">1. Base LPM</span>
+                <p class="sd-body">General physical intelligence across molecules, reactions, transport, geometry, and manufacturing.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">2. Customer adapters</span>
+                <p class="sd-body">Each deployment learns real factory behavior without exposing customer IP to the base model.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">3. Inverse design</span>
+                <p class="sd-body">Shodh generates candidates, recipes, geometries, and process windows backward from the target.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">4. Validation loop</span>
+                <p class="sd-body">Every lab or factory validation improves future predictions.</p>
+              </div>
+              <div class="sd-slide-9-item">
+                <span class="sd-label">5. Discovery-to-manufacturing scope</span>
+                <p class="sd-body">Most tools stop at discovery or optimization. Shodh connects both.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide sd-slide--tall" id="slide-10" aria-label="The Ask">
+      <div class="sd-grid sd-grid--slide-10">
+        <div class="sd-headline sd-headline--slide-10">
+          <span class="sd-label sd-details sd-text-line">The Ask</span>
+          <h1 class="sd-h1 sd-h1--center">Give us one hard physical problem</h1>
+        </div>
+        <div class="sd-slide-10-objective sd-details">
+          <h3 class="sd-h3">Pick one bounded objective:</h3>
+          <p class="sd-body">Improve yield / Reduce scrap / Find the best dopant / Design a manufacturable formulation / Convert batch to continuous / Shorten wetting or formation / Generate new process IP</p>
+        </div>
+        <div class="sd-slide-10-structure sd-details">
+          <h3 class="sd-h3 sd-slide-10-structure-label">90-day structure</h3>
+          <div class="sd-slide-10-timeline">
+            <div class="sd-slide-10-step">
+              <span class="sd-label">Month 1: Blind validation</span>
+              <p class="sd-body">Predict hidden outcomes from historical data.</p>
+            </div>
+            <div class="sd-slide-10-step">
+              <span class="sd-label">Month 2: Inverse design</span>
+              <p class="sd-body">Generate candidates, recipes, dopants, geometries, or process windows.</p>
+            </div>
+            <div class="sd-slide-10-step">
+              <span class="sd-label">Month 3: Physical validation</span>
+              <p class="sd-body">Run focused experiments and calculate ROI.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sd-slide-10-end sd-details">
+          <h3 class="sd-h3">End result</h3>
+          <p class="sd-body">technical proof / ROI model / validated process window / IP candidates / enterprise expansion plan</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-11" aria-label="Closing">
+      <div class="sd-grid sd-grid--slide-11">
+        <h1 class="sd-h1 sd-h1--center sd-slide-11-closing">
+          <span class="sd-text-line">Shodh turns physics</span>
+          <span class="sd-text-line">into products.</span>
+        </h1>
+      </div>
+    </section>
+
+  </main>
+  </div>
+  <script id="my-scene-json" type="application/json"></script>
+  <script src="../shodh-new/vendor/lenis.min.js" defer></script>
+  <script src="../shodh-new/vendor/gsap.min.js" defer></script>
+  <script src="../shodh-new/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shodh-new/vendor/unicornStudio.umd.js" defer></script>
+  <script src="sales-deck.js" defer></script>
+  <script src="sales-deck-animations.js" defer></script>
+</body>
+</html>
