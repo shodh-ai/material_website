@@ -1357,12 +1357,24 @@
     margin-top: var(--sd-space-32);
   }
 
+  /* Stack narrative above table — separate rows so they don't overlap */
+  #slide-6 .sd-grid--slide-6,
+  #slide-7 .sd-grid--slide-7,
+  #slide-8 .sd-grid--slide-8 {
+    grid-template-rows: auto auto auto;
+  }
+
   #slide-6 .sd-slide-6-narrative,
   #slide-6 .sd-slide-6-table {
     grid-column: 1 / -1;
   }
 
+  #slide-6 .sd-slide-6-narrative {
+    grid-row: 2;
+  }
+
   #slide-6 .sd-slide-6-table {
+    grid-row: 3;
     margin-top: var(--sd-space-32);
   }
 
@@ -1371,7 +1383,13 @@
     grid-column: 1 / -1;
   }
 
+  #slide-7 .sd-slide-7-narrative {
+    grid-row: 2;
+    align-content: start;
+  }
+
   #slide-7 .sd-slide-7-table {
+    grid-row: 3;
     margin-top: var(--sd-space-32);
   }
 
@@ -1385,7 +1403,12 @@
     grid-column: 1 / -1;
   }
 
+  #slide-8 .sd-slide-8-narrative {
+    grid-row: 2;
+  }
+
   #slide-8 .sd-slide-8-side {
+    grid-row: 3;
     margin-top: var(--sd-space-32);
   }
 
@@ -1409,11 +1432,116 @@
     --sd-margin-x: 24px;
     --sd-margin-y: 48px;
     --sd-gutter: 16px;
+
+    /* Phone type scale — derived from the same tokens for consistency */
+    --sd-h1-size: 34px;
+    --sd-h1-lh: 1.12;
+    --sd-h3-size: 19px;
+    --sd-h3-lh: 26px;
+    --sd-body-size: 15px;
+    --sd-body-lh: 23px;
+    --sd-label-size: 12px;
+    --sd-label-lh: 15px;
   }
 
-  .sd-grid {
+  /* Let pre-broken / single-line text wrap so nothing is clipped off-screen */
+  .sales-deck .sd-text-line,
+  .sales-deck .sd-mask-line-inner {
+    white-space: normal !important;
+  }
+
+  /* One screen per slide, content top-aligned and scrollable */
+  .sd-slide {
+    align-items: flex-start;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  #slide-1.sd-slide,
+  #slide-11.sd-slide {
+    align-items: center;
+  }
+
+  .sd-grid,
+  #slide-1 .sd-grid--slide-1,
+  #slide-2 .sd-grid--slide-2,
+  #slide-3 .sd-grid--slide-3,
+  #slide-4 .sd-grid--slide-4,
+  #slide-5 .sd-grid--slide-5,
+  #slide-6 .sd-grid--slide-6,
+  #slide-7 .sd-grid--slide-7,
+  #slide-8 .sd-grid--slide-8,
+  #slide-9 .sd-grid--slide-9,
+  #slide-10 .sd-grid--slide-10,
+  #slide-11 .sd-grid--slide-11 {
     min-height: auto;
   }
+
+  /* Slide 1 — stack title block, full-width left-aligned text */
+  #slide-1 .sd-grid--slide-1 {
+    grid-template-rows: auto;
+    row-gap: var(--sd-space-24);
+  }
+
+  #slide-1 .sd-label,
+  #slide-1 .sd-h1,
+  #slide-1 .sd-h3,
+  #slide-1 .sd-body {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    text-align: left;
+    align-self: auto;
+  }
+
+  #slide-1 .sd-h1 {
+    margin-top: 0;
+  }
+
+  /* Slide 2 — stack headline + single-column problem list (heading→body pairs) */
+  #slide-2 .sd-grid--slide-2 {
+    grid-template-rows: auto;
+    row-gap: var(--sd-space-32);
+  }
+
+  #slide-2 .sd-headline--slide-2 {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  #slide-2 .sd-h1 {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  #slide-2 .sd-slide-2-lower {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    align-self: start;
+  }
+
+  #slide-2 .sd-problem-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: var(--sd-space-8);
+  }
+
+  #slide-2 .sd-problem-grid > * {
+    grid-column: 1 !important;
+    margin-top: 0;
+  }
+
+  #slide-2 .sd-problem-h3--r1c1 { grid-row: 1; }
+  #slide-2 .sd-problem-body--r2c1 { grid-row: 2; }
+  #slide-2 .sd-problem-h3--r1c2 { grid-row: 3; margin-top: var(--sd-space-24); }
+  #slide-2 .sd-problem-body--r2c2 { grid-row: 4; }
+  #slide-2 .sd-problem-h3--r1c3 { grid-row: 5; margin-top: var(--sd-space-24); }
+  #slide-2 .sd-problem-body--r2c3 { grid-row: 6; }
+  #slide-2 .sd-problem-h3--r3c1 { grid-row: 7; margin-top: var(--sd-space-24); }
+  #slide-2 .sd-problem-body--r4c1 { grid-row: 8; }
+  #slide-2 .sd-problem-h3--r3c2 { grid-row: 9; margin-top: var(--sd-space-24); }
+  #slide-2 .sd-problem-body--r4c2 { grid-row: 10; }
 
   .sd-metrics-header,
   .sd-metrics-row {
@@ -1454,6 +1582,23 @@
     grid-column: 1 / -1;
     font-weight: 600;
     color: var(--sd-color-text);
+  }
+}
+
+/* ── Small phones — tighten the type scale a final step ── */
+@media (max-width: 480px) {
+  .sales-deck {
+    --sd-margin-x: 20px;
+    --sd-margin-y: 40px;
+
+    --sd-h1-size: 28px;
+    --sd-h1-lh: 1.15;
+    --sd-h3-size: 18px;
+    --sd-h3-lh: 25px;
+    --sd-body-size: 14px;
+    --sd-body-lh: 22px;
+    --sd-label-size: 11px;
+    --sd-label-lh: 14px;
   }
 }
 
