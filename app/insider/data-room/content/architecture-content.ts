@@ -6,19 +6,19 @@ export const skandaArchitectureDoc = {
   color: "#22c55e",
   content: `# THE SKANDA ARCHITECTURE: TECHNICAL DEEP-DIVE
 
-*The Physics Engine for the Physical World — Version 2.0*
+*The Physics Engine for the Physical World - Version 2.0*
 
 ---
 
 ## EXECUTIVE SUMMARY
 
-**What We Built:** A physics foundation model that understands how materials behave at the mesoscale (10nm-100μm) — the critical length scale where 90% of industrial materials fail during manufacturing.
+**What We Built:** A physics foundation model that understands how materials behave at the mesoscale (10nm-100μm) - the critical length scale where 90% of industrial materials fail during manufacturing.
 
 **Why It Matters:**
 
 * Google/Microsoft operate at atomic scale (too small to predict factory yield)
 * Traditional FEA operates at system scale (too big to understand material failure)
-* **We own the mesoscale** — the gap where real manufacturing happens
+* **We own the mesoscale** - the gap where real manufacturing happens
 
 **The Technical Innovation:**
 
@@ -47,13 +47,13 @@ Current AI models are built for words and images. Materials science AI is stuck 
 
 * Operate at 10⁻¹⁰ meters (individual atoms)
 * Use DFT (Density Functional Theory) to predict crystal properties
-* **Problem:** Cannot predict real-world performance. Example: GNoME discovers a crystal with "high lithium conductivity" — but when manufactured, it cracks due to thermal stress (not captured at atomic scale)
+* **Problem:** Cannot predict real-world performance. Example: GNoME discovers a crystal with "high lithium conductivity" - but when manufactured, it cracks due to thermal stress (not captured at atomic scale)
 
 **The System Trap (ANSYS, COMSOL):**
 
 * Operate at 10⁻² meters (full battery cells)
 * Use FEA/CFD to simulate bulk behavior
-* **Problem:** Cannot explain WHY materials fail. Example: FEA predicts battery will last 2000 cycles — but it fails at cycle 450 due to microscopic particle cracking (not resolved at system scale)
+* **Problem:** Cannot explain WHY materials fail. Example: FEA predicts battery will last 2000 cycles - but it fails at cycle 450 due to microscopic particle cracking (not resolved at system scale)
 
 **The Mesoscale Gap:**
 
@@ -71,11 +71,11 @@ Current AI models are built for words and images. Materials science AI is stuck 
 
 We don't build separate AI models for every problem. We built a **single Physics Foundation Model** that powers three distinct application layers:
 
-**Layer 1 — THE CORE (The Brain):** SkandaX Foundation Model — Pre-Trained Physics Hypercube, 10M+ Synthetic Scenarios
+**Layer 1 - THE CORE (The Brain):** SkandaX Foundation Model - Pre-Trained Physics Hypercube, 10M+ Synthetic Scenarios
 
-**Layer 2 — THE KERNEL (The Engines):** Forward Model (Predictor), Inverse Model (Designer), Process Model (Manufacturer)
+**Layer 2 - THE KERNEL (The Engines):** Forward Model (Predictor), Inverse Model (Designer), Process Model (Manufacturer)
 
-**Layer 3 — THE INTERFACE (The Products):** VALIDATE (for Suppliers), DEPLOY (for Factories), GENESIS (for OEMs)
+**Layer 3 - THE INTERFACE (The Products):** VALIDATE (for Suppliers), DEPLOY (for Factories), GENESIS (for OEMs)
 
 **Analogy:** SkandaX Foundation Model = GPT-4 (the brain). Forward/Inverse/Process Models = Fine-tuned variants (the specialists). VALIDATE/DEPLOY/GENESIS = ChatGPT/API wrappers (the products).
 
@@ -87,7 +87,7 @@ We don't build separate AI models for every problem. We built a **single Physics
 
 **The Solution:** We manufactured our own training distribution using **governing physics equations**.
 
-**Step 1: Encode the Physics** — We wrapped the fundamental equations of electrochemistry into a computational engine:
+**Step 1: Encode the Physics** - We wrapped the fundamental equations of electrochemistry into a computational engine:
 
 | Physics Law | What It Governs | Implementation |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ We don't build separate AI models for every problem. We built a **single Physics
 | **Cahn-Hilliard** | Phase separation (binder migration) | Phase-field modeling |
 | **Continuum Mechanics** | Stress/strain from volume expansion | FEA simulation |
 
-**Step 2: Monte Carlo Sweep** — We executed **10 Million+ synthetic simulations**, sweeping parameters across **5 orders of magnitude**:
+**Step 2: Monte Carlo Sweep** - We executed **10 Million+ synthetic simulations**, sweeping parameters across **5 orders of magnitude**:
 
 | Parameter | Range | What It Covers |
 | --- | --- | --- |
@@ -119,13 +119,13 @@ We don't build separate AI models for every problem. We built a **single Physics
 
 **The Skanda Approach (Foundation Model):**
 
-**The Insight:** Whether a voxel represents a Lithium ion in a battery, a Hydrogen molecule in a fuel cell, or water in a cement pore network — the underlying physics of **tortuosity and flux** are mathematically identical.
+**The Insight:** Whether a voxel represents a Lithium ion in a battery, a Hydrogen molecule in a fuel cell, or water in a cement pore network - the underlying physics of **tortuosity and flux** are mathematically identical.
 
 **The Training Strategy:**
 
-**Stage 1: Pre-Training (10M samples)** — Input: Synthetic microstructures from physics simulations. Task: Predict transport properties (tortuosity, diffusivity, permeability). Output: A model that understands the **universal laws of transport**.
+**Stage 1: Pre-Training (10M samples)** - Input: Synthetic microstructures from physics simulations. Task: Predict transport properties (tortuosity, diffusivity, permeability). Output: A model that understands the **universal laws of transport**.
 
-**Stage 2: Fine-Tuning (100-300 samples per chemistry)** — Input: Real lab data for specific chemistry (e.g., Silicon anodes). Task: Learn chemistry-specific quirks (SEI formation, particle cracking). Output: A specialized model for that chemistry.
+**Stage 2: Fine-Tuning (100-300 samples per chemistry)** - Input: Real lab data for specific chemistry (e.g., Silicon anodes). Task: Learn chemistry-specific quirks (SEI formation, particle cracking). Output: A specialized model for that chemistry.
 
 **The Frozen Core:** The physics embedding space acts as **initialization weights** for every industrial problem we solve. This ensures the AI never proposes a design that violates thermodynamics.
 
@@ -144,11 +144,11 @@ This is the **transfer learning advantage** that makes the platform scalable.
 
 **The industry is trapped between two worlds:**
 
-**World 1: Atomic Models (Too Small)** — DFT calculates conductivity, but in the factory, binder clumps during drying → blocks pores → conductivity drops by 100x. **DFT cannot predict manufacturing defects.**
+**World 1: Atomic Models (Too Small)** - DFT calculates conductivity, but in the factory, binder clumps during drying → blocks pores → conductivity drops by 100x. **DFT cannot predict manufacturing defects.**
 
-**World 2: System Models (Too Big)** — FEA predicts 200 Wh/kg, but microscopic cracks form at cycle 400 → cascading failure → dies at cycle 450. **FEA cannot resolve cracks smaller than mesh size (~1mm).**
+**World 2: System Models (Too Big)** - FEA predicts 200 Wh/kg, but microscopic cracks form at cycle 400 → cascading failure → dies at cycle 450. **FEA cannot resolve cracks smaller than mesh size (~1mm).**
 
-**The Mesoscale (Where We Operate):** 10nm – 100μm — Pores, grain boundaries, cracks, binder networks. **This is where 90% of manufacturing failures originate.**
+**The Mesoscale (Where We Operate):** 10nm – 100μm - Pores, grain boundaries, cracks, binder networks. **This is where 90% of manufacturing failures originate.**
 
 **Examples of Mesoscale Failures:**
 
@@ -224,11 +224,11 @@ While competitors like Google GNoME focus on discovering new crystals, Shodh AI 
 
 The biggest failure in deeptech is **"Domain Drift"**: AI trained on perfect simulations → Deployed to messy real-world factory → Predictions fail catastrophically → Company dies.
 
-**Examples:** Self-driving cars trained in simulation fail in rain/snow. Robot arms trained in sim can't handle real-world friction. Drug discovery models — 90% fail in clinical trials.
+**Examples:** Self-driving cars trained in simulation fail in rain/snow. Robot arms trained in sim can't handle real-world friction. Drug discovery models - 90% fail in clinical trials.
 
 **Why This Happens:** Simulations are perfect (no noise, no defects). Reality is messy (humidity, gravity, impurities, human error).
 
-**Shodh AI has solved this with the Closed-Loop Data Factory.** We don't just use AI to predict the lab — **we use the lab to calibrate the AI**.
+**Shodh AI has solved this with the Closed-Loop Data Factory.** We don't just use AI to predict the lab - **we use the lab to calibrate the AI**.
 
 ---
 
@@ -238,11 +238,11 @@ The biggest failure in deeptech is **"Domain Drift"**: AI trained on perfect sim
 
 **The Shodh Solution: Industrialized Lab Process**
 
-**Step 1: Standardization (The "Parent")** — Create ONE high-precision reference recipe: 8% Silicon, 89% Graphite, 3% PVDF binder. Specific particle sizes (100nm Si, 10μm graphite). Exact mixing protocol (350 RPM, 4 hours).
+**Step 1: Standardization (The "Parent")** - Create ONE high-precision reference recipe: 8% Silicon, 89% Graphite, 3% PVDF binder. Specific particle sizes (100nm Si, 10μm graphite). Exact mixing protocol (350 RPM, 4 hours).
 
-**Step 2: Fabrication (The "Children")** — Make large batch of slurry (enough for 20 cells). Fabricate 20 identical cells using automated electric crimpers, inert atmosphere gloveboxes, identical electrolyte volumes (±0.5%). **Result:** 20 cells that are truly identical (eliminates "human error" as a variable).
+**Step 2: Fabrication (The "Children")** - Make large batch of slurry (enough for 20 cells). Fabricate 20 identical cells using automated electric crimpers, inert atmosphere gloveboxes, identical electrolyte volumes (±0.5%). **Result:** 20 cells that are truly identical (eliminates "human error" as a variable).
 
-**Step 3: Parallel Stress Testing** — Split the 20 "Children" into different streams:
+**Step 3: Parallel Stress Testing** - Split the 20 "Children" into different streams:
 
 | Stream | # Cells | Test Protocol | Purpose |
 | --- | --- | --- | --- |
@@ -272,13 +272,13 @@ The biggest failure in deeptech is **"Domain Drift"**: AI trained on perfect sim
 
 **When a battery fails, the voltage curve only tells half the story.** To know **why** it failed, the AI needs to see inside.
 
-**Step 1: Disassembly (Vacuum Transfer)** — Take cells from Stream B, C, or D. Disassemble in glovebox (prevent oxidation). Transfer to characterization tools WITHOUT air exposure.
+**Step 1: Disassembly (Vacuum Transfer)** - Take cells from Stream B, C, or D. Disassemble in glovebox (prevent oxidation). Transfer to characterization tools WITHOUT air exposure.
 
-**Step 2: Imaging (SEM)** — What we see: Particle cracking (silicon expansion damage), binder detachment (adhesion failure), pore clogging (SEI buildup), delamination (electrode-current collector separation).
+**Step 2: Imaging (SEM)** - What we see: Particle cracking (silicon expansion damage), binder detachment (adhesion failure), pore clogging (SEI buildup), delamination (electrode-current collector separation).
 
-**Step 3: Crystallography (XRD)** — What we detect: Phase changes (Li₁₅Si₄ formation), lattice strain (stress indicators), amorphous vs crystalline lithiation, dead lithium deposits.
+**Step 3: Crystallography (XRD)** - What we detect: Phase changes (Li₁₅Si₄ formation), lattice strain (stress indicators), amorphous vs crystalline lithiation, dead lithium deposits.
 
-**Step 4: Electrochemical Signature (EIS)** — What we measure: Charge transfer resistance (Rct), SEI layer resistance (Rsei), diffusion impedance (Warburg).
+**Step 4: Electrochemical Signature (EIS)** - What we measure: Charge transfer resistance (Rct), SEI layer resistance (Rsei), diffusion impedance (Warburg).
 
 **The Output:** A comprehensive, **linked dataset** connecting Recipe (Ingredients) + Microstructure (Shape) + Performance (Life). **No such database exists anywhere else in the world.**
 
@@ -288,7 +288,7 @@ The biggest failure in deeptech is **"Domain Drift"**: AI trained on perfect sim
 
 **The Challenge:** Two data streams speaking different "languages": Stream A (10M perfect synthetic samples) and Stream B (1,000 messy real samples).
 
-**The Solution: Domain Adaptation** — We use **adversarial training** to map both streams into a **Shared Latent Space**.
+**The Solution: Domain Adaptation** - We use **adversarial training** to map both streams into a **Shared Latent Space**.
 
 **The Training:**
 
@@ -341,9 +341,9 @@ Silicon stores 10x more lithium than graphite, but it expands by 300% during cha
 
 **The Manufacturing Challenge:** Two batteries made with the **same recipe** can have **2x difference** in cycle life due to tiny, invisible defects in the mesoscale structure.
 
-**Traditional R&D:** "Trial and Error" — test 50-100 variations, takes 3-5 years, usually fails to scale.
+**Traditional R&D:** "Trial and Error" - test 50-100 variations, takes 3-5 years, usually fails to scale.
 
-**The Shodh Way:** We use SkandaX to **digitize the failure**. We don't just ask "What is the recipe?" — We ask "What is the specific 3D architecture that can survive 300% expansion without cracking?"
+**The Shodh Way:** We use SkandaX to **digitize the failure**. We don't just ask "What is the recipe?" - We ask "What is the specific 3D architecture that can survive 300% expansion without cracking?"
 
 **The Process:**
 
@@ -360,9 +360,9 @@ Silicon stores 10x more lithium than graphite, but it expands by 300% during cha
 
 By using the Parent-Child Protocol on Silicon-Graphite chemistries, we prove our "Physics Brain" can handle:
 
-* **Test 1: Extreme Mechanical Stress** — Predict cracks before they happen. Design structures that accommodate expansion. >90% R² on capacity fade.
-* **Test 2: Volatile Chemistry** — Model SEI formation kinetics. Predict electrolyte decomposition. Correlate dQ/dV features to SEI thickness.
-* **Test 3: Complex Transport** — Track tortuosity evolution as pores close. Predict lithium concentration gradients. Match simulated impedance to EIS measurements.
+* **Test 1: Extreme Mechanical Stress** - Predict cracks before they happen. Design structures that accommodate expansion. >90% R² on capacity fade.
+* **Test 2: Volatile Chemistry** - Model SEI formation kinetics. Predict electrolyte decomposition. Correlate dQ/dV features to SEI thickness.
+* **Test 3: Complex Transport** - Track tortuosity evolution as pores close. Predict lithium concentration gradients. Match simulated impedance to EIS measurements.
 
 **The Logic:** Once SkandaX achieves **95% accuracy** on Silicon (the hardest "exam"), it is effectively **"pre-validated"** for easier chemistries: Sodium-ion, LFP, Solid-state.
 
@@ -374,7 +374,7 @@ By using the Parent-Child Protocol on Silicon-Graphite chemistries, we prove our
 
 **Month 6:** Generate AI-designed Silicon recipe. The AI outputs specific composition, particle specs, and process parameters.
 
-**Month 7:** Build the recipe in lab — Mix materials exactly as specified, coat, dry, calender, assemble 20 cells.
+**Month 7:** Build the recipe in lab - Mix materials exactly as specified, coat, dry, calender, assemble 20 cells.
 
 **Month 8:** Compare prediction to reality:
 
@@ -410,7 +410,7 @@ A material that works in a 10mL beaker often **fails catastrophically** on the p
 
 **The "Valley of Death" is where 90% of battery startups die.**
 
-**Shodh AI has built the Matter Compiler** — the first software suite that translates abstract performance targets into **machine-executable factory instructions**.
+**Shodh AI has built the Matter Compiler** - the first software suite that translates abstract performance targets into **machine-executable factory instructions**.
 
 ---
 
@@ -478,7 +478,7 @@ Just as a software compiler turns high-level code into machine-readable binary, 
 
 **The Intelligence:** SkandaX Inverse Model generates 3D microstructure. SkandaX Process Model simulates manufacturing violence (mixing, coating, drying, calendering) and optimizes parameters.
 
-**Output (The Instruction):** Specific Machine Code — Mixer speed: 385 RPM, Coating speed: 2.3 m/min, Drying zones: 95°C → 115°C → 120°C, Calendering: 5.8 MPa at 80°C, Target thickness: 85 μm (±3 μm).
+**Output (The Instruction):** Specific Machine Code - Mixer speed: 385 RPM, Coating speed: 2.3 m/min, Drying zones: 95°C → 115°C → 120°C, Calendering: 5.8 MPa at 80°C, Target thickness: 85 μm (±3 μm).
 
 **This is "Zero-Shot Manufacturing." The recipe works the first time.**
 
@@ -501,13 +501,13 @@ We **delete the "Trial and Error" phase** of manufacturing, saving OEMs millions
 
 **The Solution: Federated Learning**
 
-**Step 1: Local Training** — Factory runs production. Edge node captures data. Trains local model. **Raw data never leaves factory.**
+**Step 1: Local Training** - Factory runs production. Edge node captures data. Trains local model. **Raw data never leaves factory.**
 
-**Step 2: Gradient Extraction** — Edge node computes mathematical gradients. Encrypts them. Sends ONLY gradients to central brain.
+**Step 2: Gradient Extraction** - Edge node computes mathematical gradients. Encrypts them. Sends ONLY gradients to central brain.
 
-**Step 3: Central Aggregation** — Central brain receives gradients from all factories. Aggregates updates. Improves global model. Pushes updated model back.
+**Step 3: Central Aggregation** - Central brain receives gradients from all factories. Aggregates updates. Improves global model. Pushes updated model back.
 
-**Step 4: Continuous Improvement** — Factory A benefits from Factory B's learnings (without seeing their data). Global model gets smarter with every battery produced worldwide.
+**Step 4: Continuous Improvement** - Factory A benefits from Factory B's learnings (without seeing their data). Global model gets smarter with every battery produced worldwide.
 
 **The Result:** Privacy preserved. Collective intelligence. Network effects without data sharing.
 
@@ -532,7 +532,7 @@ We **delete the "Trial and Error" phase** of manufacturing, saving OEMs millions
 
 ### BUILT FOR BATTERIES, SCALING TO ALL WET CHEMISTRY
 
-**Current Beachhead:** Energy Storage — solving the $300B bottleneck in EV batteries before scaling to hydrogen ($200B), cement ($600B), and alloys ($500B).
+**Current Beachhead:** Energy Storage - solving the $300B bottleneck in EV batteries before scaling to hydrogen ($200B), cement ($600B), and alloys ($500B).
 
 ---
 
@@ -546,7 +546,7 @@ We **delete the "Trial and Error" phase** of manufacturing, saving OEMs millions
 
 **Pain:** "Is this new molecule scalable?"
 
-**Product:** SKANDAX VALIDATE — Validate recipes in weeks, not years. Screen 50 candidates for the cost of 1. Predict failure modes before building.
+**Product:** SKANDAX VALIDATE - Validate recipes in weeks, not years. Screen 50 candidates for the cost of 1. Predict failure modes before building.
 
 ---
 
@@ -556,7 +556,7 @@ We **delete the "Trial and Error" phase** of manufacturing, saving OEMs millions
 
 **Pain:** "Yield is too low. Scrap is too high."
 
-**Product:** SKANDAX DEPLOY — Zero-Shot Manufacturing, real-time QC, yield optimization (15% scrap → 8% = $20M saved/year). ROI > 10x.
+**Product:** SKANDAX DEPLOY - Zero-Shot Manufacturing, real-time QC, yield optimization (15% scrap → 8% = $20M saved/year). ROI > 10x.
 
 ---
 
@@ -566,7 +566,7 @@ We **delete the "Trial and Error" phase** of manufacturing, saving OEMs millions
 
 **Pain:** "We're trapped by supplier roadmaps. We need to own our tech."
 
-**Product:** SKANDAX GENESIS — Generate proprietary IP, break supplier dependence, solve impossible specs (Arctic drones, space applications, 15-year EVs).
+**Product:** SKANDAX GENESIS - Generate proprietary IP, break supplier dependence, solve impossible specs (Arctic drones, space applications, 15-year EVs).
 
 ---
 
@@ -586,7 +586,7 @@ New entrant starts with zero data. We have 10,000+ samples. Network effects crea
 
 ### Moat #2: The Physics Prior
 
-Competitors can't just "train on more data" — real mesoscale data doesn't exist at scale. We spent 12 months encoding physics equations and running 10M+ simulations. Reproducing this requires deep expertise + 100k+ GPU hours. **18-month head start.**
+Competitors can't just "train on more data" - real mesoscale data doesn't exist at scale. We spent 12 months encoding physics equations and running 10M+ simulations. Reproducing this requires deep expertise + 100k+ GPU hours. **18-month head start.**
 
 ---
 
@@ -598,9 +598,9 @@ We fuse Recipe + Microstructure + Performance. Requires specialized lab infrastr
 
 ### Moat #4: The IP Portfolio
 
-**Layer 1 — Software (Trade Secrets):** Model architecture, training procedures. Don't publish, keep proprietary.
+**Layer 1 - Software (Trade Secrets):** Model architecture, training procedures. Don't publish, keep proprietary.
 
-**Layer 2 — Materials (Patents):** Microstructure designs, process recipes. 100+ patents globally.
+**Layer 2 - Materials (Patents):** Microstructure designs, process recipes. 100+ patents globally.
 
 Even if someone copies the AI, they can't use our IP-protected designs. We monetize via royalties.
 

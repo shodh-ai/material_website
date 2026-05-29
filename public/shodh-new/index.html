@@ -139,7 +139,7 @@
       height: 100%;
     }
 
-    /* ── WebGL Background (fixed — never touched) ── */
+    /* ── WebGL Background (fixed - never touched) ── */
     #unicorn-bg {
       position: fixed;
       top: 0;
@@ -148,7 +148,7 @@
       /* Use large viewport height so the canvas always covers the full screen,
          even when the mobile URL bar is hidden. Falls back gracefully. */
       height: 100vh;
-      height: 100lvh; /* large viewport height — covers area behind URL bar */
+      height: 100lvh; /* large viewport height - covers area behind URL bar */
       z-index: 0;
       overflow: hidden;
     }
@@ -705,7 +705,7 @@
       white-space: nowrap;
     }
 
-    /* Style 1 — Label / Eyebrow */
+    /* Style 1 - Label / Eyebrow */
     .shift-label {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 12px;
@@ -715,7 +715,7 @@
       color: var(--text-muted);
     }
 
-    /* Style 3 — Section Heading */
+    /* Style 3 - Section Heading */
     .shift-heading {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 48px;
@@ -726,7 +726,7 @@
       white-space: nowrap;
     }
 
-    /* Style 4 — Body / Description */
+    /* Style 4 - Body / Description */
     .shift-body {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 28px;
@@ -1430,7 +1430,7 @@
 
     /* ═══════════════════════════════════════════════════
      * MOBILE-ONLY OVERRIDES (≤ 768px)
-     * Only touches mobile layout — desktop is untouched.
+     * Only touches mobile layout - desktop is untouched.
      * ═══════════════════════════════════════════════════ */
     @media (max-width: 768px) {
 
@@ -1491,22 +1491,29 @@
       }
 
       .hero-right {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.35;
         margin-top: 0;
         margin-bottom: auto;
         padding-top: 40px;
-        max-width: 280px;
+        max-width: calc(100vw - 48px);
       }
 
       .hero-left {
         margin-bottom: 8px;
         margin-left: 0;
+        width: 100%;
+        max-width: 100%;
       }
 
       .main-title {
-        font-size: 48px;
-        line-height: 0.92;
+        font-size: clamp(28px, 7.8vw, 40px);
+        line-height: 0.96;
+      }
+
+      .hero-right .reveal-line > span,
+      .main-title .reveal-line > span {
+        white-space: nowrap;
       }
 
       .mission-label {
@@ -1524,13 +1531,17 @@
         line-height: 1.15;
       }
 
+      .shift-heading .mobile-line {
+        display: block;
+      }
+
       .shift-body {
         font-size: 16px;
         max-width: 320px;
       }
 
-      .shift-body br {
-        display: none;
+      #shift-body br {
+        display: initial;
       }
 
       .shift-label {
@@ -1542,15 +1553,15 @@
         padding: 0 20px;
       }
 
-      /* Text Block 2 — "Discovery by Design" */
+      /* Text Block 2 - "Discovery by Design" */
       .design-heading {
-        font-size: clamp(18px, 5vw, 28px);
+        font-size: clamp(16px, 4.2vw, 22px);
         line-height: 1.3;
         text-align: center;
       }
 
       #shift-content-2 .reveal-line > span {
-        white-space: normal;
+        white-space: nowrap;
       }
 
       /* ── IP Security Section ── */
@@ -1566,7 +1577,7 @@
       }
 
       .ip-heading {
-        font-size: 36px;
+        font-size: 32px !important;
         white-space: normal;
         line-height: 1.1;
         margin-bottom: 20px;
@@ -1577,7 +1588,7 @@
       }
 
       .ip-body {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.4;
       }
 
@@ -1823,6 +1834,68 @@
       text-align: center;
       max-width: 580px;
     }
+
+    @media (max-width: 768px) {
+      .gap-heading-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        left: 50%;
+        width: calc(100vw - 32px);
+        transform: translate(-50%, -50%);
+        overflow: visible;
+      }
+
+      .gap-heading-contain {
+        overflow: visible;
+        width: 100%;
+      }
+
+      .gap-heading-contain.is-left {
+        transform: translateY(-190px);
+      }
+
+      .gap-heading-contain.is-right {
+        transform: translateY(20px);
+      }
+
+      .gap-heading {
+        position: relative;
+        font-size: clamp(50px, 13.6vw, 64px) !important;
+        line-height: 0.95;
+        letter-spacing: 0;
+        white-space: normal;
+      }
+
+      .gap-heading .gap-char {
+        display: none !important;
+      }
+
+      .gap-heading::before {
+        display: block;
+        white-space: pre-line;
+      }
+
+      .gap-heading.is-left {
+        text-align: left;
+      }
+
+      .gap-heading.is-left::before {
+        content: "One\A Model";
+      }
+
+      .gap-heading.is-right {
+        text-align: right;
+      }
+
+      .gap-heading.is-right::before {
+        content: "Infinite\A Invention";
+      }
+
+      .gap-testimonial {
+        margin-top: 70px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1953,7 +2026,7 @@
         <!-- Text Block 1 -->
         <div class="shift-content" id="shift-content-1">
           <span class="shift-label" id="shift-label">THE PROBLEM</span>
-          <h2 class="shift-heading" id="shift-heading">Physical invention is still too slow.</h2>
+          <h2 class="shift-heading" id="shift-heading">Physical invention is <span class="mobile-line">still too slow.</span></h2>
           <p class="shift-body" id="shift-body">
             The world needs better batteries, drugs,<br>chemicals, materials, reactors, & factories.
           </p>
@@ -1977,9 +2050,9 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Defines the physical goal — targets,</span></div>
+              <div class="reveal-line"><span>Defines the physical goal - targets,</span></div>
               <div class="reveal-line"><span>material constraints, safety boundaries,</span></div>
-              <div class="reveal-line"><span>and manufacturability requirements —</span></div>
+              <div class="reveal-line"><span>and manufacturability requirements -</span></div>
               <div class="reveal-line"><span>so the model knows what to invent.</span></div>
             </div>
             <div class="process-bottom">
@@ -2013,8 +2086,8 @@
           <div class="process-step-panel">
             <div class="process-body-text">
               <div class="reveal-line"><span>AI predicts how each candidate will</span></div>
-              <div class="reveal-line"><span>behave under real-world conditions —</span></div>
-              <div class="reveal-line"><span>thermal, mechanical, chemical —</span></div>
+              <div class="reveal-line"><span>behave under real-world conditions -</span></div>
+              <div class="reveal-line"><span>thermal, mechanical, chemical -</span></div>
               <div class="reveal-line"><span>before a single experiment is run.</span></div>
             </div>
             <div class="process-bottom">
@@ -2093,7 +2166,7 @@
             <div class="process-body-text">
               <div class="reveal-line"><span>Translates synthesis plans into precise</span></div>
               <div class="reveal-line"><span>process parameters ready for pilot</span></div>
-              <div class="reveal-line"><span>plants or factory lines — no manual</span></div>
+              <div class="reveal-line"><span>plants or factory lines - no manual</span></div>
               <div class="reveal-line"><span>engineering required.</span></div>
             </div>
             <div class="process-bottom">
@@ -2132,7 +2205,7 @@
             <div class="process-body-text">
               <div class="reveal-line"><span>Validates physical outputs, delivers</span></div>
               <div class="reveal-line"><span>a fully documented, manufacturable</span></div>
-              <div class="reveal-line"><span>product — cutting the research-to-</span></div>
+              <div class="reveal-line"><span>product - cutting the research-to-</span></div>
               <div class="reveal-line"><span>market timeline from years to months.</span></div>
             </div>
             <div class="process-bottom">

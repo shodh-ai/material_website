@@ -184,7 +184,7 @@ export default function MasterDeckPageV2() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Master Deck</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI - Master Deck</span>
         </div>
       </header>
 
@@ -205,15 +205,15 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 1: IDENTITY ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">01 — Identity</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">01 - Identity</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
             Backed by the IndiaAI Mission.<br />
             <span className="font-normal">Built in India. For the World.</span>
           </h2>
           <div className="space-y-8 max-w-3xl">
             {[
-              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
-              "Mandate to build AI for Science — the foundation model for the physical world.",
+              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission - with priority access on national GPU compute.",
+              "Mandate to build AI for Science - the foundation model for the physical world.",
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-white/50 mt-2.5 shrink-0" />
@@ -249,7 +249,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 2: PARADIGM ─── */}
       <section className="px-6 py-28 md:py-36 max-w-6xl mx-auto border-t border-white/5">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">02 — The Trillion-Dollar Bottleneck</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">02 - The Trillion-Dollar Bottleneck</p>
           <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-16 max-w-4xl">
             The bottleneck is<br /><span className="text-white/40">not only</span> discovery.<br />
             The deeper bottleneck is<br /><span className="font-normal">the mesoscale.</span>
@@ -257,12 +257,12 @@ export default function MasterDeckPageV2() {
           <div className="space-y-8 max-w-4xl">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-2">
-                <p className="text-white/40 text-sm uppercase tracking-wider mb-4">The Atomic Layer — Accelerating</p>
+                <p className="text-white/40 text-sm uppercase tracking-wider mb-4">The Atomic Layer - Accelerating</p>
                 <p className="text-white/50 text-xl font-light">AI for science is split into two layers.</p>
-                <p className="text-white/30 font-light">The atomic layer — focused on discovery — is already dominated by models like AlphaFold and Isomorphic Labs.</p>
+                <p className="text-white/30 font-light">The atomic layer - focused on discovery - is already dominated by models like AlphaFold and Isomorphic Labs.</p>
               </div>
               <div className="space-y-2 border-l border-white/10 pl-8">
-                <p className="text-white/50 text-sm uppercase tracking-wider mb-4">The Mesoscale — Unsolved</p>
+                <p className="text-white/50 text-sm uppercase tracking-wider mb-4">The Mesoscale - Unsolved</p>
                 <p className="text-white text-xl font-light">90% of discovered molecules will never see the market.</p>
                 <p className="text-white/60 font-light">Moving from lab-scale discovery to commercial continuous manufacturing takes 6 to 8 years of expensive, physical trial-and-error.</p>
               </div>
@@ -276,7 +276,7 @@ export default function MasterDeckPageV2() {
 
       {/* ─── SECTION 2b: THE PIPELINE LANDSCAPE ─── */}
       <section className="px-6 py-16 md:py-24 border-t border-white/5 max-w-6xl mx-auto">
-        {/* Timeline track — desktop only */}
+        {/* Timeline track - desktop only */}
         <div className="hidden lg:flex items-center mb-3">
           <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
           <div className="flex-1 h-px bg-white/10" />
@@ -285,7 +285,7 @@ export default function MasterDeckPageV2() {
           <div className="w-5 h-5 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.5)] shrink-0" />
         </div>
         <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-10">
-          {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
+          {["01 - Digital Discovery", "02 - Lab Synthesis", "03 - Industrial Scale-Up"].map((l, i) => (
             <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400/80" : "text-white/60"}`}>{l}</p>
           ))}
         </div>
@@ -297,7 +297,7 @@ export default function MasterDeckPageV2() {
               stage: "Digital Discovery",
               players: ["Isomorphic Labs", "Schrödinger"],
               desc: "AI predicts molecular structures in silico. Billions of candidates screened in days.",
-              gap: "The output is a digital prediction — not a manufacturing blueprint.",
+              gap: "The output is a digital prediction - not a manufacturing blueprint.",
               border: "border-white/5",
               bg: "bg-white/[0.01]",
               numColor: "text-white/5",
@@ -309,7 +309,7 @@ export default function MasterDeckPageV2() {
               num: "02",
               stage: "Lab Synthesis",
               players: ["Emerald Cloud Lab", "Radical AI"],
-              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence — but not proof of scale.",
+              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence - but not proof of scale.",
               gap: "The industry spends 7 years and $500M building blind physical pilot plants trying to figure out how to manufacture it.",
               border: "border-white/5",
               bg: "bg-white/[0.01]",
@@ -321,7 +321,7 @@ export default function MasterDeckPageV2() {
             {
               num: "03",
               stage: "Industrial Scale-Up",
-              players: ["Shodh AI — The Bottleneck"],
+              players: ["Shodh AI - The Bottleneck"],
               desc: "At the 10,000-litre scale, the turbulence, heat transfer, and pressure of an industrial reactor tear novel molecules apart.",
               gap: "Ours to own.",
               border: "border-rose-500/20",
@@ -366,7 +366,7 @@ export default function MasterDeckPageV2() {
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
             <p className="text-white/40 text-xs uppercase tracking-wider mb-4">How We Fit Together</p>
-            <p className="text-white/65 font-light text-sm leading-relaxed">Isomorphic Labs and Radical AI are not our competitors — they are our upstream. They hand us the molecule. We build the factory. The entire AI discovery pipeline converges on Stage 3 as its bottleneck. <span className="text-white font-normal">We are the only team working on it.</span></p>
+            <p className="text-white/65 font-light text-sm leading-relaxed">Isomorphic Labs and Radical AI are not our competitors - they are our upstream. They hand us the molecule. We build the factory. The entire AI discovery pipeline converges on Stage 3 as its bottleneck. <span className="text-white font-normal">We are the only team working on it.</span></p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
             <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Our Structural Advantage</p>
@@ -379,7 +379,7 @@ export default function MasterDeckPageV2() {
       <section className="py-28 md:py-36 border-t border-white/5">
         <div className="px-6 max-w-6xl mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">03 — The Solution</p>
+            <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">03 - The Solution</p>
             <h2 className="text-4xl md:text-7xl font-extralight leading-tight tracking-tight mb-6 max-w-4xl">
               One Math Architecture<br /><span className="font-normal">for the Physical World.</span>
             </h2>
@@ -427,7 +427,7 @@ export default function MasterDeckPageV2() {
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
-                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
+                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai - lpm-v2 - prompt</span>
               </div>
 
               <div className="p-6 md:p-10 space-y-8 font-mono">
@@ -443,7 +443,7 @@ export default function MasterDeckPageV2() {
 
                 {/* Physics */}
                 <div>
-                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine - Coupling</p>
                   <div className="space-y-1.5">
                     {active.physics.map((p, i) => (
                       <div key={i} className="flex items-center gap-2 text-sm text-white/60">
@@ -468,7 +468,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 4: LANDSCAPE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">04 — The Technology</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">04 - The Technology</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Engineering the<br /><span className="font-normal">10-Billion Parameter SOTA.</span>
           </h2>
@@ -497,7 +497,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 5: THE BOTTLENECK ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">05 — The Data Engine</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">05 - The Data Engine</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Solving the<br />
             <span className="font-normal">Cold-Start Problem.</span>
@@ -533,7 +533,7 @@ export default function MasterDeckPageV2() {
             <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/15">
               <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Unified Architecture</p>
               <p className="text-white/70 font-light leading-relaxed">
-                Ultimately unified in a <span className="text-white font-normal">Mixture of Experts (MoE)</span> architecture — a single model that routes each physical problem to its specialist expert layer.
+                Ultimately unified in a <span className="text-white font-normal">Mixture of Experts (MoE)</span> architecture - a single model that routes each physical problem to its specialist expert layer.
               </p>
             </div>
           </motion.div>
@@ -543,7 +543,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 6: THE SCIENCE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">06 — The Science</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">06 - The Science</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Why one model solves<br /><span className="font-normal">Pharma, Batteries, and Specialty Chemicals.</span>
           </h2>
@@ -554,7 +554,7 @@ export default function MasterDeckPageV2() {
             These industries look completely different on paper. Physically, they are the exact same problem: <span className="text-white font-normal">a fluid moving through a porous solid under heat, pressure, and chemical reaction.</span>
           </p>
           <p className="text-white/50 font-light leading-relaxed">
-            A drug bioreactor. A solid-state battery. A carbon membrane. Strip away the industry names, and the physics is identical. We coupled the five governing equations into one unified model—the LPM.
+            A drug bioreactor. A solid-state battery. A carbon membrane. Strip away the industry names, and the physics is identical. We coupled the five governing equations into one unified model-the LPM.
           </p>
         </motion.div>
 
@@ -566,7 +566,7 @@ export default function MasterDeckPageV2() {
               { eq: "Phase Field / Cahn-Hilliard", desc: "How materials separate and solidify.", hoverText: "hover:text-violet-300", hoverBox: "hover:bg-violet-500/5 hover:border-violet-500/20", num: "2" },
               { eq: "Solid Mechanics & Fourier's Law", desc: "How materials crack and distribute heat.", hoverText: "hover:text-orange-300", hoverBox: "hover:bg-orange-500/5 hover:border-orange-500/20", num: "3" },
               { eq: "Maxwell's Equations", desc: "Electrical fields and ion transport.", hoverText: "hover:text-cyan-300", hoverBox: "hover:bg-cyan-500/5 hover:border-cyan-500/20", num: "4" },
-              { eq: "Arrhenius Equation", desc: "Reaction kinetics—how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20", num: "5" },
+              { eq: "Arrhenius Equation", desc: "Reaction kinetics-how fast chemistry happens.", hoverText: "hover:text-emerald-300", hoverBox: "hover:bg-emerald-500/5 hover:border-emerald-500/20", num: "5" },
             ].map((item, i) => (
               <div key={i} className={`group flex flex-col gap-3 p-6 rounded-2xl border border-white/5 transition-all duration-200 cursor-default ${item.hoverBox}`}>
                 <span className="text-white/20 font-mono text-3xl font-bold leading-none">{item.num}</span>
@@ -581,7 +581,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 07: THE INFLECTION POINT ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">07 — Two Engines</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">07 - Two Engines</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Forward Validation<br />&amp; <span className="font-normal">Inverse Generation.</span>
           </h2>
@@ -592,7 +592,7 @@ export default function MasterDeckPageV2() {
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Forward Model — Predictive</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">The Forward Model - Predictive</p>
             <p className="text-white/70 font-light leading-relaxed mb-5">
               Validates R&amp;D instantly. It predicts physical outcomes and system failures at{" "}
               <span className="text-white font-medium">95% accuracy,</span> bridging the sim-to-real gap.
@@ -600,10 +600,10 @@ export default function MasterDeckPageV2() {
             <p className="text-white/40 text-sm font-mono italic">&quot;What will happen when we scale this molecule to an industrial reactor?&quot;</p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20">
-            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Inverse Model — Generative Process Compiler</p>
+            <p className="text-emerald-400/70 text-xs uppercase tracking-wider mb-4">The Inverse Model - Generative Process Compiler</p>
             <p className="text-white/70 font-light leading-relaxed mb-5">
               A true generative engineering engine. You input the desired material or chemical outcome, and the model works backward to output the exact{" "}
-              <span className="text-emerald-300 font-medium">manufacturability parameters</span> — flow rates, thermal limits, pressures — required to build it in the real world.
+              <span className="text-emerald-300 font-medium">manufacturability parameters</span> - flow rates, thermal limits, pressures - required to build it in the real world.
             </p>
             <p className="text-emerald-300/70 text-sm font-mono italic">&quot;We need this outcome. What exact process parameters produce it?&quot;</p>
           </motion.div>
@@ -611,7 +611,7 @@ export default function MasterDeckPageV2() {
 
         <div className="grid md:grid-cols-2 gap-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-8 md:p-10 rounded-2xl bg-white/[0.015] border border-white/5">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Legacy Solvers — COMSOL, Ansys</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Legacy Solvers - COMSOL, Ansys</p>
             <p className="text-white/70 font-light leading-relaxed">
               Too slow, computationally expensive, and fail to adapt to real-world complexities. Months to simulate one configuration. <span className="text-white/90">Mathematically impossible to invert.</span>
             </p>
@@ -622,7 +622,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 08: THE ULTIMATE MOAT ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">08 — Validated by Industry Titans</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">08 - Validated by Industry Titans</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             The physics of scale-up<br /><span className="font-normal">is universal.</span>
           </h2>
@@ -646,7 +646,7 @@ export default function MasterDeckPageV2() {
               num: "Jubilant",
               title: "Agro-Pharma & CDMO",
               sub: "Continuous Manufacturing (Flow Chemistry)",
-              desc: "Accelerating Continuous Manufacturing for Jubilant Ingrevia — transforming batch reactions to continuous flow chemistry at industrial scale.",
+              desc: "Accelerating Continuous Manufacturing for Jubilant Ingrevia - transforming batch reactions to continuous flow chemistry at industrial scale.",
               color: "text-emerald-300",
               border: "border-emerald-500/20",
               bg: "bg-emerald-950/10",
@@ -686,12 +686,12 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 09: THE PROOF (ALPHAFOLD MOMENT) ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 — The Proof</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">09 - The Proof</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-4 max-w-3xl">
             Our AlphaFold Moment.
           </h2>
           <p className="text-white/40 font-light max-w-xl mb-6">
-            We ran a blind 25-day &quot;Sim-to-Real&quot; sprint. We didn&apos;t just simulate — we generated the recipe, physically built it, and predicted the degradation.
+            We ran a blind 25-day &quot;Sim-to-Real&quot; sprint. We didn&apos;t just simulate - we generated the recipe, physically built it, and predicted the degradation.
           </p>
           <p className="text-white/55 font-light max-w-xl mb-16 text-sm border-l-2 border-white/10 pl-4">
             We proved the core physics engine first on complex battery matrices; we are now deploying the same Navier-Stokes/Fluid architecture to Jubilant and Biocon&apos;s bioreactors.
@@ -853,7 +853,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 10: THE BUSINESS MODEL ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">10 — The Business Model</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">10 - The Business Model</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             Path to<br /><span className="font-normal">Value Capture.</span>
           </h2>
@@ -919,7 +919,7 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 11: THE GO-TO-MARKET TIMELINE ─── */}
       <section className="px-6 py-28 md:py-36 border-t border-white/5 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">11 — The Go-To-Market Timeline</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-8">11 - The Go-To-Market Timeline</p>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             From NRE to<br /><span className="font-normal">Global Standard.</span>
           </h2>
@@ -990,14 +990,14 @@ export default function MasterDeckPageV2() {
       {/* ─── SECTION 12: THE $100M CAPITAL STACK ─── */}
       <section className="px-6 py-28 md:py-40 border-t border-white/5 max-w-6xl mx-auto text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">12 — The $100M Capital Stack</p>
+          <p className="text-xs tracking-[0.3em] uppercase text-white/40 mb-12">12 - The $100M Capital Stack</p>
           <p className="text-white/30 font-light tracking-[0.2em] mb-4">Language came. Code came.</p>
           <h2 className="text-5xl md:text-8xl font-extralight tracking-tight mb-4">Science is here.</h2>
           <p className="text-xl text-white/40 font-light mb-4 max-w-xl mx-auto">
             We are structuring a $100M capitalization to build the foundation model for the physical world.
           </p>
           <p className="text-white/30 font-light max-w-xl mx-auto mb-20">
-            $50M in sovereign, non-dilutive backing is already secured — your $50M equity check punches like a $100M check.
+            $50M in sovereign, non-dilutive backing is already secured - your $50M equity check punches like a $100M check.
           </p>
 
           <div className="grid md:grid-cols-3 gap-px bg-white/5 rounded-2xl overflow-hidden max-w-4xl mx-auto mb-20">
@@ -1106,7 +1106,7 @@ export default function MasterDeckPageV2() {
                 </p>
                 <p className="text-white/70 leading-relaxed">There is a reason this industry is empty.</p>
                 <p className="text-white/70 leading-relaxed">
-                  We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets" — industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
+                  We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets" - industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
                 </p>
                 <p className="text-white/70 leading-relaxed">
                   Our competitors, Lila Science ($550M) and Radical AI ($55M), have raised massive war chests to solve the "Lab Problem." They are building brilliant tools for scientists to discover molecules.
@@ -1125,7 +1125,7 @@ export default function MasterDeckPageV2() {
                   <strong className="text-white">Invention will not be luck, but by design.</strong>
                 </p>
                 <p className="text-white/70 leading-relaxed">
-                  Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist — a battery that is both cheaper and energy-dense — and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+                  Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist - a battery that is both cheaper and energy-dense - and then generates both the molecular recipe to invent it and the machine code to manufacture it.
                 </p>
                 <p className="text-white/70 leading-relaxed">
                   We are giving nations and industries the sovereign power to invent their own energy future, breaking the reliance on decades of slow academic trial-and-error.

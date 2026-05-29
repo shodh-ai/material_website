@@ -132,7 +132,7 @@ export default function CommercialPage() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm">Back to Insider</span>
           </Link>
-          <p className="text-xs text-white/40 font-mono tracking-widest">SHODH AI — CONFIDENTIAL</p>
+          <p className="text-xs text-white/40 font-mono tracking-widest">SHODH AI - CONFIDENTIAL</p>
         </div>
       </header>
 
@@ -184,7 +184,7 @@ export default function CommercialPage() {
             <div className="p-6 rounded-2xl border border-white/15 bg-white/[0.03] text-center max-w-4xl mx-auto mb-10">
               <p className="text-white/60 text-xs uppercase tracking-wider mb-3">The SOTA</p>
               <p className="text-white font-light text-base leading-relaxed">
-                Validated in architectural reviews with <span className="text-white font-semibold">Google DeepMind</span> as a global first — the world's first unification of 3D mesoscale physics and generative inverse-design at foundation scale.
+                Validated in architectural reviews with <span className="text-white font-semibold">Google DeepMind</span> as a global first - the world's first unification of 3D mesoscale physics and generative inverse-design at foundation scale.
               </p>
             </div>
             {/* Logos */}
@@ -215,9 +215,9 @@ export default function CommercialPage() {
             </h2>
             <div className="space-y-8 max-w-3xl">
               {[
-                "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
-                "Mandate to build AI for Science — the foundation model for the physical world.",
-                "Founder Pedigree: PhD, Cambridge University — Material Science & Photonic Engineering. Former Microsoft Research.",
+                "One of 12 foundational model teams selected by the sovereign IndiaAI Mission - with priority access on national GPU compute.",
+                "Mandate to build AI for Science - the foundation model for the physical world.",
+                "Founder Pedigree: PhD, Cambridge University - Material Science & Photonic Engineering. Former Microsoft Research.",
               ].map((text, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-2 h-2 rounded-full bg-white/50 mt-2.5 shrink-0" />
@@ -275,7 +275,7 @@ export default function CommercialPage() {
               <span className="text-emerald-300">One continuous intelligence layer.</span>
             </h2>
             <p className="text-white/65 font-light text-lg leading-relaxed max-w-4xl mb-12">
-              We are building a unified Physics Foundational Model that handles the entire pipeline—from discovery to physical realization—by accurately simulating the mesoscale. Our architecture consists of four continuous engines:
+              We are building a unified Physics Foundational Model that handles the entire pipeline-from discovery to physical realization-by accurately simulating the mesoscale. Our architecture consists of four continuous engines:
             </p>
           </motion.div>
 
@@ -581,7 +581,7 @@ export default function CommercialPage() {
             <div className="mt-10 grid md:grid-cols-2 gap-4">
               <div className="p-6 rounded-xl bg-white/[0.02] border border-white/8 space-y-2">
                 <p className="text-rose-300/70 text-xs uppercase tracking-wider">Why 3D is harder than 1D</p>
-                <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
+                <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors - position, time, temperature, pressure - all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
               </div>
               <div className="p-6 rounded-xl bg-white/[0.015] border border-white/5 space-y-2">
                 <p className="text-white/40 text-xs uppercase tracking-wider">Where we stand</p>
@@ -597,13 +597,13 @@ export default function CommercialPage() {
               {/* Stage 1 */}
               <div className="mb-6 p-8 rounded-2xl border border-blue-500/20 bg-blue-950/10">
                 <div className="mb-5">
-                  <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 — Now</p>
+                  <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 - Now</p>
                   <h4 className="text-white font-light text-2xl">The 50B 3D-Foundation Model</h4>
                   <p className="text-blue-300/50 text-xs mt-1">Anchor-Partner Deployment</p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                    <p>The universal base model — validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
+                    <p>The universal base model - validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
                     <p>Achieves <span className="text-white font-normal">90% accuracy</span> on their specific process environments. First commercial deployments in Year 1.</p>
                     <p className="text-white/30 font-mono text-xs">JAX/FLAX · FNO/UPT · Mixture of Experts</p>
                   </div>
@@ -623,13 +623,13 @@ export default function CommercialPage() {
               {/* Stage 2 */}
               <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
                 <div className="mb-5">
-                  <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 — The Vision</p>
+                  <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 - The Vision</p>
                   <h4 className="text-white font-light text-2xl">The 500B+ Foundation Model</h4>
                   <p className="text-rose-300/50 text-xs mt-1">Universal Manufacturing Intelligence</p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                    <p>A client brings a completely novel molecule, composite, or device — never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
+                    <p>A client brings a completely novel molecule, composite, or device - never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
                     <p>The 50B model handles known process families well. The 500B model handles the <span className="text-white font-normal">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
                   </div>
                   <div className="space-y-3">

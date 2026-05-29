@@ -69,7 +69,7 @@ export default function VCPitchPage() {
               >
                 <CheckCircle2 className="w-4 h-4 text-white/60" />
                 <span className="text-white/60 text-xs font-light tracking-[0.2em] uppercase">
-                  Confidential — Investor Briefing
+                  Confidential - Investor Briefing
                 </span>
               </motion.div>
               <h1 className="text-4xl md:text-6xl font-light mb-4 tracking-tight">
@@ -99,12 +99,12 @@ export default function VCPitchPage() {
                 <div className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-white/40 text-xs uppercase tracking-wider mb-3">2022 — LLMs</p>
+                      <p className="text-white/40 text-xs uppercase tracking-wider mb-3">2022 - LLMs</p>
                       <p className="text-white/80 font-light leading-relaxed">Ingested the entire internet.</p>
                       <p className="text-white/50 text-sm mt-1">Learned the grammar of human language.</p>
                     </div>
                     <div className="p-6 rounded-xl bg-white/5 border border-white/15">
-                      <p className="text-white/40 text-xs uppercase tracking-wider mb-3">Today — Shodh AI</p>
+                      <p className="text-white/40 text-xs uppercase tracking-wider mb-3">Today - Shodh AI</p>
                       <p className="text-white font-medium leading-relaxed">Building the world's first Large Physics Model (LPM).</p>
                       <p className="text-white/60 text-sm mt-1 font-light">Backed by the IndiaAI Mission.</p>
                     </div>
@@ -113,9 +113,9 @@ export default function VCPitchPage() {
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
                     <p className="text-white font-medium">How we are training it:</p>
                     <ul className="space-y-2 text-white/65 font-light">
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Priority access to a <span className="text-white font-medium">200,000 GPU cluster</span> — sovereign Indian compute.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Priority access to a <span className="text-white font-medium">200,000 GPU cluster</span> - sovereign Indian compute.</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Training on millions of physical simulations and real-world industrial data.</li>
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Just like an LLM gets smarter with more text — our LPM has a <span className="text-white font-medium">scaling law</span>: more industrial data = more physical understanding.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Just like an LLM gets smarter with more text - our LPM has a <span className="text-white font-medium">scaling law</span>: more industrial data = more physical understanding.</li>
                     </ul>
                   </div>
 
@@ -148,7 +148,7 @@ export default function VCPitchPage() {
                       <p className="text-white/50 text-xs uppercase tracking-wider">Stage 1</p>
                     </div>
                     <p className="text-white font-medium mb-1">Digital Discovery</p>
-                    <p className="text-white/50 text-sm font-light mb-2">Isomorphic Labs — AI invents a molecule on a computer.</p>
+                    <p className="text-white/50 text-sm font-light mb-2">Isomorphic Labs - AI invents a molecule on a computer.</p>
                     <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/10">
                       <span className="text-white/40 text-xs">Takes days</span>
                     </div>
@@ -159,7 +159,7 @@ export default function VCPitchPage() {
                       <p className="text-white/50 text-xs uppercase tracking-wider">Stage 2</p>
                     </div>
                     <p className="text-white font-medium mb-1">Lab Synthesis</p>
-                    <p className="text-white/50 text-sm font-light mb-2">Radical AI — robotic cloud-labs make 1 gram in a test tube.</p>
+                    <p className="text-white/50 text-sm font-light mb-2">Radical AI - robotic cloud-labs make 1 gram in a test tube.</p>
                     <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/10">
                       <span className="text-white/40 text-xs">Takes weeks</span>
                     </div>
@@ -167,7 +167,7 @@ export default function VCPitchPage() {
                   <div className="p-5 rounded-xl bg-white/10 border border-white/20">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-medium text-white">3</div>
-                      <p className="text-white text-xs uppercase tracking-wider font-medium">Stage 3 — The Wall</p>
+                      <p className="text-white text-xs uppercase tracking-wider font-medium">Stage 3 - The Wall</p>
                     </div>
                     <p className="text-white font-medium mb-1">Industrial Scale-Up</p>
                     <p className="text-white/70 text-sm font-light mb-2">10,000-ton continuous-flow factory. This is where it dies.</p>
@@ -232,7 +232,7 @@ export default function VCPitchPage() {
 
                   <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                     <p className="text-white font-medium">Shodh AI solves Stage 3.</p>
-                    <p className="text-white/60 font-light mt-1">We target the mesoscale — the physics of scale-up — so discoveries actually survive in the real world.</p>
+                    <p className="text-white/60 font-light mt-1">We target the mesoscale - the physics of scale-up - so discoveries actually survive in the real world.</p>
                   </div>
                 </div>
               </motion.section>
@@ -253,10 +253,10 @@ export default function VCPitchPage() {
 
                 <div className="space-y-6">
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
-                    <p className="text-white font-medium">Because we solve the hardest part first — scale-up — we unlock the ultimate endgame of AI for Science.</p>
+                    <p className="text-white font-medium">Because we solve the hardest part first - scale-up - we unlock the ultimate endgame of AI for Science.</p>
                     <ul className="space-y-2 text-white/65 font-light mt-2">
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Shodh AI won't just <em>invent</em> a new green hydrogen catalyst or miracle drug.</li>
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Our LPM <em>understands</em> scale-up — so it simultaneously generates the <span className="text-white font-medium">exact factory blueprint</span> to manufacture it.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Our LPM <em>understands</em> scale-up - so it simultaneously generates the <span className="text-white font-medium">exact factory blueprint</span> to manufacture it.</li>
                     </ul>
                   </div>
 
@@ -276,7 +276,7 @@ export default function VCPitchPage() {
                       </div>
                       <div>
                         <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Shodh AI</p>
-                        <p className="text-white font-medium">Discovery + factory blueprint — simultaneously — in months.</p>
+                        <p className="text-white font-medium">Discovery + factory blueprint - simultaneously - in months.</p>
                       </div>
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export default function VCPitchPage() {
                   </div>
 
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
-                    <p className="text-white font-medium">How we train it — the AlphaFold blueprint:</p>
+                    <p className="text-white font-medium">How we train it - the AlphaFold blueprint:</p>
                     <ul className="space-y-2 text-white/65 font-light">
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Use 200,000 GPUs to generate millions of synthetic physics simulations (solving the PDEs).</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Anchor that synthetic data with high-fidelity, real-world data from our robotic lab partners.</li>
@@ -370,7 +370,7 @@ export default function VCPitchPage() {
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-4">
                     <p className="text-white font-medium">The Shodh AI play:</p>
                     <ul className="space-y-2 text-white/65 font-light">
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Design a 3D-printed, continuous-flow <span className="text-white font-medium">'Suitcase Factory'</span> — sculpted to keep their enzymes alive.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Design a 3D-printed, continuous-flow <span className="text-white font-medium">'Suitcase Factory'</span> - sculpted to keep their enzymes alive.</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Take a $500M CapEx nightmare and shrink it to a $5M, 6-month deployment.</li>
                     </ul>
                   </div>
@@ -407,7 +407,7 @@ export default function VCPitchPage() {
                 </div>
               </motion.section>
 
-              {/* Section 7: AlphaFold Moment — exact copy */}
+              {/* Section 7: AlphaFold Moment - exact copy */}
               <motion.section
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -667,9 +667,9 @@ export default function VCPitchPage() {
                     </ul>
                     <div className="ml-11 space-y-3 mt-2">
                       <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                        <p className="text-white/50 text-xs uppercase tracking-wider">How we make money today — The Aarti Model</p>
+                        <p className="text-white/50 text-xs uppercase tracking-wider">How we make money today - The Aarti Model</p>
                         <ul className="space-y-1 text-white/65 font-light text-sm mt-2">
-                          <li className="flex items-start gap-2"><ChevronRight className="w-3.5 h-3.5 text-white/30 mt-0.5 shrink-0" />Upfront contract fees — cash-flow positive on deployment.</li>
+                          <li className="flex items-start gap-2"><ChevronRight className="w-3.5 h-3.5 text-white/30 mt-0.5 shrink-0" />Upfront contract fees - cash-flow positive on deployment.</li>
                           <li className="flex items-start gap-2"><ChevronRight className="w-3.5 h-3.5 text-white/30 mt-0.5 shrink-0" />Revenue-sharing on the final manufactured product. Cut of the margins we unlock.</li>
                         </ul>
                       </div>
@@ -692,10 +692,10 @@ export default function VCPitchPage() {
                   </div>
 
                   <div className="p-6 rounded-xl bg-white/10 border border-white/20 space-y-3">
-                    <p className="text-white font-medium">The Tipping Point — Proper GTM:</p>
+                    <p className="text-white font-medium">The Tipping Point - Proper GTM:</p>
                     <ul className="space-y-2 text-white/70 font-light">
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />LPM achieves true <span className="text-white font-medium">Generalization</span>. No more embedded engineers needed.</li>
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Transition to Zero-Shot Manufacturing software — deployed globally across thousands of factories.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Transition to Zero-Shot Manufacturing software - deployed globally across thousands of factories.</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />From co-creation model → <span className="text-white font-medium">pure, high-margin IP and licensing monopoly.</span></li>
                     </ul>
                   </div>
@@ -720,8 +720,8 @@ export default function VCPitchPage() {
                 <div className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-4">
                     {[
-                      { name: "Biocon / Syngene", domain: "Pharma", status: "Anchor — Active", color: "emerald" },
-                      { name: "Aarti Industries", domain: "Chemicals", status: "Anchor — Active", color: "emerald" },
+                      { name: "Biocon / Syngene", domain: "Pharma", status: "Anchor - Active", color: "emerald" },
+                      { name: "Aarti Industries", domain: "Chemicals", status: "Anchor - Active", color: "emerald" },
                       { name: "Sandoz", domain: "Pharma", status: "Board-level LOI", color: "blue" },
                       { name: "LG Chem", domain: "Batteries", status: "Board-level LOI", color: "blue" },
                       { name: "Dr. Reddy's", domain: "Pharma", status: "Deep conversations", color: "white" },
@@ -765,12 +765,12 @@ export default function VCPitchPage() {
                 <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center">
                     <h4 className="text-2xl font-medium text-white mb-2">$25M</h4>
-                    <p className="text-sm text-white/50 font-light text-center">Indian Government — sovereign NVIDIA GPU compute.</p>
+                    <p className="text-sm text-white/50 font-light text-center">Indian Government - sovereign NVIDIA GPU compute.</p>
                     <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium">Secured</div>
                   </div>
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center">
                     <h4 className="text-2xl font-medium text-white mb-2">$25M</h4>
-                    <p className="text-sm text-white/50 font-light text-center">ANRF — autonomous robotic lab infrastructure.</p>
+                    <p className="text-sm text-white/50 font-light text-center">ANRF - autonomous robotic lab infrastructure.</p>
                     <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium">Secured</div>
                   </div>
                   <div className="p-6 rounded-xl bg-white/10 border border-white/20 flex flex-col items-center">
@@ -784,7 +784,7 @@ export default function VCPitchPage() {
                   <p className="text-white font-medium text-center mb-4">What does your $50M buy?</p>
                   <ul className="space-y-2 text-white/65 font-light">
                     <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />World's top AI researchers.</li>
-                    <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Massive team of Federated Data Engineers — deployed into our first 10 global partners.</li>
+                    <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Massive team of Federated Data Engineers - deployed into our first 10 global partners.</li>
                     <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Global sales team to lock in the market before Big Tech realizes they are fighting the wrong war.</li>
                   </ul>
                 </div>

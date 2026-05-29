@@ -82,7 +82,7 @@ export default function A123Page() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI × A123 Systems — Strategic IP Co-Creation</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI × A123 Systems - Strategic IP Co-Creation</span>
         </div>
       </header>
 
@@ -269,7 +269,7 @@ export default function A123Page() {
             {/* Traditional R&D vs Shodh AI */}
             <div className="mb-8">
               <p className="text-white/50 font-light text-lg leading-relaxed mb-6">
-                The traditional way of R&D is years of forward thinking — <span className="text-white/70">Parameter Guess → Simulate → Evaluate Failure → Iterate</span> — and building expensive pilot plants to do that.
+                The traditional way of R&D is years of forward thinking - <span className="text-white/70">Parameter Guess → Simulate → Evaluate Failure → Iterate</span> - and building expensive pilot plants to do that.
               </p>
             </div>
 

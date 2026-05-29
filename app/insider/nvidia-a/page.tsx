@@ -103,7 +103,7 @@ function ShodhWorldModelArchitectureInfographic() {
     <section className="relative mx-auto w-full max-w-[1500px] overflow-hidden rounded-[1.4rem] border border-black/10 bg-[#f0efe9] p-5 shadow-[0_30px_90px_rgba(8,20,33,0.22)] sm:p-6 md:aspect-[16/9] md:min-h-0 md:rounded-[2rem] md:p-0">
       <Image
         src="/image_nvidia_intro.jpeg"
-        alt="Shodh World Model Architecture — Discovery Embedding to Dynamic Digital Twin"
+        alt="Shodh World Model Architecture - Discovery Embedding to Dynamic Digital Twin"
         fill
         priority
         sizes="(max-width: 1500px) 100vw, 1500px"

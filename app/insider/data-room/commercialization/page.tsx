@@ -18,7 +18,7 @@ export default function CommercializationPage() {
           </Link>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-            <p className="text-xs text-white/40 font-mono tracking-widest">CONFIDENTIAL — FOR INVESTOR REVIEW ONLY</p>
+            <p className="text-xs text-white/40 font-mono tracking-widest">CONFIDENTIAL - FOR INVESTOR REVIEW ONLY</p>
           </div>
         </div>
       </header>
@@ -27,7 +27,7 @@ export default function CommercializationPage() {
       <section className="pt-20 pb-16 px-6 max-w-5xl mx-auto">
         <motion.div {...fade} className="text-center mb-12">
           <p className="text-xs uppercase tracking-[0.25em] text-white/40 mb-4">DATA ROOM APPENDIX</p>
-          <h1 className="text-4xl md:text-6xl font-extralight tracking-tight mb-4 leading-tight">Shodh AI — Commercialization,<br /><span className="text-rose-300">Unit Economics & Scaling Thesis</span></h1>
+          <h1 className="text-4xl md:text-6xl font-extralight tracking-tight mb-4 leading-tight">Shodh AI - Commercialization,<br /><span className="text-rose-300">Unit Economics & Scaling Thesis</span></h1>
           <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-rose-500/20 bg-rose-950/10 text-rose-300/70 text-xs">
             <Zap className="w-3.5 h-3.5" />
             Boardroom-Ready Memorandum
@@ -150,21 +150,21 @@ export default function CommercializationPage() {
               <p className="text-white/50 font-light text-sm mb-4">Industrial giants do not buy unproven deep-tech on day one. We operate a highly disciplined &ldquo;Proof-of-Value&rdquo; (PoV) pipeline.</p>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <span className="text-blue-400 shrink-0 text-sm">—</span>
+                  <span className="text-blue-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Model</p>
                     <p className="text-white/50 font-light text-sm">Anchor Pilots are initially executed at cost (subsidized by our sovereign compute grants) using their highly classified, historical failure data.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-blue-400 shrink-0 text-sm">—</span>
+                  <span className="text-blue-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Trigger</p>
                     <p className="text-white/50 font-light text-sm">Upon hitting the &gt;90% Sim-to-Real accuracy threshold, the pilot converts into a live factory deployment.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-blue-400 shrink-0 text-sm">—</span>
+                  <span className="text-blue-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Economics</p>
                     <p className="text-white/50 font-light text-sm"><span className="text-emerald-300 font-medium">$1.0M – $3.0M</span> upfront NRE (Non-Recurring Engineering) fee to deploy the finalized edge-enclave into their secure VPC.</p>
@@ -187,14 +187,14 @@ export default function CommercializationPage() {
               <p className="text-white/50 font-light text-sm mb-4">We align our incentives with the client&apos;s P&L. If we compress a 7-year API scale-up into 6 months, we recover an average of <span className="text-white font-normal">$1.35B in monopoly patent life</span> for the partner.</p>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <span className="text-violet-400 shrink-0 text-sm">—</span>
+                  <span className="text-violet-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Model</p>
                     <p className="text-white/50 font-light text-sm">Success-based bounties triggered upon successful physical pilot plant scale-up.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-violet-400 shrink-0 text-sm">—</span>
+                  <span className="text-violet-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Economics</p>
                     <p className="text-white/50 font-light text-sm"><span className="text-violet-300 font-medium">$5.0M – $10.0M</span> cash bounty per successful molecule/alloy.</p>
@@ -217,14 +217,14 @@ export default function CommercializationPage() {
               <p className="text-white/50 font-light text-sm mb-4">This is the <span className="text-rose-300 font-medium">ultimate valuation driver</span>. By inversely generating the exact manufacturing recipe, we become co-inventors of the process IP.</p>
               <div className="space-y-3 mb-4">
                 <div className="flex gap-3">
-                  <span className="text-rose-400 shrink-0 text-sm">—</span>
+                  <span className="text-rose-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Model</p>
                     <p className="text-white/50 font-light text-sm">Perpetual royalties tied to the gigafactory&apos;s physical yield.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-rose-400 shrink-0 text-sm">—</span>
+                  <span className="text-rose-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">The Economics (Example)</p>
                     <p className="text-white/50 font-light text-sm"><span className="text-rose-300 font-mono">$1.00/kWh</span> of solid-state batteries produced.</p>
@@ -275,14 +275,14 @@ export default function CommercializationPage() {
               </div>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <span className="text-blue-400 shrink-0 text-sm">—</span>
+                  <span className="text-blue-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Go-To-Market</p>
                     <p className="text-white/50 font-light text-sm">3-5 Anchor Partners (Aarti, Biocon, Jubilant, A123).</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-blue-400 shrink-0 text-sm">—</span>
+                  <span className="text-blue-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Unit Economics (The FDE Reality)</p>
                     <p className="text-white/50 font-light text-sm">Gross margins sit at <span className="text-white/70">~60%</span> in this phase. We actively deploy Forward Deployed Engineers (FDEs) to handle bespoke enterprise data silos and consume heavy compute to fine-tune the 20% edge models.</p>
@@ -311,14 +311,14 @@ export default function CommercializationPage() {
               </div>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <span className="text-violet-400 shrink-0 text-sm">—</span>
+                  <span className="text-violet-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Go-To-Market</p>
                     <p className="text-white/50 font-light text-sm">15–20 Global Tier-1 Manufacturers (e.g., BASF, LG Chem).</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-violet-400 shrink-0 text-sm">—</span>
+                  <span className="text-violet-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Unit Economics</p>
                     <p className="text-white/50 font-light text-sm">The base physics model now handles 90%+ of the computation zero-shot. FDE requirements drop significantly. Gross margins expand to <span className="text-white/70">85%+</span>. We begin recognizing recurring Process Royalties on physical factory output.</p>
@@ -343,14 +343,14 @@ export default function CommercializationPage() {
               </div>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <span className="text-rose-400 shrink-0 text-sm">—</span>
+                  <span className="text-rose-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Go-To-Market</p>
                     <p className="text-white/50 font-light text-sm">Broad commercial API access for global mid-market deep-tech.</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <span className="text-rose-400 shrink-0 text-sm">—</span>
+                  <span className="text-rose-400 shrink-0 text-sm">-</span>
                   <div>
                     <p className="text-white/70 text-sm font-medium">Unit Economics (The Royalty API)</p>
                     <p className="text-white/50 font-light text-sm">This is not a cheap compute API. Mid-market companies upload their CAD/Chemistry; our API outputs the factory blueprint bound by smart contracts that automatically capture fractional royalties on their physical production. Gross margins reach frictionless software levels <span className="text-white/70">(90%+)</span>.</p>
@@ -436,7 +436,7 @@ export default function CommercializationPage() {
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/5 text-center">
-        <p className="text-white/30 text-xs mb-4">© 2026 Shodh AI. Confidential — For Investor Review Only.</p>
+        <p className="text-white/30 text-xs mb-4">© 2026 Shodh AI. Confidential - For Investor Review Only.</p>
         <Link href="/insider/data-room" className="text-white/50 hover:text-white text-sm transition-colors">
           ← Back to Data Room
         </Link>

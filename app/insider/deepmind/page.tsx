@@ -41,7 +41,7 @@ export default function DeepMindPage() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-10">
             <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60">Shodh AI × DeepMind — Technical Discussion</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60">Shodh AI × DeepMind - Technical Discussion</span>
           </div>
           <h1 className="text-5xl md:text-8xl font-extralight tracking-tighter mb-6 leading-[0.9]">Large<br /><span className="italic font-light text-rose-300">Physics Model.</span></h1>
           <p className="text-lg md:text-2xl text-white/45 font-light max-w-2xl mx-auto">Translating discovery into manufacturing.</p>
@@ -172,7 +172,7 @@ export default function DeepMindPage() {
                       </div>
                     </div>
                     <div className="absolute bottom-full right-0 mb-3 w-52 bg-[#0a0a0a] border border-rose-500/40 rounded-xl p-3 shadow-2xl">
-                      <p className="text-rose-400 text-sm font-bold mb-1">SHODH AI — LPM</p>
+                      <p className="text-rose-400 text-sm font-bold mb-1">SHODH AI - LPM</p>
                       <p className="text-white/70 text-xs leading-snug">Aimed at 10B–50B 3D Multi-Physics neural operator for mesoscale inverse manufacturing</p>
                     </div>
                   </div>
@@ -190,7 +190,7 @@ export default function DeepMindPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">01b</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">The Solution — The Large Physics Model</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">The Solution - The Large Physics Model</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">The Large Physics Model <span className="text-rose-300 font-light">(LPM)</span></h2>
               <p className="text-white/45 font-light text-xl mb-6">Unifying the governing PDEs of the physical world into a single neural operator.</p>
@@ -199,9 +199,9 @@ export default function DeepMindPage() {
                 <div className="p-5 rounded-xl border border-rose-500/15 bg-rose-950/5">
                   <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-3">What the LPM Actually Does</p>
                   <ul className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">—</span><span>It operates as a <span className="text-white font-normal">3D Multi-Physics Neural Surrogate</span>.</span></li>
-                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">—</span><span>It processes massive <span className="text-white font-normal">3D/4D physics tensors</span> across all domains in milliseconds.</span></li>
-                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">—</span><span><span className="text-white font-normal">Fully Invertible:</span> You input the desired zero-defect physical outcome. The LPM runs the physics backward to generate the exact thermal, fluid, and pressure recipe required to manufacture it.</span></li>
+                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">-</span><span>It operates as a <span className="text-white font-normal">3D Multi-Physics Neural Surrogate</span>.</span></li>
+                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">-</span><span>It processes massive <span className="text-white font-normal">3D/4D physics tensors</span> across all domains in milliseconds.</span></li>
+                    <li className="flex gap-2"><span className="text-rose-400 shrink-0">-</span><span><span className="text-white font-normal">Fully Invertible:</span> You input the desired zero-defect physical outcome. The LPM runs the physics backward to generate the exact thermal, fluid, and pressure recipe required to manufacture it.</span></li>
                   </ul>
                 </div>
               </div>
@@ -252,7 +252,7 @@ export default function DeepMindPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">02</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 Sandbox — The Synthetic Data Engine</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 Sandbox - The Synthetic Data Engine</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Phase 1 Sandbox: The Synthetic Data Engine <span className="text-emerald-300 font-light">(Silicon Anodes)</span></h2>
               <p className="text-white/45 font-light text-xl mb-8">Overcoming the lack of open-source data via physically-validated synthetic generation.</p>
@@ -297,15 +297,15 @@ export default function DeepMindPage() {
                 <div className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden">
                   <div className="px-5 py-3 border-b border-white/5 flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-rose-400/60"/>
-                    <p className="text-white/40 text-xs uppercase tracking-widest">The Physical Validation — Hardware Demo</p>
+                    <p className="text-white/40 text-xs uppercase tracking-widest">The Physical Validation - Hardware Demo</p>
                   </div>
                   <video autoPlay loop muted playsInline className="w-full max-h-[300px] object-cover">
                     <source src="/Animated_Sliding_Glass_Lid_Video.mp4" type="video/mp4"/>
                   </video>
-                  <p className="text-white/25 text-xs px-5 py-3 font-light">Custom vacuum-sealed transfer vessel — transporting live silicon anodes into the SEM to prevent oxidation</p>
+                  <p className="text-white/25 text-xs px-5 py-3 font-light">Custom vacuum-sealed transfer vessel - transporting live silicon anodes into the SEM to prevent oxidation</p>
                 </div>
                 <div className="p-5 rounded-xl border border-emerald-500/20 bg-emerald-950/5">
-                  <p className="text-emerald-300/70 text-xs uppercase tracking-wider mb-2">The Verdict — 95% Morphological Match</p>
+                  <p className="text-emerald-300/70 text-xs uppercase tracking-wider mb-2">The Verdict - 95% Morphological Match</p>
                   <p className="text-white/65 font-light text-sm leading-relaxed">Cross-referencing our procedural STR-GEN structures against uncorrupted physical scans, we achieved a <span className="text-white font-normal">95% morphological match</span>. The synthetic data is mathematically equivalent to reality.</p>
                 </div>
               </div>
@@ -314,27 +314,27 @@ export default function DeepMindPage() {
               <div className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden">
                 <div className="px-5 py-3 border-b border-white/5 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-white/20"/>
-                  <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography — Commercial Battery SEM</p>
+                  <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography - Commercial Battery SEM</p>
                 </div>
                 <div className="grid grid-cols-2 gap-px bg-white/5 p-px">
                   <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
-                    <img src="/SEM_comparison/Samsung_25R6_sem_slices copy.png" alt="Real SEM slices — Samsung 25R6" className="w-full h-full object-contain opacity-90"/>
+                    <img src="/SEM_comparison/Samsung_25R6_sem_slices copy.png" alt="Real SEM slices - Samsung 25R6" className="w-full h-full object-contain opacity-90"/>
                   </div>
                   <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
-                    <img src="/SEM_comparison/Samsung_25R6_sem_isosurface.png" alt="Real SEM isosurface — Samsung 25R6" className="w-full h-full object-contain opacity-90"/>
+                    <img src="/SEM_comparison/Samsung_25R6_sem_isosurface.png" alt="Real SEM isosurface - Samsung 25R6" className="w-full h-full object-contain opacity-90"/>
                   </div>
                 </div>
-                <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 — Physical scan data</p>
+                <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 - Physical scan data</p>
               </div>
               <div className="rounded-2xl border border-blue-500/20 bg-blue-950/5 overflow-hidden">
                 <div className="px-5 py-3 border-b border-blue-500/10 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-blue-400/50"/>
-                  <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI — Generated Digital Twin</p>
+                  <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI - Generated Digital Twin</p>
                 </div>
                 <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
                   <img src="/SEM_comparison/sample_003_20260206_125915_sem_isosurface.png" alt="Shodh AI generated SEM isosurface" className="w-full h-full object-contain opacity-95"/>
                 </div>
-                <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated — no physical scan required</p>
+                <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated - no physical scan required</p>
               </div>
             </motion.div>
           </section>
@@ -344,7 +344,7 @@ export default function DeepMindPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">03</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 — The Neural Surrogate & Wet-Lab Validation</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 - The Neural Surrogate & Wet-Lab Validation</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Phase 1 Sandbox: Natively Learning PDEs & <span className="text-blue-300 font-light">Closing the Sim-to-Real Gap</span></h2>
               <p className="text-white/45 font-light text-xl mb-8">Digital predictions mean nothing without physical validation.</p>
@@ -352,8 +352,8 @@ export default function DeepMindPage() {
                 <div className="p-5 rounded-xl border border-blue-500/15 bg-blue-950/5">
                   <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-3">The Digital Surrogate (Training on the Data)</p>
                   <ul className="space-y-2 text-white/65 font-light text-sm leading-relaxed">
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
                   </ul>
                 </div>
               </div>
@@ -445,21 +445,21 @@ export default function DeepMindPage() {
                 <p className="text-violet-300/70 text-xs uppercase tracking-wider mb-4">The Wet-Lab Physical Validation (Ongoing Blind Study)</p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Rigorous Testing Protocol</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">To isolate true chemical performance from random lab variance (e.g., poor cell crimping), we are actively executing an N=6 coin cell physical blind study across 5 distinct matrix recipes.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">The Matrix</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">We prompted the AI to generate both baseline formulations and boundary-pushing recipes <span className="text-white/80">(The AI Safe Bet vs. The AI Hero)</span>. We also built intentionally flawed physical designs (brittle/choked cells) to force specific mechanical cracking (LAM) and high-resistance failures.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Early Signals</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">Initial physical stress-tests are successfully tracking the AI&apos;s predicted trend lines. The physical cells are failing exactly in the extreme modes <span className="text-white/80">(Loss of Active Material, porosity bottlenecks)</span> that the digital diffusion model predicted.</p>
@@ -552,7 +552,7 @@ export default function DeepMindPage() {
             <motion.div {...fade}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">04</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">The Bottleneck — Why We Abandoned Legacy Solvers</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">The Bottleneck - Why We Abandoned Legacy Solvers</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-10 max-w-4xl">The Bottleneck: Moving from <span className="text-orange-300 font-light">1D Discovery to 3D Manufacturing</span></h2>
               <div className="space-y-5 max-w-4xl">
@@ -575,7 +575,7 @@ export default function DeepMindPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">05</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 2 — The Pure-JAX 3D Physics Engine</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 2 - The Pure-JAX 3D Physics Engine</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Phase 2: A Native-JAX <span className="text-cyan-300 font-light">Differentiable Physics Engine</span></h2>
               <p className="text-white/45 font-light text-xl mb-10">Executing Navier-Stokes and Multiphase Thermodynamics entirely on GPUs via XLA.</p>
@@ -652,7 +652,7 @@ export default function DeepMindPage() {
               </div>
             </motion.div>
             <motion.div {...fade}>
-              <p className="text-white/30 text-xs uppercase tracking-widest mb-5">Validation Results — JAX-LaB Physics Engine</p>
+              <p className="text-white/30 text-xs uppercase tracking-widest mb-5">Validation Results - JAX-LaB Physics Engine</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {[
                   { file: "1a_ch_slice.png",             label: "CH Phase Field",         sub: "Mid-plane slice" },
@@ -684,7 +684,7 @@ export default function DeepMindPage() {
             <motion.div {...fade}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">06</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Scaling the 50B Model — The Infrastructure Ask</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Scaling the 50B Model - The Infrastructure Ask</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Scaling the 3D Trunk: <span className="text-rose-300 font-light">Architecture & Infrastructure</span></h2>
               <p className="text-white/45 font-light text-xl mb-10">Transitioning from edge-validation to universal scale.</p>
@@ -725,7 +725,7 @@ export default function DeepMindPage() {
       </div>
 
       <footer className="border-t border-white/5 px-6 py-10 text-center">
-        <p className="text-white/20 text-xs tracking-widest uppercase">Shodh AI × DeepMind — Technical Discussion — Confidential</p>
+        <p className="text-white/20 text-xs tracking-widest uppercase">Shodh AI × DeepMind - Technical Discussion - Confidential</p>
       </footer>
     </div>
   );

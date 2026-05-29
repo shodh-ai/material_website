@@ -9,7 +9,7 @@ const docs = [
   {
     id: "preprint",
     num: "01",
-    title: "Academic Preprint — Mesoscale Battery Sim2Real",
+    title: "Academic Preprint - Mesoscale Battery Sim2Real",
     subtitle: "Peer-reviewed research submission",
     desc: "Full academic preprint covering our sim-to-real methodology for mesoscale battery microstructure generation and electrochemical validation.",
     icon: FileText,
@@ -20,7 +20,7 @@ const docs = [
     id: "diligence",
     num: "02",
     title: "Commercial Diligence & Morphological Validation",
-    subtitle: "Tier-1 OEM — Technical Diligence Report",
+    subtitle: "Tier-1 OEM - Technical Diligence Report",
     desc: "Proving that our procedural 3D generation engine (STR-GEN) can algorithmically recreate commercial battery morphology without physical X-ray scans.",
     icon: FlaskConical,
     kind: "Technical Memo",
@@ -29,7 +29,7 @@ const docs = [
   {
     id: "architecture",
     num: "03",
-    title: "Architecture & Roadmap — JAX-Native Physics Engine",
+    title: "Architecture & Roadmap - JAX-Native Physics Engine",
     subtitle: "Neural Surrogate Architecture Whitepaper",
     desc: "3D multi-physics JAX engine, Diffusion-FNO surrogate, divergence-penalty training, and Rayleigh-Taylor validation.",
     icon: Cpu,
@@ -39,7 +39,7 @@ const docs = [
   {
     id: "scaleup",
     num: "04",
-    title: "Scale-Up Proof — Batch-to-Continuous Conversion",
+    title: "Scale-Up Proof - Batch-to-Continuous Conversion",
     subtitle: "Tier-1 Specialty Chemical Manufacturer",
     desc: "Ongoing pilot: mapping 1D batch kinetics into 3D continuous-flow physics via our Large Physics Model. Includes redacted partner artifacts.",
     icon: Beaker,
@@ -67,7 +67,7 @@ export default function GdmDataRoomPage() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-10">
             <Lock className="w-3.5 h-3.5 text-rose-300" />
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60">Shodh AI × GDM — Secure Data Room</span>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/60">Shodh AI × GDM - Secure Data Room</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-extralight tracking-tighter mb-6 leading-[0.9]">GDM<br /><span className="italic font-light text-rose-300">Data Room.</span></h1>
           <p className="text-lg md:text-xl text-white/45 font-light max-w-2xl mx-auto">Four technical artifacts supporting the Shodh AI × Google DeepMind technical discussion.</p>
@@ -108,7 +108,7 @@ export default function GdmDataRoomPage() {
       </main>
 
       <footer className="border-t border-white/5 px-6 py-10 text-center">
-        <p className="text-white/20 text-xs tracking-widest uppercase">Shodh AI × Google DeepMind — Data Room — Confidential</p>
+        <p className="text-white/20 text-xs tracking-widest uppercase">Shodh AI × Google DeepMind - Data Room - Confidential</p>
       </footer>
     </div>
   );

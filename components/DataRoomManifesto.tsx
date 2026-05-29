@@ -60,7 +60,7 @@ const moats = [
   },
   {
     title: "Federated Learning & Client Lock-In",
-    desc: "On-premise HPC at Gigafactories — data never leaves, every node strengthens the global model, creating irreversible switching costs.",
+    desc: "On-premise HPC at Gigafactories - data never leaves, every node strengthens the global model, creating irreversible switching costs.",
     icon: Server,
   },
 ];
@@ -172,7 +172,7 @@ export default function DataRoomManifesto() {
               </li>
               <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
                 <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                <span className="text-base"><strong className="text-white">The Product:</strong> A physics foundation model that operates at the mesoscale (10nm–100μm) — the critical length scale where 90% of industrial materials fail during manufacturing.</span>
+                <span className="text-base"><strong className="text-white">The Product:</strong> A physics foundation model that operates at the mesoscale (10nm–100μm) - the critical length scale where 90% of industrial materials fail during manufacturing.</span>
               </li>
             </ul>
 
@@ -196,7 +196,7 @@ export default function DataRoomManifesto() {
               </div>
               <div className="p-6 rounded-xl bg-[#48cae4]/[0.08] border border-[#48cae4]/20">
                 <p className="text-sm text-[#48cae4] uppercase tracking-wider mb-2 font-medium">
-                  Skanda — Mesoscale
+                  Skanda - Mesoscale
                 </p>
                 <p className="text-white/90 text-base leading-relaxed font-medium">
                   Where real manufacturing happens
@@ -215,11 +215,11 @@ export default function DataRoomManifesto() {
               <ul className="space-y-3 list-none">
                 <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
                   <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base">Language is 1D (text), images are 2D (pixels) — but <strong className="text-white">matter is 4D (3D space + time)</strong></span>
+                  <span className="text-base">Language is 1D (text), images are 2D (pixels) - but <strong className="text-white">matter is 4D (3D space + time)</strong></span>
                 </li>
                 <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
                   <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base">Predicting the next token isn&apos;t enough — you must <strong className="text-white">predict the next physical state</strong></span>
+                  <span className="text-base">Predicting the next token isn&apos;t enough - you must <strong className="text-white">predict the next physical state</strong></span>
                 </li>
                 <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
                   <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
@@ -227,7 +227,7 @@ export default function DataRoomManifesto() {
                 </li>
                 <li className="flex items-start gap-3 text-white/70 font-light leading-relaxed">
                   <ChevronRight className="w-5 h-5 text-[#48cae4] mt-0.5 shrink-0" />
-                  <span className="text-base"><strong className="text-white">Skanda LMM</strong> tokenizes reality — atoms, pores, and forces into vector space — training on 10<sup>24</sup> FLOPs of physics interactions</span>
+                  <span className="text-base"><strong className="text-white">Skanda LMM</strong> tokenizes reality - atoms, pores, and forces into vector space - training on 10<sup>24</sup> FLOPs of physics interactions</span>
                 </li>
               </ul>
             </div>
@@ -240,7 +240,7 @@ export default function DataRoomManifesto() {
             <SectionHeader icon={Zap} title="The Technical Breakthrough" />
 
             <div className="space-y-5">
-              {/* 1. Forward Model — COMPLETED */}
+              {/* 1. Forward Model - COMPLETED */}
               <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#22c55e]" />
                 <div className="pl-4">
@@ -269,7 +269,7 @@ export default function DataRoomManifesto() {
                 </div>
               </div>
 
-              {/* 2. Inverse Model — DEMO READY */}
+              {/* 2. Inverse Model - DEMO READY */}
               <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#48cae4]" />
                 <div className="pl-4">
@@ -296,7 +296,7 @@ export default function DataRoomManifesto() {
                 </div>
               </div>
 
-              {/* 3. Process Model — NEW */}
+              {/* 3. Process Model - NEW */}
               <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl bg-[#a855f7]" />
                 <div className="pl-4">
@@ -309,7 +309,7 @@ export default function DataRoomManifesto() {
                     <div>
                       <p className="text-white/30 text-sm uppercase tracking-wider mb-1">The Bridge</p>
                       <p className="text-white/70 text-base leading-relaxed">
-                        Designing the structure is only half the battle. Our Process Model translates 3D geometry into factory recipes — Mixing speeds, Drying temperatures, Calendering pressures.
+                        Designing the structure is only half the battle. Our Process Model translates 3D geometry into factory recipes - Mixing speeds, Drying temperatures, Calendering pressures.
                       </p>
                     </div>
                     <div className="p-3 rounded-lg bg-[#a855f7]/[0.06] border border-[#a855f7]/10">
@@ -331,7 +331,7 @@ export default function DataRoomManifesto() {
 
             <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5">
               <p className="text-white/70 text-base font-light leading-relaxed">
-                High-throughput robotic fabrication of <strong className="text-white">10,000 cells per week</strong> in 100% inert environments — handling exotic chemistries where humans cannot safely go.
+                High-throughput robotic fabrication of <strong className="text-white">10,000 cells per week</strong> in 100% inert environments - handling exotic chemistries where humans cannot safely go.
               </p>
               <p className="text-white/50 text-base font-light leading-relaxed mt-3">
                 Every experiment feeds the global LMM, compounding the model&apos;s intelligence with each cycle.
@@ -909,7 +909,7 @@ export default function DataRoomManifesto() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          THE STRATEGIC ROUND — DEPLOYMENT STRATEGY (USE OF FUNDS)
+          THE STRATEGIC ROUND - DEPLOYMENT STRATEGY (USE OF FUNDS)
           ═══════════════════════════════════════════════════════════════════ */}
       <div className="mt-8 rounded-2xl border border-white/[0.06] bg-[#0a0a0a] overflow-hidden">
         {/* Header */}
@@ -926,7 +926,7 @@ export default function DataRoomManifesto() {
             We are opening a <strong className="text-white">$15M strategic round</strong> to accelerate deployment and industrial integration.
           </p>
           <p className="text-base text-white/50 font-light leading-relaxed max-w-2xl mx-auto">
-            We leverage the <strong className="text-white/70">IndiaAI Mission</strong> and <strong className="text-white/70">ANRF mandates</strong> to offset heavy compute and wet-lab CAPEX — structural cost-efficiency built into the model.
+            We leverage the <strong className="text-white/70">IndiaAI Mission</strong> and <strong className="text-white/70">ANRF mandates</strong> to offset heavy compute and wet-lab CAPEX - structural cost-efficiency built into the model.
           </p>
         </div>
       </div>

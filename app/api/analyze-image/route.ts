@@ -150,7 +150,7 @@ Be technical but concise.`
 
     const modelSource = quantitativeAnalysis
       ? (isTiff ? 'Analysis performed on uploaded 3D TIFF stack using trained forward model.' : 'Analysis performed using parameter-based forward model (upload a .tif for full 3D analysis).')
-      : 'Forward model unavailable — showing estimated values.';
+      : 'Forward model unavailable - showing estimated values.';
 
     const fadeRate = perf?.['capacity_fade_rate']?.toFixed(6) ?? 'N/A';
     const nominalCap = perf?.['nominal_capacity']?.toFixed(2) ?? 'N/A';

@@ -73,7 +73,7 @@ export default function EnterprisePage() {
               India's Sovereign Generative Physics Platform
             </h2>
             <p className="text-xl text-white/80 font-light leading-relaxed max-w-3xl">
-              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale—<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
+              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale-<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
             </p>
             <p className="text-white/60 font-light leading-relaxed max-w-4xl">
               We've launched our foundational mesoscale physics model (Project Skanda, in collaboration with NVIDIA), backed by the <strong className="text-white/80 font-medium">India AI Mission</strong>. Our platform scales across chemicals, batteries, and pharma, with early validation in a mesoscale battery model now proving <strong className="text-white/80 font-medium">70-80% lab accuracy</strong>. As one of 12 IndiaAI foundational model companies, we're positioned to build sovereign deep-tech IP, complementing atomic discovery models by acting as the <strong className="text-white/80 font-medium">intelligence layer for physical factory scale-up.</strong>
@@ -108,7 +108,7 @@ export default function EnterprisePage() {
                 <div>
                   <h4 className="text-lg text-white font-medium mb-2">Era 3: AI for Physical Realization <span className="text-emerald-400/80 text-sm ml-2 font-light">(Shodh AI)</span></h4>
                   <p className="text-white/80 font-light leading-relaxed">
-                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities—simulating infinite "what if" physical designs without physical trials.
+                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities-simulating infinite "what if" physical designs without physical trials.
                   </p>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function EnterprisePage() {
                 The Reality
               </h3>
               <p className="text-white/60 font-light leading-relaxed">
-                AI invents molecules fast, but lab-to-factory scaling warps physics—heat traps, flows fail, and reactions explode.
+                AI invents molecules fast, but lab-to-factory scaling warps physics-heat traps, flows fail, and reactions explode.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.05)]">
@@ -402,7 +402,7 @@ export default function EnterprisePage() {
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
               <div className="text-xs text-purple-400 uppercase tracking-widest mb-2 font-medium">Biopharma</div>
               <h4 className="text-lg text-white font-medium mb-3">Biocon / Syngene</h4>
-              <p className="text-white/60 font-light text-sm mb-4">With Kiran Mazumdar-Shaw—slashing 16-step API processes via generative flow reactors.</p>
+              <p className="text-white/60 font-light text-sm mb-4">With Kiran Mazumdar-Shaw-slashing 16-step API processes via generative flow reactors.</p>
               <div className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-white/70">
                 16 Steps → 3 Steps
               </div>
@@ -411,7 +411,7 @@ export default function EnterprisePage() {
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
               <div className="text-xs text-blue-400 uppercase tracking-widest mb-2 font-medium">Specialty Chemicals</div>
               <h4 className="text-lg text-white font-medium mb-3">Aarti Industries</h4>
-              <p className="text-white/60 font-light text-sm mb-4">With Mirik Gogri—using Digital Twins to eliminate exothermic risks in massive batch scales.</p>
+              <p className="text-white/60 font-light text-sm mb-4">With Mirik Gogri-using Digital Twins to eliminate exothermic risks in massive batch scales.</p>
               <div className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-white/70">
                 Zero-Risk Exothermics
               </div>
@@ -444,7 +444,7 @@ export default function EnterprisePage() {
             <div className="p-6 text-center border border-white/5 rounded-2xl bg-white/[0.01]">
               <Database className="w-8 h-8 text-emerald-400 mx-auto mb-4" />
               <h4 className="text-white font-medium mb-2">Unmatched Compute</h4>
-              <p className="text-white/60 font-light text-sm">IndiaAI-backed 32k+ GPUs for rapid simulations—bypassing slow public cloud queues.</p>
+              <p className="text-white/60 font-light text-sm">IndiaAI-backed 32k+ GPUs for rapid simulations-bypassing slow public cloud queues.</p>
             </div>
             
             <div className="p-6 text-center border border-emerald-500/20 rounded-2xl bg-emerald-500/5 shadow-[0_0_20px_rgba(16,185,129,0.05)]">

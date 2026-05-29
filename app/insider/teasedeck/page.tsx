@@ -30,7 +30,7 @@ export default function TeaserDeckPage() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm">Back to Insider</span>
           </Link>
-          <p className="text-xs text-white/40 font-mono tracking-widest">TEASER DECK — CONFIDENTIAL</p>
+          <p className="text-xs text-white/40 font-mono tracking-widest">TEASER DECK - CONFIDENTIAL</p>
         </div>
       </header>
 
@@ -72,7 +72,7 @@ export default function TeaserDeckPage() {
           <motion.div {...fade} className="grid md:grid-cols-2 gap-6 mb-12">
             {/* Left Box - Digital Economy */}
             <div className="p-8 rounded-2xl border border-white/10 bg-white/[0.02]">
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-4">20% — The Digital Economy</p>
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-4">20% - The Digital Economy</p>
               <p className="text-white/60 text-sm font-light mb-4">(Bits)</p>
               <p className="text-white/70 font-light text-base leading-relaxed">Automating digital workflows.</p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export default function TeaserDeckPage() {
 
             {/* Right Box - Physical Economy */}
             <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/5">
-              <p className="text-rose-300/70 text-xs uppercase tracking-widest mb-4">80% — The Physical Economy</p>
+              <p className="text-rose-300/70 text-xs uppercase tracking-widest mb-4">80% - The Physical Economy</p>
               <p className="text-rose-300/60 text-sm font-light mb-4">(Atoms)</p>
               <p className="text-white/70 font-light text-base leading-relaxed">Solving physical constraints human minds cannot compute.</p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -336,7 +336,7 @@ export default function TeaserDeckPage() {
           <motion.div {...fade} className="text-center">
             <a href="mailto:arastu@shodh.ai" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-colors">
               Partner with Us
-              <span className="text-black/60 text-sm">— arastu@shodh.ai</span>
+              <span className="text-black/60 text-sm">- arastu@shodh.ai</span>
             </a>
           </motion.div>
         </div>
