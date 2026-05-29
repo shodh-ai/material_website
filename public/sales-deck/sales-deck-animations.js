@@ -58,10 +58,18 @@
       });
     }
 
-    const htmlLines = heading.innerHTML
-      .split(/<br\s*\/?>/i)
-      .map((line) => line.replace(/<[^>]+>/g, '').trim())
-      .filter(Boolean);
+    const brLines = [];
+    let currentLine = '';
+    heading.childNodes.forEach((node) => {
+      if (node.nodeName === 'BR') {
+        brLines.push(currentLine.trim());
+        currentLine = '';
+      } else {
+        currentLine += node.textContent || '';
+      }
+    });
+    brLines.push(currentLine.trim());
+    const htmlLines = brLines.filter(Boolean);
 
     if (htmlLines.length > 1) {
       const fullText = htmlLines.join(' ');
