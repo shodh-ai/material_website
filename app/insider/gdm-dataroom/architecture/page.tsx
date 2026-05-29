@@ -87,7 +87,7 @@ const jaxLabImages = [
 export default function ArchitecturePage() {
   return (
     <GdmDocShell
-      eyebrow="File 03 · Shodh AI — Technical Architecture Whitepaper"
+      eyebrow="File 03 · Shodh AI - Technical Architecture Whitepaper"
       title="JAX-Native Physics Engine & Neural Surrogate Architecture"
       classification="Confidential"
     >
@@ -152,7 +152,7 @@ export default function ArchitecturePage() {
         <JaxFlow />
 
         <p className="text-white/30 text-xs uppercase tracking-widest mb-5 mt-10">
-          Validation Results — JAX-LaB Physics Engine
+          Validation Results - JAX-LaB Physics Engine
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 not-prose">
           {jaxLabImages.map((img) => (
@@ -288,7 +288,7 @@ export default function ArchitecturePage() {
               label: "VRMSE (held-out)",
               value: "0.0197 ± 0.0254",
               note:
-                "~2% error vs fluid std-dev — near-perfect parity with the numerical solver.",
+                "~2% error vs fluid std-dev - near-perfect parity with the numerical solver.",
               color: "border-emerald-500/25 bg-emerald-950/10 text-emerald-300",
             },
             {
@@ -320,7 +320,7 @@ export default function ArchitecturePage() {
           ))}
         </div>
         <p className="text-white/50 text-sm italic">
-          Validation Results on Held-out Test Split — 1,180 trajectories.
+          Validation Results on Held-out Test Split - 1,180 trajectories.
         </p>
 
         <h2 className="text-2xl font-light text-white mt-10 mb-4">

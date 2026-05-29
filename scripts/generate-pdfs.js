@@ -63,8 +63,8 @@ async function generatePDFs() {
           margin: { top: "100px", bottom: "80px", left: "60px", right: "60px" },
           printBackground: true,
           displayHeaderFooter: true,
-          headerTemplate: `<div style="width:100%;padding:20px 60px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb;font-size:9px;"><img src="${logoDataUri}" style="height:18px;"/><span style="color:#9ca3af;font-family:system-ui;letter-spacing:0.05em;text-transform:uppercase;">Confidential — Investor Data Room</span></div>`,
-          footerTemplate: `<div style="width:100%;padding:10px 60px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;font-size:8px;color:#9ca3af;font-family:system-ui;"><span>Shodh AI — ${doc.title}</span><span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`,
+          headerTemplate: `<div style="width:100%;padding:20px 60px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb;font-size:9px;"><img src="${logoDataUri}" style="height:18px;"/><span style="color:#9ca3af;font-family:system-ui;letter-spacing:0.05em;text-transform:uppercase;">Confidential - Investor Data Room</span></div>`,
+          footerTemplate: `<div style="width:100%;padding:10px 60px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;font-size:8px;color:#9ca3af;font-family:system-ui;"><span>Shodh AI - ${doc.title}</span><span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div>`,
         },
         stylesheet: CSS,
       }

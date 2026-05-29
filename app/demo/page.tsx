@@ -265,7 +265,7 @@ function ValidationPanel({ validation, forwardRaw }: { validation: ValidationRes
         {/* Extra forward model metrics */}
         {isReal && (fwdMicro || fwdPerf) && (
           <div className="mt-4 pt-4" style={{ borderTop: '1px solid rgba(168,85,247,0.1)' }}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3">Forward Model — Full Predictions</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3">Forward Model - Full Predictions</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {fwdMicro && Object.entries(fwdMicro).map(([key, val]) => (
                 <div key={key} className="rounded-lg px-3 py-2" style={{ background: 'rgba(59,130,246,0.06)' }}>
@@ -430,7 +430,7 @@ export default function DemoPage() {
           body: JSON.stringify({ prompt: input }),
         });
 
-        // Read NDJSON stream — chunk 1 = thinking (fast), chunk 2 = generation (slow)
+        // Read NDJSON stream - chunk 1 = thinking (fast), chunk 2 = generation (slow)
         const reader = res.body!.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
@@ -515,7 +515,7 @@ export default function DemoPage() {
             <Menu className="w-6 h-6 text-gray-400" />
           </button>
           <h1 className="text-xl font-medium text-gray-100 select-none">
-            Skanda &mdash; Material Architect
+            Skanda - Material Architect
           </h1>
           <button className="p-2 rounded-md hover:bg-white/5 transition-colors">
             <Pencil className="w-4 h-4 text-gray-500" />
@@ -566,7 +566,7 @@ export default function DemoPage() {
                 {msg.role === 'user' ? 'You' : 'Skanda'}
               </p>
 
-              {/* Loading spinner — only when NO thinking data yet */}
+              {/* Loading spinner - only when NO thinking data yet */}
               {msg.isLoading && !msg.thinking_steps && (
                 <div className="flex items-center gap-3 py-4">
                   <Loader2 className="w-5 h-5 text-purple-400 animate-spin" />

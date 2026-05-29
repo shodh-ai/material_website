@@ -559,7 +559,7 @@ export default function InsiderTeaserUpPage() {
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-12">
             <motion.div variants={staggerContainer} className="pointer-events-auto lg:col-span-8">
               <motion.div variants={fadeInUp} className="mb-7 flex flex-wrap gap-3">
-                <Badge>Slide 1 — Title</Badge>
+                <Badge>Slide 1 - Title</Badge>
                 <span className="rounded-full border border-[#0b2338]/10 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0b2338]/70 backdrop-blur-md">Confidential</span>
               </motion.div>
               <motion.h1 variants={fadeInUp} className="text-5xl font-black uppercase leading-[1.02] tracking-tight text-[#0b2338] sm:text-7xl md:text-8xl lg:text-9xl">
@@ -589,7 +589,7 @@ export default function InsiderTeaserUpPage() {
             <div className="mt-8 grid gap-3 md:grid-cols-3">
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#48cae4]/24 bg-[#e8fbff]/70 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#48cae4]">Founder</p>
-                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">PhD, Cambridge University - Materials Science & Photonic Engineering. Former Microsoft Research.</p>
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#0b2338]/10 bg-white/78 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0b2338]/45">Built With</p>
@@ -597,7 +597,7 @@ export default function InsiderTeaserUpPage() {
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#b5ff48]/30 bg-[#f4ffe7]/75 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b6b00]">Backed By</p>
-                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">Sovereign IndiaAI Mission — Priority National Compute</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-[#0b2338]">Sovereign IndiaAI Mission - Priority National Compute</p>
               </motion.div>
             </div>
           </motion.div>

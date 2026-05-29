@@ -29,7 +29,7 @@ export default function PreprintPage() {
         <div className="relative w-full" style={{ height: "85vh" }}>
           <iframe
             src={PDF_URL}
-            title="Academic Preprint — Mesoscale Battery Sim2Real"
+            title="Academic Preprint - Mesoscale Battery Sim2Real"
             className="absolute inset-0 w-full h-full border-0"
           />
         </div>

@@ -298,7 +298,7 @@ export default function GenesisPage() {
                     <p className="text-sm italic text-white/50 border-l-2 border-[#48cae4] pl-3">"The Compiler operates as a federated control layer, integrating with existing PLC/MES systems without replacing factory hardware."</p>
                     <div className="bg-white/5 p-3 rounded mt-8">
                       <strong className="block text-white text-base uppercase mb-2">Why Investors Love It</strong>
-                      <span className="text-white/60 text-base">This is High-Margin ARR. It creates a "Data Moat"—once our software is installed, we are the operating system of that factory.</span>
+                      <span className="text-white/60 text-base">This is High-Margin ARR. It creates a "Data Moat"-once our software is installed, we are the operating system of that factory.</span>
                     </div>
                   </div>
                 </div>
@@ -555,7 +555,7 @@ export default function GenesisPage() {
                   </div>
 
                   <p className="text-white/70 leading-relaxed text-base md:text-lg">
-                    <strong className="text-white">Why India Matters:</strong> India is not just a market; it is a launchpad. With the IndiaAI Mission and massive PLI schemes for batteries and hydrogen, these players are seeking Technology Sovereignty—reducing reliance on foreign IP. Shodh AI provides the domestic Operating System for this transition.
+                    <strong className="text-white">Why India Matters:</strong> India is not just a market; it is a launchpad. With the IndiaAI Mission and massive PLI schemes for batteries and hydrogen, these players are seeking Technology Sovereignty-reducing reliance on foreign IP. Shodh AI provides the domestic Operating System for this transition.
                   </p>
                 </div>
               </div>

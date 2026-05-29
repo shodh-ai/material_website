@@ -332,7 +332,7 @@ function WorldFoundationalModelInfographic() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(246,245,239,0.08),rgba(246,245,239,0.02)_46%,rgba(246,245,239,0.34)),radial-gradient(circle_at_66%_17%,rgba(255,255,255,0.72),transparent_32%)]" />
 
       <div className="absolute right-[5%] top-[5%] w-[40%] rounded-3xl border border-[#0b2338]/10 bg-[#f7f5ea]/84 p-6 text-right shadow-[0_22px_70px_rgba(11,35,56,0.12)] backdrop-blur-xl">
-        <p className="text-xs font-black uppercase tracking-[0.28em] text-[#4b6b00]">Slide 4 — Technology &amp; IP</p>
+        <p className="text-xs font-black uppercase tracking-[0.28em] text-[#4b6b00]">Slide 4 - Technology &amp; IP</p>
         <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-tight text-[#0b2338]">The World Foundational Model</h2>
         <p className="ml-auto mt-3 max-w-[540px] text-sm font-semibold leading-tight text-black/64">We are building a continuous physics AI model that learns the thread of physics connecting molecules, materials, processes, and factories.</p>
         <p className="mt-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#4b6b00]">Four continuous layers</p>

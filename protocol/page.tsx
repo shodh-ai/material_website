@@ -112,7 +112,7 @@ export default function SkandaPage() {
                 {/* Full Original Content Restored */}
                 <div className="space-y-6 text-base md:text-lg text-white/70 leading-relaxed">
                   <p>
-                    We utilize a 3D Diffusion Transformer (DiT)—the same core architecture behind OpenAI’s Sora, but retrained for Physics. Instead of pixels, Skanda treats matter as <strong className="text-white">3D Voxels</strong>.
+                    We utilize a 3D Diffusion Transformer (DiT)-the same core architecture behind OpenAI’s Sora, but retrained for Physics. Instead of pixels, Skanda treats matter as <strong className="text-white">3D Voxels</strong>.
                   </p>
                   <p>
                     It learns the "grammar" of how particles pack, pores connect, and binders stretch.
@@ -241,7 +241,7 @@ export default function SkandaPage() {
                   4. Skanda-Morph: <br/> The Process Compiler
                 </h2>
                 <p className="text-white/80 text-lg md:text-xl mb-10 leading-relaxed">
-                  The fatal flaw of Lab AI is the assumption of "Perfect Geometry." But manufacturing is violent—it shears, crushes, and deforms matter.
+                  The fatal flaw of Lab AI is the assumption of "Perfect Geometry." But manufacturing is violent-it shears, crushes, and deforms matter.
                 </p>
                 <div className="space-y-8">
                   <div className="flex gap-6">

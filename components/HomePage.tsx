@@ -15,14 +15,14 @@
       image: "/scale.svg",
       title: "The Scale",
       description:
-        "Atomic models are too small to be useful. We model the Mesoscale—where pores, grains, and defects actually determine if a material works in a factory.",
+        "Atomic models are too small to be useful. We model the Mesoscale-where pores, grains, and defects actually determine if a material works in a factory.",
     },
     {
       number: "02",
       image: "/Design.svg",
       title: "The Design",
       description:
-        "We don't do trial and error. You define the target—like heat resistance or energy density—and SkandaX generates the exact microstructure to achieve it.",
+        "We don't do trial and error. You define the target-like heat resistance or energy density-and SkandaX generates the exact microstructure to achieve it.",
     },
     {
       number: "03",
@@ -250,7 +250,7 @@
 
                 {/* Secondary Title */}
                 <p className="text-black/60 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed mb-10">
-                  Skanda: a <span className="text-black">Foundation Model for Matter</span> — a generative LMM trained on physics-first simulations and deployed as an industrial OS.
+                  Skanda: a <span className="text-black">Foundation Model for Matter</span> - a generative LMM trained on physics-first simulations and deployed as an industrial OS.
                 </p>
 
                 {/* Button */}

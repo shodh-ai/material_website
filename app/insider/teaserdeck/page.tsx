@@ -72,7 +72,7 @@ export default function TeaserDeckPage() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm">Back to Insider</span>
           </Link>
-          <p className="text-xs text-white/40 font-mono tracking-widest">TEASER DECK — CONFIDENTIAL</p>
+          <p className="text-xs text-white/40 font-mono tracking-widest">TEASER DECK - CONFIDENTIAL</p>
         </div>
       </header>
 
@@ -119,7 +119,7 @@ export default function TeaserDeckPage() {
             <div className="p-6 rounded-2xl border border-white/15 bg-white/[0.03] text-center">
               <p className="text-white/60 text-xs uppercase tracking-wider mb-3">The SOTA</p>
               <p className="text-white font-light text-base leading-relaxed">
-                Validated in architectural reviews with <span className="text-white font-semibold">Google DeepMind</span> as a global first — the world's first unification of 3D mesoscale physics and generative inverse-design at foundation scale.
+                Validated in architectural reviews with <span className="text-white font-semibold">Google DeepMind</span> as a global first - the world's first unification of 3D mesoscale physics and generative inverse-design at foundation scale.
               </p>
             </div>
           </motion.div>
@@ -384,7 +384,7 @@ export default function TeaserDeckPage() {
                           </div>
                         </div>
                         <div className="absolute bottom-full right-0 mb-3 w-52 bg-white border border-rose-200 rounded-xl p-3 shadow-lg">
-                          <p className="text-rose-500 text-sm font-bold mb-1">SHODH AI — LPM</p>
+                          <p className="text-rose-500 text-sm font-bold mb-1">SHODH AI - LPM</p>
                           <p className="text-gray-600 text-xs leading-snug">Aimed at 10B–50B 3D Multi-Physics neural operator for mesoscale inverse manufacturing</p>
                         </div>
                       </div>
@@ -446,7 +446,7 @@ export default function TeaserDeckPage() {
               <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-3">The Shodh AI Promise</p>
               <p className="text-white font-light text-lg leading-relaxed">
                 Discovery gives you a candidate.<br />
-                <span className="text-white font-medium">We give you the blueprint to actually build it—unlocking impossible, zero-to-billion product categories that currently die in the lab.</span>
+                <span className="text-white font-medium">We give you the blueprint to actually build it-unlocking impossible, zero-to-billion product categories that currently die in the lab.</span>
               </p>
             </div>
           </motion.div>
@@ -500,7 +500,7 @@ export default function TeaserDeckPage() {
                   <div className="w-3 h-3 rounded-full bg-white/10" />
                   <div className="w-3 h-3 rounded-full bg-white/10" />
                   <div className="w-3 h-3 rounded-full bg-white/10" />
-                  <span className="text-xs text-white/35 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
+                  <span className="text-xs text-white/35 font-mono ml-3">shodh-ai - lpm-v2 - prompt</span>
                 </div>
                 <div className="p-6 md:p-10 space-y-8 font-mono">
                   <div>
@@ -511,7 +511,7 @@ export default function TeaserDeckPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
+                    <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine - Coupling</p>
                     <div className="space-y-1.5">
                       {active.physics.map((p, physIdx) => (
                         <div key={physIdx} className="flex items-center gap-2 text-sm text-white/60">

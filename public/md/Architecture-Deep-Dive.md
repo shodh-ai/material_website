@@ -2,19 +2,19 @@
 
 **The Physics Engine for the Physical World**
 
-*Version 2.0 — February 2026*
+*Version 2.0 - February 2026*
 
 ---
 
 ## **EXECUTIVE SUMMARY**
 
-**What We Built:** A physics foundation model that understands how materials behave at the mesoscale (10nm-100μm) — the critical length scale where 90% of industrial materials fail during manufacturing.
+**What We Built:** A physics foundation model that understands how materials behave at the mesoscale (10nm-100μm) - the critical length scale where 90% of industrial materials fail during manufacturing.
 
 **Why It Matters:**
 
 * Google/Microsoft operate at atomic scale (too small to predict factory yield)  
 * Traditional FEA operates at system scale (too big to understand material failure)  
-* **We own the mesoscale** — the gap where real manufacturing happens
+* **We own the mesoscale** - the gap where real manufacturing happens
 
 **The Technical Innovation:**
 
@@ -364,7 +364,7 @@ The biggest failure in deeptech is **"Domain Drift"**:
 
 **Shodh AI has solved this with the Closed-Loop Data Factory.**
 
-We don't just use AI to predict the lab — **we use the lab to calibrate the AI**.
+We don't just use AI to predict the lab - **we use the lab to calibrate the AI**.
 
 ---
 
@@ -839,7 +839,7 @@ A material that works in a 10mL beaker often **fails catastrophically** on the p
 
 **The "Valley of Death" is where 90% of battery startups die.**
 
-**Shodh AI has built the Matter Compiler** — the first software suite that translates abstract performance targets into **machine-executable factory instructions**.
+**Shodh AI has built the Matter Compiler** - the first software suite that translates abstract performance targets into **machine-executable factory instructions**.
 
 We don't just find the needle in the haystack. **We provide the blueprint to build the magnet.**
 

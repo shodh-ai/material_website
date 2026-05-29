@@ -50,7 +50,7 @@ export default function GdmDocShell({
           Back to Data Room
         </Link>
         <p className="text-white/20 text-[11px] tracking-widest uppercase mt-6">
-          Shodh AI × Google DeepMind — Data Room — Confidential
+          Shodh AI × Google DeepMind - Data Room - Confidential
         </p>
       </footer>
     </div>

@@ -344,7 +344,7 @@ export default function NvidiaPage() {
             <motion.div {...fade} className="mb-10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white/25 font-mono text-sm">03</span>
-                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 — The Neural Surrogate & Wet-Lab Validation</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-white/40">Phase 1 - The Neural Surrogate & Wet-Lab Validation</p>
               </div>
               <h2 className="text-4xl md:text-5xl font-extralight leading-tight tracking-tight mb-4 max-w-4xl">Phase 1 Sandbox: Natively Learning PDEs & <span className="text-blue-300 font-light">Closing the Sim-to-Real Gap</span></h2>
               <p className="text-white/45 font-light text-xl mb-8">Digital predictions mean nothing without physical validation.</p>
@@ -352,8 +352,8 @@ export default function NvidiaPage() {
                 <div className="p-5 rounded-xl border border-blue-500/15 bg-blue-950/5">
                   <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-3">The Digital Surrogate (Training on the Data)</p>
                   <ul className="space-y-2 text-white/65 font-light text-sm leading-relaxed">
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
-                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">—</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Trained a Conditional Diffusion model <span className="font-mono text-white/80 text-xs">(skanda_charge2sem)</span> on 100,000 of our synthetic microstructures.</span></li>
+                    <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span><span>Achieved <span className="text-white font-normal">87% zero-shot accuracy</span> mapping target performances back to physical manufacturing configurations.</span></li>
                   </ul>
                 </div>
               </div>
@@ -445,21 +445,21 @@ export default function NvidiaPage() {
                 <p className="text-violet-300/70 text-xs uppercase tracking-wider mb-4">The Wet-Lab Physical Validation (Ongoing Blind Study)</p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Rigorous Testing Protocol</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">To isolate true chemical performance from random lab variance (e.g., poor cell crimping), we are actively executing an N=6 coin cell physical blind study across 5 distinct matrix recipes.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">The Matrix</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">We prompted the AI to generate both baseline formulations and boundary-pushing recipes <span className="text-white/80">(The AI Safe Bet vs. The AI Hero)</span>. We also built intentionally flawed physical designs (brittle/choked cells) to force specific mechanical cracking (LAM) and high-resistance failures.</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">—</span>
+                    <span className="text-violet-400 shrink-0 text-sm font-medium mt-0.5">-</span>
                     <div>
                       <p className="text-white/80 text-sm font-normal mb-1">Early Signals</p>
                       <p className="text-white/60 font-light text-sm leading-relaxed">Initial physical stress-tests are successfully tracking the AI&apos;s predicted trend lines. The physical cells are failing exactly in the extreme modes <span className="text-white/80">(Loss of Active Material, porosity bottlenecks)</span> that the digital diffusion model predicted.</p>

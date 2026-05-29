@@ -154,7 +154,7 @@ export default function ShodhDeckV3() {
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Investor Briefing</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI - Confidential Investor Briefing</span>
         </div>
       </header>
 
@@ -200,8 +200,8 @@ export default function ShodhDeckV3() {
           </h2>
           <div className="space-y-8 max-w-3xl">
             {[
-              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
-              "Mandate to build AI for Science — the foundation model for the physical world.",
+              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission - with priority access on national GPU compute.",
+              "Mandate to build AI for Science - the foundation model for the physical world.",
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-white/50 mt-2.5 shrink-0" />
@@ -251,24 +251,24 @@ export default function ShodhDeckV3() {
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mb-6">
               <div className="space-y-3 bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                <p className="text-white/40 text-xs uppercase tracking-wider">The Atomic Layer — Accelerating</p>
+                <p className="text-white/40 text-xs uppercase tracking-wider">The Atomic Layer - Accelerating</p>
                 <p className="text-white/80 text-lg font-light">AI for science is split into two layers.</p>
-                <p className="text-white/50 font-light text-sm leading-relaxed">The atomic layer — focused on discovery — is already dominated by models like AlphaFold and Isomorphic Labs.</p>
+                <p className="text-white/50 font-light text-sm leading-relaxed">The atomic layer - focused on discovery - is already dominated by models like AlphaFold and Isomorphic Labs.</p>
               </div>
               <div className="space-y-3 bg-red-950/20 backdrop-blur-sm p-6 rounded-2xl border border-red-500/20">
                 <p className="text-red-400 text-xs uppercase tracking-wider flex items-center gap-2">
-                  <AlertTriangle className="w-3 h-3" /> The Mesoscale — Unsolved
+                  <AlertTriangle className="w-3 h-3" /> The Mesoscale - Unsolved
                 </p>
                 <p className="text-white text-lg font-light">90% of discovered molecules will never see the market.</p>
                 <p className="text-white/60 font-light text-sm leading-relaxed">Moving from lab-scale to commercial manufacturing takes 6–8 years of expensive, physical trial-and-error.</p>
               </div>
             </div>
             <div className="border-l-2 border-white/10 pl-6 py-2 mb-16 max-w-3xl">
-              <p className="text-white/55 font-light leading-relaxed">It is our thesis that thousands of discovered new enzymes, proteins, molecules, and novel materials already exist — but none of them are easily scalable, mesoscale-producible, or manufacturable at volume. There are constant cancer solutions discovered in labs. <span className="text-white font-normal">None of them convert in the real world.</span></p>
+              <p className="text-white/55 font-light leading-relaxed">It is our thesis that thousands of discovered new enzymes, proteins, molecules, and novel materials already exist - but none of them are easily scalable, mesoscale-producible, or manufacturable at volume. There are constant cancer solutions discovered in labs. <span className="text-white font-normal">None of them convert in the real world.</span></p>
             </div>
           </motion.div>
 
-        {/* Timeline track — desktop */}
+        {/* Timeline track - desktop */}
         <div className="relative z-10 hidden lg:flex items-center mb-3">
           <div className="w-3 h-3 rounded-full bg-[#060606] border border-white/20 shrink-0" />
           <div className="flex-1 h-px bg-white/10" />
@@ -277,7 +277,7 @@ export default function ShodhDeckV3() {
           <div className="w-5 h-5 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.5)] shrink-0" />
         </div>
         <div className="relative z-10 hidden lg:grid lg:grid-cols-3 gap-6 mb-8">
-          {["01 — Digital Discovery", "02 — Lab Synthesis", "03 — Industrial Scale-Up"].map((l, i) => (
+          {["01 - Digital Discovery", "02 - Lab Synthesis", "03 - Industrial Scale-Up"].map((l, i) => (
             <p key={i} className={`text-xs uppercase tracking-wider ${i === 2 ? "text-rose-400" : "text-white/70"}`}>{l}</p>
           ))}
         </div>
@@ -288,21 +288,21 @@ export default function ShodhDeckV3() {
               num: "01", stage: "Digital Discovery",
               players: ["Isomorphic Labs", "Schrödinger"],
               desc: "AI predicts molecular structures in silico. Billions of candidates screened in days.",
-              gap: "Output: a digital prediction — not a manufacturing blueprint.",
+              gap: "Output: a digital prediction - not a manufacturing blueprint.",
               border: "border-white/5", bg: "bg-white/[0.01]", numColor: "text-white/40",
               tagBorder: "border-white/15", tagText: "text-white/70", gapColor: "text-white/60",
             },
             {
               num: "02", stage: "Lab Synthesis",
               players: ["Emerald Cloud Lab", "Radical AI"],
-              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence — not proof of scale.",
+              desc: "Autonomous robotic labs synthesize milligrams of material. Proof of existence - not proof of scale.",
               gap: "The industry spends 7 years and $500M building blind physical pilot plants.",
               border: "border-white/5", bg: "bg-white/[0.01]", numColor: "text-white/40",
               tagBorder: "border-white/15", tagText: "text-white/70", gapColor: "text-white/60",
             },
             {
               num: "03", stage: "Industrial Scale-Up",
-              players: ["Shodh AI — The Bottleneck"],
+              players: ["Shodh AI - The Bottleneck"],
               desc: "At the 10,000-litre scale, turbulence, heat transfer, and pressure tear novel molecules apart. 90% of discovered molecules fail here.",
               gap: "Ours to own.",
               border: "border-rose-500/20", bg: "bg-rose-950/10", numColor: "text-rose-400/60",
@@ -328,7 +328,7 @@ export default function ShodhDeckV3() {
         <div className="relative z-10 grid md:grid-cols-2 gap-4">
           <motion.div {...fade} className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
             <p className="text-white/55 text-xs uppercase tracking-wider mb-3">How We Fit Together</p>
-            <p className="text-white/75 font-light text-sm leading-relaxed">Isomorphic Labs and Radical AI are not our competitors — they are our upstream. They hand us the molecule. We build the factory. <span className="text-white font-normal">We are the only exit for the pipeline.</span></p>
+            <p className="text-white/75 font-light text-sm leading-relaxed">Isomorphic Labs and Radical AI are not our competitors - they are our upstream. They hand us the molecule. We build the factory. <span className="text-white font-normal">We are the only exit for the pipeline.</span></p>
           </motion.div>
           <motion.div {...fade} transition={{ delay: 0.05 }} className="p-6 rounded-2xl bg-rose-950/15 border border-rose-500/20 backdrop-blur-sm">
             <p className="text-white/55 text-xs uppercase tracking-wider mb-3">Structural Advantage</p>
@@ -351,11 +351,11 @@ export default function ShodhDeckV3() {
           </h2>
           <p className="text-white/30 text-xs uppercase tracking-widest mb-10">From Testing Guesses to Generating Blueprints.</p>
           <p className="text-white/55 font-light text-lg max-w-2xl mb-14 leading-relaxed">
-            Stop guessing. Input your <span className="text-white font-normal">intent</span> — the AI works backward and writes the exact factory machine code.
+            Stop guessing. Input your <span className="text-white font-normal">intent</span> - the AI works backward and writes the exact factory machine code.
           </p>
         </motion.div>
 
-        {/* 5-Step Workflow Diagram — Skandax Style Redesign */}
+        {/* 5-Step Workflow Diagram - Skandax Style Redesign */}
         <motion.div {...fade} className="mb-14 pb-4">
           {/* Main Diagram Grid */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_24px_1fr_24px_1fr_24px_1fr_24px_1fr] items-center gap-y-6">
@@ -520,7 +520,7 @@ export default function ShodhDeckV3() {
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
-                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
+                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai - lpm-v2 - prompt</span>
               </div>
               <div className="p-6 md:p-10 space-y-8 font-mono">
                 <div>
@@ -531,7 +531,7 @@ export default function ShodhDeckV3() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine - Coupling</p>
                   <div className="space-y-1.5">
                     {active.physics.map((p, physIdx) => (
                       <div key={physIdx} className="flex items-center gap-2 text-sm text-white/60">
@@ -559,7 +559,7 @@ export default function ShodhDeckV3() {
             To make this generative workflow possible, we had to unify the underlying math of the physical world.
           </p>
           <p className="text-white/45 font-light text-base max-w-3xl mb-12 leading-relaxed">
-            Legacy tools (COMSOL, Ansys) are deterministic calculators. They take months to run one scenario and are <span className="text-white font-normal">mathematically impossible to invert</span> — meaning they can never be &ldquo;generative.&rdquo; The LPM is a Neural Operator that replaces deterministic math entirely. We coupled the 5 governing equations of industrial scale-up into a single, invertible foundation model.
+            Legacy tools (COMSOL, Ansys) are deterministic calculators. They take months to run one scenario and are <span className="text-white font-normal">mathematically impossible to invert</span> - meaning they can never be &ldquo;generative.&rdquo; The LPM is a Neural Operator that replaces deterministic math entirely. We coupled the 5 governing equations of industrial scale-up into a single, invertible foundation model.
           </p>
 
           {/* Equations → LPM convergence */}
@@ -608,7 +608,7 @@ export default function ShodhDeckV3() {
           <motion.div {...fade} className="p-8 rounded-2xl bg-emerald-950/20 border border-emerald-500/20 flex flex-col">
             <p className="text-white/35 text-xs uppercase tracking-wider mb-4">Impact for Our Anchor Partners</p>
             <p className="text-white/55 font-light text-sm leading-relaxed mb-3">
-              Biocon&apos;s API synthesis relies on 16+ steps in legacy batch reactors. Novel biocatalysts promise a reduction to 2–3 steps — but industrializing them hits a wall: suboptimal fluid dynamics and mass transfer kill enzyme yields at scale.
+              Biocon&apos;s API synthesis relies on 16+ steps in legacy batch reactors. Novel biocatalysts promise a reduction to 2–3 steps - but industrializing them hits a wall: suboptimal fluid dynamics and mass transfer kill enzyme yields at scale.
             </p>
             <p className="text-white/55 font-light text-sm leading-relaxed mb-6">
               Shodh AI designs the exact continuous-flow architecture for each enzyme, compressing 7 years of scale-up into 6 months.
@@ -624,7 +624,7 @@ export default function ShodhDeckV3() {
             <p className="text-white/35 text-xs uppercase tracking-wider mb-5">The Fourth Industrial Revolution</p>
             <h4 className="text-white font-light text-2xl leading-snug mb-5">The physical world is the next frontier of AI.</h4>
             <p className="text-white/55 font-light text-sm leading-relaxed mb-3">
-              Steam. Electricity. Computers. Now: <span className="text-white font-normal">manufacturing by design.</span> The fourth revolution opens zero-to-billion markets for those bold enough to stake science — and gives an insurmountable competitive edge to those who move first.
+              Steam. Electricity. Computers. Now: <span className="text-white font-normal">manufacturing by design.</span> The fourth revolution opens zero-to-billion markets for those bold enough to stake science - and gives an insurmountable competitive edge to those who move first.
             </p>
             <p className="text-white/40 font-light text-sm leading-relaxed mt-auto">
               Nations that control the manufacturing blueprint will define the new industrial order. Invention will no longer be luck. It will be <span className="text-white/70 font-normal">by design.</span>
@@ -823,7 +823,7 @@ export default function ShodhDeckV3() {
                   </div>
                 </div>
                 <div className="absolute top-0 left-16 w-80 bg-[#0a0a0a] border-2 border-rose-500/60 rounded-xl p-5 shadow-2xl">
-                  <p className="text-rose-400 text-lg leading-tight font-bold mb-2">Shodh AI — LPM</p>
+                  <p className="text-rose-400 text-lg leading-tight font-bold mb-2">Shodh AI - LPM</p>
                   <p className="text-white text-sm font-semibold mb-2">10B Parameters</p>
                   <p className="text-white/90 text-xs leading-snug mb-3 font-medium">The ONLY 3D Multi-Physics Neural Operator for Mesoscale Inverse Manufacturing</p>
                   <div className="pt-3 border-t border-white/20">
@@ -857,12 +857,12 @@ export default function ShodhDeckV3() {
 
         {/* ── The Moat ── */}
         <motion.div {...fade} className="mb-16 p-7 md:p-10 rounded-2xl border border-white/8 bg-white/[0.01]">
-          <p className="text-white/40 text-xs uppercase tracking-widest mb-4">The Moat — Why Microsoft and Google Cannot Win This</p>
+          <p className="text-white/40 text-xs uppercase tracking-widest mb-4">The Moat - Why Microsoft and Google Cannot Win This</p>
           <p className="text-white/65 font-light text-base max-w-3xl mb-4 leading-relaxed">
-            Models like AlphaFold and Aurora were trained because the data was <span className="text-white font-normal">public</span> — the Protein Data Bank, global weather telemetry. Manufacturing failure data does not exist on the internet. It sits inside heavily guarded corporate silos.
+            Models like AlphaFold and Aurora were trained because the data was <span className="text-white font-normal">public</span> - the Protein Data Bank, global weather telemetry. Manufacturing failure data does not exist on the internet. It sits inside heavily guarded corporate silos.
           </p>
           <p className="text-white/65 font-light text-base max-w-3xl leading-relaxed">
-            Big Tech cannot scrape a bioreactor&apos;s thermal failure data. Building the manufacturing foundation model requires a pure B2B, federated-learning approach — deploying directly inside enterprise infrastructure. <span className="text-white font-normal">That is our exact GTM.</span>
+            Big Tech cannot scrape a bioreactor&apos;s thermal failure data. Building the manufacturing foundation model requires a pure B2B, federated-learning approach - deploying directly inside enterprise infrastructure. <span className="text-white font-normal">That is our exact GTM.</span>
           </p>
         </motion.div>
 
@@ -907,32 +907,32 @@ export default function ShodhDeckV3() {
             <div className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden">
               <div className="px-5 py-3 border-b border-white/5 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-white/20" />
-                <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography — Commercial Battery SEM</p>
+                <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography - Commercial Battery SEM</p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-white/5 p-px">
                 <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
                   <img
                     src="/SEM_comparison/Samsung_25R6_sem_slices copy.png"
-                    alt="Real SEM slices — Samsung 25R6"
+                    alt="Real SEM slices - Samsung 25R6"
                     className="w-full h-full object-contain opacity-90"
                   />
                 </div>
                 <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
                   <img
                     src="/SEM_comparison/Samsung_25R6_sem_isosurface.png"
-                    alt="Real SEM isosurface — Samsung 25R6"
+                    alt="Real SEM isosurface - Samsung 25R6"
                     className="w-full h-full object-contain opacity-90"
                   />
                 </div>
               </div>
-              <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 — Physical scan data</p>
+              <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 - Physical scan data</p>
             </div>
 
             {/* Right: Shodh AI Generated */}
             <div className="rounded-2xl border border-blue-500/20 bg-blue-950/5 overflow-hidden">
               <div className="px-5 py-3 border-b border-blue-500/10 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-blue-400/50" />
-                <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI — Generated Digital Twin</p>
+                <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI - Generated Digital Twin</p>
               </div>
               <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
                 <img
@@ -941,7 +941,7 @@ export default function ShodhDeckV3() {
                   className="w-full h-full object-contain opacity-95"
                 />
               </div>
-              <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated — no physical scan required</p>
+              <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated - no physical scan required</p>
             </div>
           </div>
 
@@ -950,7 +950,7 @@ export default function ShodhDeckV3() {
             <div className="p-6 rounded-2xl bg-blue-950/10 border border-blue-500/15">
               <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-2">95% Morphological Match</p>
               <p className="text-white/60 font-light text-sm leading-relaxed">
-                Our AI generates synthetic physical structures with perfect mathematical parity to real-world physics — allowing us to train the 10B model without waiting months for physical lab scans.
+                Our AI generates synthetic physical structures with perfect mathematical parity to real-world physics - allowing us to train the 10B model without waiting months for physical lab scans.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center gap-4">
@@ -1000,7 +1000,7 @@ export default function ShodhDeckV3() {
             A two-way<br /><span className="font-normal">engineering engine.</span>
           </h2>
           <p className="text-white/55 font-light text-lg max-w-2xl mb-16 leading-relaxed">
-            The LPM operates in both directions. It can predict physical failure — and it can invert that logic to generate a factory blueprint from scratch.
+            The LPM operates in both directions. It can predict physical failure - and it can invert that logic to generate a factory blueprint from scratch.
           </p>
         </motion.div>
 
@@ -1008,7 +1008,7 @@ export default function ShodhDeckV3() {
           {/* Forward Model */}
           <motion.div {...fade} className="rounded-2xl border border-blue-500/30 bg-blue-950/10 overflow-hidden flex flex-col">
             <div className="px-6 py-4 border-b border-blue-500/10 bg-blue-950/10">
-              <p className="text-blue-300/70 text-xs uppercase tracking-[0.25em]">The Forward Model — Predict Failure</p>
+              <p className="text-blue-300/70 text-xs uppercase tracking-[0.25em]">The Forward Model - Predict Failure</p>
             </div>
             <div className="p-6 md:p-8 flex-grow space-y-5">
               <div>
@@ -1027,7 +1027,7 @@ export default function ShodhDeckV3() {
                 </div>
               </div>
               <div>
-                <p className="text-white/30 text-xs font-mono uppercase mb-2">Output — 90%+ Accuracy</p>
+                <p className="text-white/30 text-xs font-mono uppercase mb-2">Output - 90%+ Accuracy</p>
                 <div className="p-4 rounded-xl bg-blue-950/30 border border-blue-500/30 font-mono text-sm text-blue-200 leading-relaxed">
                   AI predicts the exact physical degradation and system failure point in milliseconds.
                 </div>
@@ -1038,7 +1038,7 @@ export default function ShodhDeckV3() {
           {/* Inverse Model */}
           <motion.div {...fade} transition={{ delay: 0.1 }} className="rounded-2xl border border-emerald-500/20 bg-emerald-950/10 overflow-hidden flex flex-col">
             <div className="px-6 py-4 border-b border-emerald-500/10 bg-emerald-950/10">
-              <p className="text-emerald-400/50 text-xs uppercase tracking-[0.25em]">The Inverse Model — Generative Process Compiler</p>
+              <p className="text-emerald-400/50 text-xs uppercase tracking-[0.25em]">The Inverse Model - Generative Process Compiler</p>
             </div>
             <div className="p-6 md:p-8 flex-grow space-y-5">
               <div>
@@ -1147,7 +1147,7 @@ export default function ShodhDeckV3() {
               These industries look completely different on paper. Physically, they are the exact same problem: <span className="text-white font-normal">a fluid moving through a porous solid under heat, pressure, and chemical reaction.</span>
             </p>
             <p className="text-white/50 font-light leading-relaxed">
-              A drug bioreactor. A solid-state battery. A carbon membrane. Strip away the industry names, and the physics is identical. We coupled the five governing equations into one unified model — the LPM.
+              A drug bioreactor. A solid-state battery. A carbon membrane. Strip away the industry names, and the physics is identical. We coupled the five governing equations into one unified model - the LPM.
             </p>
             <p className="text-white/50 font-light leading-relaxed">
               We are proving the LPM across three highly distinct trillion-dollar verticals <span className="text-white font-normal">right now:</span>
@@ -1186,7 +1186,7 @@ export default function ShodhDeckV3() {
             25-day blind<br /><span className="font-normal">Sim-to-Real sprint.</span>
           </h2>
           <p className="text-white/55 font-light text-lg max-w-2xl mb-16 leading-relaxed">
-            To validate the underlying physics engine, we ran a blind sprint on solid-state batteries — one of the most complex multiphysics environments in materials science. We didn&apos;t just simulate — we generated the recipe, physically built it, and predicted the degradation.
+            To validate the underlying physics engine, we ran a blind sprint on solid-state batteries - one of the most complex multiphysics environments in materials science. We didn&apos;t just simulate - we generated the recipe, physically built it, and predicted the degradation.
           </p>
         </motion.div>
 
@@ -1354,7 +1354,7 @@ export default function ShodhDeckV3() {
             Three compounding<br /><span className="font-normal">revenue layers.</span>
           </h2>
           <p className="text-white/55 font-light text-lg max-w-2xl mb-16 leading-relaxed">
-            We operate on three layers for enterprise partners — from immediate NRE cash flow to perpetual royalties on global physical output.
+            We operate on three layers for enterprise partners - from immediate NRE cash flow to perpetual royalties on global physical output.
           </p>
         </motion.div>
 
@@ -1424,7 +1424,7 @@ export default function ShodhDeckV3() {
 
         {/* GTM Timeline */}
         <div className="mb-16 space-y-3">
-          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">Go-To-Market Roadmap — What the $50M buys</p>
+          <p className="text-white/30 text-xs uppercase tracking-[0.25em] mb-6">Go-To-Market Roadmap - What the $50M buys</p>
           {GTM_PHASES.map((p, i) => (
             <motion.div key={i} {...fade} transition={{ delay: i * 0.1 }} className={`p-6 md:p-8 rounded-2xl border-l-2 border ${p.color} bg-white/[0.015]`}>
               <div className="flex flex-col md:flex-row gap-4 md:gap-10">
@@ -1459,7 +1459,7 @@ export default function ShodhDeckV3() {
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
           >
             <Mail className="w-5 h-5" />
-            Partner with Us — arastu@shodh.ai
+            Partner with Us - arastu@shodh.ai
           </a>
         </motion.div>
       </section>

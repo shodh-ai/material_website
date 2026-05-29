@@ -15,7 +15,7 @@
 
 Current AI models are built for words and images. Shodh AI is building the first **Foundation Model for Physics.** We have moved beyond "Black Box" predictions to create a system that understands the fundamental laws of thermodynamics, kinetics, and mechanics.
 
-We call this the **Meso-Foundation Model**—the world's first large-scale transformer trained to bridge the gap between atomic chemistry and industrial manufacturing.
+We call this the **Meso-Foundation Model**-the world's first large-scale transformer trained to bridge the gap between atomic chemistry and industrial manufacturing.
 
 **THE SKANDA STACK: ONE Foundation Model, THREE INTERFACES**  
 We do not build separate AI models for every problem. We have built a single **"Physics Foundation Model"** (The SkandaX Foundation Model) that powers three distinct application layers:
@@ -35,7 +35,7 @@ We do not build separate AI models for every problem. We have built a single **"
 
 To give our AI "Physics Intuition," we don't wait for slow, expensive lab data. We manufactured our own.
 
-We wrapped the governing equations of physics—including **Fick’s Law of Diffusion** and **Butler-Volmer Kinetics**—into a massive Monte Carlo engine. We executed **10 Million+ synthetic simulations**, sweeping parameters across five orders of magnitude.
+We wrapped the governing equations of physics-including **Fick’s Law of Diffusion** and **Butler-Volmer Kinetics**-into a massive Monte Carlo engine. We executed **10 Million+ synthetic simulations**, sweeping parameters across five orders of magnitude.
 
 * **The Result:** A "Physics Model" that maps every theoretically possible material behavior. Our AI has "failed" 10 million times in the computer so it never has to fail in your factory.
 
@@ -43,7 +43,7 @@ We wrapped the governing equations of physics—including **Fick’s Law of Diff
 
 ### **02 / The Foundation Model (Universal Latent Space)**
 
-Traditional Material Science machine learning is "one-off"—you build a model for Lithium, then you start over for Sodium.
+Traditional Material Science machine learning is "one-off"-you build a model for Lithium, then you start over for Sodium.
 
 The Skanda architecture utilizes a **Multimodal Transformer** that learns the "Universal Language of Transport." Whether a voxel represents a Lithium-ion in a battery or a Hydrogen molecule in a membrane, the underlying physics of tortuosity and flux are mathematically identical.
 
@@ -85,7 +85,7 @@ While competitors like Google GNoME focus on discovering new *crystals*, Shodh A
 
 ### **Simulations are perfect. Reality is messy.**
 
-The biggest failure in Deeptech is "Domain Drift"—where an AI trained in a perfect simulation fails when it hits a real-world factory.
+The biggest failure in Deeptech is "Domain Drift"-where an AI trained in a perfect simulation fails when it hits a real-world factory.
 
 Shodh AI has solved this by building a **Closed-Loop Data Factory**. We don't just use AI to predict the lab; we use the lab to "calibrate" the AI. We have operationalized the transition from **Synthetic Physics** to **Physical Ground Truth.![][image1]**
 
@@ -175,7 +175,7 @@ By using the **Parent-Child Protocol** on Silicon-Graphite chemistries, we are p
 * **Volatile Chemistry:** Managing the instability of the SEI layer.  
 * **Complex Transport:** Ensuring lithium ions can navigate a rapidly changing pore network.
 
-**The Logic:** Once SkandaX achieves a 95% accuracy rate on Silicon—the industry's most difficult "Exam"—it is effectively "Pre-Validated" for easier chemistries like Sodium-ion, LFP, and Solid-State.
+**The Logic:** Once SkandaX achieves a 95% accuracy rate on Silicon-the industry's most difficult "Exam"-it is effectively "Pre-Validated" for easier chemistries like Sodium-ion, LFP, and Solid-State.
 
 ---
 
@@ -209,7 +209,7 @@ This is the final "Value Capture" section. It moves the conversation from the la
 
 Discovery is only half the battle. The "Valley of Death" exists because a material that works in a beaker often fails on the production line.
 
-Shodh AI has built the **Matter Compiler**—the first software suite that translates abstract performance targets into machine-executable factory instructions. We don’t just find the needle in the haystack; we provide the blueprint to build the magnet.
+Shodh AI has built the **Matter Compiler**-the first software suite that translates abstract performance targets into machine-executable factory instructions. We don’t just find the needle in the haystack; we provide the blueprint to build the magnet.
 
 ---
 
@@ -229,7 +229,7 @@ Just as a software compiler turns high-level code into machine-readable binary, 
 
 * **Input (The Intent):** "I need a High-Energy Anode for a 10-minute fast charge."  
 * **The Intelligence:** SkandaX generates the 3D microstructure and simulates the manufacturing violence (mixing, shearing, drying).  
-* **Output (The Instruction):** The model outputs specific **Machine Code**—the exact Mixing Speed, Drying Temperature, and Calendering Pressure required for the factory line.
+* **Output (The Instruction):** The model outputs specific **Machine Code**-the exact Mixing Speed, Drying Temperature, and Calendering Pressure required for the factory line.
 
 **This is "Zero-Shot Manufacturing." The recipe works the first time it hits the production line.**
 
@@ -272,7 +272,7 @@ We capture value across three scalable layers:
 
 **"We aren't just building a company; we are building a new asset class."**
 
-By owning the IP of the "Process Recipe" and the "Machine Instructions," Shodh AI becomes the indispensable layer of the physical world. Whether the world moves to Sodium, Solid-State, or Fusion—they will need the Skanda Compiler to build it.
+By owning the IP of the "Process Recipe" and the "Machine Instructions," Shodh AI becomes the indispensable layer of the physical world. Whether the world moves to Sodium, Solid-State, or Fusion-they will need the Skanda Compiler to build it.
 
 ---
 

@@ -228,7 +228,7 @@ export default function DocumentPage() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-xs text-gray-400 tracking-widest uppercase">Shodh AI — Investor Data Room</p>
+            <p className="text-xs text-gray-400 tracking-widest uppercase">Shodh AI - Investor Data Room</p>
           </div>
         </div>
       </motion.div>
@@ -246,7 +246,7 @@ export default function DocumentPage() {
               dangerouslySetInnerHTML={{ __html: renderDocumentContent(doc.content) }}
             />
             <div className="mt-12 pt-6 border-t border-gray-100 flex items-center justify-between">
-              <p className="text-xs text-gray-300 tracking-wider uppercase">Shodh AI — Confidential</p>
+              <p className="text-xs text-gray-300 tracking-wider uppercase">Shodh AI - Confidential</p>
               <p className="text-xs text-gray-300">Investor Data Room</p>
             </div>
           </div>

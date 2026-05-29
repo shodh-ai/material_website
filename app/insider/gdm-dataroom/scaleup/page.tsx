@@ -46,7 +46,7 @@ function RedactedPreview({
                 Redacted for Safety
               </p>
               <p className="text-white/70 text-xs font-light text-center leading-relaxed">
-                This is non-commercial partner data — not under NDA — which we
+                This is non-commercial partner data - not under NDA - which we
                 are showing for transparency. We are still redacting sensitive
                 regions for safety.
               </p>
@@ -65,8 +65,8 @@ function RedactedPreview({
 export default function ScaleUpPage() {
   return (
     <GdmDocShell
-      eyebrow="File 04 · Shodh AI — Commercial Scale-Up Case Study (Ongoing Pilot)"
-      title="Scale-Up Proof — Batch-to-Continuous Conversion"
+      eyebrow="File 04 · Shodh AI - Commercial Scale-Up Case Study (Ongoing Pilot)"
+      title="Scale-Up Proof - Batch-to-Continuous Conversion"
       classification="Confidential · Tier-1 Specialty Chemical Manufacturer (Aarti Industries) · NDA"
     >
       <article className="prose prose-invert max-w-none font-light text-white/70 leading-relaxed">
@@ -86,7 +86,7 @@ export default function ScaleUpPage() {
           <strong className="text-white">Continuous Flow Process</strong> to
           drastically increase factory throughput. However, converting batch
           kinetics (stirred tank) to continuous flow (tubular reactor)
-          fundamentally alters the mesoscale physics—specifically fluid
+          fundamentally alters the mesoscale physics-specifically fluid
           mixing, residence time, and heat transfer.
         </p>
 
@@ -122,7 +122,7 @@ export default function ScaleUpPage() {
                 study) that Shodh AI used during early validation. This
                 material is{" "}
                 <span className="text-white">not under NDA</span>, so we are
-                showing the files directly for transparency — but we are still{" "}
+                showing the files directly for transparency - but we are still{" "}
                 <span className="text-white">redacting sensitive regions for safety</span>.
               </p>
             </div>
@@ -133,12 +133,12 @@ export default function ScaleUpPage() {
           <RedactedPreview
             src="/deepmind/Pilot Reactor GA drawing.pdf"
             title="Pilot Reactor GA Drawing"
-            note="Partner-supplied General Arrangement drawing of the pilot batch reactor vessel. Used to calibrate the 3D voxel geometry pipeline for the substitution reaction (A + B + C → P + S1 + S2). Non-commercial partner data — shown directly, with safety redactions."
+            note="Partner-supplied General Arrangement drawing of the pilot batch reactor vessel. Used to calibrate the 3D voxel geometry pipeline for the substitution reaction (A + B + C → P + S1 + S2). Non-commercial partner data - shown directly, with safety redactions."
           />
           <RedactedPreview
             src="/deepmind/Case Study _AI Modelling (CL-1 CONFIDENTIAL).pdf"
-            title="Case Study — AI Modelling (CL-1 Confidential)"
-            note="Early AI-modelling case study on lab kinetics and mass-balance data used by Shodh AI during initial validation. Non-commercial partner data — shown directly for transparency, with safety redactions."
+            title="Case Study - AI Modelling (CL-1 Confidential)"
+            note="Early AI-modelling case study on lab kinetics and mass-balance data used by Shodh AI during initial validation. Non-commercial partner data - shown directly for transparency, with safety redactions."
           />
         </div>
 
