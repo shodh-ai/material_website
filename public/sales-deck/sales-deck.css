@@ -362,6 +362,7 @@
   grid-column: 5 / -1;
   grid-row: 1;
   text-align: right;
+  align-items: flex-end;
 }
 
 #slide-3 .sd-headline--slide-3 {
