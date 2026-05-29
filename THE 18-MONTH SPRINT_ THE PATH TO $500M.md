@@ -66,7 +66,7 @@ By the end of Month 18, Shodh AI will have achieved the **Autonomous Closed-Loop
 2. **Operational:** We own the world's largest proprietary dataset of Mesoscale failures.  
 3. **Commercial:** We are embedded in the production lines of the world's most strategic manufacturers.
 
-**Historically, deeptech platforms that successfully cross the "Sim-to-Real" chasm—moving from laboratory discovery to industrial deployment—command strategic valuations of $500M+.**
+**Historically, deeptech platforms that successfully cross the "Sim-to-Real" chasm-moving from laboratory discovery to industrial deployment-command strategic valuations of $500M+.**
 
 ---
 

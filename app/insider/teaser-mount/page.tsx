@@ -674,7 +674,7 @@ export default function InsiderTeaserUpPage() {
         <LightSlideShell eyebrow="Business & Vision" title="The Business & Vision" tone="amber">
           <motion.div variants={fadeInUp} className="rounded-2xl border border-[#b5ff48]/25 bg-[#f4ffe7]/75 p-6 shadow-lg backdrop-blur-xl md:p-8">
             <Globe2 className="mb-5 h-8 w-8 text-[#4b6b00]" />
-            <p className="mt-4 text-lg leading-relaxed text-gray-700">We begin as the foundation model for industrial scale-up — and expand into the zero-to-billion engine for physical IP.</p>
+            <p className="mt-4 text-lg leading-relaxed text-gray-700">We begin as the foundation model for industrial scale-up - and expand into the zero-to-billion engine for physical IP.</p>
             <p className="mt-3 text-lg leading-relaxed text-gray-700">Paid deployments and milestone-based programs fund the model’s expansion; long term, Shodh participates in the physical IP it helps generate through licensing, royalties, joint ventures, and co-development.</p>
             <p className="mt-3 text-lg leading-relaxed text-gray-700">We give companies and nations the ability to generate, validate, and manufacture new physical technologies.</p>
             <p className="mt-3 text-2xl font-medium leading-snug text-[#0b2338]">Just as LLMs made intelligence programmable, Shodh makes physical invention programmable.</p>

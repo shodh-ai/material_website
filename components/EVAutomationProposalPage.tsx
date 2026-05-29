@@ -100,7 +100,7 @@ export default function EVAutomationProposalPage() {
                 Currently, US automakers and battery startups invest billions discovering novel solid-state or high-silicon chemistries. But translating a successful "coin-cell" discovery into Gigafactory-level yield takes 7 to 10 years and $1B+ in CapEx.
               </p>
               <p className="text-white/60 font-light leading-relaxed mt-4">
-                The bottleneck is engineering, not chemistry. When novel materials scale up, the mesoscale physics—microstructure cracking, fluid dynamics, porosity, and heat transfer—cause massive defect rates and scrap.
+                The bottleneck is engineering, not chemistry. When novel materials scale up, the mesoscale physics-microstructure cracking, fluid dynamics, porosity, and heat transfer-cause massive defect rates and scrap.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.05)]">

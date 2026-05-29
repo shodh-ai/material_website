@@ -16,13 +16,13 @@ export const genesisProtocolDoc = {
 
 **We are building the AI infrastructure layer for the physical world.**
 
-Just as AWS became the operating system for digital products, **Skanda becomes the operating system for physical products**. Every advanced manufacturer—from EV batteries to hydrogen fuel cells to low-carbon cement—will run their designs through our platform before building anything.
+Just as AWS became the operating system for digital products, **Skanda becomes the operating system for physical products**. Every advanced manufacturer-from EV batteries to hydrogen fuel cells to low-carbon cement-will run their designs through our platform before building anything.
 
 **The Thesis:**
 
-* Google/Microsoft operate at the atomic level (DFT) — Too small to predict factory yield
-* Traditional FEA operates at the system level — Too big to understand material failure
-* **We own the mesoscale** (10nm-100μm) — Where 90% of industrial materials actually fail
+* Google/Microsoft operate at the atomic level (DFT) - Too small to predict factory yield
+* Traditional FEA operates at the system level - Too big to understand material failure
+* **We own the mesoscale** (10nm-100μm) - Where 90% of industrial materials actually fail
 
 **The Opportunity:**
 
@@ -70,13 +70,13 @@ We capture value across four scalable layers, each with different economics and 
 
 **Revenue Stream:** Usage-based pricing + Self-service subscriptions
 
-**The Product:** SkandaX API — developers query the physics model directly
+**The Product:** SkandaX API - developers query the physics model directly
 
 **How It Works:**
 
-* POST /predict-performance — Input: Recipe + Microstructure image — Output: Cycle life, failure mode, confidence — Price: $0.01 per prediction
-* POST /generate-design — Input: Target specs (cycle life, power, temperature) — Output: 3D microstructure + manufacturing recipe — Price: $1.00 per generation
-* POST /optimize-recipe — Input: Current recipe + performance gap — Output: Optimized parameters — Price: $0.50 per optimization
+* POST /predict-performance - Input: Recipe + Microstructure image - Output: Cycle life, failure mode, confidence - Price: $0.01 per prediction
+* POST /generate-design - Input: Target specs (cycle life, power, temperature) - Output: 3D microstructure + manufacturing recipe - Price: $1.00 per generation
+* POST /optimize-recipe - Input: Current recipe + performance gap - Output: Optimized parameters - Price: $0.50 per optimization
 
 **Pricing Tiers:**
 
@@ -162,15 +162,15 @@ We capture value across four scalable layers, each with different economics and 
 
 **Revenue Stream:** Annual subscriptions per production line + performance bonuses
 
-**The Product:** SkandaX DEPLOY — Real-time factory monitoring and defect prediction
+**The Product:** SkandaX DEPLOY - Real-time factory monitoring and defect prediction
 
 **How It Works:**
 
-**Step 1: Integration** — Deploy edge node (NVIDIA Orin/IGX) directly on factory floor. Connect to production line sensors. Federated learning: Data never leaves factory, only gradients sent to central model.
+**Step 1: Integration** - Deploy edge node (NVIDIA Orin/IGX) directly on factory floor. Connect to production line sensors. Federated learning: Data never leaves factory, only gradients sent to central model.
 
-**Step 2: Real-Time Monitoring** — Camera captures electrode images during coating. AI detects micro-defects invisible to human QC inspectors. Flags "bad batches" before they reach cell assembly.
+**Step 2: Real-Time Monitoring** - Camera captures electrode images during coating. AI detects micro-defects invisible to human QC inspectors. Flags "bad batches" before they reach cell assembly.
 
-**Step 3: Yield Optimization** — Alerts operators to process drift. Predicts failures before they happen. Recommends corrective actions in real-time.
+**Step 3: Yield Optimization** - Alerts operators to process drift. Predicts failures before they happen. Recommends corrective actions in real-time.
 
 **The Pricing Model:**
 
@@ -212,9 +212,9 @@ We capture value across four scalable layers, each with different economics and 
 
 **How It Works:**
 
-* **Scenario A: Co-Developed IP** — BMW's exclusivity expires → BMW pays $0.75/kWh OR we license to others at $1.25/kWh
-* **Scenario B: Platform-Generated IP** — Startup uses API to generate novel design → royalty kicks in when production >10 GWh/year
-* **Scenario C: Owned IP** — We discover breakthrough design → License non-exclusively → Rate: $1.50/kWh
+* **Scenario A: Co-Developed IP** - BMW's exclusivity expires → BMW pays $0.75/kWh OR we license to others at $1.25/kWh
+* **Scenario B: Platform-Generated IP** - Startup uses API to generate novel design → royalty kicks in when production >10 GWh/year
+* **Scenario C: Owned IP** - We discover breakthrough design → License non-exclusively → Rate: $1.50/kWh
 
 **The Unit Economics:**
 
@@ -382,8 +382,8 @@ We capture value across four scalable layers, each with different economics and 
 
 **Open International Offices:**
 
-* **Munich, Germany** (Europe hub) — 2-3 FDEs for BMW, Northvolt, BASF + Sales engineer for EU market
-* **Tokyo, Japan** (Asia hub) — 2-3 FDEs for Panasonic, Murata + Partnership lead for Asia
+* **Munich, Germany** (Europe hub) - 2-3 FDEs for BMW, Northvolt, BASF + Sales engineer for EU market
+* **Tokyo, Japan** (Asia hub) - 2-3 FDEs for Panasonic, Murata + Partnership lead for Asia
 
 ---
 
@@ -418,13 +418,13 @@ We capture value across four scalable layers, each with different economics and 
 
 ---
 
-#### Product Maturity — SkandaX Platform v2.0
+#### Product Maturity - SkandaX Platform v2.0
 
 **New Products:**
 
-1. **Factory Guard Pro** — Computer vision + physics model. Predicts failures 50-100 cycles before they happen. Auto-adjusts process parameters.
-2. **Genesis Studio** — No-code inverse design. Drag-and-drop interface for non-engineers. Integrated with CAD tools (COMSOL, ANSYS).
-3. **Data Marketplace** — Partners contribute anonymized data. Get credits for API usage. Platform improves for everyone.
+1. **Factory Guard Pro** - Computer vision + physics model. Predicts failures 50-100 cycles before they happen. Auto-adjusts process parameters.
+2. **Genesis Studio** - No-code inverse design. Drag-and-drop interface for non-engineers. Integrated with CAD tools (COMSOL, ANSYS).
+3. **Data Marketplace** - Partners contribute anonymized data. Get credits for API usage. Platform improves for everyone.
 
 ---
 
@@ -471,15 +471,15 @@ We capture value across four scalable layers, each with different economics and 
 
 ### Why We Command Premium Multiples
 
-**1. AI Infrastructure (Not Just Software)** — We're the platform layer. Network effects compound. Winner-take-most dynamics.
+**1. AI Infrastructure (Not Just Software)** - We're the platform layer. Network effects compound. Winner-take-most dynamics.
 
-**2. Defensible Moat** — 10,000+ proprietary multimodal samples. Foundation model trained on 10M+ simulations. 100+ patents.
+**2. Defensible Moat** - 10,000+ proprietary multimodal samples. Foundation model trained on 10M+ simulations. 100+ patents.
 
-**3. Massive TAM** — $8-10T addressable. Energy transition = secular tailwind. Strategic importance.
+**3. Massive TAM** - $8-10T addressable. Energy transition = secular tailwind. Strategic importance.
 
-**4. Capital Efficiency** — 90%+ gross margins. $20M achieving $100M+ Silicon Valley equivalent output.
+**4. Capital Efficiency** - 90%+ gross margins. $20M achieving $100M+ Silicon Valley equivalent output.
 
-**5. Execution Velocity** — AI speed (18-month cycles). Parallel expansion. Platform leverage.
+**5. Execution Velocity** - AI speed (18-month cycles). Parallel expansion. Platform leverage.
 
 ---
 
@@ -533,10 +533,10 @@ We capture value across four scalable layers, each with different economics and 
 
 **Target Accounts:**
 
-* **Automotive OEMs:** BMW, Mercedes, Tesla, Tata, BYD — "Own your battery IP, break supplier lock-in"
-* **Battery Manufacturers:** CATL, LG, Panasonic, Samsung SDI — "2x R&D speed, 50% cost reduction"
-* **Next-Gen Startups:** QuantumScape, Factorial, Solid Power — "Get to production faster, conserve runway"
-* **Defense/Aerospace:** Lockheed, Northrop, Safran, ISRO — "Design for extreme edge cases"
+* **Automotive OEMs:** BMW, Mercedes, Tesla, Tata, BYD - "Own your battery IP, break supplier lock-in"
+* **Battery Manufacturers:** CATL, LG, Panasonic, Samsung SDI - "2x R&D speed, 50% cost reduction"
+* **Next-Gen Startups:** QuantumScape, Factorial, Solid Power - "Get to production faster, conserve runway"
+* **Defense/Aerospace:** Lockheed, Northrop, Safran, ISRO - "Design for extreme edge cases"
 
 **Sales Process:** Intro call → Technical deep-dive → Pilot ($500k / 3 months) → Full partnership ($3-7M)
 
@@ -552,7 +552,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ### Layer 3 (Royalties): IP Licensing
 
-**This layer is passive — customers come to us.**
+**This layer is passive - customers come to us.**
 
 * NRE partners reach end of exclusivity → license to others
 * API users scale to production → automatic royalty via ToS
@@ -566,7 +566,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ---
 
-### 50% — Product & Engineering ($10M)
+### 50% - Product & Engineering ($10M)
 
 * **Platform Engineers:** 12-15 senior engineers (API infrastructure, edge deployment, DevOps, data engineering)
 * **ML Researchers:** 5-8 PhDs (foundation model, transfer learning, computer vision, physics simulation)
@@ -574,7 +574,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ---
 
-### 25% — Data Generation ($5M)
+### 25% - Data Generation ($5M)
 
 * **Lab Equipment:** $500k one-time (gloveboxes, cyclers, mixers, ovens)
 * **Materials Scientists:** 6-8 people (2 per chemistry)
@@ -583,7 +583,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ---
 
-### 15% — Go-to-Market ($3M)
+### 15% - Go-to-Market ($3M)
 
 * **Forward Deployed Engineers:** 5-8 people embedded at Tier-1 partner sites
 * **Enterprise Sales:** 4-6 people (Head of Sales, AEs, Sales Engineers)
@@ -592,7 +592,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ---
 
-### 10% — IP & Infrastructure ($2M)
+### 10% - IP & Infrastructure ($2M)
 
 * **Patents:** $1M (50-100 patents)
 * **Legal:** $500k (contracts, licensing, governance)
@@ -624,7 +624,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ### Category 1: Big Tech AI Labs
 
-**Google DeepMind / Microsoft Research** — GNoME, MatterGen (atomic-level)
+**Google DeepMind / Microsoft Research** - GNoME, MatterGen (atomic-level)
 
 * Operating at wrong scale (atoms, not mesoscale)
 * No real-world manufacturing data
@@ -635,7 +635,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ### Category 2: Traditional Simulation Software
 
-**ANSYS, COMSOL, Dassault Systèmes** — FEA/CFD tools
+**ANSYS, COMSOL, Dassault Systèmes** - FEA/CFD tools
 
 * Wrong approach (system-level)
 * No AI/ML capabilities
@@ -646,7 +646,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ### Category 3: Computational Materials Startups
 
-**Citrine Informatics, Materials Zone, Kebotix** — ML for materials
+**Citrine Informatics, Materials Zone, Kebotix** - ML for materials
 
 * No mesoscale focus
 * No physics foundation model
@@ -667,7 +667,7 @@ We capture value across four scalable layers, each with different economics and 
 
 ### The Race We're Actually In
 
-**It's not "who has the best model" — it's "who establishes the platform flywheel first."**
+**It's not "who has the best model" - it's "who establishes the platform flywheel first."**
 
 More customers → More usage → More data → Better model → More accurate predictions → More customers → **COMPOUNDING**
 

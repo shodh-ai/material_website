@@ -1,5 +1,5 @@
 /**
- * Fluid Shader Controller — main.js
+ * Fluid Shader Controller - main.js
  *
  * Strategy: build a patched JSON, create a Blob URL from it, and pass that
  * as `filePath` to UnicornStudio.addScene().
@@ -394,10 +394,10 @@ async function boot() {
     // Start preloading all assets immediately (runs in parallel with shader setup)
     preloadAllAssets();
 
-    // Set a failsafe timeout — if assets take too long (15s), dismiss loader anyway
+    // Set a failsafe timeout - if assets take too long (15s), dismiss loader anyway
     setTimeout(() => {
       if (!loaderDismissed) {
-        console.warn('[Boot] Failsafe timeout — dismissing loader.');
+        console.warn('[Boot] Failsafe timeout - dismissing loader.');
         allAssetsLoaded = true;
         shaderReady = true;
 
@@ -521,7 +521,7 @@ function initFooterForm() {
     input.addEventListener('blur', toggleFilled);
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     form.classList.remove('is-success', 'is-error');
 
@@ -530,10 +530,34 @@ function initFooterForm() {
       return;
     }
 
-    // Placeholder until a backend is connected
-    form.classList.add('is-success');
-    form.reset();
-    fields.forEach((field) => field.classList.remove('is-filled'));
+    const submitButton = form.querySelector('.footer-form-send');
+    const formData = new FormData(form);
+
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const response = await fetch('/api/footer-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          company: formData.get('company'),
+          message: formData.get('message'),
+        }),
+      });
+
+      if (!response.ok) throw new Error('Footer contact request failed');
+
+      form.classList.add('is-success');
+      form.reset();
+      fields.forEach((field) => field.classList.remove('is-filled'));
+    } catch (error) {
+      console.error(error);
+      form.classList.add('is-error');
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
 
@@ -754,7 +778,7 @@ function setupOrbitAnimation() {
 
   // 2. Create ScrollTrigger Timeline
   // Extended to +=3200 to include the process slide-in (Phase 6)
-  // so the transition is seamless — no gap between orbit and process.
+  // so the transition is seamless - no gap between orbit and process.
   const processSection = document.getElementById('section-process');
   const processTrack   = document.getElementById('process-track');
   const tl = gsap.timeline({
@@ -775,7 +799,7 @@ function setupOrbitAnimation() {
           }
         }
       },
-      // Keep process-fixed-overlay active on leave — Phase B's pin takes over.
+      // Keep process-fixed-overlay active on leave - Phase B's pin takes over.
       onLeaveBack: () => {
         if (processSection) {
           processSection.classList.remove('process-fixed-overlay');
@@ -931,7 +955,7 @@ function setupProcessSection() {
   // as Phase 6 of the orbit timeline, so the transition is seamless.
 
   // ═══════════════════════════════════════════════════════════════════════
-  // PHASE B: Pinned horizontal scroll — steps 2+ slide in while pinned.
+  // PHASE B: Pinned horizontal scroll - steps 2+ slide in while pinned.
   //          Step 1 is already fully visible from Phase A / orbit Phase 6.
   // ═══════════════════════════════════════════════════════════════════════
   const stepDur     = 3;
@@ -949,7 +973,7 @@ function setupProcessSection() {
         pin:    true,
         scrub:  1.5,
         onEnter: () => {
-          // Remove the fixed overlay from orbit Phase 6 —
+          // Remove the fixed overlay from orbit Phase 6 -
           // ScrollTrigger's own pin (position:fixed) takes over seamlessly.
           section.classList.remove('process-fixed-overlay');
         }
@@ -1012,7 +1036,7 @@ function setupProcessSection() {
     const holdStart = remaining * stepDur;
     tl.to({}, { duration: stepDur * holdFactor }, holdStart);
   } else {
-    // Only one step — just pin briefly to hold it
+    // Only one step - just pin briefly to hold it
     gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -1188,7 +1212,7 @@ function setupGapSection() {
     0
   );
 
-  // Animation 2: Character reveal — left text (stagger from end → chars slide inward)
+  // Animation 2: Character reveal - left text (stagger from end → chars slide inward)
   tl.to(leftChars, {
     keyframes: {
       '40%': { opacity: 1 },
@@ -1200,7 +1224,7 @@ function setupGapSection() {
     stagger: { each: 0.022, from: 'end' }
   }, 0);
 
-  // Animation 2b: Character reveal — right text (stagger from start → chars slide inward)
+  // Animation 2b: Character reveal - right text (stagger from start → chars slide inward)
   tl.to(rightChars, {
     keyframes: {
       '40%': { opacity: 1 },
@@ -1220,7 +1244,7 @@ function setupGapSection() {
     ease: 'power2.out'
   }, 0.7);
 
-  // ── Image Slideshow (endless continuous loop — never stops) ──
+  // ── Image Slideshow (endless continuous loop - never stops) ──
   let currentImg = 0;
 
   function switchImage() {
@@ -1233,4 +1257,3 @@ function setupGapSection() {
   // Start the loop immediately and keep it running forever
   setInterval(switchImage, 800);
 }
-

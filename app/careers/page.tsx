@@ -39,7 +39,7 @@ const staggerContainer: Variants = {
 
 const openRoles = [
   {
-    title: "ML Research Engineer — Physics Foundation Models",
+    title: "ML Research Engineer - Physics Foundation Models",
     team: "Core AI",
     location: "Bangalore, India",
     type: "Full-time",
@@ -76,7 +76,7 @@ const openRoles = [
     location: "Bangalore, India",
     type: "Full-time",
     description:
-      "Build the interfaces for our Matter Compiler — the tools that factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and the SkandaX platform.",
+      "Build the interfaces for our Matter Compiler - the tools that factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and the SkandaX platform.",
     requirements: [
       "Strong TypeScript/React/Next.js skills",
       "Experience with 3D visualization (Three.js, WebGL) is a plus",
@@ -103,7 +103,7 @@ const openRoles = [
     color: "#f59e0b",
   },
   {
-    title: "Research Intern — AI for Science",
+    title: "Research Intern - AI for Science",
     team: "Core AI",
     location: "Bangalore, India",
     type: "Internship (6 months)",
@@ -211,7 +211,7 @@ export default function CareersPage() {
               variants={fadeInUp}
               className="text-xl text-white/70 font-light max-w-2xl mx-auto leading-relaxed mb-10"
             >
-              We're building the world's first Physics Foundation Model — the "GPT for Materials."
+              We're building the world's first Physics Foundation Model - the "GPT for Materials."
               Join us in solving the hardest problems at the intersection of AI and science.
             </motion.p>
 

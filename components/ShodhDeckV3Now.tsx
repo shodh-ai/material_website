@@ -110,7 +110,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm font-light">Back</span>
           </Link>
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI — Confidential Investor Briefing</span>
+          <span className="text-xs font-light tracking-[0.3em] uppercase text-white/30">Shodh AI - Confidential Investor Briefing</span>
         </div>
       </header>
 
@@ -184,7 +184,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             </h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mb-12">
               <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02]">
-                <p className="text-white/30 text-xs uppercase tracking-wider mb-3">The Digital Economy — Bits</p>
+                <p className="text-white/30 text-xs uppercase tracking-wider mb-3">The Digital Economy - Bits</p>
                 <p className="text-5xl font-extralight text-white/25 mb-4">20%</p>
                 <p className="text-white/45 font-light text-sm leading-relaxed mb-4">{isFront ? "OpenAI, Anthropic, and others compress human work in language, code, and digital workflows." : "Automating Digital Labor. Foundation models today are replacing human workers to optimize existing digital workflows. It is an efficiency game."}</p>
                 <div className="flex flex-wrap gap-2">
@@ -194,9 +194,9 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                 </div>
               </div>
               <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
-                <p className="text-rose-400/70 text-xs uppercase tracking-wider mb-3">The Physical Economy — Atoms</p>
+                <p className="text-rose-400/70 text-xs uppercase tracking-wider mb-3">The Physical Economy - Atoms</p>
                 <p className="text-5xl font-extralight text-white mb-4">80%</p>
-                <p className="text-white/65 font-light text-sm leading-relaxed mb-4">{isFront ? <>Manufacturing, energy, semiconductors, chemicals, pharma, defense. AI for science does not just replace experts — it lets us engineer systems, materials, and factories <span className="text-white font-normal">humans could never manually search or optimize.</span></> : <>Expanding the Boundaries of Physics. AI for Science isn&apos;t replacing humans. It is solving physical constraints human minds cannot compute, creating entirely new zero-to-billion dollar markets.</>}</p>
+                <p className="text-white/65 font-light text-sm leading-relaxed mb-4">{isFront ? <>Manufacturing, energy, semiconductors, chemicals, pharma, defense. AI for science does not just replace experts - it lets us engineer systems, materials, and factories <span className="text-white font-normal">humans could never manually search or optimize.</span></> : <>Expanding the Boundaries of Physics. AI for Science isn&apos;t replacing humans. It is solving physical constraints human minds cannot compute, creating entirely new zero-to-billion dollar markets.</>}</p>
                 <div className="flex flex-wrap gap-2">
                   {(isFront ? ["Pharma", "Batteries", "Chemicals", "Defense", "Materials"] : ["Solid-State Batteries", "Space Alloys", "Semiconductor Lithography", "Next-Gen Chemicals"]).map((m) => (
                     <span key={m} className="text-xs px-2.5 py-1 rounded-full border border-rose-500/20 text-rose-300/60">{m}</span>
@@ -206,7 +206,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             </div>
             <div className="max-w-3xl border-l-2 border-rose-500/30 pl-6 py-2">
               <p className="text-white/60 font-light text-xl leading-relaxed">
-                {isFront ? <>The frontier is shifting from replacing what humans already do to building what humans still <span className="text-white font-normal">cannot design, test, or manufacture on their own.</span></> : <>Building the AI for the physical world will be <span className="text-white font-normal">vastly more consequential</span> — and create <span className="text-white font-normal">vastly larger companies</span> — than AI for the digital world. Automating the digital world saves billions. Compiling the physical world creates trillions.</>}
+                {isFront ? <>The frontier is shifting from replacing what humans already do to building what humans still <span className="text-white font-normal">cannot design, test, or manufacture on their own.</span></> : <>Building the AI for the physical world will be <span className="text-white font-normal">vastly more consequential</span> - and create <span className="text-white font-normal">vastly larger companies</span> - than AI for the digital world. Automating the digital world saves billions. Compiling the physical world creates trillions.</>}
               </p>
             </div>
           </motion.div>
@@ -223,10 +223,10 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           </h2>
           <div className="space-y-8 max-w-3xl">
             {[
-              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission — with priority access on national GPU compute.",
-              "Mandate to build AI for Science — the foundation model for the physical world.",
-              "Founder Pedigree: PhD, Cambridge University — Material Science & Photonic Engineering. Former Microsoft Research.",
-              "Early Traction — The Sim-to-Real Proof: Our v1 300M parameter model achieved ~70% zero-shot accuracy predicting physical failure points in silicon anode battery wet-lab builds. We have proven the math translates to reality. Now, we scale to 10B.",
+              "One of 12 foundational model teams selected by the sovereign IndiaAI Mission - with priority access on national GPU compute.",
+              "Mandate to build AI for Science - the foundation model for the physical world.",
+              "Founder Pedigree: PhD, Cambridge University - Material Science & Photonic Engineering. Former Microsoft Research.",
+              "Early Traction - The Sim-to-Real Proof: Our v1 300M parameter model achieved ~70% zero-shot accuracy predicting physical failure points in silicon anode battery wet-lab builds. We have proven the math translates to reality. Now, we scale to 10B.",
             ].map((text, i) => (
               <div key={i} className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-white/50 mt-2.5 shrink-0" />
@@ -397,7 +397,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <div className="flex items-center gap-3 mb-5">
                     <span className="text-white/60 font-mono text-base">Layer 1</span>
                     <div className="h-px flex-1 bg-white/8" />
-                    <span className="text-white/60 text-sm uppercase tracking-wider">Discovery — The Microscale</span>
+                    <span className="text-white/60 text-sm uppercase tracking-wider">Discovery - The Microscale</span>
                   </div>
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
@@ -422,7 +422,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                           "When the supply of \u201cdigital molecules\u201d goes to infinity, the value of a discovery drops to zero.",
                         ].map((point, i) => (
                           <li key={i} className="flex items-start gap-2.5 text-white/70 font-light text-base leading-relaxed">
-                            <span className="text-white/30 shrink-0 mt-1">&mdash;</span><span>{point}</span>
+                            <span className="text-white/30 shrink-0 mt-1">-</span><span>{point}</span>
                           </li>
                         ))}
                       </ul>
@@ -433,7 +433,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <div className="flex items-center gap-3 mb-5">
                     <span className="text-rose-300/80 font-mono text-base">Layer 2</span>
                     <div className="h-px flex-1 bg-rose-500/20" />
-                    <span className="text-rose-300/80 text-sm uppercase tracking-wider">Manufacturing — The Mesoscale</span>
+                    <span className="text-rose-300/80 text-sm uppercase tracking-wider">Manufacturing - The Mesoscale</span>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -444,8 +444,8 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                       <p className="text-rose-300/50 text-xs uppercase tracking-wider mb-3">The Reality</p>
                       <ul className="space-y-2.5">
                         <li className="flex items-start gap-2.5 text-white font-light text-base leading-relaxed">
-                          <span className="text-rose-300/40 shrink-0 mt-1">&mdash;</span>
-                          <span>Completely unsolved. Moving a digital molecule into a 10,000-liter factory reactor means fighting the chaotic laws of physics — thermodynamics, fluid dynamics, and heat transfer.</span>
+                          <span className="text-rose-300/40 shrink-0 mt-1">-</span>
+                          <span>Completely unsolved. Moving a digital molecule into a 10,000-liter factory reactor means fighting the chaotic laws of physics - thermodynamics, fluid dynamics, and heat transfer.</span>
                         </li>
                       </ul>
                     </div>
@@ -476,18 +476,18 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               90% of AI-discovered molecules will never see the market.
             </p>
             <div className="border-l-2 border-white/15 pl-6 py-1 mb-16 max-w-3xl space-y-4">
-              <p className="text-white/70 font-light text-base leading-relaxed">Thousands of discovered new enzymes, proteins, molecules, and novel materials already exist — but none of them are easily scalable, mesoscale-producible, or manufacturable at volume.</p>
+              <p className="text-white/70 font-light text-base leading-relaxed">Thousands of discovered new enzymes, proteins, molecules, and novel materials already exist - but none of them are easily scalable, mesoscale-producible, or manufacturable at volume.</p>
               <p className="text-white/70 font-light text-base leading-relaxed">There are constant cancer solutions discovered in labs. <span className="text-white font-normal">None of them convert in the real world.</span></p>
             </div>
           </motion.div>
 
 
           <motion.div {...fade} className="mb-6 p-8 md:p-10 rounded-2xl bg-white/[0.03] border border-white/10">
-            <p className="text-white/60 text-xs uppercase tracking-wider mb-6">Case Study — Biocon</p>
+            <p className="text-white/60 text-xs uppercase tracking-wider mb-6">Case Study - Biocon</p>
             <p className="text-white font-light text-xl leading-relaxed mb-3 max-w-3xl">
               &ldquo;We have novel biocatalysts that can cut our 16-step API synthesis to 3 steps. But when we scale to an industrial reactor, the enzyme dies.&rdquo;
             </p>
-            <p className="text-white/60 font-light text-base italic mb-6">— Kiran Mazumdar-Shaw, Chairperson, Biocon</p>
+            <p className="text-white/60 font-light text-base italic mb-6">- Kiran Mazumdar-Shaw, Chairperson, Biocon</p>
             <div className="pt-5 border-t border-white/8">
               <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Biocon</p>
               <p className="text-white/55 font-light text-sm">India’s largest biopharmaceutical company. $1.5B in revenue.</p>
@@ -495,11 +495,11 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           </motion.div>
 
           <motion.div {...fade} className="mb-12 p-8 md:p-10 rounded-2xl bg-rose-950/10 border border-rose-500/20">
-            <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-6">Case Study — Log9 Materials</p>
+            <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-6">Case Study - Log9 Materials</p>
             <p className="text-white font-light text-2xl leading-relaxed mb-3 max-w-3xl">
               &ldquo;My company is dead.&rdquo;
             </p>
-            <p className="text-white/60 font-light text-base italic mb-6">— Akshay Singhal, Founder, Log9 Materials</p>
+            <p className="text-white/60 font-light text-base italic mb-6">- Akshay Singhal, Founder, Log9 Materials</p>
             <div className="pt-5 border-t border-rose-500/15 grid md:grid-cols-2 gap-6">
               <div>
                 <p className="text-rose-300/50 text-xs uppercase tracking-wider mb-1">Log9 Materials</p>
@@ -564,7 +564,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               {
                 industry: "Batteries & Energy Storage", stat: "90%",
                 color: "text-emerald-300", border: "border-emerald-500/20", bg: "bg-emerald-950/5",
-                body: isFront ? "We have known promising battery chemistries for years. The winner is whoever can mass-produce them with low defects, high yield, and the right cost curve." : "We’ve known about solid-state chemistry for a decade. The winner is whoever can mass-produce them without defects at $50/kWh — breaking China’s monopoly.",
+                body: isFront ? "We have known promising battery chemistries for years. The winner is whoever can mass-produce them with low defects, high yield, and the right cost curve." : "We’ve known about solid-state chemistry for a decade. The winner is whoever can mass-produce them without defects at $50/kWh - breaking China’s monopoly.",
               },
               {
                 industry: "Aerospace, Defense & Nuclear", stat: "90%",
@@ -612,7 +612,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <div className="flex items-center gap-4 p-5 rounded-xl bg-rose-950/20 border border-rose-500/20">
                     <span className="text-2xl">&#x1F525;</span>
                     <div>
-                      <p className="text-rose-300/60 text-xs uppercase tracking-wider">Process Layer — Shodh AI</p>
+                      <p className="text-rose-300/60 text-xs uppercase tracking-wider">Process Layer - Shodh AI</p>
                       <p className="text-white font-light">We compile the factory</p>
                     </div>
                   </div>
@@ -628,11 +628,11 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   </div>
                   <div className="space-y-3">
                     <div className="p-5 rounded-xl border border-white/8 bg-white/[0.02]">
-                      <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Layer 1 — Discovery</p>
+                      <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Layer 1 - Discovery</p>
                       <p className="text-white/70 font-light text-base">A digital molecule exists in a computer.</p>
                     </div>
                     <div className="p-5 rounded-xl border border-rose-500/25 bg-rose-950/15">
-                      <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-2">Layer 2 — Shodh AI</p>
+                      <p className="text-rose-300/70 text-xs uppercase tracking-wider mb-2">Layer 2 - Shodh AI</p>
                       <p className="text-white font-light text-base">The LPM compiles the exact factory process to manufacture it at scale.</p>
                     </div>
                   </div>
@@ -667,13 +667,13 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           </h3>
           <p className="text-white/30 text-xs uppercase tracking-widest mb-8">From Testing Guesses to Generating Blueprints.</p>
           <p className="text-white/55 font-light text-lg max-w-2xl mb-14 leading-relaxed">
-            Stop guessing. Input your <span className="text-white font-normal">intent</span> — the AI works backward and writes the exact factory machine code.
+            Stop guessing. Input your <span className="text-white font-normal">intent</span> - the AI works backward and writes the exact factory machine code.
           </p>
         </motion.div>
         )}
 
 
-        {/* 5-Step Workflow Diagram — Skandax Style Redesign */}
+        {/* 5-Step Workflow Diagram - Skandax Style Redesign */}
         <motion.div {...fade} className="mb-14 pb-4">
           {/* Main Diagram Grid */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_24px_1fr_24px_1fr_24px_1fr_24px_1fr] items-center gap-y-6">
@@ -837,7 +837,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
                 <div className="w-3 h-3 rounded-full bg-white/10" />
-                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai — lpm-v2 — prompt</span>
+                <span className="text-xs text-white/35 font-mono ml-3">shodh-ai - lpm-v2 - prompt</span>
               </div>
               <div className="p-6 md:p-10 space-y-8 font-mono">
                 <div>
@@ -848,7 +848,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   </p>
                 </div>
                 <div>
-                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine — Coupling</p>
+                  <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Physics Engine - Coupling</p>
                   <div className="space-y-1.5">
                     {active.physics.map((p, physIdx) => (
                       <div key={physIdx} className="flex items-center gap-2 text-sm text-white/60">
@@ -876,7 +876,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             We unified the underlying math of the physical world into a single foundation model.
           </p>
           <p className="text-white/55 font-light text-base max-w-3xl mb-12 leading-relaxed">
-            To create the &ldquo;Fabless Physical Economy,&rdquo; we had to solve a mathematical impossibility. You cannot build a factory using trial-and-error. You need a model that can process the laws of physics backward—starting from the perfect product and generating the exact factory process to make it.
+            To create the &ldquo;Fabless Physical Economy,&rdquo; we had to solve a mathematical impossibility. You cannot build a factory using trial-and-error. You need a model that can process the laws of physics backward-starting from the perfect product and generating the exact factory process to make it.
           </p>
 
           {/* Equations → LPM convergence */}
@@ -915,7 +915,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               <p className="text-white/75 font-light text-sm leading-relaxed">Processes 3D/4D physics across all domains in milliseconds, not months.</p>
             </div>
             <div className="p-5 rounded-xl bg-white/[0.02] border border-white/8">
-              <p className="text-white/60 text-xs uppercase tracking-wider mb-2">Fully Invertible — Inverse Design</p>
+              <p className="text-white/60 text-xs uppercase tracking-wider mb-2">Fully Invertible - Inverse Design</p>
               <p className="text-white/75 font-light text-sm leading-relaxed">You input the desired zero-defect outcome. The LPM generates the exact thermal, fluid, and pressure recipe to manufacture it.</p>
             </div>
           </div>
@@ -923,7 +923,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
 
         {/* Patent stat */}
         <motion.div {...fade} className="mt-10 p-8 rounded-2xl bg-emerald-950/15 border border-emerald-500/20">
-          <p className="text-emerald-300/60 text-xs uppercase tracking-wider mb-3">The ROI — Patent Life Recovered</p>
+          <p className="text-emerald-300/60 text-xs uppercase tracking-wider mb-3">The ROI - Patent Life Recovered</p>
           <p className="text-5xl font-extralight text-emerald-300 mb-4">+6.75 <span className="text-2xl">yrs</span></p>
           <p className="text-white/75 font-light text-base">By skipping the pilot plant, we unlock <span className="text-emerald-300 font-normal">$1.35B in monopoly revenue</span> per molecule for our partners.</p>
         </motion.div>
@@ -1148,7 +1148,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           <div className="mt-10 grid md:grid-cols-2 gap-4">
             <div className="p-6 rounded-xl bg-white/[0.02] border border-white/8 space-y-2">
               <p className="text-rose-300/70 text-xs uppercase tracking-wider">Why 3D is harder than 1D</p>
-              <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors — position, time, temperature, pressure — all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
+              <p className="text-white/65 font-light text-sm leading-relaxed">Biology models fold 1D sequences. Physics requires 3D tensors - position, time, temperature, pressure - all at once. Orders of magnitude more complex. Current SOTA: Aurora at 1.3B params. Our target: <span className="text-white font-normal">The 10B+ Large Physics Model.</span> In computational load, a 10B 3D multi-physics model is equivalent to a 100B-parameter LLM.</p>
             </div>
             <div className="p-6 rounded-xl bg-white/[0.015] border border-white/5 space-y-2">
               <p className="text-white/40 text-xs uppercase tracking-wider">Where we stand</p>
@@ -1164,13 +1164,13 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
 
           <div className="mb-6 p-8 rounded-2xl border border-blue-500/20 bg-blue-950/10">
             <div className="mb-5">
-              <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 — Now</p>
+              <p className="text-blue-300/60 text-xs uppercase tracking-wider mb-1">Stage 1 - Now</p>
               <h4 className="text-white font-light text-2xl">The 50B 3D-Foundation Model</h4>
               <p className="text-blue-300/50 text-xs mt-1">Anchor-Partner Deployment</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                <p>The universal base model — validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
+                <p>The universal base model - validated at the edge. The 50B foundation is deployed into secure federated enclaves at Biocon, Jubilant, and Aarti, using their historical failure data to fine-tune the final 20% weights without their IP ever leaving their walls.</p>
                 <p>Achieves <span className="text-white font-normal">90% accuracy</span> on their specific process environments. First commercial deployments in Year 1.</p>
                 <p className="text-white/30 font-mono text-xs">JAX/FLAX · FNO/UPT · Mixture of Experts</p>
               </div>
@@ -1189,13 +1189,13 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
 
           <div className="p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
             <div className="mb-5">
-              <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 — The Vision</p>
+              <p className="text-rose-300/60 text-xs uppercase tracking-wider mb-1">And Stage 2 - The Vision</p>
               <h4 className="text-white font-light text-2xl">The 500B+ Foundation Model</h4>
               <p className="text-rose-300/50 text-xs mt-1">Universal Manufacturing Intelligence</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3 text-white/65 font-light text-sm leading-relaxed">
-                <p>A client brings a completely novel molecule, composite, or device — never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
+                <p>A client brings a completely novel molecule, composite, or device - never seen before. The LPM outputs the gigafactory blueprint. No physical trial-and-error required.</p>
                 <p>The 50B model handles known process families well. The 500B model handles the <span className="text-white font-normal">hard edge cases</span>: chaotic turbulence, multi-phase reactions, and extreme-condition manufacturing.</p>
               </div>
               <div className="space-y-3">
@@ -1224,7 +1224,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
         <motion.div {...fade}>
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px w-8 bg-white/15 shrink-0" />
-            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Proof — Early Work</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/55">The Proof - Early Work</p>
           </div>
           <h2 className="text-4xl md:text-6xl font-extralight leading-tight tracking-tight mb-6 max-w-3xl">
             {isFront ? <>Proof that the<br /><span className="font-normal">physics stack works.</span></> : <>How it will<br /><span className="font-normal">be done.</span></>}
@@ -1247,11 +1247,11 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           <p className="text-white/50 font-light text-sm max-w-2xl mb-8">How do we actually build a 10B 3D-tensor physics model?</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-6 rounded-2xl bg-blue-950/10 border border-blue-500/20">
-              <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-2">The 80% Foundation — Pure Physics</p>
-              <p className="text-white/75 font-light text-sm leading-relaxed">We train the base LPM on millions of synthetically generated 3D fluid and thermodynamic simulations. The AI learns the universal laws of physics — Navier-Stokes, Fick&apos;s Law.</p>
+              <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-2">The 80% Foundation - Pure Physics</p>
+              <p className="text-white/75 font-light text-sm leading-relaxed">We train the base LPM on millions of synthetically generated 3D fluid and thermodynamic simulations. The AI learns the universal laws of physics - Navier-Stokes, Fick&apos;s Law.</p>
             </div>
             <div className="p-6 rounded-2xl bg-emerald-950/10 border border-emerald-500/20">
-              <p className="text-emerald-300/70 text-xs uppercase tracking-wider mb-2">The 20% Fine-Tuning — The Domain Expert</p>
+              <p className="text-emerald-300/70 text-xs uppercase tracking-wider mb-2">The 20% Fine-Tuning - The Domain Expert</p>
               <p className="text-white/75 font-light text-sm leading-relaxed">We deploy the universal base model inside secure federated enclaves at the client site. We fine-tune the final 20% weights using their highly classified historical failure data without their IP ever leaving their walls.</p>
             </div>
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/8">
@@ -1265,7 +1265,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           </div>
         </motion.div>
 
-        {/* Slide 2: The Core Moat — 3D Data Factory */}
+        {/* Slide 2: The Core Moat - 3D Data Factory */}
         <motion.div {...fade} className="mb-16 border-t border-white/5 pt-12">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-white/25 font-mono text-sm">02</span>
@@ -1280,34 +1280,34 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             <div className="rounded-2xl border border-white/8 bg-white/[0.02] overflow-hidden">
               <div className="px-5 py-3 border-b border-white/5 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-white/20" />
-                <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography — Commercial Battery SEM</p>
+                <p className="text-white/40 text-xs uppercase tracking-widest">Real-World Tomography - Commercial Battery SEM</p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-white/5 p-px">
                 <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
-                  <img src="/SEM_comparison/Samsung_25R6_sem_slices copy.png" alt="Real SEM slices — Samsung 25R6" className="w-full h-full object-contain opacity-90" />
+                  <img src="/SEM_comparison/Samsung_25R6_sem_slices copy.png" alt="Real SEM slices - Samsung 25R6" className="w-full h-full object-contain opacity-90" />
                 </div>
                 <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
-                  <img src="/SEM_comparison/Samsung_25R6_sem_isosurface.png" alt="Real SEM isosurface — Samsung 25R6" className="w-full h-full object-contain opacity-90" />
+                  <img src="/SEM_comparison/Samsung_25R6_sem_isosurface.png" alt="Real SEM isosurface - Samsung 25R6" className="w-full h-full object-contain opacity-90" />
                 </div>
               </div>
-              <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 — Physical scan data</p>
+              <p className="text-white/25 text-xs px-5 py-3 font-light">Samsung 25R6 - Physical scan data</p>
             </div>
             <div className="rounded-2xl border border-blue-500/20 bg-blue-950/5 overflow-hidden">
               <div className="px-5 py-3 border-b border-blue-500/10 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-blue-400/50" />
-                <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI — Generated Digital Twin</p>
+                <p className="text-blue-300/60 text-xs uppercase tracking-widest">Shodh AI - Generated Digital Twin</p>
               </div>
               <div className="bg-[#060606] min-h-[200px] overflow-hidden flex items-center justify-center">
                 <img src="/SEM_comparison/sample_003_20260206_125915_sem_isosurface.png" alt="Shodh AI generated SEM isosurface" className="w-full h-full object-contain opacity-95" />
               </div>
-              <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated — no physical scan required</p>
+              <p className="text-blue-300/40 text-xs px-5 py-3 font-light">Algorithmically generated - no physical scan required</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-6 rounded-2xl bg-blue-950/10 border border-blue-500/15">
               <p className="text-blue-300/70 text-xs uppercase tracking-wider mb-2">95% Morphological Match</p>
-              <p className="text-white/60 font-light text-sm leading-relaxed">Our AI generates synthetic physical structures with mathematical parity to real-world physics — allowing us to train the 10B model without waiting months for physical lab scans.</p>
+              <p className="text-white/60 font-light text-sm leading-relaxed">Our AI generates synthetic physical structures with mathematical parity to real-world physics - allowing us to train the 10B model without waiting months for physical lab scans.</p>
             </div>
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center gap-4">
               <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
@@ -1331,7 +1331,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
           <div className="grid md:grid-cols-2 gap-4 mb-10">
             <div className="p-5 rounded-xl bg-white/[0.02] border border-white/8">
               <p className="text-white/50 text-xs uppercase tracking-wider mb-2">The Sandbox</p>
-              <p className="text-white/70 font-light text-sm leading-relaxed">We chose the silicon anode — the biggest unsolved problem in next-gen lithium batteries, and one of the most chaotic, degradation-heavy environments in the physical world.</p>
+              <p className="text-white/70 font-light text-sm leading-relaxed">We chose the silicon anode - the biggest unsolved problem in next-gen lithium batteries, and one of the most chaotic, degradation-heavy environments in the physical world.</p>
             </div>
             <div className="p-5 rounded-xl bg-white/[0.02] border border-white/8">
               <p className="text-white/50 text-xs uppercase tracking-wider mb-2">The Digital Training</p>
@@ -1430,7 +1430,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             <span className="text-white/25 font-mono text-sm">04</span>
             <h3 className="text-xl md:text-2xl font-light text-white">The Wet-Lab Validation: Closing the Sim2Real Gap</h3>
           </div>
-          <p className="text-white/40 font-light text-sm max-w-2xl mb-10">We took the AI&apos;s 5 digital recipes into a physical wet-lab — mixed the chemicals, coated the foils, manufactured the physical cells, and put them on stress-testers until they broke.</p>
+          <p className="text-white/40 font-light text-sm max-w-2xl mb-10">We took the AI&apos;s 5 digital recipes into a physical wet-lab - mixed the chemicals, coated the foils, manufactured the physical cells, and put them on stress-testers until they broke.</p>
         </motion.div>
 
         <div className="p-8 rounded-xl bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-emerald-900/20 border border-white/10 mb-0">
@@ -1578,7 +1578,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             Three anchor partners.<br /><span className="font-normal">Three trillion-dollar markets.</span>
           </h2>
           <p className="text-white/50 font-light text-lg max-w-2xl mb-16 leading-relaxed">
-            Each partner has personally validated our thesis — and each one is a gateway to a global industry.
+            Each partner has personally validated our thesis - and each one is a gateway to a global industry.
           </p>
         </motion.div>
 
@@ -1597,7 +1597,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               <div className="space-y-5">
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Partner</p>
-                  <p className="text-white/80 font-light text-sm">Kiran Mazumdar-Shaw — Founder & Chairperson</p>
+                  <p className="text-white/80 font-light text-sm">Kiran Mazumdar-Shaw - Founder & Chairperson</p>
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Personal Angle</p>
@@ -1605,7 +1605,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Project</p>
-                  <p className="text-white/55 font-light text-sm leading-relaxed">Taking Biocon&apos;s complex biologicals from 5L benchtop synthesis to 10,000L commercial bioreactors — optimizing oxygen mass transfer and impeller shear-stress to prevent microbe death.</p>
+                  <p className="text-white/55 font-light text-sm leading-relaxed">Taking Biocon&apos;s complex biologicals from 5L benchtop synthesis to 10,000L commercial bioreactors - optimizing oxygen mass transfer and impeller shear-stress to prevent microbe death.</p>
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">Blueprint & Bounty Trigger</p>
@@ -1617,17 +1617,17 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-3">Market Unlocked</p>
                   <div className="space-y-2">
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">TAM — Global Biomanufacturing</p>
+                      <p className="text-white/45 text-xs">TAM - Global Biomanufacturing</p>
                       <p className="text-blue-300 font-light text-lg">$300B+</p>
                     </div>
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">SAM — Scale-Up & Yield Optimization</p>
+                      <p className="text-white/45 text-xs">SAM - Scale-Up & Yield Optimization</p>
                       <p className="text-blue-300/60 font-light">$35B</p>
                     </div>
                   </div>
                 </div>
                 <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5">
-                  <p className="text-white/45 font-light text-sm leading-relaxed">If we prove it with Biocon, every global pharma giant — Pfizer, Novartis — becomes an immediate target for our LPM.</p>
+                  <p className="text-white/45 font-light text-sm leading-relaxed">If we prove it with Biocon, every global pharma giant - Pfizer, Novartis - becomes an immediate target for our LPM.</p>
                 </div>
               </div>
             </div>
@@ -1646,7 +1646,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               <div className="space-y-5">
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Partner</p>
-                  <p className="text-white/80 font-light text-sm">Mirik Gogri — Promoter</p>
+                  <p className="text-white/80 font-light text-sm">Mirik Gogri - Promoter</p>
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Personal Angle</p>
@@ -1658,7 +1658,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">Blueprint & Bounty Trigger</p>
-                  <p className="text-white/55 font-light text-sm">Safely transitioning hazardous batch chemistries into continuous flow — without physical pilot-plant explosions.</p>
+                  <p className="text-white/55 font-light text-sm">Safely transitioning hazardous batch chemistries into continuous flow - without physical pilot-plant explosions.</p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -1666,11 +1666,11 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-3">Market Unlocked</p>
                   <div className="space-y-2">
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">TAM — Global Specialty Chemicals</p>
+                      <p className="text-white/45 text-xs">TAM - Global Specialty Chemicals</p>
                       <p className="text-rose-300 font-light text-lg">$800B+</p>
                     </div>
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">SAM — Chemical Process Engineering</p>
+                      <p className="text-white/45 text-xs">SAM - Chemical Process Engineering</p>
                       <p className="text-rose-300/60 font-light">$60B</p>
                     </div>
                   </div>
@@ -1695,7 +1695,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
               <div className="space-y-5">
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Partner</p>
-                  <p className="text-white/80 font-light text-sm">Deepak Jain — CEO</p>
+                  <p className="text-white/80 font-light text-sm">Deepak Jain - CEO</p>
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Personal Angle</p>
@@ -1703,7 +1703,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">The Project</p>
-                  <p className="text-white/55 font-light text-sm leading-relaxed">Using the LPM to generate continuous flow manufacturing parameters — feed rates, temperature gradients — for high-volume agrochemicals in weeks instead of months.</p>
+                  <p className="text-white/55 font-light text-sm leading-relaxed">Using the LPM to generate continuous flow manufacturing parameters - feed rates, temperature gradients - for high-volume agrochemicals in weeks instead of months.</p>
                 </div>
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-1.5">Blueprint & Bounty Trigger</p>
@@ -1715,11 +1715,11 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
                   <p className="text-white/30 text-xs uppercase tracking-wider mb-3">Market Unlocked</p>
                   <div className="space-y-2">
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">TAM — Global CDMO & Agrochemicals</p>
+                      <p className="text-white/45 text-xs">TAM - Global CDMO & Agrochemicals</p>
                       <p className="text-emerald-300 font-light text-lg">$250B+</p>
                     </div>
                     <div className="flex justify-between items-baseline">
-                      <p className="text-white/45 text-xs">SAM — CDMO Process Tech</p>
+                      <p className="text-white/45 text-xs">SAM - CDMO Process Tech</p>
                       <p className="text-emerald-300/60 font-light">$25B</p>
                     </div>
                   </div>
@@ -1838,7 +1838,7 @@ export default function ShodhDeckV3Now({ variant = "right" }: { variant?: DeckVa
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-all text-base"
           >
             <Mail className="w-5 h-5" />
-            Partner with Us — arastu@shodh.ai
+            Partner with Us - arastu@shodh.ai
           </a>
         </motion.div>
       </section>

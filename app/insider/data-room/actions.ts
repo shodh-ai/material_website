@@ -9,7 +9,7 @@ export async function submitInvestorApplication(formData: {
 }) {
     try {
         if (!process.env.DATABASE_URL) {
-            console.log('No DATABASE_URL set — skipping DB insert (local dev mode)');
+            console.log('No DATABASE_URL set - skipping DB insert (local dev mode)');
             return { success: true };
         }
 

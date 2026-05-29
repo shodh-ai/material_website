@@ -112,13 +112,13 @@ export default function ANRFPitchPage() {
                     <p className="text-white font-medium text-lg">Our singular goal:</p>
                     <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                       <p className="text-white text-xl font-medium">Build the world's largest Large Physics Model (LPM).</p>
-                      <p className="text-white/60 mt-1">Transform how global R&D and manufacturing are done — forever.</p>
+                      <p className="text-white/60 mt-1">Transform how global R&D and manufacturing are done - forever.</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <p className="text-white font-medium">We didn't just write a whitepaper. We proved the science.</p>
-                    <p className="text-white/70 font-light">At the IndiaAI summit, we released our first foundational model — targeting the hardest problem in the battery world: the <span className="text-white font-medium">Silicon-Graphite Anode.</span></p>
+                    <p className="text-white/70 font-light">At the IndiaAI summit, we released our first foundational model - targeting the hardest problem in the battery world: the <span className="text-white font-medium">Silicon-Graphite Anode.</span></p>
 
                     <div className="grid md:grid-cols-2 gap-4 mt-4">
                       <div className="p-5 rounded-xl bg-white/5 border border-white/10">
@@ -191,14 +191,14 @@ export default function ANRFPitchPage() {
                         <AlertTriangle className="w-5 h-5 text-yellow-400/70 shrink-0 mt-0.5" />
                         <div>
                           <p className="text-white/80 font-medium">The old way:</p>
-                          <p className="text-white/60 font-light text-sm">Simulating a battery charging required a supercomputer running for <span className="text-white">weeks</span> — just for a few seconds of real time.</p>
+                          <p className="text-white/60 font-light text-sm">Simulating a battery charging required a supercomputer running for <span className="text-white">weeks</span> - just for a few seconds of real time.</p>
                         </div>
                       </li>
                       <li className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
                         <Zap className="w-5 h-5 text-emerald-400/70 shrink-0 mt-0.5" />
                         <div>
                           <p className="text-white/80 font-medium">Our LPM:</p>
-                          <p className="text-white/60 font-light text-sm">Predicts how a new material will swell, heat up, and perform — in <span className="text-white">milliseconds.</span></p>
+                          <p className="text-white/60 font-light text-sm">Predicts how a new material will swell, heat up, and perform - in <span className="text-white">milliseconds.</span></p>
                         </div>
                       </li>
                     </ul>
@@ -224,7 +224,7 @@ export default function ANRFPitchPage() {
 
                 <div className="space-y-6">
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                    <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Real example — our partner Kiran Mazumdar-Shaw at Biocon</p>
+                    <p className="text-white/50 text-xs uppercase tracking-wider mb-3">Real example - our partner Kiran Mazumdar-Shaw at Biocon</p>
                     <ul className="space-y-2 text-white/70 font-light">
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Making a life-saving drug requires a <span className="text-white font-medium">16-step chemical batch process.</span></li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Slow. Insanely expensive.</li>
@@ -245,7 +245,7 @@ export default function ANRFPitchPage() {
                         <p className="text-white/50 text-xs uppercase tracking-wider">Stage 1</p>
                       </div>
                       <p className="text-white font-medium mb-1">Digital Discovery</p>
-                      <p className="text-white/50 text-sm font-light">Isomorphic Labs — AI invents a molecule on a computer.</p>
+                      <p className="text-white/50 text-sm font-light">Isomorphic Labs - AI invents a molecule on a computer.</p>
                     </div>
                     <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                       <div className="flex items-center gap-2 mb-3">
@@ -253,12 +253,12 @@ export default function ANRFPitchPage() {
                         <p className="text-white/50 text-xs uppercase tracking-wider">Stage 2</p>
                       </div>
                       <p className="text-white font-medium mb-1">Lab Synthesis</p>
-                      <p className="text-white/50 text-sm font-light">Radical AI — robotic labs make 1 gram in a test tube.</p>
+                      <p className="text-white/50 text-sm font-light">Radical AI - robotic labs make 1 gram in a test tube.</p>
                     </div>
                     <div className="p-5 rounded-xl bg-white/10 border border-white/20">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-medium text-white">3</div>
-                        <p className="text-white text-xs uppercase tracking-wider font-medium">Stage 3 — Us</p>
+                        <p className="text-white text-xs uppercase tracking-wider font-medium">Stage 3 - Us</p>
                       </div>
                       <p className="text-white font-medium mb-1">Industrial Scale-Up</p>
                       <p className="text-white/70 text-sm font-light">The Valley of Death. We design the actual factory physics to manufacture 10,000 tons safely.</p>
@@ -285,13 +285,13 @@ export default function ANRFPitchPage() {
                   <div className="space-y-3 text-white/70 font-light">
                     <p className="text-white font-medium text-lg">How can one AI solve both battery degradation and pharmaceutical scale-up?</p>
                     <p>Because the real bottlenecks don't happen in giant machines.</p>
-                    <p>They happen at the <span className="text-white font-medium">Mesoscale</span> — larger than a single atom, microscopic compared to the final product.</p>
+                    <p>They happen at the <span className="text-white font-medium">Mesoscale</span> - larger than a single atom, microscopic compared to the final product.</p>
                   </div>
 
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10">
                     <p className="text-white font-medium mb-4">Every multi-trillion-dollar industry on Earth boils down to one interaction:</p>
                     <p className="text-white text-xl font-medium text-center py-4 border-y border-white/10">
-                      A fluid moving through a microscopic, sponge-like solid — and reacting with it.
+                      A fluid moving through a microscopic, sponge-like solid - and reacting with it.
                     </p>
                   </div>
 
@@ -339,7 +339,7 @@ export default function ANRFPitchPage() {
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-4 tracking-tight">
                   Digitizing the <span className="font-normal">Laws of the Universe</span>
                 </h2>
-                <p className="text-white/50 font-light mb-8">Legacy software takes weeks. Our LPM couples 6 branches of physics — simultaneously.</p>
+                <p className="text-white/50 font-light mb-8">Legacy software takes weeks. Our LPM couples 6 branches of physics - simultaneously.</p>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   {[
@@ -400,7 +400,7 @@ export default function ANRFPitchPage() {
                 </div>
 
                 <div className="mt-6 p-6 rounded-xl bg-white/5 border border-white/10 text-center">
-                  <p className="text-white font-medium">By unifying all 6 into a single neural network — Shodh AI generates the perfect physical blueprint in seconds.</p>
+                  <p className="text-white font-medium">By unifying all 6 into a single neural network - Shodh AI generates the perfect physical blueprint in seconds.</p>
                 </div>
               </motion.section>
 
@@ -431,7 +431,7 @@ export default function ANRFPitchPage() {
                       </div>
                       <div className="flex items-start gap-2 mt-3">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <p className="text-white/60 text-sm font-light">Solved. IndiaAI Mission secures a 200,000 GPU cluster. We have priority access — sovereign compute.</p>
+                        <p className="text-white/60 text-sm font-light">Solved. IndiaAI Mission secures a 200,000 GPU cluster. We have priority access - sovereign compute.</p>
                       </div>
                     </div>
                     <div className="p-6 rounded-xl bg-white/5 border border-white/20">
@@ -457,11 +457,11 @@ export default function ANRFPitchPage() {
                       </li>
                       <li className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
                         <ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />
-                        <p>Scientists rarely publish <span className="text-white font-medium">failed experiments</span> — but an AI learning physics desperately needs to know what not to do.</p>
+                        <p>Scientists rarely publish <span className="text-white font-medium">failed experiments</span> - but an AI learning physics desperately needs to know what not to do.</p>
                       </li>
                       <li className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
                         <ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />
-                        <p>Training only on computer simulations causes the AI to hallucinate — the <span className="text-white font-medium">"Sim-to-Real Gap."</span></p>
+                        <p>Training only on computer simulations causes the AI to hallucinate - the <span className="text-white font-medium">"Sim-to-Real Gap."</span></p>
                       </li>
                     </ul>
                   </div>
@@ -471,7 +471,7 @@ export default function ANRFPitchPage() {
                     <ul className="space-y-3 text-white/70 font-light">
                       <li className="flex items-start gap-2">
                         <Globe className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />
-                        <p><span className="text-white font-medium">USA:</span> Government and massive funds backing Lila Sciences & Radical AI — building autonomous robotic labs.</p>
+                        <p><span className="text-white font-medium">USA:</span> Government and massive funds backing Lila Sciences & Radical AI - building autonomous robotic labs.</p>
                       </li>
                       <li className="flex items-start gap-2">
                         <Globe className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />
@@ -485,7 +485,7 @@ export default function ANRFPitchPage() {
                 </div>
               </motion.section>
 
-              {/* Section 7: The AlphaFold Moment — KEPT EXACTLY */}
+              {/* Section 7: The AlphaFold Moment - KEPT EXACTLY */}
               <motion.section
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -503,13 +503,13 @@ export default function ANRFPitchPage() {
                 <div className="space-y-6">
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
                     <p className="text-white font-medium">People assume AlphaFold trained on millions of real, lab-tested proteins.</p>
-                    <p className="text-white/60 font-light">That's mathematically impossible — only 170,000 mapped proteins existed.</p>
+                    <p className="text-white/60 font-light">That's mathematically impossible - only 170,000 mapped proteins existed.</p>
                     <p className="text-white font-medium mt-2">Their secret: <span className="text-white/80 font-normal">Self-Distillation.</span></p>
                     <ul className="space-y-2 text-white/60 font-light text-sm mt-2">
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Take a small real dataset.</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Ask the AI to hallucinate millions of synthetic shapes.</li>
                       <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />Mix the best synthetic ones back in.</li>
-                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />AlphaFold was mostly synthetic data — strictly anchored by a small foundation of real data.</li>
+                      <li className="flex items-start gap-2"><ChevronRight className="w-4 h-4 text-white/30 mt-0.5 shrink-0" />AlphaFold was mostly synthetic data - strictly anchored by a small foundation of real data.</li>
                     </ul>
                   </div>
 
@@ -536,7 +536,7 @@ export default function ANRFPitchPage() {
                     </div>
                   </div>
 
-                  <p className="text-white/60 font-light">We use IndiaAI's GPUs to run millions of synthetic physics simulations — fast and free. But we need a <span className="text-white font-medium">pristine, robotic dataset of real-world physical failures</span> to anchor those simulations so the AI doesn't hallucinate.</p>
+                  <p className="text-white/60 font-light">We use IndiaAI's GPUs to run millions of synthetic physics simulations - fast and free. But we need a <span className="text-white font-medium">pristine, robotic dataset of real-world physical failures</span> to anchor those simulations so the AI doesn't hallucinate.</p>
                 </div>
 
                 {/* The AlphaFold Proof - 3 Step Visual - EXACT COPY */}
@@ -783,12 +783,12 @@ export default function ANRFPitchPage() {
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-4 tracking-tight">
                   The Closed-Loop <span className="font-normal">National Asset</span>
                 </h2>
-                <p className="text-white/50 font-light mb-8">The National Autonomous Cloud-Lab — in partnership with ANRF.</p>
+                <p className="text-white/50 font-light mb-8">The National Autonomous Cloud-Lab - in partnership with ANRF.</p>
 
                 <div className="space-y-6">
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
                     <p className="text-white font-medium">Right now, human PhD students take 10–20 years to commercialize a new material.</p>
-                    <p className="text-white/60 font-light">By building a fully automated, robotic lab controlled by our LPM — we remove the human bottleneck entirely.</p>
+                    <p className="text-white/60 font-light">By building a fully automated, robotic lab controlled by our LPM - we remove the human bottleneck entirely.</p>
                   </div>
 
                   <p className="text-white font-medium">The continuous loop:</p>
@@ -881,7 +881,7 @@ export default function ANRFPitchPage() {
                   <div className="p-6 rounded-xl bg-white/5 border border-white/10 space-y-3">
                     <p className="text-white font-medium">The hard truth about India's current path:</p>
                     <ul className="space-y-2 text-white/65 font-light">
-                      <li className="flex items-start gap-2"><AlertTriangle className="w-4 h-4 text-yellow-400/70 mt-0.5 shrink-0" />If India only provides the GPUs — we will still be dependent on the West for physical data.</li>
+                      <li className="flex items-start gap-2"><AlertTriangle className="w-4 h-4 text-yellow-400/70 mt-0.5 shrink-0" />If India only provides the GPUs - we will still be dependent on the West for physical data.</li>
                       <li className="flex items-start gap-2"><AlertTriangle className="w-4 h-4 text-yellow-400/70 mt-0.5 shrink-0" />The combination of LPM + robotic experimentation is the bleeding edge of global science today.</li>
                     </ul>
                   </div>

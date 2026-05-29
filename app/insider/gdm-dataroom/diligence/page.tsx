@@ -48,7 +48,7 @@ function Table({
 export default function DiligencePage() {
   return (
     <GdmDocShell
-      eyebrow="File 02 · Shodh AI — Technical Diligence Report"
+      eyebrow="File 02 · Shodh AI - Technical Diligence Report"
       title="Commercial Diligence & Morphological Validation (Tier-1 OEM)"
       classification="Confidential (Shared under Mutual NDA)"
     >
@@ -109,11 +109,11 @@ export default function DiligencePage() {
         <div className="my-8 rounded-2xl border border-white/10 bg-black/40 overflow-hidden">
           <img
             src="/deepmind/EIL-013.tif.png"
-            alt="UCL LG MJ1 — X-ray Nano-CT slice / reconstruction"
+            alt="UCL LG MJ1 - X-ray Nano-CT slice / reconstruction"
             className="w-full h-auto"
           />
           <p className="px-4 py-3 text-xs text-white/45 border-t border-white/10">
-            UCL LG MJ1 — reference X-ray Nano-CT reconstruction used as public
+            UCL LG MJ1 - reference X-ray Nano-CT reconstruction used as public
             proxy for morphological validation.
           </p>
         </div>
