@@ -1733,6 +1733,7 @@
       align-items: center;
       justify-content: center;
       gap: 0;
+      transform: translateY(30px);
     }
 
     /* ── Heading Row: two halves side by side ── */
@@ -1751,15 +1752,18 @@
     }
 
     .gap-heading-contain.is-left {
-      transform: translateY(-150px) translateX(-150px);
+      transform: translateY(-145px) translateX(-240px);
+      text-align: left;
     }
 
     .gap-heading-contain.is-right {
-      transform: translateY(100px) translateX(200px);
+      transform: translateY(25px) translateX(260px);
+      text-align: right;
     }
 
     .gap-heading-contain {
       overflow: hidden;
+      width: min(52vw, 760px);
     }
 
     .gap-heading {
@@ -1767,10 +1771,15 @@
       font-size: 100px;
       font-weight: 600;
       line-height: 1.05;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
       color: var(--text-title);
       text-transform: uppercase;
-      white-space: nowrap;
+      white-space: normal;
+      margin: 0;
+    }
+
+    .gap-line {
+      display: block;
     }
 
     .gap-heading .gap-char {
@@ -1788,8 +1797,9 @@
     .gap-cover {
       position: relative;
       z-index: 1;
-      width: 30vw;
-      height: 55vh;
+      width: calc(450px * 16 / 9);
+      height: 450px;
+      aspect-ratio: 16 / 9;
       margin: 0 auto;
       border-radius: 0.25rem;
       overflow: hidden;
@@ -1819,9 +1829,9 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      margin-top: 6px;
+      margin-top: 84px;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(0);
     }
 
     .gap-testimonial-text {
@@ -1852,11 +1862,11 @@
       }
 
       .gap-heading-contain.is-left {
-        transform: translateY(-190px);
+        transform: translateY(-210px);
       }
 
       .gap-heading-contain.is-right {
-        transform: translateY(20px);
+        transform: translateY(72px);
       }
 
       .gap-heading {
@@ -1893,7 +1903,7 @@
       }
 
       .gap-testimonial {
-        margin-top: 70px;
+        margin-top: 90px;
       }
     }
   </style>
@@ -2263,21 +2273,21 @@
         <!-- Split headline -->
         <div class="gap-heading-row">
           <div class="gap-heading-contain is-left">
-            <h2 class="gap-heading is-left">One model&nbsp;</h2>
+            <h2 class="gap-heading is-left" data-lines="One|Model">One Model</h2>
           </div>
           <div class="gap-heading-contain is-right">
-            <h2 class="gap-heading is-right">Infinite invention.</h2>
+            <h2 class="gap-heading is-right" data-lines="Infinite|Invention">Infinite Invention</h2>
           </div>
         </div>
 
         <!-- Center image slideshow -->
         <div class="gap-cover" id="gap-cover">
-          <img src="assets/orbit/pexels-817621-12770846_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
-          <img src="assets/orbit/pexels-aliakdemir-30037320_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
-          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Laboratory imagery">
-          <img src="assets/orbit/pexels-magic-k-24827758-6729421_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
-          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
-          <img src="assets/orbit/pexels-stephen-leonardi-587681991-28614865_gm_optimized.jpeg" class="gap-image" alt="Technology imagery">
+          <img src="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
+          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
+          <img src="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
+          <img src="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
+          <img src="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" class="gap-image" alt="Architecture imagery">
+          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Clean energy imagery">
         </div>
 
         <!-- Testimonial -->

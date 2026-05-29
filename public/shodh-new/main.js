@@ -1196,16 +1196,21 @@ function setupGapSection() {
 
   // ── Manual character splitting (no SplitText plugin needed) ──
   function splitChars(el) {
-    const text = el.textContent;
+    const lines = (el.dataset.lines || el.textContent).split('|');
     el.innerHTML = '';
     const chars = [];
-    for (let i = 0; i < text.length; i++) {
-      const span = document.createElement('span');
-      span.className = 'gap-char';
-      span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
-      el.appendChild(span);
-      chars.push(span);
-    }
+    lines.forEach((lineText) => {
+      const line = document.createElement('span');
+      line.className = 'gap-line';
+      for (let i = 0; i < lineText.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'gap-char';
+        span.textContent = lineText[i] === ' ' ? '\u00A0' : lineText[i];
+        line.appendChild(span);
+        chars.push(span);
+      }
+      el.appendChild(line);
+    });
     return chars;
   }
 
