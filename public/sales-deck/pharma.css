@@ -1,0 +1,656 @@
+/* ─────────────────────────────────────────────────────────────
+ * Shodh AI Pharma Sales Deck — slide layout overrides
+ * Loaded after sales-deck.css to re-map slide IDs for pharma.
+ * ───────────────────────────────────────────────────────────── */
+
+/* ── Slide 8 — Pharma Use Cases (left h1 / 5-col cards + message) ── */
+#slide-8 .sd-grid--slide-8 {
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-8 .sd-headline--slide-8 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+#slide-8 .sd-h1 {
+  text-align: left;
+}
+
+#slide-8 .sd-slide-8-cases {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: var(--sd-gutter);
+  row-gap: var(--sd-space-24);
+  align-items: start;
+}
+
+#slide-8 .sd-slide-8-case {
+  display: grid;
+  gap: var(--sd-space-8);
+  align-content: start;
+}
+
+#slide-8 .sd-slide-8-case .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-8 .sd-slide-8-case .sd-body {
+  margin: 0;
+}
+
+#slide-8 .sd-slide-8-message {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  gap: var(--sd-space-8);
+  align-content: start;
+}
+
+#slide-8 .sd-slide-8-message .sd-body {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ── Slide 9 — Pharma Pilot (left h1 / objective / 3-col timeline / output) ── */
+#slide-9 .sd-grid--slide-9 {
+  align-content: start;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-9 .sd-grid--slide-9 > * {
+  grid-column: 1 / -1;
+}
+
+#slide-9 .sd-h1 {
+  text-align: left;
+}
+
+#slide-9 .sd-slide-9-objective {
+  display: grid;
+  gap: var(--sd-space-8);
+  justify-items: start;
+  text-align: left;
+}
+
+#slide-9 .sd-slide-9-objective .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-9 .sd-slide-9-objective .sd-body {
+  margin: 0;
+  max-width: 760px;
+}
+
+#slide-9 .sd-slide-9-structure {
+  display: grid;
+  gap: var(--sd-space-24);
+}
+
+#slide-9 .sd-slide-9-structure-label {
+  text-transform: none;
+  text-align: left;
+  margin: 0;
+}
+
+#slide-9 .sd-slide-9-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--sd-gutter);
+}
+
+#slide-9 .sd-slide-9-step {
+  display: grid;
+  gap: var(--sd-space-8);
+  align-content: start;
+}
+
+#slide-9 .sd-slide-9-step .sd-body {
+  margin: 0;
+}
+
+#slide-9 .sd-slide-9-output {
+  display: grid;
+  gap: var(--sd-space-8);
+  justify-items: start;
+  text-align: left;
+}
+
+#slide-9 .sd-slide-9-output .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-9 .sd-slide-9-output .sd-body {
+  margin: 0;
+  max-width: 760px;
+}
+
+/* ── Slide 10 — Business Model + Moat (right h1 / 2-col labeled lists) ── */
+#slide-10 .sd-grid--slide-10 {
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-10 .sd-headline--slide-10 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+#slide-10 .sd-h1 {
+  text-align: right;
+}
+
+#slide-10 .sd-h1 .sd-text-line,
+#slide-10 .sd-h1 .sd-mask-line-inner {
+  display: block;
+  white-space: nowrap;
+}
+
+#slide-10 .sd-slide-10-figure {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-self: center;
+  width: min(620px, 100%);
+  margin: 0;
+  pointer-events: none;
+}
+
+#slide-10 .sd-loop {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--sd-color-text);
+}
+
+#slide-10 .sd-loop-track {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.16;
+  stroke-width: 1.2;
+}
+
+#slide-10 .sd-loop-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.65;
+  stroke-width: 1.7;
+}
+
+#slide-10 .sd-loop-arrow {
+  fill: currentColor;
+}
+
+#slide-10 .sd-loop-node-top {
+  fill: currentColor;
+  fill-opacity: 0.88;
+}
+
+#slide-10 .sd-loop-node-side {
+  fill: currentColor;
+  fill-opacity: 0.32;
+}
+
+#slide-10 .sd-loop-label {
+  fill: currentColor;
+  font-family: var(--sd-font);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+#slide-10 .sd-slide-10-columns {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--sd-space-64);
+  align-items: start;
+}
+
+#slide-10 .sd-slide-10-col {
+  display: grid;
+  gap: var(--sd-space-24);
+  align-content: start;
+}
+
+#slide-10 .sd-slide-10-col > .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-10 .sd-slide-10-items {
+  display: grid;
+  gap: var(--sd-space-24);
+}
+
+#slide-10 .sd-slide-10-item {
+  display: grid;
+  gap: var(--sd-space-4);
+}
+
+#slide-10 .sd-slide-10-item .sd-body {
+  margin: 0;
+}
+
+/* ── Slide 11 — The Ask (left h1 / objective / 3-col timeline / end) ── */
+#slide-11 .sd-grid--slide-11 {
+  align-content: start;
+  justify-items: start;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-11 .sd-grid--slide-11 > * {
+  grid-column: 1 / -1;
+}
+
+#slide-11 .sd-headline--slide-11 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  text-align: left;
+}
+
+#slide-11 .sd-slide-11-objective {
+  display: grid;
+  gap: var(--sd-space-8);
+  justify-items: start;
+  text-align: left;
+}
+
+#slide-11 .sd-slide-11-objective .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-11 .sd-slide-11-objective .sd-body {
+  margin: 0;
+  max-width: 760px;
+}
+
+#slide-11 .sd-slide-11-structure {
+  display: grid;
+  gap: var(--sd-space-24);
+}
+
+#slide-11 .sd-slide-11-structure-label {
+  text-transform: none;
+  text-align: left;
+  margin: 0;
+}
+
+#slide-11 .sd-slide-11-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--sd-gutter);
+}
+
+#slide-11 .sd-slide-11-step {
+  display: grid;
+  gap: var(--sd-space-8);
+  align-content: start;
+}
+
+#slide-11 .sd-slide-11-step .sd-body {
+  margin: 0;
+}
+
+#slide-11 .sd-slide-11-end {
+  display: grid;
+  gap: var(--sd-space-8);
+  justify-items: start;
+  text-align: left;
+}
+
+#slide-11 .sd-slide-11-end .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-11 .sd-slide-11-end .sd-body {
+  margin: 0;
+  max-width: 760px;
+}
+
+/* ── Slide 12 — Closing (centered on screen) ── */
+#slide-12 .sd-grid--slide-12 {
+  align-content: center;
+  justify-items: center;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-12 .sd-slide-12-closing {
+  grid-column: 1 / -1;
+  order: 1;
+  text-align: center;
+}
+
+#slide-12 .sd-slide-12-figure {
+  grid-column: 1 / -1;
+  order: 2;
+  justify-self: center;
+  width: min(1080px, 100%);
+  margin: 0;
+  pointer-events: none;
+}
+
+#slide-12 .sd-tx {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--sd-color-text);
+}
+
+#slide-12 .sd-tx-cube-edge {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.32;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-orbit {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.55;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-nucleus {
+  fill: currentColor;
+}
+
+#slide-12 .sd-tx-electron {
+  fill: currentColor;
+  fill-opacity: 0.85;
+}
+
+#slide-12 .sd-tx-dot {
+  fill: currentColor;
+  fill-opacity: 0.4;
+}
+
+#slide-12 .sd-tx-dot--ordered {
+  fill-opacity: 0.8;
+}
+
+#slide-12 .sd-tx-lattice {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.3;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-chevron {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-axis {
+  stroke: currentColor;
+  stroke-opacity: 0.22;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-arrow {
+  fill: currentColor;
+}
+
+#slide-12 .sd-tx-face-top {
+  fill: currentColor;
+  fill-opacity: 0.88;
+}
+
+#slide-12 .sd-tx-face-left {
+  fill: currentColor;
+  fill-opacity: 0.38;
+}
+
+#slide-12 .sd-tx-face-right {
+  fill: currentColor;
+  fill-opacity: 0.24;
+}
+
+#slide-12 .sd-tx-platform {
+  fill: currentColor;
+  fill-opacity: 0.18;
+}
+
+#slide-12 .sd-tx-bevel {
+  fill: currentColor;
+  fill-opacity: 0.55;
+}
+
+#slide-12 .sd-tx-spark {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#slide-12 .sd-tx-label {
+  fill: currentColor;
+  font-family: var(--sd-font);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ── Slide 13 — Battery Appendix (left h1 / left narrative + right target table) ── */
+#slide-13 .sd-grid--slide-13 {
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  row-gap: var(--sd-space-48);
+  min-height: var(--sd-usable-h);
+}
+
+#slide-13 .sd-headline--slide-13 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+#slide-13 .sd-h1 {
+  text-align: left;
+}
+
+#slide-13 .sd-slide-13-narrative {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--sd-gutter);
+  align-items: start;
+}
+
+#slide-13 .sd-slide-13-narrative .sd-block {
+  gap: var(--sd-space-8);
+}
+
+#slide-13 .sd-slide-13-narrative .sd-slide-13-intro {
+  gap: var(--sd-space-8);
+}
+
+#slide-13 .sd-slide-13-narrative .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-13 .sd-slide-13-narrative .sd-body {
+  margin: 0;
+}
+
+#slide-13 .sd-slide-13-side {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  gap: var(--sd-space-8);
+  align-content: start;
+}
+
+#slide-13 .sd-slide-13-side .sd-h3 {
+  text-transform: none;
+  margin: 0;
+}
+
+#slide-13 .sd-slide-13-table {
+  display: grid;
+  gap: 0;
+  align-content: start;
+  margin-top: var(--sd-space-8);
+}
+
+#slide-13 .sd-slide-13-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.2fr;
+  column-gap: var(--sd-gutter);
+  align-items: baseline;
+  padding-block: 11px;
+}
+
+#slide-13 .sd-slide-13-row .sd-body {
+  margin: 0;
+}
+
+#slide-13 .sd-slide-13-row--head .sd-body {
+  color: var(--sd-color-label);
+}
+
+#slide-13 .sd-slide-13-row [role='rowheader'] {
+  color: var(--sd-color-text);
+}
+
+/* ── Responsive: tablet (<=1100px) ── */
+@media (max-width: 1100px) {
+  #slide-8 .sd-slide-8-cases {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #slide-13 .sd-grid--slide-13 {
+    grid-template-rows: auto auto auto;
+  }
+
+  #slide-13 .sd-slide-13-narrative,
+  #slide-13 .sd-slide-13-side {
+    grid-column: 1 / -1;
+  }
+
+  #slide-13 .sd-slide-13-narrative {
+    grid-row: 2;
+  }
+
+  #slide-13 .sd-slide-13-side {
+    grid-row: 3;
+    margin-top: var(--sd-space-32);
+  }
+}
+
+/* ── Responsive: mobile (<=720px) ── */
+@media (max-width: 720px) {
+  #slide-8 .sd-slide-8-cases {
+    grid-template-columns: 1fr;
+    row-gap: var(--sd-space-24);
+  }
+
+  #slide-9 .sd-slide-9-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  #slide-10 .sd-slide-10-columns {
+    grid-template-columns: 1fr;
+    row-gap: var(--sd-space-48);
+  }
+
+  #slide-11 .sd-slide-11-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  #slide-12.sd-slide {
+    align-items: center;
+  }
+
+  #slide-11.sd-slide {
+    align-items: flex-start;
+  }
+
+  .sd-grid,
+  #slide-8 .sd-grid--slide-8,
+  #slide-9 .sd-grid--slide-9,
+  #slide-10 .sd-grid--slide-10,
+  #slide-11 .sd-grid--slide-11,
+  #slide-12 .sd-grid--slide-12,
+  #slide-13 .sd-grid--slide-13 {
+    min-height: auto;
+  }
+
+  #slide-13 .sd-slide-13-narrative {
+    grid-template-columns: 1fr;
+    row-gap: var(--sd-space-24);
+  }
+
+  #slide-13 .sd-slide-13-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--sd-border);
+    border-radius: 10px;
+    overscroll-behavior-x: contain;
+  }
+
+  #slide-13 .sd-slide-13-row {
+    column-gap: var(--sd-space-16);
+    row-gap: 0;
+    padding: 10px var(--sd-space-16);
+    align-items: baseline;
+    grid-template-columns: 1.3fr 1fr 1.2fr;
+    min-width: 440px;
+  }
+
+  #slide-13 .sd-slide-13-row + .sd-slide-13-row {
+    border-top: 1px solid var(--sd-border);
+  }
+
+  #slide-13 .sd-slide-13-row--head {
+    background: rgba(15, 40, 71, 0.05);
+    border-bottom: 1px solid var(--sd-border-strong);
+  }
+
+  [data-theme='dark'] #slide-13 .sd-slide-13-row--head {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  #slide-13 .sd-slide-13-row .sd-body {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  #slide-13 .sd-slide-13-row .sd-body:first-child {
+    grid-column: auto;
+  }
+
+  #slide-13 .sd-slide-13-row [role='rowheader'] {
+    font-weight: 600;
+    color: var(--sd-color-text);
+  }
+}
