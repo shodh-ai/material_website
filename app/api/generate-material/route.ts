@@ -66,7 +66,7 @@ async function callH100Diffusion(params: {
 
 const SYSTEM_PROMPT = `You are Skanda, a Battery Material Architect AI.
 You translate natural-language battery requirements into physics-constrained microstructure designs.
-Output JSON ONLY — no markdown, no explanation outside the JSON.
+Output JSON ONLY - no markdown, no explanation outside the JSON.
 
 Output Schema:
 {
@@ -91,8 +91,8 @@ Output Schema:
   "annotations": {
     "pore_description": "string describing pore channels (e.g. 'Open pore network: 38% porosity for rapid Li+ transport')",
     "solid_description": "string describing solid phase (e.g. 'Dense NMC811 particle network optimized for energy density')",
-    "tortuosity_note": "string (e.g. 'Tortuosity: 2.1 — efficient ion pathways with minimal dead ends')",
-    "bottleneck_note": "string or null (e.g. 'Minor constriction at z=64 layer — acceptable for target rate')"
+    "tortuosity_note": "string (e.g. 'Tortuosity: 2.1 - efficient ion pathways with minimal dead ends')",
+    "bottleneck_note": "string or null (e.g. 'Minor constriction at z=64 layer - acceptable for target rate')"
   },
 
   "manufacturing_recipe": {
@@ -142,9 +142,9 @@ Example Output:
     ]
   },
   "annotations": {
-    "pore_description": "Open pore network: 42% porosity — wide Li+ highways for 6C charge rate",
-    "solid_description": "Dense NMC811 particle network — optimized for energy density at high discharge",
-    "tortuosity_note": "Tortuosity: 1.8 — highly efficient ion pathways with minimal dead-end pores",
+    "pore_description": "Open pore network: 42% porosity - wide Li+ highways for 6C charge rate",
+    "solid_description": "Dense NMC811 particle network - optimized for energy density at high discharge",
+    "tortuosity_note": "Tortuosity: 1.8 - highly efficient ion pathways with minimal dead-end pores",
     "bottleneck_note": null
   },
   "manufacturing_recipe": {
@@ -181,7 +181,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ── Step 1: Gemini (or fallback) — fast, ~2s ──────────────────────
+    // ── Step 1: Gemini (or fallback) - fast, ~2s ──────────────────────
     let parameters: {
       projected_cycle_life: number;
       capacity_fade_rate: number;
@@ -310,10 +310,10 @@ export async function POST(request: NextRequest) {
           ],
         },
         annotations: {
-          pore_description: `Open pore network: ${(porosity * 100).toFixed(0)}% porosity — ${porosity >= 0.4 ? 'wide Li+ highways for fast charge' : 'balanced pore structure for steady-state operation'}`,
-          solid_description: `Dense NMC811 particle network — optimized for ${powerDemand >= 0.8 ? 'power density at high discharge rates' : 'energy density and longevity'}`,
-          tortuosity_note: `Tortuosity: ${(4.0 - powerDemand * 3.0).toFixed(1)} — ${powerDemand >= 0.8 ? 'highly efficient ion pathways' : 'standard ion transport efficiency'}`,
-          bottleneck_note: powerDemand >= 0.9 ? 'Minor constriction risk at high C-rates — within acceptable limits' : null,
+          pore_description: `Open pore network: ${(porosity * 100).toFixed(0)}% porosity - ${porosity >= 0.4 ? 'wide Li+ highways for fast charge' : 'balanced pore structure for steady-state operation'}`,
+          solid_description: `Dense NMC811 particle network - optimized for ${powerDemand >= 0.8 ? 'power density at high discharge rates' : 'energy density and longevity'}`,
+          tortuosity_note: `Tortuosity: ${(4.0 - powerDemand * 3.0).toFixed(1)} - ${powerDemand >= 0.8 ? 'highly efficient ion pathways' : 'standard ion transport efficiency'}`,
+          bottleneck_note: powerDemand >= 0.9 ? 'Minor constriction risk at high C-rates - within acceptable limits' : null,
         },
         manufacturing_recipe: {
           material_composition: [
@@ -346,7 +346,7 @@ export async function POST(request: NextRequest) {
 
     const stream = new ReadableStream({
       async start(controller) {
-        // CHUNK 1 — Gemini thinking (sent immediately)
+        // CHUNK 1 - Gemini thinking (sent immediately)
         const thinkingChunk = {
           type: 'thinking',
           reasoning: params.reasoning,
@@ -361,7 +361,7 @@ export async function POST(request: NextRequest) {
         };
         controller.enqueue(encoder.encode(JSON.stringify(thinkingChunk) + '\n'));
 
-        // CHUNK 2 — Diffusion model (H100 via SSH or HF Space fallback)
+        // CHUNK 2 - Diffusion model (H100 via SSH or HF Space fallback)
         let gifUrl: string | null = null;
         let modelInfo = '';
         let tiffUrl: string | null = null;

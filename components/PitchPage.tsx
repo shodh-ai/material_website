@@ -113,7 +113,7 @@ export default function PitchPage() {
                   </p>
 
                   <p className="text-white/70 leading-relaxed mb-4">
-                    We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets"—industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
+                    We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets"-industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
                   </p>
 
                   <p className="text-white/70 leading-relaxed mb-4">
@@ -137,7 +137,7 @@ export default function PitchPage() {
                   </p>
 
                   <p className="text-white/70 leading-relaxed mb-4">
-                    Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist—a battery that is both cheaper and energy-dense—and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+                    Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist-a battery that is both cheaper and energy-dense-and then generates both the molecular recipe to invent it and the machine code to manufacture it.
                   </p>
 
                   <p className="text-white/70 leading-relaxed mb-4">
@@ -213,7 +213,7 @@ export default function PitchPage() {
                   Chapter 1: The AI Evolution
                 </div>
                 <h2 className="text-3xl md:text-5xl font-light text-white mb-8 tracking-tight">
-                Shodh AI — <span className="font-normal">Build in India. Made for the World.</span>
+                Shodh AI - <span className="font-normal">Build in India. Made for the World.</span>
               </h2>
               
               <div className="space-y-4 text-white/70 font-light leading-relaxed max-w-4xl">

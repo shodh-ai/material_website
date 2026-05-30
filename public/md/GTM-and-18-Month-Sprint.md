@@ -10,7 +10,7 @@
 
 **We are building the AI infrastructure layer for the physical world.**
 
-Just as AWS became the operating system for digital products, **Skanda becomes the operating system for physical products**. Every advanced manufacturer—from EV batteries to hydrogen fuel cells to low-carbon cement—will run their designs through our platform before building anything.
+Just as AWS became the operating system for digital products, **Skanda becomes the operating system for physical products**. Every advanced manufacturer-from EV batteries to hydrogen fuel cells to low-carbon cement-will run their designs through our platform before building anything.
 
 **The Thesis:**
 
@@ -70,7 +70,7 @@ We capture value across four scalable layers, each with different economics and 
 
 **Revenue Stream:** Usage-based pricing \+ Self-service subscriptions
 
-**The Product:** SkandaX API — developers query the physics model directly
+**The Product:** SkandaX API - developers query the physics model directly
 
 **How It Works:**
 
@@ -208,7 +208,7 @@ Price: $0.50 per optimization
 
 **Revenue Stream:** Annual subscriptions per production line \+ performance bonuses
 
-**The Product:** SkandaX DEPLOY — Real-time factory monitoring and defect prediction
+**The Product:** SkandaX DEPLOY - Real-time factory monitoring and defect prediction
 
 **How It Works:**
 
@@ -747,7 +747,7 @@ Price: $0.50 per optimization
 * Revenue: $200-300M ARR (4-5x growth)  
 * Valuation: $8-12B  
 * Multiple: 30-40x  
-* **Milestone:** Series C (optional — may be cash-flow positive)
+* **Milestone:** Series C (optional - may be cash-flow positive)
 
 **Year 3:**
 
@@ -920,7 +920,7 @@ Price: $0.50 per optimization
 
 ### **Layer 3 (Royalties): IP Licensing**
 
-**This layer is passive — customers come to us**
+**This layer is passive - customers come to us**
 
 **Scenario A: NRE partners reach end of exclusivity**
 
@@ -954,7 +954,7 @@ Price: $0.50 per optimization
 
 ---
 
-### **50% — Product & Engineering ($10M)**
+### **50% - Product & Engineering ($10M)**
 
 **The Investment:**
 
@@ -990,7 +990,7 @@ Price: $0.50 per optimization
 
 ---
 
-### **25% — Data Generation ($5M)**
+### **25% - Data Generation ($5M)**
 
 **The Investment:**
 
@@ -1019,7 +1019,7 @@ Price: $0.50 per optimization
 
 ---
 
-### **15% — Go-to-Market ($3M)**
+### **15% - Go-to-Market ($3M)**
 
 **The Investment:**
 
@@ -1053,7 +1053,7 @@ Price: $0.50 per optimization
 
 ---
 
-### **10% — IP & Infrastructure ($2M)**
+### **10% - IP & Infrastructure ($2M)**
 
 **The Investment:**
 
@@ -1224,7 +1224,7 @@ Price: $0.50 per optimization
 
 ### **The Race We're Actually In**
 
-**It's not "who has the best model" — it's "who establishes the platform flywheel first"**
+**It's not "who has the best model" - it's "who establishes the platform flywheel first"**
 
 **The Flywheel:**
 
@@ -1357,7 +1357,7 @@ More customers (compounding)
 * ✅ Conservative claims (don't promise 100% accuracy, aim for 85-90%)  
 * ✅ Continuous learning (model improves as we collect more real data)
 
-**Validation checkpoint:** Month 6 — if R² \< 80% on real data, pivot strategy
+**Validation checkpoint:** Month 6 - if R² \< 80% on real data, pivot strategy
 
 ---
 
@@ -1633,7 +1633,7 @@ More customers (compounding)
 
 ---
 
-### **Unit Economics (Mature State — Year 3+)**
+### **Unit Economics (Mature State - Year 3+)**
 
 **API Business:**
 
@@ -1682,7 +1682,7 @@ More customers (compounding)
 
 **Interpretation:** Cash-flow positive by Month 9-10. By Month 18, we have **$66M in the bank** from revenue WITHOUT raising Series B.
 
-**This gives us optionality:** We raise Series B from a position of strength, not desperation — we choose the right partner, not the fastest money.
+**This gives us optionality:** We raise Series B from a position of strength, not desperation - we choose the right partner, not the fastest money.
 
 ---
 
@@ -1694,7 +1694,7 @@ More customers (compounding)
 
 We are at an inflection point in human civilization.
 
-**The AI revolution has conquered the digital world.** ChatGPT, Midjourney, Claude — they generate text, images, code. But they stop at the screen.
+**The AI revolution has conquered the digital world.** ChatGPT, Midjourney, Claude - they generate text, images, code. But they stop at the screen.
 
 **The physical world is still stuck in the 20th century.** Developing a new material takes 5-10 years and $10M+. We're running out of time for the energy transition, for climate tech, for advanced manufacturing.
 

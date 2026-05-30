@@ -71,7 +71,7 @@ export default function AartiPage() {
               India's Sovereign Generative Physics Platform
             </h2>
             <p className="text-xl text-white/80 font-light leading-relaxed max-w-3xl">
-              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale—<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
+              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale-<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
             </p>
             <p className="text-white/60 font-light leading-relaxed max-w-4xl">
               We've launched our foundational mesoscale physics model (Project Skanda, in collaboration with NVIDIA), backed by the <strong className="text-white/80 font-medium">India AI Mission</strong>. Our platform scales across chemicals, batteries, and pharma, with early validation in a mesoscale battery model now proving <strong className="text-white/80 font-medium">70-80% lab accuracy</strong>. As one of 12 IndiaAI foundational model companies, we're positioned to build sovereign deep-tech IP, complementing atomic discovery models by acting as the <strong className="text-white/80 font-medium">intelligence layer for physical factory scale-up.</strong>
@@ -106,7 +106,7 @@ export default function AartiPage() {
                 <div>
                   <h4 className="text-lg text-white font-medium mb-2">Era 3: AI for Physical Realization <span className="text-blue-400/80 text-sm ml-2 font-light">(Shodh AI)</span></h4>
                   <p className="text-white/80 font-light leading-relaxed">
-                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities—simulating infinite "what if" physical designs without physical trials.
+                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities-simulating infinite "what if" physical designs without physical trials.
                   </p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function AartiPage() {
 
           <div className="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 text-center">
             <p className="text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-              Currently, the chemical industry solves this via trial-and-error physical "Pilot Plants," costing months of time and millions in CapEx. <strong className="text-red-300 font-medium">This is the global manufacturing chokepoint</strong>—where chemical formulas meet the messy reality of multi-physics.
+              Currently, the chemical industry solves this via trial-and-error physical "Pilot Plants," costing months of time and millions in CapEx. <strong className="text-red-300 font-medium">This is the global manufacturing chokepoint</strong>-where chemical formulas meet the messy reality of multi-physics.
             </p>
           </div>
         </motion.section>
@@ -165,7 +165,7 @@ export default function AartiPage() {
             <span className="text-xs font-light tracking-[0.2em] uppercase text-blue-400 mb-4 block">3. Aligning with Your R&D Mandate</span>
             <h2 className="text-3xl md:text-4xl font-light text-white mb-6">Zero-Shot Engineering</h2>
             <p className="text-white/70 font-light leading-relaxed max-w-3xl">
-              Your focus on optimizing unit operations—specifically mixing, crystallization, and distillation—is exactly where AI-driven physics excels. We propose moving Aarti Industries toward <strong className="text-white font-medium">"Zero-Shot Engineering."</strong> By training our model on Aarti's proprietary 1L-to-10kL historical scale-up data, we create a "Digital Scale-Up Twin" that instantly predicts how a new chemical will behave at industrial scale.
+              Your focus on optimizing unit operations-specifically mixing, crystallization, and distillation-is exactly where AI-driven physics excels. We propose moving Aarti Industries toward <strong className="text-white font-medium">"Zero-Shot Engineering."</strong> By training our model on Aarti's proprietary 1L-to-10kL historical scale-up data, we create a "Digital Scale-Up Twin" that instantly predicts how a new chemical will behave at industrial scale.
             </p>
             <p className="text-white/70 font-light leading-relaxed max-w-3xl mt-4">
               This allows your 400+ scientists to instantly predict how a new chemical will behave at industrial scale, eliminating the trial-and-error pilot phase and designing highly efficient, generative continuous-flow architectures. Furthermore, by generating AI-optimized internal architectures for distillation towers, we target a <strong className="text-white font-medium">30–50% reduction in energy use and emissions</strong>, aligning perfectly with Aarti's sustainability and OpEx goals.
@@ -192,7 +192,7 @@ export default function AartiPage() {
 
           <div className="text-center pt-8 border-t border-white/10">
             <p className="text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-              For now, we aren't predicting new chemical formulas—<strong className="text-white">we are the missing physics layer that makes your new chemicals instantly manufacturable at scale.</strong>
+              For now, we aren't predicting new chemical formulas-<strong className="text-white">we are the missing physics layer that makes your new chemicals instantly manufacturable at scale.</strong>
             </p>
           </div>
         </motion.section>
@@ -293,7 +293,7 @@ export default function AartiPage() {
           <div className="p-6 rounded-xl bg-blue-900/20 border border-blue-500/30 text-center">
             <h4 className="text-blue-300 font-medium mb-2">Timeline</h4>
             <p className="text-white/80 font-light text-sm">
-              30 days to in-silico validation and scale-up predictions—proving process intensification and establishing the blueprint for full-scale continuous flow integration.
+              30 days to in-silico validation and scale-up predictions-proving process intensification and establishing the blueprint for full-scale continuous flow integration.
             </p>
           </div>
         </motion.section>
@@ -311,7 +311,7 @@ export default function AartiPage() {
             <span className="text-white text-4xl md:text-6xl font-medium mt-4 block">to Global AI-Industrial Leader</span>
           </h2>
           <p className="text-white/70 font-light leading-relaxed max-w-3xl mx-auto text-lg mt-8 mb-16">
-            With IndiaAI compute and NVIDIA partnership, we're building ethical, AI-native industrial sovereignty. Partnering with Aarti Industries positions India as the global hub for AI-driven Process Intensification and advanced materials—transforming chemical sustainability, safety, and economic resilience worldwide.
+            With IndiaAI compute and NVIDIA partnership, we're building ethical, AI-native industrial sovereignty. Partnering with Aarti Industries positions India as the global hub for AI-driven Process Intensification and advanced materials-transforming chemical sustainability, safety, and economic resilience worldwide.
           </p>
 
           <div className="pt-16 border-t border-white/10 max-w-3xl mx-auto text-left flex flex-col md:flex-row justify-between items-start md:items-center gap-6">

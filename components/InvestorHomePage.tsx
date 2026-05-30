@@ -83,7 +83,7 @@ const businessLayers = [
     layer: "02",
     title: "The Yield Operating System",
     subtitle: "SaaS per Production Line",
-    description: "SkandaX DEPLOY becomes the factory's operating system. We are Yield Insurance—if our AI prevents even one bad batch or reduces ramp-up time by 3 months, the software pays for itself 10x over. Once integrated into PLC/MES sensors, switching costs become astronomical.",
+    description: "SkandaX DEPLOY becomes the factory's operating system. We are Yield Insurance-if our AI prevents even one bad batch or reduces ramp-up time by 3 months, the software pays for itself 10x over. Once integrated into PLC/MES sensors, switching costs become astronomical.",
     metric: "$250K-500K",
     metricLabel: "annual per line",
     color: "#a855f7",
@@ -95,7 +95,7 @@ const businessLayers = [
     layer: "03",
     title: "The Sovereign Royalty",
     subtitle: "IP Tax (Intel Inside Model)",
-    description: "Because we used SkandaX GENESIS to create the proprietary microstructure and machine recipe, we own the IP. We take a small Technology Tax on every battery produced using a Shodh-proprietary design. This is exponential upside—as partners scale from 1 GWh to 100 GWh, our revenue explodes with zero marginal cost.",
+    description: "Because we used SkandaX GENESIS to create the proprietary microstructure and machine recipe, we own the IP. We take a small Technology Tax on every battery produced using a Shodh-proprietary design. This is exponential upside-as partners scale from 1 GWh to 100 GWh, our revenue explodes with zero marginal cost.",
     metric: "$0.50-1.50",
     metricLabel: "per kWh produced",
     color: "#f59e0b",
@@ -251,7 +251,7 @@ export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataR
                 variants={fadeInUp}
                 className="mt-6 text-base md:text-xl text-white/90 font-light max-w-2xl drop-shadow-md leading-relaxed"
               >
-                AI for Science isn't just coming—it's the next <strong className="text-white">$0 to $1 Trillion market</strong>.
+                AI for Science isn't just coming-it's the next <strong className="text-white">$0 to $1 Trillion market</strong>.
                 We are at the perfect "Compute + Physics" intersection.
                 <span className="text-[#48cae4]"> Shodh AI is India's sovereign answer</span> to the global race for material dominance.
               </motion.p>
@@ -363,7 +363,7 @@ export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataR
                       variants={fadeInUp}
                       className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2"
                     >
-                      The world has already begun. AI for science is the next big thing—and it's inevitable.
+                      The world has already begun. AI for science is the next big thing-and it's inevitable.
                     </motion.p>
                   </motion.div>
                 </div>
@@ -522,7 +522,7 @@ export default function InvestorHomePage({ showDataRoomCTA = true }: { showDataR
                 variants={fadeInUp}
                 className="text-xl text-gray-700 font-light max-w-3xl mx-auto leading-relaxed mb-4"
               >
-                Introducing <strong className="text-gray-900">SkandaX</strong>—the first "Matter Compiler."
+                Introducing <strong className="text-gray-900">SkandaX</strong>-the first "Matter Compiler."
                 <br />
                 <span className="text-gray-600">
                   A closed-loop AI system that translates material requirements into manufacturable reality. From intent to factory-ready materials in 6 months instead of 5 years.

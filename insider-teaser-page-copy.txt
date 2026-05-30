@@ -1,4 +1,4 @@
-SHODH AI — INSIDER TEASER PAGE COPY
+SHODH AI - INSIDER TEASER PAGE COPY
 =====================================
 
 HEADER
@@ -7,7 +7,7 @@ Shodh AI
 Insider Teaser
 
 
-SLIDE 1 — TITLE
+SLIDE 1 - TITLE
 ---------------
 Confidential
 
@@ -21,16 +21,16 @@ INTRODUCTION BAND
 Shodh AI is building the frontier physics AI system that connects discovery, mesoscale piloting, process control, and real-world factory production.
 
 Founder Pedigree
-PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.
+PhD, Cambridge University - Materials Science & Photonic Engineering. Former Microsoft Research.
 
 Built With
 NVIDIA & Google
 
 Backed By
-Sovereign IndiaAI Mission — Priority National Compute
+Sovereign IndiaAI Mission - Priority National Compute
 
 
-SLIDE 2 — THE PROBLEM
+SLIDE 2 - THE PROBLEM
 ---------------------
 The Trillion-Dollar “Valley of Death”
 
@@ -58,7 +58,7 @@ A material can pass lab tests and fracture during industrial production.
 Physics is currently siloed.
 
 
-SLIDE 3 — THE SOLUTION
+SLIDE 3 - THE SOLUTION
 ----------------------
 The World Foundational Model
 
@@ -66,16 +66,16 @@ We are building a continuous physics AI model that learns the thread of physics 
 
 It operates across four continuous layers:
 
-01 — Discovery Layer
+01 - Discovery Layer
 Integrates atomic, molecular, biological, and material discovery.
 
-02 — Mesoscale Physics Engine
+02 - Mesoscale Physics Engine
 The core bridge. Simulates the lab-to-production gap where most failures emerge: mixing, shear, heat transfer, mass transfer, reaction kinetics, phase behavior, degradation, impurities, and instability.
 
-03 — Control Layer
+03 - Control Layer
 Translates physics predictions into process parameters, operating windows, control policies, and experiment plans.
 
-04 — Digital Twin Layer
+04 - Digital Twin Layer
 Creates dynamic, physics-enabled twins for reactors, production lines, and factory-scale systems.
 
 The ROI
@@ -85,7 +85,7 @@ Strategic Value
 Shodh AI helps companies capture more of their patent-protected revenue window by reducing the time between discovery, scale-up, and commercialization.
 
 
-SLIDE 4 — THE TECHNOLOGY
+SLIDE 4 - THE TECHNOLOGY
 ------------------------
 A Model That Learns Physics
 
@@ -114,7 +114,7 @@ Partner ground truth from labs, reactors, pilot runs, and factories calibrates t
 Every industrial deployment reduces the Reality Gap and makes the model more general.
 
 
-SLIDE 5 — COMMERCIAL STRATEGY
+SLIDE 5 - COMMERCIAL STRATEGY
 -----------------------------
 The 25 Billion-Dollar Pillars
 
@@ -161,7 +161,7 @@ Industrial Materials
 ...and 19 additional Pillars spanning Semiconductors, Advanced Manufacturing, Metamaterials, Tissue Engineering, Nuclear Materials, Hypersonic Materials, Industrial Heat Flow, and Smart Manufacturing.
 
 
-SLIDE 6 — TRACTION & WHY WE WIN
+SLIDE 6 - TRACTION & WHY WE WIN
 -------------------------------
 Traction & Why We Win
 
@@ -185,7 +185,7 @@ The Compounding Flywheel
 Customers pay us to solve bottlenecks. Each deployment creates ground truth. Each solved Pillar strengthens the World Model.
 
 
-SLIDE 7 — THE END GAME
+SLIDE 7 - THE END GAME
 ----------------------
 Generative Physical IP
 

@@ -71,7 +71,7 @@ export default function BioconPage() {
               India's Sovereign Generative Physics Platform
             </h2>
             <p className="text-xl text-white/80 font-light leading-relaxed max-w-3xl">
-              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale—<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
+              We're building India's first <strong className="text-white font-medium">Large Material Model (LMM)</strong> that understands the fundamental physics of the mesoscale-<strong className="text-white font-medium">fluid dynamics, heat transfer, and mass transport.</strong>
             </p>
             <p className="text-white/60 font-light leading-relaxed max-w-4xl">
               We've launched our foundational mesoscale physics model (Project Skanda, in collaboration with NVIDIA), backed by the <strong className="text-white/80 font-medium">India AI Mission</strong>. Our platform scales across chemicals, batteries, and pharma, with early validation in a mesoscale battery model now proving <strong className="text-white/80 font-medium">70-80% lab accuracy</strong>. As one of 12 IndiaAI foundational model companies, we're positioned to build sovereign deep-tech IP, complementing atomic discovery models by acting as the <strong className="text-white/80 font-medium">intelligence layer for physical factory scale-up.</strong>
@@ -106,7 +106,7 @@ export default function BioconPage() {
                 <div>
                   <h4 className="text-lg text-white font-medium mb-2">Era 3: AI for Physical Realization <span className="text-purple-400/80 text-sm ml-2 font-light">(Shodh AI)</span></h4>
                   <p className="text-white/80 font-light leading-relaxed">
-                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities—simulating infinite "what if" physical designs without physical trials.
+                    Discoveries are useless if they cannot exist in the real world. Shodh AI masters the universal laws of physics to turn Era 2 discoveries into scalable realities-simulating infinite "what if" physical designs without physical trials.
                   </p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function BioconPage() {
 
           <div className="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 text-center">
             <p className="text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-              Enzymes must thrive in custom porous structures for high-speed continuous flow, but designing these via trial-and-error takes too long. <strong className="text-red-300 font-medium">This is the global manufacturing chokepoint</strong>—where atomic discovery (e.g., DeepMind/Isomorphic Labs) meets real-world physics.
+              Enzymes must thrive in custom porous structures for high-speed continuous flow, but designing these via trial-and-error takes too long. <strong className="text-red-300 font-medium">This is the global manufacturing chokepoint</strong>-where atomic discovery (e.g., DeepMind/Isomorphic Labs) meets real-world physics.
             </p>
           </div>
         </motion.section>
@@ -165,7 +165,7 @@ export default function BioconPage() {
             <span className="text-xs font-light tracking-[0.2em] uppercase text-purple-400 mb-4 block">3. Aligning with Your Disruptive Mandate</span>
             <h2 className="text-3xl md:text-4xl font-light text-white mb-6">Full-Stack Synergy (Atomic + Mesoscale)</h2>
             <p className="text-white/70 font-light leading-relaxed max-w-3xl">
-              Your guidance to bypass legacy processes for true disruption is spot on. Discovering novel enzymes (biological "software" via AlphaFold or Syngene labs) is only half the battle—if placed in outdated batch reactors, yields fail. <strong className="text-white font-medium">Shodh AI designs the "hardware":</strong> generative continuous-flow architectures tailored to enzymes' exact thermodynamic needs.
+              Your guidance to bypass legacy processes for true disruption is spot on. Discovering novel enzymes (biological "software" via AlphaFold or Syngene labs) is only half the battle-if placed in outdated batch reactors, yields fail. <strong className="text-white font-medium">Shodh AI designs the "hardware":</strong> generative continuous-flow architectures tailored to enzymes' exact thermodynamic needs.
             </p>
           </div>
           
@@ -189,7 +189,7 @@ export default function BioconPage() {
 
           <div className="text-center pt-8 border-t border-white/10">
             <p className="text-white/80 font-light leading-relaxed max-w-3xl mx-auto">
-              This co-design skips 16 steps to 2-3, turning fragile enzymes into scalable powerhouses. For now, we're not competing with atomic models—<strong className="text-white">we're the missing physics layer that makes them manufacturable.</strong>
+              This co-design skips 16 steps to 2-3, turning fragile enzymes into scalable powerhouses. For now, we're not competing with atomic models-<strong className="text-white">we're the missing physics layer that makes them manufacturable.</strong>
             </p>
           </div>
         </motion.section>
@@ -281,7 +281,7 @@ export default function BioconPage() {
           <div className="p-6 rounded-xl bg-purple-900/20 border border-purple-500/30 text-center">
             <h4 className="text-purple-300 font-medium mb-2">Timeline</h4>
             <p className="text-white/80 font-light text-sm">
-              30 days to in-silico validation and 3D-print-ready designs—proving step/cycle reductions and establishing the blueprint for full validation. Scalable to full APIs, with LOI for ongoing collaboration.
+              30 days to in-silico validation and 3D-print-ready designs-proving step/cycle reductions and establishing the blueprint for full validation. Scalable to full APIs, with LOI for ongoing collaboration.
             </p>
           </div>
         </motion.section>
@@ -299,7 +299,7 @@ export default function BioconPage() {
             <span className="text-white text-4xl md:text-6xl font-medium mt-4 block">to Global Programmable Manufacturing Leader</span>
           </h2>
           <p className="text-white/70 font-light leading-relaxed max-w-3xl mx-auto text-lg mt-8 mb-16">
-            With IndiaAI compute and NVIDIA partnership, we're building ethical, AI-native biotech sovereignty. Partnering with Biocon/Syngene positions India as the hub for AI-biology convergence—transforming healthcare, sustainability, and economic resilience.
+            With IndiaAI compute and NVIDIA partnership, we're building ethical, AI-native biotech sovereignty. Partnering with Biocon/Syngene positions India as the hub for AI-biology convergence-transforming healthcare, sustainability, and economic resilience.
           </p>
 
           <div className="pt-16 border-t border-white/10 max-w-3xl mx-auto text-left flex flex-col md:flex-row justify-between items-start md:items-center gap-6">

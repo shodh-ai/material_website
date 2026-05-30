@@ -200,7 +200,7 @@ export default function InsiderTeaserPage() {
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-12">
             <motion.div variants={staggerContainer} className="pointer-events-auto lg:col-span-8">
               <motion.div variants={fadeInUp} className="mb-7 flex flex-wrap gap-3">
-                <Badge>Slide 1 — Title</Badge>
+                <Badge>Slide 1 - Title</Badge>
                 <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/70 backdrop-blur-md">Confidential</span>
               </motion.div>
               <motion.h1 variants={fadeInUp} className="text-5xl font-medium uppercase leading-[1.02] tracking-tight text-white sm:text-7xl md:text-8xl lg:text-9xl">
@@ -224,7 +224,7 @@ export default function InsiderTeaserPage() {
             <div className="mt-8 grid gap-3 md:grid-cols-3">
               <motion.div variants={scaleIn} className="rounded-2xl border border-purple-300/20 bg-black/55 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-200/70">Founder</p>
-                <p className="mt-2 text-lg font-medium leading-snug text-white">PhD, Cambridge University — Materials Science & Photonic Engineering. Former Microsoft Research.</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-white">PhD, Cambridge University - Materials Science & Photonic Engineering. Former Microsoft Research.</p>
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/45">Built With</p>
@@ -232,13 +232,13 @@ export default function InsiderTeaserPage() {
               </motion.div>
               <motion.div variants={scaleIn} className="rounded-2xl border border-[#ff9933]/25 bg-black/55 p-5 backdrop-blur-xl">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff9933]/80">Backed By</p>
-                <p className="mt-2 text-lg font-medium leading-snug text-white">Sovereign IndiaAI Mission — Priority National Compute</p>
+                <p className="mt-2 text-lg font-medium leading-snug text-white">Sovereign IndiaAI Mission - Priority National Compute</p>
               </motion.div>
             </div>
           </motion.div>
         </section>
 
-        <SlideShell eyebrow="Slide 2 — The Problem" title="The Trillion-Dollar “Valley of Death”" subtitle="AI has accelerated discovery. But physical production is still slow, manual, and expensive." tone="red">
+        <SlideShell eyebrow="Slide 2 - The Problem" title="The Trillion-Dollar “Valley of Death”" subtitle="AI has accelerated discovery. But physical production is still slow, manual, and expensive." tone="red">
           <div className="grid gap-6 lg:grid-cols-3">
             <motion.div variants={scaleIn} className="rounded-2xl border border-white/12 bg-black/50 p-6 backdrop-blur-xl">
               <Microscope className="mb-5 h-8 w-8 text-red-300" />
@@ -269,7 +269,7 @@ export default function InsiderTeaserPage() {
           </div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 3 — The Solution" title="The World Foundational Model" subtitle="We are building a continuous physics AI model that learns the thread of physics connecting molecules, materials, processes, and factories." tone="lightCyan">
+        <SlideShell eyebrow="Slide 3 - The Solution" title="The World Foundational Model" subtitle="We are building a continuous physics AI model that learns the thread of physics connecting molecules, materials, processes, and factories." tone="lightCyan">
           <p className="mb-6 text-sm font-bold uppercase tracking-[0.18em] text-gray-500">It operates across four continuous layers:</p>
           <div className="grid gap-5 md:grid-cols-2">
             {layers.map((layer) => {
@@ -296,7 +296,7 @@ export default function InsiderTeaserPage() {
           </motion.div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 4 — The Technology" title="A Model That Learns Physics" subtitle="LLMs learned language. Shodh AI is learning physics." tone="lightCyan">
+        <SlideShell eyebrow="Slide 4 - The Technology" title="A Model That Learns Physics" subtitle="LLMs learned language. Shodh AI is learning physics." tone="lightCyan">
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
             <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
               <p className="text-lg leading-relaxed text-gray-600">You cannot scrape the internet for factory physics.</p>
@@ -327,7 +327,7 @@ export default function InsiderTeaserPage() {
           </div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 5 — Commercial Strategy" title="The 25 Billion-Dollar Pillars" subtitle="One base physics model. Twenty-five industrial adapters. One compounding World Model." tone="lightAmber">
+        <SlideShell eyebrow="Slide 5 - Commercial Strategy" title="The 25 Billion-Dollar Pillars" subtitle="One base physics model. Twenty-five industrial adapters. One compounding World Model." tone="lightAmber">
           <motion.div variants={fadeInUp} className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
             <p className="text-xl font-medium leading-relaxed text-gray-900">Each Pillar is a paid industrial deployment:</p>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -364,7 +364,7 @@ export default function InsiderTeaserPage() {
           </motion.div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 6 — Traction & Why We Win" title="Traction & Why We Win" subtitle="We are validating the Pillars with major industrial partners." tone="lightCyan">
+        <SlideShell eyebrow="Slide 6 - Traction & Why We Win" title="Traction & Why We Win" subtitle="We are validating the Pillars with major industrial partners." tone="lightCyan">
           <div className="grid gap-6">
             <motion.div variants={fadeInUp} className="rounded-2xl border border-emerald-200 bg-white/70 p-6 shadow-lg backdrop-blur-xl md:p-8">
               <h3 className="text-2xl font-medium text-gray-900">Anchor Partners</h3>
@@ -384,7 +384,7 @@ export default function InsiderTeaserPage() {
           </motion.div>
         </SlideShell>
 
-        <SlideShell eyebrow="Slide 7 — The End Game" title="Generative Physical IP" tone="cyan">
+        <SlideShell eyebrow="Slide 7 - The End Game" title="Generative Physical IP" tone="cyan">
           <div className="grid gap-6 lg:grid-cols-3">
             {[
               ["The first phase is predictive:", "Will this molecule, material, or process scale?"],

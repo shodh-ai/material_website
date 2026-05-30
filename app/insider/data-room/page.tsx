@@ -65,7 +65,7 @@ const documents = [
 ];
 
 export default function DataRoomPage() {
-  // Form gate removed — investors access data room directly
+  // Form gate removed - investors access data room directly
   const [step, setStep] = useState<"form" | "access">("access");
   const [formData, setFormData] = useState({
     name: "",
@@ -183,8 +183,8 @@ export default function DataRoomPage() {
 
       <main className="max-w-6xl mx-auto px-6 py-16">
         <AnimatePresence mode="wait">
-          {/* STEP 1: INVESTOR ONBOARDING FORM — COMMENTED OUT */}
-          {/* Form gate removed per investor feedback — direct access now */}
+          {/* STEP 1: INVESTOR ONBOARDING FORM - COMMENTED OUT */}
+          {/* Form gate removed per investor feedback - direct access now */}
           {/* {step === "form" && (
             <motion.div
               key="form"
@@ -349,7 +349,7 @@ export default function DataRoomPage() {
                     </p>
 
                     <p className="text-white/70 leading-relaxed mb-4">
-                      We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets"—industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
+                      We are building for a market that doesn't exist on a spreadsheet yet. Jensen Huang calls these "Zero-Billion Dollar Markets"-industries that are currently zero, but are inevitably destined to become the infrastructure of the future.
                     </p>
 
                     <p className="text-white/70 leading-relaxed mb-4">
@@ -373,7 +373,7 @@ export default function DataRoomPage() {
                     </p>
 
                     <p className="text-white/70 leading-relaxed mb-4">
-                      Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist—a battery that is both cheaper and energy-dense—and then generates both the molecular recipe to invent it and the machine code to manufacture it.
+                      Our AI enables a new paradigm: <strong className="text-white">Inverse Design</strong>. It allows a human to imagine a material that shouldn't exist-a battery that is both cheaper and energy-dense-and then generates both the molecular recipe to invent it and the machine code to manufacture it.
                     </p>
 
                     <p className="text-white/70 leading-relaxed mb-4">

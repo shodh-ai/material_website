@@ -139,7 +139,7 @@
       height: 100%;
     }
 
-    /* ── WebGL Background (fixed — never touched) ── */
+    /* ── WebGL Background (fixed - never touched) ── */
     #unicorn-bg {
       position: fixed;
       top: 0;
@@ -148,7 +148,7 @@
       /* Use large viewport height so the canvas always covers the full screen,
          even when the mobile URL bar is hidden. Falls back gracefully. */
       height: 100vh;
-      height: 100lvh; /* large viewport height — covers area behind URL bar */
+      height: 100lvh; /* large viewport height - covers area behind URL bar */
       z-index: 0;
       overflow: hidden;
     }
@@ -705,7 +705,7 @@
       white-space: nowrap;
     }
 
-    /* Style 1 — Label / Eyebrow */
+    /* Style 1 - Label / Eyebrow */
     .shift-label {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 12px;
@@ -715,7 +715,7 @@
       color: var(--text-muted);
     }
 
-    /* Style 3 — Section Heading */
+    /* Style 3 - Section Heading */
     .shift-heading {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 48px;
@@ -726,7 +726,7 @@
       white-space: nowrap;
     }
 
-    /* Style 4 — Body / Description */
+    /* Style 4 - Body / Description */
     .shift-body {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-size: 28px;
@@ -1430,7 +1430,7 @@
 
     /* ═══════════════════════════════════════════════════
      * MOBILE-ONLY OVERRIDES (≤ 768px)
-     * Only touches mobile layout — desktop is untouched.
+     * Only touches mobile layout - desktop is untouched.
      * ═══════════════════════════════════════════════════ */
     @media (max-width: 768px) {
 
@@ -1491,22 +1491,29 @@
       }
 
       .hero-right {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.35;
         margin-top: 0;
         margin-bottom: auto;
         padding-top: 40px;
-        max-width: 280px;
+        max-width: calc(100vw - 48px);
       }
 
       .hero-left {
         margin-bottom: 8px;
         margin-left: 0;
+        width: 100%;
+        max-width: 100%;
       }
 
       .main-title {
-        font-size: 48px;
-        line-height: 0.92;
+        font-size: clamp(28px, 7.8vw, 40px);
+        line-height: 0.96;
+      }
+
+      .hero-right .reveal-line > span,
+      .main-title .reveal-line > span {
+        white-space: nowrap;
       }
 
       .mission-label {
@@ -1524,13 +1531,17 @@
         line-height: 1.15;
       }
 
+      .shift-heading .mobile-line {
+        display: block;
+      }
+
       .shift-body {
         font-size: 16px;
         max-width: 320px;
       }
 
-      .shift-body br {
-        display: none;
+      #shift-body br {
+        display: initial;
       }
 
       .shift-label {
@@ -1542,15 +1553,15 @@
         padding: 0 20px;
       }
 
-      /* Text Block 2 — "Discovery by Design" */
+      /* Text Block 2 - "Discovery by Design" */
       .design-heading {
-        font-size: clamp(18px, 5vw, 28px);
+        font-size: clamp(16px, 4.2vw, 22px);
         line-height: 1.3;
         text-align: center;
       }
 
       #shift-content-2 .reveal-line > span {
-        white-space: normal;
+        white-space: nowrap;
       }
 
       /* ── IP Security Section ── */
@@ -1566,7 +1577,7 @@
       }
 
       .ip-heading {
-        font-size: 36px;
+        font-size: 32px !important;
         white-space: normal;
         line-height: 1.1;
         margin-bottom: 20px;
@@ -1577,7 +1588,7 @@
       }
 
       .ip-body {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.4;
       }
 
@@ -1722,6 +1733,7 @@
       align-items: center;
       justify-content: center;
       gap: 0;
+      transform: translateY(30px);
     }
 
     /* ── Heading Row: two halves side by side ── */
@@ -1740,15 +1752,18 @@
     }
 
     .gap-heading-contain.is-left {
-      transform: translateY(-150px) translateX(-150px);
+      transform: translateY(-145px) translateX(-240px);
+      text-align: left;
     }
 
     .gap-heading-contain.is-right {
-      transform: translateY(100px) translateX(200px);
+      transform: translateY(25px) translateX(260px);
+      text-align: right;
     }
 
     .gap-heading-contain {
       overflow: hidden;
+      width: min(52vw, 760px);
     }
 
     .gap-heading {
@@ -1756,10 +1771,15 @@
       font-size: 100px;
       font-weight: 600;
       line-height: 1.05;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
       color: var(--text-title);
       text-transform: uppercase;
-      white-space: nowrap;
+      white-space: normal;
+      margin: 0;
+    }
+
+    .gap-line {
+      display: block;
     }
 
     .gap-heading .gap-char {
@@ -1777,8 +1797,9 @@
     .gap-cover {
       position: relative;
       z-index: 1;
-      width: 30vw;
-      height: 55vh;
+      width: calc(450px * 16 / 9);
+      height: 450px;
+      aspect-ratio: 16 / 9;
       margin: 0 auto;
       border-radius: 0.25rem;
       overflow: hidden;
@@ -1808,9 +1829,9 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      margin-top: 6px;
+      margin-top: 84px;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(0);
     }
 
     .gap-testimonial-text {
@@ -1822,6 +1843,68 @@
       color: var(--text-secondary);
       text-align: center;
       max-width: 580px;
+    }
+
+    @media (max-width: 768px) {
+      .gap-heading-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        left: 50%;
+        width: calc(100vw - 32px);
+        transform: translate(-50%, -50%);
+        overflow: visible;
+      }
+
+      .gap-heading-contain {
+        overflow: visible;
+        width: 100%;
+      }
+
+      .gap-heading-contain.is-left {
+        transform: translateY(-210px);
+      }
+
+      .gap-heading-contain.is-right {
+        transform: translateY(72px);
+      }
+
+      .gap-heading {
+        position: relative;
+        font-size: clamp(50px, 13.6vw, 64px) !important;
+        line-height: 0.95;
+        letter-spacing: 0;
+        white-space: normal;
+      }
+
+      .gap-heading .gap-char {
+        display: none !important;
+      }
+
+      .gap-heading::before {
+        display: block;
+        white-space: pre-line;
+      }
+
+      .gap-heading.is-left {
+        text-align: left;
+      }
+
+      .gap-heading.is-left::before {
+        content: "One\A Model";
+      }
+
+      .gap-heading.is-right {
+        text-align: right;
+      }
+
+      .gap-heading.is-right::before {
+        content: "Infinite\A Invention";
+      }
+
+      .gap-testimonial {
+        margin-top: 90px;
+      }
     }
   </style>
 </head>
@@ -1898,7 +1981,7 @@
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
               </svg>
             </button>
-            <a href="#" class="contact-btn">BOOK DEMO</a>
+            <a href="#section-footer" class="contact-btn">BOOK DEMO</a>
           </div>
         </header>
 
@@ -1953,7 +2036,7 @@
         <!-- Text Block 1 -->
         <div class="shift-content" id="shift-content-1">
           <span class="shift-label" id="shift-label">THE PROBLEM</span>
-          <h2 class="shift-heading" id="shift-heading">Physical invention is still too slow.</h2>
+          <h2 class="shift-heading" id="shift-heading">Physical invention is <span class="mobile-line">still too slow.</span></h2>
           <p class="shift-body" id="shift-body">
             The world needs better batteries, drugs,<br>chemicals, materials, reactors, & factories.
           </p>
@@ -1977,9 +2060,9 @@
         <div class="process-step">
           <div class="process-step-panel">
             <div class="process-body-text">
-              <div class="reveal-line"><span>Defines the physical goal — targets,</span></div>
+              <div class="reveal-line"><span>Defines the physical goal - targets,</span></div>
               <div class="reveal-line"><span>material constraints, safety boundaries,</span></div>
-              <div class="reveal-line"><span>and manufacturability requirements —</span></div>
+              <div class="reveal-line"><span>and manufacturability requirements -</span></div>
               <div class="reveal-line"><span>so the model knows what to invent.</span></div>
             </div>
             <div class="process-bottom">
@@ -2013,8 +2096,8 @@
           <div class="process-step-panel">
             <div class="process-body-text">
               <div class="reveal-line"><span>AI predicts how each candidate will</span></div>
-              <div class="reveal-line"><span>behave under real-world conditions —</span></div>
-              <div class="reveal-line"><span>thermal, mechanical, chemical —</span></div>
+              <div class="reveal-line"><span>behave under real-world conditions -</span></div>
+              <div class="reveal-line"><span>thermal, mechanical, chemical -</span></div>
               <div class="reveal-line"><span>before a single experiment is run.</span></div>
             </div>
             <div class="process-bottom">
@@ -2093,7 +2176,7 @@
             <div class="process-body-text">
               <div class="reveal-line"><span>Translates synthesis plans into precise</span></div>
               <div class="reveal-line"><span>process parameters ready for pilot</span></div>
-              <div class="reveal-line"><span>plants or factory lines — no manual</span></div>
+              <div class="reveal-line"><span>plants or factory lines - no manual</span></div>
               <div class="reveal-line"><span>engineering required.</span></div>
             </div>
             <div class="process-bottom">
@@ -2132,7 +2215,7 @@
             <div class="process-body-text">
               <div class="reveal-line"><span>Validates physical outputs, delivers</span></div>
               <div class="reveal-line"><span>a fully documented, manufacturable</span></div>
-              <div class="reveal-line"><span>product — cutting the research-to-</span></div>
+              <div class="reveal-line"><span>product - cutting the research-to-</span></div>
               <div class="reveal-line"><span>market timeline from years to months.</span></div>
             </div>
             <div class="process-bottom">
@@ -2190,21 +2273,21 @@
         <!-- Split headline -->
         <div class="gap-heading-row">
           <div class="gap-heading-contain is-left">
-            <h2 class="gap-heading is-left">One model&nbsp;</h2>
+            <h2 class="gap-heading is-left" data-lines="One|Model">One Model</h2>
           </div>
           <div class="gap-heading-contain is-right">
-            <h2 class="gap-heading is-right">Infinite invention.</h2>
+            <h2 class="gap-heading is-right" data-lines="Infinite|Invention">Infinite Invention</h2>
           </div>
         </div>
 
         <!-- Center image slideshow -->
         <div class="gap-cover" id="gap-cover">
-          <img src="assets/orbit/pexels-817621-12770846_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
-          <img src="assets/orbit/pexels-aliakdemir-30037320_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
-          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Laboratory imagery">
-          <img src="assets/orbit/pexels-magic-k-24827758-6729421_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
-          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
-          <img src="assets/orbit/pexels-stephen-leonardi-587681991-28614865_gm_optimized.jpeg" class="gap-image" alt="Technology imagery">
+          <img src="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
+          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
+          <img src="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
+          <img src="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
+          <img src="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" class="gap-image" alt="Architecture imagery">
+          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Clean energy imagery">
         </div>
 
         <!-- Testimonial -->
