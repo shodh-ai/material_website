@@ -19,6 +19,20 @@
     ease: 'power2.out',
   };
 
+  // Self-drawing illustration reveal: stroked geometry traces itself in while
+  // every shape gently fades, so the figure looks like it is being formed.
+  // Staggers use `amount` so the total spread stays constant regardless of how
+  // many shapes a figure has — keeps the pacing consistent and calm.
+  const FIGURE = {
+    drawDuration: 1.15,
+    drawSpread: 0.9,
+    drawEase: 'power1.inOut',
+    fadeDuration: 0.75,
+    fadeSpread: 0.7,
+    fadeEase: 'sine.out',
+    delay: 0.15,
+  };
+
   let lenis = null;
   let snapTimer = null;
   let isSnapping = false;
@@ -143,8 +157,83 @@
 
   function getFadeTargets(slide) {
     return [...slide.querySelectorAll('.sd-h2, .sd-label.sd-details, .sd-details')].filter(
-      (el) => !el.matches('.sd-h1') && !el.querySelector('.sd-h1')
+      (el) =>
+        !el.matches('.sd-h1') &&
+        !el.querySelector('.sd-h1') &&
+        !el.matches('figure') &&
+        !el.closest('figure')
     );
+  }
+
+  // Animate a single SVG illustration: trace stroked lines via dash offset and
+  // fade every shape in, so it reads as the drawing forming naturally.
+  function animateFigure(figure) {
+    if (figure.dataset.sdFigureAnimated === 'true') return;
+    figure.dataset.sdFigureAnimated = 'true';
+
+    const shapes = [...figure.querySelectorAll('path, line, polyline, polygon, circle, ellipse, rect, text')].filter(
+      (el) => !el.closest('defs')
+    );
+    if (!shapes.length) return;
+
+    // Pass 1 — read all geometry/styles up front so we never interleave reads
+    // and writes (avoids forced synchronous layout / jank during the reveal).
+    const measured = shapes.map((el) => {
+      let length = 0;
+      if (typeof el.getTotalLength === 'function') {
+        try {
+          length = el.getTotalLength();
+        } catch (err) {
+          length = 0;
+        }
+      }
+      const cs = getComputedStyle(el);
+      const strokeWidth = parseFloat(cs.strokeWidth) || 0;
+      const hasStroke = !!cs.stroke && cs.stroke !== 'none' && strokeWidth > 0;
+      const hasDashPattern = !!cs.strokeDasharray && cs.strokeDasharray !== 'none';
+      // Only trace solid strokes; leave already-dashed strokes to just fade in.
+      const draw = length > 1 && hasStroke && !hasDashPattern;
+      return { el, length, draw };
+    });
+
+    // Pass 2 — apply the hidden starting state (writes only).
+    const strokeEls = [];
+    measured.forEach(({ el, length, draw }) => {
+      if (draw) {
+        gsap.set(el, { strokeDasharray: length, strokeDashoffset: length });
+        strokeEls.push(el);
+      }
+    });
+    gsap.set(shapes, { opacity: 0 });
+
+    const tl = gsap.timeline({ delay: FIGURE.delay });
+
+    tl.to(
+      shapes,
+      {
+        opacity: 1,
+        duration: FIGURE.fadeDuration,
+        stagger: { amount: FIGURE.fadeSpread },
+        ease: FIGURE.fadeEase,
+      },
+      0
+    );
+
+    if (strokeEls.length) {
+      tl.to(
+        strokeEls,
+        {
+          strokeDashoffset: 0,
+          duration: FIGURE.drawDuration,
+          stagger: { amount: FIGURE.drawSpread },
+          ease: FIGURE.drawEase,
+          onComplete() {
+            gsap.set(strokeEls, { clearProps: 'strokeDasharray,strokeDashoffset' });
+          },
+        },
+        0
+      );
+    }
   }
 
   function revealSlide(slide) {
@@ -193,6 +282,8 @@
         }
       );
     }
+
+    [...slide.querySelectorAll('figure')].forEach(animateFigure);
   }
 
   function initSlideAnimations() {
