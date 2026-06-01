@@ -321,7 +321,7 @@ function SecuritySlide() {
         {[
           [LockKeyhole, "Zero-Trust Security", "Universal physics is separated from proprietary trade secrets; formulas and factory telemetry stay inside your walls."],
           [ShieldCheck, "100% IP Ownership", "You retain exclusive ownership of generated CAD, material formulas, operating recipes, and manufacturing IP."],
-          [Waves, "Start Generating", "Stop guessing. Start generating. Scale the next physical breakthrough with a production-ready AI engine."],
+          [Waves, "Let's Talk", "Stop guessing. Start generating. Scale the next physical breakthrough with a production-ready AI engine."],
         ].map(([Icon, title, copy]) => {
           const LucideIcon = Icon as typeof LockKeyhole;
           return (
