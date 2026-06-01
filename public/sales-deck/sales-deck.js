@@ -26,8 +26,8 @@ const DEFAULTS_LIGHT = {
   grain: 0.04,
 };
 
-let currentTheme = 'light';
-let P = { ...DEFAULTS_LIGHT };
+let currentTheme = 'dark';
+let P = { ...DEFAULTS_DARK };
 
 function applyThemePalette(theme) {
   const defaults = theme === 'light' ? DEFAULTS_LIGHT : DEFAULTS_DARK;
@@ -51,7 +51,7 @@ function setTheme(theme) {
   }
 
   try {
-    localStorage.setItem('shodh-theme', theme);
+    localStorage.setItem('shodh-sales-deck-theme', theme);
   } catch (_) {}
 
   if (sceneTemplate) {
@@ -62,9 +62,9 @@ function setTheme(theme) {
 }
 
 function initTheme() {
-  let saved = 'light';
+  let saved = 'dark';
   try {
-    saved = localStorage.getItem('shodh-theme') || 'light';
+    saved = localStorage.getItem('shodh-sales-deck-theme') || 'dark';
   } catch (_) {}
 
   currentTheme = saved;
