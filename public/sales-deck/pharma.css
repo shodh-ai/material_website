@@ -134,6 +134,10 @@
   max-width: 760px;
 }
 
+#slide-5 .sd-stack-arrowhead {
+  fill: currentColor;
+}
+
 /* ── Slide 10 — Business Model + Moat (right h1 / 2-col labeled lists) ── */
 #slide-10 .sd-grid--slide-10 {
   grid-template-rows: auto auto auto;
