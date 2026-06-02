@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shodh AI Pitch Deck</title>
+  <link rel="icon" type="image/svg+xml" href="../shodh-new/White Shodh AI Brandmark.svg">
+  <link rel="preload" href="../shodh-new/fluid-config.json" as="fetch" crossorigin>
+  <link rel="preload" href="../shodh-new/Syne/Syne-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="sales-deck.css?v=22">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: var(--sd-bg, #c8d8ef);
+      transition: background 0.5s ease;
+    }
+
+    #unicorn-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100lvh;
+      overflow: hidden;
+    }
+
+    #unicorn-bg canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      #unicorn-bg {
+        height: -webkit-fill-available;
+      }
+    }
+
+    /* ── Reusable pitch text-slide layout ── */
+    #sales-deck-content .sd-grid--slide-pitch {
+      grid-template-rows: auto auto;
+      align-content: start;
+      row-gap: var(--sd-space-48);
+      min-height: var(--sd-usable-h);
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-headline {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      text-align: left;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-h1 {
+      text-align: left;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-h1 .sd-text-line {
+      display: block;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-body {
+      margin: 0;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-body:last-child {
+      margin-bottom: 0;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-hero-cta {
+      font-weight: 600;
+      margin-top: var(--sd-space-16);
+    }
+
+    #sales-deck-content .sd-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--sd-gutter);
+      row-gap: var(--sd-space-24);
+    }
+
+    #sales-deck-content #slide-5 .sd-stat-grid,
+    #sales-deck-content #slide-7 .sd-stat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #sales-deck-content .sd-stat {
+      display: grid;
+      gap: var(--sd-space-8);
+      padding: 0;
+      min-width: 0;
+    }
+
+    #sales-deck-content .sd-stat .sd-label {
+      margin: 0;
+      grid-column: auto;
+      grid-row: auto;
+      text-align: left;
+      align-self: auto;
+      justify-self: start;
+    }
+
+    #sales-deck-content .sd-stat .sd-body {
+      margin: 0;
+      grid-column: auto;
+      grid-row: auto;
+      align-self: auto;
+      justify-self: stretch;
+      text-align: left;
+      color: var(--sd-color-text);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      max-width: none;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-details {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      align-self: start;
+      justify-self: stretch;
+      text-align: left;
+      width: 100%;
+      max-width: none;
+      display: grid;
+      gap: var(--sd-space-24);
+      padding: 0;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch .sd-details > .sd-body {
+      grid-column: auto;
+      grid-row: auto;
+      align-self: auto;
+      justify-self: stretch;
+      text-align: left;
+      color: var(--sd-color-text);
+      line-height: 1.35;
+      max-width: none;
+      overflow-wrap: anywhere;
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch > .sd-details:not(:has(.sd-stat-grid)) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--sd-gutter);
+    }
+
+    #sales-deck-content .sd-grid--slide-pitch > .sd-details:not(:has(.sd-stat-grid)) .sd-hero-cta {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      align-self: end;
+    }
+
+    #sales-deck-content #slide-2 .sd-headline,
+    #sales-deck-content #slide-2 .sd-h1,
+    #sales-deck-content #slide-4 .sd-headline,
+    #sales-deck-content #slide-4 .sd-h1,
+    #sales-deck-content #slide-6 .sd-headline,
+    #sales-deck-content #slide-6 .sd-h1,
+    #sales-deck-content #slide-8 .sd-headline,
+    #sales-deck-content #slide-8 .sd-h1,
+    #sales-deck-content #slide-10 .sd-headline,
+    #sales-deck-content #slide-10 .sd-h1,
+    #sales-deck-content #slide-12 .sd-headline,
+    #sales-deck-content #slide-12 .sd-h1,
+    #sales-deck-content #slide-14 .sd-headline,
+    #sales-deck-content #slide-14 .sd-h1 {
+      text-align: right;
+    }
+
+    #sales-deck-content #slide-1 .sd-headline,
+    #sales-deck-content #slide-1 .sd-h1,
+    #sales-deck-content #slide-3 .sd-headline,
+    #sales-deck-content #slide-3 .sd-h1,
+    #sales-deck-content #slide-9 .sd-headline,
+    #sales-deck-content #slide-9 .sd-h1,
+    #sales-deck-content #slide-15 .sd-headline,
+    #sales-deck-content #slide-15 .sd-h1 {
+      text-align: center;
+    }
+
+    #sales-deck-content #slide-1 .sd-details,
+    #sales-deck-content #slide-3 .sd-details,
+    #sales-deck-content #slide-9 .sd-details,
+    #sales-deck-content #slide-15 .sd-details {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #sales-deck-content #slide-3 .sd-details .sd-hero-cta,
+    #sales-deck-content #slide-9 .sd-details .sd-hero-cta,
+    #sales-deck-content #slide-15 .sd-details .sd-hero-cta {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: end;
+    }
+
+    /* ── Closing slide layout ── */
+    #sales-deck-content .sd-grid--slide-closing {
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+      min-height: var(--sd-usable-h);
+    }
+
+    #sales-deck-content .sd-grid--slide-closing .sd-headline {
+      grid-column: 1 / -1;
+    }
+
+    #sales-deck-content .sd-grid--slide-closing .sd-h1 {
+      text-align: center;
+    }
+
+    #sales-deck-content .sd-grid--slide-closing .sd-h1 .sd-text-line {
+      display: block;
+    }
+
+    #sales-deck-content .sd-grid--slide-closing .sd-details {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: var(--sd-space-48);
+    }
+
+    /* ── Team slide styles ── */
+    #sales-deck-content #slide-team .sd-grid--slide-team {
+      align-content: start;
+      row-gap: var(--sd-space-48);
+      min-height: var(--sd-usable-h);
+    }
+
+    #sales-deck-content #slide-team .sd-grid--slide-team > * {
+      grid-column: 1 / -1;
+    }
+
+    #sales-deck-content #slide-team .sd-h1 {
+      text-align: left;
+    }
+
+    #sales-deck-content #slide-team .sd-team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--sd-gutter);
+      row-gap: var(--sd-space-32);
+      align-items: start;
+    }
+
+    #sales-deck-content #slide-team .sd-team-member {
+      display: grid;
+      gap: var(--sd-space-8);
+      align-content: start;
+    }
+
+    #sales-deck-content #slide-team .sd-team-member .sd-h3 {
+      text-transform: none;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    #sales-deck-content #slide-team .sd-team-member .sd-label {
+      display: block;
+      margin: 0;
+    }
+
+    @media (max-width: 1100px) {
+      #sales-deck-content #slide-team .sd-team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      #sales-deck-content #slide-team .sd-team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="sales-deck" data-theme="light">
+  <div id="unicorn-bg" aria-hidden="true"></div>
+  <button class="theme-toggle sd-theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+  <div id="sales-deck-scroll" class="sales-deck-scroll">
+  <main id="sales-deck-content" class="sales-deck-content">
+
+    <section class="sd-slide" id="slide-1" aria-label="Vision">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Shodh AI</span>
+          <h1 class="sd-h1">
+            <span class="sd-text-line">AI for inventing</span>
+            <span class="sd-text-line">and manufacturing</span>
+            <span class="sd-text-line">the physical world</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">What Shodh reads</span>
+            <p class="sd-body">chemistry / materials / recipes / sensors / QC / equipment constraints</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">What Shodh outputs</span>
+            <p class="sd-body">products / processes / validation plans / manufacturable operating windows</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-2" aria-label="The Problem">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">The Problem</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Physical R&amp;D still breaks</span>
+            <span class="sd-text-line">between lab and factory.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Discovery looks good</span>
+            <p class="sd-body">molecule / material / chemistry / component</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Scale-up breaks</span>
+            <p class="sd-body">heat / mixing / transport / QC drift / equipment limits / cost</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Result</span>
+            <p class="sd-body">good ideas die because the production path is unknown</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-3" aria-label="Why This Matters Now">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Why Now</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">The bottleneck has moved</span>
+            <span class="sd-text-line">from discovery to scale-up.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">AI today</span>
+            <p class="sd-body">candidate generation / literature screening / simulation assistance</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Industrial bottleneck</span>
+            <p class="sd-body">plant behavior / process constraints / QC outcomes / manufacturability</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Shodh wedge</span>
+            <p class="sd-body">scientific intent → manufacturable physical outcome</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-4" aria-label="The Breakthrough">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">The Breakthrough</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">A model that designs backward</span>
+            <span class="sd-text-line">from the desired outcome.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Learns</span>
+            <p class="sd-body">matter / energy / transport / reaction / geometry / time / failure modes</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Designs</span>
+            <p class="sd-body">molecule / formulation / process window / reactor geometry</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Under constraints</span>
+            <p class="sd-body">factory limits / cost / validation / manufacturability</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-5" aria-label="Product">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Product</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">From target property</span>
+            <span class="sd-text-line">to factory-ready plan.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">Input</span>
+              <p class="sd-body">chemistry, CAD, recipes, sensor data, QC outcomes, factory constraints, target properties</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Output</span>
+              <p class="sd-body">candidates / windows / geometries / validation / ROI / IP</p>
+            </div>
+          </div>
+          <p class="sd-body sd-hero-cta">Shodh is the model layer between scientific intent and physical execution.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-6" aria-label="Why It Generalizes">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Why It Generalizes</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Different industries.</span>
+            <span class="sd-text-line">Same physics.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Same primitives</span>
+            <p class="sd-body">matter / energy / transport / reaction / geometry / time</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Different expressions</span>
+            <p class="sd-body">battery / catalyst / drug molecule / turbine / reactor / aerospace material</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Expansion logic</span>
+            <p class="sd-body">horizontal model / vertical wedge / expanding market</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-7" aria-label="Beachhead">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Beachhead</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Start where a failed process</span>
+            <span class="sd-text-line">costs millions.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">Initial wedge</span>
+              <p class="sd-body">Batteries, specialty chemicals, pharma process development, aerospace, and advanced materials.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Why this wedge</span>
+              <p class="sd-body">high R&amp;D spend / costly pilots / yield losses / clear ROI</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-8" aria-label="Proof / Traction">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Proof / Traction</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Industrial customers are pulling</span>
+            <span class="sd-text-line">for physics-to-factory AI.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">Aarti Industries</span>
+              <p class="sd-body">Brownfield chemical process optimization.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Jubilant</span>
+              <p class="sd-body">Process and hardware invention.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">A123 Battery</span>
+              <p class="sd-body">Manufacturability, scrap reduction, wetting, formation, and process IP.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Pipeline</span>
+              <p class="sd-body">Pharma, chemicals, batteries, aerospace, materials, and energy.</p>
+            </div>
+          </div>
+          <p class="sd-body sd-hero-cta">Shodh is not a single-use tool. It is a model-first platform with cross-industry demand.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-9" aria-label="Case Study">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Case Study</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">More yield from</span>
+            <span class="sd-text-line">the same plant.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Problem</span>
+            <p class="sd-body">hotspots / dead zones / secondary impurities / yield loss</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Shodh found</span>
+            <p class="sd-body">high-residence-time thermal zone near feed and mixing</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Generated</span>
+            <p class="sd-body">feed angle / feed rate / RPM curve / jacket profile / static insert geometry</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Impact</span>
+            <p class="sd-body">higher yield / lower impurity / lower variance / lower COGS</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-10" aria-label="Market">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Market</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">The market is physical R&amp;D,</span>
+            <span class="sd-text-line">scale-up, and optimization.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">TAM</span>
+              <p class="sd-body">Physical R&amp;D and manufacturing optimization across atom-based industries.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">SAM</span>
+              <p class="sd-body">High-value industrial R&amp;D and scale-up teams.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">SOM</span>
+              <p class="sd-body">Paid pilots, licenses, gain-share, and IP upside from first enterprise customers.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Wedges</span>
+              <p class="sd-body">Batteries, chemicals, pharma, aerospace, materials, energy, and advanced manufacturing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-11" aria-label="Business Model">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Business Model</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Pilot → platform → upside.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">Paid pilots</span>
+              <p class="sd-body">90-day validation on one bounded physical problem.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Enterprise licenses</span>
+              <p class="sd-body">Customer-specific Shodh model and adapter.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">AI-for-hire</span>
+              <p class="sd-body">High-value molecule, material, process, hardware, or scale-up invention.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Upside</span>
+              <p class="sd-body">Gain-share from verified savings and shared IP co-creation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-12" aria-label="Moat">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Moat</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Every validation makes</span>
+            <span class="sd-text-line">Shodh harder to copy.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">Base physics model</span>
+              <p class="sd-body">Learns shared structure across physical systems.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Customer adapters</span>
+              <p class="sd-body">Learn factory behavior without exposing customer IP.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Inverse design engine</span>
+              <p class="sd-body">Generates candidates, recipes, geometries, and process windows from targets.</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Validation loop</span>
+              <p class="sd-body">Every lab and factory result improves future predictions.</p>
+            </div>
+          </div>
+          <p class="sd-body sd-hero-cta">Most tools stop at discovery or simulation. Shodh connects objective to manufacturable product.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-13" aria-label="Competitive Landscape">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Competitive Landscape</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Point tools stop before</span>
+            <span class="sd-text-line">manufacturing reality.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat-grid">
+            <div class="sd-stat">
+              <span class="sd-label">AI materials discovery</span>
+              <p class="sd-body">candidate search</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">AI drug discovery</span>
+              <p class="sd-body">molecule pipelines</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Simulation</span>
+              <p class="sd-body">specific systems</p>
+            </div>
+            <div class="sd-stat">
+              <span class="sd-label">Shodh</span>
+              <p class="sd-body">target → candidate → process → validation → manufacturable product</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-14" aria-label="Why We Win">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Why We Win</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">Every deployment improves</span>
+            <span class="sd-text-line">the next physical system.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Others optimize</span>
+            <p class="sd-body">one molecule / one material / one simulation / one plant</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Shodh connects</span>
+            <p class="sd-body">objective → candidates → constraints → process → validation → ROI → IP</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Compounding loop</span>
+            <p class="sd-body">every deployment improves the next physical system</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-15" aria-label="Ask">
+      <div class="sd-grid sd-grid--slide-pitch">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Ask</span>
+          <h1 class="sd-h1 sd-h1--center">
+            <span class="sd-text-line">We are raising [$X]</span>
+            <span class="sd-text-line">to scale customer deployments.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <div class="sd-stat">
+            <span class="sd-label">Funds</span>
+            <p class="sd-body">model scaling / customer deployments / A123 validation / secure adapters / commercial team</p>
+          </div>
+          <div class="sd-stat">
+            <span class="sd-label">Milestones</span>
+            <p class="sd-body">paid pilots / enterprise licenses / validated battery deployment / gain-share / IP co-creation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-team" aria-label="Team">
+      <div class="sd-grid sd-grid--slide-team">
+        <div class="sd-headline">
+          <span class="sd-label sd-details sd-text-line">Team</span>
+          <h1 class="sd-h1">
+            <span class="sd-text-line">Advisory board</span>
+            <span class="sd-text-line">for enterprise scale-up</span>
+          </h1>
+        </div>
+        <div class="sd-team-grid sd-details">
+          <div class="sd-team-member">
+            <h3 class="sd-h3">Arun Seth</h3>
+            <span class="sd-label">Advisory Board</span>
+          </div>
+          <div class="sd-team-member">
+            <h3 class="sd-h3">Rahul Singhvi</h3>
+            <span class="sd-label">Advisory Board</span>
+          </div>
+          <div class="sd-team-member">
+            <h3 class="sd-h3">Sanjeev Verma</h3>
+            <span class="sd-label">Advisory Board</span>
+          </div>
+          <div class="sd-team-member">
+            <h3 class="sd-h3">Dr. Vivian Mendonca</h3>
+            <span class="sd-label">Advisory Board</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sd-slide" id="slide-17" aria-label="Closing">
+      <div class="sd-grid sd-grid--slide-closing">
+        <div class="sd-headline">
+          <h1 class="sd-h1">
+            <span class="sd-text-line">Language came.</span>
+            <span class="sd-text-line">Code came.</span>
+            <span class="sd-text-line">Science is next.</span>
+          </h1>
+        </div>
+        <div class="sd-details">
+          <p class="sd-body sd-hero-cta">Shodh turns physics into products.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  </div>
+  <script id="my-scene-json" type="application/json"></script>
+  <script src="../shodh-new/vendor/lenis.min.js" defer></script>
+  <script src="../shodh-new/vendor/gsap.min.js" defer></script>
+  <script src="../shodh-new/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shodh-new/vendor/unicornStudio.umd.js" defer></script>
+  <script src="sales-deck.js" defer></script>
+  <script src="sales-deck-animations.js?v=4" defer></script>
+</body>
+</html>
