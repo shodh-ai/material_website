@@ -303,7 +303,11 @@ export default function InvestorDataRoomPage() {
                 </a>
               </li>
               <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
-              <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">06 Non-Dilutive Capital Compute and Strategic Programs</li>
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#non-dilutive-capital">
+                  06 Non-Dilutive Capital Compute and Strategic Programs
+                </a>
+              </li>
               <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
             </ol>
             <div className="mt-5 space-y-5 text-black">
@@ -1879,6 +1883,181 @@ export default function InvestorDataRoomPage() {
           </section>
         </article>
 
+        <article
+          id="non-dilutive-capital"
+          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+              06 Non-Dilutive Capital Compute and Strategic Programs
+            </p>
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI: Non-Dilutive Capital, Compute & Strategic Programs
+            </h2>
+            <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+              Document Classification: Financial & Strategic Diligence — Series A Data Room
+            </p>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Shodh AI is a frontier physical AI company. Building a multiscale intelligence system for molecules, materials, process physics, and manufacturing requires substantial compute, research capital, and access to strategically important physical problems.
+              </p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                As Shodh scales toward larger foundation models, compute demand will continue to increase.
+              </p>
+              <p>
+                The company’s financing strategy is therefore staged: use non-dilutive compute and strategic government support to reduce early capital intensity, reach stronger model and commercial milestones, and position the company for larger US-led financing rounds as the model roadmap expands.
+              </p>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 font-semibold">
+                Non-dilutive support is not a replacement for long-term frontier AI financing. It is an early leverage layer.
+              </p>
+              <p>The programs below include current compute support, submitted proposals, and active strategic discussions.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. Strategic Programs & Compute Pipeline
+            </h3>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[1180px] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Program / Partner</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Type</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Estimated Value / Scope</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Current Status</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Intended Use</th>
+                    <th className="px-3 py-3 font-semibold">Diligence Evidence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["IndiaAI Mission", "Sovereign compute allocation", "Initial 1M compute hours, with pathway to approximately 30M compute hours for larger model training after proof milestones", "Initial allocation / proof-stage support; larger allocation subject to proof milestones", "Large-scale foundation model training, synthetic physics data generation, simulation workloads, and larger model development", "Allocation documentation, application dossier, proof submissions, milestone correspondence"],
+                    ["RDI / TDB", "Research, development, innovation support and non-dilutive debt", "Approximately $20M–$30M to support compute and model-building infrastructure", "Active Discussion / Under Review", "Compute support, model development, multiscale physics validation, and R&D infrastructure", "Proposal materials, discussion notes, term sheet draft, application materials"],
+                    ["ANRF Grant Program", "Research grant / compute support", "Approximately $3M in compute support", "In Discussion / Submitted", "Model development, validation workloads, and research infrastructure", "Grant application, submission confirmation, correspondence"],
+                    ["Govt. of India / Thorium or Nuclear Program", "Strategic national program", "Sovereign nuclear modeling / secure deployment opportunity", "In Active Discussion", "Safety-aware modeling, reactor thermodynamics, and secure edge deployment for strategic infrastructure", "Stakeholder meeting notes, PSA letter, proposal materials"],
+                    ["Other Government / Strategic Programs", "Strategic support", "To be confirmed", "In Discussion / Targeted", "Sector-specific physical AI programs in energy, aerospace, defense, or advanced manufacturing", "Meeting notes, proposals, correspondence"],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      {row.map((cell, index) => (
+                        <td key={cell} className={`${index < row.length - 1 ? "border-r border-black" : ""} px-3 py-3`}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Strategic Value of Non-Dilutive Compute
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Frontier AI companies require increasing compute as model scale, dataset scale, and evaluation complexity grow. For Shodh, this is especially important because the model is not trained only on text or static data. It must learn from physics simulations, molecular structures, thermodynamic trajectories, process behavior, and validation outcomes.
+              </p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                The IndiaAI compute pathway begins with an initial 1M compute-hour allocation to demonstrate proof milestones, with a potential expansion toward approximately 30M compute hours for larger model training and synthetic physics data generation.
+              </p>
+              <p>This support can be used for workloads such as:</p>
+              <ul className="list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                <li>large-scale physics foundation model training,</li>
+                <li>synthetic physics data generation,</li>
+                <li>macro-fluid and thermodynamic simulation trajectories,</li>
+                <li>model evaluation and validation workloads,</li>
+                <li>larger model development after proof milestones,</li>
+                <li>research-scale experimentation before commercial deployment.</li>
+              </ul>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 font-semibold">
+                The strategic value is capital efficiency. Non-dilutive compute allows Shodh to advance the model roadmap without funding every early training and simulation workload through venture capital alone.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. Compute Strategy: R&D Infrastructure vs. Commercial Execution
+            </h3>
+            <div className="grid gap-5">
+              <section className="border-l-4 border-black bg-amber-50 px-4 py-3">
+                <h4 className="mb-2 font-semibold">A. Non-Dilutive / Sovereign Compute</h4>
+                <p className="font-semibold">Primary use: model training, synthetic data generation, large-scale simulation, research experimentation, and validation workloads.</p>
+                <p className="mt-3 leading-7 text-black">
+                  This compute supports the foundational work required to improve Shodh’s physics models and reduce the cost of early model scaling.
+                </p>
+              </section>
+              <section className="border-l-4 border-black bg-white py-3 pl-4">
+                <h4 className="mb-2 font-semibold">B. Commercial GPU / Customer Deployment Infrastructure</h4>
+                <p className="font-semibold">Primary use: customer NREs, API inference, enterprise pilots, secure deployments, and customer-specific workloads.</p>
+                <p className="mt-3">These resources support revenue-generating activity, including:</p>
+                <ul className="mt-3 list-disc space-y-1 pl-6">
+                  <li>paid NRE deployments,</li>
+                  <li>enterprise API usage,</li>
+                  <li>secure edge deployments,</li>
+                  <li>customer-specific simulation workloads,</li>
+                  <li>inference for domain-specific Enterprise Agents.</li>
+                </ul>
+              </section>
+              <p className="max-w-3xl border-l-4 border-black bg-white py-3 pl-4 font-semibold leading-7 text-black">
+                This separation allows Shodh to use non-dilutive compute for early frontier-model development while reserving privately funded infrastructure and commercial cloud resources for customer-facing work.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              4. Frontier AI Financing Roadmap
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>Shodh’s long-term model roadmap will require progressively larger compute budgets.</p>
+              <p>The current non-dilutive programs are intended to help Shodh reach the next set of technical and commercial milestones more efficiently:</p>
+              <ol className="space-y-3 border-l-4 border-black bg-white py-3 pl-6">
+                <li><strong>1. Proof-stage model validation</strong><br />Use initial compute support to validate core model performance, simulation workflows, and synthetic data generation.</li>
+                <li><strong>2. Larger model training</strong><br />Expand toward larger physics foundation models using IndiaAI compute and other non-dilutive support where available.</li>
+                <li><strong>3. Commercial deployment readiness</strong><br />Combine model progress with enterprise pilots, NRE deployments, and customer validation.</li>
+                <li><strong>4. US-led scale financing</strong><br />Use stronger technical and commercial proof points to support larger future financing rounds for frontier model scaling, global enterprise GTM, and infrastructure expansion.</li>
+              </ol>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                This staged strategy is designed to avoid premature overcapitalization while still acknowledging the reality of frontier AI: larger models, larger datasets, and broader deployment will require substantially more compute over time.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              5. National Strategic Relevance
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>Shodh’s work sits at the intersection of AI, materials, energy, manufacturing, and strategic infrastructure.</p>
+              <p>National science and technology programs are increasingly focused on capabilities such as:</p>
+              <ul className="list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                <li>advanced battery materials,</li>
+                <li>synthetic fuels and energy security,</li>
+                <li>aerospace and defense manufacturing,</li>
+                <li>nuclear and thorium-cycle modeling,</li>
+                <li>supply-chain resilience,</li>
+                <li>domestic scientific computing capacity.</li>
+              </ul>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                Shodh’s physics-native AI platform is aligned with these priorities because it is designed to model, optimize, and de-risk physical systems that matter for industrial competitiveness and national infrastructure.
+              </p>
+              <p>Strategic government engagement can provide several advantages:</p>
+              <ol className="space-y-3 border-l-4 border-black bg-white py-3 pl-6">
+                <li><strong>1. Non-dilutive capital and compute</strong><br />Reduces the capital intensity of early model development.</li>
+                <li><strong>2. High-value validation environments</strong><br />Gives Shodh access to difficult physical problems that are not easily available in public datasets.</li>
+                <li><strong>3. Regulatory and institutional credibility</strong><br />Supports trust in sectors such as energy, nuclear, aerospace, and advanced manufacturing.</li>
+                <li><strong>4. Strategic customer pathways</strong><br />Creates opportunities for government-backed pilots, sovereign deployments, and public-private partnerships.</li>
+              </ol>
+            </div>
+          </section>
+        </article>
+
         <div className="mt-20 border-t-4 border-black pt-10">
           <aside className="mb-10 xl:hidden">
             <nav className="border-2 border-black bg-white p-5">
@@ -1907,7 +2086,11 @@ export default function InvestorDataRoomPage() {
                   </a>
                 </li>
                 <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
-                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">06 Non-Dilutive Capital Compute and Strategic Programs</li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#non-dilutive-capital">
+                    06 Non-Dilutive Capital Compute and Strategic Programs
+                  </a>
+                </li>
                 <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
               </ol>
               <div className="mt-6 space-y-5 text-sm text-black">
