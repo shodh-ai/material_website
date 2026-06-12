@@ -3,6 +3,7 @@ import Link from "next/link";
 const sop001PdfUrl = "/pdf/SOP-001_solid_state_battery_electrolyte.pdf";
 const sop002PdfUrl = "/pdf/SOP-002_highly_branched_SAF.pdf";
 const daeLetterUrl = "/pdf/Letter-to-Secretary-DAE.pdf";
+const industrialValidationPortfolioUrl = "/Shodh_Industrial_Validation_Portfolio_Final_Polished.pdf";
 const prePrintScreenshots = [
   "/pre-prints/Screenshot 2026-06-13 at 2.38.15 AM.png",
   "/pre-prints/Screenshot 2026-06-13 at 2.38.29 AM.png",
@@ -326,7 +327,11 @@ export default function InvestorDataRoomPage() {
                       02 Empirical Validation Dossier Battery
                     </a>
                   </li>
-                  <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">03 Aarti Industries NRE Case Study</li>
+                  <li>
+                    <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#industrial-validation-portfolio">
+                      03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
+                    </a>
+                  </li>
                   <li>
                     <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
                       04 Govt of India DAE Nuclear Letter
@@ -2109,7 +2114,11 @@ export default function InvestorDataRoomPage() {
                         02 Empirical Validation Dossier Battery
                       </a>
                     </li>
-                    <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">03 Aarti Industries NRE Case Study</li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#industrial-validation-portfolio">
+                        03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
+                      </a>
+                    </li>
                     <li>
                       <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
                         04 Govt of India DAE Nuclear Letter
@@ -2406,6 +2415,66 @@ export default function InvestorDataRoomPage() {
             <div className="my-10 border-y border-black bg-white py-5 text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black">
                 End of Exhibit A / 02 Empirical Validation Dossier Battery
+              </p>
+              <p className="mt-2 text-sm font-medium text-black">
+                <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#industrial-validation-portfolio">
+                  Next: Exhibit A / 03 Industrial Validation Portfolio
+                </a>
+              </p>
+            </div>
+
+            <article
+              id="industrial-validation-portfolio"
+              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+            >
+              <header className="border-b-2 border-black bg-white pb-8 text-black">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+                  Exhibit A / 03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
+                </p>
+                <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+                  03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
+                </h2>
+              </header>
+
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <div className="max-w-3xl space-y-4 leading-7 text-black">
+                  <p>
+                    This portfolio consolidates Shodh’s industrial manufacturability validation work into one diligence document. It includes an A123-specific battery manufacturing pilot architecture, Aarti Industries brownfield process optimization case study, Jubilant Pharmova process / hardware invention case study, cross-industry scale-up analogs, and an economic impact framework for evaluating pilot ROI.
+                  </p>
+                  <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                    This document is intended as a consolidated validation portfolio. Individual case studies may be separated into standalone exhibits later if required during diligence.
+                  </p>
+                </div>
+              </section>
+
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+                  Industrial Validation Portfolio PDF
+                </h3>
+                <div className="border-2 border-black bg-white">
+                  <div className="border-b-2 border-black bg-white px-4 py-3 text-xs font-semibold uppercase tracking-wide text-black">
+                    Shodh Industrial Validation Portfolio Final Polished
+                  </div>
+                  <iframe
+                    src={`${industrialValidationPortfolioUrl}#view=FitH`}
+                    title="Shodh Industrial Validation Portfolio"
+                    className="h-[780px] w-full bg-white"
+                  />
+                </div>
+                <a
+                  className="mt-4 inline-flex border border-black bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-white"
+                  href={industrialValidationPortfolioUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open full Industrial Validation Portfolio
+                </a>
+              </section>
+            </article>
+
+            <div className="my-10 border-y border-black bg-white py-5 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black">
+                End of Exhibit A / 03 Industrial Validation Portfolio
               </p>
               <p className="mt-2 text-sm font-medium text-black">
                 <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#nuclear-dossier">
