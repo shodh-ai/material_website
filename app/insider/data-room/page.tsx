@@ -21,7 +21,8 @@ import {
   Layers,
   AlertCircle,
   ChevronDown,
-  DollarSign
+  DollarSign,
+  Beaker
 } from "lucide-react";
 import { submitInvestorApplication } from "./actions";
 import DataRoomManifesto from "@/components/DataRoomManifesto";
@@ -61,6 +62,30 @@ const documents = [
     category: "Financials",
     readTime: "25 min read",
     href: "/insider/data-room/commercialization"
+  },
+  {
+    id: "saf-dossier",
+    title: "Technical Dossier 01: C15 SAF",
+    subtitle: "Autonomous Discovery & Empirical Validation",
+    description: "Investor-facing technical dossier on UNIPHY's in silico discovery, autonomous retrosynthesis, wet-lab validation, and commercial scale-up path for a heavily branched C15 sustainable aviation fuel candidate.",
+    pages: "Technical Dossier",
+    icon: Beaker,
+    color: "#f59e0b",
+    category: "Validation",
+    readTime: "18 min read",
+    href: "/insider/data-room/saf-dossier"
+  },
+  {
+    id: "battery-electrolyte-dossier",
+    title: "Technical Dossier 02: Solid-State Electrolyte",
+    subtitle: "Autonomous Discovery & Empirical Validation",
+    description: "Investor-facing technical dossier on UNIPHY's discovery, autonomous retrosynthesis, electrochemical validation, and factory scale-up path for a high-stability sulfonate ester solid-state battery electrolyte.",
+    pages: "Technical Dossier",
+    icon: Zap,
+    color: "#a78bfa",
+    category: "Validation",
+    readTime: "18 min read",
+    href: "/insider/data-room/battery-electrolyte-dossier"
   }
 ];
 
@@ -137,6 +162,8 @@ export default function DataRoomPage() {
   const mdMap: Record<string, { url: string; filename: string }> = {
     "genesis-protocol": { url: "/md/GTM-and-18-Month-Sprint.md", filename: "The-Genesis-Protocol-2.0.md" },
     "skanda-architecture": { url: "/md/Architecture-Deep-Dive.md", filename: "The-SkandaX-Protocol.md" },
+    "saf-dossier": { url: "/md/C15-SAF-Technical-Dossier.md", filename: "C15-SAF-Technical-Dossier.md" },
+    "battery-electrolyte-dossier": { url: "/md/Solid-State-Battery-Electrolyte-Technical-Dossier.md", filename: "Solid-State-Battery-Electrolyte-Technical-Dossier.md" },
   };
 
   const handleDownloadPdf = (docId: string) => {
