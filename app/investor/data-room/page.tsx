@@ -3,6 +3,15 @@ import Link from "next/link";
 const sop001PdfUrl = "/pdf/SOP-001_solid_state_battery_electrolyte.pdf";
 const sop002PdfUrl = "/pdf/SOP-002_highly_branched_SAF.pdf";
 const daeLetterUrl = "/pdf/Letter-to-Secretary-DAE.pdf";
+const prePrintScreenshots = [
+  "/pre-prints/Screenshot 2026-06-13 at 2.38.15 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.38.29 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.38.40 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.49.38 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.49.47 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.54.47 AM.png",
+  "/pre-prints/Screenshot 2026-06-13 at 2.55.14 AM.png",
+];
 
 const safRows = [
   [
@@ -128,21 +137,21 @@ function DossierHeader({
   status: string;
 }) {
   return (
-    <header className="mb-10 border-b border-slate-200 pb-8">
+    <header className="mb-10 border-b-2 border-black pb-8">
       <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
             {eyebrow}
           </p>
-          <h2 className="max-w-4xl text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+          <h2 className="max-w-4xl text-3xl font-semibold tracking-tight text-black md:text-5xl">
             {title}
           </h2>
         </div>
-        <p className="w-fit shrink-0 border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-800">
+        <p className="w-fit shrink-0 border border-black bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-black">
           {status}
         </p>
       </div>
-      <p className="max-w-4xl text-base leading-7 text-slate-700">{summary}</p>
+      <p className="max-w-4xl text-base leading-7 text-black">{summary}</p>
     </header>
   );
 }
@@ -156,14 +165,14 @@ function ValidationTable({
 }) {
   return (
     <figure className="my-7">
-      <figcaption className="border-x-2 border-t-2 border-slate-300 bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-800">
+      <figcaption className="border-x-2 border-t-2 border-black bg-white px-4 py-3 text-sm font-semibold text-black">
         {caption}
       </figcaption>
-      <div className="overflow-x-auto border-2 border-slate-300 bg-white">
+      <div className="overflow-x-auto border-2 border-black bg-white">
         <table className="w-full min-w-[980px] border-collapse text-sm">
           <thead>
-            <tr className="bg-slate-200 text-slate-950">
-              <th className="w-[24%] border border-slate-300 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
+            <tr className="bg-white text-black">
+              <th className="w-[24%] border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
                 Property
               </th>
               <th className="w-[18%] border border-slate-300 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
@@ -172,10 +181,10 @@ function ValidationTable({
               <th className="w-[18%] border border-slate-300 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
                 Wet-Lab Measurement
               </th>
-              <th className="w-[13%] border border-slate-300 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
+              <th className="w-[13%] border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
                 Delta Error
               </th>
-              <th className="border border-slate-300 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
+              <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">
                 Analytical Evidence
               </th>
             </tr>
@@ -186,19 +195,19 @@ function ValidationTable({
                 key={row[0]}
                 className={rowIndex % 2 === 0 ? "bg-white" : "bg-slate-50"}
               >
-                <td className="border border-slate-300 px-4 py-3 align-top font-semibold text-slate-950">
+                <td className="border border-black px-4 py-3 align-top font-semibold text-black">
                   {row[0]}
                 </td>
-                <td className="border border-slate-300 px-4 py-3 align-top font-mono text-[13px] text-slate-800">
+                <td className="border border-black px-4 py-3 align-top font-mono text-[13px] text-black">
                   {row[1]}
                 </td>
-                <td className="border border-slate-300 px-4 py-3 align-top font-mono text-[13px] font-semibold text-slate-950">
+                <td className="border border-black px-4 py-3 align-top font-mono text-[13px] font-semibold text-black">
                   {row[2]}
                 </td>
-                <td className="border border-slate-300 bg-amber-50 px-4 py-3 align-top font-mono text-[13px] font-semibold text-slate-950">
+                <td className="border border-black bg-white px-4 py-3 align-top font-mono text-[13px] font-semibold text-black">
                   {row[3]}
                 </td>
-                <td className="border border-slate-300 px-4 py-3 align-top text-slate-700">
+                <td className="border border-black px-4 py-3 align-top text-black">
                   {row[4]}
                 </td>
               </tr>
@@ -212,14 +221,14 @@ function ValidationTable({
 
 function CompetitiveMatrixTable() {
   return (
-    <figure className="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-      <figcaption className="border-b border-slate-200 bg-slate-950 px-5 py-4 text-sm font-semibold uppercase tracking-wide text-white">
+    <figure className="my-8 overflow-hidden border-2 border-black bg-white">
+      <figcaption className="border-b-2 border-black bg-white px-5 py-4 text-sm font-semibold uppercase tracking-wide text-black">
         Competitive Matrix
       </figcaption>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[1180px] border-collapse text-sm">
           <thead>
-            <tr className="bg-slate-100 text-slate-950">
+            <tr className="bg-white text-black">
               <th className="border-b border-r border-slate-200 px-4 py-4 text-left text-xs font-bold uppercase tracking-wide text-slate-600">
                 Category
               </th>
@@ -265,44 +274,427 @@ function CompetitiveMatrixTable() {
 
 export default function InvestorDataRoomPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
-      <div className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-12">
-        <header className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-          <div className="flex flex-col gap-4 border-b border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-7 text-white md:flex-row md:items-start md:justify-between md:px-8 md:py-9">
+    <main className="min-h-screen bg-white font-mono text-[13px] leading-relaxed text-black selection:bg-black selection:text-white [&_*]:!rounded-none [&_*]:!shadow-none [&_a]:!text-blue-700 [&_a]:underline [&_code]:border [&_code]:border-black [&_code]:bg-white [&_code]:px-1 [&_div]:!border-black [&_figcaption]:!border-black [&_h1]:!font-semibold [&_h2]:!font-semibold [&_h3]:!border-black [&_h3]:!text-black [&_h4]:!text-black [&_li]:!text-black [&_ol]:!border-black [&_p]:!text-black [&_section]:!border-black [&_section]:!bg-white [&_strong]:!text-black [&_table]:!text-black [&_td]:!border-black [&_td]:!text-black [&_th]:!border-black [&_th]:!text-black [&_tr]:!bg-white [&_ul]:!border-black [&_ul]:!bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-5 md:px-6 md:py-8 xl:grid xl:grid-cols-[340px_minmax(0,760px)] xl:gap-12">
+        <aside className="hidden xl:block">
+          <nav className="sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto border-2 border-black bg-white p-4 text-xs">
+            <p className="mb-4 border-b border-black pb-2 font-semibold uppercase tracking-wide text-black">
+              Data Room Index
+            </p>
+            <ol className="space-y-1 text-black">
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#executive-thesis">
+                  01 Shodh AI Executive Thesis
+                </a>
+              </li>
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#competitive-philosophy">
+                  02 Competitive Landscape and Positioning
+                </a>
+              </li>
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#commercial-traction">
+                  03 Commercial Traction and Enterprise Pipeline
+                </a>
+              </li>
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#business-model">
+                  04 Business Model and Enterprise Agent Strategy
+                </a>
+              </li>
+              <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
+              <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">06 Non-Dilutive Capital Compute and Strategic Programs</li>
+              <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
+            </ol>
+            <div className="mt-5 space-y-5 text-black">
+              <section>
+                <p className="mb-2 border-b border-black pb-1 font-semibold uppercase tracking-wide">
+                  Exhibit A Empirical Validation and Case Studies
+                </p>
+                <ol className="space-y-1">
+                  <li>
+                    <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#saf-dossier">
+                      01 Empirical Validation Dossier eFuel SAF
+                    </a>
+                  </li>
+                  <li>
+                    <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#battery-dossier">
+                      02 Empirical Validation Dossier Battery
+                    </a>
+                  </li>
+                  <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">03 Aarti Industries NRE Case Study</li>
+                  <li>
+                    <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
+                      04 Govt of India DAE Nuclear Letter
+                    </a>
+                  </li>
+                </ol>
+              </section>
+              <section>
+                <p className="mb-2 border-b border-black pb-1 font-semibold uppercase tracking-wide">
+                  Exhibit B Technical IP and Internal Preprints
+                </p>
+                <ol className="space-y-1">
+                  <li>
+                    <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#proprietary-research-math">
+                      02 Proprietary Research and Math
+                    </a>
+                  </li>
+                </ol>
+              </section>
+            </div>
+          </nav>
+        </aside>
+
+        <div className="min-w-0">
+        <header className="mb-10 border-b-2 border-black bg-white pb-8">
+          <div className="flex flex-col gap-4 border-b-2 border-black bg-white pb-6 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-200">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-black">
                 Shodh AI Investor Data Room
               </p>
-              <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">
+              <h1 className="text-2xl font-semibold tracking-tight text-black md:text-4xl">
                 Technical Validation Dossiers
               </h1>
             </div>
-            <p className="w-fit border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-blue-100">
+            <p className="w-fit border border-black bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-black">
               Confidential Review
             </p>
           </div>
-          <p className="max-w-3xl px-6 py-5 text-base leading-7 text-slate-700 md:px-8">
-            Investor-ready technical packet covering autonomous discovery
-            programs, source SOPs, empirical measurements, sovereign validation,
-            and commercial scale-up paths.
-          </p>
         </header>
 
         <article
-          id="competitive-philosophy"
-          className="mb-12 scroll-mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+          id="executive-thesis"
+          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
-          <header className="border-b border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-10 text-white md:px-10 md:py-12">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-blue-200">
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI Executive Thesis
+            </h2>
+            <p className="mt-3 text-lg font-semibold text-black">
+              From Discovery to Manufacturability
+            </p>
+            <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+              Document Classification: Executive Thesis — Series A Data Room
+            </p>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh AI is building a physics-native intelligence layer for industrial R&D and manufacturing.</p>
+              <p>Our core thesis is simple: the next step-change in physical innovation will not come from generating more candidate molecules, materials, formulations, or processes. It will come from identifying which candidates can be synthesized, processed, scaled, validated, and manufactured under real industrial constraints.</p>
+              <p>Most AI systems stop at discovery. Most simulators stop at a narrow physics domain. Most digital twins begin only after an industrial asset already exists.</p>
+              <p>Shodh connects these layers into one computational loop: molecular behavior, process physics, equipment constraints, validation planning, and manufacturing economics.</p>
+              <p>The question Shodh is built to answer is the question that ultimately determines whether physical innovation creates value:</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Can this idea become a manufacturable product?</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. The Scale-Up Death Valley
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>The industrial world still operates on a fragmented timeline:</p>
+              <p className="border border-black bg-amber-50 px-4 py-3 text-sm font-semibold tracking-wide text-black">Discovery → R&D → Pilot → Scale-Up → Commercial Manufacturing</p>
+              <p>This structure creates a predictable and costly failure mode. A promising material, formulation, or chemistry is discovered in the lab. The pilot team attempts to scale it. Manufacturing then discovers that the process breaks under real-world thermal gradients, mixing conditions, fluid shear, yield requirements, safety constraints, or cost targets.</p>
+              <p>At that point, the failure is no longer just scientific. It is economic. Years of R&D effort and capital expenditure can be lost because manufacturability was evaluated too late.</p>
+              <p>The problem is not a lack of ideas. The problem is that the path from idea to manufactured reality is too slow, expensive, and uncertain.</p>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 text-base font-semibold leading-7 text-black">A promising molecule is not a product. A product is something that can be manufactured repeatedly, safely, economically, and at industrial scale.</p>
+              <p>Shodh exists to collapse the gap between discovery and manufacturing.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Physical Innovation Is a Multiscale Problem
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Human science has historically separated chemistry, materials science, fluid dynamics, process engineering, and manufacturing into different disciplines. That structure made sense for human teams. It does not reflect how physical systems behave.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Real industrial outcomes are coupled across scales.</p>
+              <p>A molecular change can affect viscosity. Viscosity can affect mixing. Mixing can affect heat transfer. Heat transfer can affect yield. Yield can affect cost, safety, quality, and manufacturability.</p>
+              <p>This is why point solutions are insufficient. A molecule generator, simulator, robotic lab, or digital twin may solve an important piece of the workflow, but the industrial value is created when those pieces are connected.</p>
+              <p>Shodh is designed around this connection.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. The Multiscale Computational Loop
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh AI evaluates the physical world across interconnected scales, moving in both directions between discovery and manufacturing.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Discovery to Scale-Up</p>
+              <p className="border border-black bg-amber-50 px-4 py-3 text-sm font-semibold tracking-wide text-black">Micro → Meso → Macro</p>
+              <p>Shodh begins at the molecular and materials level, reasoning about structure, thermodynamics, reaction behavior, and candidate properties. The system then evaluates whether that candidate can survive process conditions, heat transfer, mixing behavior, equipment constraints, and manufacturing operating windows.</p>
+              <p>The goal is not only to identify promising candidates. The goal is to de-risk candidates computationally before expensive physical experimentation begins.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Process Optimization</p>
+              <p className="border border-black bg-amber-50 px-4 py-3 text-sm font-semibold tracking-wide text-black">Macro → Meso → Micro</p>
+              <p>Shodh can also begin with an existing industrial process. For a reactor, production line, or manufacturing system experiencing low yield, instability, quality drift, or cost pressure, Shodh evaluates macro-level operating conditions and traces process behavior back toward its underlying physical causes.</p>
+              <p>The goal is to optimize industrial systems by diagnosing the physics underneath them.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              4. Simulation-First, Lab-Validated
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Industrial R&D has historically followed a slow loop:</p>
+              <p className="border border-black bg-white px-4 py-3 text-sm font-semibold tracking-wide text-black">Guess → Test → Learn → Repeat</p>
+              <p>Shodh enables a different loop:</p>
+              <p className="border border-black bg-amber-50 px-4 py-3 text-sm font-semibold tracking-wide text-black">Simulate → Inverse-Design → Validate → Scale</p>
+              <p>The physical lab remains essential. Real-world validation is still required. But the lab should not be the primary search engine.</p>
+              <p>Shodh’s thesis is that more of the search should happen computationally, with physical experimentation used for targeted validation, calibration, and grounding. This mirrors the evolution of aerospace, robotics, and advanced manufacturing, where simulation increasingly reduces the cost and risk of entering the physical world.</p>
+              <p>For industrial R&D, the implication is significant: fewer blind experiments, faster iteration, better candidate selection, and earlier visibility into scale-up risk.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              5. Commercial Validation
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Shodh’s value is measured in industrial outcomes.</p>
+              <p>The relevant metrics are not abstract model scores alone. They are yield improvement, COGS reduction, faster time-to-market, reduced pilot risk, better operating windows, and improved manufacturing reliability.</p>
+              <p>Shodh’s deployments are designed around bounded, measurable industrial pain points. In customer and pilot contexts such as continuous flow chemistry, specialty chemicals, advanced materials, and battery manufacturing, Shodh’s work is framed around specific economic outcomes: yield, rheology, process stability, scale-up feasibility, cost, and annualized value.</p>
+              <p>The purpose is to translate high-dimensional physics into economic leverage for enterprise partners.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              6. The Sim-to-Real Data Flywheel
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh’s foundation model is trained on large-scale physics data and evaluated against industrially relevant validation tasks. The ultimate challenge is closing the sim-to-real gap under factory conditions.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Paid NRE deployments are central to this strategy.</p>
+              <p>These deployments are valuable not only as revenue, but as calibration events. Each deployment exposes the model to real industrial conditions, measured process data, wet-lab outcomes, sensor streams, and validation results that are difficult to reproduce from public datasets alone.</p>
+              <p>Operating strictly within permissioned, contractual boundaries, Shodh uses deployment learnings to calibrate its underlying simulators, improve its training distribution, and strengthen its ability to model real physical systems.</p>
+              <p>This creates a compounding advantage. Replicating Shodh’s model is not simply a matter of copying architecture. It requires comparable access to deployment data, calibration loops, industrial validation history, and customer-specific physical context.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              7. The Business Model
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh’s commercial model is designed to scale from high-touch technical deployments to enterprise software and IP-driven economics.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Direct Deployments</p>
+              <p>Paid NRE and pilot projects focused on specific process, discovery, and scale-up bottlenecks. These generate revenue while producing real-world validation and calibration signals.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Enterprise SaaS & API Delivery</p>
+              <p>Recurring software and API licensing for enterprise R&D, process engineering, and scale-up workflows.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Partnered IP & Gain-Share</p>
+              <p>Partnerships with pharmaceutical, chemical, materials, and manufacturing companies to co-discover and de-risk new products, with potential economics across upfront payments, milestones, royalties, or gain-share structures.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Proprietary IP Generation</p>
+              <p>Use of Shodh’s inverse-design loops to discover and validate new materials, formulations, and processes, creating a portfolio of licensable proprietary IP.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              8. The Long-Term Position
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh does not need to own every robotic lab, factory interface, digital twin, or legacy simulator.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Shodh’s position is to provide the physics-native intelligence layer that powers them.</p>
+              <p>Robotic labs can become execution layers. Digital twins can become interfaces. Legacy solvers can become validation layers. Enterprise R&D teams can become users of a system that connects discovery, simulation, validation, and manufacturability inside one computational loop.</p>
+              <p>Shodh is building toward a world where industrial invention is faster, cheaper, safer, and more manufacturable from the beginning.</p>
+              <p>We do not just discover the chemistry.</p>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 text-base font-semibold leading-7 text-black">We discover the path from chemistry to factory.</p>
+            </div>
+          </section>
+          <nav className="mt-10 border-t-2 border-black pt-5 text-sm font-semibold">
+            <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#competitive-philosophy">
+              Next: 02 Competitive Landscape and Positioning
+            </a>
+          </nav>
+        </article>
+
+        <article
+          id="competitive-philosophy"
+          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+              02 Competitive Landscape and Positioning
+            </p>
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI: Competitive Landscape & Positioning
+            </h2>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Most companies in AI-for-science optimize one layer of physical innovation. Shodh AI is built around the harder cross-layer problem: connecting molecular discovery, physical simulation, synthesis validation, process behavior, and manufacturability inside one computational loop.</p>
+              <p>Our view is not that existing companies are weak. Many are technically strong and commercially credible. The issue is that the market remains fragmented across discovery tools, engineering simulators, robotic labs, digital twins, and legacy solvers.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Shodh’s thesis is that physical innovation cannot be won by optimizing one layer in isolation. A molecule, material, formulation, catalyst, or process only becomes valuable if it can be synthesized, scaled, stabilized, and manufactured economically.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. Competitive Landscape
+            </h3>
+            <div className="space-y-5 leading-7 text-black [&_div]:border-t [&_div]:border-black [&_div]:bg-white [&_div]:pt-4 [&_p]:mt-1 [&_p]:text-black">
+              <div>
+                <h4 className="mb-2 font-semibold text-black">A. Engineering Physics AI</h4>
+                <p>Examples: PhysicsX, Neural Concept, BeyondMath, Luminary Cloud, Godela, Trim</p>
+                <p>These companies focus on engineering-scale simulation: CFD, FEA, CAD-native optimization, thermal modeling, aerodynamics, industrial design, and simulation acceleration.</p>
+                <p>They are valuable because they make engineering workflows faster and more intelligent. However, their center of gravity is typically the macroscopic engineering layer: structures, fluids, geometry, thermal behavior, and design optimization.</p>
+                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold text-black">Shodh’s view: engineering simulation is powerful, but it does not by itself solve the full discovery-to-manufacturing problem. A model that optimizes a reactor shape, turbine, aircraft component, or flow path is not the same as a system that reasons from molecular structure to reaction pathway to yield to scale-up to operating window.</p>
+                <p className="font-semibold">Shodh connects engineering physics to molecular discovery and process-scale manufacturability.</p>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold text-black">B. Molecular Discovery AI</h4>
+                <p>Examples: SandboxAQ, Isomorphic Labs, Insilico Medicine, and related AI-drug / AI-materials companies</p>
+                <p>These companies focus on molecular generation, property prediction, drug discovery, protein-ligand interactions, materials discovery, and quantitative scientific modeling.</p>
+                <p>They are strong at the discovery layer. However, discovery is only the beginning of industrial value creation.</p>
+                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold text-black">Shodh’s view: a promising molecule is not yet a product. A drug candidate, material, formulation, catalyst, or specialty chemical still has to be synthesized, processed, stabilized, scaled, and manufactured reliably and economically.</p>
+                <p className="font-semibold">Shodh is designed to couple discovery with synthesis feasibility, process behavior, and manufacturing constraints from the beginning.</p>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold text-black">C. Autonomous Lab / AI Science Factory Companies</h4>
+                <p>Examples: Lila Sciences, Radical AI, Periodic Labs, Yoneda Labs</p>
+                <p>These companies are building robotic labs, closed-loop experimentation systems, AI chemists, and high-throughput physical testing infrastructure.</p>
+                <p>They are important because they recognize that AI must connect to physical reality. However, physical experimentation remains expensive, slow, and capacity-constrained, even when automated.</p>
+                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold text-black">Shodh’s view: the lab should not be the primary search engine. It should be the validation layer. Shodh shifts more of the search into simulation and inverse design, then uses targeted physical experiments to validate the highest-confidence candidates.</p>
+                <p className="font-semibold">Shodh can make robotic labs more efficient by narrowing the experimental search space before physical execution.</p>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold text-black">D. Digital Twin / Spatial Intelligence Companies</h4>
+                <p>Examples: Geminus, World Labs, and related digital twin / spatial AI companies</p>
+                <p>These systems help represent, monitor, simulate, or generate parts of the physical world. Digital twins are valuable for existing industrial assets. Spatial world models are valuable for robotics, simulation, media, and embodied intelligence.</p>
+                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold text-black">Shodh’s view: representation is not enough. The harder industrial problem is not only modeling what exists. It is inventing what should exist, predicting whether it can be made, and designing the path from discovery to manufacturing.</p>
+                <p className="font-semibold">Shodh focuses on invention, inverse design, process feasibility, and manufacturability.</p>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold text-black">E. Legacy Simulation & Scientific Software</h4>
+                <p>Examples: Ansys, Schrödinger, COMSOL, traditional CAE and chemistry tools</p>
+                <p>These platforms have deep enterprise trust, mature workflows, and high-fidelity solvers across engineering, chemistry, and physics domains.</p>
+                <p>They are valuable because industrial customers trust deterministic physics. However, these tools are often fragmented, computationally intensive, forward-oriented, and difficult to integrate into generative discovery workflows.</p>
+                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold text-black">Shodh’s view: legacy solvers should not simply be discarded. They can serve as validation layers inside an AI-native workflow. Shodh combines fast neural inference with physics-grounded verification, allowing customers to move toward inverse design without abandoning trusted deterministic methods.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Competitive Matrix
+            </h3>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="w-full min-w-[1180px] border-collapse text-sm text-black">
+                <thead>
+                  <tr className="bg-white text-black">
+                    <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Category</th>
+                    <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Example Companies</th>
+                    <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Core Strength</th>
+                    <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Boundary</th>
+                    <th className="border border-black bg-amber-50 px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Shodh Differentiation</th>
+                    <th className="border border-black px-4 py-3 text-left text-xs font-bold uppercase tracking-wide">Potential Relationship</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-white">
+                    <td className="border border-black px-4 py-3 align-top font-semibold">Engineering Physics AI</td>
+                    <td className="border border-black px-4 py-3 align-top">PhysicsX, Neural Concept, BeyondMath, Luminary Cloud, Godela, Trim</td>
+                    <td className="border border-black px-4 py-3 align-top">CFD, FEA, CAD optimization, simulation acceleration, engineering design</td>
+                    <td className="border border-black px-4 py-3 align-top">Primarily focused on macroscopic engineering and geometry</td>
+                    <td className="border border-black bg-amber-50 px-4 py-3 align-top font-semibold">Connects engineering physics to molecular discovery, chemistry, process behavior, and scale-up</td>
+                    <td className="border border-black px-4 py-3 align-top">Competitor / API customer / platform partner</td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-black px-4 py-3 align-top font-semibold">Molecular Discovery AI</td>
+                    <td className="border border-black px-4 py-3 align-top">SandboxAQ, Isomorphic Labs, Insilico Medicine</td>
+                    <td className="border border-black px-4 py-3 align-top">Molecule generation, property prediction, drug discovery, materials discovery</td>
+                    <td className="border border-black px-4 py-3 align-top">Strong at discovery, but less focused on synthesis, processing, and plant-scale manufacturability</td>
+                    <td className="border border-black bg-amber-50 px-4 py-3 align-top font-semibold">Couples candidate discovery with synthesis feasibility, process validation, and manufacturing constraints</td>
+                    <td className="border border-black px-4 py-3 align-top">Scale-up backend / manufacturability layer</td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-black px-4 py-3 align-top font-semibold">Autonomous Labs / AI Science Factories</td>
+                    <td className="border border-black px-4 py-3 align-top">Lila Sciences, Radical AI, Periodic Labs, Yoneda Labs</td>
+                    <td className="border border-black px-4 py-3 align-top">Robotic experimentation, closed-loop testing, wet-lab execution</td>
+                    <td className="border border-black px-4 py-3 align-top">Accelerate experimentation, but remain constrained by physical lab cost and throughput</td>
+                    <td className="border border-black bg-amber-50 px-4 py-3 align-top font-semibold">Moves more search into simulation and uses labs for targeted validation</td>
+                    <td className="border border-black px-4 py-3 align-top">Robotic execution partner / customer</td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-black px-4 py-3 align-top font-semibold">Digital Twin / Spatial AI</td>
+                    <td className="border border-black px-4 py-3 align-top">Geminus, World Labs</td>
+                    <td className="border border-black px-4 py-3 align-top">Industrial monitoring, digital twins, spatial world modeling</td>
+                    <td className="border border-black px-4 py-3 align-top">Strong at representation and monitoring, less focused on invention and manufacturability</td>
+                    <td className="border border-black bg-amber-50 px-4 py-3 align-top font-semibold">Adds predictive, generative, and inverse-design capability for industrial systems</td>
+                    <td className="border border-black px-4 py-3 align-top">Physics engine / predictive layer</td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-black px-4 py-3 align-top font-semibold">Legacy Simulation & Scientific Software</td>
+                    <td className="border border-black px-4 py-3 align-top">Ansys, Schrödinger, COMSOL, traditional CAE and chemistry tools</td>
+                    <td className="border border-black px-4 py-3 align-top">Trusted solvers, enterprise workflows, deterministic validation</td>
+                    <td className="border border-black px-4 py-3 align-top">Accurate but fragmented, computationally intensive, and mostly forward-oriented</td>
+                    <td className="border border-black bg-amber-50 px-4 py-3 align-top font-semibold">Combines AI speed with physics-grounded validation and inverse-design workflows</td>
+                    <td className="border border-black px-4 py-3 align-top">Validation layer / integration partner / replacement over time</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. Why Shodh Is Different
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p>Shodh is not trying to be another molecule generator, faster simulator, robotic lab, or digital twin.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">Shodh is designed as the physics-native intelligence layer connecting them.</p>
+              <p>The core differentiation is fivefold:</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Discovery-to-manufacturing continuity</p>
+              <p>Shodh does not stop at candidate generation. It evaluates whether a candidate can be synthesized, processed, scaled, and manufactured under real constraints.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Multiscale physical reasoning</p>
+              <p>Shodh connects molecular behavior, process physics, equipment constraints, and manufacturing economics inside one computational loop.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Simulation-first, lab-validated workflow</p>
+              <p>Shodh shifts more search into simulation and uses physical labs for targeted validation rather than broad trial-and-error.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Solver-grounded validation</p>
+              <p>Shodh does not treat neural prediction as a blind replacement for physics. It uses physics-grounded validation to improve trust in industrial settings.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Deployment data flywheel</p>
+              <p>Customer deployments create validation data, calibration signals, and industrial context that are difficult to reproduce from public scientific datasets alone.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              4. Strategic Takeaway
+            </h3>
+            <div className="max-w-3xl space-y-3 leading-7 text-black">
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">The AI-for-science market is not weak. It is fragmented.</p>
+              <p>Engineering AI companies optimize physical design. Molecular AI companies generate candidates. Robotic labs automate experiments. Digital twins represent industrial assets. Legacy solvers validate known physics.</p>
+              <p className="mt-5 w-fit border border-black bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">Shodh’s position is different.</p>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 text-base font-semibold leading-7 text-black">Shodh connects discovery, simulation, validation, and manufacturability into one system. We discover the path from chemistry to factory.</p>
+            </div>
+          </section>
+          <nav className="mt-10 border-t-2 border-black pt-5 text-sm font-semibold">
+            <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#saf-dossier">
+              Next: Empirical Validation Dossier eFuel
+            </a>
+          </nav>
+        </article>
+
+        <article
+          id="competitive-philosophy-old"
+          className="hidden"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
               Confidential — Data Room
             </p>
-            <h2 className="max-w-5xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
               Shodh AI Competitive Matrix & Core Philosophy
             </h2>
           </header>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               1. Core Thesis: The Physical World Is One System
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -325,7 +717,7 @@ export default function InvestorDataRoomPage() {
               <p>Discovery and scale-up are not two separate problems.</p>
               <p>They are one multiscale physical optimization problem.</p>
               <p>Shodh AI is built on this thesis:</p>
-              <p className="rounded-2xl border border-blue-100 border-l-4 border-l-blue-600 bg-blue-50 px-5 py-4 font-semibold text-blue-950 shadow-sm">
+              <p className="border-l-4 border-black bg-white py-3 pl-4 font-semibold text-black">
                 The winning AI company for the physical world will not only
                 discover candidates. It will design candidates that can be
                 manufactured.
@@ -333,14 +725,14 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               2. The Market Problem: Competitors Are Strong, But Siloed
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
               <p>The AI-for-science market is not weak. It is fragmented.</p>
               <p>Most companies are solving one layer of the physical world:</p>
-              <ul className="grid list-disc gap-2 rounded-xl border border-slate-200 bg-white p-5 pl-8 md:grid-cols-2">
+              <ul className="list-disc space-y-1 border border-black bg-white p-4 pl-8">
                 <li>molecular discovery,</li>
                 <li>engineering simulation,</li>
                 <li>autonomous wet-lab experimentation,</li>
@@ -355,11 +747,11 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               3. Competitive Landscape
             </h3>
-            <div className="grid gap-5 leading-7 text-neutral-800 md:grid-cols-2 [&_div]:rounded-xl [&_div]:border [&_div]:border-slate-200 [&_div]:bg-white [&_div]:p-5 [&_p]:mt-1 [&_p]:text-slate-700">
+            <div className="space-y-5 leading-7 text-black [&_div]:border-t [&_div]:border-black [&_div]:bg-white [&_div]:pt-4 [&_p]:mt-1 [&_p]:text-black">
               <div>
                 <h4 className="mb-2 font-semibold text-slate-950">
                   A. Engineering Physics AI
@@ -489,8 +881,8 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               4. Shodh’s Differentiation
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -503,7 +895,7 @@ export default function InvestorDataRoomPage() {
                 scale-up.
               </p>
               <p>Our differentiation is fourfold:</p>
-              <ol className="grid list-decimal gap-5 pl-6 md:grid-cols-2 [&_li]:rounded-xl [&_li]:border [&_li]:border-slate-200 [&_li]:bg-white [&_li]:p-5 [&_li]:pl-7 [&_p]:mt-1 [&_p]:text-slate-700">
+              <ol className="list-decimal space-y-5 pl-6 [&_li]:border-t [&_li]:border-black [&_li]:bg-white [&_li]:pt-4 [&_p]:mt-1 [&_p]:text-black">
                 <li>
                   <strong>Multiscale Physics</strong>
                   <p>
@@ -578,8 +970,8 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               5. Technical Differentiation: Why This Is Hard
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -601,11 +993,11 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               6. Shodh’s Mathematical Architecture: The Technical Moat
             </h3>
-            <div className="grid gap-5 leading-7 text-neutral-800 md:grid-cols-2 [&_div]:rounded-xl [&_div]:border [&_div]:border-slate-200 [&_div]:bg-white [&_div]:p-5 [&_p]:mt-1 [&_p]:text-slate-700">
+            <div className="space-y-5 leading-7 text-black [&_div]:border-t [&_div]:border-black [&_div]:bg-white [&_div]:pt-4 [&_p]:mt-1 [&_p]:text-black">
               <p>
                 The reason the AI-for-science market is fragmented is that
                 multiscale physics is mathematically hostile to standard AI
@@ -874,8 +1266,8 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               7. The Platform Play: Why Competitors Become Customers
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -961,15 +1353,15 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               8. Competitive Matrix
             </h3>
             <CompetitiveMatrixTable />
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               9. How Shodh Wins
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -981,8 +1373,8 @@ export default function InvestorDataRoomPage() {
             </div>
           </section>
 
-          <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               10. The One-Line Competitive Claim
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -1024,7 +1416,7 @@ export default function InvestorDataRoomPage() {
           </section>
 
           <section>
-            <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
               11. The Investor Takeaway
             </h3>
             <div className="max-w-4xl space-y-2 leading-7 text-neutral-800 [&_p]:max-w-3xl [&_strong]:text-slate-950">
@@ -1046,94 +1438,532 @@ export default function InvestorDataRoomPage() {
           </section>
         </article>
 
-        <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
-          <aside className="lg:sticky lg:top-6">
-            <nav className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                Documents
+        <article
+          id="commercial-traction"
+          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+              03 Commercial Traction and Enterprise Pipeline
+            </p>
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI: Commercial Traction & Strategic Enterprise Pipeline
+            </h2>
+            <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+              Document Classification: Commercial Due Diligence — Series A Data Room
+            </p>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Shodh AI’s go-to-market strategy begins with bounded, high-value enterprise deployments in industrial environments where discovery, scale-up, and manufacturability are tightly coupled.
               </p>
-              <ol className="space-y-3 text-sm text-slate-800">
-                <li>
-                  <a
-                    className="block border-l-4 border-slate-600 bg-slate-50 px-3 py-2 font-medium text-slate-900 hover:bg-slate-100"
-                    href="#competitive-philosophy"
-                  >
-                    00. Competitive Matrix & Core Philosophy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="block border-l-4 border-blue-600 bg-blue-50 px-3 py-2 font-medium text-blue-900 hover:bg-blue-100"
-                    href="#saf-dossier"
-                  >
-                    01. C15 Sustainable Aviation Fuel
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="block border-l-4 border-violet-600 bg-violet-50 px-3 py-2 font-medium text-violet-900 hover:bg-violet-100"
-                    href="#battery-dossier"
-                  >
-                    02. Solid-State Battery Electrolyte
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="block border-l-4 border-emerald-600 bg-emerald-50 px-3 py-2 font-medium text-emerald-900 hover:bg-emerald-100"
-                    href="#nuclear-dossier"
-                  >
-                    03. Nuclear Reactor Infrastructure
-                  </a>
-                </li>
-              </ol>
-              <div className="mt-6 border-t border-slate-200 pt-5">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Source Documents
-                </p>
-                <div className="space-y-2 text-sm">
-                  <a
-                    className="block border border-slate-200 px-3 py-2 font-medium text-blue-700 hover:bg-slate-50"
-                    href={sop002PdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open SOP-002 PDF
-                  </a>
-                  <a
-                    className="block border border-slate-200 px-3 py-2 font-medium text-blue-700 hover:bg-slate-50"
-                    href={sop001PdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open SOP-001 PDF
-                  </a>
-                  <a
-                    className="block border border-slate-200 px-3 py-2 font-medium text-blue-700 hover:bg-slate-50"
-                    href={daeLetterUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open DAE Letter PDF
-                  </a>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                Our initial commercial motion is focused on paid NRE deployments, technical pilots, formal proposals, and strategic scoping projects.
+              </p>
+              <p>
+                These engagements are designed to solve immediate customer pain points while generating the validation data, workflow knowledge, and calibration signals needed to expand into recurring SaaS/API licensing, domain-specific enterprise agents, milestone-based economics, and IP-driven partnerships.
+              </p>
+              <p>
+                The pipeline below reflects a mix of active deployments, submitted proposals, technical scoping conversations, and strategic target discussions. Status labels are included to distinguish signed work from proposals, discussions, and post-Series A opportunities.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. Active Commercial Pipeline
+            </h3>
+            <p className="mb-5 max-w-3xl leading-7 text-black">
+              The following accounts represent active deployments, formal pilot proposals, submitted mandates, or active scoping discussions.
+            </p>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[1100px] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Account / Partner</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Sector</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Target Use Case</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Current Status</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Commercial Path</th>
+                    <th className="px-3 py-3 font-semibold">Diligence Evidence Available</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Aarti Industries", "Specialty Chemicals", "Exothermic reaction scale-up, continuous-flow chemistry, yield optimization, and COGS reduction", "Active / Paid Pilot, if confirmed", "Paid NRE → Enterprise Process Agent → SaaS/API expansion", "Executed NDA, NRE documentation, normalized pilot data, Exhibit A-03"],
+                    ["Jubilant Pharmova", "Pharmaceuticals / Specialty Chemicals", "Continuous-flow multiphase catalytic manufacturing, process optimization, and thermal scaling", "Deployed / Proposal Submitted, confirm exact current status", "Paid pilot / NRE → Scale-up economics → Potential process or hardware invention", "Executed NDA, technical proposal, validation portfolio"],
+                    ["A123 Systems", "Battery Manufacturing", "Slurry rheology, coating instability, scrap reduction, electrolyte/process optimization, and scale-up parameters", "Active Pilot Proposal / Technical Scoping", "90-day paid pilot → Factory-line rollout → SaaS deployment", "Executed NDA, meeting notes, pilot proposal, Exhibit A-02"],
+                    ["Department of Atomic Energy / Indian Govt. Thorium Program", "Sovereign Energy / Nuclear", "Process modeling, safety-aware simulation, and next-generation reactor thermodynamics", "Active Mandate / Early Discussion / Proposal Phase, confirm exact status", "Strategic sovereign deployment → Secure edge / air-gapped deployment", "PSA letter, stakeholder notes, proposal materials, Exhibit A-04"],
+                    ["IOCL / Bharat Petroleum", "Energy / Fuels", "Synthetic aviation fuel / e-fuel process scale-up, thermodynamic validation, and continuous-flow pilot design", "In Discussion", "Pilot validation → Scale-up economics → Strategic deployment", "Introductory communications, technical briefing notes, Exhibit A-01"],
+                    ["National Resilience", "Biomanufacturing", "Shear-sensitive process optimization, biologics manufacturability, and scale-up risk reduction", "In Discussion", "Technical evaluation → Paid NRE → Milestone / gain-share structure", "Executive email thread, discovery meeting notes"],
+                    ["GE Aerospace", "Aerospace / Advanced Manufacturing", "Advanced materials, supply-chain simulation, and process modeling", "In Discussion", "Paid NRE → Enterprise deployment", "Introductory communications, technical scoping notes"],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      {row.map((cell, index) => (
+                        <td key={cell} className={`${index < row.length - 1 ? "border-r border-black" : ""} px-3 py-3`}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Traction Highlights & Supporting Evidence
+            </h3>
+            <p className="mb-6 max-w-3xl leading-7 text-black">
+              Shodh’s commercial pipeline is supported by technical validation work across specialty chemicals, batteries, fuels, pharmaceuticals, and strategic infrastructure. The following highlights summarize the evidence available in the Exhibit A folder.
+            </p>
+            <div className="space-y-6">
+              <section className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">A. Specialty Chemicals / Aarti Industries</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh’s specialty chemicals work focuses on process optimization, exothermic reaction scale-up, yield improvement, and COGS reduction.</p>
+                  <p>The commercial relevance is direct: improvements in yield, stability, process operating windows, and raw-material efficiency can translate into measurable enterprise value.</p>
+                  <p>Where supported by Exhibit A-03, Shodh may reference normalized pilot outcomes including modeled or measured COGS reduction, process improvement, and yield optimization.</p>
+                  <p><strong>Evidence:</strong> Exhibit A-03, normalized pilot data, NRE documentation, and supporting validation materials.</p>
                 </div>
+              </section>
+              <section className="border-l-4 border-black bg-amber-50 px-4 py-3">
+                <h4 className="mb-2 font-semibold">B. Battery Manufacturing / A123 Systems</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh has prepared a bounded pilot proposal for A123 Systems focused on battery manufacturing challenges including slurry rheology, mixing behavior, coating instability, scrap reduction, electrolyte performance, and process scale-up.</p>
+                  <p>In supporting validation work, Shodh predicted ionic conductivity of <strong>1.25 × 10⁻³ S/cm</strong> for a Sulfonate Ester solid-state electrolyte versus wet-lab validation of <strong>1.22 × 10⁻³ S/cm</strong>, an absolute difference of <strong>0.03 × 10⁻³ S/cm</strong>, or approximately <strong>2.4%</strong>.</p>
+                  <p>The proposed pilot models a potential <strong>$4.97M/year annualized value opportunity</strong> from scrap reduction on a single battery line, subject to pilot validation.</p>
+                  <p><strong>Evidence:</strong> Exhibit A-02, A123 validation portfolio, meeting notes, and pilot proposal materials.</p>
+                </div>
+              </section>
+              <section className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">C. Pharmaceuticals / Jubilant Pharmova</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh’s pharmaceutical and specialty chemical work focuses on continuous-flow chemistry, multiphase catalytic manufacturing, thermal scaling, and process optimization.</p>
+                  <p>The commercial relevance is the connection between molecular/process design and manufacturable operating conditions. In these workflows, Shodh is positioned to help evaluate yield, thermal behavior, reaction robustness, process feasibility, and scale-up economics earlier in the development cycle.</p>
+                  <p><strong>Evidence:</strong> Executed NDA, technical proposal, validation portfolio, and related deployment materials.</p>
+                </div>
+              </section>
+              <section className="border-l-4 border-black bg-amber-50 px-4 py-3">
+                <h4 className="mb-2 font-semibold">D. Energy / IOCL and Bharat Petroleum</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh is in discussions around synthetic aviation fuel and e-fuel scale-up opportunities. The technical wedge is the ability to move from candidate discovery and thermodynamic validation toward process design and continuous-flow scale-up.</p>
+                  <p>In supporting validation work, Shodh generated and empirically validated a branched C15 alkene sustainable aviation fuel candidate with a measured freezing point of <strong>-67.9°C</strong>. The validation package also includes robotic synthesis workflow materials, including Opentrons-compatible protocol materials where applicable.</p>
+                  <p>This evidence supports ongoing discussions with major Indian energy companies regarding SAF / e-fuel scale-up.</p>
+                  <p><strong>Evidence:</strong> Exhibit A-01, SAF empirical dossier, technical briefing notes, and introductory communications.</p>
+                </div>
+              </section>
+              <section className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">E. Sovereign Energy / Nuclear</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh is engaged in discussions or proposal activity related to next-generation nuclear and thorium-cycle infrastructure.</p>
+                  <p>The technical relevance is the use of physics-native AI for safety-aware modeling, process simulation, and secure deployment in strategic infrastructure contexts. Shodh’s approach incorporates safety-constrained modeling and deterministic review workflows designed for high-consequence physical systems.</p>
+                  <p>Where supported by Exhibit A-04, Shodh may reference correspondence or letters from relevant government stakeholders regarding evaluation or investigation of Shodh’s model for strategic nuclear applications.</p>
+                  <p><strong>Evidence:</strong> Exhibit A-04, PSA letter, stakeholder notes, and proposal materials.</p>
+                </div>
+              </section>
+              <section className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">F. Biomanufacturing / National Resilience</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh is in discussion with National Resilience regarding process optimization and manufacturability challenges in biomanufacturing.</p>
+                  <p>The technical wedge is the ability to model shear-sensitive processes, fluid behavior, and scale-up risk in systems where small changes in operating conditions can materially affect quality, yield, and viability.</p>
+                  <p>The potential commercial path is a scoped technical evaluation followed by a paid NRE or milestone-based deployment.</p>
+                  <p><strong>Evidence:</strong> Executive email thread, discovery meeting notes, and technical scoping materials.</p>
+                </div>
+              </section>
+              <section className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">G. Aerospace / GE Aerospace</h4>
+                <div className="space-y-2 leading-7 text-black">
+                  <p>Shodh is in discussion with GE Aerospace regarding advanced materials, process simulation, and supply-chain-related modeling opportunities.</p>
+                  <p>The technical wedge is the application of multiscale physical modeling to advanced manufacturing environments where materials behavior, process conditions, and supply-chain resilience are tightly coupled.</p>
+                  <p>The potential commercial path is a scoped NRE followed by broader enterprise deployment if the initial technical wedge is validated.</p>
+                  <p><strong>Evidence:</strong> Introductory communications and technical scoping notes.</p>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. Strategic Implication
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>Shodh’s current pipeline has been seeded primarily through founder-led sales, technical demonstrations, and strategic relationships.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">The commercial implication is that Shodh is seeing demand across multiple high-CapEx sectors where failed scale-up, poor yield, process instability, and manufacturability risk create measurable economic pain.</p>
+              <p>Series A capital is intended to convert this early commercial pull into a repeatable enterprise GTM engine through US commercial leadership, deal architects, forward engineers, and enterprise agent productization.</p>
+              <p>The detailed hiring plan, capital allocation, and US expansion roadmap are covered separately in:</p>
+              <p><strong>05_Series_A_Use_of_Funds_and_US_Expansion.pdf</strong></p>
+            </div>
+          </section>
+        </article>
+
+        <article
+          id="business-model"
+          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+              04 Business Model and Enterprise Agent Strategy
+            </p>
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI: Business Model & Enterprise Agent Strategy
+            </h2>
+            <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+              Document Classification: Commercial Strategy — Series A Data Room
+            </p>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Shodh AI monetizes across the industrial value chain by combining near-term enterprise deployments with scalable software, domain-specific agents, milestone economics, and proprietary IP generation.
+              </p>
+              <p>Our commercial strategy is designed around a clear progression:</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">
+                Paid NREs teach us workflows → Workflows become Enterprise Agents → Agents become SaaS/API modules → Validated programs unlock milestone, gain-share, and IP economics
+              </p>
+              <p>
+                This structure allows Shodh to generate near-term revenue while systematically converting custom technical work into repeatable, higher-margin enterprise software and long-term upside.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. Paid NRE Deployments
+            </h3>
+            <div className="max-w-3xl space-y-5 leading-7 text-black">
+              <div>
+                <h4 className="mb-2 font-semibold">Immediate Revenue & Model Calibration</h4>
+                <p>
+                  Shodh’s initial commercial engagement typically begins with paid Non-Recurring Engineering (NRE) deployments. These are bounded enterprise projects focused on specific industrial bottlenecks such as yield improvement, process scale-up, formulation optimization, thermal stability, scrap reduction, or manufacturability validation.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold">Customer Value</h4>
+                <p>
+                  Customers use Shodh to reduce the cost, time, and risk of physical iteration. Instead of relying primarily on repeated pilot-plant experiments, Shodh helps computationally de-risk candidate chemistries, process conditions, and manufacturing operating windows before expensive physical validation.
+                </p>
+                <p className="mt-3">Examples include:</p>
+                <ul className="mt-3 list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                  <li>thermal scaling for continuous-flow chemistry,</li>
+                  <li>slurry rheology and scrap reduction in battery manufacturing,</li>
+                  <li>process optimization for specialty chemicals,</li>
+                  <li>scale-up feasibility for synthetic fuels,</li>
+                  <li>shear-sensitive process modeling in biomanufacturing.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold">Shodh Value</h4>
+                <p>For Shodh, NRE deployments serve three purposes:</p>
+                <ol className="mt-3 space-y-3 border-l-4 border-black bg-white py-3 pl-6">
+                  <li><strong>1. Near-term revenue</strong><br />NREs create immediate commercial value without requiring the company to wait for full SaaS maturity.</li>
+                  <li><strong>2. Workflow discovery</strong><br />Each deployment reveals repeatable enterprise workflows that can later be productized.</li>
+                  <li><strong>3. Model calibration</strong><br />Where contractually permitted, deployments provide access to real industrial data, process outcomes, and validation signals that help calibrate Shodh’s physics models and improve sim-to-real performance.</li>
+                </ol>
+                <p className="mt-4 border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                  NRE is not the final business model. It is the entry point into customers, data, workflows, and repeatable software products.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Domain-Specific Enterprise AI Agents
+            </h3>
+            <div className="max-w-3xl space-y-5 leading-7 text-black">
+              <div>
+                <h4 className="mb-2 font-semibold">Productizing Industrial Workflows</h4>
+                <p>
+                  To scale beyond bespoke deployments, Shodh translates repeated NRE workflows into domain-specific Enterprise AI Agents.
+                </p>
+                <p>
+                  These agents are designed to embed inside enterprise R&D, process engineering, and manufacturing environments. Each agent focuses on a specific high-value workflow that previously required a combination of scientists, simulation engineers, process experts, and manual experimentation.
+                </p>
+              </div>
+              <div className="grid gap-5">
+                {[
+                  ["A. Synthesis Planning Agent", "The Synthesis Planning Agent connects target molecules, materials, or formulations to candidate precursor pathways and synthesis plans.", ["precursor search,", "synthesis feasibility evaluation,", "thermodynamic screening,", "robotic execution planning where applicable,", "integration with automated wet-lab systems such as Opentrons.", "Proof of Concept: Autonomously queried commodity supply chains to generate the exact 3-step Opentrons robotic API code for a novel C15 Sustainable Aviation Fuel (SAF)."], "This agent turns discovery outputs into experimentally actionable synthesis pathways."],
+                  ["B. Scale-Up Risk Agent", "The Scale-Up Risk Agent evaluates whether a promising candidate can survive real manufacturing conditions.", ["thermal runaway,", "poor heat transfer,", "shear-stress degradation,", "mixing failure,", "viscosity drift,", "coating instability,", "yield collapse,", "unsafe or uneconomic operating windows.", "Proof of Concept: Utilizes our proprietary DLPack Zero-Copy Memory Bridge to pause neural network hallucinations and run ground-truth JAX-MD physics in 0.67 milliseconds."], "This agent helps customers assess manufacturability before committing to expensive pilot-scale work."],
+                  ["C. Process Optimization Agent", "The Process Optimization Agent ingests process data, sensor streams, and manufacturing context to diagnose yield, quality, or stability problems.", ["why yield is falling,", "why viscosity or stability is drifting,", "where thermal or mixing conditions are failing,", "which process parameters should be adjusted,", "whether the root cause is macro-scale, meso-scale, or molecular."], "This agent converts Shodh’s multiscale physics models into an operational tool for factories and process engineers."],
+                  ["D. Manufacturability Agent", "The Manufacturability Agent evaluates whether a candidate molecule, formulation, material, or process can become a real product.", ["Can this be synthesized?", "Can it be scaled?", "Can it remain stable?", "Can it meet cost and quality constraints?", "Can it work on existing production infrastructure?", "What process conditions are required?"], "This agent directly reflects Shodh’s core thesis: a promising molecule is not a product until it can be made repeatedly, safely, economically, and at scale."],
+                ].map(([title, intro, points, closing]) => (
+                  <section key={title as string} className="border-l-4 border-black bg-white py-2 pl-4">
+                    <h4 className="mb-2 font-semibold">{title}</h4>
+                    <p>{intro}</p>
+                    <p className="mt-3">It is designed to support:</p>
+                    <ul className="mt-3 list-disc space-y-1 pl-6">
+                      {(points as string[]).map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 font-semibold">{closing}</p>
+                  </section>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. Enterprise SaaS & API Licensing
+            </h3>
+            <div className="max-w-3xl space-y-5 leading-7 text-black">
+              <div>
+                <h4 className="mb-2 font-semibold">Recurring Software Revenue</h4>
+                <p>As Shodh’s agents and physics models mature, they are packaged into recurring software licenses and API-based delivery.</p>
+              </div>
+              <div className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">Cloud API</h4>
+                <p>Shodh’s cloud API provides enterprise R&D and process engineering teams with access to Shodh’s multiscale physics engine for workflows such as:</p>
+                <ul className="mt-3 list-disc space-y-1 pl-6">
+                  <li>virtual screening,</li>
+                  <li>scale-up validation,</li>
+                  <li>process optimization,</li>
+                  <li>formulation search,</li>
+                  <li>manufacturability analysis,</li>
+                  <li>physics-grounded inverse design.</li>
+                </ul>
+                <p className="mt-3 font-semibold">This creates a recurring revenue path beyond one-off deployments.</p>
+              </div>
+              <div className="border-l-4 border-black bg-white py-2 pl-4">
+                <h4 className="mb-2 font-semibold">Enterprise Agent Licenses</h4>
+                <p>Domain-specific agents can be licensed as enterprise modules for specific customer workflows. Examples include:</p>
+                <ul className="mt-3 list-disc space-y-1 pl-6">
+                  <li>Synthesis Planning Agent,</li>
+                  <li>Scale-Up Risk Agent,</li>
+                  <li>Process Optimization Agent,</li>
+                  <li>Manufacturability Agent,</li>
+                  <li>Formulation Agent,</li>
+                  <li>Battery Process Agent,</li>
+                  <li>Continuous-Flow Chemistry Agent.</li>
+                </ul>
+                <p className="mt-3">These agents allow Shodh to productize lessons from NRE deployments and sell repeatable workflow software across multiple customers.</p>
+              </div>
+              <div className="border-l-4 border-black bg-amber-50 px-4 py-3">
+                <h4 className="mb-2 font-semibold">Secure Edge / Air-Gapped Deployment</h4>
+                <p>For customers in defense, aerospace, nuclear, energy, and proprietary pharmaceutical manufacturing, Shodh can deploy models in secure environments.</p>
+                <p className="mt-3">This may include:</p>
+                <ul className="mt-3 list-disc space-y-1 pl-6">
+                  <li>on-premise deployment,</li>
+                  <li>air-gapped infrastructure,</li>
+                  <li>quantized edge models,</li>
+                  <li>secure inference environments,</li>
+                  <li>customer-controlled data boundaries.</li>
+                </ul>
+                <p className="mt-3 font-semibold">This deployment mode supports customers that cannot send sensitive process, national-security, or manufacturing data to external cloud systems.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              4. Milestone & Gain-Share Programs
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <h4 className="font-semibold">Participating in Customer Upside</h4>
+              <p>In selected programs, Shodh can participate in the economic upside of the products or processes it helps create.</p>
+              <p>This model is especially relevant when Shodh contributes materially to:</p>
+              <ul className="list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                <li>discovery of a novel molecule or material,</li>
+                <li>process de-risking,</li>
+                <li>pilot synthesis,</li>
+                <li>yield improvement,</li>
+                <li>manufacturability validation,</li>
+                <li>commercial scale-up.</li>
+              </ul>
+              <p>Potential structures include:</p>
+              <ul className="list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                <li>upfront payments,</li>
+                <li>technical milestone payments,</li>
+                <li>pilot-success payments,</li>
+                <li>commercial-scale success fees,</li>
+                <li>royalty participation,</li>
+                <li>gain-share economics linked to cost savings or revenue impact.</li>
+              </ul>
+              <p>This aligns Shodh’s revenue with the customer’s commercial success.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                The goal is not only to sell software access. The goal is to capture a portion of the economic value created when Shodh helps customers invent, validate, or manufacture valuable physical products.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              5. Proprietary IP Generation
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <h4 className="font-semibold">Building a Licensable IP Portfolio</h4>
+              <p>Over time, Shodh can use its own inverse-design workflows to generate proprietary materials, formulations, chemistries, and processes.</p>
+              <p>This creates a separate upside path beyond customer deployments and SaaS licensing.</p>
+              <p>Potential proprietary IP areas include:</p>
+              <ul className="list-disc space-y-1 border-l-4 border-black bg-white py-3 pl-8">
+                <li>sustainable aviation fuels,</li>
+                <li>synthetic e-fuels,</li>
+                <li>solid-state battery electrolytes,</li>
+                <li>advanced catalysts,</li>
+                <li>green solvents,</li>
+                <li>specialty chemicals,</li>
+                <li>manufacturing process improvements,</li>
+                <li>high-value materials or formulations.</li>
+              </ul>
+              <p>Shodh AI is actively generating sovereign IP. During idle compute cycles, our 'God-Loop' autonomously discovered, verified, and reverse-engineered the manufacturing pathways for a highly branched C15 Sustainable Aviation Fuel (SAF) and a Sulfonate Ester solid-state battery electrolyte. We retain the composition-of-matter IP to license to Fortune 500 manufacturers.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">The strategic purpose is to convert Shodh’s model capabilities into a portfolio of licensable proprietary IP.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              6. How the Business Model Compounds
+            </h3>
+            <p className="mb-5 max-w-3xl leading-7 text-black">
+              Shodh’s commercial model is designed to compound across five layers:
+            </p>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[760px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Layer</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Revenue Type</th>
+                    <th className="px-3 py-3 font-semibold">Strategic Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Paid NRE Deployments", "Near-term project revenue", "Customer access, validation data, workflow discovery"],
+                    ["Enterprise Agents", "Productized workflow software", "Repeatability and reduced services dependency"],
+                    ["SaaS/API Licensing", "Recurring software revenue", "Scalable enterprise distribution"],
+                    ["Milestone / Gain-Share", "Upside-linked economics", "Participation in customer success"],
+                    ["Proprietary IP", "Licensing / royalty potential", "Long-term asset creation"],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      <td className="border-r border-black px-3 py-3 font-semibold">{row[0]}</td>
+                      <td className="border-r border-black px-3 py-3">{row[1]}</td>
+                      <td className="px-3 py-3">{row[2]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-5 max-w-3xl space-y-2 border-l-4 border-black bg-amber-50 px-4 py-3 leading-7 text-black">
+              <p className="font-semibold">The key insight is that each layer strengthens the next.</p>
+              <p>NREs reveal workflows.</p>
+              <p>Workflows become agents.</p>
+              <p>Agents become SaaS/API modules.</p>
+              <p>Successful programs create milestone and gain-share opportunities.</p>
+              <p>Internal inverse-design loops create proprietary IP.</p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              7. Strategic Implication
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>Shodh AI is not designed to remain a services-heavy NRE company.</p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold">NREs are the wedge.</p>
+              <p>They create revenue, customer access, deployment data, and workflow knowledge. Shodh then converts repeated workflows into Enterprise Agents and SaaS/API products, while selectively participating in the upside of high-value discoveries, process improvements, and proprietary IP.</p>
+              <p>This gives Shodh a business model with three forms of value creation:</p>
+              <ol className="space-y-3 border-l-4 border-black bg-white py-3 pl-6">
+                <li><strong>1. Immediate enterprise revenue</strong> from paid deployments.</li>
+                <li><strong>2. Scalable recurring revenue</strong> from SaaS, APIs, and Enterprise Agents.</li>
+                <li><strong>3. Asymmetric upside</strong> from gain-share structures and proprietary IP.</li>
+              </ol>
+              <p>Shodh does not only sell tools.</p>
+              <p className="border-l-4 border-black bg-white py-3 pl-4 text-base font-semibold">Shodh captures value from the physical innovation it helps make possible.</p>
+            </div>
+          </section>
+        </article>
+
+        <div className="mt-20 border-t-4 border-black pt-10">
+          <aside className="mb-10 xl:hidden">
+            <nav className="border-2 border-black bg-white p-5">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-black">
+                Data Room Index
+              </p>
+              <ol className="space-y-2 text-sm text-black">
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#executive-thesis">
+                    01 Shodh AI Executive Thesis
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#competitive-philosophy">
+                    02 Competitive Landscape and Positioning
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#commercial-traction">
+                    03 Commercial Traction and Enterprise Pipeline
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#business-model">
+                    04 Business Model and Enterprise Agent Strategy
+                  </a>
+                </li>
+                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
+                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">06 Non-Dilutive Capital Compute and Strategic Programs</li>
+                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
+              </ol>
+              <div className="mt-6 space-y-5 text-sm text-black">
+                <section>
+                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
+                    Exhibit A Empirical Validation and Case Studies
+                  </p>
+                  <ol className="space-y-2">
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#saf-dossier">
+                        01 Empirical Validation Dossier eFuel SAF
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#battery-dossier">
+                        02 Empirical Validation Dossier Battery
+                      </a>
+                    </li>
+                    <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">03 Aarti Industries NRE Case Study</li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
+                        04 Govt of India DAE Nuclear Letter
+                      </a>
+                    </li>
+                  </ol>
+                </section>
+                <section>
+                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
+                    Exhibit B Technical IP and Internal Preprints
+                  </p>
+                  <ol className="space-y-2">
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#proprietary-research-math">
+                        02 Proprietary Research and Math
+                      </a>
+                    </li>
+                  </ol>
+                </section>
               </div>
             </nav>
           </aside>
 
-          <div className="min-w-0">
+          <div className="min-w-0 space-y-20">
             <article
               id="saf-dossier"
-              className="mb-12 scroll-mt-8 rounded-3xl border border-slate-200 bg-white px-5 py-8 shadow-sm md:px-8 md:py-10"
+              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
-                eyebrow="Technical Dossier 01"
+                eyebrow="Exhibit A / 01 Empirical Validation Dossier eFuel SAF"
                 title="Autonomous Discovery & Empirical Validation of C15 Sustainable Aviation Fuel (SAF)"
                 summary="UNIPHY generated, routed, synthesized, and validated a heavily branched C15 alkene candidate for cold-flow performance and Jet-A1-grade energy density."
                 status="Validation Complete"
               />
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   1. In Silico Discovery & Molecular Rationale
                 </h3>
                 <p className="mb-2">
@@ -1170,8 +2000,8 @@ export default function InvestorDataRoomPage() {
                 </p>
               </section>
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   2. Autonomous Retrosynthesis (SOP-002 Generation)
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1210,8 +2040,8 @@ export default function InvestorDataRoomPage() {
                 </ol>
               </section>
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   3. Empirical Wet-Lab Validation
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1229,7 +2059,7 @@ export default function InvestorDataRoomPage() {
               </section>
 
               <section>
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   4. Commercial Scale-Up & Paid Pilot Program
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1250,29 +2080,30 @@ export default function InvestorDataRoomPage() {
               </section>
             </article>
 
-            <div className="my-10 border border-slate-300 bg-slate-100 px-6 py-6 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                End of Technical Dossier 01
+            <div className="my-10 border-y border-black bg-white py-5 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black">
+                End of Exhibit A / 01 Empirical Validation Dossier eFuel SAF
               </p>
-              <p className="mt-2 text-sm font-medium text-slate-700">
-                Next document begins below: High-Stability Solid-State Battery
-                Electrolyte.
+              <p className="mt-2 text-sm font-medium text-black">
+                <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#battery-dossier">
+                  Next: Exhibit A / 02 Empirical Validation Dossier Battery
+                </a>
               </p>
             </div>
 
             <article
               id="battery-dossier"
-              className="scroll-mt-8 border border-slate-200 bg-white px-5 py-8 shadow-sm md:px-8 md:py-10"
+              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
-                eyebrow="Technical Dossier 02"
+                eyebrow="Exhibit A / 02 Empirical Validation Dossier Battery"
                 title="Autonomous Discovery & Empirical Validation of High-Stability Solid-State Battery Electrolyte"
                 summary="UNIPHY engineered, synthesized, and validated a sulfonate ester electrolyte candidate designed for high-voltage stability, SEI formation, and dendrite suppression."
                 status="Validation Complete"
               />
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   1. In Silico Discovery & Molecular Rationale
                 </h3>
                 <p className="mb-2">
@@ -1308,8 +2139,8 @@ export default function InvestorDataRoomPage() {
                 </p>
               </section>
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   2. Autonomous Retrosynthesis (SOP-001 Generation)
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1350,8 +2181,8 @@ export default function InvestorDataRoomPage() {
                 </ol>
               </section>
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   3. Empirical Wet-Lab Validation
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1369,7 +2200,7 @@ export default function InvestorDataRoomPage() {
               </section>
 
               <section>
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   4. Commercial Scale-Up & Paid Pilot Program
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1389,32 +2220,33 @@ export default function InvestorDataRoomPage() {
               </section>
             </article>
 
-            <div className="my-10 border border-slate-300 bg-slate-100 px-6 py-6 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                End of Technical Dossier 02
+            <div className="my-10 border-y border-black bg-white py-5 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black">
+                End of Exhibit A / 02 Empirical Validation Dossier Battery
               </p>
-              <p className="mt-2 text-sm font-medium text-slate-700">
-                Next document begins below: Stage-3 Nuclear Reactor
-                Infrastructure.
+              <p className="mt-2 text-sm font-medium text-black">
+                <a className="inline-flex border border-black bg-white px-4 py-2 text-blue-700 hover:bg-white" href="#nuclear-dossier">
+                  Next: Exhibit A / 04 Govt of India DAE Nuclear Letter
+                </a>
               </p>
             </div>
 
             <article
               id="nuclear-dossier"
-              className="scroll-mt-8 border border-slate-200 bg-white px-5 py-8 shadow-sm md:px-8 md:py-10"
+              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
-                eyebrow="Technical Dossier 03"
+                eyebrow="Exhibit A / 04 Govt of India DAE Nuclear Letter"
                 title="Inverse Design & Autonomous Optimization of Stage-3 Nuclear Reactor Infrastructure"
                 summary="UNIPHY's macro-fluid and thermal experts are positioned for inverse design of liquid sodium and molten salt reactor infrastructure for India's 3-stage nuclear program."
                 status="Sovereign Validation"
               />
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   1. The Sovereign Mandate
                 </h3>
-                <div className="mb-5 grid gap-3 border border-slate-300 bg-slate-50 p-4 text-sm md:grid-cols-2">
+                <div className="mb-5 space-y-2 border border-black bg-white p-4 text-sm">
                   <p>
                     <strong>Target Deployment:</strong> Stage-2 / Stage-3 Liquid
                     Sodium & Molten Salt Reactors
@@ -1455,8 +2287,8 @@ export default function InvestorDataRoomPage() {
                 </p>
               </section>
 
-              <section className="mx-5 my-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 md:mx-8 md:my-8 md:p-7">
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   2. Mathematical Guarantees: The CBF-QP Shield
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1468,7 +2300,7 @@ export default function InvestorDataRoomPage() {
                   </strong>
                   .
                 </p>
-                <div className="border-l-4 border-emerald-600 bg-emerald-50 px-5 py-4">
+                <div className="border-l-4 border-black bg-white py-3 pl-4">
                   <p className="leading-7 text-emerald-950">
                     When <strong>UNIPHY</strong> generates a{" "}
                     <strong>3D reactor component</strong>, the latent
@@ -1489,7 +2321,7 @@ export default function InvestorDataRoomPage() {
               </section>
 
               <section>
-                <h3 className="mb-5 border-b border-slate-200 pb-3 text-xl font-semibold tracking-tight text-slate-950">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
                   3. The Pilot Deployment
                 </h3>
                 <p className="mb-4 leading-7 text-neutral-800">
@@ -1507,20 +2339,115 @@ export default function InvestorDataRoomPage() {
                   <strong>thorium reactor deployment</strong> and securing{" "}
                   <strong>long-term energy independence</strong> for the nation.
                 </p>
+                <div className="mt-6 border-2 border-black bg-white">
+                  <div className="border-b-2 border-black bg-white px-4 py-3 text-xs font-semibold uppercase tracking-wide text-black">
+                    Govt of India DAE Nuclear Letter
+                  </div>
+                  <iframe
+                    src={`${daeLetterUrl}#view=FitH`}
+                    title="Govt of India DAE Nuclear Letter"
+                    className="h-[780px] w-full bg-white"
+                  />
+                </div>
                 <a
-                  className="inline-flex border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-800 hover:bg-blue-100"
+                  className="mt-4 inline-flex border border-black bg-white px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-white"
                   href={daeLetterUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Open PSA-endorsed DAE letter PDF
+                  Open full DAE Nuclear Letter
                 </a>
+              </section>
+            </article>
+
+            <article
+              id="proprietary-research-math"
+              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+            >
+              <header className="border-b-2 border-black bg-white pb-8 text-black">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+                  Exhibit B Technical IP and Internal Preprints / 02 Proprietary Research and Math
+                </p>
+                <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+                  Shodh AI: Internal Pre-Prints & Algorithmic Intellectual Property
+                </h2>
+                <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+                  Document Classification: Algorithmic IP — Series A Data Room
+                </p>
+              </header>
+
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+                  Context & R&D Velocity
+                </h3>
+                <div className="max-w-3xl space-y-3 leading-7 text-black">
+                  <p>
+                    At Shodh AI, our primary mandate is commercial execution and infrastructure scaling. Our engineering sprints move significantly faster than traditional academic publishing cycles.
+                  </p>
+                  <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">
+                    During current R&D, our engineering teams encountered fundamental mathematical and hardware bottlenecks that neither open-source literature nor legacy solvers could address.
+                  </p>
+                  <p>
+                    To solve these, Shodh AI engineered proprietary algorithmic breakthroughs in real-time.
+                  </p>
+                  <p>
+                    The following documents are internal pre-print abstracts and technical whitepapers detailing the core mathematical frameworks powering our architecture. While these will eventually be submitted to arXiv and tier-1 journals (NeurIPS, ICML, Nature) to establish Shodh AI’s scientific dominance, they are currently retained as internal Trade Secrets and Algorithmic IP.
+                  </p>
+                </div>
+              </section>
+
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+                  Institutional Validation
+                </h3>
+                <div className="max-w-3xl space-y-3 leading-7 text-black">
+                  <p>
+                    These breakthroughs were not developed in a vacuum. Because our architecture pushes the absolute physical limits of modern silicon, these papers are co-authored alongside the elite hardware and research institutions that support our infrastructure, including:
+                  </p>
+                  <div className="space-y-3">
+                    <p className="border-l-4 border-black bg-amber-50 px-4 py-3">
+                      <strong>NVIDIA</strong> — Validating our FP8/BF16 Hybrid Precision, FP64 cuSOLVER optimizations, and O(N) Warp Spatial Hashing.
+                    </p>
+                    <p className="border-l-4 border-black bg-white py-3 pl-4">
+                      <strong>Google Cloud</strong> — Validating our zero-drop Sinkhorn Optimal Transport routing on Trillium v6e TPUs.
+                    </p>
+                    <p className="border-l-4 border-black bg-white py-3 pl-4">
+                      <strong>Tata Institute of Fundamental Research (TIFR)</strong> — Validating our zero-dissipation Symplectic Neural ODEs.
+                    </p>
+                    <p className="border-l-4 border-black bg-white py-3 pl-4">
+                      <strong>Arizona State University</strong> — Validating our Hodge-Projected topology extraction and Shape-Gain LLM Bridge.
+                    </p>
+                  </div>
+                  <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-base font-semibold leading-7 text-black">
+                    These abstracts serve as verifiable proof that Shodh AI is not merely utilizing existing physics libraries, but actively inventing the mathematics required to virtualize physical reality.
+                  </p>
+                </div>
+              </section>
+
+              <section className="my-8 border-t border-black bg-white pt-5">
+                <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+                  Internal Pre-Print Screenshot Archive
+                </h3>
+                <div className="space-y-8">
+                  {prePrintScreenshots.map((src, index) => (
+                    <figure key={src} className="border-2 border-black bg-white">
+                      <figcaption className="border-b-2 border-black bg-white px-4 py-3 text-xs font-semibold uppercase tracking-wide text-black">
+                        Pre-Print Screenshot {String(index + 1).padStart(2, "0")}
+                      </figcaption>
+                      <img
+                        src={src}
+                        alt={`Shodh AI internal pre-print screenshot ${index + 1}`}
+                        className="block h-auto w-full bg-white"
+                      />
+                    </figure>
+                  ))}
+                </div>
               </section>
             </article>
           </div>
         </div>
 
-        <footer className="mt-10 border border-slate-200 bg-white px-5 py-4 text-sm text-slate-500 shadow-sm">
+        <footer className="mt-10 border-t-2 border-black bg-white pt-5 text-sm text-black">
           <Link
             href="/"
             className="font-medium text-blue-700 underline underline-offset-4"
@@ -1528,6 +2455,7 @@ export default function InvestorDataRoomPage() {
             Back to Shodh AI
           </Link>
         </footer>
+        </div>
       </div>
     </main>
   );
