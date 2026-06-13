@@ -445,9 +445,90 @@ export default function InvestorDataRoomPage() {
           </div>
         </header>
 
+        <aside className="sticky top-0 z-40 mb-8 border-2 border-black bg-white xl:hidden">
+          <details open>
+            <summary className="flex cursor-pointer list-none items-center justify-between border-b-2 border-black bg-white px-4 py-3 text-sm font-semibold uppercase tracking-wide text-black">
+              Data Room Index
+              <span className="ml-4 text-xs">Open</span>
+            </summary>
+            <nav className="max-h-[70vh] overflow-y-auto bg-white p-4">
+              <ol className="grid gap-2 text-sm text-black sm:grid-cols-2">
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#executive-thesis">
+                    01 Shodh AI Executive Thesis
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#competitive-philosophy">
+                    02 Competitive Landscape and Positioning
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#commercial-traction">
+                    03 Commercial Traction and Enterprise Pipeline
+                  </a>
+                </li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#business-model">
+                    04 Business Model and Enterprise Agent Strategy
+                  </a>
+                </li>
+                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#non-dilutive-capital">
+                    06 Non-Dilutive Capital Compute and Strategic Programs
+                  </a>
+                </li>
+                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
+              </ol>
+              <div className="mt-5 grid gap-5 text-sm text-black md:grid-cols-2">
+                <section>
+                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
+                    Exhibit A Empirical Validation and Case Studies
+                  </p>
+                  <ol className="space-y-2">
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#saf-dossier">
+                        01 Empirical Validation Dossier eFuel SAF
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#battery-dossier">
+                        02 Empirical Validation Dossier Battery
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#industrial-validation-portfolio">
+                        03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
+                      </a>
+                    </li>
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
+                        04 Govt of India DAE Nuclear Letter
+                      </a>
+                    </li>
+                  </ol>
+                </section>
+                <section>
+                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
+                    Exhibit B Technical IP and Internal Preprints
+                  </p>
+                  <ol className="space-y-2">
+                    <li>
+                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#proprietary-research-math">
+                        02 Proprietary Research and Math
+                      </a>
+                    </li>
+                  </ol>
+                </section>
+              </div>
+            </nav>
+          </details>
+        </aside>
+
         <article
           id="executive-thesis"
-          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
           <header className="border-b-2 border-black bg-white pb-8 text-black">
             <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
@@ -596,7 +677,7 @@ export default function InvestorDataRoomPage() {
 
         <article
           id="competitive-philosophy"
-          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
           <header className="border-b-2 border-black bg-white pb-8 text-black">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
@@ -1522,7 +1603,7 @@ export default function InvestorDataRoomPage() {
 
         <article
           id="commercial-traction"
-          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
           <header className="border-b-2 border-black bg-white pb-8 text-black">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
@@ -1684,7 +1765,7 @@ export default function InvestorDataRoomPage() {
 
         <article
           id="business-model"
-          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
           <header className="border-b-2 border-black bg-white pb-8 text-black">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
@@ -1963,7 +2044,7 @@ export default function InvestorDataRoomPage() {
 
         <article
           id="non-dilutive-capital"
-          className="mb-20 scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
         >
           <header className="border-b-2 border-black bg-white pb-8 text-black">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
@@ -2137,88 +2218,10 @@ export default function InvestorDataRoomPage() {
         </article>
 
         <div className="mt-20 border-t-4 border-black pt-10">
-          <aside className="mb-10 xl:hidden">
-            <nav className="border-2 border-black bg-white p-5">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-black">
-                Data Room Index
-              </p>
-              <ol className="space-y-2 text-sm text-black">
-                <li>
-                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#executive-thesis">
-                    01 Shodh AI Executive Thesis
-                  </a>
-                </li>
-                <li>
-                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#competitive-philosophy">
-                    02 Competitive Landscape and Positioning
-                  </a>
-                </li>
-                <li>
-                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#commercial-traction">
-                    03 Commercial Traction and Enterprise Pipeline
-                  </a>
-                </li>
-                <li>
-                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#business-model">
-                    04 Business Model and Enterprise Agent Strategy
-                  </a>
-                </li>
-                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">05 Series A Use of Funds and US Expansion</li>
-                <li>
-                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#non-dilutive-capital">
-                    06 Non-Dilutive Capital Compute and Strategic Programs
-                  </a>
-                </li>
-                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
-              </ol>
-              <div className="mt-6 space-y-5 text-sm text-black">
-                <section>
-                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
-                    Exhibit A Empirical Validation and Case Studies
-                  </p>
-                  <ol className="space-y-2">
-                    <li>
-                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#saf-dossier">
-                        01 Empirical Validation Dossier eFuel SAF
-                      </a>
-                    </li>
-                    <li>
-                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#battery-dossier">
-                        02 Empirical Validation Dossier Battery
-                      </a>
-                    </li>
-                    <li>
-                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#industrial-validation-portfolio">
-                        03 Industrial Validation Portfolio — A123, Aarti, Jubilant & Scale-Up Analogs
-                      </a>
-                    </li>
-                    <li>
-                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#nuclear-dossier">
-                        04 Govt of India DAE Nuclear Letter
-                      </a>
-                    </li>
-                  </ol>
-                </section>
-                <section>
-                  <p className="mb-2 border-b border-black pb-1 text-xs font-semibold uppercase tracking-wide">
-                    Exhibit B Technical IP and Internal Preprints
-                  </p>
-                  <ol className="space-y-2">
-                    <li>
-                      <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#proprietary-research-math">
-                        02 Proprietary Research and Math
-                      </a>
-                    </li>
-                  </ol>
-                </section>
-              </div>
-            </nav>
-          </aside>
-
           <div className="min-w-0 space-y-20">
             <article
               id="saf-dossier"
-              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+              className="scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
                 eyebrow="Exhibit A / 01 Empirical Validation Dossier eFuel SAF"
@@ -2358,7 +2361,7 @@ export default function InvestorDataRoomPage() {
 
             <article
               id="battery-dossier"
-              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+              className="scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
                 eyebrow="Exhibit A / 02 Empirical Validation Dossier Battery"
@@ -2498,7 +2501,7 @@ export default function InvestorDataRoomPage() {
 
             <article
               id="industrial-validation-portfolio"
-              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+              className="scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <header className="border-b-2 border-black bg-white pb-8 text-black">
                 <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
@@ -2558,7 +2561,7 @@ export default function InvestorDataRoomPage() {
 
             <article
               id="nuclear-dossier"
-              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+              className="scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <DossierHeader
                 eyebrow="Exhibit A / 04 Govt of India DAE Nuclear Letter"
@@ -2687,7 +2690,7 @@ export default function InvestorDataRoomPage() {
 
             <article
               id="proprietary-research-math"
-              className="scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+              className="scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
             >
               <header className="border-b-2 border-black bg-white pb-8 text-black">
                 <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
