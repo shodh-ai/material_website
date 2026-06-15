@@ -281,6 +281,7 @@ export default function InvestorDataRoomPage() {
   const [password, setPassword] = useState("");
   const [accessGranted, setAccessGranted] = useState(false);
   const [accessError, setAccessError] = useState("");
+  const [mobileIndexOpen, setMobileIndexOpen] = useState(true);
 
   useEffect(() => {
     const hasSessionAccess = window.sessionStorage.getItem("shodhInvestorDataRoomAccess") === "granted";
@@ -289,6 +290,21 @@ export default function InvestorDataRoomPage() {
       .some((cookie) => cookie === "shodhInvestorDataRoomAccess=granted");
     setAccessGranted(hasSessionAccess || hasCookieAccess);
   }, []);
+
+  useEffect(() => {
+    if (!accessGranted) {
+      return;
+    }
+
+    function collapseMobileIndexOnScroll() {
+      if (window.scrollY > 80) {
+        setMobileIndexOpen(false);
+      }
+    }
+
+    window.addEventListener("scroll", collapseMobileIndexOnScroll, { passive: true });
+    return () => window.removeEventListener("scroll", collapseMobileIndexOnScroll);
+  }, [accessGranted]);
 
   function handlePasswordSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -382,7 +398,11 @@ export default function InvestorDataRoomPage() {
                   06 Non-Dilutive Capital Compute and Strategic Programs
                 </a>
               </li>
-              <li className="border-l-4 border-neutral-300 px-3 py-1.5 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
+              <li>
+                <a className="block border-l-4 border-black bg-amber-50 px-3 py-1.5 font-semibold text-black hover:bg-amber-50" href="#commercial-advisory-board">
+                  07 Commercial Advisory Board and Strategic Network
+                </a>
+              </li>
             </ol>
             <div className="mt-5 space-y-5 text-black">
               <section>
@@ -446,12 +466,22 @@ export default function InvestorDataRoomPage() {
         </header>
 
         <aside className="sticky top-0 z-40 mb-8 border-2 border-black bg-white xl:hidden">
-          <details open>
+          <details
+            open={mobileIndexOpen}
+            onToggle={(event) => setMobileIndexOpen(event.currentTarget.open)}
+          >
             <summary className="flex cursor-pointer list-none items-center justify-between border-b-2 border-black bg-white px-4 py-3 text-sm font-semibold uppercase tracking-wide text-black">
               Data Room Index
               <span className="ml-4 text-xs">Open</span>
             </summary>
-            <nav className="max-h-[70vh] overflow-y-auto bg-white p-4">
+            <nav
+              className="max-h-[70vh] overflow-y-auto bg-white p-4"
+              onClick={(event) => {
+                if ((event.target as HTMLElement).closest("a")) {
+                  setMobileIndexOpen(false);
+                }
+              }}
+            >
               <ol className="grid gap-2 text-sm text-black sm:grid-cols-2">
                 <li>
                   <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#executive-thesis">
@@ -479,7 +509,11 @@ export default function InvestorDataRoomPage() {
                     06 Non-Dilutive Capital Compute and Strategic Programs
                   </a>
                 </li>
-                <li className="border-l-4 border-neutral-300 px-3 py-2 text-neutral-500">07 Commercial Advisory Board and Strategic Network</li>
+                <li>
+                  <a className="block border-l-4 border-black bg-amber-50 px-3 py-2 font-semibold text-black hover:bg-amber-50" href="#commercial-advisory-board">
+                    07 Commercial Advisory Board and Strategic Network
+                  </a>
+                </li>
               </ol>
               <div className="mt-5 grid gap-5 text-sm text-black md:grid-cols-2">
                 <section>
@@ -2213,6 +2247,166 @@ export default function InvestorDataRoomPage() {
                 <li><strong>3. Regulatory and institutional credibility</strong><br />Supports trust in sectors such as energy, nuclear, aerospace, and advanced manufacturing.</li>
                 <li><strong>4. Strategic customer pathways</strong><br />Creates opportunities for government-backed pilots, sovereign deployments, and public-private partnerships.</li>
               </ol>
+            </div>
+          </section>
+        </article>
+
+        <article
+          id="commercial-advisory-board"
+          className="mb-20 scroll-mt-32 xl:scroll-mt-8 border-2 border-black bg-white p-6 md:p-10"
+        >
+          <header className="border-b-2 border-black bg-white pb-8 text-black">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-black">
+              07 Commercial Advisory Board and Strategic Network
+            </p>
+            <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-black md:text-4xl">
+              Shodh AI: Commercial Advisory Board & Strategic Network
+            </h2>
+            <p className="mt-5 border border-black bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-black">
+              Document Classification: Commercial Strategy — Series A Data Room
+            </p>
+          </header>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Shodh AI’s commercialization strategy requires access to complex industrial buyers across chemicals, pharmaceuticals, aerospace, energy, defense, cloud infrastructure, and government-linked strategic programs.
+              </p>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                The company is supported by a network of senior advisors, commercial champions, and institutional relationships who can help Shodh navigate enterprise sales, strategic partnerships, sector-specific diligence, and global expansion.
+              </p>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              1. Commercial Advisory Board
+            </h3>
+            <p className="mb-5 max-w-3xl leading-7 text-black">
+              The following advisors provide Shodh with senior commercial, financial, operating, and sector-specific guidance.
+            </p>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[980px] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Advisor</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Background</th>
+                    <th className="px-3 py-3 font-semibold">Strategic Relevance to Shodh</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Arun Seth", "Former senior leader at British Telecom India and Alcatel-Lucent India; technology and telecom veteran.", "Enterprise credibility, technology-sector governance, strategic partnerships, and senior customer access."],
+                    ["Sanjeev Varma", "Senior investment banker and business advisor with multi-decade US corporate and investment banking experience.", "US capital markets, strategic finance, enterprise deal structuring, and investor/customer access."],
+                    ["Rahul Singhvi", "Life sciences entrepreneur and operator; co-founder / former CEO of National Resilience and former Operating Partner at Flagship Pioneering.", "Pharma, biotech manufacturing, biomanufacturing scale-up, and US life-sciences commercialization."],
+                    ["Dr. Vivian Mendonca", "Pharmaceutical and healthcare leader with global healthcare and pharma industry experience.", "Pharma access, global healthcare context, commercial validation, and life-sciences network."],
+                    ["Manish Dugar", "Senior finance and operating executive; former Wipro Technologies CFO / senior Wipro leader.", "Financial discipline, enterprise scaling, operating systems, governance, and CFO-level diligence."],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      {row.map((cell, index) => (
+                        <td key={cell} className={`${index < row.length - 1 ? "border-r border-black" : ""} px-3 py-3`}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              2. Strategic Commercial Network
+            </h3>
+            <p className="mb-5 max-w-3xl leading-7 text-black">
+              The following relationships support Shodh’s access to sector-specific customers, infrastructure partners, and strategic markets.
+            </p>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[1040px] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Strategic Network Member</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Background</th>
+                    <th className="px-3 py-3 font-semibold">Strategic Relevance to Shodh</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Chandra Shekhar / Chandrashekhar Yavarna", "Aerospace sourcing and supply-chain leader associated with GE Aviation / GE Aerospace global sourcing.", "Aerospace manufacturing, supply-chain optimization, advanced materials, and industrial customer access."],
+                    ["Masood Hussainy", "Aerospace and advanced manufacturing executive associated with Tata Advanced Systems / Tata Advanced Materials.", "Aerospace, defense manufacturing, advanced materials, and industrial scale-up access."],
+                    ["Udit Goyal", "Google Cloud strategy and revenue operations leader in India.", "Cloud partnerships, enterprise GTM, hyperscaler relationships, and AI infrastructure strategy."],
+                    ["Unnikrishnan A.R.", "NVIDIA South Asia developer ecosystem and accelerated computing leader.", "GPU ecosystem, AI/HPC compute, developer relations, and infrastructure partnership pathways."],
+                    ["Mirik Gogri", "Aarti Industries corporate strategy leader and climate-tech investor.", "Specialty chemicals, industrial process scale-up, climate-tech, energy transition, and strategic customer access."],
+                    ["Seema Rao", "Google corporate development / M&A professional focused on India and Southeast Asia.", "Strategic partnerships, technology M&A perspective, and corporate development guidance."],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      {row.map((cell, index) => (
+                        <td key={cell} className={`${index < row.length - 1 ? "border-r border-black" : ""} px-3 py-3`}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              3. Government & Institutional Interfaces
+            </h3>
+            <p className="mb-5 max-w-3xl border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold leading-7 text-black">
+              The following individuals and institutions are relevant to Shodh’s strategic government, science, and national-technology context. They should be referenced only where the relationship is formally permissioned or supported by diligence materials.
+            </p>
+            <div className="overflow-x-auto border-2 border-black bg-white">
+              <table className="min-w-[980px] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b-2 border-black bg-white">
+                    <th className="border-r border-black px-3 py-3 font-semibold">Institution / Individual</th>
+                    <th className="border-r border-black px-3 py-3 font-semibold">Background</th>
+                    <th className="px-3 py-3 font-semibold">Relevance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Prof. Ajay Kumar Sood", "Principal Scientific Adviser to the Government of India and Chairperson of PM-STIAC.", "National science and technology strategy, frontier AI, and strategic research programs."],
+                    ["Prof. Abhay Karandikar", "Member, NITI Aayog; former Secretary, Department of Science & Technology; former Director, IIT Kanpur.", "Indian science policy, ANRF, frontier technology programs, and national innovation infrastructure."],
+                    ["Dr. K. Srikar Reddy", "Consul General of India in San Francisco.", "US-India technology, diplomacy, institutional access, and Bay Area strategic engagement."],
+                  ].map((row) => (
+                    <tr key={row[0]} className="border-b border-black align-top last:border-b-0">
+                      {row.map((cell, index) => (
+                        <td key={cell} className={`${index < row.length - 1 ? "border-r border-black" : ""} px-3 py-3`}>
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="my-8 border-t border-black bg-white pt-5">
+            <h3 className="mb-5 border-b border-black pb-3 text-lg font-semibold tracking-tight text-black">
+              4. Strategic Implication
+            </h3>
+            <div className="max-w-3xl space-y-4 leading-7 text-black">
+              <p>
+                Shodh’s advisory and strategic network is designed to support the company’s transition from founder-led technical sales to structured enterprise commercialization.
+              </p>
+              <p>The network strengthens Shodh across five areas:</p>
+              <ol className="space-y-2 border-l-4 border-black bg-white py-3 pl-6">
+                <li>1. senior enterprise credibility,</li>
+                <li>2. customer introductions in high-CapEx sectors,</li>
+                <li>3. US commercial expansion,</li>
+                <li>4. strategic finance and deal structuring,</li>
+                <li>5. government and infrastructure-linked programs.</li>
+              </ol>
+              <p className="border-l-4 border-black bg-amber-50 px-4 py-3 font-semibold">
+                As Shodh expands into the US market, this network can help convert technical proof into enterprise pilots, strategic partnerships, and long-term commercial deployments.
+              </p>
             </div>
           </section>
         </article>
