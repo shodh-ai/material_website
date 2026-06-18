@@ -133,7 +133,7 @@ export default function IndustrialScaleUpPage() {
           Shodh is supported by IndiaAI-backed compute access. Larger compute proposals are under active discussion, including an anticipated <Highlight>30 million compute hours allocation</Highlight>.
         </p>
         <p>
-          In technical discussions with Google Cloud’s senior TPU engineering team, including Distinguished Scientist Diwaker, Shodh’s architecture was recognized as a highly demanding <Emphasis>"frontier AI-for-Science"</Emphasis> use case suited for large-scale TPU training.
+          In technical discussions with <Highlight>Google Cloud’s senior TPU engineering team</Highlight>, including Distinguished Scientist <Highlight>Diwakar Gupta</Highlight>, Shodh’s workload was discussed as operating at the <Emphasis>extreme edge of AI-for-science compute</Emphasis>, with potential relevance not only for <Highlight>large-scale TPU training</Highlight> but also as feedback for <Highlight>future TPU architecture and silicon development</Highlight>.
         </p>
         <p>
           Shodh is also engaging with industrial partners across specialty chemicals, energy storage, sustainable fuels, and biopharma.
