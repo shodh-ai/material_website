@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 type GalleryItem = {
   src: string;
   alt: string;
-  category: "aero" | "protein";
+  category: "aero" | "protein" | "cstr";
 };
 
 const items: GalleryItem[] = [
@@ -30,12 +30,23 @@ const items: GalleryItem[] = [
     alt: "Protein model output",
     category: "protein",
   },
+  {
+    src: "/Screenshot 2026-06-30 at 4.31.06 PM.png",
+    alt: "CSTR simulation output 1",
+    category: "cstr",
+  },
 ];
 
 const aeroMetrics = [
   ["Compute Time", "45 ms", "vs Legacy CFD: 72 hours"],
   ["Mass Conservation", "0.00001%", "Loss"],
   ["Fluid Grid", "3D Navier-Stokes", "Compressible Flow"],
+];
+
+const cstrMetrics = [
+  ["Rheology / Fluid Accuracy", "0.054", "nRMSE"],
+  ["Thermodynamic Coupling", "Active", "Exothermic Heat Release"],
+  ["Interface Loss", "< 1e-4", "Stable multi-physics interface"],
 ];
 
 export default function Page() {
@@ -51,6 +62,7 @@ export default function Page() {
 
   const aero = items.filter((i) => i.category === "aero");
   const protein = items.find((i) => i.category === "protein");
+  const cstr = items.filter((i) => i.category === "cstr");
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#030712] text-white">
@@ -106,10 +118,9 @@ export default function Page() {
                 key={img.src}
                 type="button"
                 onClick={() => setLightbox(img)}
-                className="group relative h-[330px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/30 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35"
+                className="group relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/45 p-2 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35"
               >
-                <Image src={img.src} alt={img.alt} fill className="object-cover transition duration-500 group-hover:scale-105" priority />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-70" />
+                <Image src={img.src} alt={img.alt} fill className="object-contain p-2 transition duration-500 group-hover:scale-[1.02]" priority />
               </button>
             ))}
           </div>
@@ -146,9 +157,9 @@ export default function Page() {
               <button
                 type="button"
                 onClick={() => setLightbox(protein)}
-                className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/30 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/35"
+                className="relative aspect-[4/3] min-h-[420px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/45 p-3 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-emerald-300/35"
               >
-                <Image src={protein.src} alt={protein.alt} fill className="object-cover transition duration-500 hover:scale-105" priority />
+                <Image src={protein.src} alt={protein.alt} fill className="object-contain p-3 transition duration-500 hover:scale-[1.02]" priority />
               </button>
             )}
 
@@ -195,6 +206,53 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="relative min-h-screen px-6 py-10 lg:px-12 flex items-center">
+        <div className="mx-auto w-full max-w-7xl rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/30 backdrop-blur-xl lg:p-8">
+          <div className="mb-7 flex flex-col gap-4 border-b border-white/10 pb-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-200/80">Slide 03 · CSTR Scale-Up</div>
+              <h2 className="mt-3 max-w-4xl text-4xl font-black tracking-[-0.04em] sm:text-6xl">
+                Predictive Scale-Up for Mega-Factories
+              </h2>
+              <p className="mt-4 text-lg text-slate-300">Target: 10,000L CSTR Thermal Runaway</p>
+            </div>
+            <div className="rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-100">
+              Reactor Safety
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5">
+            {cstr.map((img) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={() => setLightbox(img)}
+                className="group relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/45 p-2 shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-amber-300/35"
+              >
+                <Image src={img.src} alt={img.alt} fill className="object-contain p-2 transition duration-500 group-hover:scale-[1.02]" priority />
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {cstrMetrics.map(([label, value, note]) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-black/25 p-5 shadow-xl shadow-black/20">
+                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">{label}</div>
+                <div className="mt-3 text-3xl font-black tracking-[-0.04em] text-white">{value}</div>
+                <div className="mt-1 text-sm text-amber-100/75">{note}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 rounded-2xl border border-amber-300/15 bg-amber-300/10 p-5 shadow-xl shadow-black/20">
+            <div className="text-xs font-bold uppercase tracking-[0.22em] text-amber-100/80">Impact</div>
+            <p className="mt-3 text-base leading-7 text-slate-200">
+              Autonomously maps impeller shear-stress and thermal runaway thresholds in silico before physical plant construction, eliminating catastrophic scale-up failures.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {lightbox && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md"
@@ -215,7 +273,7 @@ export default function Page() {
               alt={lightbox.alt}
               width={1920}
               height={1200}
-              className="max-h-[82vh] w-full rounded-2xl object-contain ring-1 ring-white/10"
+              className="max-h-[82vh] w-full rounded-2xl bg-black/50 object-contain ring-1 ring-white/10"
             />
           </div>
         </div>
