@@ -61,13 +61,13 @@ export default function Page() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <div className="mb-8 inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100">
-              UNIPHY Demo Deck
+              Physics Model Output Deck
             </div>
             <h1 className="max-w-4xl text-5xl font-black leading-[0.94] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
-              Simulating the Future of Indian Transport in Milliseconds
+              Model Outputs
             </h1>
             <p className="mt-8 max-w-2xl text-xl leading-8 text-slate-300">
-              Physics model outputs for national infrastructure and sovereign drug discovery.
+              A two-slide preview of zero-shot physics simulation and molecule-to-recipe generation.
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default function Page() {
               <h2 className="mt-3 max-w-4xl text-4xl font-black tracking-[-0.04em] sm:text-6xl">
                 Simulating National Infrastructure in Milliseconds
               </h2>
-              <p className="mt-4 text-lg text-slate-300">UNIPHY Lobe 2: Zero-Shot Aerodynamics & Compressible Flow</p>
+              <p className="mt-4 text-lg text-slate-300">Zero-Shot Aerodynamics & Compressible Flow</p>
             </div>
             <div className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100">
               Train / Plane CFD
@@ -134,7 +134,7 @@ export default function Page() {
               <h2 className="mt-3 max-w-4xl text-4xl font-black tracking-[-0.04em] sm:text-6xl">
                 Automated Sovereign Drug Discovery
               </h2>
-              <p className="mt-4 text-lg text-slate-300">Target: p53 Y220C (Oncology) | UNIPHY Lobes 1 & 5</p>
+              <p className="mt-4 text-lg text-slate-300">Target: p53 Y220C (Oncology)</p>
             </div>
             <div className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-100">
               Molecule + Recipe
