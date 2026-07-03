@@ -2,7 +2,11 @@
 
 import { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
+import { Inter } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 import {
   Languages,
   Pill,
@@ -203,9 +207,9 @@ const demos: Record<DemoId, DemoConfig> = {
     inputText: (
       <>
         &ldquo;Design an oral pill for the{" "}
-        <span className="font-semibold text-cyan-300">p53 Y220C</span> cancer mutation
+        <span className="font-semibold text-cyan-700">p53 Y220C</span> cancer mutation
         that won&apos;t cause{" "}
-        <span className="font-semibold text-cyan-300">heart arrhythmias</span>.&rdquo;
+        <span className="font-semibold text-cyan-700">heart arrhythmias</span>.&rdquo;
       </>
     ),
     thoughtSteps: [
@@ -256,10 +260,10 @@ const demos: Record<DemoId, DemoConfig> = {
     inputText: (
       <>
         &ldquo;Design a highly{" "}
-        <span className="font-semibold text-green-300">waterproof industrial coating</span>{" "}
+        <span className="font-semibold text-green-700">waterproof industrial coating</span>{" "}
         to replace toxic{" "}
-        <span className="font-semibold text-green-300">Teflon (PFAS)</span>. It must be{" "}
-        <span className="font-semibold text-green-300">100% biodegradable</span> in the
+        <span className="font-semibold text-green-700">Teflon (PFAS)</span>. It must be{" "}
+        <span className="font-semibold text-green-700">100% biodegradable</span> in the
         environment.&rdquo;
       </>
     ),
@@ -312,8 +316,8 @@ const demos: Record<DemoId, DemoConfig> = {
     inputText: (
       <>
         &ldquo;Simulate the aerodynamic{" "}
-        <span className="font-semibold text-orange-300">shockwave</span> of a{" "}
-        <span className="font-semibold text-orange-300">Mach 5</span> jet flying at
+        <span className="font-semibold text-orange-700">shockwave</span> of a{" "}
+        <span className="font-semibold text-orange-700">Mach 5</span> jet flying at
         high altitude.&rdquo;
       </>
     ),
@@ -366,9 +370,9 @@ const demos: Record<DemoId, DemoConfig> = {
     inputText: (
       <>
         &ldquo;Design a{" "}
-        <span className="font-semibold text-amber-300">solid-state polymer electrolyte</span>{" "}
+        <span className="font-semibold text-amber-700">solid-state polymer electrolyte</span>{" "}
         for an EV battery that will not catch fire at{" "}
-        <span className="font-semibold text-amber-300">high voltages or 150°C</span>.&rdquo;
+        <span className="font-semibold text-amber-700">high voltages or 150°C</span>.&rdquo;
       </>
     ),
     thoughtSteps: [
@@ -446,75 +450,75 @@ export default function PhysicsDemoPage() {
   const a = demo.accent;
   const accentMap: Record<string, Record<string, string>> = {
     emerald: {
-      text: "emerald", border: "border-emerald-300/15", bg: "from-[#06120f]",
-      shadow: "shadow-emerald-950/30", icon: "text-emerald-300", label: "text-emerald-200/80",
-      hl: "text-emerald-300", hlBorder: "border-emerald-400/30 bg-emerald-400/5",
-      badge: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
-      step: "bg-emerald-500/20 text-emerald-300",
-      closeBorder: "border-emerald-400/20 bg-emerald-400/5",
-      closeIcon: "text-emerald-300", closeBody: "text-emerald-100/90",
-      btn: "from-emerald-500 to-cyan-500", btnShadow: "shadow-emerald-500/25",
-      conn: "text-emerald-400",
+      text: "emerald", border: "border-emerald-200", bg: "from-emerald-50",
+      shadow: "shadow-emerald-100", icon: "text-emerald-600", label: "text-emerald-700",
+      hl: "text-emerald-700", hlBorder: "border-emerald-300 bg-emerald-50",
+      badge: "border-emerald-300 bg-emerald-50 text-emerald-700",
+      step: "bg-emerald-100 text-emerald-700",
+      closeBorder: "border-emerald-200 bg-emerald-50",
+      closeIcon: "text-emerald-600", closeBody: "text-emerald-900/90",
+      btn: "from-emerald-600 to-cyan-600", btnShadow: "shadow-emerald-500/20",
+      conn: "text-emerald-500",
     },
     green: {
-      text: "green", border: "border-green-300/15", bg: "from-[#06120a]",
-      shadow: "shadow-green-950/30", icon: "text-green-300", label: "text-green-200/80",
-      hl: "text-green-300", hlBorder: "border-green-400/30 bg-green-400/5",
-      badge: "border-green-300/20 bg-green-300/10 text-green-200",
-      step: "bg-green-500/20 text-green-300",
-      closeBorder: "border-green-400/20 bg-green-400/5",
-      closeIcon: "text-green-300", closeBody: "text-green-100/90",
-      btn: "from-green-500 to-emerald-500", btnShadow: "shadow-green-500/25",
-      conn: "text-green-400",
+      text: "green", border: "border-green-200", bg: "from-green-50",
+      shadow: "shadow-green-100", icon: "text-green-600", label: "text-green-700",
+      hl: "text-green-700", hlBorder: "border-green-300 bg-green-50",
+      badge: "border-green-300 bg-green-50 text-green-700",
+      step: "bg-green-100 text-green-700",
+      closeBorder: "border-green-200 bg-green-50",
+      closeIcon: "text-green-600", closeBody: "text-green-900/90",
+      btn: "from-green-600 to-emerald-600", btnShadow: "shadow-green-500/20",
+      conn: "text-green-500",
     },
     orange: {
-      text: "orange", border: "border-orange-300/15", bg: "from-[#120a06]",
-      shadow: "shadow-orange-950/30", icon: "text-orange-300", label: "text-orange-200/80",
-      hl: "text-orange-300", hlBorder: "border-orange-400/30 bg-orange-400/5",
-      badge: "border-orange-300/20 bg-orange-300/10 text-orange-200",
-      step: "bg-orange-500/20 text-orange-300",
-      closeBorder: "border-orange-400/20 bg-orange-400/5",
-      closeIcon: "text-orange-300", closeBody: "text-orange-100/90",
-      btn: "from-orange-500 to-red-500", btnShadow: "shadow-orange-500/25",
-      conn: "text-orange-400",
+      text: "orange", border: "border-orange-200", bg: "from-orange-50",
+      shadow: "shadow-orange-100", icon: "text-orange-600", label: "text-orange-700",
+      hl: "text-orange-700", hlBorder: "border-orange-300 bg-orange-50",
+      badge: "border-orange-300 bg-orange-50 text-orange-700",
+      step: "bg-orange-100 text-orange-700",
+      closeBorder: "border-orange-200 bg-orange-50",
+      closeIcon: "text-orange-600", closeBody: "text-orange-900/90",
+      btn: "from-orange-600 to-red-600", btnShadow: "shadow-orange-500/20",
+      conn: "text-orange-500",
     },
     amber: {
-      text: "amber", border: "border-amber-300/15", bg: "from-[#120f06]",
-      shadow: "shadow-amber-950/30", icon: "text-amber-300", label: "text-amber-200/80",
-      hl: "text-amber-300", hlBorder: "border-amber-400/30 bg-amber-400/5",
-      badge: "border-amber-300/20 bg-amber-300/10 text-amber-200",
-      step: "bg-amber-500/20 text-amber-300",
-      closeBorder: "border-amber-400/20 bg-amber-400/5",
-      closeIcon: "text-amber-300", closeBody: "text-amber-100/90",
-      btn: "from-amber-500 to-orange-500", btnShadow: "shadow-amber-500/25",
-      conn: "text-amber-400",
+      text: "amber", border: "border-amber-200", bg: "from-amber-50",
+      shadow: "shadow-amber-100", icon: "text-amber-600", label: "text-amber-700",
+      hl: "text-amber-700", hlBorder: "border-amber-300 bg-amber-50",
+      badge: "border-amber-300 bg-amber-50 text-amber-700",
+      step: "bg-amber-100 text-amber-700",
+      closeBorder: "border-amber-200 bg-amber-50",
+      closeIcon: "text-amber-600", closeBody: "text-amber-900/90",
+      btn: "from-amber-600 to-orange-600", btnShadow: "shadow-amber-500/20",
+      conn: "text-amber-500",
     },
   };
   const ac = accentMap[a];
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#030712] text-white">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.18),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(16,185,129,0.15),transparent_32%),radial-gradient(circle_at_50%_80%,rgba(167,139,250,0.12),transparent_30%),linear-gradient(135deg,#030712_0%,#08111f_45%,#020617_100%)]" />
-      <div className="fixed inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:64px_64px]" />
-
-      <div className="mx-auto max-w-5xl px-5 py-12 lg:px-8 lg:py-20">
+    <main className={`${inter.className} min-h-screen overflow-x-hidden bg-white text-slate-900`}>
+      <div className="mx-auto max-w-5xl px-5 py-10 lg:px-8 lg:py-16">
         {/* Header */}
-        <div className="mb-10 text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-emerald-100">
-            <Sparkles className="h-3.5 w-3.5" />
-            Physics Model Demo
+        <div className="mb-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+          <Image
+            src="/shodhai_logo.svg"
+            alt="Shodh AI"
+            width={136}
+            height={32}
+            priority
+            className="h-7 w-auto [filter:brightness(0)_saturate(100%)_invert(10%)_sepia(22%)_saturate(1393%)_hue-rotate(169deg)_brightness(94%)_contrast(98%)]"
+          />
+          <div className="flex items-center gap-2 text-sm text-slate-500">
+            <span className="hidden sm:inline">an IndiaAI mission company</span>
+            <Image
+              src="/india-ai-logo.png"
+              alt="IndiaAI"
+              width={59}
+              height={28}
+              className="h-7 w-auto"
+            />
           </div>
-          <h1 className="text-5xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
-            English In.
-            <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-violet-400 bg-clip-text text-transparent">
-              Molecule Out.
-            </span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
-            Watch the physics model translate plain-English requests into validated
-            molecules — and the robotic code to manufacture them.
-          </p>
         </div>
 
         {/* Demo Selector Tabs */}
@@ -530,7 +534,7 @@ export default function PhysicsDemoPage() {
                 className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition duration-200 ${
                   isActive
                     ? accentMap[d.accent].badge
-                    : "border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    : "border-slate-200 bg-slate-50 text-slate-400 hover:border-slate-300 hover:text-slate-800"
                 }`}
               >
                 <TabIcon className="h-4 w-4" />
@@ -553,14 +557,14 @@ export default function PhysicsDemoPage() {
         {/* Input Section */}
         <SectionWrapper delay={0}>
           <SectionBadge icon={Languages} text="Step 1 — Input" color="cyan" />
-          <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm">
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-300">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-700">
                 <Languages className="h-5 w-5" />
               </div>
               <div>
                 <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-500">User Types</div>
-                <p className="text-lg leading-relaxed text-slate-100">
+                <p className="text-lg leading-relaxed text-slate-900">
                   {demo.inputText}
                 </p>
               </div>
@@ -573,9 +577,9 @@ export default function PhysicsDemoPage() {
         {/* Thought Process Section */}
         <SectionWrapper delay={0.1}>
           <SectionBadge icon={Brain} text="Step 2 — Thought Process" color="violet" />
-          <div className="mt-5 rounded-2xl border border-white/10 bg-[#0a0f1e]/80 p-5 backdrop-blur-sm">
-            <div className="mb-4 flex items-center gap-2 border-b border-white/5 pb-3">
-              <div className={`h-2.5 w-2.5 rounded-full ${phase === "thinking" ? "animate-pulse bg-violet-400" : phase === "done" ? "bg-emerald-400" : "bg-slate-600"}`} />
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm">
+            <div className="mb-4 flex items-center gap-2 border-b border-slate-200 pb-3">
+              <div className={`h-2.5 w-2.5 rounded-full ${phase === "thinking" ? "animate-pulse bg-violet-500" : phase === "done" ? "bg-emerald-500" : "bg-slate-400"}`} />
               <span className="font-mono text-xs text-slate-400">
                 {phase === "idle" && "awaiting input..."}
                 {phase === "thinking" && "processing constraints → latent space → candidates..."}
@@ -594,24 +598,24 @@ export default function PhysicsDemoPage() {
                       initial={{ opacity: 0, x: -12, height: 0 }}
                       animate={{ opacity: 1, x: 0, height: "auto" }}
                       transition={{ duration: 0.3 }}
-                      className={`flex items-start gap-3 rounded-lg px-3 py-2 ${isLatest ? "bg-violet-500/10" : ""}`}
+                      className={`flex items-start gap-3 rounded-lg px-3 py-2 ${isLatest ? "bg-violet-50" : ""}`}
                     >
-                      <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${isLatest ? "text-violet-300" : "text-slate-500"}`} />
+                      <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${isLatest ? "text-violet-600" : "text-slate-400"}`} />
                       <div className="min-w-0">
-                        <span className={`text-sm font-semibold ${isLatest ? "text-violet-200" : "text-slate-300"}`}>
+                        <span className={`text-sm font-semibold ${isLatest ? "text-violet-700" : "text-slate-700"}`}>
                           {step.label}
                         </span>
                         {isLatest && (
                           <motion.span
                             animate={{ opacity: [1, 0.3, 1] }}
                             transition={{ duration: 0.6, repeat: Infinity }}
-                            className="ml-1 inline-block h-3.5 w-1.5 bg-violet-300 align-middle"
+                            className="ml-1 inline-block h-3.5 w-1.5 bg-violet-500 align-middle"
                           />
                         )}
                         <div className="text-xs text-slate-500">{step.detail}</div>
                       </div>
                       {!isLatest && phase === "done" && (
-                        <CheckCircle2 className="ml-auto h-4 w-4 shrink-0 text-emerald-400" />
+                        <CheckCircle2 className="ml-auto h-4 w-4 shrink-0 text-emerald-500" />
                       )}
                     </motion.div>
                   );
@@ -620,7 +624,7 @@ export default function PhysicsDemoPage() {
             </div>
 
             {phase === "thinking" && (
-              <div className="mt-4 h-1 overflow-hidden rounded-full bg-white/5">
+              <div className="mt-4 h-1 overflow-hidden rounded-full bg-slate-200">
                 <motion.div
                   className="h-full bg-gradient-to-r from-violet-500 to-cyan-500"
                   animate={{ width: `${(visibleSteps / demo.thoughtSteps.length) * 100}%` }}
@@ -650,7 +654,7 @@ export default function PhysicsDemoPage() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className={`relative h-[420px] overflow-hidden rounded-2xl border ${ac.border} bg-gradient-to-br ${ac.bg} to-[#030712] shadow-2xl ${ac.shadow}`}
+                  className={`relative h-[420px] overflow-hidden rounded-2xl border ${ac.border} bg-gradient-to-br ${ac.bg} to-white shadow-xl ${ac.shadow}`}
                 >
                   <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
                     <FlaskConical className={`h-4 w-4 ${ac.icon}`} />
@@ -658,7 +662,7 @@ export default function PhysicsDemoPage() {
                       {demo.viewerType === "shockwave" ? "Shockwave Heatmap" : demo.viewerType === "polymer" ? "3D Polymer Viewer" : "3D Molecule Viewer"}
                     </span>
                   </div>
-                  <div className="absolute right-4 top-4 z-10 rounded-full border border-white/10 bg-black/40 px-3 py-1 font-mono text-[10px] text-slate-400">
+                  <div className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white/70 px-3 py-1 font-mono text-[10px] text-slate-400">
                     {demo.viewerType === "shockwave" ? "neural CFD output" : "drag to rotate · scroll to zoom"}
                   </div>
                   {demo.viewerType === "molecule" && <Molecule3D />}
@@ -675,7 +679,7 @@ export default function PhysicsDemoPage() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm"
                 >
                   <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-400">Scorecard</h3>
                   <div className="grid grid-cols-2 gap-3">
@@ -688,14 +692,14 @@ export default function PhysicsDemoPage() {
                         className={`rounded-xl border p-3 ${
                           metric.highlight
                             ? ac.hlBorder
-                            : "border-white/10 bg-white/[0.02]"
+                            : "border-slate-200 bg-slate-100/60"
                         }`}
                       >
                         <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                           {metric.label}
                         </div>
                         <div className={`mt-1.5 text-2xl font-black tracking-tight ${
-                          metric.highlight ? ac.hl : "text-white"
+                          metric.highlight ? ac.hl : "text-slate-900"
                         }`}>
                           {metric.value}
                           {metric.unit && (
@@ -733,18 +737,18 @@ export default function PhysicsDemoPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm"
+                  className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-400">
-                      <Activity className="h-4 w-4 text-violet-300" />
+                      <Activity className="h-4 w-4 text-violet-600" />
                       Li+ Diffusion Rate
                     </h3>
-                    <span className="rounded-full border border-violet-300/20 bg-violet-300/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-violet-200">
+                    <span className="rounded-full border border-violet-300 bg-violet-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-violet-700">
                       Stable at 150°C
                     </span>
                   </div>
-                  <div className="relative h-[280px] overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#0a0a1a] to-[#030712]">
+                  <div className="relative h-[280px] overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-100">
                     <DiffusionChart />
                   </div>
                   <p className="mt-3 text-xs text-slate-500">
@@ -760,26 +764,26 @@ export default function PhysicsDemoPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm"
+                  className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-400">
-                      <Droplets className="h-4 w-4 text-cyan-300" />
+                      <Droplets className="h-4 w-4 text-cyan-700" />
                       Water Contact Simulation
                     </h3>
-                    <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-200">
+                    <span className="rounded-full border border-cyan-300 bg-cyan-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-700">
                       Coarse-Grained MD
                     </span>
                   </div>
-                  <div className="relative h-[300px] overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#06121a] to-[#030712]">
+                  <div className="relative h-[300px] overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-100">
                     <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
-                      <Droplets className="h-3.5 w-3.5 text-cyan-300" />
-                      <span className="text-xs font-semibold uppercase tracking-wider text-cyan-200/80">
+                      <Droplets className="h-3.5 w-3.5 text-cyan-700" />
+                      <span className="text-xs font-semibold uppercase tracking-wider text-cyan-700/80">
                         Virtual droplet beading on coating surface
                       </span>
                     </div>
                     <WaterDropletSim />
-                    <div className="absolute bottom-4 right-4 z-10 rounded-lg border border-cyan-300/20 bg-black/50 px-3 py-1.5 font-mono text-xs text-cyan-200">
+                    <div className="absolute bottom-4 right-4 z-10 rounded-lg border border-cyan-300 bg-white/80 px-3 py-1.5 font-mono text-xs text-cyan-700">
                       θ = 118.6°
                     </div>
                   </div>
@@ -792,7 +796,7 @@ export default function PhysicsDemoPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm"
+                  className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-5 backdrop-blur-sm"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-400">
@@ -812,30 +816,30 @@ export default function PhysicsDemoPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
-                        className="relative rounded-xl border border-white/10 bg-black/25 p-4"
+                        className="relative rounded-xl border border-slate-200 bg-slate-100 p-4"
                       >
                         <div className={`mb-2 flex h-7 w-7 items-center justify-center rounded-full text-xs font-black ${ac.step}`}>
                           {s.step}
                         </div>
-                        <div className="text-sm font-semibold text-white">{s.title}</div>
+                        <div className="text-sm font-semibold text-slate-900">{s.title}</div>
                         <div className="mt-1 text-xs leading-relaxed text-slate-400">{s.detail}</div>
                         {i < demo.synthesisSteps!.length - 1 && (
-                          <ChevronRight className="absolute -right-2.5 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-white/15 lg:block" />
+                          <ChevronRight className="absolute -right-2.5 top-1/2 hidden h-5 w-5 -translate-y-1/2 text-slate-900/15 lg:block" />
                         )}
                       </motion.div>
                     ))}
                   </div>
 
                   {/* Opentrons Code Block */}
-                  <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0d1117]">
-                    <div className="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
+                  <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-900">
+                    <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <Bot className={`h-4 w-4 ${ac.icon}`} />
                         <span className="font-mono text-xs text-slate-400">opentrons_protocol.py</span>
                       </div>
                       <button
                         onClick={copyCode}
-                        className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-slate-300 transition hover:bg-white/10"
+                        className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-slate-200 transition hover:bg-white/10"
                       >
                         {copied ? "Copied ✓" : "Copy"}
                       </button>
@@ -873,9 +877,9 @@ export default function PhysicsDemoPage() {
         </AnimatePresence>
 
         {/* Footer */}
-        <div className="mt-20 border-t border-white/5 pt-8 text-center">
-          <p className="text-xs text-slate-600">
-            Skanda AI · Physics Foundation Model for Molecular Design
+        <div className="mt-20 border-t border-slate-200 pt-8 text-center">
+          <p className="text-xs text-slate-400">
+            Shodh AI · Physics Foundation Model for Molecular Design
           </p>
         </div>
       </div>
@@ -897,10 +901,12 @@ function SectionWrapper({ children, delay }: { children: React.ReactNode; delay:
 
 function SectionBadge({ icon: Icon, text, color }: { icon: any; text: string; color: string }) {
   const colors: Record<string, string> = {
-    cyan: "border-cyan-300/20 bg-cyan-300/10 text-cyan-200",
-    violet: "border-violet-300/20 bg-violet-300/10 text-violet-200",
-    emerald: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
-    green: "border-green-300/20 bg-green-300/10 text-green-200",
+    cyan: "border-cyan-300 bg-cyan-50 text-cyan-700",
+    violet: "border-violet-300 bg-violet-50 text-violet-700",
+    emerald: "border-emerald-300 bg-emerald-50 text-emerald-700",
+    green: "border-green-300 bg-green-50 text-green-700",
+    orange: "border-orange-300 bg-orange-50 text-orange-700",
+    amber: "border-amber-300 bg-amber-50 text-amber-700",
   };
   return (
     <div className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] ${colors[color]}`}>
@@ -915,10 +921,10 @@ function Connector({ active, accentColor }: { active: boolean; accentColor: stri
     <div className="flex justify-center py-3">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: active ? 1 : 0.3, scale: 1 }}
+        animate={{ opacity: active ? 1 : 0.4, scale: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <ArrowDown className={`h-5 w-5 ${active ? accentColor : "text-slate-700"}`} />
+        <ArrowDown className={`h-5 w-5 ${active ? accentColor : "text-slate-300"}`} />
       </motion.div>
     </div>
   );
