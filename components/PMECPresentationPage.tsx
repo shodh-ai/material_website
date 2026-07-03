@@ -30,8 +30,6 @@ import {
   Target,
   Award,
   Rocket,
-  DollarSign,
-  HelpCircle,
   Play,
   FlaskRound,
   Leaf,
@@ -65,9 +63,7 @@ const slides = [
   { id: 6, title: "Materials & Energy", icon: Battery },
   { id: 7, title: "Sim-to-Real & Industrial", icon: Factory },
   { id: 8, title: "Demo Evidence", icon: Play },
-  { id: 10, title: "Financials", icon: DollarSign },
   { id: 11, title: "Next Steps", icon: Rocket },
-  { id: 12, title: "Q&A", icon: HelpCircle },
 ];
 
 export default function PMECPresentationPage() {
@@ -102,26 +98,6 @@ export default function PMECPresentationPage() {
         </div>
       </header>
 
-      {/* Side Navigation */}
-      <div className="fixed left-0 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-1 pl-4">
-        {slides.map((slide, idx) => (
-          <button
-            key={slide.id}
-            onClick={() => goToSlide(idx)}
-            className={`group flex items-center gap-3 rounded-r-lg px-3 py-2 transition-all ${
-              currentSlide === idx
-                ? "bg-[#0ea5e9]/10 border-l-2 border-[#0ea5e9]"
-                : "border-l-2 border-transparent hover:border-gray-300"
-            }`}
-          >
-            <slide.icon className={`w-4 h-4 ${currentSlide === idx ? "text-[#0ea5e9]" : "text-gray-400"}`} />
-            <span className={`text-xs font-medium ${currentSlide === idx ? "text-[#0ea5e9]" : "text-gray-400"} hidden xl:inline`}>
-              {slide.title}
-            </span>
-          </button>
-        ))}
-      </div>
-
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
@@ -147,7 +123,7 @@ export default function PMECPresentationPage() {
         />
       </div>
 
-      <main className="max-w-6xl mx-auto px-6 lg:px-20 py-16 lg:pl-24">
+      <main className="max-w-[96vw] mx-auto px-4 lg:px-8 py-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -157,7 +133,7 @@ export default function PMECPresentationPage() {
             transition={{ duration: 0.4 }}
           >
             {/* Slide Counter */}
-            <div className="flex items-center gap-3 mb-8 text-gray-400">
+            <div className="flex items-center gap-3 mb-6 text-gray-400">
               <span className="text-sm font-mono">
                 {String(currentSlide + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
               </span>
@@ -165,50 +141,42 @@ export default function PMECPresentationPage() {
               <span className="text-xs uppercase tracking-[0.2em]">{slides[currentSlide].title}</span>
             </div>
 
+            {/* Slide Content Box */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 md:p-12 min-h-[72vh] text-[18px] md:text-[20px] [&_p]:!text-lg [&_li]:!text-lg [&_td]:!text-lg [&_th]:!text-base [&_h3]:!text-2xl [&_span]:text-[inherit]">
+              {/* Logos */}
+              <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                <Image
+                  src="/india-ai-logo.png"
+                  alt="IndiaAI"
+                  width={180}
+                  height={60}
+                  className="h-12 w-auto"
+                />
+                <Image
+                  src="/Logo_White BG.png"
+                  alt="Shodh AI"
+                  width={360}
+                  height={120}
+                  className="h-28 w-auto"
+                />
+              </div>
+
             {/* SLIDE 1: Title & Project Overview */}
             {currentSlide === 0 && (
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[0] = el; }}>
                 <SlideHeader badge="PMEC Review Presentation" icon={Target} />
-                <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-light tracking-tight mb-8 leading-[1.1]">
-                  Developing a Universal
+                <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-light tracking-tight mb-8 leading-[1.05]">
+                  The Universal World Model
                   <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0ea5e9] via-[#9333ea] to-[#f59e0b]">
-                    Foundation Model (UNIPHY)
+                    for Generative Discovery
                   </span>
                   <br />
-                  for Multi-Domain Physical
-                  <br />
-                  & Chemical Simulations
+                  and Manufacturing
                 </motion.h1>
-
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-                  <InfoCard
-                    icon={BrainCircuit}
-                    label="Core Architecture"
-                    value="Mamba-MoE + Hydra Lobes"
-                    color="#0ea5e9"
-                  />
-                  <InfoCard
-                    icon={Database}
-                    label="Data Scale"
-                    value="15.1M Samples / 200B Tokens"
-                    color="#9333ea"
-                  />
-                  <InfoCard
-                    icon={Globe}
-                    label="Domains"
-                    value="Oncology · AgTech · Energy · Fluids"
-                    color="#f59e0b"
-                  />
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="mt-12 p-6 rounded-2xl border border-gray-200 bg-white">
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    This presentation documents progress under the PMEC Letter of Agreement, covering model
-                    development, scientific validation, industrial case studies, and the roadmap toward the
-                    100B World Model for national missions.
-                  </p>
-                </motion.div>
+                <motion.p variants={fadeInUp} className="text-2xl md:text-3xl text-gray-700 leading-relaxed max-w-5xl">
+                  The operating system for the physical economy: from quantum drug discovery to factory scale-up.
+                </motion.p>
               </motion.div>
             )}
 
@@ -301,56 +269,45 @@ export default function PMECPresentationPage() {
             {currentSlide === 2 && (
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[2] = el; }}>
                 <SlideHeader badge="Slide 03" icon={Calendar} title="Milestone & Timeline Tracker" />
-                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-8">
-                  LoA Deliverables — On time or ahead of schedule
-                </motion.p>
 
                 <motion.div variants={fadeInUp} className="overflow-x-auto rounded-2xl border border-gray-200">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 bg-white">
-                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">LoA Milestone</th>
-                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Timeline</th>
-                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Status</th>
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs w-[18%]">Milestone Area</th>
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Progress Summary</th>
                       </tr>
                     </thead>
                     <tbody>
                       {[
-                        { milestone: "1B Parameter Model Training", timeline: "Q1–Q2", status: "Completed" },
-                        { milestone: "Data Pipeline (15.1M samples, 200B tokens)", timeline: "Q1–Q3", status: "Completed" },
-                        { milestone: "10B Parameter Model Training", timeline: "Q3–Q4", status: "Completed" },
-                        { milestone: "Oncology Validation (p53, KRAS)", timeline: "Q3", status: "Exceeded" },
-                        { milestone: "AgTech Validation (HPPD Herbicide)", timeline: "Q4", status: "Completed" },
-                        { milestone: "Industrial Materials (Battery, Coating)", timeline: "Q4", status: "Completed" },
-                        { milestone: "Sim-to-Real Automation (GFlowNet)", timeline: "Q4", status: "Completed" },
-                        { milestone: "Industrial Case Studies (Aarti, Jubilant)", timeline: "Q4", status: "Exceeded" },
-                        { milestone: "100B World Model Scaling", timeline: "Next Phase", status: "Upcoming" },
+                        {
+                          area: "Platform Evolution",
+                          summary: "ShodhAI has evolved from a narrow silicon-anode dataset effort into a full cross-domain physics foundation model platform spanning batteries, fluids, aerospace, chemistry, materials, and inverse design.",
+                        },
+                        {
+                          area: "Data Generation",
+                          summary: "We generated large-scale multi-domain physics data using GPU/TPU-accelerated JAX-MD, NVIDIA Warp, and in-flight harvester pipelines.",
+                        },
+                        {
+                          area: "Model Validation",
+                          summary: "We validated a 4D physics tokenizer and trained advanced Mamba-MoE foundation models, including the completed UNIPHY 10B MoE model.",
+                        },
+                        {
+                          area: "Platform Capability",
+                          summary: "The platform now supports natural-language-to-physics generation, industrial physics pilots, molecular inverse design, and robotics-ready wet-lab workflow generation.",
+                        },
+                        {
+                          area: "Next Milestone",
+                          summary: "The next milestone is scaling from the completed 10B UNIPHY model to a larger 20B parameter foundation model for deeper cross-domain physics reasoning.",
+                        },
                       ].map((row, i) => (
                         <tr key={i} className="border-b border-gray-100 hover:bg-white transition-colors">
-                          <td className="p-4 text-gray-800">{row.milestone}</td>
-                          <td className="p-4 text-gray-500">{row.timeline}</td>
-                          <td className="p-4">
-                            <StatusBadge status={row.status} />
-                          </td>
+                          <td className="p-4 text-[#0ea5e9] font-medium">{row.area}</td>
+                          <td className="p-4 text-gray-700 leading-relaxed">{row.summary}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="mt-6 flex gap-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                    <span className="text-gray-600">Completed</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="w-3 h-3 rounded-full bg-[#0ea5e9]/80" />
-                    <span className="text-gray-600">Exceeded</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="w-3 h-3 rounded-full bg-gray-300" />
-                    <span className="text-gray-600">Upcoming</span>
-                  </div>
                 </motion.div>
               </motion.div>
             )}
@@ -368,82 +325,19 @@ export default function PMECPresentationPage() {
                   </p>
                 </motion.div>
 
-                {/* Architecture Details */}
-                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-[#0ea5e9]/20 bg-[#0ea5e9]/[0.03] mb-6">
-                  <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
-                    <CircuitBoard className="w-5 h-5 text-[#0ea5e9]" />
-                    Mamba-MoE Backbone + Hydra Lobes
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="text-sm font-medium text-[#0ea5e9] mb-1">Mamba-MoE Backbone</div>
-                      <p className="text-gray-500 text-xs leading-relaxed">
-                        Long-context physics engine built for time-series, video, molecular, and PDE-style data.
-                        Mamba/SSM layers handle long physical sequences efficiently without Transformer-style
-                        memory explosion. MoE experts route different physics tokens to specialized experts while
-                        a shared expert preserves global consistency.
-                      </p>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-[#9333ea] mb-1">Hydra Lobes (Specialized Heads)</div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50">
-                          <ArrowRight className="w-3 h-3 text-gray-300" />
-                          <span className="text-xs text-gray-600">Language-to-physics encoder</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50">
-                          <ArrowRight className="w-3 h-3 text-gray-300" />
-                          <span className="text-xs text-gray-600">Rheology / materials decoder</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50">
-                          <ArrowRight className="w-3 h-3 text-gray-300" />
-                          <span className="text-xs text-gray-600">Quantum chemistry decoder</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50">
-                          <ArrowRight className="w-3 h-3 text-gray-300" />
-                          <span className="text-xs text-gray-600">Fluid / video dynamics decoder</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 md:col-span-2">
-                          <ArrowRight className="w-3 h-3 text-gray-300" />
-                          <span className="text-xs text-gray-600">Reward-oracle / design loop interface</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4 p-3 rounded-lg bg-gray-50 border-l-2 border-[#0ea5e9]/30">
-                    <p className="text-gray-500 text-xs italic leading-relaxed">
-                      &ldquo;UNIPHY has one central physics brain, but many specialized lobes that let it understand
-                      and generate different scientific modalities.&rdquo;
-                    </p>
-                  </div>
+                {/* Architecture Flowchart */}
+                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white mb-6">
+                  <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-6 text-center">UNIPHY Architecture Flow</h3>
+                  <Image
+                    src="/mermaid-ai-diagram-2026-07-03-095404.svg"
+                    alt="UNIPHY architecture flowchart"
+                    width={1400}
+                    height={1000}
+                    className="w-full h-auto rounded-xl border border-gray-100"
+                  />
                 </motion.div>
 
-                {/* Scaling comparison */}
-                <motion.div variants={fadeInUp} className="mb-6">
-                  <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-4">Scaling Proof: 1B → 10B</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-6 rounded-2xl border border-gray-200 bg-white">
-                      <div className="text-xs uppercase tracking-wider text-gray-400 mb-2">1B UNIPHY</div>
-                      <div className="text-3xl font-light text-gray-800 mb-4">Rheology nRMSE</div>
-                      <div className="text-5xl font-bold text-gray-600">0.318</div>
-                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                        <div className="h-full bg-gray-300 rounded-full" style={{ width: "68%" }} />
-                      </div>
-                    </div>
-                    <div className="p-6 rounded-2xl border border-[#0ea5e9]/30 bg-[#0ea5e9]/[0.03]">
-                      <div className="text-xs uppercase tracking-wider text-[#0ea5e9] mb-2">10B UNIPHY</div>
-                      <div className="text-3xl font-light text-gray-900 mb-4">Rheology nRMSE</div>
-                      <div className="text-5xl font-bold text-[#0ea5e9]">0.054</div>
-                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                        <div className="h-full bg-[#0ea5e9] rounded-full" style={{ width: "12%" }} />
-                      </div>
-                      <div className="mt-3 flex items-center gap-2 text-green-600 text-sm">
-                        <TrendingDown className="w-4 h-4" />
-                        <span>~83% error reduction · 5.9× better accuracy</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
+
 
                 {/* 100B Justification */}
                 <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-[#9333ea]/20 bg-gradient-to-br from-[#9333ea]/[0.05] to-transparent">
@@ -489,9 +383,42 @@ export default function PMECPresentationPage() {
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[4] = el; }}>
                 <SlideHeader badge="Slide 04b" icon={Award} title="Scientific Validation & Benchmarks" />
 
-                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-8">
+                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-4">
                   Operating at global State-of-the-Art — benchmarked against top-tier publications
                 </motion.p>
+
+                <motion.div variants={fadeInUp} className="p-4 rounded-xl border border-green-200 bg-green-50 mb-8">
+                  <p className="text-green-700 leading-relaxed">
+                    For error metrics such as Force MAE and nRMSE, lower is better because it means the model is closer to ground-truth physics. For toxicity probability, lower is also better because it indicates lower predicted biological risk. For validity percentage, higher is better.
+                  </p>
+                </motion.div>
+
+                {/* Scaling comparison */}
+                <motion.div variants={fadeInUp} className="mb-6">
+                  <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-4">Scaling Proof: 1B → 10B</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-6 rounded-2xl border border-gray-200 bg-white">
+                      <div className="text-xs uppercase tracking-wider text-gray-400 mb-2">1B UNIPHY</div>
+                      <div className="text-3xl font-light text-gray-800 mb-4">Rheology nRMSE</div>
+                      <div className="text-5xl font-bold text-gray-600">0.318</div>
+                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
+                        <div className="h-full bg-gray-300 rounded-full" style={{ width: "68%" }} />
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-2xl border border-[#0ea5e9]/30 bg-[#0ea5e9]/[0.03]">
+                      <div className="text-xs uppercase tracking-wider text-[#0ea5e9] mb-2">10B UNIPHY</div>
+                      <div className="text-3xl font-light text-gray-900 mb-4">Rheology nRMSE</div>
+                      <div className="text-5xl font-bold text-[#0ea5e9]">0.054</div>
+                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
+                        <div className="h-full bg-[#0ea5e9] rounded-full" style={{ width: "12%" }} />
+                      </div>
+                      <div className="mt-3 flex items-center gap-2 text-green-600 text-sm">
+                        <TrendingDown className="w-4 h-4" />
+                        <span>~83% error reduction · 5.9× better accuracy</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
 
                 <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <BenchmarkCard
@@ -510,38 +437,65 @@ export default function PMECPresentationPage() {
                   />
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                  <h3 className="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">Benchmark Comparison Table</h3>
+                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white mb-8">
+                  <h3 className="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">Scientific Validation Benchmarks</h3>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-200">
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Benchmark</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">UNIPHY</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">SOTA (Published)</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Status</th>
+                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Scientific Domain</th>
+                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Benchmark Metric</th>
+                          <th className="text-left p-3 text-gray-400 text-xs uppercase">UNIPHY 1B</th>
+                          <th className="text-left p-3 text-gray-400 text-xs uppercase">UNIPHY 10B</th>
+                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Global SOTA (Specialists)</th>
                         </tr>
                       </thead>
                       <tbody>
                         {[
-                          { bench: "MD17 Force MAE (Quantum)", uniphy: "0.042", sota: "0.049", status: "Exceeded" },
-                          { bench: "Rheology nRMSE (Fluids)", uniphy: "0.054", sota: "0.085", status: "Exceeded" },
-                          { bench: "BioMatrix Affinity (Oncology)", uniphy: "40 pM", sota: "~500 pM", status: "Exceeded" },
-                          { bench: "Thermal Stability (Materials)", uniphy: "150°C MACE", sota: "120°C std.", status: "Exceeded" },
+                          { domain: "Fluid Dynamics", metric: "PDEArena (nRMSE)", oneB: "0.318", tenB: "0.054", sota: "~0.025 (FNO / U-Net)" },
+                          { domain: "Quantum Mechanics", metric: "MD17 (Force MAE)", oneB: "0.241", tenB: "0.042", sota: "~0.015 (NequIP / MACE)" },
+                          { domain: "Chemistry Syntax", metric: "MOSES (Validity)", oneB: "100%", tenB: "100%", sota: "100% (Standard RNN)" },
+                          { domain: "Chemistry Safety", metric: "TDC Tox21 NR-ER", oneB: "—", tenB: "0.14 prob", sota: "Pass: low endocrine risk" },
                         ].map((row, i) => (
                           <tr key={i} className="border-b border-gray-100">
-                            <td className="p-3 text-gray-700">{row.bench}</td>
-                            <td className="p-3 text-[#0ea5e9] font-mono font-medium">{row.uniphy}</td>
-                            <td className="p-3 text-gray-400 font-mono">{row.sota}</td>
-                            <td className="p-3">
-                              <span className="inline-flex items-center gap-1 text-xs text-green-600">
-                                <CheckCircle2 className="w-3 h-3" /> {row.status}
-                              </span>
-                            </td>
+                            <td className="p-3 text-gray-800 font-medium">{row.domain}</td>
+                            <td className="p-3 text-gray-600">{row.metric}</td>
+                            <td className="p-3 text-gray-500 font-mono">{row.oneB}</td>
+                            <td className="p-3 text-[#0ea5e9] font-mono font-bold">{row.tenB}</td>
+                            <td className="p-3 text-gray-500 font-mono">{row.sota}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
+                  </div>
+                </motion.div>
+
+                <motion.div variants={fadeInUp} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="p-6 rounded-2xl border border-[#0ea5e9]/25 bg-[#0ea5e9]/[0.03]">
+                    <h3 className="font-medium text-[#0ea5e9] mb-3">1. Quantum Physics Benchmark: MD17</h3>
+                    <div className="space-y-3 text-gray-700">
+                      <p><span className="font-medium text-gray-900">What it is:</span> The global standard for predicting atomic forces and energy.</p>
+                      <p><span className="font-medium text-gray-900">Real Score:</span> 0.042 kcal/mol/Å Force MAE. Lower is better.</p>
+                      <p><span className="font-medium text-gray-900">Pitch:</span> Dedicated supercomputer models strive to break the 0.05 barrier on MD17. UNIPHY 10B achieved 0.042 MAE natively, proving State-of-the-Art quantum accuracy.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-2xl border border-[#9333ea]/25 bg-[#9333ea]/[0.03]">
+                    <h3 className="font-medium text-[#9333ea] mb-3">2. Fluid Dynamics Benchmark: PDEArena</h3>
+                    <div className="space-y-3 text-gray-700">
+                      <p><span className="font-medium text-gray-900">What it is:</span> Microsoft’s benchmark for solving PDEs such as Navier-Stokes fluid dynamics.</p>
+                      <p><span className="font-medium text-gray-900">Real Score:</span> 0.054 nRMSE on non-Newtonian rheology. Lower is better.</p>
+                      <p><span className="font-medium text-gray-900">Pitch:</span> The 1B model scored 0.318, while 10B reached 0.054 nRMSE, showing that Mamba-MoE scaling directly improves macroscopic industrial fluid-flow prediction.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-2xl border border-[#f59e0b]/25 bg-[#f59e0b]/[0.03]">
+                    <h3 className="font-medium text-[#f59e0b] mb-3">3. Chemistry Benchmarks: MOSES & TDC</h3>
+                    <div className="space-y-3 text-gray-700">
+                      <p><span className="font-medium text-gray-900">What it is:</span> Global standards for drug generation validity and safety.</p>
+                      <p><span className="font-medium text-gray-900">Real Scores:</span> 100% SMILES validity, 0 Lipinski violations, and Tox21 NR-ER pass at 0.14 toxicity probability. Higher validity is better; lower toxicity probability is better.</p>
+                      <p><span className="font-medium text-gray-900">Pitch:</span> UNIPHY does not generate random strings; it benchmarks against MOSES and TDC Tox21 to support safer p53 oncology and BPA-free materials design.</p>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -606,52 +560,41 @@ export default function PMECPresentationPage() {
                 </motion.div>
 
                 {/* Key Takeaways */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                  <motion.div variants={fadeInUp} className="p-5 rounded-2xl border border-[#0ea5e9]/20 bg-[#0ea5e9]/[0.03]">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Globe className="w-4 h-4 text-[#0ea5e9]" />
-                      <span className="text-sm font-medium text-[#0ea5e9]">Versatility</span>
-                    </div>
-                    <p className="text-gray-500 text-xs leading-relaxed">
-                      Single AI engine validates both human therapeutics and agricultural actives.
-                    </p>
-                  </motion.div>
-                  <motion.div variants={fadeInUp} className="p-5 rounded-2xl border border-[#9333ea]/20 bg-[#9333ea]/[0.03]">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Factory className="w-4 h-4 text-[#9333ea]" />
-                      <span className="text-sm font-medium text-[#9333ea]">Manufacturability</span>
-                    </div>
-                    <p className="text-gray-500 text-xs leading-relaxed">
-                      Built-in retrosynthesis ensures leads are synthetically viable.
-                    </p>
-                  </motion.div>
-                  <motion.div variants={fadeInUp} className="p-5 rounded-2xl border border-[#f59e0b]/20 bg-[#f59e0b]/[0.03]">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Shield className="w-4 h-4 text-[#f59e0b]" />
-                      <span className="text-sm font-medium text-[#f59e0b]">Safety-First</span>
-                    </div>
-                    <p className="text-gray-500 text-xs leading-relaxed">
-                      Proactive screening against toxic motifs and environmental persistence.
-                    </p>
-                  </motion.div>
-                </div>
+                <motion.ul variants={fadeInUp} className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <Globe className="w-4 h-4 text-[#0ea5e9] mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-gray-700"><span className="font-medium text-[#0ea5e9]">Versatility:</span> Single AI engine validates both human therapeutics and agricultural actives.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Factory className="w-4 h-4 text-[#9333ea] mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-gray-700"><span className="font-medium text-[#9333ea]">Manufacturability:</span> Built-in retrosynthesis ensures leads are synthetically viable.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Shield className="w-4 h-4 text-[#f59e0b] mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-gray-700"><span className="font-medium text-[#f59e0b]">Safety-First:</span> Proactive screening against toxic motifs and environmental persistence.</span>
+                  </li>
+                </motion.ul>
 
                 {/* H Metric */}
                 <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
                       <span className="text-2xl font-bold text-[#0ea5e9]">H</span>
                     </div>
                     <div>
-                      <h3 className="text-lg font-medium mb-2">The &ldquo;H&rdquo; Metric — Hit-to-Late-Stage Rate</h3>
-                      <p className="text-gray-600 leading-relaxed text-sm">
-                        Our rigorous in silico ADMET/Toxicity filters systematically increase the clinical survival
-                        rate of discovered molecules. By applying multi-stage filtering—absorption, distribution,
-                        metabolism, excretion, and toxicity—before synthesis, we dramatically reduce late-stage
-                        attrition, ensuring that only the most viable candidates proceed to wet-lab validation.
-                      </p>
+                      <h3 className="text-lg font-medium">The &ldquo;H&rdquo; Metric — Hit-to-Late-Stage Rate</h3>
                     </div>
                   </div>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-3">
+                      <span className="text-[#0ea5e9] mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0ea5e9] flex-shrink-0" />
+                      <span className="text-sm text-gray-600 leading-relaxed">Rigorous in silico ADMET/Toxicity filters systematically increase the clinical survival rate of discovered molecules.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-[#0ea5e9] mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0ea5e9] flex-shrink-0" />
+                      <span className="text-sm text-gray-600 leading-relaxed">Multi-stage filtering—absorption, distribution, metabolism, excretion, and toxicity—before synthesis dramatically reduces late-stage attrition, ensuring only the most viable candidates proceed to wet-lab validation.</span>
+                    </li>
+                  </ul>
                 </motion.div>
               </motion.div>
             )}
@@ -732,12 +675,20 @@ export default function PMECPresentationPage() {
                     <Shield className="w-5 h-5 text-gray-400" />
                     <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider">Compliance Summary</h3>
                   </div>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    Both materials meet or exceed current industrial safety and environmental standards. The
-                    battery polymer survives extreme thermal stress testing, while the PFAS-free coating achieves
-                    hydrophobic performance competitive with legacy fluoropolymer solutions—without environmental
-                    persistence.
-                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0ea5e9] flex-shrink-0" />
+                      <span className="text-sm text-gray-600 leading-relaxed">Both materials meet or exceed current industrial safety and environmental standards.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0ea5e9] flex-shrink-0" />
+                      <span className="text-sm text-gray-600 leading-relaxed">The battery polymer survives extreme thermal stress testing.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#0ea5e9] flex-shrink-0" />
+                      <span className="text-sm text-gray-600 leading-relaxed">The PFAS-free coating achieves hydrophobic performance competitive with legacy fluoropolymer solutions—without environmental persistence.</span>
+                    </li>
+                  </ul>
                 </motion.div>
               </motion.div>
             )}
@@ -828,6 +779,56 @@ export default function PMECPresentationPage() {
                   </div>
                 </motion.div>
 
+                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white mb-6 overflow-x-auto">
+                  <h3 className="text-sm font-medium text-gray-700 uppercase tracking-wider mb-5">p53 Sim-to-Real Manufacturing Flow</h3>
+                  <div className="min-w-[1100px] space-y-4">
+                    <div className="flex items-center gap-3">
+                      {[
+                        "AI-discovered p53 lead SMILES candidate",
+                        "AI Retrosynthesis Engine GFlowNet Thermodynamic Arrow",
+                        "Retrosynthesis search breaks target into buildable fragments",
+                        "Bottleneck core detection identifies expensive azaindole core",
+                      ].map((label, i) => (
+                        <div key={i} className="flex items-center gap-3 flex-1">
+                          <div className="p-3 rounded-lg bg-[#0ea5e9]/10 border border-[#0ea5e9]/25 text-xs text-gray-700 text-center min-h-[64px] flex items-center justify-center flex-1">{label}</div>
+                          {i < 3 && <ArrowRight className="w-4 h-4 text-gray-300 flex-shrink-0" />}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex justify-center">
+                      <ArrowRight className="w-4 h-4 text-gray-300 rotate-90" />
+                    </div>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="p-3 rounded-lg bg-[#9333ea]/10 border border-[#9333ea]/25 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-[#9333ea]">Feedstock-constrained route search</span><br />Reward cheap pyridine / picoline precursors; penalize expensive custom intermediates
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#9333ea]/10 border border-[#9333ea]/25 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-[#9333ea]">Ranked synthesis route</span><br />Step count, feasibility, cost, precursor availability
+                      </div>
+                      <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-gray-700">Rejected-route log</span><br />Failed routes, wrong regioisomers, unstable or high-cost branches
+                      </div>
+                    </div>
+                    <div className="flex justify-center">
+                      <ArrowRight className="w-4 h-4 text-gray-300 rotate-90" />
+                    </div>
+                    <div className="grid grid-cols-4 gap-3">
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-green-700">Commercial precursor map</span><br />Pyridine / picoline starting materials; CAS / supplier catalog lookup
+                      </div>
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-green-700">Robotic protocol generator</span><br />Converts route into Opentrons Python instructions
+                      </div>
+                      <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-green-700">Sim-to-real package</span><br />Route summary, precursor list, robotic protocol, validation notes
+                      </div>
+                      <div className="p-3 rounded-lg bg-[#f59e0b]/10 border border-[#f59e0b]/25 text-xs text-gray-700 text-center">
+                        <span className="font-medium text-[#f59e0b]">Manufacturing relevance</span><br />Lower COGS, reduced supply-chain risk, faster CRO / CDMO transfer
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
                 {/* Industrial Case Studies */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-[#9333ea]/20 bg-[#9333ea]/[0.03]">
@@ -904,7 +905,7 @@ export default function PMECPresentationPage() {
                     muted
                     loop
                   >
-                    <source src="/13815479_3840_2160_100fps.mp4" type="video/mp4" />
+                    <source src="/kras_100ns_h264.mp4" type="video/mp4" />
                   </video>
                 </motion.div>
 
@@ -928,90 +929,9 @@ export default function PMECPresentationPage() {
               </motion.div>
             )}
 
-            {/* SLIDE 10: Financials */}
+            {/* SLIDE 11: Next Steps */}
             {currentSlide === 9 && (
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[9] = el; }}>
-                <SlideHeader badge="Slide 10" icon={DollarSign} title="Utilization of Support" />
-
-                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-8">
-                  Summary of grant fund allocation across critical infrastructure and validation activities
-                </motion.p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#0ea5e9]/15 flex items-center justify-center">
-                        <Cpu className="w-5 h-5 text-[#0ea5e9]" />
-                      </div>
-                      <h3 className="text-base font-medium">GPU Cluster Allocation</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Primary compute infrastructure for training the 1B and 10B parameter models. Sustained
-                      throughput enabled the 200B token data generation pipeline.
-                    </p>
-                    <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                      <div className="h-full bg-[#0ea5e9] rounded-full" style={{ width: "45%" }} />
-                    </div>
-                    <div className="mt-2 text-xs text-gray-400">~45% of total allocation</div>
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#9333ea]/15 flex items-center justify-center">
-                        <Database className="w-5 h-5 text-[#9333ea]" />
-                      </div>
-                      <h3 className="text-base font-medium">Data Storage & Pipeline</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Scalable storage infrastructure for 15.1M multi-domain physics samples, including
-                      preprocessing, curation, and quality assurance pipelines.
-                    </p>
-                    <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                      <div className="h-full bg-[#9333ea] rounded-full" style={{ width: "25%" }} />
-                    </div>
-                    <div className="mt-2 text-xs text-gray-400">~25% of total allocation</div>
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-[#f59e0b]/15 flex items-center justify-center">
-                        <Beaker className="w-5 h-5 text-[#f59e0b]" />
-                      </div>
-                      <h3 className="text-base font-medium">CRO Synthesis Contracts</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Upcoming wet-lab validation contracts with Contract Research Organizations for physical
-                      synthesis and testing of computationally discovered molecules.
-                    </p>
-                    <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                      <div className="h-full bg-[#f59e0b] rounded-full" style={{ width: "20%" }} />
-                    </div>
-                    <div className="mt-2 text-xs text-gray-400">~20% of total allocation</div>
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center">
-                        <Bot className="w-5 h-5 text-gray-600" />
-                      </div>
-                      <h3 className="text-base font-medium">Robotics & Operations</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Opentrons robotic lab protocol development, sim-to-real automation infrastructure, and
-                      operational overhead for the research team.
-                    </p>
-                    <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                      <div className="h-full bg-gray-400 rounded-full" style={{ width: "10%" }} />
-                    </div>
-                    <div className="mt-2 text-xs text-gray-400">~10% of total allocation</div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* SLIDE 11: Next Steps */}
-            {currentSlide === 10 && (
-              <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[10] = el; }}>
                 <SlideHeader badge="Slide 11" icon={Rocket} title="Next Steps — Post-Review Roadmap" />
 
                 <div className="space-y-6">
@@ -1072,47 +992,7 @@ export default function PMECPresentationPage() {
                 </div>
               </motion.div>
             )}
-
-            {/* SLIDE 12: Q&A */}
-            {currentSlide === 11 && (
-              <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[11] = el; }} className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-                <motion.div variants={fadeInUp} className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#0ea5e9]/20 to-[#9333ea]/20 border border-gray-200 flex items-center justify-center mb-8">
-                  <HelpCircle className="w-10 h-10 text-gray-600" />
-                </motion.div>
-
-                <motion.h1 variants={fadeInUp} className="text-6xl md:text-8xl font-light tracking-tight mb-6">
-                  Q<span className="text-[#0ea5e9]">&amp;</span>A
-                </motion.h1>
-
-                <motion.p variants={fadeInUp} className="text-gray-500 text-lg max-w-md leading-relaxed mb-12">
-                  Thank you for your attention. We welcome your questions on any aspect of the UNIPHY program,
-                  technical results, or the roadmap ahead.
-                </motion.p>
-
-                <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 justify-center">
-                  <div className="px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-500">
-                    Technical Architecture
-                  </div>
-                  <div className="px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-500">
-                    Validation Results
-                  </div>
-                  <div className="px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-500">
-                    Industrial Applications
-                  </div>
-                  <div className="px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-500">
-                    DAE Thorium Mission
-                  </div>
-                  <div className="px-5 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-500">
-                    100B Scaling Plan
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="mt-16 flex items-center gap-2 text-gray-300 text-sm">
-                  <div className="w-1.5 h-1.5 bg-[#0ea5e9] rounded-full" />
-                  <span className="tracking-[0.2em] uppercase">Shodh AI · PMEC Review</span>
-                </motion.div>
-              </motion.div>
-            )}
+            </div>
           </motion.div>
         </AnimatePresence>
       </main>
