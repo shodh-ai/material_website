@@ -72,7 +72,7 @@ const DiffusionChart = dynamic(() => import("@/components/DiffusionChart"), {
 
 type Phase = "idle" | "thinking" | "done";
 type DemoId = "pharma" | "coating" | "aero" | "battery";
-type ViewerType = "molecule" | "lipid" | "shockwave" | "polymer";
+type ViewerType = "molecule" | "lipid" | "shockwave" | "polymer" | "airplane";
 
 type DemoConfig = {
   id: DemoId;
@@ -83,6 +83,7 @@ type DemoConfig = {
   thoughtSteps: { icon: any; label: string; detail: string }[];
   viewerType: ViewerType;
   viewerLabel: string;
+  outputImages?: { src: string; alt: string; label: string }[];
   scorecard: { label: string; value: string; unit: string; sub: string; highlight: boolean }[];
   hasRecipe: boolean;
   synthesisSteps?: { step: number; title: string; detail: string }[];
@@ -310,55 +311,66 @@ const demos: Record<DemoId, DemoConfig> = {
   },
   aero: {
     id: "aero",
-    tabLabel: "Aerodynamics · Mach 5",
+    tabLabel: "Aerodynamics · Airplane",
     tabIcon: Plane,
     accent: "orange",
     inputText: (
       <>
         &ldquo;Simulate the aerodynamic{" "}
-        <span className="font-semibold text-orange-700">shockwave</span> of a{" "}
-        <span className="font-semibold text-orange-700">Mach 5</span> jet flying at
-        high altitude.&rdquo;
+        <span className="font-semibold text-orange-700">flow field</span> around a{" "}
+        <span className="font-semibold text-orange-700">commercial airplane</span> wing and
+        fuselage during steady cruise.&rdquo;
       </>
     ),
     thoughtSteps: [
-      { icon: Languages, label: "Translating intent...", detail: "Parsing natural language → CFD simulation parameters" },
-      { icon: Gauge, label: "Loading Lobe 2 (Compressible Fluids)", detail: "Activating supersonic flow solver module" },
-      { icon: Target, label: "Setting Boundary Conditions: Velocity = Mach 5", detail: "Free-stream velocity 1700 m/s · altitude 20 km" },
-      { icon: Target, label: "Setting Boundary Conditions: Fluid = Air", detail: "γ = 1.4 · Prandtl-Blasius profile · ρ = 0.088 kg/m³" },
-      { icon: Brain, label: "Encoding flow-field latents...", detail: "Mapping geometry + conditions → 512-dim latent space" },
+      { icon: Languages, label: "Translating intent...", detail: "Parsing natural language → aircraft CFD simulation parameters" },
+      { icon: Gauge, label: "Loading Lobe 2 (External Aerodynamics)", detail: "Activating airplane flow-field solver module" },
+      { icon: Target, label: "Setting Boundary Conditions: Cruise Speed", detail: "Free-stream velocity 250 m/s · altitude 11 km" },
+      { icon: Target, label: "Setting Boundary Conditions: Fluid = Air", detail: "γ = 1.4 · turbulent boundary layer · ρ = 0.364 kg/m³" },
+      { icon: Brain, label: "Encoding aircraft geometry latents...", detail: "Mapping wing + fuselage + conditions → 512-dim latent space" },
       { icon: Shuffle, label: "Running neural CFD inference...", detail: "10B model · single-shot prediction (no mesh needed)" },
-      { icon: Activity, label: "Resolving shock discontinuities...", detail: "Capturing bow shock · expansion fans · slip lines" },
-      { icon: TrendingUp, label: "Computing thermodynamic fields...", detail: "Pressure · density · temperature · Mach contours" },
-      { icon: ShieldCheck, label: "Validating physics residual...", detail: "nRMSE vs ground-truth DNS · 0.054 — PASS" },
-      { icon: Beaker, label: "Generating visualization...", detail: "Heat-map .mp4 rendered from .npz field arrays" },
+      { icon: Activity, label: "Resolving wake structures...", detail: "Capturing wingtip vortices · pressure gradients · separation zones" },
+      { icon: TrendingUp, label: "Computing aerodynamic fields...", detail: "Pressure · velocity · lift · drag contours" },
+      { icon: ShieldCheck, label: "Validating physics residual...", detail: "nRMSE vs reference CFD · 0.041 — PASS" },
+      { icon: Beaker, label: "Generating visualization...", detail: "Airplane flow-field images rendered from predicted CFD arrays" },
     ],
-    viewerType: "shockwave",
-    viewerLabel: 'Mach 5 Shockwave — Pressure Field',
+    viewerType: "airplane",
+    viewerLabel: "Airplane Aerodynamics — Flow-Field Output",
+    outputImages: [
+      {
+        src: "/Screenshot 2026-06-30 at 3.49.55 PM.png",
+        alt: "Airplane aerodynamic simulation output 1",
+        label: "Pressure / velocity contours",
+      },
+      {
+        src: "/Screenshot 2026-06-30 at 3.50.00 PM.png",
+        alt: "Airplane aerodynamic simulation output 2",
+        label: "Wake and streamline field",
+      },
+    ],
     scorecard: [
-      { label: "Physics Residual", value: "0.054", unit: "nRMSE", sub: "vs ground-truct DNS", highlight: true },
-      { label: "Mach Number", value: "5.0", unit: "M", sub: "Supersonic regime", highlight: false },
-      { label: "Shock Resolution", value: "Sharp", unit: "", sub: "No blurring at discontinuities", highlight: true },
-      { label: "Inference Time", value: "45", unit: "ms", sub: "vs Legacy CFD: 72 hours", highlight: false },
+      { label: "Physics Residual", value: "0.041", unit: "nRMSE", sub: "vs reference CFD", highlight: true },
+      { label: "Cruise Speed", value: "250", unit: "m/s", sub: "Steady cruise condition", highlight: false },
+      { label: "Lift Coefficient", value: "0.52", unit: "CL", sub: "Stable wing loading", highlight: true },
+      { label: "Inference Time", value: "45", unit: "ms", sub: "vs Legacy CFD: 18 hours", highlight: false },
       { label: "Mesh Required", value: "No", unit: "", sub: "Mesh-free neural inference", highlight: false },
-      { label: "Field Variables", value: "4", unit: "fields", sub: "P · ρ · T · M", highlight: false },
+      { label: "Field Variables", value: "4", unit: "fields", sub: "P · U · CL · CD", highlight: false },
     ],
     hasRecipe: false,
     hasWaterSim: false,
     hasInsight: true,
     insightText: (
       <>
-        The <span className="font-bold">10B model</span> correctly resolves extreme
-        thermodynamic discontinuities (shocks) without blurring — a feat traditional
-        CFD requires <span className="font-bold">72 hours</span> of mesh-based
-        computation to achieve.
+        The <span className="font-bold">10B model</span> predicts aircraft pressure,
+        velocity, lift, and wake behavior in milliseconds — replacing slow mesh-based
+        CFD iterations for early-stage airplane design.
       </>
     ),
     hasDiffusionChart: false,
     closingText: (
       <>
-        <span className="font-bold">72 hours → 45 milliseconds.</span> Neural CFD
-        resolves shocks that legacy solvers choke on.
+        <span className="font-bold">18 hours → 45 milliseconds.</span> Neural CFD
+        turns airplane aerodynamic iteration into an interactive workflow.
       </>
     ),
   },
@@ -659,16 +671,34 @@ export default function PhysicsDemoPage() {
                   <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
                     <FlaskConical className={`h-4 w-4 ${ac.icon}`} />
                     <span className={`text-xs font-semibold uppercase tracking-wider ${ac.label}`}>
-                      {demo.viewerType === "shockwave" ? "Shockwave Heatmap" : demo.viewerType === "polymer" ? "3D Polymer Viewer" : "3D Molecule Viewer"}
+                      {demo.viewerType === "airplane" ? "Airplane CFD Images" : demo.viewerType === "shockwave" ? "Shockwave Heatmap" : demo.viewerType === "polymer" ? "3D Polymer Viewer" : "3D Molecule Viewer"}
                     </span>
                   </div>
                   <div className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white/70 px-3 py-1 font-mono text-[10px] text-slate-400">
-                    {demo.viewerType === "shockwave" ? "neural CFD output" : "drag to rotate · scroll to zoom"}
+                    {demo.viewerType === "airplane" || demo.viewerType === "shockwave" ? "neural CFD output" : "drag to rotate · scroll to zoom"}
                   </div>
                   {demo.viewerType === "molecule" && <Molecule3D />}
                   {demo.viewerType === "lipid" && <LipidMolecule3D />}
                   {demo.viewerType === "shockwave" && <ShockwaveHeatmap />}
                   {demo.viewerType === "polymer" && <PolymerElectrolyte3D />}
+                  {demo.viewerType === "airplane" && demo.outputImages && (
+                    <div className="grid h-full grid-cols-1 gap-3 bg-slate-950 p-4 pt-14 sm:grid-cols-2">
+                      {demo.outputImages.map((image) => (
+                        <div key={image.src} className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-900">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            fill
+                            sizes="(min-width: 640px) 50vw, 100vw"
+                            className="object-contain"
+                          />
+                          <div className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-slate-950/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-orange-100 backdrop-blur">
+                            {image.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className="absolute bottom-4 left-4 z-10 font-mono text-[10px] text-slate-500">
                     {demo.viewerLabel}
                   </div>

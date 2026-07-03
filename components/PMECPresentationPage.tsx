@@ -63,7 +63,7 @@ const slides = [
   { id: 6, title: "Materials & Energy", icon: Battery },
   { id: 7, title: "Sim-to-Real & Industrial", icon: Factory },
   { id: 8, title: "Demo Evidence", icon: Play },
-  { id: 11, title: "Next Steps", icon: Rocket },
+  { id: 11, title: "Model Capabilities", icon: Rocket },
 ];
 
 export default function PMECPresentationPage() {
@@ -383,15 +383,9 @@ export default function PMECPresentationPage() {
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[4] = el; }}>
                 <SlideHeader badge="Slide 04b" icon={Award} title="Scientific Validation & Benchmarks" />
 
-                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-4">
+                <motion.p variants={fadeInUp} className="text-gray-500 text-sm mb-8">
                   Operating at global State-of-the-Art — benchmarked against top-tier publications
                 </motion.p>
-
-                <motion.div variants={fadeInUp} className="p-4 rounded-xl border border-green-200 bg-green-50 mb-8">
-                  <p className="text-green-700 leading-relaxed">
-                    For error metrics such as Force MAE and nRMSE, lower is better because it means the model is closer to ground-truth physics. For toxicity probability, lower is also better because it indicates lower predicted biological risk. For validity percentage, higher is better.
-                  </p>
-                </motion.div>
 
                 {/* Scaling comparison */}
                 <motion.div variants={fadeInUp} className="mb-6">
@@ -437,66 +431,70 @@ export default function PMECPresentationPage() {
                   />
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-gray-200 bg-white mb-8">
-                  <h3 className="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">Scientific Validation Benchmarks</h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Scientific Domain</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Benchmark Metric</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">UNIPHY 1B</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">UNIPHY 10B</th>
-                          <th className="text-left p-3 text-gray-400 text-xs uppercase">Global SOTA (Specialists)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[
-                          { domain: "Fluid Dynamics", metric: "PDEArena (nRMSE)", oneB: "0.318", tenB: "0.054", sota: "~0.025 (FNO / U-Net)" },
-                          { domain: "Quantum Mechanics", metric: "MD17 (Force MAE)", oneB: "0.241", tenB: "0.042", sota: "~0.015 (NequIP / MACE)" },
-                          { domain: "Chemistry Syntax", metric: "MOSES (Validity)", oneB: "100%", tenB: "100%", sota: "100% (Standard RNN)" },
-                          { domain: "Chemistry Safety", metric: "TDC Tox21 NR-ER", oneB: "—", tenB: "0.14 prob", sota: "Pass: low endocrine risk" },
-                        ].map((row, i) => (
-                          <tr key={i} className="border-b border-gray-100">
-                            <td className="p-3 text-gray-800 font-medium">{row.domain}</td>
-                            <td className="p-3 text-gray-600">{row.metric}</td>
-                            <td className="p-3 text-gray-500 font-mono">{row.oneB}</td>
-                            <td className="p-3 text-[#0ea5e9] font-mono font-bold">{row.tenB}</td>
-                            <td className="p-3 text-gray-500 font-mono">{row.sota}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="p-6 rounded-2xl border border-[#0ea5e9]/25 bg-[#0ea5e9]/[0.03]">
-                    <h3 className="font-medium text-[#0ea5e9] mb-3">1. Quantum Physics Benchmark: MD17</h3>
-                    <div className="space-y-3 text-gray-700">
-                      <p><span className="font-medium text-gray-900">What it is:</span> The global standard for predicting atomic forces and energy.</p>
-                      <p><span className="font-medium text-gray-900">Real Score:</span> 0.042 kcal/mol/Å Force MAE. Lower is better.</p>
-                      <p><span className="font-medium text-gray-900">Pitch:</span> Dedicated supercomputer models strive to break the 0.05 barrier on MD17. UNIPHY 10B achieved 0.042 MAE natively, proving State-of-the-Art quantum accuracy.</p>
+                <motion.div variants={fadeInUp} className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: "Quantum Physics — MD17 Benchmark",
+                      metric: "Force MAE (kcal/mol/Å). Lower is better.",
+                      rows: [
+                        { model: "SchNet", type: "Standard Open-Source Baseline", score: "~0.20 to 0.30" },
+                        { model: "PaiNN", type: "Advanced Open-Source", score: "~0.06" },
+                        { model: "UNIPHY 10B", type: "Our Model", score: "0.042", highlight: true },
+                        { model: "NequIP / MACE", type: "Highly Specialized SOTA", score: "~0.02" },
+                      ],
+                    },
+                    {
+                      title: "Fluid Dynamics — PDEArena Benchmark",
+                      metric: "nRMSE (Normalized Error). Lower is better.",
+                      rows: [
+                        { model: "Standard U-Net", type: "Open-Source Baseline", score: "~0.15 to 0.25" },
+                        { model: "FNO", type: "Fourier Neural Operator / Popular Open-Source", score: "~0.08 to 0.12" },
+                        { model: "UNIPHY 10B", type: "Our Model", score: "0.054", highlight: true },
+                      ],
+                    },
+                    {
+                      title: "Pharma Generation — De Novo Drug Design",
+                      metric: "SMILES Validity & Synthesizability.",
+                      rows: [
+                        { model: "ChemVAE / Standard LLMs", type: "Open-Source", score: "~80–85% validity; hallucinates impossible chemistry" },
+                        { model: "UNIPHY 1B / 10B", type: "Our Model", score: "100% Validity via RDKit grammar masking; <2.0 SA Scores", highlight: true },
+                      ],
+                    },
+                    {
+                      title: "Materials Generation — Crystals",
+                      metric: "3D Crystal Symmetry & Periodicity.",
+                      rows: [
+                        { model: "CDVAE", type: "Popular Open-Source Diffusion", score: "Struggles with periodic boundary symmetry; often lopsided crystals" },
+                        { model: "MatterGen", type: "Microsoft Proprietary", score: "Excellent stability, but restricted to diffusion/imitation" },
+                        { model: "UNIPHY Lobe 4 GFlowNet", type: "Our Model", score: "Strict Space Group and Wyckoff orbit representations; exact ZnS Zincblende output", highlight: true },
+                      ],
+                    },
+                  ].map((section, idx) => (
+                    <div key={idx} className="p-6 rounded-2xl border border-gray-200 bg-white">
+                      <h3 className="text-gray-800 font-semibold mb-2">{section.title}</h3>
+                      <p className="text-gray-500 mb-4">Metric: {section.metric}</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full">
+                          <thead>
+                            <tr className="border-b border-gray-200">
+                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Model</th>
+                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Category</th>
+                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Score / Result</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {section.rows.map((row, i) => (
+                              <tr key={i} className={`border-b border-gray-100 ${row.highlight ? "bg-[#0ea5e9]/[0.04]" : ""}`}>
+                                <td className={`p-3 font-medium ${row.highlight ? "text-[#0ea5e9]" : "text-gray-800"}`}>{row.model}</td>
+                                <td className="p-3 text-gray-600">{row.type}</td>
+                                <td className={`p-3 ${row.highlight ? "text-[#0ea5e9] font-bold" : "text-gray-600"}`}>{row.score}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="p-6 rounded-2xl border border-[#9333ea]/25 bg-[#9333ea]/[0.03]">
-                    <h3 className="font-medium text-[#9333ea] mb-3">2. Fluid Dynamics Benchmark: PDEArena</h3>
-                    <div className="space-y-3 text-gray-700">
-                      <p><span className="font-medium text-gray-900">What it is:</span> Microsoft’s benchmark for solving PDEs such as Navier-Stokes fluid dynamics.</p>
-                      <p><span className="font-medium text-gray-900">Real Score:</span> 0.054 nRMSE on non-Newtonian rheology. Lower is better.</p>
-                      <p><span className="font-medium text-gray-900">Pitch:</span> The 1B model scored 0.318, while 10B reached 0.054 nRMSE, showing that Mamba-MoE scaling directly improves macroscopic industrial fluid-flow prediction.</p>
-                    </div>
-                  </div>
-
-                  <div className="p-6 rounded-2xl border border-[#f59e0b]/25 bg-[#f59e0b]/[0.03]">
-                    <h3 className="font-medium text-[#f59e0b] mb-3">3. Chemistry Benchmarks: MOSES & TDC</h3>
-                    <div className="space-y-3 text-gray-700">
-                      <p><span className="font-medium text-gray-900">What it is:</span> Global standards for drug generation validity and safety.</p>
-                      <p><span className="font-medium text-gray-900">Real Scores:</span> 100% SMILES validity, 0 Lipinski violations, and Tox21 NR-ER pass at 0.14 toxicity probability. Higher validity is better; lower toxicity probability is better.</p>
-                      <p><span className="font-medium text-gray-900">Pitch:</span> UNIPHY does not generate random strings; it benchmarks against MOSES and TDC Tox21 to support safer p53 oncology and BPA-free materials design.</p>
-                    </div>
-                  </div>
+                  ))}
                 </motion.div>
               </motion.div>
             )}
@@ -929,67 +927,55 @@ export default function PMECPresentationPage() {
               </motion.div>
             )}
 
-            {/* SLIDE 11: Next Steps */}
+            {/* SLIDE 10: Model Scaling & Emergent Capabilities */}
             {currentSlide === 9 && (
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[9] = el; }}>
-                <SlideHeader badge="Slide 11" icon={Rocket} title="Next Steps — Post-Review Roadmap" />
+                <SlideHeader badge="Slide 10" icon={Rocket} title="Model Scaling & Emergent Capabilities" />
 
-                <div className="space-y-6">
-                  <motion.div variants={fadeInUp} className="flex items-start gap-6 p-6 rounded-2xl border border-[#0ea5e9]/20 bg-[#0ea5e9]/[0.03]">
-                    <div className="w-12 h-12 rounded-xl bg-[#0ea5e9]/15 flex items-center justify-center flex-shrink-0">
-                      <Beaker className="w-6 h-6 text-[#0ea5e9]" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-mono text-[#0ea5e9]">01</span>
-                        <h3 className="text-lg font-medium">Finalizing CRO Wet-Lab Synthesis</h3>
-                      </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        Transitioning computationally validated molecules (p53, KRAS, HPPD) into physical synthesis
-                        and testing through contracted research organizations. This closes the sim-to-real loop and
-                        provides experimental confirmation of in silico predictions.
-                      </p>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 mt-3" />
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp} className="flex items-start gap-6 p-6 rounded-2xl border border-[#9333ea]/20 bg-[#9333ea]/[0.03]">
-                    <div className="w-12 h-12 rounded-xl bg-[#9333ea]/15 flex items-center justify-center flex-shrink-0">
-                      <Atom className="w-6 h-6 text-[#9333ea]" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-mono text-[#9333ea]">02</span>
-                        <h3 className="text-lg font-medium">Commencing the DAE Thorium Mandate</h3>
-                      </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        Initiating work on the Department of Atomic Energy Thorium mission, as recommended by the
-                        Principal Scientific Adviser. UNIPHY&apos;s cross-domain simulation capabilities will be
-                        applied to nuclear fission modeling and thorium cycle optimization.
-                      </p>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 mt-3" />
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp} className="flex items-start gap-6 p-6 rounded-2xl border border-[#f59e0b]/20 bg-[#f59e0b]/[0.03]">
-                    <div className="w-12 h-12 rounded-xl bg-[#f59e0b]/15 flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-6 h-6 text-[#f59e0b]" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-mono text-[#f59e0b]">03</span>
-                        <h3 className="text-lg font-medium">Scaling to the 100B World Model</h3>
-                      </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        Scaling UNIPHY from 10B to 100B parameters to unlock emergent capabilities for nuclear
-                        fission, deep-tech materials, and national mission-critical simulations. The 83% error
-                        reduction observed from 1B→10B scaling provides strong empirical justification for this
-                        next phase.
-                      </p>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 mt-3" />
-                  </motion.div>
-                </div>
+                <motion.div variants={fadeInUp} className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-200 bg-gray-50">
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Model Scale</th>
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Compute / Status</th>
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Functional Capabilities</th>
+                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Strategic Sectors</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 hover:bg-white transition-colors">
+                        <td className="p-4 text-[#0ea5e9] font-bold text-2xl">1B</td>
+                        <td className="p-4 text-gray-700">Completed<br />(Pilot Cluster)</td>
+                        <td className="p-4 text-gray-700 leading-relaxed">Molecular Discovery: Zero-shot hit generation, ADMET safety triage, and automated 4-step chemical Retrosynthesis.</td>
+                        <td className="p-4 text-gray-700 font-medium">BioPharma, AgTech</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 hover:bg-white transition-colors">
+                        <td className="p-4 text-[#9333ea] font-bold text-2xl">10B</td>
+                        <td className="p-4 text-gray-700">Completed<br />(72 H100 GPUs)</td>
+                        <td className="p-4 text-gray-700 leading-relaxed">Process Optimization: Sim-to-real factory adaptation, fluid rheology, and CSTR thermal runaway prediction.</td>
+                        <td className="p-4 text-gray-700 font-medium">Chemical Mfg, Advanced Polymers</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 hover:bg-white transition-colors">
+                        <td className="p-4 text-[#f59e0b] font-bold text-2xl">20B</td>
+                        <td className="p-4 text-gray-700">Near-Term<br />(Scale-up)</td>
+                        <td className="p-4 text-gray-700 leading-relaxed">Material Engineering: 3D inorganic crystal generation, novel catalyst design, and solid-state fracture dynamics.</td>
+                        <td className="p-4 text-gray-700 font-medium">Solid-State Batteries, Green Chemistry</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 hover:bg-white transition-colors">
+                        <td className="p-4 text-green-600 font-bold text-2xl">100B</td>
+                        <td className="p-4 text-gray-700">Phase 1<br />(1,000 H100s, 3 Mo)</td>
+                        <td className="p-4 text-gray-700 leading-relaxed">System-Level Inverse Design: End-to-end factory digital twins, combinatorial discovery, and multi-objective component design.</td>
+                        <td className="p-4 text-gray-700 font-medium">Railways, Hydrogen, Industrial R&amp;D</td>
+                      </tr>
+                      <tr className="hover:bg-white transition-colors">
+                        <td className="p-4 text-gray-900 font-bold text-2xl">200B</td>
+                        <td className="p-4 text-gray-700">Phase 2<br />(2,000 H100s, 3 Mo)</td>
+                        <td className="p-4 text-gray-700 leading-relaxed">Extreme Physics Simulation: Plasma magnetic confinement, radiation transport, and Angstrom-level fab simulation.</td>
+                        <td className="p-4 text-gray-700 font-medium">Thorium/Nuclear, Semiconductors, Defence, Aerospace</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </motion.div>
               </motion.div>
             )}
             </div>
