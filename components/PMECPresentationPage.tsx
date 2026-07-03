@@ -41,6 +41,7 @@ import {
   BarChart3,
   Calendar,
   Building2,
+  Clock,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -174,7 +175,7 @@ export default function PMECPresentationPage() {
                   <br />
                   and Manufacturing
                 </motion.h1>
-                <motion.p variants={fadeInUp} className="text-2xl md:text-3xl text-gray-700 leading-relaxed max-w-5xl">
+                <motion.p variants={fadeInUp} className="text-3xl md:text-5xl text-gray-700 leading-relaxed max-w-5xl">
                   The operating system for the physical economy: from quantum drug discovery to factory scale-up.
                 </motion.p>
               </motion.div>
@@ -265,45 +266,84 @@ export default function PMECPresentationPage() {
               </motion.div>
             )}
 
-            {/* SLIDE 3: Milestone & Timeline Tracker */}
+            {/* SLIDE 3: Expanded Scope & Milestone Progress Tracker */}
             {currentSlide === 2 && (
               <motion.div variants={staggerContainer} initial="hidden" animate="visible" ref={(el) => { slideRefs.current[2] = el; }}>
-                <SlideHeader badge="Slide 03" icon={Calendar} title="Milestone & Timeline Tracker" />
+                <SlideHeader badge="Slide 03" icon={Calendar} title="Expanded Scope & Milestone Progress Tracker" />
+
+                <motion.p variants={fadeInUp} className="text-gray-600 leading-relaxed mb-6">
+                  Due to rapid architectural breakthroughs, we expanded our LoA scope from a narrow silicon-anode
+                  dataset to a Universal Multi-Physics Foundation Model. All expanded self-defined targets slated for
+                  August 2026 have been successfully achieved ahead of schedule.
+                </motion.p>
 
                 <motion.div variants={fadeInUp} className="overflow-x-auto rounded-2xl border border-gray-200">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-gray-200 bg-white">
-                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs w-[18%]">Milestone Area</th>
-                        <th className="text-left p-4 font-medium text-gray-600 uppercase tracking-wider text-xs">Progress Summary</th>
+                      <tr className="border-b border-gray-200 bg-gray-50">
+                        <th className="text-left p-3 font-medium text-gray-600 uppercase tracking-wider text-xs">Milestone Area</th>
+                        <th className="text-left p-3 font-medium text-gray-600 uppercase tracking-wider text-xs">Self-Defined Target</th>
+                        <th className="text-left p-3 font-medium text-gray-600 uppercase tracking-wider text-xs whitespace-nowrap">Target Month</th>
+                        <th className="text-left p-3 font-medium text-gray-600 uppercase tracking-wider text-xs whitespace-nowrap">Status</th>
+                        <th className="text-left p-3 font-medium text-gray-600 uppercase tracking-wider text-xs">Scientific Progress & Output Comment</th>
                       </tr>
                     </thead>
                     <tbody>
                       {[
                         {
-                          area: "Platform Evolution",
-                          summary: "ShodhAI has evolved from a narrow silicon-anode dataset effort into a full cross-domain physics foundation model platform spanning batteries, fluids, aerospace, chemistry, materials, and inverse design.",
+                          area: "1. Platform Evolution & Data Generation",
+                          target: "Evolve from narrow silicon-anode dataset to a multi-domain physics data factory.",
+                          month: "Aug 2026",
+                          status: "Achieved (June 2026)",
+                          comment: "Exceeded LoA Scope. Generated 15.1 Million high-fidelity cross-domain samples (200 Billion tokens) using GPU-accelerated JAX-MD and NVIDIA Warp pipelines.",
                         },
                         {
-                          area: "Data Generation",
-                          summary: "We generated large-scale multi-domain physics data using GPU/TPU-accelerated JAX-MD, NVIDIA Warp, and in-flight harvester pipelines.",
+                          area: "2. Model Validation (Tokenizer)",
+                          target: "Build a unified compression layer for diverse physical states (Fluids, Molecules, Thermo).",
+                          month: "Aug 2026",
+                          status: "Achieved (July 2026)",
+                          comment: "Validated LURTEE V1. Successfully built a 4D physics tokenizer capable of compressing 3D molecular geometries and non-Newtonian fluid grids into a unified 2048-D latent space.",
                         },
                         {
-                          area: "Model Validation",
-                          summary: "We validated a 4D physics tokenizer and trained advanced Mamba-MoE foundation models, including the completed UNIPHY 10B MoE model.",
+                          area: "3. Foundation Model (1B & 10B MoE)",
+                          target: "Train and validate the Mamba-MoE architecture up to 10 Billion parameters.",
+                          month: "Aug 2026",
+                          status: "Achieved (July 2026)",
+                          comment: "10B Model Completed. Successfully demonstrated physical scaling laws. Fluid Rheology nRMSE dropped to 0.054; Nuclear Fission flux nRMSE reached 0.248.",
                         },
                         {
-                          area: "Platform Capability",
-                          summary: "The platform now supports natural-language-to-physics generation, industrial physics pilots, molecular inverse design, and robotics-ready wet-lab workflow generation.",
+                          area: "4. Platform Capability (Chemistry & Pharma)",
+                          target: "Demonstrate zero-shot molecular discovery and automated synthesis planning.",
+                          month: "Aug 2026",
+                          status: "Achieved (July 2026)",
+                          comment: "Wet-Lab Ready Outputs. Autonomously generated sub-nanomolar hits for p53 (40 pM) and KRAS (113 nM), passing strict ADMET safety triage. Generated automated Opentrons robotic synthesis protocols.",
                         },
                         {
-                          area: "Next Milestone",
-                          summary: "The next milestone is scaling from the completed 10B UNIPHY model to a larger 20B parameter foundation model for deeper cross-domain physics reasoning.",
+                          area: "5. Platform Capability (Industrial Physics)",
+                          target: "Demonstrate Sim-to-Real translation for manufacturing scale-up.",
+                          month: "Aug 2026",
+                          status: "Achieved (July 2026)",
+                          comment: "Factory Digital Twins. Deployed multi-physics decoders for CSTR thermal runaway prediction and solid-state battery electrolyte diffusion, replacing slow legacy solvers.",
+                        },
+                        {
+                          area: "6. Next Milestone (Scale-Up & LURTEE V2)",
+                          target: "Scale architecture to 20B parameters; transition to mesh-free Port-Hamiltonian physics.",
+                          month: "Q4 2026",
+                          status: "Initiated (On Track)",
+                          comment: "Next Phase. Moving to 20B to unlock deeper cross-domain reasoning (3D inorganic crystals, solid-state fracture dynamics). Upgrading to V2 continuous-time physics tokenization.",
                         },
                       ].map((row, i) => (
                         <tr key={i} className="border-b border-gray-100 hover:bg-white transition-colors">
-                          <td className="p-4 text-[#0ea5e9] font-medium">{row.area}</td>
-                          <td className="p-4 text-gray-700 leading-relaxed">{row.summary}</td>
+                          <td className="p-3 text-[#0ea5e9] font-medium whitespace-nowrap">{row.area}</td>
+                          <td className="p-3 text-gray-700 leading-relaxed">{row.target}</td>
+                          <td className="p-3 text-gray-600 whitespace-nowrap">{row.month}</td>
+                          <td className="p-3">
+                            <span className={`inline-flex items-center gap-1 text-xs font-medium ${row.status.startsWith("Achieved") ? "text-green-600" : "text-[#f59e0b]"}`}>
+                              {row.status.startsWith("Achieved") ? <CheckCircle2 className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                              {row.status}
+                            </span>
+                          </td>
+                          <td className="p-3 text-gray-600 leading-relaxed">{row.comment}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -337,44 +377,6 @@ export default function PMECPresentationPage() {
                   />
                 </motion.div>
 
-
-
-                {/* 100B Justification */}
-                <motion.div variants={fadeInUp} className="p-6 rounded-2xl border border-[#9333ea]/20 bg-gradient-to-br from-[#9333ea]/[0.05] to-transparent">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#9333ea]/15 flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-[#9333ea]" />
-                    </div>
-                    <h3 className="text-lg font-medium">Why 100B Is the Next Logical Step</h3>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed text-sm mb-4">
-                    The 100B model is justified because national-mission science needs emergent capability, not
-                    just incremental accuracy. The scaling curve shows that as model size increases, physics error
-                    drops sharply. The 10B result is not the endpoint — it is the evidence that 100B is the next step.
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
-                      <Atom className="w-5 h-5 text-[#9333ea]" />
-                      <span className="text-gray-700 text-sm">Nuclear fission simulation & optimization</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
-                      <Layers className="w-5 h-5 text-[#9333ea]" />
-                      <span className="text-gray-700 text-sm">Advanced materials discovery</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
-                      <CircuitBoard className="w-5 h-5 text-[#9333ea]" />
-                      <span className="text-gray-700 text-sm">Multi-physics design loops</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
-                      <Bot className="w-5 h-5 text-[#9333ea]" />
-                      <span className="text-gray-700 text-sm">Autonomous scientific self-play via reward oracles</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 md:col-span-2">
-                      <Globe className="w-5 h-5 text-[#9333ea]" />
-                      <span className="text-gray-700 text-sm">National-scale scientific reasoning & mission planning</span>
-                    </div>
-                  </div>
-                </motion.div>
               </motion.div>
             )}
 
@@ -387,112 +389,112 @@ export default function PMECPresentationPage() {
                   Operating at global State-of-the-Art — benchmarked against top-tier publications
                 </motion.p>
 
-                {/* Scaling comparison */}
-                <motion.div variants={fadeInUp} className="mb-6">
-                  <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-4">Scaling Proof: 1B → 10B</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-6 rounded-2xl border border-gray-200 bg-white">
-                      <div className="text-xs uppercase tracking-wider text-gray-400 mb-2">1B UNIPHY</div>
-                      <div className="text-3xl font-light text-gray-800 mb-4">Rheology nRMSE</div>
-                      <div className="text-5xl font-bold text-gray-600">0.318</div>
-                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                        <div className="h-full bg-gray-300 rounded-full" style={{ width: "68%" }} />
-                      </div>
-                    </div>
-                    <div className="p-6 rounded-2xl border border-[#0ea5e9]/30 bg-[#0ea5e9]/[0.03]">
-                      <div className="text-xs uppercase tracking-wider text-[#0ea5e9] mb-2">10B UNIPHY</div>
-                      <div className="text-3xl font-light text-gray-900 mb-4">Rheology nRMSE</div>
-                      <div className="text-5xl font-bold text-[#0ea5e9]">0.054</div>
-                      <div className="mt-4 h-2 rounded-full bg-gray-100 overflow-hidden">
-                        <div className="h-full bg-[#0ea5e9] rounded-full" style={{ width: "12%" }} />
-                      </div>
-                      <div className="mt-3 flex items-center gap-2 text-green-600 text-sm">
-                        <TrendingDown className="w-4 h-4" />
-                        <span>~83% error reduction · 5.9× better accuracy</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <BenchmarkCard
-                    domain="Quantum (MD17)"
-                    metric="Force MAE"
-                    value="0.042"
-                    comparison="vs. Nature-published baselines"
-                    color="#0ea5e9"
-                  />
-                  <BenchmarkCard
-                    domain="Fluids (Rheology)"
-                    metric="nRMSE"
-                    value="0.054"
-                    comparison="vs. DeepMind BioMatrix benchmarks"
-                    color="#9333ea"
-                  />
-                </motion.div>
-
                 <motion.div variants={fadeInUp} className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                   {[
                     {
                       title: "Quantum Physics — MD17 Benchmark",
                       metric: "Force MAE (kcal/mol/Å). Lower is better.",
-                      rows: [
-                        { model: "SchNet", type: "Standard Open-Source Baseline", score: "~0.20 to 0.30" },
-                        { model: "PaiNN", type: "Advanced Open-Source", score: "~0.06" },
-                        { model: "UNIPHY 10B", type: "Our Model", score: "0.042", highlight: true },
-                        { model: "NequIP / MACE", type: "Highly Specialized SOTA", score: "~0.02" },
+                      chartMax: 0.30,
+                      chartValues: [
+                        { model: "SchNet", value: 0.25 },
+                        { model: "PaiNN", value: 0.06 },
+                        { model: "UNIPHY 10B", value: 0.042, highlight: true },
+                        { model: "NequIP / MACE", value: 0.02 },
                       ],
                     },
                     {
                       title: "Fluid Dynamics — PDEArena Benchmark",
                       metric: "nRMSE (Normalized Error). Lower is better.",
-                      rows: [
-                        { model: "Standard U-Net", type: "Open-Source Baseline", score: "~0.15 to 0.25" },
-                        { model: "FNO", type: "Fourier Neural Operator / Popular Open-Source", score: "~0.08 to 0.12" },
-                        { model: "UNIPHY 10B", type: "Our Model", score: "0.054", highlight: true },
+                      chartMax: 0.25,
+                      chartValues: [
+                        { model: "U-Net", value: 0.20 },
+                        { model: "FNO", value: 0.10 },
+                        { model: "UNIPHY 10B", value: 0.054, highlight: true },
                       ],
                     },
                     {
                       title: "Pharma Generation — De Novo Drug Design",
                       metric: "SMILES Validity & Synthesizability.",
                       rows: [
-                        { model: "ChemVAE / Standard LLMs", type: "Open-Source", score: "~80–85% validity; hallucinates impossible chemistry" },
-                        { model: "UNIPHY 1B / 10B", type: "Our Model", score: "100% Validity via RDKit grammar masking; <2.0 SA Scores", highlight: true },
+                        { model: "ChemVAE / Standard LLMs", score: "~80–85% validity; hallucinates impossible chemistry" },
+                        { model: "UNIPHY 1B / 10B", score: "100% Validity via RDKit grammar masking; <2.0 SA Scores", highlight: true },
                       ],
                     },
                     {
                       title: "Materials Generation — Crystals",
                       metric: "3D Crystal Symmetry & Periodicity.",
                       rows: [
-                        { model: "CDVAE", type: "Popular Open-Source Diffusion", score: "Struggles with periodic boundary symmetry; often lopsided crystals" },
-                        { model: "MatterGen", type: "Microsoft Proprietary", score: "Excellent stability, but restricted to diffusion/imitation" },
-                        { model: "UNIPHY Lobe 4 GFlowNet", type: "Our Model", score: "Strict Space Group and Wyckoff orbit representations; exact ZnS Zincblende output", highlight: true },
+                        { model: "CDVAE", score: "Struggles with periodic boundary symmetry; often lopsided crystals" },
+                        { model: "MatterGen", score: "Excellent stability, but restricted to diffusion/imitation" },
+                        { model: "UNIPHY Lobe 4 GFlowNet", score: "Strict Space Group and Wyckoff orbit representations; exact ZnS Zincblende output", highlight: true },
                       ],
                     },
                   ].map((section, idx) => (
                     <div key={idx} className="p-6 rounded-2xl border border-gray-200 bg-white">
                       <h3 className="text-gray-800 font-semibold mb-2">{section.title}</h3>
                       <p className="text-gray-500 mb-4">Metric: {section.metric}</p>
-                      <div className="overflow-x-auto">
-                        <table className="w-full">
-                          <thead>
-                            <tr className="border-b border-gray-200">
-                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Model</th>
-                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Category</th>
-                              <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Score / Result</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {section.rows.map((row, i) => (
-                              <tr key={i} className={`border-b border-gray-100 ${row.highlight ? "bg-[#0ea5e9]/[0.04]" : ""}`}>
-                                <td className={`p-3 font-medium ${row.highlight ? "text-[#0ea5e9]" : "text-gray-800"}`}>{row.model}</td>
-                                <td className="p-3 text-gray-600">{row.type}</td>
-                                <td className={`p-3 ${row.highlight ? "text-[#0ea5e9] font-bold" : "text-gray-600"}`}>{row.score}</td>
-                              </tr>
+                      {section.chartValues ? (
+                        <div>
+                          {/* Reversed Y-axis bar chart: 0 at top, bars grow downward */}
+                          <div className="relative h-52 mb-2">
+                            {/* 0 line at top */}
+                            <div className="absolute top-0 left-0 right-0 flex items-center gap-2 z-10">
+                              <span className="text-xs text-gray-400 font-mono bg-white px-1">0</span>
+                              <div className="flex-1 border-t border-dashed border-gray-300" />
+                            </div>
+                            {/* Bars container */}
+                            <div className="flex items-start justify-around gap-4 h-full pt-5">
+                              {section.chartValues!.map((bar, i) => (
+                                <div key={i} className="flex flex-col items-center flex-1 h-full">
+                                  <div
+                                    className={`w-full max-w-[72px] rounded-b-lg transition-all duration-700 ${bar.highlight ? "bg-[#0ea5e9]" : "bg-gray-300"}`}
+                                    style={{ height: `${(bar.value / section.chartMax!) * 100}%` }}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            {/* Value labels at bar bottoms */}
+                            <div className="flex justify-around gap-4 absolute bottom-0 left-0 right-0">
+                              {section.chartValues!.map((bar, i) => (
+                                <div key={i} className="flex-1 text-center">
+                                  <span className={`text-xs font-mono ${bar.highlight ? "text-[#0ea5e9] font-bold" : "text-gray-500"}`}>
+                                    {bar.value}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          {/* Model labels */}
+                          <div className="flex justify-around gap-4 mt-6 pt-2 border-t border-gray-100">
+                            {section.chartValues!.map((bar, i) => (
+                              <div key={i} className="flex-1 text-center">
+                                <span className={`text-xs ${bar.highlight ? "text-[#0ea5e9] font-bold" : "text-gray-600"}`}>
+                                  {bar.model}
+                                </span>
+                              </div>
                             ))}
-                          </tbody>
-                        </table>
-                      </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="overflow-x-auto">
+                          <table className="w-full">
+                            <thead>
+                              <tr className="border-b border-gray-200">
+                                <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Model</th>
+                                <th className="text-left p-3 text-gray-400 uppercase tracking-wider">Score / Result</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {section.rows!.map((row, i) => (
+                                <tr key={i} className={`border-b border-gray-100 ${row.highlight ? "bg-[#0ea5e9]/[0.04]" : ""}`}>
+                                  <td className={`p-3 font-medium ${row.highlight ? "text-[#0ea5e9]" : "text-gray-800"}`}>{row.model}</td>
+                                  <td className={`p-3 ${row.highlight ? "text-[#0ea5e9] font-bold" : "text-gray-600"}`}>{row.score}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </motion.div>
@@ -706,7 +708,14 @@ export default function PMECPresentationPage() {
                   </div>
                   <p className="text-gray-600 leading-relaxed text-sm mb-4">
                     The Thermodynamic Arrow takes an AI-generated molecule and works backward to answer:
-                    <span className="text-[#0ea5e9]"> Can it be made? What precursors are needed? What is the lowest-cost route? Can the route be executed by a lab robot?</span>
+                    <br />
+                    <span className="text-[#0ea5e9]">Can it be made?</span>
+                    <br />
+                    <span className="text-[#0ea5e9]">What precursors are needed?</span>
+                    <br />
+                    <span className="text-[#0ea5e9]">What is the lowest-cost route?</span>
+                    <br />
+                    <span className="text-[#0ea5e9]">Can the route be executed by a lab robot?</span>
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                     <div className="p-3 rounded-lg bg-gray-50 border border-gray-100">
