@@ -90,10 +90,6 @@ export default function IntroPage() {
 
           <div className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-12 lg:py-20">
             <div className="lg:col-span-7">
-              <div className="mb-6 inline-flex items-center gap-3 rounded-xl border border-[#000042]/15 bg-white/25 px-4 py-2 shadow-sm backdrop-blur-md">
-                <span className="h-2.5 w-2.5 rounded-sm bg-[#000042] shadow-[0_0_12px_#000042]" />
-                <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#000042]/70">Shodh AI</span>
-              </div>
               <h1 className="max-w-5xl text-5xl font-medium leading-[0.98] tracking-[-0.06em] text-[#000042] sm:text-6xl md:text-7xl lg:text-8xl">
                 The Universal Foundation Model for Physical Science
               </h1>
