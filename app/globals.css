@@ -253,3 +253,173 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 66, 0.1) !important;
   }
 }
+
+/* ── Print styles for /foundation-model PDF export ── */
+@media print {
+  .foundation-model-page {
+    background: #c8d8ef !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .foundation-model-page .unicorn-bg-print-hide {
+    display: none !important;
+  }
+  .foundation-model-page .print-bg {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: -1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .foundation-model-page section {
+    page-break-before: always;
+    page-break-inside: avoid;
+    break-before: page;
+    break-inside: avoid;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100% !important;
+    max-width: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .foundation-model-page section:first-of-type {
+    page-break-before: auto;
+    break-before: auto;
+  }
+  .foundation-model-page section > div {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    padding: 48px 64px !important;
+  }
+  .foundation-model-page section > div > div {
+    max-width: 1120px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .foundation-model-page section:nth-of-type(5) {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+  .foundation-model-page article {
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+    position: relative !important;
+    z-index: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+  .foundation-model-page article:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  .foundation-model-page article > div {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+  }
+  .foundation-model-page article > div.bg-white {
+    order: 1;
+    grid-column: 1;
+    background: #ffffff !important;
+    padding: 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+  .foundation-model-page article > div:not(.bg-white) {
+    order: 2;
+    grid-column: 2;
+    background: transparent !important;
+    padding: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .foundation-model-page article .min-h-\[280px\],
+  .foundation-model-page article .min-h-\[52vh\],
+  .foundation-model-page article .min-h-\[420px\],
+  .foundation-model-page article .min-h-\[78vh\] {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  .foundation-model-page section h1 {
+    font-size: 58px !important;
+    line-height: 0.98 !important;
+  }
+  .foundation-model-page section h2 {
+    font-size: 40px !important;
+    line-height: 1.02 !important;
+  }
+  .foundation-model-page section h3 {
+    font-size: 18px !important;
+    line-height: 1.15 !important;
+  }
+  .foundation-model-page section p,
+  .foundation-model-page section div {
+    font-size: 13px !important;
+  }
+  .foundation-model-page .grid {
+    gap: 18px !important;
+  }
+  .foundation-model-page section:nth-of-type(6) > div {
+    padding: 40px 64px !important;
+  }
+  .foundation-model-page section:nth-of-type(6) h2 {
+    font-size: 38px !important;
+  }
+  .foundation-model-page section:nth-of-type(6) .grid > div {
+    padding: 22px !important;
+  }
+  .foundation-model-page section:nth-of-type(6) h3 {
+    font-size: 16px !important;
+  }
+  .foundation-model-page section:nth-of-type(6) p {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+  }
+  .foundation-model-page .bg-white {
+    background: #ffffff !important;
+  }
+  .foundation-model-page .bg-white\/30,
+  .foundation-model-page .bg-white\/25,
+  .foundation-model-page .bg-white\/35,
+  .foundation-model-page .bg-white\/20 {
+    background: rgba(255, 255, 255, 0.86) !important;
+    backdrop-filter: none !important;
+  }
+  .foundation-model-page .backdrop-blur-xl,
+  .foundation-model-page .backdrop-blur-md {
+    backdrop-filter: none !important;
+  }
+  .foundation-model-page .shadow-2xl,
+  .foundation-model-page .shadow-xl,
+  .foundation-model-page .shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 66, 0.1) !important;
+  }
+}
