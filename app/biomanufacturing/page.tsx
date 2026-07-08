@@ -71,9 +71,12 @@ const ecosystemCards = [
 
 export default function IntroPage() {
   return (
-    <main className={`${syne.className} relative min-h-screen bg-transparent text-[#1a1a2e] selection:bg-[#000042] selection:text-white`}>
-      <UnicornBackground />
+    <main className={`${syne.className} biomanufacturing-page relative min-h-screen bg-transparent text-[#1a1a2e] selection:bg-[#000042] selection:text-white`}>
+      <div className="unicorn-bg-print-hide">
+        <UnicornBackground />
+      </div>
       <section className="relative z-10 overflow-hidden border-b border-[#000042]/20">
+        <img className="print-bg hidden" src="/webgl-bg-light.png" alt="" />
         <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col px-5 py-6 sm:px-6 sm:py-8 md:px-10 lg:px-14">
           <header className="flex items-center justify-between py-2 sm:py-3">
             <Link href="/" className="flex items-center gap-3">
@@ -165,6 +168,7 @@ export default function IntroPage() {
 
           return (
             <article key={module.title} className="grid min-h-[auto] grid-cols-1 lg:min-h-[78vh] lg:grid-cols-2">
+              <img className="print-bg hidden" src="/webgl-bg-light.png" alt="" />
               {reversed ? visual : panel}
               {reversed ? panel : visual}
             </article>
@@ -173,6 +177,7 @@ export default function IntroPage() {
       </section>
 
       <section className="relative z-10 border-y border-[#000042]/10 bg-transparent px-5 py-12 text-[#1a1a2e] sm:px-6 sm:py-20 md:px-10 lg:px-14">
+        <img className="print-bg hidden" src="/webgl-bg-light.png" alt="" />
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#000042]/50 sm:text-xs sm:tracking-[0.24em]">Agentic Integration & Workflow Ecosystem</p>
@@ -194,6 +199,7 @@ export default function IntroPage() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-20 md:px-10 lg:px-14">
+        <img className="print-bg hidden" src="/webgl-bg-light.png" alt="" />
         <div className="rounded-[1.5rem] border border-[#000042]/10 bg-white/30 p-6 shadow-2xl shadow-[#000042]/10 sm:rounded-[2rem] md:p-12 lg:p-14">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">

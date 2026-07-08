@@ -19,3 +19,237 @@ body::-webkit-scrollbar {
 body {
   overflow-x: hidden;
 }
+
+/* ── Print styles for /biomanufacturing PDF export ── */
+@media print {
+  .biomanufacturing-page {
+    background: #c8d8ef !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .biomanufacturing-page .unicorn-bg-print-hide {
+    display: none !important;
+  }
+
+  /* Hidden <img> becomes the slide background in print */
+  .biomanufacturing-page .print-bg {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: -1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Every section starts on a new page. The hero starts naturally on page 1. */
+  .biomanufacturing-page section {
+    page-break-before: always;
+    page-break-inside: avoid;
+    break-before: page;
+    break-inside: avoid;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    width: 100% !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .biomanufacturing-page section:first-of-type {
+    page-break-before: auto;
+    break-before: auto;
+  }
+  .biomanufacturing-page section > div {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+  }
+
+  /* The modules section is a wrapper; each article is its own full-page slide. */
+  .biomanufacturing-page section:nth-of-type(2) {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+  .biomanufacturing-page section:nth-of-type(2) > div {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+  .biomanufacturing-page article {
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+    position: relative !important;
+    z-index: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+  .biomanufacturing-page article:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  .biomanufacturing-page article > div {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+  }
+  /* White text panel always on the left, visual on the right. */
+  .biomanufacturing-page article > div.bg-white {
+    order: 1;
+    grid-column: 1;
+    background: #ffffff !important;
+    padding: 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+  .biomanufacturing-page article > div:not(.bg-white) {
+    order: 2;
+    grid-column: 2;
+    background: transparent !important;
+    padding: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .biomanufacturing-page article > div:not(.bg-white) .bg-white\/20,
+  .biomanufacturing-page article > div:not(.bg-white) .bg-white\/25 {
+    background: rgba(255, 255, 255, 0.6) !important;
+  }
+  .biomanufacturing-page article .min-h-\[280px\],
+  .biomanufacturing-page article .min-h-\[52vh\],
+  .biomanufacturing-page article .min-h-\[420px\],
+  .biomanufacturing-page article .min-h-\[78vh\] {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  .biomanufacturing-page article .flex-col > span {
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+  }
+  .biomanufacturing-page article .rounded-\[24px\],
+  .biomanufacturing-page article .rounded-\[28px\] {
+    height: 100px !important;
+    width: 100px !important;
+    border-radius: 24px !important;
+  }
+  .biomanufacturing-page article .rounded-\[24px\] svg,
+  .biomanufacturing-page article .rounded-\[28px\] svg {
+    height: 52px !important;
+    width: 52px !important;
+  }
+  .biomanufacturing-page article .text-\[36px\],
+  .biomanufacturing-page article .sm\:text-\[44px\] {
+    font-size: 48px !important;
+  }
+  .biomanufacturing-page article .text-\[15px\],
+  .biomanufacturing-page article .sm\:text-\[16px\],
+  .biomanufacturing-page article .md\:text-\[18px\] {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Hero slide tweaks */
+  .biomanufacturing-page section:first-of-type h1 {
+    font-size: 52px !important;
+  }
+  .biomanufacturing-page section:first-of-type p {
+    font-size: 16px !important;
+  }
+  .biomanufacturing-page section:first-of-type .bg-white\/30,
+  .biomanufacturing-page section:first-of-type .bg-white\/25 {
+    padding: 28px !important;
+  }
+  .biomanufacturing-page section:first-of-type .rounded-\[2rem\] {
+    border-radius: 24px !important;
+  }
+
+  /* Ecosystem slide: center content vertically and horizontally */
+  .biomanufacturing-page section:nth-of-type(3) > div {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    padding: 48px 64px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(3) .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(3) .grid > div {
+    padding: 28px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(3) h2 {
+    font-size: 36px !important;
+    margin-bottom: 48px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(3) h3 {
+    font-size: 18px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(3) p {
+    font-size: 13px !important;
+  }
+
+  /* Partnership slide: center the card vertically */
+  .biomanufacturing-page section:nth-of-type(4) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .biomanufacturing-page section:nth-of-type(4) > div {
+    width: 100% !important;
+    padding: 48px 64px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(4) > div > div {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    align-items: center !important;
+    gap: 48px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(4) h2 {
+    font-size: 40px !important;
+  }
+  .biomanufacturing-page section:nth-of-type(4) p {
+    font-size: 16px !important;
+  }
+
+  .biomanufacturing-page .bg-white {
+    background: #ffffff !important;
+  }
+  .biomanufacturing-page .bg-white\/30,
+  .biomanufacturing-page .bg-white\/25,
+  .biomanufacturing-page .bg-white\/20 {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: none !important;
+  }
+  .biomanufacturing-page .backdrop-blur-xl,
+  .biomanufacturing-page .backdrop-blur-md {
+    backdrop-filter: none !important;
+  }
+  .biomanufacturing-page .shadow-2xl,
+  .biomanufacturing-page .shadow-xl,
+  .biomanufacturing-page .shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 66, 0.1) !important;
+  }
+}
