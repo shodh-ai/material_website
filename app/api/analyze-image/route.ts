@@ -7,6 +7,11 @@ const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
 
 export async function POST(request: NextRequest) {
   try {
+    const contentLength = Number(request.headers.get('content-length') || 0);
+    if (contentLength > 12 * 1024 * 1024) {
+      return NextResponse.json({ error: 'Upload is too large' }, { status: 413 });
+    }
+
     const formData = await request.formData();
     const image = formData.get('image') as File;
     const prompt = formData.get('prompt') as string;
@@ -16,6 +21,18 @@ export async function POST(request: NextRequest) {
         { error: 'Image is required' },
         { status: 400 }
       );
+    }
+
+    const allowedTypes = new Set(['image/tiff', 'image/png', 'image/jpeg']);
+    if (!allowedTypes.has(image.type) || image.size > 10 * 1024 * 1024) {
+      return NextResponse.json(
+        { error: 'Upload a PNG, JPEG, or TIFF file no larger than 10 MB' },
+        { status: 400 }
+      );
+    }
+
+    if (typeof prompt === 'string' && prompt.length > 2000) {
+      return NextResponse.json({ error: 'Prompt is too long' }, { status: 400 });
     }
 
     // Convert image to base64 for Gemini

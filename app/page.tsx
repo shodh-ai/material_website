@@ -3,7 +3,12 @@ export default function Page() {
     <iframe
       src="/shodh-new/index.html"
       title="Shodh AI"
-      className="block h-dvh w-full border-0"
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100dvh",
+        border: 0,
+      }}
     />
   );
 }

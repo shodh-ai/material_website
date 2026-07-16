@@ -1,35 +1,75 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { canViewPath, VIEWER_COOKIE } from "./lib/viewer-access";
 
-const protectedPaths = [
-  "/investor/data-room",
-  "/Shodh_Industrial_Validation_Portfolio_Final_Polished.pdf",
-];
+const publicExactPaths = new Set([
+  "/",
+  "/access",
+  "/api/viewer-access",
+  "/api/footer-contact",
+  "/favicon.ico",
+  "/Logo_White BG.png",
+]);
+
+const publicPathPrefixes = ["/shodh-new/"];
+
+function isPublicPath(pathname: string) {
+  return (
+    publicExactPaths.has(pathname) ||
+    publicPathPrefixes.some((prefix) => pathname.startsWith(prefix))
+  );
+}
+
+function routeFromPageChunk(pathname: string) {
+  const decodedPath = decodeURIComponent(pathname);
+  const rootPageMatch = decodedPath.match(
+    /^\/_next\/static\/chunks\/app\/page(?:-[^/]+)?\.js$/
+  );
+  if (rootPageMatch) return "/";
+
+  const pageMatch = decodedPath.match(
+    /^\/_next\/static\/chunks\/app\/(.+)\/page(?:-[^/]+)?\.js$/
+  );
+  return pageMatch ? `/${pageMatch[1]}` : null;
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const isProtectedPath = protectedPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
 
-  if (!isProtectedPath) {
+  if (pathname.startsWith("/_next/static/")) {
+    const pageRoute = routeFromPageChunk(pathname);
+    if (!pageRoute || pageRoute === "/" || pageRoute === "/access") {
+      return NextResponse.next();
+    }
+
+    const viewerCode = request.cookies.get(VIEWER_COOKIE)?.value;
+    return canViewPath(viewerCode, pageRoute)
+      ? NextResponse.next()
+      : new NextResponse(null, { status: 404 });
+  }
+
+  if (isPublicPath(pathname)) {
     return NextResponse.next();
   }
 
-  const hasAccess = request.cookies.get("shodhInvestorDataRoomAccess")?.value === "granted";
-
-  if (!hasAccess && pathname !== "/investor/data-room") {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/investor/data-room";
-    redirectUrl.search = "";
-    return NextResponse.redirect(redirectUrl);
+  const viewerCode = request.cookies.get(VIEWER_COOKIE)?.value;
+  if (canViewPath(viewerCode, pathname)) {
+    const response = NextResponse.next();
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
   }
 
-  const response = NextResponse.next();
-  response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
-  return response;
+  if (pathname.startsWith("/api/")) {
+    return new NextResponse(null, { status: 404 });
+  }
+
+  const accessUrl = request.nextUrl.clone();
+  accessUrl.pathname = "/access";
+  accessUrl.search = "";
+  accessUrl.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
+  return NextResponse.redirect(accessUrl);
 }
 
 export const config = {
-  matcher: [
-    "/investor/data-room/:path*",
-    "/Shodh_Industrial_Validation_Portfolio_Final_Polished.pdf",
-  ],
+  matcher: ["/((?!_next/image).*)"],
 };

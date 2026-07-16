@@ -395,7 +395,7 @@ export default function DemoPage() {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    if ((!input.trim() && !uploadedImage) || isGenerating) return;
+    if (!uploadedImage || isGenerating) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
@@ -411,86 +411,15 @@ export default function DemoPage() {
     setMessages(prev => [...prev, { id: loadingId, role: 'model', isLoading: true, loadingStage: 'Analyzing request...' }]);
 
     try {
-      if (uploadedImage) {
-        const fd = new FormData();
-        fd.append('image', uploadedImage);
-        fd.append('prompt', input);
-        const res = await fetch('/api/analyze-image', { method: 'POST', body: fd });
-        const data = await res.json();
-        setMessages(prev => prev.filter(m => m.id !== loadingId).concat({
-          id: Date.now().toString(), role: 'model', content: data.content, analysis: data.analysis,
-        }));
-        removeImage();
-      } else {
-        // Update loading stage
-        setMessages(prev => prev.map(m => m.id === loadingId ? { ...m, loadingStage: 'Translating to physics...' } : m));
-
-        const res = await fetch('/api/generate-material', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: input }),
-        });
-
-        // Read NDJSON stream - chunk 1 = thinking (fast), chunk 2 = generation (slow)
-        const reader = res.body!.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-        const modelMsgId = Date.now().toString();
-        let thinkingReceived = false;
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-
-          // Process complete lines
-          const lines = buffer.split('\n');
-          buffer = lines.pop() || ''; // keep incomplete line in buffer
-
-          for (const line of lines) {
-            if (!line.trim()) continue;
-            try {
-              const chunk = JSON.parse(line);
-
-              if (chunk.type === 'thinking') {
-                // Immediately show thinking panel + parameters
-                thinkingReceived = true;
-                setMessages(prev => prev.filter(m => m.id !== loadingId).concat({
-                  id: modelMsgId,
-                  role: 'model',
-                  reasoning: chunk.reasoning,
-                  parameters: chunk.parameters,
-                  thinking_steps: chunk.thinking_steps,
-                  annotations: chunk.annotations,
-                  isLoading: true,
-                  loadingStage: 'Generating 3D microstructure...',
-                }));
-              } else if (chunk.type === 'generation') {
-                // Add image + validation + recipe + forward model to existing message
-                setMessages(prev => prev.map(m =>
-                  m.id === modelMsgId ? {
-                    ...m,
-                    generatedImage: chunk.imageUrl,
-                    tiffUrl: chunk.tiffUrl,
-                    validation: chunk.validation,
-                    manufacturing_recipe: chunk.manufacturing_recipe,
-                    forward_model_raw: chunk.forward_model_raw,
-                    isLoading: false,
-                    loadingStage: undefined,
-                  } : m
-                ));
-              }
-            } catch { /* skip malformed lines */ }
-          }
-        }
-
-        // If stream ended without thinking chunk, show error
-        if (!thinkingReceived) {
-          setMessages(prev => prev.filter(m => m.id !== loadingId).concat({
-            id: Date.now().toString(), role: 'model',
-            content: 'Failed to get response. Please try again.',
-          }));
-        }
-      }
+      const fd = new FormData();
+      fd.append('image', uploadedImage);
+      fd.append('prompt', input);
+      const res = await fetch('/api/analyze-image', { method: 'POST', body: fd });
+      const data = await res.json();
+      setMessages(prev => prev.filter(m => m.id !== loadingId).concat({
+        id: Date.now().toString(), role: 'model', content: data.content, analysis: data.analysis,
+      }));
+      removeImage();
     } catch {
       setMessages(prev => prev.filter(m => m.id !== loadingId).concat({
         id: Date.now().toString(), role: 'model',
@@ -539,24 +468,10 @@ export default function DemoPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6" style={{ background: 'rgba(139,92,246,0.15)' }}>
                 <Cpu className="w-8 h-8 text-purple-400" />
               </div>
-              <h2 className="text-2xl font-medium text-gray-200 mb-2">Describe your battery application</h2>
+              <h2 className="text-2xl font-medium text-gray-200 mb-2">Analyze a microstructure</h2>
               <p className="text-gray-500 text-base max-w-lg mx-auto">
-                Skanda translates your requirements into physics-optimized microstructure designs with full validation and manufacturing recipes.
+                Upload an SEM image or TIFF stack for quantitative analysis.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mt-6">
-                {['I need a drone battery that charges in 10 minutes',
-                  'Design a grid storage cell for 10,000 cycles',
-                  'Hypercar battery with maximum power output',
-                  'EV battery balanced for range and fast charging',
-                ].map(suggestion => (
-                  <button key={suggestion}
-                    onClick={() => { setInput(suggestion); }}
-                    className="px-4 py-2 rounded-xl text-sm text-gray-400 transition-all hover:text-gray-200 hover:bg-white/5"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                    {suggestion}
-                  </button>
-                ))}
-              </div>
             </div>
           )}
 
@@ -714,7 +629,7 @@ export default function DemoPage() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Describe your battery application..."
+              placeholder="Optional question about the uploaded image..."
               disabled={isGenerating}
               rows={1}
               className="w-full bg-transparent text-base text-gray-200 placeholder-gray-500 px-6 pt-5 pb-3 resize-none focus:outline-none disabled:opacity-50"
@@ -731,12 +646,6 @@ export default function DemoPage() {
                 </button>
 
                 <div className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-gray-400 select-none"
-                  style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.2)' }}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                  Diffusion + Forward Models
-                </div>
-
-                <div className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-gray-400 select-none"
                   style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)' }}>
                   <Link2 className="w-3.5 h-3.5 text-blue-400" />
                   HuggingFace
@@ -745,19 +654,19 @@ export default function DemoPage() {
 
               <button
                 onClick={() => handleSubmit()}
-                disabled={(!input.trim() && !uploadedImage) || isGenerating}
+                disabled={!uploadedImage || isGenerating}
                 className="flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all disabled:opacity-30"
                 style={{
-                  background: (!input.trim() && !uploadedImage) || isGenerating
+                  background: !uploadedImage || isGenerating
                     ? 'rgba(255,255,255,0.06)' : 'rgba(139,92,246,0.8)',
-                  color: (!input.trim() && !uploadedImage) || isGenerating ? '#6b7280' : '#fff',
+                  color: !uploadedImage || isGenerating ? '#6b7280' : '#fff',
                 }}
               >
                 {isGenerating ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    Run
+                    Analyze
                     <kbd className="text-xs opacity-60 ml-1 hidden sm:inline">&#8984; &crarr;</kbd>
                   </>
                 )}

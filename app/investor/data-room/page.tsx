@@ -1,13 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const sop001PdfUrl = "/pdf/SOP-001_solid_state_battery_electrolyte.pdf";
 const sop002PdfUrl = "/pdf/SOP-002_highly_branched_SAF.pdf";
 const daeLetterUrl = "/pdf/Letter-to-Secretary-DAE.pdf";
 const industrialValidationPortfolioUrl = "/Shodh_Industrial_Validation_Portfolio_Final_Polished.pdf";
-const dataRoomPasswords = new Set(["lsvp-2026", "celesta-2026", "google-2026", "nvidia-2026"]);
 const prePrintScreenshots = [
   "/pre-prints/Screenshot 2026-06-13 at 2.38.15 AM.png",
   "/pre-prints/Screenshot 2026-06-13 at 2.38.29 AM.png",
@@ -278,24 +277,9 @@ function CompetitiveMatrixTable() {
 }
 
 export default function InvestorDataRoomPage() {
-  const [password, setPassword] = useState("");
-  const [accessGranted, setAccessGranted] = useState(false);
-  const [accessError, setAccessError] = useState("");
   const [mobileIndexOpen, setMobileIndexOpen] = useState(true);
 
   useEffect(() => {
-    const hasSessionAccess = window.sessionStorage.getItem("shodhInvestorDataRoomAccess") === "granted";
-    const hasCookieAccess = document.cookie
-      .split("; ")
-      .some((cookie) => cookie === "shodhInvestorDataRoomAccess=granted");
-    setAccessGranted(hasSessionAccess || hasCookieAccess);
-  }, []);
-
-  useEffect(() => {
-    if (!accessGranted) {
-      return;
-    }
-
     function collapseMobileIndexOnScroll() {
       if (window.scrollY > 80) {
         setMobileIndexOpen(false);
@@ -304,64 +288,7 @@ export default function InvestorDataRoomPage() {
 
     window.addEventListener("scroll", collapseMobileIndexOnScroll, { passive: true });
     return () => window.removeEventListener("scroll", collapseMobileIndexOnScroll);
-  }, [accessGranted]);
-
-  function handlePasswordSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (dataRoomPasswords.has(password.trim())) {
-      window.sessionStorage.setItem("shodhInvestorDataRoomAccess", "granted");
-      document.cookie = "shodhInvestorDataRoomAccess=granted; path=/; max-age=86400; SameSite=Lax";
-      setAccessGranted(true);
-      setAccessError("");
-      return;
-    }
-    setAccessError("Invalid access code.");
-  }
-
-  if (!accessGranted) {
-    return (
-      <main className="min-h-screen bg-white font-mono text-black selection:bg-black selection:text-white">
-        <div className="mx-auto flex min-h-screen max-w-xl items-center px-4 py-12">
-          <section className="w-full border-2 border-black bg-white p-6 md:p-10">
-            <p className="mb-4 border-b-2 border-black pb-3 text-xs font-semibold uppercase tracking-wide">
-              Protected Investor Data Room
-            </p>
-            <h1 className="text-2xl font-semibold tracking-tight md:text-4xl">
-              Shodh AI Data Room
-            </h1>
-            <p className="mt-4 leading-7">
-              Enter your access code to continue.
-            </p>
-            <form onSubmit={handlePasswordSubmit} className="mt-8 space-y-4">
-              <label className="block text-xs font-semibold uppercase tracking-wide" htmlFor="data-room-password">
-                Access Code
-              </label>
-              <input
-                id="data-room-password"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                className="w-full border-2 border-black bg-white px-4 py-3 font-mono text-sm text-black outline-none"
-                autoComplete="current-password"
-                autoFocus
-              />
-              {accessError ? (
-                <p className="border-l-4 border-black bg-amber-50 px-4 py-3 text-sm font-semibold">
-                  {accessError}
-                </p>
-              ) : null}
-              <button
-                type="submit"
-                className="w-full border-2 border-black bg-black px-4 py-3 text-sm font-semibold uppercase tracking-wide text-white"
-              >
-                Enter Data Room
-              </button>
-            </form>
-          </section>
-        </div>
-      </main>
-    );
-  }
+  }, []);
 
   return (
     <main className="min-h-screen bg-white font-mono text-[13px] leading-relaxed text-black selection:bg-black selection:text-white [&_*]:!rounded-none [&_*]:!shadow-none [&_a]:!text-blue-700 [&_a]:underline [&_code]:border [&_code]:border-black [&_code]:bg-white [&_code]:px-1 [&_div]:!border-black [&_figcaption]:!border-black [&_h1]:!font-semibold [&_h2]:!font-semibold [&_h3]:!border-black [&_h3]:!text-black [&_h4]:!text-black [&_li]:!text-black [&_ol]:!border-black [&_p]:!text-black [&_section]:!border-black [&_section]:!bg-white [&_strong]:!text-black [&_table]:!text-black [&_td]:!border-black [&_td]:!text-black [&_th]:!border-black [&_th]:!text-black [&_tr]:!bg-white [&_ul]:!border-black [&_ul]:!bg-white">
