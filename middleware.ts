@@ -5,6 +5,7 @@ const publicExactPaths = new Set([
   "/",
   "/access",
   "/founders-associate",
+  "/api/founders-associate",
   "/api/viewer-access",
   "/api/footer-contact",
   "/favicon.ico",
