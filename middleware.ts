@@ -4,9 +4,11 @@ import { canViewPath, VIEWER_COOKIE } from "./lib/viewer-access";
 const publicExactPaths = new Set([
   "/",
   "/access",
+  "/founders-associate",
   "/api/viewer-access",
   "/api/footer-contact",
   "/favicon.ico",
+  "/Founders_Associate.png",
   "/Logo_White BG.png",
 ]);
 
@@ -37,7 +39,7 @@ export function middleware(request: NextRequest) {
 
   if (pathname.startsWith("/_next/static/")) {
     const pageRoute = routeFromPageChunk(pathname);
-    if (!pageRoute || pageRoute === "/" || pageRoute === "/access") {
+    if (!pageRoute || isPublicPath(pageRoute)) {
       return NextResponse.next();
     }
 
