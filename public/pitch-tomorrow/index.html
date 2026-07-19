@@ -1,0 +1,4763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shodh AI</title>
+  <link rel="icon" type="image/svg+xml" href="White Shodh AI Brandmark.svg">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="Syne/Syne-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fluid-config.json" as="fetch" crossorigin>
+  <link rel="preload" href="White Shodh AI Brandmark.svg" as="image">
+
+  <!-- Google Fonts (Plus Jakarta Sans + Space Grotesk only; Syne loaded locally) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Theme Variables (Dark = default) ── */
+    :root {
+      --bg-primary: #01050b;
+      --text-primary: #fff;
+      --text-title: #F0F0FF;
+      --text-secondary: rgba(255, 255, 255, 0.82);
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-faint: rgba(255, 255, 255, 0.35);
+      --border-color: rgba(255, 255, 255, 0.3);
+      --border-hover: rgba(255, 255, 255, 0.8);
+      --btn-hover-bg: rgba(255, 255, 255, 0.1);
+      --cta-btn-bg: #fff;
+      --cta-btn-color: #01050b;
+      --cta-btn-border: rgba(255, 255, 255, 0.9);
+      --logo-filter: none;
+      --icon-stroke: white;
+      --icon-fill: white;
+      --loader-bg: #01050b;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f5f5f7;
+      --text-primary: #1a1a2e;
+      --text-title: #000042;
+      --text-secondary: rgba(0, 0, 66, 0.75);
+      --text-muted: rgba(0, 0, 66, 0.5);
+      --text-faint: rgba(0, 0, 66, 0.3);
+      --border-color: rgba(0, 0, 66, 0.25);
+      --border-hover: rgba(0, 0, 66, 0.6);
+      --btn-hover-bg: rgba(0, 0, 66, 0.08);
+      --cta-btn-bg: #1a1a2e;
+      --cta-btn-color: #fff;
+      --cta-btn-border: rgba(0, 0, 66, 0.8);
+      --logo-filter: invert(1);
+      --icon-stroke: #1a1a2e;
+      --icon-fill: #1a1a2e;
+      --loader-bg: #f5f5f7;
+    }
+
+    /* ── Theme Toggle Button ── */
+    .hero-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+    }
+    .theme-toggle {
+      pointer-events: auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      padding: 0;
+    }
+    .theme-toggle:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--border-hover);
+    }
+    .theme-toggle .icon-sun { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ── Logo theme filter ── */
+    .logo img {
+      filter: var(--logo-filter);
+      transition: filter 0.5s ease;
+    }
+
+    /* ── Loader theme-aware fill ── */
+    .loader-logo path {
+      fill: var(--text-primary);
+      transition: fill 0.5s ease;
+    }
+
+    body {
+      background: var(--bg-primary);
+      overflow-x: hidden;
+      overflow-y: auto;
+      width: 100vw;
+      font-family: 'Syne', 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--text-primary);
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    /* Hide scrollbar, keep scroll functionality */
+    body::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Scroll lock during loading */
+    body.loading-lock {
+      overflow: hidden !important;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── WebGL Background (fixed - never touched) ── */
+    #unicorn-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      /* Use large viewport height so the canvas always covers the full screen,
+         even when the mobile URL bar is hidden. Falls back gracefully. */
+      height: 100vh;
+      height: 100lvh; /* large viewport height - covers area behind URL bar */
+      z-index: 0;
+      overflow: hidden;
+    }
+    /* Ensure UnicornStudio's internally-created canvas fills the container */
+    #unicorn-bg canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    /* Safari iOS fallback */
+    @supports (-webkit-touch-callout: none) {
+      #unicorn-bg {
+        height: -webkit-fill-available;
+      }
+    }
+
+    /* ── Control Panel ── */
+    #controlPanel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 320px;
+      z-index: 100;
+      background: rgba(8, 12, 24, 0.72);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.04);
+      overflow: hidden;
+      transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    #controlPanel.collapsed { width: 52px; }
+    #controlPanel.collapsed .panel-body { display: none; }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: default;
+    }
+
+    .panel-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      background: linear-gradient(130deg, #fff 30%, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+
+    #controlPanel.collapsed .panel-title { display: none; }
+
+    .toggle-btn {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: #a5b4fc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.35s;
+    }
+    .toggle-btn:hover { background: rgba(165,180,252,0.15); }
+    .toggle-btn .icon { transition: transform 0.35s; }
+    #controlPanel.collapsed .toggle-btn .icon { transform: rotate(180deg); }
+
+    .panel-body {
+      padding: 20px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .panel-body::-webkit-scrollbar { width: 4px; }
+    .panel-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    /* ── Sections ── */
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
+    }
+
+    /* ── Color Grid ── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .color-item label {
+      display: block;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .color-swatch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 9px;
+      padding: 7px 10px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .color-swatch:hover { border-color: rgba(165,180,252,0.35); }
+
+    .color-swatch input[type="color"] {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+    }
+    .color-swatch input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    .color-swatch input[type="color"]::-webkit-color-swatch {
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 5px;
+    }
+
+    .hex-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── Sliders ── */
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .slider-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-meta label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .slider-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #818cf8;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #6366f1;
+      box-shadow: 0 0 8px rgba(99,102,241,0.6);
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 14px rgba(99,102,241,0.9);
+    }
+
+    /* ── Reset Button ── */
+    .reset-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 11px;
+      border: 1px solid rgba(165,180,252,0.22);
+      background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(165,180,252,0.08));
+      color: #c7d2fe;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: .03em;
+      transition: all 0.25s;
+    }
+    .reset-btn:hover {
+      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(165,180,252,0.15));
+      border-color: rgba(165,180,252,0.45);
+      box-shadow: 0 4px 16px rgba(99,102,241,0.25);
+    }
+    .reset-btn:active { transform: scale(.98); }
+
+    /* ── Loading indicator ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--loader-bg, #01050b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #loader.fade-out {
+      opacity: 0;
+    }
+    .loader-logo {
+      width: 480px;
+      height: 480px;
+    }
+    .loader-text {
+      position: absolute;
+      bottom: calc(50% - 280px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: loaderTextFade 1.5s 1.5s ease-in-out forwards;
+    }
+    @keyframes loaderTextFade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .loader-text {
+        bottom: calc(50% - 160px);
+        font-size: 10px;
+      }
+    }
+
+    /* ── Hide Control Panel ── */
+    #controlPanel { display: none !important; }
+
+    /* ── Custom Font ── */
+    @font-face {
+      font-family: 'Syne';
+      src: url('Syne/Syne-VariableFont_wght.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ── Scroll Container ── */
+    #scroll-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .scroll-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh; /* dynamic viewport height for mobile */
+    }
+
+    .hero-section {
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* --- Hero Section --- */
+    .hero-wrapper {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 24px;
+      pointer-events: none; /* Let clicks pass through to background */
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      padding: 30px 20px 20px; /* Top: 30px, L/R: 20px, Bottom: 20px */
+    }
+
+    .hero-header {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      color: var(--text-primary);
+    }
+
+    .contact-btn {
+      pointer-events: auto; /* Re-enable clicks for button */
+      display: inline-block;
+      padding: 8px 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--border-hover);
+    }
+
+    .hero-main {
+      display: contents;
+    }
+
+    .hero-right {
+      grid-column: 8 / -1;
+      grid-row: 4;
+      align-self: end;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--text-primary);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-right strong {
+      font-weight: 600;
+    }
+
+    .hero-left {
+      grid-column: 1 / -1;
+      grid-row: 8;
+      align-self: end;
+      max-width: 980px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      overflow: visible;
+    }
+
+    .mission-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: 1.2px;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+      margin-left: 3px; /* Optically align with BUILDING title */
+    }
+
+    .main-title {
+      font-size: 90px;
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
+      text-transform: uppercase;
+    }
+
+    .main-title .reveal-line {
+      overflow: visible;
+      padding-right: 20px;
+    }
+
+    .pitch-intro-main {
+      display: block;
+      grid-column: 1 / -1;
+      grid-row: 2 / 9;
+      position: relative;
+      min-height: 0;
+      padding: 0 10px 10px;
+    }
+
+    .pitch-intro-heading {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      margin: 0;
+      color: var(--text-title);
+      font-size: 90px;
+      font-weight: 600;
+      line-height: 0.9;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      text-shadow: 0 3px 24px rgba(0, 0, 35, 0.62);
+      pointer-events: none;
+    }
+
+    .pitch-intro-image {
+      position: absolute;
+      z-index: 1;
+      top: 9%;
+      left: 28%;
+      width: 65%;
+      height: 68%;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0, 0, 35, 0.18);
+    }
+
+    .pitch-intro-image-frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+
+    .pitch-intro-image-frame:first-child {
+      opacity: 1;
+    }
+
+    .pitch-intro-line {
+      position: absolute;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .pitch-intro-line-1 { top: 0; left: 7%; }
+    .pitch-intro-line-2 { top: 17%; left: 7%; }
+    .pitch-intro-line-3 { top: 55%; right: 4%; }
+    .pitch-intro-line-4 { top: 72%; right: 1%; }
+
+    .pitch-intro-line-3,
+    .pitch-intro-line-4 {
+      text-align: right;
+    }
+
+    @media (max-width: 1200px) {
+      .hero-right {
+        grid-column: 7 / -1; /* starts earlier on medium screens to prevent text squishing */
+      }
+      .main-title {
+        font-size: 90px;
+      }
+      .mission-label {
+        margin-left: 2px; /* Adjusted optical alignment for 90px font */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      .hero-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .hero-right {
+        grid-column: 1 / -1;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        font-size: 20px;
+        max-width: 100%;
+      }
+      .hero-left {
+        grid-column: 1 / -1;
+      }
+      .main-title {
+        font-size: 56px;
+      }
+      .mission-label {
+        margin-left: 1px; /* Adjusted optical alignment for 56px font */
+      }
+
+      .pitch-intro-main {
+        flex: 1;
+        padding: 20px 0 10px;
+      }
+
+      .pitch-intro-heading {
+        font-size: 56px;
+      }
+
+      .pitch-intro-image {
+        top: 22%;
+        left: 5%;
+        width: 90%;
+        height: 50%;
+      }
+
+      .pitch-intro-line-1 { top: 5%; left: 0; }
+      .pitch-intro-line-2 { top: 15%; left: 0; }
+      .pitch-intro-line-3 { top: 68%; right: 0; }
+      .pitch-intro-line-4 { top: 78%; right: 0; }
+    }
+
+    /* Reveal Text Animation Setup */
+    .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding: 4px 6px 5px 0; /* Prevent clipping of glyphs on all edges (top, right, bottom, left) */
+    }
+
+    .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+    }
+
+    .animate-fade-in {
+      opacity: 0;
+    }
+
+    /* ── Valley of Death interstitial ── */
+    .valley-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+      z-index: 6;
+      background: transparent;
+    }
+
+    .valley-diagram {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .valley-diagram::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse at 50% 84%, rgba(1, 5, 11, 0.76) 0%, rgba(0, 0, 66, 0.3) 26%, transparent 58%);
+      pointer-events: none;
+    }
+
+    .valley-diagram::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 22%;
+      z-index: 1;
+      background: linear-gradient(to bottom, transparent 0%, rgba(1, 5, 11, 0.46) 25%, #01050b 62%, #01050b 100%);
+      pointer-events: none;
+    }
+
+    .valley-diagram svg {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .valley-copy {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      color: var(--text-title);
+      pointer-events: none;
+    }
+
+    .valley-slide-title {
+      position: absolute;
+      top: 5.5%;
+      left: 4%;
+      width: 92%;
+      max-width: 1900px;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .valley-mountain-copy {
+      position: absolute;
+      top: 54%;
+      width: 24%;
+      color: #000042;
+      text-align: center;
+    }
+
+    .valley-mountain-copy.left { left: 11%; }
+    .valley-mountain-copy.right { right: 11%; }
+
+    .valley-kicker,
+    .valley-gap-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .valley-money {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: 650;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      white-space: nowrap;
+    }
+
+    .valley-names,
+    .valley-caption {
+      margin-top: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .valley-caption { opacity: 0.68; }
+
+    .valley-gap-copy {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      width: 34%;
+      transform: translateX(-50%);
+      color: #ffffff;
+      text-align: center;
+      text-shadow: 0 2px 18px rgba(0, 0, 66, 0.5);
+    }
+
+    .valley-gap-path {
+      margin-top: 9px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .valley-gap-time {
+      margin-top: 5px;
+      font-size: 15px;
+      opacity: 0.68;
+    }
+
+    .valley-gap-time span {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .valley-shodh {
+      position: absolute;
+      left: 50%;
+      top: 67.5%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .valley-shodh strong {
+      display: block;
+      font-size: 48px;
+      letter-spacing: 0.12em;
+    }
+
+    .valley-shodh span {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .valley-bottom-line {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      width: max-content;
+      max-width: 92%;
+      transform: translateX(-50%);
+      padding: 10px 18px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: #000042;
+      box-shadow: 0 8px 28px rgba(0, 0, 66, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .valley-section {
+        min-height: 72dvh;
+        height: auto;
+        padding: 0;
+      }
+
+      .valley-diagram {
+        aspect-ratio: 4 / 5;
+        min-height: 62dvh;
+      }
+
+      .valley-diagram svg {
+        object-fit: cover;
+      }
+
+      .valley-slide-title {
+        top: 5%;
+        font-size: 40px;
+      }
+
+      .valley-mountain-copy {
+        top: 45%;
+        width: 37%;
+      }
+
+      .valley-mountain-copy.left { left: 4%; }
+      .valley-mountain-copy.right { right: 4%; }
+      .valley-money { font-size: 18px; white-space: normal; }
+      .valley-kicker { font-size: 10px; }
+      .valley-names, .valley-caption { display: none; }
+      .valley-gap-copy { top: 51%; width: 42%; }
+      .valley-shodh { top: 70%; }
+      .valley-bottom-line { bottom: 4%; font-size: 13px; }
+    }
+
+    /* ── Static input → Shodh → output split ── */
+    .static-objective-section {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    .static-objective-left,
+    .static-objective-right {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      padding: 60px;
+    }
+
+    .static-objective-left {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .static-slide-kicker,
+    .static-flow-label {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .static-slide-heading {
+      margin-top: 24px;
+      max-width: 560px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .static-flow-block {
+      position: absolute;
+      top: 58%;
+      left: 60px;
+      margin: 0;
+      transform: translateY(-50%);
+    }
+
+    .static-flow-list {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+    }
+
+    .static-objective-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+    }
+
+    .static-objective-right .static-flow-block {
+      right: 60px;
+      left: auto;
+      width: 100%;
+      max-width: 430px;
+      margin: 0;
+    }
+
+    .static-shodh-flow {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transform: translate(-50%, -50%);
+      padding: 12px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 40px;
+      background: #000042;
+      color: #ffffff;
+      box-shadow: 0 12px 36px rgba(0, 0, 66, 0.24);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .static-shodh-flow span {
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+    .static-slide-bottom-line {
+      position: absolute;
+      left: 50%;
+      bottom: 36px;
+      z-index: 3;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 90%;
+      padding: 12px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #000042;
+      box-shadow: 0 10px 30px rgba(0, 0, 66, 0.14);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .static-objective-section { flex-direction: column; min-height: 100dvh; height: auto; }
+      .static-objective-left,
+      .static-objective-right { width: 100%; min-height: 50dvh; height: auto; padding: 24px; }
+      .static-slide-heading { margin-top: 12px; font-size: 18px; }
+      .static-flow-block,
+      .static-objective-right .static-flow-block {
+        position: static;
+        width: auto;
+        max-width: none;
+        margin: auto 0 64px;
+        transform: none;
+      }
+      .static-flow-list { margin-top: 12px; font-size: 15px; }
+      .static-shodh-flow { top: 50%; padding: 10px 18px; font-size: 18px; }
+      .static-shodh-flow span { font-size: 18px; }
+      .static-slide-bottom-line { bottom: 12px; width: 90%; padding: 10px 18px; font-size: 15px; }
+    }
+
+    /* ─────────────────────────────────────────────────
+     * FONT STYLES USED IN THIS PROJECT
+     * ─────────────────────────────────────────────────
+     *
+     * 1. LABEL / EYEBROW  ("INDIAAI MISSION", "THE THESIS")
+     *    Syne 600–700 | 12–13px | letter-spacing: 1.2–1.5px
+     *    text-transform: uppercase | color: #fff
+     *
+     * 2. HERO TITLE  ("BUILDING THE TYPE 1 CIVILIZATION")
+     *    Syne 600 | 120px (90px ≤1200px, 56px ≤768px)
+     *    line-height: 0.95 | letter-spacing: -0.02em
+     *    text-transform: uppercase | color: #F0F0FF
+     *
+     * 3. SECTION HEADING  ("The Inevitable Shift")
+     *    Syne 600 | 80px | line-height: 1.2 (120%)
+     *    letter-spacing: -0.02em | color: #fff
+     *
+     * 4. BODY / DESCRIPTION  (hero-right paragraph, shift body)
+     *    Syne 400 | 28px | line-height: 1.2
+     *    letter-spacing: -0.01em | color: rgba(255,255,255,0.82)
+     *
+     * 5. MONOSPACE ACCENT  (control panel values)
+     *    Space Grotesk 600–700 | 11–12px | color: #a5b4fc
+     * ───────────────────────────────────────────────── */
+
+    /* ── Section 2: Orbit Animation ── */
+    .orbit-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      overflow: hidden;
+      contain: layout style;
+    }
+
+    /* ── Static evidence ladder ── */
+    .proof-ladder-section {
+      position: relative;
+      display: block;
+      padding: 40px 48px 92px;
+      isolation: isolate;
+    }
+
+    .proof-ladder {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .proof-ladder-rail {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .proof-ladder-rail path {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.34);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .proof-step {
+      position: absolute;
+      z-index: 1;
+      width: 31%;
+      min-height: 250px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #000042;
+      box-shadow: 0 18px 50px rgba(0, 0, 66, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .proof-step-1 { left: 0; bottom: 0; }
+    .proof-step-2 { left: 34.5%; bottom: 15%; }
+    .proof-step-3 { right: 0; bottom: 30%; }
+
+    .proof-step-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .proof-step-heading span {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+    }
+
+    .proof-step-copy,
+    .proof-step-metrics {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.38;
+    }
+
+    .proof-step-copy + .proof-step-copy,
+    .proof-step-metrics + .proof-step-copy {
+      margin-top: 10px;
+    }
+
+    .proof-step-outcome {
+      display: block;
+      margin-top: 18px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .proof-ladder-bottom {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      z-index: 2;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 92%;
+      color: var(--text-primary);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .proof-ladder-section {
+        height: auto;
+        min-height: 100dvh;
+        padding: 24px 24px 88px;
+      }
+      .proof-ladder { display: flex; flex-direction: column; gap: 18px; }
+      .proof-ladder-rail { display: none; }
+      .proof-step {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        min-height: 0;
+        padding: 18px;
+      }
+      .proof-step-heading { font-size: 22px; }
+      .proof-ladder-bottom { bottom: 24px; width: 90%; font-size: 15px; }
+    }
+
+    /* ── Slide 5: Flagship prospective result ── */
+    .flagship-result-section,
+    .cross-physics-section {
+      position: relative;
+      z-index: 6;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      padding: 36px 48px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .pitch-slide-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .pitch-slide-title {
+      max-width: 1240px;
+      margin-top: 14px;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .flagship-flow-grid {
+      display: grid;
+      grid-template-columns: 0.82fr 1.35fr 0.88fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .flagship-card {
+      min-height: 250px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0, 0, 66, 0.16);
+    }
+
+    .flagship-card-before,
+    .flagship-card-result {
+      background: rgba(255, 255, 255, 0.92);
+      color: #000042;
+    }
+
+    .flagship-card-shodh {
+      background: rgba(0, 0, 66, 0.72);
+      color: #ffffff;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .flagship-card-label {
+      display: block;
+      margin-bottom: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .flagship-primary-metric {
+      margin: 0;
+      line-height: 1;
+    }
+
+    .flagship-primary-metric strong,
+    .flagship-secondary-metric strong {
+      display: block;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .flagship-primary-metric span,
+    .flagship-secondary-metric span {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .flagship-secondary-metric {
+      margin-top: 14px;
+      line-height: 1;
+    }
+
+    .flagship-secondary-metric strong {
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    .flagship-result-deltas {
+      display: grid;
+      gap: 4px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .flagship-actions {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .flagship-lock {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .flagship-target {
+      display: block;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 66, 0.16);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .flagship-evidence-strip {
+      margin-top: 16px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 40px;
+      background: rgba(0, 0, 66, 0.32);
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .flagship-impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .flagship-impact {
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .flagship-impact span {
+      margin-right: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── Slide 6: Cross-physics validation ── */
+    .cross-physics-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cross-table-wrap {
+      margin-top: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #000042;
+      box-shadow: 0 18px 50px rgba(0, 0, 66, 0.16);
+    }
+
+    .cross-table-row {
+      display: grid;
+      grid-template-columns: 1.15fr 1.75fr 0.85fr 0.85fr 1.3fr;
+      align-items: center;
+      min-height: 66px;
+      border-top: 1px solid rgba(0, 0, 66, 0.12);
+    }
+
+    .cross-table-row:first-child { border-top: 0; }
+
+    .cross-table-row > div {
+      padding: 14px 18px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .cross-table-head {
+      min-height: 52px;
+      background: #000042;
+      color: #ffffff;
+    }
+
+    .cross-table-head > div {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cross-status {
+      justify-self: center;
+      padding: 7px 12px;
+      border: 1px solid rgba(0, 0, 66, 0.24);
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .cross-status-progress {
+      background: rgba(0, 0, 66, 0.08);
+    }
+
+    .cross-physics-line {
+      margin-top: 24px;
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .cross-footer {
+      margin-top: auto;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .flagship-result-section,
+      .cross-physics-section { height: auto; min-height: 100dvh; padding: 24px; overflow: visible; }
+      .pitch-slide-title { font-size: 40px; }
+      .flagship-flow-grid { grid-template-columns: 1fr; }
+      .flagship-card { min-height: 0; }
+      .flagship-primary-metric { font-size: 40px; }
+      .flagship-impact-grid { grid-template-columns: 1fr; }
+      .cross-table-wrap { overflow-x: auto; }
+      .cross-table-row { min-width: 980px; }
+      .cross-physics-line { font-size: 15px; }
+      .cross-footer { margin-top: 24px; }
+    }
+
+    /* ── Static product cards from Foundation Model Bio ── */
+    .product-card-slide {
+      position: relative;
+      z-index: 6;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .product-copy-panel,
+    .product-visual-panel {
+      min-width: 0;
+      height: 100%;
+      padding: 60px;
+    }
+
+    .product-copy-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .product-card-body {
+      max-width: 560px;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+    }
+
+    .product-card-eyebrow,
+    .product-visual-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .product-card-title {
+      margin-top: 18px;
+      font-size: 72px;
+      font-weight: 600;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .product-visual-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+    }
+
+    .product-visual-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+    }
+
+    .product-icon-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 112px;
+      height: 112px;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 18px 46px rgba(0, 0, 66, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .product-icon-tile svg {
+      width: 64px;
+      height: 64px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 768px) {
+      .product-card-slide {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100dvh;
+      }
+      .product-copy-panel,
+      .product-visual-panel { min-height: 50dvh; height: auto; padding: 24px; }
+      .product-card-body { font-size: 15px; }
+      .product-card-title { font-size: 40px; }
+      .product-visual-panel { order: 2; }
+      .product-copy-panel { order: 1; }
+      .product-icon-tile { width: 80px; height: 80px; border-radius: 18px; }
+      .product-icon-tile svg { width: 48px; height: 48px; }
+    }
+
+    /* ── Slide 7: Combined product platform ── */
+    .product-platform-section {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      padding: 36px 48px;
+      overflow: hidden;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .product-platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+      min-height: 0;
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .product-module {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 34px;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .product-module-synth {
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.96);
+      color: #000042;
+      box-shadow: 0 22px 60px rgba(0, 0, 66, 0.16);
+    }
+
+    .product-module-scale {
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      background: rgba(0, 0, 66, 0.42);
+      color: #ffffff;
+      box-shadow: 0 22px 60px rgba(0, 0, 66, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .product-module-kind {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.68;
+    }
+
+    .product-module-title {
+      margin: 16px 0 0;
+      font-size: 60px;
+      font-weight: 600;
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .product-module-promise {
+      margin: 28px 0 0;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .product-module-list {
+      display: grid;
+      gap: 12px;
+      margin: auto 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .product-module-list li {
+      padding-top: 12px;
+      border-top: 1px solid currentColor;
+      border-top-color: color-mix(in srgb, currentColor 22%, transparent);
+    }
+
+    @media (max-width: 768px) {
+      .product-platform-section {
+        height: auto;
+        min-height: 100dvh;
+        padding: 24px;
+        overflow: visible;
+      }
+      .product-platform-grid { grid-template-columns: 1fr; }
+      .product-module { min-height: 460px; padding: 26px; }
+      .product-module-title { font-size: 40px; }
+      .product-module-promise { font-size: 18px; }
+      .product-module-list { font-size: 15px; }
+    }
+
+    /* ── Slides 8–11: static pitch systems ── */
+    .validation-programmes-section,
+    .business-model-section,
+    .market-section,
+    .expansion-section {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      padding: 36px 48px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .programmes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr 1fr;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .programme-stage {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .programme-stage-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .programme-stage-title::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.72);
+    }
+
+    .programme-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .programme-stage-active .programme-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .programme-card {
+      min-height: 112px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #000042;
+    }
+
+    .programme-partner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .partner-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 36px;
+      width: 36px;
+      height: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 66, 0.12);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+
+    .partner-logo img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    .programme-name {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .programme-process {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.3;
+      color: rgba(0, 0, 66, 0.72);
+    }
+
+    .business-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 26px;
+    }
+
+    .business-stage-card,
+    .market-equation-card,
+    .expansion-card {
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #000042;
+      box-shadow: 0 18px 50px rgba(0, 0, 66, 0.15);
+    }
+
+    .business-stage-card {
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .business-stage-label,
+    .market-card-label,
+    .expansion-card-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .business-stage-list,
+    .market-card-list,
+    .expansion-list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 15px;
+      line-height: 1.48;
+    }
+
+    .business-price {
+      margin-top: auto;
+      padding-top: 22px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+
+    .pitch-flow-arrow,
+    .market-operator {
+      align-self: center;
+      color: var(--text-primary);
+      font-size: 40px;
+      font-weight: 400;
+    }
+
+    .business-bottom-line,
+    .market-bottom-line,
+    .expansion-bottom-line {
+      margin-top: 20px;
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .pitch-small-footer {
+      margin-top: auto;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .market-equation {
+      display: grid;
+      grid-template-columns: 1.2fr auto 1fr auto 1.25fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 26px;
+    }
+
+    .market-equation-card {
+      min-height: 260px;
+    }
+
+    .market-big-number {
+      margin-top: 18px;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .market-card-copy {
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .market-expansion-band {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
+      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 18px;
+      background: rgba(0, 0, 66, 0.28);
+      color: var(--text-primary);
+    }
+
+    .market-expansion-number {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .market-expansion-copy {
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .expansion-flow {
+      display: grid;
+      grid-template-columns: 0.92fr auto 1.32fr auto 1.05fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 26px;
+    }
+
+    .expansion-card {
+      min-height: 340px;
+    }
+
+    .expansion-card-count {
+      display: block;
+      margin-top: 24px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    @media (max-width: 768px) {
+      .validation-programmes-section,
+      .business-model-section,
+      .market-section,
+      .expansion-section { height: auto; min-height: 100dvh; padding: 24px; overflow: visible; }
+      .programmes-grid,
+      .business-flow,
+      .market-equation,
+      .expansion-flow { grid-template-columns: 1fr; }
+      .programme-stage-active .programme-cards { grid-template-columns: 1fr; }
+      .pitch-flow-arrow,
+      .market-operator { transform: rotate(90deg); text-align: center; }
+      .business-stage-card,
+      .market-equation-card,
+      .expansion-card { min-height: 0; }
+      .market-expansion-band { grid-template-columns: 1fr; }
+      .pitch-small-footer { margin-top: 24px; }
+    }
+
+    /* ── Editorial light/dark rhythm after the valley ── */
+    .proof-ladder-section {
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .proof-ladder-section::before {
+      content: "";
+      position: absolute;
+      inset: 28px 32px;
+      z-index: -1;
+      border: 1px solid rgba(0, 0, 66, 0.12);
+      pointer-events: none;
+    }
+
+    .proof-ladder-rail path {
+      stroke: rgba(0, 0, 66, 0.22);
+    }
+
+    .proof-step {
+      border-color: rgba(0, 0, 66, 0.18);
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 16px 36px rgba(0, 0, 66, 0.08);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .proof-step-3 {
+      border-color: #000042;
+      background: #000042;
+      color: #ffffff;
+      box-shadow: 0 20px 44px rgba(0, 0, 66, 0.2);
+    }
+
+    .proof-ladder-bottom {
+      color: #000042;
+    }
+
+    .product-platform-section {
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .product-platform-section::before {
+      content: "";
+      position: absolute;
+      inset: 26px 32px;
+      z-index: 0;
+      border: 1px solid rgba(0, 0, 66, 0.12);
+      pointer-events: none;
+    }
+
+    .product-platform-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-platform-section .pitch-slide-kicker {
+      color: rgba(0, 0, 66, 0.5);
+      text-align: center;
+    }
+
+    .product-platform-section .pitch-slide-title {
+      max-width: none;
+      color: #000042;
+      text-align: center;
+    }
+
+    .product-platform-grid {
+      margin-right: 52px;
+      margin-left: 52px;
+    }
+
+    .product-module {
+      border-radius: 6px;
+    }
+
+    .product-module-synth {
+      border-color: rgba(0, 0, 66, 0.18);
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .product-module-scale {
+      border-color: #000042;
+      background: #000042;
+      box-shadow: 0 20px 46px rgba(0, 0, 66, 0.2);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .business-model-section,
+    .expansion-section {
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .business-model-section::before,
+    .expansion-section::before {
+      content: "";
+      position: absolute;
+      inset: 26px 32px;
+      z-index: 0;
+      border: 1px solid rgba(0, 0, 66, 0.12);
+      pointer-events: none;
+    }
+
+    .business-model-section > *,
+    .expansion-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .business-model-section .pitch-slide-kicker,
+    .expansion-section .pitch-slide-kicker,
+    .business-model-section .pitch-small-footer,
+    .expansion-section .pitch-small-footer {
+      color: rgba(0, 0, 66, 0.5);
+    }
+
+    .business-model-section .pitch-slide-title,
+    .expansion-section .pitch-slide-title,
+    .business-model-section .pitch-flow-arrow,
+    .expansion-section .pitch-flow-arrow,
+    .business-model-section .business-bottom-line,
+    .expansion-section .expansion-bottom-line {
+      color: #000042;
+    }
+
+    .business-model-section .business-stage-card,
+    .expansion-section .expansion-card {
+      border-color: rgba(0, 0, 66, 0.16);
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .business-model-section .business-stage-card:nth-of-type(3),
+    .expansion-section .expansion-card:nth-of-type(3) {
+      border-color: #000042;
+      background: #000042;
+      color: #ffffff;
+      box-shadow: 0 20px 46px rgba(0, 0, 66, 0.18);
+    }
+
+    .market-section {
+      background: rgba(0, 0, 38, 0.32);
+    }
+
+    /* ── Slides 12–13: static closing sequence ── */
+    .team-slide,
+    .raise-slide {
+      position: relative;
+      z-index: 5;
+      height: 100dvh;
+      min-height: 640px;
+      overflow: hidden;
+      padding: 38px 48px 34px;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .team-slide {
+      display: flex;
+      flex-direction: column;
+      color: #ffffff;
+      background: rgba(0, 0, 38, 0.28);
+    }
+
+    .team-slide .pitch-slide-kicker {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .team-slide .pitch-slide-title {
+      max-width: 940px;
+      color: #ffffff;
+      font-size: clamp(42px, 5.3vw, 76px);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+    }
+
+    .team-layout {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 0.9fr 1fr 1.08fr 1.25fr;
+      gap: 0;
+      margin-top: 34px;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .team-founder,
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 24px;
+      border: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+      background: transparent;
+    }
+
+    .team-layout > :last-child {
+      border-right: 0;
+    }
+
+    .team-founder-label,
+    .team-card-label {
+      margin: 0 0 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .team-founder h3 {
+      margin: 0;
+      max-width: 320px;
+      font-size: clamp(24px, 2.25vw, 34px);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+
+    .team-founder-degree {
+      margin: 20px 0 0;
+      max-width: 300px;
+      font-size: clamp(13px, 1.15vw, 16px);
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .team-card-grid {
+      display: contents;
+    }
+
+    .team-card {
+      min-width: 0;
+    }
+
+    .team-card-network {
+      background: transparent;
+      color: #ffffff;
+    }
+
+    .team-card-network .team-card-label {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .team-card h3 {
+      margin: 0;
+      font-size: clamp(20px, 2vw, 29px);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+    }
+
+    .team-card p {
+      margin: 14px 0 0;
+      font-size: clamp(13px, 1.15vw, 16px);
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .team-card-network p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .team-card-network .team-network-names {
+      font-size: clamp(18px, 1.7vw, 25px);
+      color: #ffffff;
+    }
+
+    .raise-slide {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+      grid-template-rows: auto 1fr;
+      gap: 22px 42px;
+      color: #000042;
+      background: #ffffff;
+    }
+
+    .raise-slide::before {
+      content: "";
+      position: absolute;
+      inset: 26px 32px;
+      z-index: 0;
+      border: 1px solid rgba(0, 0, 66, 0.12);
+      pointer-events: none;
+    }
+
+    .raise-slide > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .raise-slide .pitch-slide-kicker {
+      grid-column: 1 / -1;
+      color: rgba(0, 0, 66, 0.48);
+    }
+
+    .raise-hero {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 24px 0 16px 20px;
+    }
+
+    .raise-hero h2 {
+      margin: 0;
+      font-size: clamp(62px, 8vw, 116px);
+      font-weight: 500;
+      line-height: 0.82;
+      letter-spacing: -0.065em;
+    }
+
+    .raise-hero h2 span {
+      display: block;
+      margin-top: 14px;
+      color: #567ea6;
+    }
+
+    .raise-hero p {
+      margin: auto 0 0;
+      max-width: 520px;
+      font-size: clamp(18px, 1.8vw, 26px);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .raise-details {
+      display: grid;
+      grid-template-columns: 1fr 0.92fr;
+      grid-template-rows: 1fr;
+      gap: 16px;
+      min-height: 0;
+      padding: 0 20px 16px 0;
+    }
+
+    .raise-card {
+      padding: 24px;
+      border: 1px solid rgba(0, 0, 66, 0.16);
+      background: #ffffff;
+    }
+
+    .raise-card h3 {
+      margin: 0 0 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 66, 0.52);
+    }
+
+    .raise-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(15px, 1.28vw, 19px);
+      line-height: 1.22;
+    }
+
+    .raise-targets {
+      background: #000042;
+      color: #ffffff;
+      border-color: #000042;
+    }
+
+    .raise-targets h3 {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .raise-targets li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .raise-targets strong {
+      min-width: 80px;
+      font-size: clamp(26px, 2.5vw, 38px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+    }
+
+    .raise-leverage {
+      display: block;
+      margin-top: 28px;
+      padding: 20px 0 0;
+      border: 0;
+      border-top: 1px solid rgba(0, 0, 66, 0.2);
+      background: transparent;
+    }
+
+    .raise-leverage h3 {
+      margin: 0 0 9px;
+    }
+
+    .raise-leverage p {
+      margin: 0;
+      font-size: clamp(14px, 1.25vw, 18px);
+      line-height: 1.3;
+    }
+
+    .raise-leverage strong {
+      font-size: 1.25em;
+      font-weight: 600;
+    }
+
+    /* Retire the animated homepage sequence after the deck. */
+    #section-process,
+    #section-ip,
+    #section-gap,
+    #section-footer .cta-area {
+      display: none !important;
+    }
+
+    #section-footer {
+      min-height: 48vh;
+      justify-content: flex-end;
+      padding-top: 80px;
+    }
+
+    #section-footer .animate-footer-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .proof-ladder-section::before,
+      .product-platform-section::before,
+      .business-model-section::before,
+      .expansion-section::before,
+      .raise-slide::before {
+        inset: 12px;
+      }
+      .product-platform-grid { margin-right: 0; margin-left: 0; }
+
+      .team-slide,
+      .raise-slide {
+        height: auto;
+        min-height: 100dvh;
+        padding: 32px 20px;
+      }
+
+      .team-layout,
+      .raise-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .team-layout { flex: none; }
+      .team-card-grid { display: contents; }
+      .team-founder,
+      .team-card { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+      .raise-slide .pitch-slide-kicker { grid-column: auto; }
+      .raise-details { padding: 0; }
+      .raise-hero { min-height: 420px; padding: 20px 0; }
+      #section-footer { min-height: 44vh; padding-top: 52px; }
+    }
+
+    .orbit-images-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+
+    .orbit-image {
+      position: absolute;
+      /* Dimensions assigned dynamically in JS (135-210px) */
+      object-fit: cover;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      /* Position assigned in JS */
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .orbit-text-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shift-content {
+      position: absolute;
+      text-align: center;
+      max-width: 1200px;
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      will-change: transform, opacity;
+    }
+
+    #shift-content-2 {
+      max-width: none;
+      pointer-events: none;
+    }
+
+    #shift-content-2 .design-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    #shift-content-2 .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 6px;
+    }
+
+    #shift-content-2 .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    /* Style 1 - Label / Eyebrow */
+    .shift-label {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Style 3 - Section Heading */
+    .shift-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    /* Style 4 - Body / Description */
+    .shift-body {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      max-width: 640px;
+    }
+
+    .design-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(24px, 3.2vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .design-heading em {
+      font-style: normal;
+    }
+
+    @media (max-width: 1200px) {
+      .shift-heading { font-size: 48px; }
+      .shift-body    { font-size: 22px; }
+    }
+
+    @media (max-width: 768px) {
+      .shift-heading { font-size: 40px; }
+      .shift-body    { font-size: 18px; }
+      .shift-content { gap: 20px; padding: 0 24px; }
+    }
+
+    /* ── Debug Grid Overlay ── */
+    .debug-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      padding: 0 20px; /* matches the horizontal padding of hero-wrapper */
+    }
+
+    .debug-grid > div {
+      height: 100%;
+      background-color: rgba(255, 100, 100, 0.08);
+      border-left: 1px solid rgba(255, 100, 100, 0.2);
+      border-right: 1px solid rgba(255, 100, 100, 0.2);
+    }
+
+    /* ── Debug Rows Overlay ── */
+    .debug-rows {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 40px 0 20px; /* matches vertical padding of hero-wrapper */
+    }
+
+    .debug-rows > div {
+      width: 100%;
+      flex: 1;
+      background-color: rgba(255, 100, 100, 0.04);
+      border-top: 1px solid rgba(255, 100, 100, 0.15);
+      border-bottom: 1px solid rgba(255, 100, 100, 0.15);
+    }
+
+    .debug-grid, .debug-rows {
+      transition: opacity 0.25s ease-in-out;
+    }
+
+    .debug-grid.hidden, .debug-rows.hidden {
+      opacity: 0;
+    }
+
+    /* ── Section 3: Process Steps (Horizontal Scroll) ── */
+    /* Toggled by JS during orbit→process transition only */
+    .process-fixed-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100vh !important;
+      z-index: 10 !important;
+    }
+
+    .process-section {
+      z-index: 5;
+      overflow: hidden;
+      position: relative;
+      contain: layout style;
+    }
+
+    .process-track {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      will-change: transform;
+      transform: translateZ(0);
+      contain: layout style;
+    }
+
+    .process-step {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+    }
+
+    .process-step-panel {
+      width: 50%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+    }
+
+    .process-body-text {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: #000042;
+      max-width: 480px;
+    }
+
+    .process-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .process-eyebrow {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #000042;
+    }
+
+    .process-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 0.8;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #000042;
+      white-space: nowrap;
+    }
+
+    .process-step-right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+
+    .process-right-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+    }
+
+    .process-right-label-top {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .process-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .process-icon img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .process-icon svg {
+      width: 80px;
+      height: 80px;
+    }
+
+    /* ── Icon Line-Drawing Animation ── */
+    .icon-animated-path {
+      fill: none;
+      stroke: var(--icon-stroke);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: var(--path-length);
+      stroke-dashoffset: var(--path-length);
+      opacity: 0;
+      transition: none;
+    }
+
+    .icon-animated-fill {
+      fill: var(--icon-fill);
+      opacity: 0;
+      transition: none;
+    }
+
+    .process-step.icon-animate .icon-animated-path {
+      animation: iconDraw 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+      animation-delay: var(--draw-delay, 0s);
+    }
+
+    .process-step.icon-animate .icon-animated-fill {
+      animation: iconFillIn 0.6s ease-out forwards;
+      animation-delay: var(--fill-delay, 1.4s);
+    }
+
+    @keyframes iconDraw {
+      0% {
+        stroke-dashoffset: var(--path-length);
+        opacity: 1;
+      }
+      100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+
+    @keyframes iconFillIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.15;
+      }
+    }
+
+    .process-right-label-bottom {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    /* Reveal animation for process panel text */
+    .process-step-panel .reveal-line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 4px;
+    }
+
+    .process-step-panel .reveal-line > span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+    }
+
+    .process-step-panel .animate-fade-in {
+      opacity: 0;
+    }
+
+    @media (max-width: 1200px) {
+      .process-heading {
+        font-size: 64px;
+      }
+      .process-body-text {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .process-step {
+        flex-direction: column;
+      }
+      .process-step-panel {
+        width: 100%;
+        height: 50%;
+        padding: 32px 24px;
+      }
+      .process-step-right {
+        width: 100%;
+        height: 50%;
+      }
+      .process-heading {
+        font-size: 40px;
+      }
+      .process-body-text {
+        font-size: 18px;
+      }
+    }
+    /* ── Section 4: CTA + Footer ── */
+    .footer-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cta-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 80px 80px 60px;
+    }
+
+    /* Footer contact form */
+    .footer-form {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .footer-form-intro {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin: 0 0 48px 0;
+    }
+
+    .footer-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 20px 56px;
+      align-content: center;
+    }
+
+    .footer-form .field {
+      width: 100%;
+      padding-top: 24px;
+      position: relative;
+    }
+
+    .footer-form .field--message {
+      grid-area: 1 / 2 / 4 / 3;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-form .field__label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(0);
+      pointer-events: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0;
+      padding: 0;
+      line-height: 1.3;
+      transition: top 0.3s ease, transform 0.3s ease;
+    }
+
+    .footer-form .field__input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 18px 0;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text-primary);
+      -webkit-appearance: none;
+      appearance: none;
+      resize: vertical;
+    }
+
+    .footer-form .field--message .field__input {
+      flex: 1;
+      min-height: 140px;
+    }
+
+    /* Placeholder hidden until focus */
+    .footer-form .field__input::placeholder {
+      color: var(--text-primary);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-form .field__input:focus::placeholder {
+      opacity: 0.7;
+    }
+
+    /* Underline lines */
+    .footer-form .field__line,
+    .footer-form .field__line--active {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    .footer-form .field__line {
+      width: 100%;
+      background: var(--border-color);
+      opacity: 0.55;
+    }
+
+    .footer-form .field__line--active {
+      width: 100%;
+      background: var(--text-primary);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    /* Active underline on hover, focus, or filled */
+    .footer-form .field:hover .field__line--active,
+    .footer-form .field:focus-within .field__line--active,
+    .footer-form .field.is-filled .field__line--active {
+      transform: scaleX(1);
+    }
+
+    .footer-form-messages {
+      margin-top: 24px;
+    }
+
+    .footer-form-success,
+    .footer-form-error {
+      display: none;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .footer-form.is-success .footer-form-intro,
+    .footer-form.is-success .footer-form-fields,
+    .footer-form.is-success .footer-form-messages .footer-form-error {
+      display: none;
+    }
+
+    .footer-form.is-success .footer-form-success {
+      display: block;
+    }
+
+    .footer-form.is-error .footer-form-error {
+      display: block;
+      color: #e85d5d;
+    }
+
+    .footer-form-send {
+      display: block;
+      margin-top: 36px;
+      margin-left: auto;
+      padding: 12px 36px;
+      border: 1.5px solid var(--cta-btn-border);
+      border-radius: 40px;
+      background: var(--cta-btn-bg);
+      color: var(--cta-btn-color);
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-form-send:hover {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border-color);
+      box-shadow: 0 0 24px var(--btn-hover-bg);
+    }
+
+    .footer-form.is-success .footer-form-send {
+      display: none;
+    }
+
+    /* Footer Bar */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 40px 10px;
+      margin-top: auto;
+      gap: 40px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-tagline {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-brand {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(64px, 10vw, 140px);
+      font-weight: 600;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      color: var(--text-title);
+      text-transform: uppercase;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      padding-bottom: 8px;
+    }
+
+    .footer-link {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Footer animations */
+    .footer-section .animate-footer-in {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @media (max-width: 1200px) {
+      .cta-area {
+        padding: 60px 60px 40px;
+      }
+      .footer-form-grid {
+        gap: 16px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cta-area {
+        padding: 48px 24px 32px;
+        align-items: flex-start;
+      }
+      .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 24px 32px;
+        gap: 32px;
+      }
+      .footer-right {
+        align-items: flex-start;
+      }
+    }
+
+    /* ── Section: IP Security ── */
+    .ip-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 120vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .ip-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      max-width: 1100px;
+      padding: 80px 60px;
+    }
+
+    /* SVG border with corner gaps */
+    .ip-border-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .ip-border-line {
+      fill: none;
+      stroke: rgba(0, 0, 66, 0.15);
+      stroke-width: 1;
+      stroke-linecap: butt;
+    }
+
+    .ip-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #000042;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .ip-body {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: rgba(0, 0, 66, 0.7);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @media (max-width: 1200px) {
+      .ip-heading {
+        font-size: 64px;
+      }
+      .ip-content {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ip-heading {
+        font-size: 40px;
+        white-space: normal;
+      }
+      .ip-content {
+        padding: 48px 24px;
+      }
+      .ip-body {
+        font-size: 18px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════
+     * MOBILE-ONLY OVERRIDES (≤ 768px)
+     * Only touches mobile layout - desktop is untouched.
+     * ═══════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* ── Loader ── */
+      .loader-logo {
+        width: 200px;
+        height: 200px;
+      }
+
+      /* ── Hero Section ── */
+      .hero-wrapper {
+        padding: 20px 20px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .hero-header {
+        flex-shrink: 0;
+      }
+
+      .hero-header .logo {
+        margin-left: 0 !important;
+      }
+
+      .hero-header .logo img {
+        height: 36px !important;
+      }
+
+      .contact-btn {
+        padding: 6px 18px;
+        font-size: 10px;
+        margin-right: 0px !important;
+      }
+
+      .hero-header-right {
+        margin-right: 0 !important;
+        gap: 8px;
+      }
+
+      .theme-toggle {
+        width: 30px;
+        height: 30px;
+      }
+
+      .theme-toggle svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .hero-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        gap: 0;
+      }
+
+      .hero-main.pitch-intro-main {
+        display: block;
+        padding: 20px 0 10px;
+      }
+
+      .pitch-intro-heading {
+        font-size: 40px;
+        line-height: 1.02;
+      }
+
+      .hero-right {
+        font-size: 14px;
+        line-height: 1.35;
+        margin-top: 0;
+        margin-bottom: auto;
+        padding-top: 40px;
+        max-width: calc(100vw - 48px);
+      }
+
+      .hero-left {
+        margin-bottom: 8px;
+        margin-left: 0;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .main-title {
+        font-size: clamp(28px, 7.8vw, 40px);
+        line-height: 0.96;
+      }
+
+      .hero-right .reveal-line > span,
+      .main-title .reveal-line > span {
+        white-space: nowrap;
+      }
+
+      .mission-label {
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+        margin-left: 1px;
+      }
+
+      /* ── Orbit Section: Text Blocks ── */
+      .shift-heading {
+        font-size: 32px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.15;
+      }
+
+      .shift-heading .mobile-line {
+        display: block;
+      }
+
+      .shift-body {
+        font-size: 16px;
+        max-width: 320px;
+      }
+
+      #shift-body br {
+        display: initial;
+      }
+
+      .shift-label {
+        font-size: 10px;
+      }
+
+      .shift-content {
+        gap: 16px;
+        padding: 0 20px;
+      }
+
+      /* Text Block 2 - "Discovery by Design" */
+      .design-heading {
+        font-size: clamp(16px, 4.2vw, 22px);
+        line-height: 1.3;
+        text-align: center;
+      }
+
+      #shift-content-2 .reveal-line > span {
+        white-space: nowrap;
+      }
+
+      /* ── IP Security Section ── */
+      .ip-section {
+        height: auto;
+        min-height: 80vh;
+        padding: 40px 0;
+      }
+
+      .ip-content {
+        max-width: 100%;
+        padding: 40px 20px;
+      }
+
+      .ip-heading {
+        font-size: 32px !important;
+        white-space: normal;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+
+      .ip-heading br {
+        display: none;
+      }
+
+      .ip-body {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      /* Let <br> tags in IP body collapse on mobile so text reflows naturally */
+      .ip-body br {
+        display: none;
+      }
+
+      /* ── CTA + Footer ── */
+      .footer-section {
+        min-height: auto;
+      }
+
+      .cta-area {
+        padding: 60px 20px 40px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: 50vh;
+      }
+
+      .footer-form {
+        max-width: 100%;
+      }
+
+      .footer-form-intro {
+        font-size: 20px;
+        margin-bottom: 32px;
+      }
+
+      .footer-form-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 0;
+      }
+
+      .footer-form .field--message {
+        grid-area: auto;
+        margin-top: 8px;
+      }
+
+      .footer-form .field__input {
+        font-size: 15px;
+        padding: 16px 0;
+      }
+
+      .footer-form .field--message .field__input {
+        min-height: 120px;
+      }
+
+      .footer-form-send {
+        margin-top: 28px;
+        padding: 10px 28px;
+        font-size: 11px;
+      }
+
+      .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px 24px;
+        gap: 24px;
+      }
+
+      .footer-left {
+        gap: 8px;
+      }
+
+      .footer-tagline {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
+
+      .footer-brand {
+        font-size: clamp(42px, 12vw, 80px);
+        line-height: 0.9;
+      }
+
+      .footer-right {
+        align-items: flex-start;
+        gap: 4px;
+        padding-bottom: 0;
+      }
+
+      .footer-link {
+        font-size: 10px;
+      }
+
+      .footer-copyright {
+        font-size: 10px;
+        margin-top: 8px;
+      }
+
+      /* ── Gap Section (mobile) ── */
+      .gap-section {
+        height: 100vh;
+        min-height: 100vh;
+      }
+
+      .gap-heading-row {
+        margin-bottom: 0;
+      }
+
+      .gap-heading {
+        font-size: 36px !important;
+      }
+
+      .gap-heading-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .gap-cover {
+        width: 85vw !important;
+        height: 40vh !important;
+      }
+
+      .gap-testimonial-text {
+        font-size: 14px !important;
+        padding: 0 20px;
+      }
+    }
+
+    /* ── Section: "One Model" Gap Animation ── */
+    .gap-section {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .gap-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      transform: translateY(30px);
+    }
+
+    /* ── Heading Row: two halves side by side ── */
+    .gap-heading-row {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .gap-heading-contain.is-left {
+      transform: translateY(-145px) translateX(-240px);
+      text-align: left;
+    }
+
+    .gap-heading-contain.is-right {
+      transform: translateY(25px) translateX(260px);
+      text-align: right;
+    }
+
+    .gap-heading-contain {
+      overflow: hidden;
+      width: min(52vw, 760px);
+    }
+
+    .gap-heading {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 100px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0;
+      color: var(--text-title);
+      text-transform: uppercase;
+      white-space: normal;
+      margin: 0;
+    }
+
+    .gap-line {
+      display: block;
+    }
+
+    .gap-heading .gap-char {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    @media (max-width: 1200px) {
+      .gap-heading {
+        font-size: 60px;
+      }
+    }
+
+    /* ── Center Image Cover (expands via clip-path) ── */
+    .gap-cover {
+      position: relative;
+      z-index: 1;
+      width: calc(450px * 16 / 9);
+      height: 450px;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      clip-path: inset(50% 50% 50% 50% round 0.25rem);
+      will-change: clip-path;
+    }
+
+    .gap-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+
+    .gap-image:first-child {
+      opacity: 1;
+    }
+
+    /* ── Testimonial below the image ── */
+    .gap-testimonial {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 84px;
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    .gap-testimonial-text {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 580px;
+    }
+
+    @media (max-width: 768px) {
+      .gap-heading-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        left: 50%;
+        width: calc(100vw - 32px);
+        transform: translate(-50%, -50%);
+        overflow: visible;
+      }
+
+      .gap-heading-contain {
+        overflow: visible;
+        width: 100%;
+      }
+
+      .gap-heading-contain.is-left {
+        transform: translateY(-210px);
+      }
+
+      .gap-heading-contain.is-right {
+        transform: translateY(72px);
+      }
+
+      .gap-heading {
+        position: relative;
+        font-size: clamp(50px, 13.6vw, 64px) !important;
+        line-height: 0.95;
+        letter-spacing: 0;
+        white-space: normal;
+      }
+
+      .gap-heading .gap-char {
+        display: none !important;
+      }
+
+      .gap-heading::before {
+        display: block;
+        white-space: pre-line;
+      }
+
+      .gap-heading.is-left {
+        text-align: left;
+      }
+
+      .gap-heading.is-left::before {
+        content: "One\A Model";
+      }
+
+      .gap-heading.is-right {
+        text-align: right;
+      }
+
+      .gap-heading.is-right::before {
+        content: "Infinite\A Invention";
+      }
+
+      .gap-testimonial {
+        margin-top: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <style>
+      #logo-mask path {
+        transition: stroke-dashoffset 0.4s ease-out;
+      }
+    </style>
+    <svg class="loader-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="logo-mask">
+          <path id="mask-path-1" d="M 24.4,6.4 C 12,0 7.5,6 7.5,15 L 20,20" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" style="fill: none !important; stroke: white !important; stroke-dasharray: 40; stroke-dashoffset: 40;" />
+          <path id="mask-path-2" d="M 15.6,33.9 C 28,40 32.5,34 32.5,25 L 20,20" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" style="fill: none !important; stroke: white !important; stroke-dasharray: 40; stroke-dashoffset: 40;" />
+        </mask>
+        <g id="logo-paths">
+          <path d="M7.06178 22.9236C6.1544 22.4309 5.81821 21.2959 6.31088 20.3886L6.7569 19.5671L14.4628 23.751C14.614 23.8331 14.67 24.0223 14.5879 24.1735L13.9932 25.2688C13.6648 25.8738 12.9081 26.0979 12.3032 25.7694L7.06178 22.9236Z" fill="white"/>
+          <path d="M32.993 16.9352C33.896 17.4358 34.2223 18.5736 33.7217 19.4767L33.2686 20.2942L25.2264 15.8364C25.0759 15.753 25.0215 15.5633 25.1049 15.4128L25.7092 14.3227C26.0429 13.7207 26.8014 13.5032 27.4035 13.8369L32.993 16.9352Z" fill="white"/>
+          <path d="M15.5888 33.8841C14.6814 33.3914 14.3452 32.2564 14.8379 31.3491L15.2839 30.5276L22.8199 34.6193C22.9712 34.7014 23.0272 34.8906 22.9451 35.0418L22.3504 36.1371C22.0219 36.7421 21.2653 36.9662 20.6604 36.6377L15.5888 33.8841Z" fill="white"/>
+          <path d="M17.4016 3.47166C18.309 2.97899 19.4439 3.31518 19.9366 4.22256L20.3826 5.04404L6.96754 12.3278L6.22416 10.9587C5.89571 10.3538 6.11984 9.59714 6.72476 9.2687L17.4016 3.47166Z" fill="white"/>
+          <path d="M32.963 30.6811C33.8704 30.1885 34.2066 29.0535 33.7139 28.1461L33.2679 27.3246L19.518 34.7902L20.2614 36.1593C20.5899 36.7642 21.3465 36.9884 21.9514 36.6599L32.963 30.6811Z" fill="white"/>
+          <path d="M24.7191 26.406C25.6265 25.9134 25.9627 24.7784 25.47 23.871L25.024 23.0496L15.6442 28.1424C14.7368 28.635 14.4006 29.77 14.8933 30.6774L15.3393 31.4988L24.7191 26.406Z" fill="white"/>
+          <path d="M24.4014 11.6724C25.3088 11.1798 25.645 10.0448 25.1523 9.13742L24.7063 8.31594L15.0121 13.5795C14.4072 13.9079 14.183 14.6645 14.5115 15.2695L15.2548 16.6386L24.4014 11.6724Z" fill="white"/>
+          <path d="M24.4257 6.4021C25.3295 6.90128 25.6575 8.03863 25.1583 8.94245L24.7064 9.76069L16.8839 5.44026L17.6371 4.07651C17.9699 3.47397 18.7282 3.2553 19.3307 3.58809L24.4257 6.4021Z" fill="white"/>
+          <path d="M25.019 24.2979L25.4709 23.4797C25.9701 22.5759 25.6421 21.4385 24.7383 20.9393L15.3016 15.7273L14.5484 17.0911C14.2156 17.6936 14.4342 18.4518 15.0368 18.7846L25.019 24.2979Z" fill="white"/>
+          <path d="M6.04199 10.7587C6.04199 9.72621 6.879 8.8892 7.9115 8.8892H8.84626V23.0663H7.9115C6.879 23.0663 6.04199 22.2293 6.04199 21.1968V10.7587Z" fill="white"/>
+          <path d="M25.3965 8.09348C25.3965 7.06098 24.5595 6.22397 23.527 6.22397H22.5923V11.8325H23.527C24.5595 11.8325 25.3965 10.9955 25.3965 9.96299V8.09348Z" fill="white"/>
+          <path d="M25.7081 22.6601C25.7081 21.6276 24.8711 20.7906 23.8386 20.7906H22.9039V26.6328H23.8386C24.8711 26.6328 25.7081 25.7958 25.7081 24.7633V22.6601Z" fill="white"/>
+          <path d="M33.9478 18.6096C33.9478 17.577 33.1108 16.74 32.0783 16.74H31.1436V30.8782H32.0783C33.1108 30.8782 33.9478 30.0412 33.9478 29.0087V18.6096Z" fill="white"/>
+          <path d="M14.5517 29.8266C14.5517 28.7941 15.3887 27.9571 16.4212 27.9571H17.356V34.0719H16.4212C15.3887 34.0719 14.5517 33.2349 14.5517 32.2024V29.8266Z" fill="white"/>
+          <path d="M14.3353 14.7926C14.3353 14.1042 14.8933 13.5462 15.5816 13.5462H17.1395V18.9211H15.5816C14.8933 18.9211 14.3353 18.363 14.3353 17.6747V14.7926Z" fill="white"/>
+        </g>
+      </defs>
+      
+      <!-- Background layer (dimmed) -->
+      <use href="#logo-paths" opacity="0.25"/>
+      
+      <!-- Foreground layer (full opacity, masked) -->
+      <use href="#logo-paths" mask="url(#logo-mask)"/>
+    </svg>
+    <span class="loader-text">Loading</span>
+  </div>
+
+  <!-- WebGL Background (fixed, always visible) -->
+  <div id="unicorn-bg"></div>
+
+  <!-- ── Scroll Container ── -->
+  <div id="scroll-container">
+
+    <!-- Section 1: Hero -->
+    <div class="scroll-section hero-section" id="section-hero">
+      <div class="hero-wrapper">
+        <header class="hero-header">
+          <div class="logo" style="margin-left: 10px;">
+            <img src="White Shodh AI Brandmark.svg" alt="Shodh AI" style="height: 48px; width: auto; pointer-events: auto;" />
+          </div>
+          <div class="hero-header-right" style="margin-right: 10px;">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light mode">
+              <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+              <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+            <a href="#section-footer" class="contact-btn">BOOK DEMO</a>
+          </div>
+        </header>
+
+        <main class="hero-main pitch-intro-main">
+          <div class="pitch-intro-image" role="img" aria-label="Scientific, industrial and clean-energy imagery">
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" alt="" />
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" alt="" />
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" alt="" />
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" alt="" />
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" alt="" />
+            <img class="pitch-intro-image-frame" src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" alt="" />
+          </div>
+          <h1 class="pitch-intro-heading" aria-label="Physical intelligence from molecule to factory">
+            <span class="pitch-intro-line pitch-intro-line-1">Physical</span>
+            <span class="pitch-intro-line pitch-intro-line-2">Intelligence</span>
+            <span class="pitch-intro-line pitch-intro-line-3">From molecule</span>
+            <span class="pitch-intro-line pitch-intro-line-4">To factory</span>
+          </h1>
+        </main>
+      </div>
+    </div>
+
+    <!-- Section 2: Orbit Animation -->
+    <div class="scroll-section valley-section" id="section-valley">
+      <div class="valley-diagram">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="none" role="img" aria-label="Two funding mountains surrounding the dark scale-up gap occupied by Shodh">
+          <defs>
+            <linearGradient id="pitchValleyLeft" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.46" />
+              <stop offset="0.62" stop-color="#ffffff" stop-opacity="0.82" />
+              <stop offset="1" stop-color="#ffffff" />
+            </linearGradient>
+            <linearGradient id="pitchValleyRight" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset="0.38" stop-color="#ffffff" stop-opacity="0.82" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0.46" />
+            </linearGradient>
+          </defs>
+
+          <path d="M 0 900 L 0 655 C 90 625 170 555 245 465 C 300 400 320 342 385 325 C 460 305 515 385 555 465 C 600 535 650 625 690 710 C 710 770 720 810 730 830 L 730 900 Z" fill="url(#pitchValleyLeft)" opacity="0.92" />
+
+          <path d="M 870 900 L 870 830 C 880 810 890 770 910 710 C 950 625 1000 535 1065 455 C 1110 375 1165 270 1240 280 C 1310 290 1350 385 1410 465 C 1475 555 1540 625 1600 650 L 1600 900 Z" fill="url(#pitchValleyRight)" opacity="0.92" />
+        </svg>
+
+        <div class="valley-copy">
+          <div class="valley-mountain-copy left">
+            <p class="valley-kicker">Discovery AI</p>
+            <p class="valley-money">Isomorphic · $2.1B</p>
+            <p class="valley-names">Insilico · Lila · Periodic · CuspAI</p>
+          </div>
+
+          <div class="valley-gap-copy">
+            <p class="valley-gap-title">The scale-up gap</p>
+            <p class="valley-gap-path">LAB → PILOT → FACTORY</p>
+            <p class="valley-gap-time">
+              6–24 months of trial-and-error
+              <span>$Mn in cost and delayed value</span>
+            </p>
+          </div>
+
+          <div class="valley-shodh">
+            <strong>SHODH</strong>
+            <span>Molecule → factory</span>
+          </div>
+
+          <div class="valley-mountain-copy right">
+            <p class="valley-kicker">Engineering AI</p>
+            <p class="valley-money">Prometheus · $18B+</p>
+            <p class="valley-names">PhysicsX · $300M at $2.4B</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static input/output split: intentionally no animation classes or hooks -->
+    <section class="scroll-section static-objective-section" id="section-objective-static">
+      <div class="static-objective-left">
+        <span class="static-slide-kicker">Slide 3 — What Shodh does</span>
+        <h2 class="static-slide-heading">Give Shodh the molecule, process data and equipment. Get a manufacturable process.</h2>
+
+        <div class="static-flow-block">
+          <span class="static-flow-label">Inputs</span>
+          <ul class="static-flow-list">
+            <li>Molecule / biologic</li>
+            <li>Lab and process data</li>
+            <li>Reactor geometry</li>
+            <li>Operating constraints</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="static-objective-right">
+        <div class="static-flow-block">
+          <span class="static-flow-label">Outputs</span>
+          <ul class="static-flow-list">
+            <li>Yield and impurity prediction</li>
+            <li>Failure diagnosis</li>
+            <li>Optimal operating conditions</li>
+            <li>Scale-up recipe</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="static-shodh-flow" aria-label="Through Shodh">
+        <span aria-hidden="true">→</span>
+        <strong>SHODH</strong>
+        <span aria-hidden="true">→</span>
+      </div>
+
+      <p class="static-slide-bottom-line"><strong>One model:</strong> molecule → process → equipment → industrial scale</p>
+    </section>
+
+    <!-- Static evidence ladder: intentionally no animation classes or hooks -->
+    <section class="scroll-section orbit-section proof-ladder-section" id="section-orbit">
+      <div class="proof-ladder" aria-label="Evidence ladder from scientific grounding to prospective control">
+        <svg class="proof-ladder-rail" viewBox="0 0 1000 540" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 40 490 H 350 V 340 H 665 V 190 H 960" />
+        </svg>
+
+        <article class="proof-step proof-step-1">
+          <h2 class="proof-step-heading"><span>1 ·</span> Made</h2>
+          <p class="proof-step-copy">Model-designed molecule and synthesis route</p>
+          <p class="proof-step-copy">Physically synthesized and independently documented</p>
+          <strong class="proof-step-outcome">Made something real</strong>
+        </article>
+
+        <article class="proof-step proof-step-2">
+          <h2 class="proof-step-heading"><span>2 ·</span> Predicted</h2>
+          <ul class="proof-step-metrics">
+            <li>3 blinded partner back-tests</li>
+            <li>Yield MAE: 1.8 pp</li>
+            <li>Impurity MAE: 0.4 pp</li>
+            <li>Peak-temperature error: 2.5°C</li>
+          </ul>
+          <strong class="proof-step-outcome">Predicted unseen industrial outcomes</strong>
+        </article>
+
+        <article class="proof-step proof-step-3">
+          <h2 class="proof-step-heading"><span>3 ·</span> Improved</h2>
+          <p class="proof-step-copy">Recommendation frozen before execution</p>
+          <p class="proof-step-copy">Tested prospectively on a live partner process</p>
+          <p class="proof-step-copy">Yield: 82.4% → 96.7%</p>
+          <strong class="proof-step-outcome">Changed a real outcome</strong>
+        </article>
+      </div>
+
+      <p class="proof-ladder-bottom">Scientific grounding → predictive accuracy → prospective control</p>
+    </section>
+
+    <!-- Slide 5: Prospective Industrial Validation — static -->
+    <section class="scroll-section flagship-result-section" id="section-flagship-result">
+      <span class="pitch-slide-kicker">Slide 5 — Prospective Industrial Validation</span>
+      <h2 class="pitch-slide-title">Shodh’s locked recommendation met every acceptance criterion on the first prospective run</h2>
+
+      <div class="flagship-flow-grid">
+        <article class="flagship-card flagship-card-before">
+          <span class="flagship-card-label">Baseline</span>
+          <p class="flagship-primary-metric"><strong>82.4%</strong><span>Yield</span></p>
+          <p class="flagship-secondary-metric"><strong>12.3%</strong><span>Impurity</span></p>
+        </article>
+
+        <article class="flagship-card flagship-card-shodh">
+          <span class="flagship-card-label">Shodh Recommendation</span>
+          <ul class="flagship-actions">
+            <li>Identified the process bottleneck</li>
+            <li>Redesigned the process for continuous flow</li>
+            <li>Set the operating and cooling window</li>
+          </ul>
+          <strong class="flagship-lock">Locked before execution</strong>
+        </article>
+
+        <article class="flagship-card flagship-card-result">
+          <span class="flagship-card-label">Physical Result</span>
+          <p class="flagship-primary-metric"><strong>96.7%</strong><span>Yield</span></p>
+          <p class="flagship-secondary-metric"><strong>3.1%</strong><span>Impurity</span></p>
+          <div class="flagship-result-deltas">
+            <span>+14.3 percentage points in yield</span>
+            <span>−9.2 percentage points in impurity</span>
+          </div>
+          <strong class="flagship-target">All pre-agreed acceptance criteria passed</strong>
+        </article>
+      </div>
+
+      <p class="flagship-evidence-strip"><strong>Aarti Industries</strong> · Recommendation locked 12 June 2026 · Partner run completed 27 June 2026</p>
+
+      <div class="flagship-impact-grid" aria-label="Secondary impact">
+        <p class="flagship-impact"><span>Partner-estimated</span>Up to 10 months of development potentially avoided</p>
+        <p class="flagship-impact"><span>Projected — not yet realised</span>$2.4M annual value per production line</p>
+      </div>
+    </section>
+
+    <!-- Slide 6: Cross-Physics Validation — static -->
+    <section class="scroll-section cross-physics-section" id="section-cross-physics">
+      <span class="pitch-slide-kicker">Slide 6 — Cross-Physics Validation</span>
+      <h2 class="pitch-slide-title">The same model is being validated across different process physics</h2>
+
+      <div class="cross-table-wrap" role="table" aria-label="Cross-physics validation by partner">
+        <div class="cross-table-row cross-table-head" role="row">
+          <div role="columnheader">Partner</div>
+          <div role="columnheader">Process physics</div>
+          <div role="columnheader">Blind prediction</div>
+          <div role="columnheader">Prospective run</div>
+          <div role="columnheader">Measured result</div>
+        </div>
+
+        <div class="cross-table-row" role="row">
+          <div role="cell"><strong>Aarti Industries</strong></div>
+          <div role="cell">Exothermic chemical process</div>
+          <div role="cell"><span class="cross-status">Complete</span></div>
+          <div role="cell"><span class="cross-status">Complete</span></div>
+          <div role="cell">Yield <strong>82.4% → 96.7%</strong></div>
+        </div>
+
+        <div class="cross-table-row" role="row">
+          <div role="cell"><strong>Axella Biotech</strong></div>
+          <div role="cell">High-concentration mAb bioreactor</div>
+          <div role="cell"><span class="cross-status">Complete</span></div>
+          <div role="cell"><span class="cross-status">Complete</span></div>
+          <div role="cell"><strong>[Insert verified metric]</strong></div>
+        </div>
+
+        <div class="cross-table-row" role="row">
+          <div role="cell"><strong>Syngene</strong></div>
+          <div role="cell">Small-molecule scale-up</div>
+          <div role="cell"><span class="cross-status">Complete</span></div>
+          <div role="cell"><span class="cross-status cross-status-progress">In progress</span></div>
+          <div role="cell">Lab validation underway</div>
+        </div>
+      </div>
+
+      <p class="cross-physics-line">Chemical processing · Bioreactor scale-up · Small-molecule manufacturing</p>
+      <p class="cross-footer">Only partner-confirmed results shown; detailed records available in VDR under NDA.</p>
+    </section>
+
+    <!-- Slide 7: Product — static -->
+    <section class="scroll-section product-platform-section" id="section-product">
+      <span class="pitch-slide-kicker">Slide 7 — Product</span>
+      <h2 class="pitch-slide-title">One platform. Two deployment modules.</h2>
+
+      <div class="product-platform-grid">
+        <article class="product-module product-module-synth">
+          <span class="product-module-kind">Process intelligence</span>
+          <h3 class="product-module-title">Shodh SYNTH</h3>
+          <p class="product-module-promise">Design a manufacturable process</p>
+          <ul class="product-module-list">
+            <li>Route and process design</li>
+            <li>Yield and impurity prediction</li>
+            <li>Operating-window optimisation</li>
+            <li>Batch-to-continuous conversion</li>
+          </ul>
+        </article>
+
+        <article class="product-module product-module-scale">
+          <span class="product-module-kind">Factory intelligence</span>
+          <h3 class="product-module-title">Shodh SCALE</h3>
+          <p class="product-module-promise">Transfer and optimise it at industrial scale</p>
+          <ul class="product-module-list">
+            <li>Equipment-aware digital twin</li>
+            <li>Failure and hotspot diagnosis</li>
+            <li>Inverse optimisation of plant conditions</li>
+            <li>Private adaptation inside the customer environment</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Slide 8: Industrial Validation Programmes — static -->
+    <section class="scroll-section validation-programmes-section" id="section-validation-programmes">
+      <span class="pitch-slide-kicker">Slide 8 — Industrial Validation Programmes</span>
+      <h2 class="pitch-slide-title">8 industrial programmes across three stages of validation</h2>
+
+      <div class="programmes-grid">
+        <section class="programme-stage">
+          <h3 class="programme-stage-title">Prospectively validated</h3>
+          <div class="programme-cards">
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=aarti-industries.com&amp;sz=128" alt=""></span>
+                <strong class="programme-name">Aarti Industries</strong>
+              </div>
+              <p class="programme-process">Chemical batch → continuous flow</p>
+            </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="./assets/partner-logos/axella.png" alt="Axella Biotech logo"></span>
+                <strong class="programme-name">Axella Biotech</strong>
+              </div>
+              <p class="programme-process">High-concentration bioreactor scale-up</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="programme-stage programme-stage-active">
+          <h3 class="programme-stage-title">Active validation</h3>
+          <div class="programme-cards">
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=syngeneintl.com&amp;sz=128" alt=""></span>
+                <strong class="programme-name">Syngene</strong>
+              </div>
+              <p class="programme-process">Small-molecule process scale-up</p>
+            </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="./assets/partner-logos/jubilant-biosys.png" alt="Jubilant Biosys logo"></span>
+                <strong class="programme-name">Jubilant Biosys</strong>
+              </div>
+              <p class="programme-process">Pharmaceutical process scale-up</p>
+            </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="./assets/partner-logos/biocon.svg" alt="Biocon logo"></span>
+                <strong class="programme-name">Biocon</strong>
+              </div>
+              <p class="programme-process">Large-molecule bioprocess scale-up</p>
+            </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=nii.res.in&amp;sz=128" alt=""></span>
+                <strong class="programme-name">NII-supported programmes</strong>
+              </div>
+              <p class="programme-process">Large-molecule process development</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="programme-stage">
+          <h3 class="programme-stage-title">In scoping</h3>
+          <div class="programme-cards">
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=jubilantingrevia.com&amp;sz=128" alt=""></span>
+                <strong class="programme-name">Jubilant Ingrevia</strong>
+              </div>
+              <p class="programme-process">Chemical process optimisation</p>
+            </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=india.gulfoilltd.com&amp;sz=128" alt=""></span>
+                <strong class="programme-name">Gulf Oil</strong>
+              </div>
+              <p class="programme-process">Industrial formulation and process optimisation</p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Slide 9: Business Model — static -->
+    <section class="scroll-section business-model-section" id="section-business-model">
+      <span class="pitch-slide-kicker">Slide 9 — Business Model</span>
+      <h2 class="pitch-slide-title">Land with one process. Expand across lines, products and sites.</h2>
+
+      <div class="business-flow">
+        <article class="business-stage-card">
+          <h3 class="business-stage-label">1 · Paid validation</h3>
+          <ul class="business-stage-list">
+            <li>One process</li>
+            <li>One defined performance target</li>
+            <li>One measured physical result</li>
+          </ul>
+          <p class="business-price">$100K–$150K</p>
+        </article>
+        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
+        <article class="business-stage-card">
+          <h3 class="business-stage-label">2 · Private site deployment</h3>
+          <ul class="business-stage-list">
+            <li>Prediction and failure diagnosis</li>
+            <li>Inverse process optimisation</li>
+            <li>Private adaptation within the customer environment</li>
+            <li>Expansion across products and manufacturing lines</li>
+          </ul>
+          <p class="business-price">$500K–$1M annually</p>
+        </article>
+        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
+        <article class="business-stage-card">
+          <h3 class="business-stage-label">3 · Enterprise expansion</h3>
+          <ul class="business-stage-list">
+            <li>Multiple manufacturing sites</li>
+            <li>Continuous process optimisation</li>
+            <li>Deployment across the customer’s manufacturing network</li>
+          </ul>
+          <p class="business-price">$1M–$3M+ annual contract value</p>
+        </article>
+      </div>
+
+      <p class="business-bottom-line">Recurring software first. Selective process-IP upside second.</p>
+      <p class="pitch-small-footer">Illustrative target pricing. Final pricing depends on deployment scope, compute requirements and customer value.</p>
+    </section>
+
+    <!-- Slide 10: Initial Market — static -->
+    <section class="scroll-section market-section" id="section-initial-market">
+      <span class="pitch-slide-kicker">Slide 10 — Initial Market</span>
+      <h2 class="pitch-slide-title">A $450M–$1.35B initial software market from countable manufacturing sites</h2>
+
+      <div class="market-equation">
+        <article class="market-equation-card">
+          <h3 class="market-card-label">Initial target sites globally</h3>
+          <p class="market-big-number">~900</p>
+          <ul class="market-card-list">
+            <li>400+ specialty-chemical manufacturing sites</li>
+            <li>300+ pharmaceutical and CDMO sites</li>
+            <li>200+ biomanufacturing sites</li>
+          </ul>
+        </article>
+        <span class="market-operator" aria-hidden="true">×</span>
+        <article class="market-equation-card">
+          <h3 class="market-card-label">Target annual contract value</h3>
+          <p class="market-big-number">$500K–$1.5M</p>
+          <p class="market-card-copy">Per deployed site</p>
+        </article>
+        <span class="market-operator" aria-hidden="true">=</span>
+        <article class="market-equation-card">
+          <h3 class="market-card-label">Initial software opportunity</h3>
+          <p class="market-big-number">$450M–$1.35B</p>
+        </article>
+      </div>
+
+      <div class="market-expansion-band">
+        <p class="market-expansion-number">1,500+ additional sites</p>
+        <p class="market-expansion-copy"><strong>Expansion market</strong><br>Formulation · advanced materials · batteries · energy · industrial manufacturing</p>
+      </div>
+
+      <p class="market-bottom-line">The initial market is already substantial. Each validated process class expands it further.</p>
+      <p class="pitch-small-footer">Bottom-up planning estimate based on qualified target-site counts and target deployment pricing.</p>
+    </section>
+
+    <!-- Slide 11: Expansion — static -->
+    <section class="scroll-section expansion-section" id="section-expansion">
+      <span class="pitch-slide-kicker">Slide 11 — Expansion</span>
+      <h2 class="pitch-slide-title">Each validated process class unlocks adjacent industrial markets</h2>
+
+      <div class="expansion-flow">
+        <article class="expansion-card">
+          <h3 class="expansion-card-label">Today</h3>
+          <ul class="expansion-list">
+            <li>Exothermic chemical-process scale-up</li>
+            <li>High-concentration bioreactor scale-up</li>
+          </ul>
+          <strong class="expansion-card-count">8 industrial validation programmes</strong>
+        </article>
+        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
+        <article class="expansion-card">
+          <h3 class="expansion-card-label">Next</h3>
+          <ul class="expansion-list">
+            <li>Small-molecule reaction scale-up</li>
+            <li>Batch-to-continuous conversion</li>
+            <li>Large-molecule bioprocessing</li>
+            <li>Formulation and mixing</li>
+            <li>Peptides, ADCs and LNP processes</li>
+            <li>Specialty-chemical manufacturing</li>
+          </ul>
+        </article>
+        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
+        <article class="expansion-card">
+          <h3 class="expansion-card-label">Platform</h3>
+          <ul class="expansion-list">
+            <li>Pharma and biomanufacturing</li>
+            <li>Chemicals and advanced materials</li>
+            <li>Batteries and energy</li>
+            <li>Advanced engineering</li>
+          </ul>
+          <strong class="expansion-card-count">One physical-intelligence layer across industrial manufacturing</strong>
+        </article>
+      </div>
+
+      <p class="expansion-bottom-line">The same underlying model expands across process classes without rebuilding the product from scratch.</p>
+      <p class="pitch-small-footer">Customer data and process IP remain private within the customer environment.</p>
+    </section>
+
+    <!-- Slide 12: Team — static -->
+    <section class="scroll-section team-slide" id="section-team">
+      <span class="pitch-slide-kicker">Slide 12 — Built to lead physical intelligence</span>
+      <h2 class="pitch-slide-title">Built to lead physical intelligence</h2>
+
+      <div class="team-layout">
+        <article class="team-founder">
+          <p class="team-founder-label">Founder &amp; CEO</p>
+          <h3>Arastu Sharma</h3>
+          <p class="team-founder-degree">PhD, Materials Science &amp; AI<br>University of Cambridge</p>
+        </article>
+
+        <div class="team-card-grid">
+          <article class="team-card">
+            <div>
+              <p class="team-card-label">Technical team</p>
+              <h3>15-person AI-native technical team</h3>
+            </div>
+            <p>AI · physics · chemistry · materials · process engineering · HPC</p>
+          </article>
+
+          <article class="team-card">
+            <div>
+              <p class="team-card-label">Capital efficiency</p>
+              <h3>Built with exceptional capital efficiency</h3>
+            </div>
+            <p>10B physical foundation model · 15M trajectories · 8 industrial programmes</p>
+          </article>
+
+          <article class="team-card team-card-network">
+            <div>
+              <p class="team-card-label">Advisory board</p>
+              <h3 class="team-network-names">Kiran Mazumdar-Shaw · Rahul Singhvi · Arun Seth</h3>
+            </div>
+            <p>IndiaAI-supported compute · global industrial validation partners</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 13: Raise — static -->
+    <section class="scroll-section raise-slide" id="section-raise">
+      <span class="pitch-slide-kicker">Slide 13 — Raising $55M</span>
+
+      <div class="raise-hero">
+        <h2>Raising<span>$55M</span></h2>
+        <article class="raise-card raise-leverage">
+          <h3>Additional leverage</h3>
+          <p>Up to <strong>$20M</strong> government-backed debt expected after institutional lead</p>
+        </article>
+        <p>The method is proven. This round scales it into a global company.</p>
+      </div>
+
+      <div class="raise-details">
+        <article class="raise-card">
+          <h3>Use of funds</h3>
+          <ul class="raise-list">
+            <li>Frontier model and compute</li>
+            <li>Prospective industrial validation</li>
+            <li>Private enterprise deployments</li>
+            <li>India and US commercial expansion</li>
+          </ul>
+        </article>
+
+        <article class="raise-card raise-targets">
+          <h3>24-month target</h3>
+          <ul class="raise-list">
+            <li><strong>30</strong><span>enterprise customers</span></li>
+            <li><strong>$24M</strong><span>ARR</span></li>
+            <li><strong>8</strong><span>validated process classes</span></li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Process Steps (Horizontal Scroll) -->
+    <div class="scroll-section process-section" id="section-process">
+      <div class="process-track" id="process-track">
+        <!-- Step 1 -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Defines the physical goal - targets,</span></div>
+              <div class="reveal-line"><span>material constraints, safety boundaries,</span></div>
+              <div class="reveal-line"><span>and manufacturability requirements -</span></div>
+              <div class="reveal-line"><span>so the model knows what to invent.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Candidate Generation</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Objective</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">The Customer's Problem</span>
+              <div class="process-icon">
+                <!-- The Intent: Two lines + single rounded rectangle -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top line (narrower) -->
+                  <line class="icon-animated-path" style="--path-length: 44; --draw-delay: 0.2s;" x1="28" y1="12" x2="72" y2="12" />
+                  <!-- Middle line (wider) -->
+                  <line class="icon-animated-path" style="--path-length: 58; --draw-delay: 0.5s;" x1="21" y1="25" x2="79" y2="25" />
+                  <!-- Single rounded rectangle -->
+                  <rect class="icon-animated-path" style="--path-length: 250; --draw-delay: 0.8s;" x="13" y="35" width="74" height="49" rx="5" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 2.0s;" x="13" y="35" width="74" height="49" rx="5" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 1</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 2: Skandax Genesis -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>AI predicts how each candidate will</span></div>
+              <div class="reveal-line"><span>behave under real-world conditions -</span></div>
+              <div class="reveal-line"><span>thermal, mechanical, chemical -</span></div>
+              <div class="reveal-line"><span>before a single experiment is run.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Behavior Modeling</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Simulate</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Virtual Testing</span>
+              <div class="process-icon">
+                <!-- Skandax Genesis: Four diamond shapes in a cross -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.2s;" points="50,8 67,25 50,42 33,25" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 1.6s;" points="50,8 67,25 50,42 33,25" />
+                  <!-- Right diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.5s;" points="75,33 92,50 75,67 58,50" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 1.8s;" points="75,33 92,50 75,67 58,50" />
+                  <!-- Bottom diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 0.8s;" points="50,58 67,75 50,92 33,75" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 2.0s;" points="50,58 67,75 50,92 33,75" />
+                  <!-- Left diamond -->
+                  <polygon class="icon-animated-path" style="--path-length: 100; --draw-delay: 1.1s;" points="25,33 42,50 25,67 8,50" />
+                  <polygon class="icon-animated-fill" style="--fill-delay: 2.2s;" points="25,33 42,50 25,67 8,50" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 2</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 3: Skandax Validate -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Maps the most viable candidates to</span></div>
+              <div class="reveal-line"><span>practical synthesis routes, identifying</span></div>
+              <div class="reveal-line"><span>the exact precursors, conditions, and</span></div>
+              <div class="reveal-line"><span>sequences needed to make them real.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Synthesis Planning</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Synthesize</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">From Digital To Physical</span>
+              <div class="process-icon">
+                <!-- Skandax Validate: Focus/crop brackets with inner square -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Top-left corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.2s;" points="14,33 14,14 33,14" />
+                  <!-- Top-right corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.4s;" points="67,14 86,14 86,33" />
+                  <!-- Bottom-right corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.6s;" points="86,67 86,86 67,86" />
+                  <!-- Bottom-left corner bracket -->
+                  <polyline class="icon-animated-path" style="--path-length: 52; --draw-delay: 0.8s;" points="33,86 14,86 14,67" />
+                  <!-- Inner square -->
+                  <rect class="icon-animated-path" style="--path-length: 160; --draw-delay: 1.0s;" x="30" y="30" width="40" height="40" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 2.2s;" x="30" y="30" width="40" height="40" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 3</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 4: Skandax Deploy -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Translates synthesis plans into precise</span></div>
+              <div class="reveal-line"><span>process parameters ready for pilot</span></div>
+              <div class="reveal-line"><span>plants or factory lines - no manual</span></div>
+              <div class="reveal-line"><span>engineering required.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Process Compilation</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Deploy</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Production Ready</span>
+              <div class="process-icon">
+                <!-- Skandax Deploy: Atom/orbital pattern -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Orbit 1 (ellipse tilted +45°) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 0.2s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(45, 50, 50)" />
+                  <!-- Orbit 2 (ellipse tilted -45°) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 0.6s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(-45, 50, 50)" />
+                  <!-- Orbit 3 (horizontal ellipse) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 1.0s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(0, 50, 50)" />
+                  <!-- Orbit 4 (vertical ellipse) -->
+                  <ellipse class="icon-animated-path" style="--path-length: 220; --draw-delay: 1.4s;" cx="50" cy="50" rx="38" ry="16" transform="rotate(90, 50, 50)" />
+                  <!-- Center dot -->
+                  <circle class="icon-animated-path" style="--path-length: 20; --draw-delay: 1.0s;" cx="50" cy="50" r="3.5" />
+                  <circle class="icon-animated-fill" style="--fill-delay: 1.8s;" cx="50" cy="50" r="3.5" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 4</span>
+            </div>
+          </div>
+        </div>
+        <!-- Step 5: The Reality -->
+        <div class="process-step">
+          <div class="process-step-panel">
+            <div class="process-body-text">
+              <div class="reveal-line"><span>Validates physical outputs, delivers</span></div>
+              <div class="reveal-line"><span>a fully documented, manufacturable</span></div>
+              <div class="reveal-line"><span>product - cutting the research-to-</span></div>
+              <div class="reveal-line"><span>market timeline from years to months.</span></div>
+            </div>
+            <div class="process-bottom">
+              <span class="process-eyebrow animate-fade-in">Validation & Commercialization</span>
+              <h2 class="process-heading">
+                <div class="reveal-line"><span>Reality</span></div>
+              </h2>
+            </div>
+          </div>
+          <div class="process-step-right">
+            <div class="process-right-inner">
+              <span class="process-right-label-top">Years To Months</span>
+              <div class="process-icon">
+                <!-- The Reality: Two overlapping squares -->
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Back square (top-left) -->
+                  <rect class="icon-animated-path" style="--path-length: 190; --draw-delay: 0.2s;" x="14" y="14" width="47" height="47" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 1.6s;" x="14" y="14" width="47" height="47" />
+                  <!-- Front square (bottom-right) -->
+                  <rect class="icon-animated-path" style="--path-length: 190; --draw-delay: 0.6s;" x="39" y="39" width="47" height="47" />
+                  <rect class="icon-animated-fill" style="--fill-delay: 1.8s;" x="39" y="39" width="47" height="47" />
+                  <!-- Diagonal line in overlap zone -->
+                  <line class="icon-animated-path" style="--path-length: 46; --draw-delay: 1.0s;" x1="39" y1="61" x2="61" y2="39" />
+                </svg>
+              </div>
+              <span class="process-right-label-bottom">Step 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: IP Security -->
+    <div class="ip-section" id="section-ip">
+      <div class="ip-content" id="ip-content">
+        <!-- SVG border lines with corner gaps -->
+        <svg class="ip-border-svg" id="ip-border-svg" preserveAspectRatio="none">
+          <!-- Top line: gap at left and right corners -->
+          <line class="ip-border-line" id="ip-line-top" x1="8%" y1="0.5" x2="92%" y2="0.5" />
+          <!-- Bottom line: gap at left and right corners -->
+          <line class="ip-border-line" id="ip-line-bottom" x1="8%" y1="99.5%" x2="92%" y2="99.5%" />
+          <!-- Left line: gap at top and bottom corners -->
+          <line class="ip-border-line" id="ip-line-left" x1="0.5" y1="8%" x2="0.5" y2="92%" />
+          <!-- Right line: gap at top and bottom corners -->
+          <line class="ip-border-line" id="ip-line-right" x1="99.8%" y1="8%" x2="99.8%" y2="92%" />
+        </svg>
+        <h2 class="ip-heading" id="ip-heading" style="font-size: 48px;">Shodh turns science into<br>new physical products.</h2>
+        <p class="ip-body" id="ip-body">Give it an objective, a safer battery, a better catalyst, a scalable<br>process &amp; it reasons across chemistry, physics, &amp; manufacturing<br>constraints to generate a path from idea to reality.</p>
+      </div>
+    </div>
+
+    <!-- Section: "One Model" Gap Animation -->
+    <div class="gap-section" id="section-gap">
+      <div class="gap-inner">
+        <!-- Split headline -->
+        <div class="gap-heading-row">
+          <div class="gap-heading-contain is-left">
+            <h2 class="gap-heading is-left" data-lines="One|Model">One Model</h2>
+          </div>
+          <div class="gap-heading-contain is-right">
+            <h2 class="gap-heading is-right" data-lines="Infinite|Invention">Infinite Invention</h2>
+          </div>
+        </div>
+
+        <!-- Center image slideshow -->
+        <div class="gap-cover" id="gap-cover">
+          <img src="assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" class="gap-image" alt="Scientific research imagery">
+          <img src="assets/orbit/pexels-esmerald-34132281_gm_optimized.jpeg" class="gap-image" alt="Materials science imagery">
+          <img src="assets/orbit/pexels-germar-derron-2151846079-31884496_gm_optimized.jpeg" class="gap-image" alt="Industrial process imagery">
+          <img src="assets/orbit/pexels-james-richardson-2159544295-36122959_gm_optimized.jpeg" class="gap-image" alt="Manufacturing imagery">
+          <img src="assets/orbit/pexels-jokassis-5461930_gm_optimized.jpeg" class="gap-image" alt="Architecture imagery">
+          <img src="assets/orbit/pexels-mohamed-b-2151113020-33661086_gm_optimized.jpeg" class="gap-image" alt="Clean energy imagery">
+        </div>
+
+        <!-- Testimonial -->
+        <div class="gap-testimonial" id="gap-testimonial">
+          <p class="gap-testimonial-text">"From molecular design to factory-ready processes, a single intelligence that bridges the gap between scientific discovery and industrial reality."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: CTA + Footer -->
+    <div class="footer-section" id="section-footer">
+      <div class="cta-area">
+        <form class="footer-form" id="footer-contact-form" action="#" method="post" novalidate>
+          <p class="footer-form-intro animate-footer-in">Connect with us</p>
+          <div class="footer-form-fields animate-footer-in">
+          <div class="footer-form-grid">
+            <div class="field">
+              <label for="footer-name" class="field__label">Name</label>
+              <input class="field__input" type="text" id="footer-name" name="name" autocomplete="name" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field">
+              <label for="footer-email" class="field__label">Email</label>
+              <input class="field__input" type="email" id="footer-email" name="email" autocomplete="email" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field">
+              <label for="footer-company" class="field__label">Company</label>
+              <input class="field__input" type="text" id="footer-company" name="company" autocomplete="organization" required>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+            <div class="field field--message">
+              <label for="footer-message" class="field__label">Message</label>
+              <textarea class="field__input" id="footer-message" name="message" required></textarea>
+              <div class="field__line"></div>
+              <div class="field__line field__line--active"></div>
+            </div>
+          </div>
+          <button type="submit" class="footer-form-send">Send</button>
+          </div>
+          <div class="footer-form-messages">
+            <div class="footer-form-success" role="status">
+              Thank you.<br>Your message has been successfully received.<br>We will get back to you as soon as possible.
+            </div>
+            <div class="footer-form-error" role="alert">
+              Oops! Something went wrong while submitting the form.
+            </div>
+          </div>
+        </form>
+      </div>
+      <footer class="footer-bar">
+        <div class="footer-left">
+          <span class="footer-tagline animate-footer-in">Manufacturing Intelligence, Grounded in Physics.</span>
+          <h2 class="footer-brand animate-footer-in">SHODH AI</h2>
+        </div>
+        <div class="footer-right">
+          <a href="https://www.linkedin.com/company/shodh-ai/" target="_blank" rel="noopener noreferrer" class="footer-link animate-footer-in">LinkedIn</a>
+          <a href="#" class="footer-link animate-footer-in">Privacy Policy</a>
+          <a href="#" class="footer-link animate-footer-in">Terms of Service</a>
+          <span class="footer-copyright animate-footer-in">2026 Shodh AI. All Rights Reserved</span>
+        </div>
+      </footer>
+    </div>
+
+  </div><!-- /#scroll-container -->
+
+  <!-- Control Panel -->
+  <div id="controlPanel">
+    <div class="panel-header">
+      <span class="panel-title">Shader Controls</span>
+      <button class="toggle-btn" id="toggleBtn" title="Toggle panel">
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="panel-body">
+      <!-- Colors -->
+      <div>
+        <div class="section-title">Gradient Colors</div>
+        <div class="color-grid">
+          <div class="color-item">
+            <label>Deep Base</label>
+            <div class="color-swatch">
+              <input type="color" id="c0" value="#01050b">
+              <span class="hex-label" id="c0hex">#01050B</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Mid Navy</label>
+            <div class="color-swatch">
+              <input type="color" id="c1" value="#0d3864">
+              <span class="hex-label" id="c1hex">#0D3864</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Slate Blue</label>
+            <div class="color-swatch">
+              <input type="color" id="c2" value="#6b95c2">
+              <span class="hex-label" id="c2hex">#6B95C2</span>
+            </div>
+          </div>
+          <div class="color-item">
+            <label>Highlight</label>
+            <div class="color-swatch">
+              <input type="color" id="c3" value="#d6e9fc">
+              <span class="hex-label" id="c3hex">#D6E9FC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamics -->
+      <div>
+        <div class="section-title">Dynamics</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Animation Speed</label>
+              <span class="slider-val" id="v-speed">1.0×</span>
+            </div>
+            <input type="range" id="s-speed" min="0" max="3" step="0.05" value="1">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Fluid Distortion</label>
+              <span class="slider-val" id="v-dist">0.38</span>
+            </div>
+            <input type="range" id="s-dist" min="0" max="1.5" step="0.01" value="0.38">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Wave Scale</label>
+              <span class="slider-val" id="v-wave">0.25</span>
+            </div>
+            <input type="range" id="s-wave" min="0.05" max="1" step="0.01" value="0.25">
+          </div>
+        </div>
+      </div>
+
+      <!-- Effects -->
+      <div>
+        <div class="section-title">Post Effects</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Gaussian Blur</label>
+              <span class="slider-val" id="v-blur">0.95</span>
+            </div>
+            <input type="range" id="s-blur" min="0" max="2" step="0.05" value="0.95">
+          </div>
+          <div class="slider-row">
+            <div class="slider-meta">
+              <label>Film Grain</label>
+              <span class="slider-val" id="v-grain">0.04</span>
+            </div>
+            <input type="range" id="s-grain" min="0" max="0.2" step="0.005" value="0.04">
+          </div>
+        </div>
+      </div>
+
+      <button class="reset-btn" id="resetBtn">↺ Reset to Defaults</button>
+    </div>
+  </div>
+
+  <!-- Unicorn Studio JSON container -->
+  <script id="my-scene-json" type="application/json"></script>
+
+  <!-- Scripts -->
+  <script src="vendor/lenis.min.js" defer></script>
+  <script src="vendor/three.min.js" defer></script>
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="vendor/unicornStudio.umd.js" defer></script>
+  <script src="main.js" defer></script>
+
+  <!-- 12-Column Debug Grid Overlay (Toggle visibility with 'G' key) -->
+  <div class="debug-grid hidden">
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+  </div>
+
+  <!-- 8-Row Debug Grid Overlay (Toggle visibility with 'G' key) -->
+  <div class="debug-rows hidden">
+    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div>
+  </div>
+
+
+
+</body>
+</html>
