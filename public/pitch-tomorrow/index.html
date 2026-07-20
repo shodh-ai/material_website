@@ -742,6 +742,33 @@
       text-transform: uppercase;
     }
 
+    .valley-cost-block {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      width: min(980px, 84%);
+      transform: translateX(-50%);
+      color: #ffffff;
+      text-align: center;
+      text-shadow: 0 2px 18px rgba(0, 0, 66, 0.42);
+    }
+
+    .valley-cost-block strong {
+      display: block;
+      font-size: clamp(18px, 1.65vw, 24px);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .valley-cost-block p {
+      margin: 10px 0 0;
+      font-size: clamp(13px, 1.15vw, 17px);
+      font-weight: 500;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
     .valley-mountain-copy {
       position: absolute;
       top: 54%;
@@ -874,6 +901,14 @@
         top: 5%;
         font-size: 40px;
       }
+
+      .valley-cost-block {
+        top: 4%;
+        width: 90%;
+      }
+
+      .valley-cost-block strong { font-size: 15px; }
+      .valley-cost-block p { margin-top: 7px; font-size: 12px; }
 
       .valley-mountain-copy {
         top: 45%;
@@ -2259,6 +2294,43 @@
       background: rgba(0, 0, 38, 0.32);
     }
 
+    /* ── Unnumbered thesis statement between the valley and Slide 3 ── */
+    .world-model-statement {
+      position: relative;
+      z-index: 6;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      padding: 48px;
+      background: #ffffff;
+      color: #000042;
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .world-model-statement::before {
+      content: "";
+      position: absolute;
+      inset: 26px 32px;
+      border: 1px solid rgba(0, 0, 66, 0.14);
+      pointer-events: none;
+    }
+
+    .world-model-statement h2 {
+      position: relative;
+      z-index: 1;
+      max-width: 1260px;
+      margin: 0;
+      font-size: clamp(54px, 6vw, 88px);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
     /* ── Slides 12–13: static closing sequence ── */
     .team-slide,
     .raise-slide {
@@ -2576,6 +2648,9 @@
       .raise-details { padding: 0; }
       .raise-hero { min-height: 420px; padding: 20px 0; }
       #section-footer { min-height: 44vh; padding-top: 52px; }
+      .world-model-statement { height: 100dvh; padding: 28px; }
+      .world-model-statement::before { inset: 12px; }
+      .world-model-statement h2 { font-size: clamp(38px, 11vw, 58px); }
     }
 
     .orbit-images-container {
@@ -3980,6 +4055,12 @@
         </svg>
 
         <div class="valley-copy">
+          <div class="valley-cost-block">
+            <strong>Drug-launch delay: ~$500K per day</strong>
+            <strong>1% yield loss: ~$1–10M for a battery factory</strong>
+            <p>Millions in experiments · 1–5 years of pilot runs · delayed production</p>
+          </div>
+
           <div class="valley-mountain-copy left">
             <p class="valley-kicker">Discovery AI</p>
             <p class="valley-money">Isomorphic · $2.1B</p>
@@ -4008,6 +4089,10 @@
         </div>
       </div>
     </div>
+
+    <section class="scroll-section world-model-statement" id="section-world-model-statement">
+      <h2>Uniform physics world model for molecular discovery and industrial scale-up</h2>
+    </section>
 
     <!-- Static input/output split: intentionally no animation classes or hooks -->
     <section class="scroll-section static-objective-section" id="section-objective-static">
