@@ -1577,7 +1577,7 @@
       .product-icon-tile svg { width: 48px; height: 48px; }
     }
 
-    /* ── Slide 7: Combined product platform ── */
+    /* ── Slide 8: Combined product platform ── */
     .product-platform-section {
       position: relative;
       z-index: 6;
@@ -1861,6 +1861,126 @@
       font-weight: 600;
       line-height: 1.25;
       text-align: center;
+    }
+
+    .commercial-engine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .commercial-engine {
+      min-height: 410px;
+      padding: 22px 24px;
+      border: 1px solid rgba(0, 0, 66, 0.16);
+      background: #ffffff;
+      color: #000042;
+    }
+
+    .commercial-engine-synth {
+      border-color: #000042;
+      background: #000042;
+      color: #ffffff;
+    }
+
+    .commercial-engine-name {
+      margin: 0;
+      font-size: clamp(25px, 2.25vw, 34px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.035em;
+    }
+
+    .commercial-engine-type {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 66, 0.5);
+    }
+
+    .commercial-engine-synth .commercial-engine-type {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .commercial-detail-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.25fr;
+      gap: 14px 26px;
+      margin-top: 22px;
+    }
+
+    .commercial-detail {
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 66, 0.14);
+    }
+
+    .commercial-engine-synth .commercial-detail {
+      border-top-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .commercial-detail h4 {
+      margin: 0 0 7px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 66, 0.48);
+    }
+
+    .commercial-engine-synth .commercial-detail h4 {
+      color: rgba(255, 255, 255, 0.56);
+    }
+
+    .commercial-detail p,
+    .commercial-detail ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(12px, 1.02vw, 15px);
+      line-height: 1.34;
+    }
+
+    .commercial-detail li + li {
+      margin-top: 5px;
+    }
+
+    .commercial-pricing {
+      font-weight: 600;
+    }
+
+    .commercial-pricing li:not(:first-child)::before {
+      content: "— ";
+    }
+
+    .commercial-land-expand {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 28px;
+      margin-top: 16px;
+      padding: 14px 20px;
+      border: 1px solid rgba(0, 0, 66, 0.14);
+      background: #edf4fa;
+      color: #000042;
+    }
+
+    .commercial-land-expand h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .commercial-land-expand p {
+      margin: 0;
+      font-size: clamp(14px, 1.2vw, 18px);
+      font-weight: 500;
+      line-height: 1.25;
     }
 
     .pitch-small-footer {
@@ -2402,6 +2522,10 @@
         inset: 12px;
       }
       .product-platform-grid { margin-right: 0; margin-left: 0; }
+      .commercial-engine-grid,
+      .commercial-detail-grid,
+      .commercial-land-expand { grid-template-columns: 1fr; }
+      .commercial-engine { min-height: 0; }
 
       .team-slide,
       .raise-slide {
@@ -4016,41 +4140,9 @@
       <p class="cross-footer">Only partner-confirmed results shown; detailed records available in VDR under NDA.</p>
     </section>
 
-    <!-- Slide 7: Product — static -->
-    <section class="scroll-section product-platform-section" id="section-product">
-      <span class="pitch-slide-kicker">Slide 7 — Product</span>
-      <h2 class="pitch-slide-title">One platform. Two deployment modules.</h2>
-
-      <div class="product-platform-grid">
-        <article class="product-module product-module-synth">
-          <span class="product-module-kind">Process intelligence</span>
-          <h3 class="product-module-title">Shodh SYNTH</h3>
-          <p class="product-module-promise">Design a manufacturable process</p>
-          <ul class="product-module-list">
-            <li>Route and process design</li>
-            <li>Yield and impurity prediction</li>
-            <li>Operating-window optimisation</li>
-            <li>Batch-to-continuous conversion</li>
-          </ul>
-        </article>
-
-        <article class="product-module product-module-scale">
-          <span class="product-module-kind">Factory intelligence</span>
-          <h3 class="product-module-title">Shodh SCALE</h3>
-          <p class="product-module-promise">Transfer and optimise it at industrial scale</p>
-          <ul class="product-module-list">
-            <li>Equipment-aware digital twin</li>
-            <li>Failure and hotspot diagnosis</li>
-            <li>Inverse optimisation of plant conditions</li>
-            <li>Private adaptation inside the customer environment</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- Slide 8: Industrial Validation Programmes — static -->
+    <!-- Slide 7: Industrial Validation Programmes — static -->
     <section class="scroll-section validation-programmes-section" id="section-validation-programmes">
-      <span class="pitch-slide-kicker">Slide 8 — Industrial Validation Programmes</span>
+      <span class="pitch-slide-kicker">Slide 7 — Industrial Validation Programmes</span>
       <h2 class="pitch-slide-title">8 industrial programmes across three stages of validation</h2>
 
       <div class="programmes-grid">
@@ -4130,46 +4222,104 @@
       </div>
     </section>
 
-    <!-- Slide 9: Business Model — static -->
-    <section class="scroll-section business-model-section" id="section-business-model">
-      <span class="pitch-slide-kicker">Slide 9 — Business Model</span>
-      <h2 class="pitch-slide-title">Land with one process. Expand across lines, products and sites.</h2>
+    <!-- Slide 8: Product — static -->
+    <section class="scroll-section product-platform-section" id="section-product">
+      <span class="pitch-slide-kicker">Slide 8 — Product</span>
+      <h2 class="pitch-slide-title">One platform. Two deployment modules.</h2>
 
-      <div class="business-flow">
-        <article class="business-stage-card">
-          <h3 class="business-stage-label">1 · Paid validation</h3>
-          <ul class="business-stage-list">
-            <li>One process</li>
-            <li>One defined performance target</li>
-            <li>One measured physical result</li>
+      <div class="product-platform-grid">
+        <article class="product-module product-module-synth">
+          <span class="product-module-kind">Process intelligence</span>
+          <h3 class="product-module-title">Shodh SYNTH</h3>
+          <p class="product-module-promise">Design a manufacturable process</p>
+          <ul class="product-module-list">
+            <li>Route and process design</li>
+            <li>Yield and impurity prediction</li>
+            <li>Operating-window optimisation</li>
+            <li>Batch-to-continuous conversion</li>
           </ul>
-          <p class="business-price">$100K–$150K</p>
         </article>
-        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
-        <article class="business-stage-card">
-          <h3 class="business-stage-label">2 · Private site deployment</h3>
-          <ul class="business-stage-list">
-            <li>Prediction and failure diagnosis</li>
-            <li>Inverse process optimisation</li>
-            <li>Private adaptation within the customer environment</li>
-            <li>Expansion across products and manufacturing lines</li>
+
+        <article class="product-module product-module-scale">
+          <span class="product-module-kind">Factory intelligence</span>
+          <h3 class="product-module-title">Shodh SCALE</h3>
+          <p class="product-module-promise">Transfer and optimise it at industrial scale</p>
+          <ul class="product-module-list">
+            <li>Equipment-aware digital twin</li>
+            <li>Failure and hotspot diagnosis</li>
+            <li>Inverse optimisation of plant conditions</li>
+            <li>Private adaptation inside the customer environment</li>
           </ul>
-          <p class="business-price">$500K–$1M annually</p>
         </article>
-        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
-        <article class="business-stage-card">
-          <h3 class="business-stage-label">3 · Enterprise expansion</h3>
-          <ul class="business-stage-list">
-            <li>Multiple manufacturing sites</li>
-            <li>Continuous process optimisation</li>
-            <li>Deployment across the customer’s manufacturing network</li>
-          </ul>
-          <p class="business-price">$1M–$3M+ annual contract value</p>
+      </div>
+    </section>
+
+    <!-- Slide 9: Dual-Engine Commercial Model — static -->
+    <section class="scroll-section business-model-section" id="section-business-model">
+      <span class="pitch-slide-kicker">Slide 9 — Dual-Engine Commercial Model</span>
+      <h2 class="pitch-slide-title">Enterprise SaaS predictability with deep-tech upside</h2>
+
+      <div class="commercial-engine-grid">
+        <article class="commercial-engine commercial-engine-scale">
+          <h3 class="commercial-engine-name">Shodh SCALE</h3>
+          <span class="commercial-engine-type">Factory Optimisation</span>
+
+          <div class="commercial-detail-grid">
+            <section class="commercial-detail">
+              <h4>Target</h4>
+              <p>CDMOs, specialty chemicals and biomanufacturers</p>
+            </section>
+            <section class="commercial-detail">
+              <h4>Value</h4>
+              <p>Improves yield, impurity control and scale-up reliability in real equipment</p>
+            </section>
+            <section class="commercial-detail">
+              <h4>Pricing</h4>
+              <ul class="commercial-pricing">
+                <li>$500K–$1M annual private site deployment</li>
+                <li>capped value-share on verified economic gains</li>
+              </ul>
+            </section>
+            <section class="commercial-detail">
+              <h4>Moat</h4>
+              <p>A living digital twin that recalibrates as raw materials, equipment, climate and fouling drift over time</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="commercial-engine commercial-engine-synth">
+          <h3 class="commercial-engine-name">Shodh SYNTH</h3>
+          <span class="commercial-engine-type">Process Reinvention</span>
+
+          <div class="commercial-detail-grid">
+            <section class="commercial-detail">
+              <h4>Target</h4>
+              <p>Pharma, CDMOs, biomanufacturing and process innovators</p>
+            </section>
+            <section class="commercial-detail">
+              <h4>Value</h4>
+              <p>Redesigns chemistry, bioprocesses and manufacturing routes for lower cost, higher yield and faster scale-up</p>
+            </section>
+            <section class="commercial-detail">
+              <h4>Pricing</h4>
+              <ul class="commercial-pricing">
+                <li>$250K process-reinvention programme</li>
+                <li>$1M–$3M physical validation milestones</li>
+                <li>selective process-IP royalty upside</li>
+              </ul>
+            </section>
+            <section class="commercial-detail">
+              <h4>Moat</h4>
+              <p>Asset-light process invention: Shodh can originate patentable routes, catalysts, process conditions and operating methods</p>
+            </section>
+          </div>
         </article>
       </div>
 
-      <p class="business-bottom-line">Recurring software first. Selective process-IP upside second.</p>
-      <p class="pitch-small-footer">Illustrative target pricing. Final pricing depends on deployment scope, compute requirements and customer value.</p>
+      <div class="commercial-land-expand">
+        <h3>Land and expand</h3>
+        <p>Land on one high-value process. Expand across products, lines, sites and process reinvention.</p>
+      </div>
     </section>
 
     <!-- Slide 10: Initial Market — static -->
