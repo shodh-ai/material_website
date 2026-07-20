@@ -2,21 +2,32 @@ export const VIEWER_COOKIE = "shodhViewerAccess";
 
 type ViewerRules = Record<string, string[]>;
 
+const BUILT_IN_VIEWER_RULES: ViewerRules = {
+  "ShodhPitch-Atlas-2026": ["/pitch-tomorrow"],
+  "ShodhPitch-Orbit-2026": ["/pitch-tomorrow"],
+  "ShodhPitch-Foundry-2026": ["/pitch-tomorrow"],
+};
+
 function getRules(): ViewerRules {
   try {
     const parsed = JSON.parse(process.env.VIEWER_ACCESS_RULES || "{}");
-    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return BUILT_IN_VIEWER_RULES;
+    }
 
-    return Object.fromEntries(
-      Object.entries(parsed).filter(
-        ([code, paths]) =>
-          code.length >= 16 &&
-          Array.isArray(paths) &&
-          paths.every((path) => typeof path === "string")
-      )
-    ) as ViewerRules;
+    return {
+      ...BUILT_IN_VIEWER_RULES,
+      ...(Object.fromEntries(
+        Object.entries(parsed).filter(
+          ([code, paths]) =>
+            code.length >= 16 &&
+            Array.isArray(paths) &&
+            paths.every((path) => typeof path === "string")
+        )
+      ) as ViewerRules),
+    };
   } catch {
-    return {};
+    return BUILT_IN_VIEWER_RULES;
   }
 }
 
