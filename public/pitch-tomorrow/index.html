@@ -2055,54 +2055,123 @@
       text-align: center;
     }
 
-    .market-equation {
+    .market-engine-grid {
       display: grid;
-      grid-template-columns: 1.2fr auto 1fr auto 1.25fr;
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
       align-items: stretch;
-      margin-top: 26px;
-    }
-
-    .market-equation-card {
-      min-height: 260px;
-    }
-
-    .market-big-number {
       margin-top: 18px;
-      font-size: 48px;
+    }
+
+    .market-wedge {
+      margin: 12px 0 0;
+      font-size: clamp(13px, 1.15vw, 16px);
+      font-weight: 600;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .market-engine {
+      display: flex;
+      flex-direction: column;
+      min-height: 330px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.94);
+      color: #000042;
+    }
+
+    .market-engine:nth-child(2) {
+      border-color: #000042;
+      background: #000042;
+      color: #ffffff;
+    }
+
+    .market-engine-label {
+      margin: 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .market-engine h3 {
+      margin: 10px 0 0;
+      font-size: clamp(20px, 1.85vw, 28px);
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    .market-engine-subtitle {
+      margin: 8px 0 0;
+      font-size: clamp(12px, 1vw, 14px);
+      line-height: 1.3;
+      opacity: 0.62;
+    }
+
+    .market-math {
+      margin: 18px 0 0;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0, 0, 66, 0.15);
+      font-size: clamp(11px, 0.92vw, 13px);
+      line-height: 1.4;
+    }
+
+    .market-engine:nth-child(2) .market-math {
+      border-top-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .market-math strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .market-potential {
+      margin: auto 0 0;
+      padding-top: 16px;
+      font-size: clamp(26px, 2.4vw, 36px);
       font-weight: 600;
       line-height: 1;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.045em;
     }
 
-    .market-card-copy {
-      margin-top: 16px;
-      font-size: 18px;
-      line-height: 1.3;
+    .market-potential span {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.5;
     }
 
-    .market-expansion-band {
+    .market-bottom-banner {
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 24px;
       align-items: center;
-      margin-top: 16px;
-      padding: 16px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 18px;
-      background: rgba(0, 0, 66, 0.28);
-      color: var(--text-primary);
+      margin-top: 14px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      color: #ffffff;
     }
 
-    .market-expansion-number {
-      font-size: 28px;
-      font-weight: 600;
-      line-height: 1;
+    .market-bottom-banner strong {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
-    .market-expansion-copy {
-      font-size: 15px;
-      line-height: 1.35;
+    .market-bottom-banner p {
+      margin: 0;
+      font-size: clamp(13px, 1.1vw, 16px);
+      line-height: 1.32;
     }
 
     .expansion-flow {
@@ -2132,15 +2201,15 @@
       .expansion-section { height: auto; min-height: 100dvh; padding: 24px; overflow: visible; }
       .programmes-grid,
       .business-flow,
-      .market-equation,
+      .market-engine-grid,
       .expansion-flow { grid-template-columns: 1fr; }
       .programme-stage-active .programme-cards { grid-template-columns: 1fr; }
       .pitch-flow-arrow,
       .market-operator { transform: rotate(90deg); text-align: center; }
       .business-stage-card,
-      .market-equation-card,
+      .market-engine,
       .expansion-card { min-height: 0; }
-      .market-expansion-band { grid-template-columns: 1fr; }
+      .market-bottom-banner { grid-template-columns: 1fr; }
       .pitch-small-footer { margin-top: 24px; }
     }
 
@@ -2419,10 +2488,8 @@
     }
 
     .raise-slide {
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
-      grid-template-rows: auto 1fr;
-      gap: 22px 42px;
+      display: flex;
+      flex-direction: column;
       color: #000042;
       background: #ffffff;
     }
@@ -2442,16 +2509,17 @@
     }
 
     .raise-slide .pitch-slide-kicker {
-      grid-column: 1 / -1;
       color: rgba(0, 0, 66, 0.48);
     }
 
     .raise-hero {
-      align-self: stretch;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 24px 0 16px 20px;
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.7fr);
+      grid-template-rows: 1fr auto;
+      gap: 32px 70px;
+      padding: 46px 48px 34px;
     }
 
     .raise-hero h2 {
@@ -2469,20 +2537,12 @@
     }
 
     .raise-hero p {
-      margin: auto 0 0;
+      grid-column: 1 / -1;
+      margin: 0;
       max-width: 520px;
       font-size: clamp(18px, 1.8vw, 26px);
       line-height: 1.18;
       letter-spacing: -0.025em;
-    }
-
-    .raise-details {
-      display: grid;
-      grid-template-columns: 1fr 0.92fr;
-      grid-template-rows: 1fr;
-      gap: 16px;
-      min-height: 0;
-      padding: 0 20px 16px 0;
     }
 
     .raise-card {
@@ -2535,11 +2595,11 @@
 
     .raise-leverage {
       display: block;
-      margin-top: 28px;
-      padding: 20px 0 0;
-      border: 0;
-      border-top: 1px solid rgba(0, 0, 66, 0.2);
-      background: transparent;
+      align-self: end;
+      margin: 0;
+      padding: 24px;
+      border: 1px solid rgba(0, 0, 66, 0.18);
+      background: #edf4fa;
     }
 
     .raise-leverage h3 {
@@ -2612,8 +2672,8 @@
       .advisor:nth-child(2) { border-right: 0; }
       .advisor:nth-child(n + 3) { border-bottom: 0; }
       .raise-slide .pitch-slide-kicker { grid-column: auto; }
-      .raise-details { padding: 0; }
-      .raise-hero { min-height: 420px; padding: 20px 0; }
+      .raise-hero { min-height: 520px; grid-template-columns: 1fr; padding: 28px 12px 12px; }
+      .raise-hero p { grid-column: auto; }
       #section-footer { min-height: 44vh; padding-top: 52px; }
       .world-model-statement { height: 100dvh; padding: 28px; }
       .world-model-statement::before { inset: 12px; }
@@ -4441,41 +4501,42 @@
       </div>
     </section>
 
-    <!-- Slide 10: Initial Market — static -->
+    <!-- Slide 10: Market — static -->
     <section class="scroll-section market-section" id="section-initial-market">
-      <span class="pitch-slide-kicker">Slide 10 — Initial Market</span>
-      <h2 class="pitch-slide-title">A $450M–$1.35B initial software market from countable manufacturing sites</h2>
+      <span class="pitch-slide-kicker">Slide 10 — Market</span>
+      <h2 class="pitch-slide-title">A $10B+ initial market: pricing physical value, not software seats.</h2>
+      <p class="market-wedge">Initial wedge: Specialty Chemicals · Pharma/CDMOs · Biomanufacturing</p>
 
-      <div class="market-equation">
-        <article class="market-equation-card">
-          <h3 class="market-card-label">Initial target sites globally</h3>
-          <p class="market-big-number">~900</p>
-          <ul class="market-card-list">
-            <li>400+ specialty-chemical manufacturing sites</li>
-            <li>300+ pharmaceutical and CDMO sites</li>
-            <li>200+ biomanufacturing sites</li>
-          </ul>
+      <div class="market-engine-grid">
+        <article class="market-engine">
+          <p class="market-engine-label">01 · The SaaS floor</p>
+          <h3>Base site licenses</h3>
+          <p class="market-engine-subtitle"><em>The predictable recurring foundation.</em></p>
+          <p class="market-math"><strong>Math</strong>2,000 top-tier global sites × $500K annual base license.</p>
+          <p class="market-potential"><span>Market potential</span>$1.0B ARR</p>
         </article>
-        <span class="market-operator" aria-hidden="true">×</span>
-        <article class="market-equation-card">
-          <h3 class="market-card-label">Target annual contract value</h3>
-          <p class="market-big-number">$500K–$1.5M</p>
-          <p class="market-card-copy">Per deployed site</p>
+
+        <article class="market-engine">
+          <p class="market-engine-label">02 · Shodh SCALE upside</p>
+          <h3>Yield gain-share</h3>
+          <p class="market-engine-subtitle"><em>The recurring physical-value multiplier.</em></p>
+          <p class="market-math"><strong>Math</strong>2,000 sites × $2M average annual gain-share. Calculated as a 15% cut of an average $13M/year saved in raw materials and wasted batches per site.</p>
+          <p class="market-potential"><span>Market potential</span>$4.0B+ ARR</p>
         </article>
-        <span class="market-operator" aria-hidden="true">=</span>
-        <article class="market-equation-card">
-          <h3 class="market-card-label">Initial software opportunity</h3>
-          <p class="market-big-number">$450M–$1.35B</p>
+
+        <article class="market-engine">
+          <p class="market-engine-label">03 · Shodh SYNTH upside</p>
+          <h3>Process IP &amp; milestones</h3>
+          <p class="market-engine-subtitle"><em>The step-change biotech payouts.</em></p>
+          <p class="market-math"><strong>Math</strong>2,000 new scale-up/process-redesign programmes globally per year × $2.5M average success milestone and IP royalty buyout.</p>
+          <p class="market-potential"><span>Market potential</span>$5.0B+ annually</p>
         </article>
       </div>
 
-      <div class="market-expansion-band">
-        <p class="market-expansion-number">1,500+ additional sites</p>
-        <p class="market-expansion-copy"><strong>Expansion market</strong><br>Formulation · advanced materials · batteries · energy · industrial manufacturing</p>
+      <div class="market-bottom-banner">
+        <strong>The bottom line</strong>
+        <p><em>SCALE</em> creates the sticky recurring site license. <em>SYNTH</em> creates the step-change IP upside. <b>Together, Shodh prices against physical value captured.</b></p>
       </div>
-
-      <p class="market-bottom-line">The initial market is already substantial. Each validated process class expands it further.</p>
-      <p class="pitch-small-footer">Bottom-up planning estimate based on qualified target-site counts and target deployment pricing.</p>
     </section>
 
     <!-- Slide 13: Raise — static -->
@@ -4489,28 +4550,6 @@
           <p>Up to <strong>$20M</strong> government-backed debt expected after institutional lead</p>
         </article>
         <p>The method is proven. This round scales it into a global company.</p>
-      </div>
-
-      <div class="raise-details">
-        <article class="raise-card">
-          <h3>Use of funds</h3>
-          <ul class="raise-list">
-            <li>Frontier model and compute</li>
-            <li>Prospective industrial validation</li>
-            <li>Private enterprise deployments</li>
-            <li>India and US commercial expansion</li>
-          </ul>
-        </article>
-
-        <article class="raise-card raise-targets">
-          <h3>24-month target</h3>
-          <ul class="raise-list">
-            <li><strong>30</strong><span>enterprise customers</span></li>
-            <li><strong>$24M</strong><span>ARR</span></li>
-            <li><strong>8</strong><span>validated process classes</span></li>
-          </ul>
-        </article>
-
       </div>
     </section>
 
