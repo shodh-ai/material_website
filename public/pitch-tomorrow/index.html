@@ -2362,98 +2362,60 @@
       letter-spacing: -0.045em;
     }
 
-    .team-layout {
-      flex: 1;
-      min-height: 0;
-      display: grid;
-      grid-template-columns: 0.9fr 1fr 1.08fr 1.25fr;
-      gap: 0;
-      margin-top: 34px;
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .team-founder,
-    .team-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 28px 24px;
-      border: 0;
-      border-right: 1px solid rgba(255, 255, 255, 0.22);
-      background: transparent;
-    }
-
-    .team-layout > :last-child {
-      border-right: 0;
-    }
-
-    .team-founder-label,
-    .team-card-label {
-      margin: 0 0 10px;
+    .advisory-board-label {
+      margin: 34px 0 14px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.55);
     }
 
-    .team-founder h3 {
-      margin: 0;
-      max-width: 320px;
-      font-size: clamp(24px, 2.25vw, 34px);
-      font-weight: 500;
-      line-height: 1.06;
-      letter-spacing: -0.03em;
+    .advisory-grid {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .team-founder-degree {
-      margin: 20px 0 0;
-      max-width: 300px;
+    .advisor {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-width: 0;
+      padding: 30px 26px;
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .advisor:last-child {
+      border-right: 0;
+    }
+
+    .advisor-index {
+      margin: 0 0 auto;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    .advisor h3 {
+      margin: 0;
+      font-size: clamp(26px, 2.7vw, 42px);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      color: #ffffff;
+    }
+
+    .advisor p {
+      margin: 16px 0 0;
+      max-width: 250px;
       font-size: clamp(13px, 1.15vw, 16px);
       line-height: 1.35;
-      color: rgba(255, 255, 255, 0.74);
-    }
-
-    .team-card-grid {
-      display: contents;
-    }
-
-    .team-card {
-      min-width: 0;
-    }
-
-    .team-card-network {
-      background: transparent;
-      color: #ffffff;
-    }
-
-    .team-card-network .team-card-label {
-      color: rgba(255, 255, 255, 0.55);
-    }
-
-    .team-card h3 {
-      margin: 0;
-      font-size: clamp(20px, 2vw, 29px);
-      font-weight: 500;
-      line-height: 1.06;
-      letter-spacing: -0.025em;
-    }
-
-    .team-card p {
-      margin: 14px 0 0;
-      font-size: clamp(13px, 1.15vw, 16px);
-      line-height: 1.45;
       color: rgba(255, 255, 255, 0.7);
-    }
-
-    .team-card-network p {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .team-card-network .team-network-names {
-      font-size: clamp(18px, 1.7vw, 25px);
-      color: #ffffff;
     }
 
     .raise-slide {
@@ -2635,15 +2597,20 @@
         padding: 32px 20px;
       }
 
-      .team-layout,
       .raise-slide {
         grid-template-columns: 1fr;
       }
 
-      .team-layout { flex: none; }
-      .team-card-grid { display: contents; }
-      .team-founder,
-      .team-card { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+      .advisory-grid {
+        flex: none;
+        grid-template-columns: 1fr 1fr;
+      }
+      .advisor {
+        min-height: 230px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      }
+      .advisor:nth-child(2) { border-right: 0; }
+      .advisor:nth-child(n + 3) { border-bottom: 0; }
       .raise-slide .pitch-slide-kicker { grid-column: auto; }
       .raise-details { padding: 0; }
       .raise-hero { min-height: 420px; padding: 20px 0; }
@@ -4090,6 +4057,36 @@
       <h2>Uniform physics world model for molecular discovery and industrial scale-up</h2>
     </section>
 
+    <!-- Slide 12: Advisory board — static -->
+    <section class="scroll-section team-slide" id="section-team">
+      <span class="pitch-slide-kicker">Slide 12 — Built to lead physical intelligence</span>
+      <h2 class="pitch-slide-title">Built to lead physical intelligence</h2>
+      <p class="advisory-board-label">Advisory board</p>
+
+      <div class="advisory-grid">
+        <article class="advisor">
+          <span class="advisor-index">01</span>
+          <h3>Kiran<br>Mazumdar-Shaw</h3>
+          <p>Founder &amp; Chairperson, Biocon</p>
+        </article>
+        <article class="advisor">
+          <span class="advisor-index">02</span>
+          <h3>Rahul<br>Singhvi</h3>
+          <p>Biomanufacturing founder &amp; operator</p>
+        </article>
+        <article class="advisor">
+          <span class="advisor-index">03</span>
+          <h3>Arun<br>Seth</h3>
+          <p>Enterprise technology veteran</p>
+        </article>
+        <article class="advisor">
+          <span class="advisor-index">04</span>
+          <h3>Mirik<br>Gogri</h3>
+          <p>Aarti Industries · Specialty chemicals</p>
+        </article>
+      </div>
+    </section>
+
     <!-- Static input/output split: intentionally no animation classes or hooks -->
     <section class="scroll-section static-objective-section" id="section-objective-static">
       <div class="static-objective-left">
@@ -4266,7 +4263,7 @@
     <!-- Slide 7: Industrial Validation Programmes — static -->
     <section class="scroll-section validation-programmes-section" id="section-validation-programmes">
       <span class="pitch-slide-kicker">Slide 7 — Industrial Validation Programmes</span>
-      <h2 class="pitch-slide-title">8 industrial programmes across three stages of validation</h2>
+      <h2 class="pitch-slide-title">9 industrial programmes across three stages of validation</h2>
 
       <div class="programmes-grid">
         <section class="programme-stage">
@@ -4320,6 +4317,13 @@
               </div>
               <p class="programme-process">Large-molecule process development</p>
             </article>
+            <article class="programme-card">
+              <div class="programme-partner">
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=jubilantingrevia.com&amp;sz=128" alt="Jubilant Ingrevia logo"></span>
+                <strong class="programme-name">Jubilant Ingrevia</strong>
+              </div>
+              <p class="programme-process">Chemical process optimisation</p>
+            </article>
           </div>
         </section>
 
@@ -4328,10 +4332,10 @@
           <div class="programme-cards">
             <article class="programme-card">
               <div class="programme-partner">
-                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=jubilantingrevia.com&amp;sz=128" alt=""></span>
-                <strong class="programme-name">Jubilant Ingrevia</strong>
+                <span class="partner-logo"><img src="https://www.google.com/s2/favicons?domain=geaerospace.com&amp;sz=128" alt="GE Aerospace logo"></span>
+                <strong class="programme-name">GE Aerospace</strong>
               </div>
-              <p class="programme-process">Chemical process optimisation</p>
+              <p class="programme-process">Chemical scale-up</p>
             </article>
             <article class="programme-card">
               <div class="programme-partner">
@@ -4472,89 +4476,6 @@
 
       <p class="market-bottom-line">The initial market is already substantial. Each validated process class expands it further.</p>
       <p class="pitch-small-footer">Bottom-up planning estimate based on qualified target-site counts and target deployment pricing.</p>
-    </section>
-
-    <!-- Slide 11: Expansion — static -->
-    <section class="scroll-section expansion-section" id="section-expansion">
-      <span class="pitch-slide-kicker">Slide 11 — Expansion</span>
-      <h2 class="pitch-slide-title">Each validated process class unlocks adjacent industrial markets</h2>
-
-      <div class="expansion-flow">
-        <article class="expansion-card">
-          <h3 class="expansion-card-label">Today</h3>
-          <ul class="expansion-list">
-            <li>Exothermic chemical-process scale-up</li>
-            <li>High-concentration bioreactor scale-up</li>
-          </ul>
-          <strong class="expansion-card-count">8 industrial validation programmes</strong>
-        </article>
-        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
-        <article class="expansion-card">
-          <h3 class="expansion-card-label">Next</h3>
-          <ul class="expansion-list">
-            <li>Small-molecule reaction scale-up</li>
-            <li>Batch-to-continuous conversion</li>
-            <li>Large-molecule bioprocessing</li>
-            <li>Formulation and mixing</li>
-            <li>Peptides, ADCs and LNP processes</li>
-            <li>Specialty-chemical manufacturing</li>
-          </ul>
-        </article>
-        <span class="pitch-flow-arrow" aria-hidden="true">→</span>
-        <article class="expansion-card">
-          <h3 class="expansion-card-label">Platform</h3>
-          <ul class="expansion-list">
-            <li>Pharma and biomanufacturing</li>
-            <li>Chemicals and advanced materials</li>
-            <li>Batteries and energy</li>
-            <li>Advanced engineering</li>
-          </ul>
-          <strong class="expansion-card-count">One physical-intelligence layer across industrial manufacturing</strong>
-        </article>
-      </div>
-
-      <p class="expansion-bottom-line">The same underlying model expands across process classes without rebuilding the product from scratch.</p>
-      <p class="pitch-small-footer">Customer data and process IP remain private within the customer environment.</p>
-    </section>
-
-    <!-- Slide 12: Team — static -->
-    <section class="scroll-section team-slide" id="section-team">
-      <span class="pitch-slide-kicker">Slide 12 — Built to lead physical intelligence</span>
-      <h2 class="pitch-slide-title">Built to lead physical intelligence</h2>
-
-      <div class="team-layout">
-        <article class="team-founder">
-          <p class="team-founder-label">Founder &amp; CEO</p>
-          <h3>Arastu Sharma</h3>
-          <p class="team-founder-degree">PhD, Materials Science &amp; AI<br>University of Cambridge</p>
-        </article>
-
-        <div class="team-card-grid">
-          <article class="team-card">
-            <div>
-              <p class="team-card-label">Technical team</p>
-              <h3>15-person AI-native technical team</h3>
-            </div>
-            <p>AI · physics · chemistry · materials · process engineering · HPC</p>
-          </article>
-
-          <article class="team-card">
-            <div>
-              <p class="team-card-label">Capital efficiency</p>
-              <h3>Built with exceptional capital efficiency</h3>
-            </div>
-            <p>10B physical foundation model · 15M trajectories · 8 industrial programmes</p>
-          </article>
-
-          <article class="team-card team-card-network">
-            <div>
-              <p class="team-card-label">Advisory board</p>
-              <h3 class="team-network-names">Kiran Mazumdar-Shaw · Rahul Singhvi · Arun Seth</h3>
-            </div>
-            <p>IndiaAI-supported compute · global industrial validation partners</p>
-          </article>
-        </div>
-      </div>
     </section>
 
     <!-- Slide 13: Raise — static -->
