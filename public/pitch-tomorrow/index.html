@@ -1666,6 +1666,34 @@
       border-top-color: color-mix(in srgb, currentColor 22%, transparent);
     }
 
+    .product-module-details {
+      display: grid;
+      gap: 18px;
+      margin-top: auto;
+    }
+
+    .product-module-detail {
+      padding-top: 14px;
+      border-top: 1px solid currentColor;
+      border-top-color: color-mix(in srgb, currentColor 22%, transparent);
+    }
+
+    .product-module-detail h4 {
+      margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.58;
+    }
+
+    .product-module-detail p {
+      margin: 0;
+      font-size: clamp(15px, 1.25vw, 18px);
+      font-weight: 500;
+      line-height: 1.32;
+    }
+
     @media (max-width: 768px) {
       .product-platform-section {
         height: auto;
@@ -1678,6 +1706,7 @@
       .product-module-title { font-size: 40px; }
       .product-module-promise { font-size: 18px; }
       .product-module-list { font-size: 15px; }
+      .product-module-detail p { font-size: 15px; }
     }
 
     /* ── Slides 8–11: static pitch systems ── */
@@ -1871,7 +1900,7 @@
     }
 
     .commercial-engine {
-      min-height: 410px;
+      min-height: 330px;
       padding: 22px 24px;
       border: 1px solid rgba(0, 0, 66, 0.16);
       background: #ffffff;
@@ -4121,7 +4150,7 @@
           <div role="cell">High-concentration mAb bioreactor</div>
           <div role="cell"><span class="cross-status">Complete</span></div>
           <div role="cell"><span class="cross-status">Complete</span></div>
-          <div role="cell"><strong>[Insert verified metric]</strong></div>
+          <div role="cell"><strong>TFF Recovery 94.5% (1.02x Target Titer)</strong></div>
         </div>
 
         <div class="cross-table-row" role="row">
@@ -4245,24 +4274,32 @@
           <span class="product-module-kind">Process intelligence</span>
           <h3 class="product-module-title">Shodh SYNTH</h3>
           <p class="product-module-promise">Design a manufacturable process</p>
-          <ul class="product-module-list">
-            <li>Route and process design</li>
-            <li>Yield and impurity prediction</li>
-            <li>Operating-window optimisation</li>
-            <li>Batch-to-continuous conversion</li>
-          </ul>
+          <div class="product-module-details">
+            <section class="product-module-detail">
+              <h4>Value</h4>
+              <p>Redesigns chemistry, bioprocesses and manufacturing routes for lower cost, higher yield and faster scale-up</p>
+            </section>
+            <section class="product-module-detail">
+              <h4>Moat</h4>
+              <p>Asset-light process invention: Shodh can originate patentable routes, catalysts, process conditions and operating methods</p>
+            </section>
+          </div>
         </article>
 
         <article class="product-module product-module-scale">
           <span class="product-module-kind">Factory intelligence</span>
           <h3 class="product-module-title">Shodh SCALE</h3>
           <p class="product-module-promise">Transfer and optimise it at industrial scale</p>
-          <ul class="product-module-list">
-            <li>Equipment-aware digital twin</li>
-            <li>Failure and hotspot diagnosis</li>
-            <li>Inverse optimisation of plant conditions</li>
-            <li>Private adaptation inside the customer environment</li>
-          </ul>
+          <div class="product-module-details">
+            <section class="product-module-detail">
+              <h4>Value</h4>
+              <p>Improves yield, impurity control and scale-up reliability in real equipment</p>
+            </section>
+            <section class="product-module-detail">
+              <h4>Moat</h4>
+              <p>A living digital twin that recalibrates as raw materials, equipment, climate and fouling drift over time</p>
+            </section>
+          </div>
         </article>
       </div>
     </section>
@@ -4283,19 +4320,11 @@
               <p>CDMOs, specialty chemicals and biomanufacturers</p>
             </section>
             <section class="commercial-detail">
-              <h4>Value</h4>
-              <p>Improves yield, impurity control and scale-up reliability in real equipment</p>
-            </section>
-            <section class="commercial-detail">
               <h4>Pricing</h4>
               <ul class="commercial-pricing">
                 <li>$500K–$1M annual private site deployment</li>
                 <li>capped value-share on verified economic gains</li>
               </ul>
-            </section>
-            <section class="commercial-detail">
-              <h4>Moat</h4>
-              <p>A living digital twin that recalibrates as raw materials, equipment, climate and fouling drift over time</p>
             </section>
           </div>
         </article>
@@ -4310,20 +4339,12 @@
               <p>Pharma, CDMOs, biomanufacturing and process innovators</p>
             </section>
             <section class="commercial-detail">
-              <h4>Value</h4>
-              <p>Redesigns chemistry, bioprocesses and manufacturing routes for lower cost, higher yield and faster scale-up</p>
-            </section>
-            <section class="commercial-detail">
               <h4>Pricing</h4>
               <ul class="commercial-pricing">
                 <li>$250K process-reinvention programme</li>
                 <li>$1M–$3M physical validation milestones</li>
                 <li>selective process-IP royalty upside</li>
               </ul>
-            </section>
-            <section class="commercial-detail">
-              <h4>Moat</h4>
-              <p>Asset-light process invention: Shodh can originate patentable routes, catalysts, process conditions and operating methods</p>
             </section>
           </div>
         </article>
