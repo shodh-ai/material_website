@@ -22,6 +22,7 @@ export default function FoundersAssociatePage() {
         body: JSON.stringify({
           name: data.get("name"),
           email: data.get("email"),
+          backgroundStory: data.get("background-story"),
           whyShodh: data.get("why-shodh"),
           difficultExample: data.get("hard-thing"),
           website: data.get("website"),
@@ -83,6 +84,19 @@ export default function FoundersAssociatePage() {
             </label>
             <input id="email" name="email" type="email" autoComplete="email" maxLength={254} required />
           </div>
+
+          <label htmlFor="background-story">
+            <span>ABOUT YOU</span>
+            Tell us your story—where you have been and what you have done
+          </label>
+          <textarea
+            id="background-story"
+            name="background-story"
+            rows={5}
+            minLength={20}
+            maxLength={4000}
+            required
+          />
 
           <label htmlFor="why-shodh">
             <span>01</span>

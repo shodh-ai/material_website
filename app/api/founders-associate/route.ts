@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
 
   const name = clean(body.name, 120);
   const email = clean(body.email, 254).toLowerCase();
+  const backgroundStory = clean(body.backgroundStory, 4_000);
   const whyShodh = clean(body.whyShodh, 4_000);
   const difficultExample = clean(body.difficultExample, 6_000);
 
@@ -41,9 +42,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (whyShodh.length < 20 || difficultExample.length < 20) {
+  if (
+    backgroundStory.length < 20 ||
+    whyShodh.length < 20 ||
+    difficultExample.length < 20
+  ) {
     return NextResponse.json(
-      { error: "Please provide a complete answer to both questions." },
+      { error: "Please provide a complete answer to all three questions." },
       { status: 400 }
     );
   }
@@ -70,12 +75,18 @@ export async function POST(request: NextRequest) {
         id BIGSERIAL PRIMARY KEY,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
+        background_story TEXT NOT NULL,
         why_shodh TEXT NOT NULL,
         difficult_example TEXT NOT NULL,
         source_hash TEXT NOT NULL,
         user_agent TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
+    `;
+
+    await sql`
+      ALTER TABLE founders_associate_applications
+      ADD COLUMN IF NOT EXISTS background_story TEXT
     `;
 
     await sql`
@@ -99,9 +110,9 @@ export async function POST(request: NextRequest) {
 
     await sql`
       INSERT INTO founders_associate_applications
-        (name, email, why_shodh, difficult_example, source_hash, user_agent)
+        (name, email, background_story, why_shodh, difficult_example, source_hash, user_agent)
       VALUES
-        (${name}, ${email}, ${whyShodh}, ${difficultExample}, ${sourceHash}, ${userAgent})
+        (${name}, ${email}, ${backgroundStory}, ${whyShodh}, ${difficultExample}, ${sourceHash}, ${userAgent})
     `;
 
     return NextResponse.json({ success: true }, { status: 201 });
