@@ -11,6 +11,10 @@ const publicExactPaths = new Set([
   "/favicon.ico",
   "/robots.txt",
   "/sitemap.xml",
+  "/research",
+  "/careers",
+  "/materials-discovery",
+  "/project-skanda",
   "/Founders_Associate.png",
   "/Logo_White BG.png",
 ]);
