@@ -115,12 +115,12 @@ function updateSceneJson() {
   document.getElementById('my-scene-json').innerText = JSON.stringify(json);
 }
 
-// ─── Preload All Assets ──────────────────────────────────────────────────────
+// ─── Preload First-Paint Assets ──────────────────────────────────────────────
 function preloadAllAssets() {
-  const orbitImages = document.querySelectorAll('.orbit-image');
-  
-  // Total assets: images + font + svg + shader
-  totalLoaderAssets = orbitImages.length + 3;
+  // Orbit images belong to the next scroll section. Waiting for every one of
+  // them leaves first-time visitors on the loading screen for far too long.
+  // They are lazy-loaded by the browser and animate in when that section opens.
+  totalLoaderAssets = 3;
 
   // Initialize SVG mask paths
   const path1 = document.getElementById('mask-path-1');
@@ -136,25 +136,12 @@ function preloadAllAssets() {
     path2.style.strokeDashoffset = len2; // Starts fully hidden
   }
 
-  // 1. Preload all orbit images
-  const imagePromises = Array.from(orbitImages).map(img => {
-    return new Promise((resolve) => {
-      const onLoad = () => { updateLoaderProgress(); resolve(); };
-      if (img.complete && img.naturalWidth > 0) {
-        onLoad();
-      } else {
-        img.onload = onLoad;
-        img.onerror = onLoad; // resolve even on error to not block forever
-      }
-    });
-  });
-
-  // 2. Preload fonts
+  // 1. Load fonts needed for the first paint.
   const fontPromise = document.fonts ? document.fonts.ready.then(() => {
     updateLoaderProgress();
   }) : Promise.resolve().then(() => updateLoaderProgress());
 
-  // 3. Preload SVG brandmark (likely already cached via <link rel="preload">)
+  // 2. Preload SVG brandmark (likely already cached via <link rel="preload">)
   const svgPromise = new Promise((resolve) => {
     const svgImg = new Image();
     const onLoad = () => { updateLoaderProgress(); resolve(); };
@@ -164,7 +151,7 @@ function preloadAllAssets() {
   });
 
   // Combine all
-  return Promise.all([...imagePromises, fontPromise, svgPromise])
+  return Promise.all([fontPromise, svgPromise])
     .then(() => {
       allAssetsLoaded = true;
       console.log('[Preloader] All assets loaded.');

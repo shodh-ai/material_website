@@ -4,6 +4,18 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['ssh2'],
   },
+  async rewrites() {
+    // Serve the marketing site directly at the canonical URL so crawlers read
+    // the same document and content that visitors see.
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          destination: '/shodh-new/index.html',
+        },
+      ],
+    };
+  },
   async headers() {
     return [
       {

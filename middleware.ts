@@ -9,6 +9,8 @@ const publicExactPaths = new Set([
   "/api/viewer-access",
   "/api/footer-contact",
   "/favicon.ico",
+  "/robots.txt",
+  "/sitemap.xml",
   "/Founders_Associate.png",
   "/Logo_White BG.png",
 ]);
