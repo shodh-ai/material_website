@@ -17,6 +17,9 @@ const publicExactPaths = new Set([
   "/project-skanda",
   "/Founders_Associate.png",
   "/Logo_White BG.png",
+  "/shodhai_logo.svg",
+  "/india-ai-logo.png",
+  "/webgl-bg-foundation-v2.png",
 ]);
 
 const publicPathPrefixes = ["/shodh-new/"];
