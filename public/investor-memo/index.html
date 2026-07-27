@@ -554,150 +554,37 @@ th { background: var(--navy); }
   background: rgba(208,226,244,.9);
 }
 
-/* Exact static Valley of Death composition from the pitch deck */
+/* Native hills from /pitch-tomorrow, resized for the A4 memo canvas. */
 .memo-pitch-valley {
   position: relative;
   height: 89mm;
   margin: 9mm 0 11mm;
   overflow: hidden;
+  border: 0;
   border-radius: 7mm;
-  background: transparent;
+  background: linear-gradient(135deg, #09172b, #41698e);
   box-shadow: 0 5mm 11mm rgba(0,0,66,.14);
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
-.memo-pitch-valley .valley-diagram {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: transparent;
-}
-.memo-pitch-valley .valley-diagram::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(ellipse at 50% 84%, rgba(1,5,11,.76) 0%, rgba(0,0,66,.3) 26%, transparent 58%);
-}
-.memo-pitch-valley .valley-diagram::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 22%;
-  z-index: 1;
-  background: linear-gradient(to bottom, transparent 0%, rgba(1,5,11,.46) 25%, #01050b 62%, #01050b 100%);
-}
-.memo-pitch-valley svg {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.memo-pitch-valley .valley-copy {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  color: #fff;
-}
+.memo-pitch-valley .valley-diagram { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.memo-pitch-valley .valley-diagram::before { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 50% 84%, rgba(1,5,11,.76) 0%, rgba(0,0,66,.3) 26%, transparent 58%); }
+.memo-pitch-valley .valley-diagram::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; z-index: 1; background: linear-gradient(to bottom, transparent 0%, rgba(1,5,11,.46) 25%, #01050b 62%, #01050b 100%); }
+.memo-pitch-valley svg { position: relative; z-index: 1; display: block; width: 100%; height: 100%; }
+.memo-pitch-valley .valley-copy { position: absolute; inset: 0; z-index: 2; color: #fff; }
 .memo-pitch-valley p { max-width: none; margin: 0; }
-.memo-pitch-valley .valley-cost-block {
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  width: 84%;
-  transform: translateX(-50%);
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1mm 5mm rgba(0,0,66,.42);
-}
-.memo-pitch-valley .valley-cost-block strong {
-  display: block;
-  color: #fff;
-  font-size: 8.3pt;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -.02em;
-}
-.memo-pitch-valley .valley-cost-block p {
-  margin-top: 1.8mm;
-  color: rgba(255,255,255,.68);
-  font-size: 6.2pt;
-  font-weight: 500;
-  line-height: 1.3;
-}
-.memo-pitch-valley .valley-mountain-copy {
-  position: absolute;
-  top: 54%;
-  width: 26%;
-  color: #000042;
-  text-align: center;
-}
-.memo-pitch-valley .valley-mountain-copy.left { left: 9%; }
-.memo-pitch-valley .valley-mountain-copy.right { right: 9%; }
-.memo-pitch-valley .valley-kicker,
-.memo-pitch-valley .valley-gap-title {
-  font-size: 5.9pt;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-.memo-pitch-valley .valley-money {
-  margin-top: 1.8mm;
-  font-size: 10.8pt;
-  font-weight: 650;
-  line-height: 1.08;
-  letter-spacing: -.025em;
-  white-space: nowrap;
-}
-.memo-pitch-valley .valley-names {
-  margin-top: 1.5mm;
-  font-size: 5.5pt;
-  font-weight: 500;
-  line-height: 1.3;
-}
-.memo-pitch-valley .valley-gap-copy {
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  width: 34%;
-  transform: translateX(-50%);
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 1mm 5mm rgba(0,0,66,.5);
-}
-.memo-pitch-valley .valley-gap-path {
-  margin-top: 1.7mm;
-  font-size: 7pt;
-  font-weight: 600;
-  line-height: 1.35;
-}
-.memo-pitch-valley .valley-shodh {
-  position: absolute;
-  left: 50%;
-  top: 67.5%;
-  transform: translate(-50%,-50%);
-  color: #fff;
-  text-align: center;
-}
-.memo-pitch-valley .valley-shodh strong {
-  display: block;
-  color: #fff;
-  font-size: 18pt;
-  line-height: 1;
-  letter-spacing: .12em;
-}
-.memo-pitch-valley .valley-shodh span {
-  display: block;
-  margin-top: .8mm;
-  font-size: 4.7pt;
-  font-weight: 650;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
+.memo-pitch-valley .valley-cost-block { position: absolute; top: 6%; left: 50%; width: 84%; transform: translateX(-50%); color: #fff; text-align: center; text-shadow: 0 1mm 5mm rgba(0,0,66,.42); }
+.memo-pitch-valley .valley-cost-block strong { display: block; color: #fff; font-size: 8.8pt; font-weight: 650; line-height: 1.25; letter-spacing: -.02em; }
+.memo-pitch-valley .valley-cost-block p { margin-top: 1.8mm; color: rgba(255,255,255,.74); font-size: 6.7pt; font-weight: 560; line-height: 1.3; }
+.memo-pitch-valley .valley-mountain-copy { position: absolute; top: 54%; width: 27%; color: #000042; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,.34); }
+.memo-pitch-valley .valley-mountain-copy.left { left: 7%; }
+.memo-pitch-valley .valley-mountain-copy.right { right: 7%; }
+.memo-pitch-valley .valley-kicker, .memo-pitch-valley .valley-gap-title { font-size: 6.5pt; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+.memo-pitch-valley .valley-money { margin-top: 1.8mm; font-size: 11.2pt; font-weight: 700; line-height: 1.08; letter-spacing: -.025em; white-space: nowrap; }
+.memo-pitch-valley .valley-names { margin-top: 1.5mm; font-size: 6.1pt; font-weight: 620; line-height: 1.35; }
+.memo-pitch-valley .valley-gap-copy { position: absolute; left: 50%; top: 48%; width: 36%; transform: translateX(-50%); color: #fff; text-align: center; text-shadow: 0 1mm 5mm rgba(0,0,66,.5); }
+.memo-pitch-valley .valley-gap-path { margin-top: 1.8mm; font-size: 7.3pt; font-weight: 700; line-height: 1.35; }
+.memo-pitch-valley .valley-shodh { position: absolute; left: 50%; top: 67.5%; transform: translate(-50%,-50%); color: #fff; text-align: center; }
+.memo-pitch-valley .valley-shodh strong { display: block; color: #fff; font-size: 18pt; line-height: 1; letter-spacing: .12em; }
+.memo-pitch-valley .valley-shodh span { display: block; margin-top: .8mm; font-size: 5.3pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
 /* Alternating editorial rhythm inspired by the pitch deck */
 .memo-content {
@@ -900,7 +787,7 @@ th { background: var(--navy); }
     background: var(--navy) !important;
   }
   .memo-pitch-valley {
-    background: transparent !important;
+    background: linear-gradient(135deg, #09172b, #41698e) !important;
   }
   .memo-section {
     margin: 0 -4mm;
@@ -966,8 +853,8 @@ th { background: var(--navy); }
         <div class="valley-copy">
           <div class="valley-cost-block">
             <strong>Drug-launch delay: ~$500K per day</strong>
-            <strong>1% yield loss: ~$1–10M for a battery factory</strong>
-            <p>Millions in experiments · 1–5 years of pilot runs · delayed production</p>
+            <strong>1% yield loss: ~$1-10M for a battery factory</strong>
+            <p>Millions in experiments · 1-5 years of pilot runs · delayed production</p>
           </div>
           <div class="valley-mountain-copy left">
             <p class="valley-kicker">Discovery AI</p>
