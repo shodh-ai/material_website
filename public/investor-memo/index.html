@@ -937,6 +937,14 @@ th { background: var(--navy); }
 }
 .investment-card h4 { margin-top: 0; }
 .investment-card ul { margin-bottom: 0; }
+.chapter-kicker {
+  display: block;
+  margin-bottom: 3mm;
+  font-size: 8pt;
+  font-weight: 750;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
 
 /* Final A4 editorial system: readable type, continuous flow, no fragmented spreads. */
 @media print {
@@ -1022,6 +1030,14 @@ th { background: var(--navy); }
     -webkit-box-decoration-break: slice;
     box-decoration-break: slice;
   }
+  .memo-section {
+    break-before: page;
+    page-break-before: always;
+  }
+  .memo-section:first-child {
+    break-before: auto;
+    page-break-before: auto;
+  }
   .memo-section::before,
   .memo-section::after { content: none !important; }
 
@@ -1047,28 +1063,38 @@ th { background: var(--navy); }
   h2.memo-heading,
   .memo-section h2.memo-heading {
     max-width: none;
-    margin: 10mm 0 6mm;
-    padding: 7mm 0 0;
-    border-top: 1.2px solid rgba(0,0,66,.3);
-    color: var(--navy);
-    font-size: 25pt;
+    min-height: 44mm;
+    margin: 0 0 8mm;
+    padding: 10mm;
+    border: 0;
+    border-radius: 4mm;
+    color: white;
+    background:
+      radial-gradient(circle at 88% 12%, rgba(111,157,204,.48), transparent 42%),
+      linear-gradient(135deg, #06152a 0%, #0f3152 100%);
+    font-size: 24pt;
     font-weight: 560;
-    line-height: 1.03;
+    line-height: 1.06;
     letter-spacing: -.045em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     break-before: auto;
     page-break-before: auto;
     break-after: avoid;
     page-break-after: avoid;
+    print-color-adjust: exact;
   }
   .memo-section:first-child h2.memo-heading { margin-top: 0; }
   h2.memo-heading::before,
   .memo-section h2.memo-heading::before {
-    display: block;
+    content: none;
+  }
+  .chapter-kicker {
     margin-bottom: 4mm;
-    color: rgba(0,0,66,.58);
+    color: rgba(255,255,255,.7);
     font-size: 7pt;
-    font-weight: 750;
-    letter-spacing: .2em;
+    letter-spacing: .24em;
   }
 
   h3.memo-heading {
@@ -1245,7 +1271,7 @@ th { background: var(--navy); }
     </section>
     <article class="memo-content">
 <section class="memo-section memo-section-0 tone-atmosphere executive-summary">
-<h2 class="memo-heading">1. Executive Summary</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 01</span>Executive Summary</h2>
 <p class="executive-lede">In recent prospective industrial validations, Shodh’s uniform physics model compressed a 3-month physical formulation test into 24 hours of computation for a global CRO, and successfully improved chemical factory yield from 82.4% to 96.7% on a mathematically locked run.</p>
 <p>While billions of dollars have been invested in "Discovery AI" to invent new digital molecules, and "Engineering AI" to optimise finished downstream machines, the physical economy remains bottlenecked by a massive, multi-trillion-dollar void in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecular discovery into a mass-produced physical reality requires surviving formulation stability, chemical route redesign, and factory scale-up. Historically, this entire lifecycle has been a fragmented sequence of expensive, manual physical trial and error.</p>
 <p>Shodh is a frontier foundation model for physical intelligence built to eliminate this bottleneck. Rather than building bespoke simulations for individual domains, Shodh operates a <strong>Uniform Physics World Model</strong> capable of true multi-scale, cross-domain inverse design. Whether calculating the thermodynamic degradation of a molecule or the fluid dynamics of a 10,000-litre factory vessel, Shodh computationally generates the physical parameters required to achieve a targeted industrial outcome.</p>
@@ -1278,7 +1304,7 @@ th { background: var(--navy); }
 </div>
 </section>
 <section class="memo-section memo-section-1 tone-atmosphere">
-<h2 class="memo-heading">2. The Industrial Scale-Up Gap</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 02</span>The Industrial Scale-Up Gap</h2>
 <p>The greatest unsolved bottleneck in the physical sciences is moving from discovery to manufacturing.</p>
 <p>On one side, Discovery AI companies—including Isomorphic, Insilico, Lila, Periodic and CuspAI—have attracted billions of dollars to design molecules and materials at the microscopic level. On the other, Engineering AI is advancing the design of large-scale machines and hardware, illustrated by PhysicsX’s $300M raise at a reported $2.4B valuation and the more than $18B committed to Prometheus’s ambition of building an “artificial general engineer” for systems such as jet engines and robotics.[1–7]</p>
 <p class="lead-in">Between these two categories remains a structural valley of death:</p>
@@ -1354,7 +1380,7 @@ th { background: var(--navy); }
 <p>By converting scale-up from a fragmented sequence of expert judgement, isolated simulation and physical trial and error into a reusable intelligence layer, Shodh is targeting one of the largest remaining bottlenecks in the physical economy.</p>
 </section>
 <section class="memo-section memo-section-2 tone-paper">
-<h2 class="memo-heading">3. What Shodh Does: A New Paradigm for Industrial Production</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 03</span>What Shodh Does: A New Paradigm for Industrial Production</h2>
 <p>Until now, no computational system has successfully connected molecular behaviour, process physics and industrial equipment across different manufacturing domains. Shodh has built and prospectively validated what we believe is the world’s first common physical-intelligence model designed to execute inverse design from molecule to factory.</p>
 <p>This is no longer only an architectural ambition. Early prospective validations show that the same underlying model can operate across sharply different process physics—from exothermic chemical reactions to biologic scale-up. These results provide the first evidence that industrial scale-up can move from a fragmented process of simulation, expert judgement and physical trial-and-error toward model-guided inverse design.</p>
 <p>Shodh is not a conventional engineering simulator. It is a foundation model for physical intelligence.</p>
@@ -1440,7 +1466,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-3 tone-split">
-<h2 class="memo-heading">4. Evidence, Generalisation and Customer Pull</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 04</span>Evidence, Generalisation and Customer Pull</h2>
 <p>To prove that Shodh’s uniform physics world model is not merely theoretical, the company prioritised industrial validation over early commercial revenue. The objective was to demonstrate that Shodh can generate a <em>prospective</em> process recommendation—locked before execution—that succeeds in a physical factory.</p>
 <p>Our validation framework follows a strict progression of physical proof: <strong>Prediction → Control (Improved) → Generalisation → Invention (Reinvented).</strong></p>
 <h3 class="memo-heading">4.1 Predicted: Blinded Back-Testing</h3>
@@ -1513,7 +1539,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-4 tone-paper">
-<h2 class="memo-heading">5. Technology, Scaling and Defensibility</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 05</span>Technology, Scaling and Defensibility</h2>
 <p>The core architectural question—whether one physical-intelligence model can generate a recommendation that changes a real industrial outcome—has now been answered prospectively. The next question is how far that capability generalises, and how quickly compute can expand it.</p>
 <p>Within the process regimes demonstrated to date, Shodh’s principal limitation is no longer the absence of a functioning architecture. It is computational breadth: the resources required to expand the common model across additional physical regimes, iterate through failures rapidly and reduce the adaptation required for each new industrial process.</p>
 <h3 class="memo-heading">5.1 One Model Across Physical Scales</h3>
@@ -1560,7 +1586,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-5 tone-deep">
-<h2 class="memo-heading">6. Market, Business Model and Competitive Status Quo</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 06</span>Market, Business Model and Competitive Status Quo</h2>
 <h3 class="memo-heading">6.1 Begin with Physical Value</h3>
 <p>Shodh’s commercial model begins with a fundamental pricing shift: <strong>we price against manufacturing economics, not software seats.</strong></p>
 <p>Legacy engineering software is sold as a CAD-style tool on a per-seat licensing model out of a company's IT budget. Because those tools merely evaluate human assumptions rather than generating optimized physical outcomes, they cannot claim a share of the factory’s economic upside.</p>
@@ -1613,7 +1639,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-6 tone-atmosphere">
-<h2 class="memo-heading">7. Team and Organisational Scalability</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 07</span>Team and Organisational Scalability</h2>
 <p>A recurring failure mode for applied AI companies in the physical sciences is degrading into a high-end, bespoke consulting firm. Shodh is structurally designed to avoid this. The objective of the company is to deploy a scalable intelligence platform, not to rent out chemical engineers by the hour.</p>
 <h3 class="memo-heading">7.1 The Core Team: Bridging Frontier AI and Heavy Industry</h3>
 <p>Transforming industrial manufacturing requires a rare intersection of disciplines that traditionally do not overlap. The Shodh operating team was built specifically to bridge Silicon Valley-calibre foundation model research with legacy industrial engineering.</p>
@@ -1654,7 +1680,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-7 tone-paper">
-<h2 class="memo-heading">8. The Round, Use of Funds, Milestones and Contingency</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 08</span>The Round, Use of Funds, Milestones and Contingency</h2>
 <p>Shodh is raising <strong>$55M in equity capital</strong> to scale foundation-model training, execute parallel industrial validation programmes, and establish global commercial deployment capability.</p>
 <h3 class="memo-heading">8.1 Financing Structure</h3>
 <ul>
@@ -1698,7 +1724,7 @@ th { background: var(--navy); }
 <div class="section-rule"></div>
 </section>
 <section class="memo-section memo-section-8 tone-split">
-<h2 class="memo-heading">9. Principal Risks and How This Round Closes Them</h2>
+<h2 class="memo-heading"><span class="chapter-kicker">Chapter 09</span>Principal Risks and How This Round Closes Them</h2>
 <p>Investing in frontier physical AI involves inherent technical and commercial risk. Shodh does not obscure these realities. Instead, this $55M financing plan has been explicitly designed around the identification, measurement, and systematic elimination of these risks.</p>
 <p>The table below mirrors the core underwriting pillars of the business, outlining the primary risk today, the evidence we have already accumulated to mitigate it, and exactly how the capital from this round closes it completely.</p>
 <div class="table-wrap"><table>
