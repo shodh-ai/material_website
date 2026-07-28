@@ -937,6 +937,101 @@ th { background: var(--navy); }
 }
 .investment-card h4 { margin-top: 0; }
 .investment-card ul { margin-bottom: 0; }
+.executive-story,
+.module-panel,
+.gap-overview,
+.scale-explanation {
+  margin: 6mm 0;
+}
+.executive-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+.executive-story p,
+.module-panel,
+.scale-explanation {
+  margin: 0;
+  padding: 6mm;
+  border: 1px solid rgba(0,0,66,.12);
+  border-radius: 5mm;
+  background: rgba(255,255,255,.68);
+}
+.module-panel > p:first-child,
+.gap-overview-copy .lead-in,
+.scale-explanation::before {
+  color: rgba(0,0,66,.62);
+  font-size: 7.5pt;
+  font-weight: 750;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.module-panel > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin: 5mm 0 0;
+}
+.module-panel > ul > li {
+  min-height: 35mm;
+  padding: 5mm;
+  border-radius: 4mm;
+  background: rgba(200,216,239,.56);
+}
+.raise-callout {
+  margin: 6mm 0;
+  padding: 7mm;
+  border-radius: 5mm;
+  color: white;
+  background: var(--navy);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.raise-callout strong {
+  color: white;
+}
+.gap-overview {
+  display: grid;
+  grid-template-columns: 1.45fr .8fr;
+  gap: 5mm;
+  align-items: stretch;
+}
+.gap-overview-copy {
+  padding: 6mm;
+  border-radius: 5mm;
+  background: rgba(255,255,255,.68);
+}
+.gap-question {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6mm;
+  border-radius: 5mm;
+  color: white;
+  background: var(--navy);
+}
+.gap-question span {
+  color: rgba(255,255,255,.65);
+  font-size: 7pt;
+  font-weight: 750;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.gap-question strong {
+  color: white;
+  font-size: 15pt;
+  font-weight: 520;
+  line-height: 1.25;
+}
+.scale-explanation::before {
+  content: "WHY SCALE CHANGES THE PHYSICS";
+  display: block;
+  margin-bottom: 4mm;
+}
+.scale-explanation {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
 .chapter-kicker {
   display: block;
   margin-bottom: 3mm;
@@ -995,16 +1090,48 @@ th { background: var(--navy); }
   .executive-lede {
     font-size: 11.5pt;
     line-height: 1.42;
+    border: 0;
+    border-radius: 5mm;
+    background: rgba(255,255,255,.72);
+  }
+  .executive-lede::before {
+    content: "PROVEN IN PROSPECTIVE INDUSTRIAL VALIDATIONS";
+    display: block;
+    margin-bottom: 4mm;
+    color: rgba(0,0,66,.56);
+    font-size: 7pt;
+    font-weight: 750;
+    letter-spacing: .18em;
+  }
+  .executive-story { gap: 4mm; }
+  .executive-story p,
+  .module-panel,
+  .scale-explanation { padding: 5mm; }
+  .executive-story p {
+    font-size: 8.8pt;
+    line-height: 1.45;
+  }
+  .module-panel > ul > li {
+    font-size: 8.7pt;
+    line-height: 1.42;
+  }
+  .raise-callout {
+    padding: 6mm;
+    font-size: 10pt;
+    line-height: 1.45;
+    print-color-adjust: exact;
   }
   .investment-case {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
   }
   .investment-card {
     padding: 4.5mm;
     background: rgba(255,255,255,.68);
   }
   .investment-card + .investment-card {
-    margin-top: 4mm;
+    margin-top: 0;
   }
   .investment-card h4 {
     margin: 0 0 3mm;
@@ -1014,6 +1141,25 @@ th { background: var(--navy); }
     font-size: 8.8pt;
     line-height: 1.45;
   }
+  .memo-section-1 .memo-pitch-valley {
+    padding: 5mm;
+    border: 1px solid rgba(0,0,66,.12);
+    border-radius: 5mm;
+    background: rgba(255,255,255,.7);
+  }
+  .gap-overview {
+    grid-template-columns: 1.42fr .8fr;
+    gap: 4mm;
+  }
+  .gap-overview-copy,
+  .gap-question {
+    padding: 5mm;
+  }
+  .gap-overview-copy p {
+    font-size: 9pt;
+    line-height: 1.48;
+  }
+  .gap-question strong { font-size: 14pt; }
 
   .memo-section,
   .memo-section:first-child {
@@ -1273,14 +1419,18 @@ th { background: var(--navy); }
 <section class="memo-section memo-section-0 tone-atmosphere executive-summary">
 <h2 class="memo-heading"><span class="chapter-kicker">Chapter 01</span>Executive Summary</h2>
 <p class="executive-lede">In recent prospective industrial validations, Shodh’s uniform physics model compressed a 3-month physical formulation test into 24 hours of computation for a global CRO, and successfully improved chemical factory yield from 82.4% to 96.7% on a mathematically locked run.</p>
+<div class="executive-story">
 <p>While billions of dollars have been invested in "Discovery AI" to invent new digital molecules, and "Engineering AI" to optimise finished downstream machines, the physical economy remains bottlenecked by a massive, multi-trillion-dollar void in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecular discovery into a mass-produced physical reality requires surviving formulation stability, chemical route redesign, and factory scale-up. Historically, this entire lifecycle has been a fragmented sequence of expensive, manual physical trial and error.</p>
 <p>Shodh is a frontier foundation model for physical intelligence built to eliminate this bottleneck. Rather than building bespoke simulations for individual domains, Shodh operates a <strong>Uniform Physics World Model</strong> capable of true multi-scale, cross-domain inverse design. Whether calculating the thermodynamic degradation of a molecule or the fluid dynamics of a 10,000-litre factory vessel, Shodh computationally generates the physical parameters required to achieve a targeted industrial outcome.</p>
+</div>
+<div class="module-panel">
 <p>To commercialise this intelligence layer, Shodh delivers the model through two enterprise modules:</p>
 <ul>
 <li><strong>Shodh SCALE:</strong> The recurring-revenue foundation. A factory and formulation deployment that optimises existing processes, capturing a "SaaS floor" base license (e.g., $250K-$500K/year) plus a capped gain-share on the verified economic value created.</li>
 <li><strong>Shodh SYNTH:</strong> The step-change upside. A process-invention capability that computationally redesigns entire chemical and biological manufacturing routes, yielding massive milestone payouts and selective process-IP royalties.</li>
 </ul>
-<p>Having validated the platform across multiple physical scales, and having already secured paid pilots structured for automated conversion into six-figure enterprise SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This round funds the compute required to ride our empirically proven scaling laws, transitioning the company from a proven scientific breakthrough into the dominant intelligence platform for the physical economy.</p>
+</div>
+<p class="raise-callout">Having validated the platform across multiple physical scales, and having already secured paid pilots structured for automated conversion into six-figure enterprise SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This round funds the compute required to ride our empirically proven scaling laws, transitioning the company from a proven scientific breakthrough into the dominant intelligence platform for the physical economy.</p>
 <h3 class="memo-heading">Investment Case at a Glance</h3>
 <div class="investment-case">
   <section class="investment-card">
@@ -1305,11 +1455,15 @@ th { background: var(--navy); }
 </section>
 <section class="memo-section memo-section-1 tone-atmosphere">
 <h2 class="memo-heading"><span class="chapter-kicker">Chapter 02</span>The Industrial Scale-Up Gap</h2>
+<div class="gap-overview">
+<div class="gap-overview-copy">
 <p>The greatest unsolved bottleneck in the physical sciences is moving from discovery to manufacturing.</p>
 <p>On one side, Discovery AI companies—including Isomorphic, Insilico, Lila, Periodic and CuspAI—have attracted billions of dollars to design molecules and materials at the microscopic level. On the other, Engineering AI is advancing the design of large-scale machines and hardware, illustrated by PhysicsX’s $300M raise at a reported $2.4B valuation and the more than $18B committed to Prometheus’s ambition of building an “artificial general engineer” for systems such as jet engines and robotics.[1–7]</p>
 <p class="lead-in">Between these two categories remains a structural valley of death:</p>
-<p class="pull-quote">How does a molecule that works in the laboratory become a reliable, economical industrial process?</p>
 <p>This is the scale-up gap.</p>
+</div>
+<aside class="gap-question"><span>The missing layer</span><strong>How does a molecule that works in the laboratory become a reliable, economical industrial process?</strong></aside>
+</div>
 
     <figure class="memo-pitch-valley" aria-label="Two funding mountains surrounding the dark scale-up gap occupied by Shodh">
       <div class="valley-diagram">
@@ -1357,9 +1511,11 @@ th { background: var(--navy); }
       </div>
     </figure>
     
+<div class="scale-explanation">
 <p>A laboratory breakthrough cannot simply be enlarged into a factory. When a reaction, biological process or material moves from a benchtop system into a 10,000-litre vessel, its physical environment changes. Heat no longer dissipates in the same way. Mixing becomes non-uniform. Mass transfer, shear, residence time, fluid dynamics, reaction kinetics and equipment geometry begin interacting at industrial scale.</p>
 <p>Although the specific failure modes differ, the structure of the scale-up problem repeats across industries. In chemicals, the constraint may be heat release, mixing and impurity formation; in biologics, shear, mass transfer and aggregation; in batteries and advanced materials, phase behaviour, coating uniformity and thermal control. The domains differ, but the underlying challenge is the same: molecular behaviour must be translated through transport physics and equipment constraints into a stable industrial process.</p>
 <p>This recurring physical structure is what makes scale-up potentially addressable through a common intelligence platform rather than a collection of unrelated engineering projects.</p>
+</div>
 <p>The resulting process knowledge is among the most valuable and closely guarded forms of industrial intelligence. TSMC’s dominance was not created only by knowing what semiconductor to manufacture; it was created through decades of accumulated knowledge about how to manufacture at exceptional yield and reliability. Similar process advantages determine competitiveness across pharmaceuticals, chemicals, biologics, batteries and advanced materials.</p>
 <h4>The limitation of the existing stack</h4>
 <p>Manufacturers currently manage scale-up through experienced process teams, deterministic simulation, specialist consultants and successive pilot runs.</p>
@@ -1555,15 +1711,9 @@ th { background: var(--navy); }
 <p>Sequential domain expansion: major chemistry, biologics and equipment experiments cannot all be trained and evaluated at full scale simultaneously.</p>
 <p>Slower failure iteration: an unsuccessful physical or computational test requires additional data generation, retraining and evaluation, extending the validation cycle.</p>
 <p>Higher adaptation effort: underrepresented physical regimes require more process-specific training and scientific intervention than they should once incorporated into the common base model.</p>
-<p>Add two or three current operational numbers here.</p>
 <h3 class="memo-heading">5.3 Empirically Demonstrated Scaling</h3>
 <p>For Shodh, model scaling is not merely a hypothesis.</p>
 <p>Across four model scales from 1B to 10B parameters, Shodh observed a stable power-law relationship between training compute and held-out physical prediction error. A curve fitted only on the smaller models predicted the 10B model’s performance within 2.4%, demonstrating that additional model and compute scale has produced predictable capability gains.</p>
-<p class="lead-in">Add:</p>
-<p>the held-out error reduction from 1B to 10B;</p>
-<p>the total compute range;</p>
-<p>optionally, the goodness of fit or confidence interval.</p>
-<p class="lead-in">Then:</p>
 <p>This result does not imply that every industrial capability emerges automatically with parameter count. It establishes that the underlying physical model continues to improve predictably with scale and provides an empirical basis for financing the next model generation.</p>
 <h3 class="memo-heading">5.4 What the Next Model Generation Unlocks</h3>
 <p>The next training programme is intended to convert this demonstrated scaling relationship into four commercial capabilities:</p>
@@ -1571,7 +1721,6 @@ th { background: var(--navy); }
 <p>lower compute and scientific effort per new programme;</p>
 <p>calibrated uncertainty around industrial recommendations;</p>
 <p>broader service through the common base model across chemicals, biologics and materials.</p>
-<p>For each, include an actual milestone or target where available.</p>
 <h3 class="memo-heading">5.5 Why the Capability Is Difficult to Reproduce</h3>
 <p class="lead-in">Shodh’s defensibility is built on four compounding layers:</p>
 <p>Physics-native, cross-scale architecture</p>
