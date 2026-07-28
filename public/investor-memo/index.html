@@ -1391,6 +1391,187 @@ th { background: var(--navy); }
     letter-spacing: -.025em;
   }
 }
+
+/* Exact light-site print system from /biomanufacturing. */
+@media print {
+  html,
+  body {
+    color: rgba(0,0,66,.78);
+    background: #c8d8ef url("/webgl-bg-light.png") center / cover fixed no-repeat !important;
+    font-size: 9.75pt;
+    font-weight: 400;
+    line-height: 1.52;
+    print-color-adjust: exact;
+  }
+  body::before {
+    background: url("/webgl-bg-light.png") center / cover no-repeat !important;
+    opacity: 1;
+  }
+  body::after { display: none; }
+
+  .memo-section,
+  .tone-paper,
+  .tone-atmosphere,
+  .tone-split,
+  .tone-deep {
+    color: rgba(0,0,66,.78);
+  }
+  strong { color: var(--navy); }
+  p { line-height: 1.52; }
+  .memo-section > p:first-of-type {
+    color: rgba(0,0,66,.78);
+    font-size: 10.25pt;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  h2.memo-heading,
+  .memo-section h2.memo-heading {
+    display: flex;
+    min-height: 43mm;
+    margin: 0 0 8mm;
+    padding: 9mm 0 7mm;
+    justify-content: flex-end;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,66,.10);
+    border-radius: 0;
+    color: var(--navy);
+    background: transparent;
+    font-size: 28pt;
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -.04em;
+    box-shadow: none;
+  }
+  .chapter-kicker {
+    margin-bottom: 5mm;
+    color: rgba(0,0,66,.55);
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .24em;
+  }
+  h3.memo-heading {
+    margin: 8mm 0 4mm;
+    padding-top: 4mm;
+    border-top: 1px solid rgba(0,0,66,.10);
+    color: var(--navy);
+    font-size: 14pt;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -.025em;
+  }
+  h4 {
+    color: var(--navy);
+    font-size: 12.5pt;
+    font-weight: 600;
+    letter-spacing: -.015em;
+  }
+  h5,
+  .visual-eyebrow,
+  .lead-in,
+  .conclusion-label {
+    color: rgba(0,0,66,.56);
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .executive-lede,
+  .executive-story p,
+  .module-panel,
+  .investment-card,
+  .gap-overview-copy,
+  .scale-explanation,
+  .memo-visual,
+  blockquote,
+  .pull-quote,
+  .table-wrap,
+  .io-card,
+  .product-card,
+  .metric-card,
+  .recommendation-card,
+  .market-grid > div,
+  .memo-conclusion {
+    border: 1px solid rgba(0,0,66,.10) !important;
+    border-radius: 6.35mm !important;
+    background: rgba(255,255,255,.85) !important;
+    box-shadow: 0 2px 8px rgba(0,0,66,.10) !important;
+  }
+  .executive-lede,
+  .executive-story p,
+  .module-panel,
+  .investment-card,
+  .gap-overview-copy,
+  .scale-explanation {
+    color: rgba(0,0,66,.78);
+  }
+  .module-panel > ul > li,
+  .result-strip {
+    border: 1px solid rgba(0,0,66,.08);
+    border-radius: 4.25mm;
+    background: rgba(255,255,255,.62);
+  }
+  .module-panel > ul > li {
+    padding-left: 5mm;
+  }
+  .module-panel > ul > li::before {
+    display: none;
+  }
+
+  .raise-callout,
+  .gap-question,
+  .io-card-dark,
+  .product-card-dark,
+  .recommendation-card,
+  .market-grid .market-dark {
+    border: 0 !important;
+    border-radius: 6.35mm !important;
+    color: white !important;
+    background: var(--navy) !important;
+    box-shadow: none !important;
+  }
+  .raise-callout strong,
+  .gap-question strong,
+  .io-card-dark strong,
+  .io-card-dark b,
+  .product-card-dark strong,
+  .recommendation-card b,
+  .market-grid .market-dark strong {
+    color: white !important;
+  }
+
+  .memo-section-1 .memo-pitch-valley {
+    border: 1px solid rgba(0,0,66,.10);
+    border-radius: 6.35mm;
+    background: rgba(255,255,255,.28);
+    box-shadow: none;
+  }
+  .io-core {
+    border-radius: 6.35mm;
+    background: rgba(255,255,255,.38);
+    color: var(--navy);
+  }
+  .io-core strong { color: var(--navy); }
+  .io-core small { color: rgba(0,0,66,.55); }
+
+  .table-wrap { overflow: hidden; }
+  table { color: rgba(0,0,66,.78); }
+  th {
+    color: white;
+    background: var(--navy);
+    font-size: 7pt;
+    font-weight: 650;
+    letter-spacing: .12em;
+  }
+  td {
+    border-color: rgba(0,0,66,.10);
+    background: rgba(255,255,255,.48);
+    font-size: 8.5pt;
+    line-height: 1.42;
+  }
+  .section-rule { border-color: rgba(0,0,66,.10); }
+}
 </style>
 </head>
 <body>
