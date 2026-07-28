@@ -812,6 +812,252 @@ th { background: var(--navy); }
       url("/webgl-bg-foundation-v2.png") center / cover !important;
   }
 }
+
+/* Final A4 editorial system: readable type, continuous flow, no fragmented spreads. */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 16mm 18mm;
+  }
+
+  html,
+  body {
+    width: auto;
+    min-height: 0;
+    color: var(--navy);
+    background: #c8d8ef !important;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+
+  body::before {
+    position: fixed;
+    background:
+      linear-gradient(rgba(200,216,239,.88), rgba(200,216,239,.88)),
+      url("/webgl-bg-foundation-v2.png") center / cover no-repeat !important;
+  }
+  body::after { opacity: .45; }
+
+  .memo-shell,
+  .memo-content {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .memo-section,
+  .memo-section:first-child {
+    position: static;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border-radius: 0;
+    color: var(--navy);
+    background: transparent !important;
+    box-shadow: none;
+    break-before: auto;
+    page-break-before: auto;
+    -webkit-box-decoration-break: slice;
+    box-decoration-break: slice;
+  }
+  .memo-section::before,
+  .memo-section::after { content: none !important; }
+
+  .tone-paper,
+  .tone-atmosphere,
+  .tone-split,
+  .tone-deep {
+    padding-right: 0;
+    color: var(--navy);
+    background: transparent !important;
+  }
+  .tone-deep h2.memo-heading,
+  .tone-deep h3.memo-heading,
+  .tone-deep h4,
+  .tone-deep h5,
+  .tone-deep strong,
+  .tone-deep em {
+    color: var(--navy);
+  }
+  .tone-deep h3.memo-heading { border-color: rgba(0,0,66,.2); }
+  .tone-deep li::before { background: var(--navy); }
+
+  h2.memo-heading,
+  .memo-section h2.memo-heading {
+    max-width: none;
+    margin: 10mm 0 6mm;
+    padding: 7mm 0 0;
+    border-top: 1.2px solid rgba(0,0,66,.3);
+    color: var(--navy);
+    font-size: 25pt;
+    font-weight: 560;
+    line-height: 1.03;
+    letter-spacing: -.045em;
+    break-before: auto;
+    page-break-before: auto;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .memo-section:first-child h2.memo-heading { margin-top: 0; }
+  h2.memo-heading::before,
+  .memo-section h2.memo-heading::before {
+    display: block;
+    margin-bottom: 4mm;
+    color: rgba(0,0,66,.58);
+    font-size: 7pt;
+    font-weight: 750;
+    letter-spacing: .2em;
+  }
+
+  h3.memo-heading {
+    margin: 7mm 0 3mm;
+    padding-top: 3.5mm;
+    border-top: 1px solid rgba(0,0,66,.18);
+    color: var(--navy);
+    font-size: 14pt;
+    font-weight: 650;
+    line-height: 1.15;
+  }
+  h4 {
+    margin: 6mm 0 2.5mm;
+    color: var(--navy);
+    font-size: 11.5pt;
+    line-height: 1.2;
+  }
+  h5 {
+    margin: 4mm 0 2mm;
+    color: rgba(0,0,66,.65);
+    font-size: 7.5pt;
+  }
+
+  p,
+  li,
+  .memo-section > p:first-of-type,
+  .product-visual .product-card p {
+    max-width: none;
+    font-size: 9.6pt;
+    line-height: 1.52;
+  }
+  p { margin-bottom: 3.2mm; }
+  p.lead-in {
+    margin-top: 4mm;
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+  li { margin-bottom: 1.8mm; padding-left: 4mm; }
+
+  .pull-quote {
+    margin: 6mm 0 7mm;
+    padding: 6mm 7mm;
+    border-radius: 4mm;
+    color: white;
+    background: var(--navy) !important;
+    font-size: 15pt;
+    line-height: 1.25;
+    box-shadow: none;
+  }
+  blockquote,
+  .tone-deep blockquote {
+    margin: 5mm 0;
+    padding: 5mm 6mm;
+    border: 1px solid rgba(0,0,66,.15);
+    border-radius: 4mm;
+    color: var(--navy);
+    background: rgba(255,255,255,.68) !important;
+    box-shadow: none;
+  }
+
+  .section-rule { display: none; }
+
+  .memo-visual {
+    margin: 7mm 0;
+    padding: 5mm;
+    border: 1px solid rgba(0,0,66,.14);
+    border-radius: 4mm;
+    background: rgba(255,255,255,.7) !important;
+    box-shadow: none;
+  }
+  .product-visual,
+  .io-visual { padding: 0; overflow: hidden; }
+  .product-visual .product-card { min-height: 52mm; padding: 7mm; }
+  .product-visual .product-card strong { margin-top: 5mm; font-size: 19pt; }
+
+  .table-wrap {
+    margin: 6mm 0;
+    overflow: visible;
+    border: 1px solid rgba(0,0,66,.16);
+    border-radius: 0;
+    background: rgba(255,255,255,.75) !important;
+    box-shadow: none;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+  table { table-layout: fixed; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  th,
+  td {
+    padding: 2.4mm;
+    font-size: 7.5pt;
+    line-height: 1.35;
+  }
+  th { font-size: 6.8pt; }
+
+  .memo-section:last-of-type .table-wrap th,
+  .memo-section:last-of-type .table-wrap td {
+    padding: 3mm;
+    font-size: 8.1pt;
+    line-height: 1.4;
+  }
+  .memo-section:last-of-type .table-wrap th {
+    font-size: 7.2pt;
+  }
+
+  .memo-pitch-valley {
+    height: 82mm;
+    margin: 6mm 0 8mm;
+    background: transparent !important;
+  }
+
+  .print-footer { display: none !important; }
+
+  .memo-conclusion {
+    margin-top: 14mm;
+    padding: 14mm 12mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid rgba(0,0,66,.25);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .memo-conclusion::before {
+    content: "SHODH AI · INVESTOR MEMO";
+    margin-bottom: 8mm;
+    color: rgba(0,0,66,.55);
+    font-size: 7pt;
+    font-weight: 750;
+    letter-spacing: .2em;
+  }
+  .memo-conclusion .conclusion-label {
+    margin: 0 0 5mm;
+    color: rgba(0,0,66,.62);
+    font-size: 8pt;
+    font-weight: 750;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .memo-conclusion .conclusion-copy {
+    margin: 0;
+    max-width: 145mm;
+    color: var(--navy);
+    font-size: 16pt;
+    font-weight: 520;
+    line-height: 1.35;
+    letter-spacing: -.025em;
+  }
+}
 </style>
 </head>
 <body>
@@ -1259,8 +1505,10 @@ th { background: var(--navy); }
 <tr><td><strong>$55M plan may be mis-sized</strong> <br><em>(Is it too much, or not enough to hit milestones?)</em></td><td><strong>Initial compute &amp; operating assumptions:</strong> Rigorous financial modelling tying compute cost to model parameter targets.</td><td><strong>Staged procurement &amp; contingency:</strong> Compute scaled in tranches, protected by up to $20M in government-backed debt as a non-dilutive shock absorber.</td></tr>
 <tr><td><strong>Team may remain founder-dependent</strong> <br><em>(Can the business scale without the CEO in every meeting?)</em></td><td><strong>Existing core technical team:</strong> Deep bench of AI, HPC, and process engineering talent already executing runs.</td><td><strong>Critical leadership hires:</strong> Bringing on dedicated commercial executives, domain leads, and deployment engineers to institutionalize the enterprise sales motion.</td></tr>
 </tbody></table></div>
-<p><strong>Conclusion</strong></p>
-<p>Shodh has already completed the hardest part of the physical AI journey: we have proven that a computational foundation model can predictably manipulate and improve outcomes in a physical factory. The core science is real, and the customer pull is immediate. With this $55M financing, Shodh will transition from a proven scientific breakthrough into the dominant, scalable intelligence platform for the global physical economy.</p>
+<div class="memo-conclusion">
+  <p class="conclusion-label">Conclusion</p>
+  <p class="conclusion-copy">Shodh has already completed the hardest part of the physical AI journey: we have proven that a computational foundation model can predictably manipulate and improve outcomes in a physical factory. The core science is real, and the customer pull is immediate. With this $55M financing, Shodh will transition from a proven scientific breakthrough into the dominant, scalable intelligence platform for the global physical economy.</p>
+</div>
 <div class="section-rule"></div>
 </section></article>
     <footer class="print-footer"><span>Shodh AI · Investor memo</span><span>Confidential</span></footer>
