@@ -850,6 +850,14 @@ th { background: var(--navy); }
   font-weight: 750;
   letter-spacing: .24em;
 }
+.cover-brand {
+  position: absolute;
+  top: 16mm;
+  left: 16mm;
+  z-index: 4;
+  width: 43mm;
+  height: auto;
+}
 .cover-image {
   position: absolute;
   top: 64mm;
@@ -1397,14 +1405,14 @@ th { background: var(--navy); }
   html,
   body {
     color: rgba(0,0,66,.78);
-    background: #c8d8ef url("/webgl-bg-light.png") center / cover fixed no-repeat !important;
+    background: #c8d8ef url("/webgl-bg-light.png") center bottom / auto 360% fixed no-repeat !important;
     font-size: 9.75pt;
     font-weight: 400;
     line-height: 1.52;
     print-color-adjust: exact;
   }
   body::before {
-    background: url("/webgl-bg-light.png") center / cover no-repeat !important;
+    background: url("/webgl-bg-light.png") center bottom / auto 360% no-repeat !important;
     opacity: 1;
   }
   body::after { display: none; }
@@ -1585,8 +1593,7 @@ th { background: var(--navy); }
       <span>Investor memo</span>
     </div>
     <section class="memo-cover" aria-label="Shodh confidential investment memorandum cover">
-      <img class="cover-logo" src="/pitch-tomorrow/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI">
-      <p class="cover-wordmark">SHODH</p>
+      <img class="cover-brand" src="/shodhai_logo.svg" alt="Shodh AI">
       <img class="cover-image" src="/pitch-tomorrow/assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" alt="Industrial process equipment">
       <h1 class="cover-title"><span>The foundation model for</span><span>physical intelligence</span></h1>
       <p class="cover-tagline">From molecule<br>to factory</p>
