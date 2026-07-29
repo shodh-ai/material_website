@@ -3,9 +3,9 @@ export const VIEWER_COOKIE = "shodhViewerAccess";
 type ViewerRules = Record<string, string[]>;
 
 const BUILT_IN_VIEWER_RULES: ViewerRules = {
-  "ShodhPitch-Atlas-2026": ["/pitch-tomorrow", "/investor-memo"],
-  "ShodhPitch-Orbit-2026": ["/pitch-tomorrow", "/investor-memo"],
-  "ShodhPitch-Foundry-2026": ["/pitch-tomorrow", "/investor-memo"],
+  "ShodhPitch-Atlas-2026": ["/pitch-tomorrow", "/investor-memo", "/meeting-intro"],
+  "ShodhPitch-Orbit-2026": ["/pitch-tomorrow", "/investor-memo", "/meeting-intro"],
+  "ShodhPitch-Foundry-2026": ["/pitch-tomorrow", "/investor-memo", "/meeting-intro"],
 };
 
 function getRules(): ViewerRules {
