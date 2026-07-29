@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shodh AI · Meeting Introduction</title>
+  <style>
+    @font-face {
+      font-family: "Syne";
+      src: url("/shodh-new/Syne/Syne-VariableFont_wght.ttf") format("truetype");
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    :root {
+      --navy: #000042;
+      --ink: rgba(0, 0, 66, .78);
+      --muted: rgba(0, 0, 66, .55);
+      --rule: rgba(0, 0, 66, .10);
+      --paper: rgba(255, 255, 255, .85);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: #d2e0f2;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #d2e0f2;
+      font-family: "Syne", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .access-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        url("/webgl-bg-light.png") center bottom / auto 360% no-repeat,
+        #c8d8ef;
+    }
+
+    .access-gate[hidden] { display: none; }
+
+    .access-card {
+      width: min(100%, 430px);
+      padding: 34px;
+      border: 1px solid var(--rule);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 20px 60px rgba(0, 0, 66, .16);
+    }
+
+    .access-card img {
+      width: 132px;
+      margin-bottom: 34px;
+      filter: invert(1);
+    }
+
+    .access-card h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .access-card p { margin-bottom: 24px; }
+
+    .access-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .access-form input,
+    .access-form button {
+      min-height: 48px;
+      border-radius: 14px;
+      font: inherit;
+    }
+
+    .access-form input {
+      width: 100%;
+      padding: 0 16px;
+      border: 1px solid rgba(0, 0, 66, .18);
+      color: var(--navy);
+      background: rgba(255, 255, 255, .8);
+      font-weight: 650;
+      letter-spacing: .18em;
+      text-transform: lowercase;
+      outline: none;
+    }
+
+    .access-form input:focus {
+      border-color: var(--navy);
+    }
+
+    .access-form button {
+      padding: 0 20px;
+      border: 0;
+      color: white;
+      background: var(--navy);
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .access-error {
+      min-height: 20px;
+      margin: 12px 0 0 !important;
+      color: #8a1631;
+      font-size: 12px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 22px;
+      color: white;
+      background: rgba(0, 0, 66, .92);
+      backdrop-filter: blur(16px);
+    }
+
+    .toolbar img { width: 122px; }
+    .toolbar span {
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .document {
+      display: grid;
+      gap: 28px;
+      width: min(100% - 32px, 920px);
+      margin: 28px auto 60px;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      min-height: 1180px;
+      padding: 62px 58px;
+      overflow: hidden;
+      background:
+        url("/webgl-bg-light.png") center bottom / auto 360% no-repeat,
+        #c8d8ef;
+      box-shadow: 0 24px 70px rgba(0, 0, 66, .16);
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .page-header img { width: 132px; filter: invert(1); }
+    .page-number {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin: 48px 0 16px;
+      color: var(--navy);
+      font-size: 52px;
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .tagline {
+      max-width: 680px;
+      margin-bottom: 38px;
+      color: rgba(0, 0, 66, .7);
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      color: var(--navy);
+      font-size: 27px;
+      font-weight: 550;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 650;
+      letter-spacing: -.015em;
+    }
+
+    .hero-card,
+    .card,
+    .person,
+    .proof-card {
+      border: 1px solid var(--rule);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 2px 8px rgba(0, 0, 66, .10);
+    }
+
+    .hero-card {
+      padding: 30px;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .hero-card p:last-child,
+    .card p:last-child,
+    .proof-card p:last-child { margin-bottom: 0; }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0 28px;
+    }
+
+    .metric {
+      min-height: 116px;
+      padding: 20px;
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .64);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--navy);
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -.04em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .two-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card { padding: 26px; }
+
+    .outcome {
+      color: rgba(255, 255, 255, .84);
+      background: var(--navy);
+      border: 0;
+      box-shadow: none;
+    }
+
+    .outcome h2,
+    .outcome h3,
+    .outcome strong { color: white; }
+    .outcome .eyebrow { color: rgba(255, 255, 255, .55); }
+
+    .section-heading {
+      margin: 42px 0 22px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .people {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .person {
+      min-height: 150px;
+      padding: 22px;
+    }
+
+    .person p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .proof-card { padding: 22px; }
+
+    .proof-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .proof-card strong {
+      color: var(--navy);
+      font-weight: 650;
+    }
+
+    .engagements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .engagements span {
+      padding: 8px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      color: var(--navy);
+      background: rgba(255, 255, 255, .62);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .vision {
+      margin-top: 24px;
+      padding: 28px;
+      border-radius: 24px;
+      color: white;
+      background: var(--navy);
+    }
+
+    .vision .eyebrow { color: rgba(255, 255, 255, .55); }
+    .vision h2 {
+      max-width: 670px;
+      color: white;
+      font-size: 31px;
+    }
+
+    .vision-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .vision-steps div {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      .page { min-height: auto; padding: 40px 28px; }
+      h1 { font-size: 39px; }
+      .two-up, .people, .proof-grid, .metric-strip { grid-template-columns: 1fr; }
+      .proof-card.wide { grid-column: auto; }
+      .vision-steps { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      html, body { background: white; }
+      .toolbar { display: none; }
+      .document { display: block; width: auto; margin: 0; }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        padding: 15mm 16mm;
+        box-shadow: none;
+        break-after: page;
+        page-break-after: always;
+        print-color-adjust: exact;
+      }
+      .page:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+      .page-header { padding-bottom: 6mm; }
+      .page-header img { width: 35mm; }
+      h1 { margin: 12mm 0 4mm; font-size: 34pt; }
+      .tagline { margin-bottom: 9mm; font-size: 15pt; }
+      .hero-card { padding: 7mm; font-size: 10.5pt; }
+      .metric-strip { gap: 3mm; margin: 4mm 0 7mm; }
+      .metric { min-height: 29mm; padding: 5mm; }
+      .metric strong { font-size: 19pt; }
+      .two-up { gap: 4mm; }
+      .card { padding: 6mm; }
+      .section-heading { margin: 8mm 0 5mm; }
+      .people, .proof-grid { gap: 3.5mm; }
+      .person { min-height: 36mm; padding: 5mm; }
+      .proof-card { padding: 5mm; }
+      .vision { margin-top: 6mm; padding: 7mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="access-gate" id="accessGate">
+    <div class="access-card">
+      <img src="/shodhai_logo.svg" alt="Shodh AI">
+      <p class="eyebrow">Private meeting brief</p>
+      <h1>Viewer access</h1>
+      <p>Enter the four-letter password to continue.</p>
+      <form class="access-form" id="accessForm">
+        <input id="accessPassword" type="password" maxlength="4" minlength="4" autocomplete="current-password" aria-label="Viewer password" required>
+        <button type="submit">View</button>
+      </form>
+      <p class="access-error" id="accessError" role="alert"></p>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <img src="/shodhai_logo.svg" alt="Shodh AI">
+  </div>
+
+  <main class="document">
+    <section class="page">
+      <header class="page-header">
+        <img src="/shodhai_logo.svg" alt="Shodh AI">
+      </header>
+
+      <p class="eyebrow">Frontier AI for physical invention</p>
+      <h1>A Frontier AI Foundation Model for Physical Invention</h1>
+      <p class="tagline">From atoms and molecules to industrial factories.</p>
+
+      <div class="hero-card">
+        <p>Shodh AI is building what we believe is the world’s first cross-domain Physics AI foundation model.</p>
+        <p>One model connects quantum chemistry, molecules, materials, fluids, heat, equipment and factory operations.</p>
+      </div>
+
+      <div class="metric-strip">
+        <div class="metric">
+          <strong>10B</strong>
+          <span>Current parameters</span>
+        </div>
+        <div class="metric">
+          <strong>100B</strong>
+          <span>Government-supported scale</span>
+        </div>
+        <div class="metric">
+          <strong>200B</strong>
+          <span>Subsequent ambition</span>
+        </div>
+      </div>
+
+      <div class="two-up">
+        <article class="card">
+          <p class="eyebrow">National-scale programme</p>
+          <h2>The world’s largest science foundation model.</h2>
+          <p>With support from the Government of India, the model is being scaled to 100 billion and subsequently up to 200 billion parameters.</p>
+          <p>The programme is being developed for strategic national missions, including semiconductors and thorium.</p>
+        </article>
+
+        <article class="card outcome">
+          <p class="eyebrow">Why process knowledge matters</p>
+          <h2>Discovery is only the beginning.</h2>
+          <p>The hardest part of manufacturing is not discovering a product, but knowing exactly how to make it reliably at industrial scale.</p>
+          <p>This process knowledge is built through years of factory experience and is usually kept as closely guarded intellectual property.</p>
+        </article>
+      </div>
+
+      <article class="card" style="margin-top:18px">
+        <p class="eyebrow">Inverse design</p>
+        <h2>Start with the outcome. Work backwards to the factory.</h2>
+        <p>Shodh starts with the required outcome, such as a target yield, material property or production cost. The model then works backwards to recommend the product design, process conditions and factory settings needed to achieve it.</p>
+      </article>
+    </section>
+
+    <section class="page">
+      <header class="page-header">
+        <img src="/shodhai_logo.svg" alt="Shodh AI">
+      </header>
+
+      <div class="section-heading">
+        <p class="eyebrow">Advisory board</p>
+        <h2>Industrial, technology and biomanufacturing leadership.</h2>
+      </div>
+
+      <div class="people">
+        <article class="person">
+          <h3>Kiran Mazumdar-Shaw</h3>
+          <p>Founder, Biocon</p>
+        </article>
+        <article class="person">
+          <h3>Arun Seth</h3>
+          <p>Technology and enterprise leader</p>
+        </article>
+        <article class="person">
+          <h3>Rahul Singhvi</h3>
+          <p>Former CEO, National Resilience</p>
+        </article>
+      </div>
+
+      <div class="section-heading">
+        <p class="eyebrow">Proof of execution</p>
+        <h2>Physical results, active programmes and synthesised molecules.</h2>
+      </div>
+
+      <div class="proof-grid">
+        <article class="proof-card outcome">
+          <p class="eyebrow">Aarti Industries</p>
+          <h3>Factory yield: 82.4% → 96.7%</h3>
+          <p>Impurities reduced from 12.3% to 3.1%.</p>
+        </article>
+        <article class="proof-card">
+          <p class="eyebrow">Biocon</p>
+          <h3>Biomanufacturing scale-up</h3>
+          <p>Active work on biomanufacturing and industrial scale-up.</p>
+        </article>
+        <article class="proof-card">
+          <p class="eyebrow">Drug design</p>
+          <h3>Designed and synthesised</h3>
+          <p>Designed a new cancer-drug candidate and its synthesis route. The molecule was successfully synthesised.</p>
+        </article>
+        <article class="proof-card">
+          <p class="eyebrow">Industrial engagements</p>
+          <div class="engagements">
+            <span>GE Aerospace</span>
+            <span>Tata Chemicals</span>
+            <span>Dr Reddy’s</span>
+            <span>Jubilant Ingrevia</span>
+          </div>
+          <p style="margin-top:14px">Other leading Indian and global industrial groups.</p>
+        </article>
+      </div>
+
+      <section class="vision">
+        <p class="eyebrow">The vision</p>
+        <h2>Shodh is building a frontier AI company for the physical economy.</h2>
+        <div class="vision-steps">
+          <div>01 · Design the product.</div>
+          <div>02 · Design the process.</div>
+          <div>03 · Scale it into the factory.</div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const gate = document.getElementById("accessGate");
+      const form = document.getElementById("accessForm");
+      const input = document.getElementById("accessPassword");
+      const error = document.getElementById("accessError");
+
+      if (sessionStorage.getItem("shodh-meeting-access") === "granted") {
+        gate.hidden = true;
+        return;
+      }
+
+      input.focus();
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (input.value.toLowerCase() === "shod") {
+          sessionStorage.setItem("shodh-meeting-access", "granted");
+          gate.hidden = true;
+          return;
+        }
+        error.textContent = "Incorrect password.";
+        input.value = "";
+        input.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
