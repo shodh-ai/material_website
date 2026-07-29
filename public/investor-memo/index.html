@@ -1057,8 +1057,10 @@ th { background: var(--navy); }
 
 .executive-spread {
   position: relative;
-  width: 100%;
+  width: calc(100% + 20mm);
   height: 262mm;
+  margin-left: -10mm;
+  margin-right: -10mm;
   overflow: hidden;
   color: var(--navy);
   background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
@@ -1881,7 +1883,7 @@ th { background: var(--navy); }
   }
   .memo-shell { padding: 0; }
   .executive-spread {
-    width: 178mm;
+    width: 198mm;
     height: 262mm;
   }
   .memo-page-snapshot {
