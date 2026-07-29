@@ -699,6 +699,127 @@ th { background: var(--navy); }
   text-transform: uppercase;
 }
 
+/* Image-led A4 cover derived from the pitch opening */
+.memo-brand { display: none; }
+.memo-cover {
+  position: relative;
+  height: 260mm;
+  margin: 0 -10mm 12mm;
+  overflow: hidden;
+  border-radius: 8mm;
+  background:
+    linear-gradient(135deg, rgba(217,233,248,.18), rgba(91,141,190,.18)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: var(--navy);
+  box-shadow: 0 7mm 20mm rgba(0,0,66,.14);
+  break-after: page;
+  page-break-after: always;
+}
+.memo-cover-top {
+  position: absolute;
+  top: 12mm;
+  left: 12mm;
+  right: 12mm;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.memo-cover-top img {
+  width: 9mm;
+  filter: invert(1);
+}
+.memo-cover-top span {
+  padding: 2mm 4mm;
+  border: 1px solid rgba(0,0,66,.26);
+  border-radius: 999px;
+  font-size: 6.7pt;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.memo-cover-image {
+  position: absolute;
+  top: 48mm;
+  right: 0;
+  width: 72%;
+  height: 128mm;
+  overflow: hidden;
+  border-radius: 2mm 0 0 2mm;
+  box-shadow: 0 8mm 22mm rgba(0,0,45,.22);
+}
+.memo-cover-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,50,.18), transparent 34%, rgba(0,0,28,.08));
+}
+.memo-cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% center;
+}
+.memo-cover-title {
+  position: absolute;
+  top: 36mm;
+  left: 12mm;
+  right: 10mm;
+  z-index: 2;
+}
+.memo-cover-title > strong {
+  display: block;
+  margin-bottom: 13mm;
+  font-size: 11pt;
+  letter-spacing: .22em;
+}
+.memo-cover-title h1 {
+  max-width: 176mm;
+  margin: 0;
+  color: #f7f8ff;
+  font-size: 35pt;
+  font-weight: 560;
+  line-height: .96;
+  letter-spacing: -.045em;
+  text-shadow: 0 2mm 7mm rgba(0,0,45,.50);
+}
+.memo-cover-title p {
+  position: absolute;
+  top: 141mm;
+  right: 1mm;
+  margin: 0;
+  color: #fff;
+  font-size: 17pt;
+  font-weight: 560;
+  letter-spacing: -.025em;
+  text-shadow: 0 2mm 6mm rgba(0,0,45,.52);
+}
+.memo-cover-meta {
+  position: absolute;
+  left: 12mm;
+  right: 12mm;
+  bottom: 14mm;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  align-items: end;
+  gap: 6mm;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(0,0,66,.22);
+}
+.memo-cover-meta span,
+.memo-cover-meta strong {
+  color: var(--navy);
+  font-size: 7pt;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.memo-cover-meta strong {
+  font-size: 9pt;
+  letter-spacing: .08em;
+}
+
 /* Alternating editorial rhythm inspired by the pitch deck */
 .memo-content {
   display: block;
@@ -714,7 +835,10 @@ th { background: var(--navy); }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-.memo-section:first-child {
+.memo-content > .section-rule:first-child {
+  display: none;
+}
+.memo-content > .memo-section:first-of-type {
   break-before: auto;
   page-break-before: auto;
 }
@@ -728,16 +852,16 @@ th { background: var(--navy); }
   line-height: 1;
   letter-spacing: -.06em;
 }
-.memo-section-1::after { content: "02"; }
-.memo-section-2::after { content: "03"; }
-.memo-section-3::after { content: "04"; }
-.memo-section-4::after { content: "05"; }
-.memo-section-5::after { content: "06"; }
-.memo-section-6::after { content: "07"; }
-.memo-section-7::after { content: "08"; }
-.memo-section-8::after { content: "09"; }
-.memo-section-9::after { content: "10"; }
-.memo-section-10::after { content: "11"; }
+.memo-section-1::after { content: "01"; }
+.memo-section-2::after { content: "02"; }
+.memo-section-3::after { content: "03"; }
+.memo-section-4::after { content: "04"; }
+.memo-section-5::after { content: "05"; }
+.memo-section-6::after { content: "06"; }
+.memo-section-7::after { content: "07"; }
+.memo-section-8::after { content: "08"; }
+.memo-section-9::after { content: "09"; }
+.memo-section-10::after { content: "10"; }
 
 .tone-paper {
   background: rgba(255,255,255,.96);
@@ -815,6 +939,33 @@ th { background: var(--navy); }
   font-size: 11.6pt;
   line-height: 1.48;
 }
+.memo-section-1 {
+  font-size: 9.1pt;
+  line-height: 1.42;
+}
+.memo-section-1 h2.memo-heading {
+  margin-bottom: 6mm;
+  font-size: 28pt;
+}
+.memo-section-1 h3.memo-heading {
+  margin-top: 6mm;
+  margin-bottom: 2.5mm;
+  padding-top: 3mm;
+  font-size: 15.5pt;
+}
+.memo-section-1 > p:first-of-type {
+  font-size: 10.4pt;
+  line-height: 1.4;
+}
+.memo-section-1 p {
+  margin-bottom: 2.4mm;
+}
+.memo-section-1 ul {
+  margin-bottom: 2.5mm;
+}
+.memo-section-1 li {
+  margin-bottom: 1.2mm;
+}
 .tone-paper > p,
 .tone-paper > ul,
 .tone-paper > blockquote {
@@ -874,6 +1025,852 @@ th { background: var(--navy); }
 .io-visual .io-card,
 .io-visual .io-core { border-radius: 0; }
 
+/* Reference-led Executive Summary prototype */
+.memo-page-snapshot {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 0;
+  display: block;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+.memo-cover > *:not(.memo-page-snapshot),
+.executive-spread > *:not(.memo-page-snapshot),
+.executive-opener-atmosphere > *:not(.memo-page-snapshot),
+.executive-module-synth > *:not(.memo-page-snapshot) {
+  z-index: 1;
+}
+.executive-module-synth > *:not(.memo-page-snapshot) { position: relative; }
+.memo-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,255,255,.18), transparent 26%),
+    linear-gradient(135deg, rgba(173,207,236,.06), rgba(17,66,110,.12));
+  pointer-events: none;
+}
+.memo-cover > *:not(.memo-page-snapshot) { z-index: 2; }
+
+.executive-spread {
+  position: relative;
+  width: 100%;
+  height: 262mm;
+  overflow: hidden;
+  color: var(--navy);
+  background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+  break-before: page;
+  break-after: page;
+  break-inside: avoid;
+  page-break-before: always;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+.executive-spread h2,
+.executive-spread h3,
+.executive-spread p {
+  margin: 0;
+  max-width: none;
+}
+.executive-opener {
+  display: grid;
+  grid-template-columns: 49% 51%;
+  background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+}
+.executive-opener-paper {
+  position: relative;
+  z-index: 2;
+  padding: 15mm 10mm 13mm 12mm;
+  background: #fff;
+}
+.executive-proof {
+  max-width: 66mm !important;
+  font-size: 10.2pt;
+  font-weight: 500;
+  line-height: 1.58;
+  letter-spacing: -.015em;
+}
+.executive-proof strong {
+  color: var(--navy);
+  font-weight: 520;
+}
+.executive-opener-title {
+  position: absolute;
+  left: 12mm;
+  right: 8mm;
+  bottom: 18mm;
+}
+.executive-opener-title span,
+.executive-side-label,
+.executive-module > span,
+.executive-module-copy > span,
+.executive-narrative-heading > span,
+.executive-case-heading > span {
+  display: block;
+  color: rgba(0,0,66,.62);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+}
+.executive-opener-title h2 {
+  margin-top: 6mm;
+  font-size: 35pt;
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+.executive-opener-atmosphere {
+  position: relative;
+  overflow: hidden;
+}
+.executive-opener-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(155deg, rgba(255,255,255,.04), rgba(47,100,149,.11));
+}
+.executive-side-label {
+  position: absolute !important;
+  top: 16mm;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.executive-mark {
+  position: absolute !important;
+  top: 47%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 3mm;
+  transform: translate(-50%,-50%);
+  color: var(--navy);
+}
+.executive-mark span {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+.executive-mark b {
+  font-size: 18pt;
+  font-weight: 400;
+}
+.executive-opener-atmosphere small {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31mm;
+  padding-top: 16mm;
+  background: rgba(213,228,244,.78);
+  color: var(--navy);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-align: center;
+}
+
+.executive-narrative {
+  padding: 15mm 12mm 13mm;
+}
+.executive-narrative::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(74,125,174,.08)),
+    radial-gradient(circle at 74% 16%, rgba(255,255,255,.16), transparent 27%);
+}
+.executive-narrative-heading {
+  position: relative;
+  z-index: 2;
+  width: 126mm;
+  margin-bottom: 10mm;
+}
+.executive-narrative-heading h2 {
+  margin-top: 5mm;
+  font-size: 28pt;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.05em;
+}
+.executive-narrative-panel {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr .64fr;
+  gap: 7mm;
+  min-height: 112mm;
+  padding: 9mm;
+  border-radius: 8mm;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.10);
+}
+.executive-narrative-panel p {
+  font-size: 8.5pt;
+  line-height: 1.55;
+}
+.executive-narrative-panel p:last-child {
+  align-self: end;
+  color: rgba(0,0,66,.58);
+  font-size: 8pt;
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.executive-narrative-footer {
+  position: relative;
+  z-index: 2;
+  margin: 7mm 0 0 39mm;
+  padding: 6mm 7mm;
+  border-radius: 6mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.88);
+}
+.executive-narrative-footer p {
+  font-size: 8.3pt;
+  line-height: 1.5;
+}
+.executive-narrative-footer strong { color: #fff; }
+
+.executive-modules {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: #fff;
+}
+.executive-module {
+  position: relative;
+  overflow: hidden;
+}
+.executive-module-scale {
+  display: flex;
+  align-items: flex-end;
+  padding: 14mm 11mm 18mm 12mm;
+  background: #fff;
+}
+.executive-module-copy > span { margin-bottom: 7mm; }
+.executive-module h2 {
+  font-size: 34pt;
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+.executive-module p {
+  margin-top: 11mm;
+  font-size: 9.1pt;
+  line-height: 1.55;
+}
+.executive-module-synth {
+  padding: 15mm 10mm 14mm;
+}
+.executive-module-synth::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(51,103,151,.09));
+}
+.executive-module-synth > span { text-align: center; }
+.executive-module-icon {
+  display: grid;
+  width: 31mm;
+  height: 31mm;
+  margin: 69mm auto 0;
+  place-items: center;
+  border-radius: 9mm;
+  background: rgba(255,255,255,.84);
+  color: var(--navy);
+  font-size: 27pt;
+  box-shadow: 0 4mm 9mm rgba(0,0,66,.10);
+}
+.executive-module-synth h2 {
+  margin-top: 25mm;
+}
+.executive-module-synth p {
+  margin-top: 7mm;
+}
+.executive-module-synth small {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31mm;
+  padding-top: 15mm;
+  background: rgba(213,228,244,.78);
+  color: var(--navy);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-align: center;
+}
+
+.executive-case {
+  padding: 15mm 12mm 12mm;
+}
+.executive-case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(150deg, rgba(255,255,255,.08), rgba(46,99,148,.08));
+}
+.executive-case-heading {
+  position: relative;
+  z-index: 2;
+  width: 132mm;
+  margin-bottom: 8mm;
+}
+.executive-case-heading h2 {
+  margin-top: 5mm;
+  font-size: 27pt;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.executive-case-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+}
+.executive-case-column {
+  min-height: 176mm;
+  padding: 7mm;
+  border-radius: 8mm;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.09);
+}
+.executive-case-column h3 {
+  margin-bottom: 6mm;
+  font-size: 14pt;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.executive-case-card {
+  padding: 5mm 0;
+  border-top: 1px solid rgba(0,0,66,.13);
+  font-size: 8.4pt;
+  line-height: 1.48;
+}
+.executive-case-card strong {
+  display: block;
+  margin-bottom: 1mm;
+}
+.executive-case-column-dark {
+  background: var(--navy);
+  color: rgba(255,255,255,.82);
+}
+.executive-case-column-dark h3,
+.executive-case-column-dark strong {
+  color: #fff;
+}
+.executive-case-column-dark .executive-case-card {
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Whole-memo editorial pagination */
+.memo-section {
+  font-size: 9.45pt;
+  line-height: 1.52;
+}
+.memo-section > h2.memo-heading {
+  max-width: 148mm;
+  margin-bottom: 9mm;
+  padding-top: 3mm;
+  font-size: 31pt;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.052em;
+}
+.memo-section > h2.memo-heading::before {
+  margin-bottom: 6mm;
+}
+.memo-section > p:first-of-type {
+  max-width: 148mm;
+  font-size: 11.2pt;
+  line-height: 1.5;
+}
+.memo-subsection,
+.memo-topic {
+  position: relative;
+  margin: 7mm 0;
+  padding: 7mm;
+  border-radius: 7mm;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.08);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.memo-subsection h3.memo-heading,
+.memo-topic h4 {
+  margin: 0 0 4mm;
+  padding: 0 0 3mm;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0,0,66,.14);
+  font-size: 17.5pt;
+  font-weight: 540;
+  line-height: 1.08;
+}
+.memo-subsection p,
+.memo-topic p {
+  max-width: none;
+}
+.memo-subsection ul,
+.memo-topic ul {
+  margin-top: 3mm;
+}
+.memo-subsection li,
+.memo-topic li {
+  margin-bottom: 2.2mm;
+}
+.memo-subsection .memo-visual,
+.memo-topic .memo-visual {
+  margin-left: 0;
+  margin-right: 0;
+}
+.tone-split {
+  padding-right: 10mm;
+}
+.tone-split::before { display: none; }
+
+/* 02 · Gap — market map, limitation, inverse opportunity */
+.memo-section-2 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-2 > p:nth-of-type(4) {
+  margin: 7mm 0;
+  padding: 7mm 8mm;
+  border-radius: 7mm;
+  background: var(--navy);
+  color: #fff;
+  font-size: 15.5pt;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.13);
+}
+.memo-section-2 .memo-pitch-valley {
+  height: 102mm;
+}
+.memo-section-2 .post-valley-essay {
+  min-height: 205mm;
+  margin: 8mm 0;
+  padding: 12mm 62mm 12mm 11mm;
+  border-radius: 8mm;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.96) 0 66%, rgba(204,224,243,.88) 66%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.09);
+  break-before: page;
+  break-inside: avoid;
+  page-break-before: always;
+  page-break-inside: avoid;
+}
+.memo-section-2 .post-valley-essay p {
+  max-width: none;
+}
+.memo-section-2 .memo-topic {
+  min-height: 112mm;
+  padding: 10mm;
+}
+.memo-section-2 .memo-topic-1 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.95) 0 63%, rgba(214,229,245,.88) 63%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-2 .memo-topic-1 > * {
+  max-width: 97mm;
+}
+.memo-section-2 .memo-topic-2 {
+  min-height: 222mm;
+  background:
+    linear-gradient(145deg, rgba(1,8,35,.97), rgba(25,68,108,.92)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-2 .memo-topic-2 h4,
+.memo-section-2 .memo-topic-2 strong { color: #fff; }
+.memo-section-2 .memo-topic-2 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-2 .memo-topic-2 li::before { background: #fff; }
+.memo-section-2 .memo-topic-2 .pull-quote {
+  background: rgba(255,255,255,.94) !important;
+  color: var(--navy);
+}
+
+/* 03 · Product — one opening essay, then three distinct capability pages */
+.memo-section-3 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 71%, rgba(10,31,59,.96) 71%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 > h2,
+.memo-section-3 > p {
+  max-width: 118mm !important;
+}
+.memo-section-3 .memo-topic {
+  min-height: 183mm;
+  padding: 10mm;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-3 .memo-topic-1 {
+  min-height: 164mm;
+  padding: 8mm;
+  font-size: 8.65pt;
+  line-height: 1.42;
+  background:
+    linear-gradient(135deg, rgba(217,232,247,.22), rgba(92,142,190,.12)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 .memo-topic-1 h5 {
+  margin-top: 7mm;
+}
+.memo-section-3 .memo-topic-1 .io-visual {
+  margin-top: 6mm;
+  margin-bottom: 5mm;
+}
+.memo-section-3 .memo-topic-1 .io-core {
+  min-height: 40mm;
+}
+.memo-section-3 .memo-topic-2 {
+  min-height: 222mm;
+  padding-right: 58mm;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 68%, rgba(213,229,246,.92) 68%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 .memo-topic-2::after {
+  content: "SCALE";
+  position: absolute;
+  right: 10mm;
+  bottom: 11mm;
+  color: rgba(0,0,66,.12);
+  font-size: 35pt;
+  font-weight: 600;
+  writing-mode: vertical-rl;
+}
+.memo-section-3 .memo-topic-3 {
+  background:
+    linear-gradient(145deg, rgba(1,8,35,.98), rgba(29,70,110,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-3 .memo-topic-3 h4,
+.memo-section-3 .memo-topic-3 strong { color: #fff; }
+.memo-section-3 .memo-topic-3 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-3 .memo-topic-3 .product-visual {
+  color: var(--navy);
+}
+
+/* 04 · Evidence — proof sequence in paired editorial cards */
+.memo-section-4 {
+  background:
+    linear-gradient(135deg, rgba(216,232,248,.88), rgba(165,199,229,.79)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-4 .memo-subsection {
+  min-height: 76mm;
+}
+.memo-section-4 .memo-subsection:nth-of-type(even) {
+  background:
+    linear-gradient(135deg, rgba(213,230,247,.90), rgba(178,207,234,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-4 .memo-subsection-2 {
+  min-height: 150mm;
+  background: rgba(255,255,255,.92);
+}
+.memo-section-4 .memo-subsection-3,
+.memo-section-4 .memo-subsection-5 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-4 .memo-subsection.memo-subsection-4 {
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-4 .memo-subsection-4 h3,
+.memo-section-4 .memo-subsection-4 strong { color: #fff; }
+.memo-section-4 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-4 .memo-subsection-4 li::before { background: #fff; }
+.memo-section-4 .memo-subsection-5,
+.memo-section-4 .memo-subsection-6 {
+  min-height: 98mm;
+}
+
+/* 05 · Technology — light atmospheric foundation with selective navy depth */
+.memo-section-5 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.90), rgba(152,190,224,.80)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: var(--ink);
+}
+.memo-section-5 > h2,
+.memo-section-5 > h2::before,
+.memo-section-5 > p,
+.memo-section-5 strong { color: var(--navy); }
+.memo-section-5 .memo-subsection {
+  min-height: 86mm;
+}
+.memo-section-5 .memo-subsection-3,
+.memo-section-5 .memo-subsection-5 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-5 .memo-subsection-3 {
+  min-height: 151mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-5 .memo-subsection-3 h3,
+.memo-section-5 .memo-subsection-3 strong { color: #fff; }
+.memo-section-5 .memo-subsection-3 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-5 .memo-subsection-3 li::before { background: #fff; }
+.memo-section-5 .memo-subsection-5 {
+  min-height: 222mm;
+  padding: 12mm;
+  background: rgba(255,255,255,.91);
+}
+
+/* 06 · Commercial model — white economics pages plus a market construction spread */
+.memo-section-6 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-6 .memo-subsection {
+  min-height: 71mm;
+}
+.memo-section-6 .memo-subsection-1,
+.memo-section-6 .memo-subsection-3 {
+  background:
+    linear-gradient(135deg, rgba(216,232,248,.88), rgba(174,205,233,.78)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-6 .memo-subsection-3 {
+  min-height: 222mm;
+  padding: 12mm;
+}
+.memo-section-6 .memo-subsection-4 {
+  min-height: 222mm;
+  break-before: page;
+  page-break-before: always;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-6 .memo-subsection-4 h3,
+.memo-section-6 .memo-subsection-4 strong { color: #fff; }
+.memo-section-6 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-6 .memo-subsection-4 blockquote {
+  margin-top: 10mm;
+  background: rgba(255,255,255,.94);
+  color: var(--navy);
+}
+.memo-section-6 .memo-subsection-4 blockquote strong { color: var(--navy); }
+.memo-section-6 .memo-subsection-5 {
+  min-height: 134mm;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-6 .memo-subsection-5 h3,
+.memo-section-6 .memo-subsection-5 strong { color: #fff; }
+.memo-section-6 .memo-subsection-5 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-6 .memo-subsection-5 li::before { background: #fff; }
+.memo-section-6 .memo-subsection-5 .market-visual {
+  color: var(--navy);
+}
+
+/* 07 · Team — an editorial organisation page and an advisory page */
+.memo-section-7 {
+  background:
+    linear-gradient(rgba(255,255,255,.96), rgba(255,255,255,.96)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-7 .memo-subsection {
+  min-height: 81mm;
+}
+.memo-section-7 .memo-subsection-1 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.89), rgba(165,199,229,.78)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-7 .memo-subsection-3 {
+  min-height: 106mm;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-7 .memo-subsection-4 {
+  min-height: 151mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-7 .memo-subsection-4 h3,
+.memo-section-7 .memo-subsection-4 strong { color: #fff; }
+.memo-section-7 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-7 .memo-subsection-4 li::before { background: #fff; }
+.memo-section-7 .memo-subsection-5 {
+  min-height: 222mm;
+  padding: 11mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(170,202,231,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+
+/* 08 · Round — capital architecture, milestones and downside protection */
+.memo-section-8 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 72%, rgba(10,31,59,.96) 72%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 > h2,
+.memo-section-8 > p { max-width: 119mm !important; }
+.memo-section-8 .memo-subsection {
+  min-height: 73mm;
+}
+.memo-section-8 .memo-subsection-1 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.92), rgba(171,203,232,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-3 blockquote {
+  background: var(--navy);
+  color: #fff;
+}
+.memo-section-8 .memo-subsection-3 {
+  min-height: 222mm;
+  padding: 12mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(164,198,229,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-3 blockquote {
+  margin-top: 24mm;
+  padding: 12mm;
+  font-size: 13pt;
+  line-height: 1.5;
+}
+.memo-section-8 .memo-subsection-3 blockquote strong { color: #fff; }
+.memo-section-8 .memo-subsection-4,
+.memo-section-8 .memo-subsection-7 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-8 .memo-subsection-5 {
+  min-height: 164mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-8 .memo-subsection-6 {
+  min-height: 222mm;
+  padding: 12mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(164,198,229,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-5 h3,
+.memo-section-8 .memo-subsection-5 strong { color: #fff; }
+.memo-section-8 .memo-subsection-5 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-8 .memo-subsection-5 li::before { background: #fff; }
+.memo-section-8 .memo-subsection-7,
+.memo-section-8 .memo-subsection-8 {
+  min-height: 106mm;
+}
+.memo-section-8 .memo-subsection-8 {
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(170,202,231,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+
+/* 09 · Risk — underwriting table with a strong close */
+.memo-section-9 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-9 .table-wrap {
+  margin: 10mm 0;
+  border-radius: 5mm;
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.10);
+  break-inside: auto;
+  page-break-inside: auto;
+}
+.memo-section-9 table {
+  table-layout: auto;
+}
+.memo-section-9 thead {
+  display: table-header-group;
+}
+.memo-section-9 tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.memo-section-9 th,
+.memo-section-9 td {
+  padding: 3mm;
+  font-size: 6.7pt;
+  line-height: 1.34;
+}
+.memo-section-9 > p:last-of-type {
+  margin-top: 10mm;
+  padding: 11mm;
+  border-radius: 8mm;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.88);
+  font-size: 12pt;
+  line-height: 1.52;
+}
+.memo-section-9 > p:last-of-type strong { color: #fff; }
+.memo-section-9 .memo-conclusion {
+  min-height: 222mm;
+  padding: 14mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(157,193,226,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-9 .memo-conclusion h4 {
+  margin-bottom: 12mm;
+  border: 0;
+  font-size: 31pt;
+  font-weight: 500;
+  letter-spacing: -.05em;
+}
+.memo-section-9 .memo-conclusion p {
+  padding: 10mm;
+  border-radius: 7mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.88);
+  font-size: 12pt;
+  line-height: 1.5;
+}
+.memo-section-9 .memo-conclusion p strong { color: #fff; }
+
 @media print {
   html, body {
     background: #bfd3eb !important;
@@ -889,6 +1886,49 @@ th { background: var(--navy); }
       radial-gradient(circle at 76% 82%, rgba(83,131,181,.18), transparent 36%) !important;
   }
   .memo-shell { padding: 0; }
+  .executive-spread {
+    width: 178mm;
+    height: 262mm;
+  }
+  .memo-page-snapshot {
+    display: block !important;
+  }
+  .memo-section {
+    font-size: 9.2pt;
+    line-height: 1.48;
+  }
+  .memo-subsection,
+  .memo-topic {
+    box-shadow: none;
+  }
+  .memo-section-5 {
+    background:
+      linear-gradient(135deg, rgba(215,231,247,.92), rgba(152,190,224,.84)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-5 > h2,
+  .memo-section-5 > h2::before,
+  .memo-section-5 > p {
+    color: #fff !important;
+  }
+  .memo-section-4 {
+    background:
+      linear-gradient(135deg, rgba(216,232,248,.91), rgba(165,199,229,.83)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 {
+    background:
+      linear-gradient(145deg, rgba(1,9,35,.98), rgba(28,69,108,.95)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 blockquote {
+    background: rgba(255,255,255,.94) !important;
+    color: var(--navy) !important;
+  }
+  .memo-section-8 .memo-subsection-3 blockquote {
+    background: var(--navy) !important;
+    color: #fff !important;
+  }
   h2.memo-heading {
     padding-top: 9mm;
     font-size: 32pt;
@@ -908,6 +1948,12 @@ th { background: var(--navy); }
     border-radius: 0;
     box-shadow: none;
   }
+  .memo-cover {
+    height: 262mm;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
   .memo-section h2.memo-heading {
     padding-top: 1mm;
   }
@@ -924,6 +1970,24 @@ th { background: var(--navy); }
       linear-gradient(135deg, rgba(1,10,28,.98), rgba(34,76,116,.94)),
       url("/webgl-bg-foundation-v2.png") center / cover !important;
   }
+  .memo-section-4 {
+    background:
+      linear-gradient(135deg, rgba(216,232,248,.91), rgba(165,199,229,.83)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 {
+    background:
+      linear-gradient(145deg, rgba(1,9,35,.98), rgba(28,69,108,.95)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 blockquote {
+    background: rgba(255,255,255,.94) !important;
+    color: var(--navy) !important;
+  }
+  .memo-section-8 .memo-subsection-3 blockquote {
+    background: var(--navy) !important;
+    color: #fff !important;
+  }
 }
 </style>
 </head>
@@ -937,7 +2001,105 @@ th { background: var(--navy); }
       <img src="/shodh-new/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI">
       <span>Investor memo</span>
     </div>
-    <article class="memo-content"><section class="memo-section memo-section-1 tone-atmosphere">
+    <section class="memo-cover" aria-label="Shodh confidential investment memorandum cover">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="memo-cover-top">
+        <img src="/shodh-new/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI">
+        <span>Confidential</span>
+      </div>
+      <div class="memo-cover-image">
+        <img src="/pitch-tomorrow/assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" alt="Industrial process equipment">
+      </div>
+      <div class="memo-cover-title">
+        <strong>SHODH</strong>
+        <h1>THE FOUNDATION MODEL<br>FOR PHYSICAL INTELLIGENCE</h1>
+        <p>From molecule to factory</p>
+      </div>
+      <div class="memo-cover-meta">
+        <span>CONFIDENTIAL INVESTMENT MEMORANDUM</span>
+        <strong>$55M EQUITY FINANCING</strong>
+        <span>JULY 2026</span>
+      </div>
+    </section>
+    <article class="memo-content"><div class="section-rule"></div>
+<section class="executive-spread executive-opener" aria-label="Executive Summary">
+      <div class="executive-opener-paper">
+        <p class="executive-proof"><strong>In recent prospective industrial validations, Shodh’s uniform physics model compressed a 3-month physical formulation test into 24 hours of computation for a global CRO, and successfully improved chemical factory yield from 82.4% to 96.7% on a mathematically locked run.</strong></p>
+        <div class="executive-opener-title">
+          <span>01 / INVESTMENT MEMORANDUM</span>
+          <h2>Executive<br>Summary</h2>
+        </div>
+      </div>
+      <div class="executive-opener-atmosphere">
+        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+        <span class="executive-side-label">UNIFORM PHYSICS WORLD MODEL</span>
+        <div class="executive-mark">
+          <span>MOLECULE</span>
+          <b>→</b>
+          <span>FACTORY</span>
+        </div>
+        <small>01</small>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-narrative" aria-label="The industrialisation gap and Shodh">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="executive-narrative-heading">
+        <span>THE INDUSTRIALISATION GAP</span>
+        <h2>A common intelligence layer for the physical economy.</h2>
+      </div>
+      <div class="executive-narrative-panel">
+        <p>While billions of dollars have been invested in "Discovery AI" to invent new digital molecules, and "Engineering AI" to optimise finished downstream machines, the physical economy remains bottlenecked by a massive, multi-trillion-dollar void in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecular discovery into a mass-produced physical reality requires surviving formulation stability, chemical route redesign, and factory scale-up. Historically, this entire lifecycle has been a fragmented sequence of expensive, manual physical trial and error.</p>
+        <p>Shodh is a frontier foundation model for physical intelligence built to eliminate this bottleneck. Rather than building bespoke simulations for individual domains, Shodh operates a <strong>Uniform Physics World Model</strong> capable of true multi-scale, cross-domain inverse design. Whether calculating the thermodynamic degradation of a molecule or the fluid dynamics of a 10,000-litre factory vessel, Shodh computationally generates the physical parameters required to achieve a targeted industrial outcome.</p>
+        <p>To commercialise this intelligence layer, Shodh delivers the model through two enterprise modules:</p>
+      </div>
+      <div class="executive-narrative-footer">
+        <p>Having validated the platform across multiple physical scales, and having already secured paid pilots structured for automated conversion into six-figure enterprise SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This round funds the compute required to ride our empirically proven scaling laws, transitioning the company from a proven scientific breakthrough into the dominant intelligence platform for the physical economy.</p>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-modules" aria-label="Shodh Scale and Shodh Synth">
+      <div class="executive-module executive-module-scale">
+        <div class="executive-module-copy">
+          <span>SHODH SCALE / FACTORY INTELLIGENCE</span>
+          <h2>SHODH<br>SCALE</h2>
+          <p><strong>Shodh SCALE:</strong> The recurring-revenue foundation. A factory and formulation deployment that optimises existing processes, capturing a "SaaS floor" base license (e.g., $250K–$500K/year) plus a capped gain-share on the verified economic value created.</p>
+        </div>
+      </div>
+      <div class="executive-module executive-module-synth">
+        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+        <span>SHODH SYNTH / PROCESS INTELLIGENCE</span>
+        <div class="executive-module-icon">⌬</div>
+        <h2>SHODH<br>SYNTH</h2>
+        <p><strong>Shodh SYNTH:</strong> The step-change upside. A process-invention capability that computationally redesigns entire chemical and biological manufacturing routes, yielding massive milestone payouts and selective process-IP royalties.</p>
+        <small>ONE PLATFORM · TWO ENTERPRISE MODULES</small>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-case" aria-label="Investment Case at a Glance">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="executive-case-heading">
+        <span>INVESTMENT CASE AT A GLANCE</span>
+        <h2>Proven today.<br>Built to generalise.</h2>
+      </div>
+      <div class="executive-case-grid">
+        <div class="executive-case-column">
+          <h3>Proven Today</h3>
+          <div class="executive-case-card"><strong>Multi-Scale Physical Results:</strong> Prospective factory scale-up (Aarti Industries: +14.3 pts in yield) and zero-day formulation prediction (Syngene: matching 3-month wet-lab data in 24 hours).</div>
+          <div class="executive-case-card"><strong>Commercial Traction:</strong> Paid validations actively converting to $250,000/year recurring enterprise site licenses.</div>
+          <div class="executive-case-card"><strong>Frontier Technology:</strong> Core Uniform Physics World Model built, with proven empirical power-law scaling capability.</div>
+          <div class="executive-case-card"><strong>Customer Pull:</strong> 9 active/scoped programmes across pharma, specialty chemicals, biologics, and aerospace.</div>
+        </div>
+        <div class="executive-case-column executive-case-column-dark">
+          <h3>What This Round Establishes</h3>
+          <div class="executive-case-card"><strong>Generalisation:</strong> Repeatability across expanded process classes via dozens of parallel physical validations.</div>
+          <div class="executive-case-card"><strong>Capability Unlocks:</strong> Scaling H100/B200 compute infrastructure to enable zero-shot transfer across unseen domains.</div>
+          <div class="executive-case-card"><strong>Software Margins:</strong> Declining human adaptation effort and computational hours per new programme.</div>
+          <div class="executive-case-card"><strong>Commercial Scale:</strong> Repeatable private SCALE deployments and a scalable organisation with dedicated commercial leadership.</div>
+        </div>
+      </div>
+    </section>
+<section class="memo-section memo-section-2 tone-paper">
 <h2 class="memo-heading">2. The Industrial Scale-Up Gap</h2>
 <p>The greatest unsolved bottleneck in the physical sciences is moving from discovery to manufacturing.</p>
 <p>On one side, Discovery AI companies—including Isomorphic, Insilico, Lila, Periodic and CuspAI—have attracted billions of dollars to design molecules and materials at the microscopic level. On the other, Engineering AI is advancing the design of large-scale machines and hardware, illustrated by PhysicsX’s $300M raise at a reported $2.4B valuation and the more than $18B committed to Prometheus’s ambition of building an “artificial general engineer” for systems such as jet engines and robotics.[1–7]</p>
@@ -991,10 +2153,13 @@ th { background: var(--navy); }
       </div>
     </figure>
     
+<div class="post-valley-essay">
 <p>A laboratory breakthrough cannot simply be enlarged into a factory. When a reaction, biological process or material moves from a benchtop system into a 10,000-litre vessel, its physical environment changes. Heat no longer dissipates in the same way. Mixing becomes non-uniform. Mass transfer, shear, residence time, fluid dynamics, reaction kinetics and equipment geometry begin interacting at industrial scale.</p>
 <p>Although the specific failure modes differ, the structure of the scale-up problem repeats across industries. In chemicals, the constraint may be heat release, mixing and impurity formation; in biologics, shear, mass transfer and aggregation; in batteries and advanced materials, phase behaviour, coating uniformity and thermal control. The domains differ, but the underlying challenge is the same: molecular behaviour must be translated through transport physics and equipment constraints into a stable industrial process.</p>
 <p>This recurring physical structure is what makes scale-up potentially addressable through a common intelligence platform rather than a collection of unrelated engineering projects.</p>
 <p>The resulting process knowledge is among the most valuable and closely guarded forms of industrial intelligence. TSMC’s dominance was not created only by knowing what semiconductor to manufacture; it was created through decades of accumulated knowledge about how to manufacture at exceptional yield and reliability. Similar process advantages determine competitiveness across pharmaceuticals, chemicals, biologics, batteries and advanced materials.</p>
+</div>
+<div class="memo-topic memo-topic-1">
 <h4>The limitation of the existing stack</h4>
 <p>Manufacturers currently manage scale-up through experienced process teams, deterministic simulation, specialist consultants and successive pilot runs.</p>
 <p>These systems are powerful, but they largely operate in the forward direction: engineers specify a proposed process, equipment configuration and set of operating conditions, and the software evaluates what may happen.</p>
@@ -1006,14 +2171,17 @@ th { background: var(--navy); }
 <p>Energy and materials: a 1% yield loss in a battery factory can represent 1 M – 1M– 10M of annual economic loss.</p>
 <p>Process industries: unsuccessful scale transfer can consume years of engineering work, physical experimentation and delayed production.</p>
 <p>These are not software-efficiency problems. They are physical-production problems measured in lost output, wasted material, delayed revenue and stranded industrial capacity.</p>
+</div>
+<div class="memo-topic memo-topic-2">
 <h4>The inverse-design opportunity</h4>
 <p>The missing layer is an intelligence system that can connect molecular behaviour, process conditions and equipment-scale physics—and work backwards from the required industrial outcome.</p>
 <p>Shodh is being built to provide that layer.</p>
 <p>Given the molecule or biologic, laboratory and process data, equipment geometry and operating constraints, Shodh predicts industrial outcomes and generates the process conditions required to achieve a defined manufacturing target. Instead of asking engineers to manually search the complete design space, Shodh uses a common physical-intelligence model to perform inverse design across molecule, process and equipment.</p>
 <p>Discovery AI determines what might work. Engineering software evaluates designs that have already been specified. Shodh determines how a scientific result can become a manufacturable industrial process.</p>
 <p>By converting scale-up from a fragmented sequence of expert judgement, isolated simulation and physical trial and error into a reusable intelligence layer, Shodh is targeting one of the largest remaining bottlenecks in the physical economy.</p>
+</div>
 </section>
-<section class="memo-section memo-section-2 tone-paper">
+<section class="memo-section memo-section-3 tone-split">
 <h2 class="memo-heading">3. What Shodh Does: A New Paradigm for Industrial Production</h2>
 <p>Until now, no computational system has successfully connected molecular behaviour, process physics and industrial equipment across different manufacturing domains. Shodh has built and prospectively validated what we believe is the world’s first common physical-intelligence model designed to execute inverse design from molecule to factory.</p>
 <p>This is no longer only an architectural ambition. Early prospective validations show that the same underlying model can operate across sharply different process physics—from exothermic chemical reactions to biologic scale-up. These results provide the first evidence that industrial scale-up can move from a fragmented process of simulation, expert judgement and physical trial-and-error toward model-guided inverse design.</p>
@@ -1024,6 +2192,7 @@ th { background: var(--navy); }
 <p>Process physics: mixing, heat and mass transfer, shear, flow, phase behaviour and residence time;</p>
 <p>Industrial equipment: geometry, operating constraints, control conditions and production scale.</p>
 <p>By learning transferable structure across these levels, Shodh can reason from the microscopic properties of a molecule or biologic through to the conditions required to manufacture it inside real industrial equipment.</p>
+<div class="memo-topic memo-topic-1">
 <h4>The input-output engine</h4>
 <p class="lead-in">A manufacturer provides Shodh with the boundary conditions of the industrial problem:</p>
 <h5>Inputs</h5>
@@ -1066,11 +2235,15 @@ th { background: var(--navy); }
 <p>In the inverse direction, it begins with the required outcome and searches across molecular, process and equipment variables to identify the configuration most likely to achieve it.</p>
 <p>Traditional simulation asks what will happen if a process is run. Shodh also asks what process should be run to achieve the required result.</p>
 <p>Shodh commercialises this common capability through two deployment modules.</p>
+</div>
+<div class="memo-topic memo-topic-2">
 <h4>Shodh SCALE — Factory Intelligence</h4>
 <p>The commercial wedge and recurring-revenue foundation.</p>
 <p>SCALE transfers and optimises processes that already exist. Once a molecule or biologic leaves the laboratory, SCALE predicts its behaviour in industrial equipment, identifies the likely causes of yield loss or impurity formation and generates the operating window required for reliable production.</p>
 <p>Following initial validation, SCALE is designed to remain privately deployed within the customer environment. Industrial processes drift: raw-material properties change, equipment fouls, ambient conditions vary and production constraints evolve. SCALE acts as a living physical model, recalibrating recommendations as the factory changes.</p>
 <p>The commercial model combines an annual private-site deployment with participation in independently verified manufacturing gains.</p>
+</div>
+<div class="memo-topic memo-topic-3">
 <h4>Shodh SYNTH — Process Intelligence</h4>
 <p>The expansion engine and source of process-IP upside.</p>
 <p>While SCALE improves an existing manufacturing process, SYNTH works backwards from the desired result to design a new one.</p>
@@ -1098,13 +2271,17 @@ th { background: var(--navy); }
 <p>As the platform expands, the objective is for every new process class to require less additional training, fewer failure iterations and less scientific intervention than the one before it.</p>
 <p>Through SCALE and SYNTH, Shodh converts a frontier breakthrough in physical AI into a deployable industrial platform—priced against the value of production improved, rather than the number of software seats occupied.</p>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-3 tone-split">
+<section class="memo-section memo-section-4 tone-paper">
 <h2 class="memo-heading">4. Evidence, Generalisation and Customer Pull</h2>
 <p>To prove that Shodh’s uniform physics world model is not merely theoretical, the company prioritised industrial validation over early commercial revenue. The objective was to demonstrate that Shodh can generate a <em>prospective</em> process recommendation—locked before execution—that succeeds in a physical factory.</p>
 <p>Our validation framework follows a strict progression of physical proof: <strong>Prediction → Control (Improved) → Generalisation → Invention (Reinvented).</strong></p>
+<div class="memo-subsection memo-subsection-1">
 <h3 class="memo-heading">4.1 Predicted: Blinded Back-Testing</h3>
 <p>Before deploying into live physical environments, the model was tested against historical industrial data. Across three blinded partner back-tests, Shodh successfully predicted unseen industrial outcomes, proving that the model could accurately forward-simulate complex transport physics and chemical behaviors at scale.</p>
+</div>
+<div class="memo-subsection memo-subsection-2">
 <h3 class="memo-heading">4.2 Improved: Prospective Control (Aarti Industries)</h3>
 <p>To prove physical control, Aarti Industries engaged Shodh to resolve a highly inefficient exothermic chemical scale-up. Shodh was provided with the target molecule, laboratory baseline data, and the industrial reactor geometries.</p>
 <ul>
@@ -1142,6 +2319,8 @@ th { background: var(--navy); }
       <div class="result-strip">+14.3 percentage points in yield · −9.2 percentage points in impurity</div>
     </figure>
     
+</div>
+<div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">4.3 Generalised: Cross-Physics Validation (Axella Biotech)</h3>
 <p>To prove that Shodh’s model understands underlying physics rather than merely memorizing chemical datasets, the identical core architecture was applied to a radically different physical domain: a high-concentration mAb bioreactor for Axella Biotech.</p>
 <ul>
@@ -1149,14 +2328,20 @@ th { background: var(--navy); }
 <li><strong>The Physical Result:</strong> Shodh’s prospective recommendation achieved a <strong>94.5% TFF Recovery</strong> (1.02x target titer) in the physical lab.</li>
 <li>This confirms that molecular behavior translated through transport physics shares a common underlying structure, validating the generalizability of the base model.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-4">
 <h3 class="memo-heading">4.4 Reinvented: Process Invention and Shodh SYNTH (Jubilant Ingrevia)</h3>
 <p>While the previous evidence supports Shodh SCALE (optimizing existing processes), Shodh is currently proving its ability to execute zero-shot generative design for entirely new manufacturable processes (Shodh SYNTH).</p>
 <ul>
 <li><strong>The Programme:</strong> For Jubilant Ingrevia, Shodh is computationally redesigning the underlying chemistry and manufacturing route for an industrial specialty chemical, rather than merely optimizing the existing operating conditions.</li>
 <li><strong>The Physical Result:</strong> Initial model recommendations are currently being tested at the laboratory R&amp;D scale. Early physical evidence confirms the computational invention is physically viable. Successful laboratory confirmation will advance this programme into pilot-scale validation. <em>(Note: Separate evidence of Shodh’s ability to generate chemically executable molecular structures is detailed in Appendix B).</em></li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">4.5 Broader Customer Pull</h3>
 <p>Because scale-up failures represent highly visible financial losses on the P&amp;L of large industrial companies, there is immediate customer pull. Beyond Aarti, Axella, and Jubilant, Shodh operates active or scoped validation programmes with Syngene (small-molecule scale-up), Biocon (large-molecule bioprocess scale-up), GE Aerospace (chemical scale-up), and Gulf Oil (industrial formulation).</p>
+</div>
+<div class="memo-subsection memo-subsection-6">
 <h3 class="memo-heading">4.6 What the Evidence Proves—and What Remains Open</h3>
 <p><strong>Proven Today</strong></p>
 <ul>
@@ -1171,11 +2356,13 @@ th { background: var(--navy); }
 <li><strong>Commercial Conversion:</strong> We must prove a repeatable GTM motion that seamlessly converts a validated physical pilot into a multi-year, private deployment contract.</li>
 </ul>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-4 tone-paper">
+<section class="memo-section memo-section-5 tone-deep">
 <h2 class="memo-heading">5. Technology, Scaling and Defensibility</h2>
 <p>The core architectural question—whether one physical-intelligence model can generate a recommendation that changes a real industrial outcome—has now been answered prospectively. The next question is how far that capability generalises, and how quickly compute can expand it.</p>
 <p>Within the process regimes demonstrated to date, Shodh’s principal limitation is no longer the absence of a functioning architecture. It is computational breadth: the resources required to expand the common model across additional physical regimes, iterate through failures rapidly and reduce the adaptation required for each new industrial process.</p>
+<div class="memo-subsection memo-subsection-1">
 <h3 class="memo-heading">5.1 One Model Across Physical Scales</h3>
 <p>Shodh does not build a separate machine-learning model for every customer, reaction or factory. It operates a single Uniform Physics World Model.</p>
 <p>The architecture uses modality-specific physical representations for molecules, continuum fields and industrial equipment before connecting them through a shared reasoning engine. This allows the model to preserve the native structure of each physical system while reasoning jointly across three levels:</p>
@@ -1183,6 +2370,8 @@ th { background: var(--navy); }
 <p>mixing, heat and mass transfer, shear, flow and phase behaviour;</p>
 <p>equipment geometry, operating constraints and production conditions.</p>
 <p>The result is one architecture capable of both forward prediction—what will happen under a proposed process—and inverse design—what process and conditions are required to achieve a specified industrial outcome.</p>
+</div>
+<div class="memo-subsection memo-subsection-2">
 <h3 class="memo-heading">5.2 The Current Compute Constraint</h3>
 <p>Shodh’s present GPU capacity artificially limits the speed and breadth of model development.</p>
 <p class="lead-in">Today, limited compute causes:</p>
@@ -1190,6 +2379,8 @@ th { background: var(--navy); }
 <p>Slower failure iteration: an unsuccessful physical or computational test requires additional data generation, retraining and evaluation, extending the validation cycle.</p>
 <p>Higher adaptation effort: underrepresented physical regimes require more process-specific training and scientific intervention than they should once incorporated into the common base model.</p>
 <p>Add two or three current operational numbers here.</p>
+</div>
+<div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">5.3 Empirically Demonstrated Scaling</h3>
 <p>For Shodh, model scaling is not merely a hypothesis.</p>
 <p>Across four model scales from 1B to 10B parameters, Shodh observed a stable power-law relationship between training compute and held-out physical prediction error. A curve fitted only on the smaller models predicted the 10B model’s performance within 2.4%, demonstrating that additional model and compute scale has produced predictable capability gains.</p>
@@ -1199,6 +2390,8 @@ th { background: var(--navy); }
 <p>optionally, the goodness of fit or confidence interval.</p>
 <p class="lead-in">Then:</p>
 <p>This result does not imply that every industrial capability emerges automatically with parameter count. It establishes that the underlying physical model continues to improve predictably with scale and provides an empirical basis for financing the next model generation.</p>
+</div>
+<div class="memo-subsection memo-subsection-4">
 <h3 class="memo-heading">5.4 What the Next Model Generation Unlocks</h3>
 <p>The next training programme is intended to convert this demonstrated scaling relationship into four commercial capabilities:</p>
 <p>zero- or low-adaptation transfer across related reactions;</p>
@@ -1206,6 +2399,8 @@ th { background: var(--navy); }
 <p>calibrated uncertainty around industrial recommendations;</p>
 <p>broader service through the common base model across chemicals, biologics and materials.</p>
 <p>For each, include an actual milestone or target where available.</p>
+</div>
+<div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">5.5 Why the Capability Is Difficult to Reproduce</h3>
 <p class="lead-in">Shodh’s defensibility is built on four compounding layers:</p>
 <p>Physics-native, cross-scale architecture</p>
@@ -1218,13 +2413,17 @@ th { background: var(--navy); }
 <p>Customer-specific process data can remain private while the common model, validation methods and process-class coverage continue to improve.</p>
 <p>The moat is not one dataset or one architecture component. It is the accumulated system: cross-scale physical representation, demonstrated scaling, prospective industrial validation and private factory deployment.</p>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-5 tone-deep">
+<section class="memo-section memo-section-6 tone-atmosphere">
 <h2 class="memo-heading">6. Market, Business Model and Competitive Status Quo</h2>
+<div class="memo-subsection memo-subsection-1">
 <h3 class="memo-heading">6.1 Begin with Physical Value</h3>
 <p>Shodh’s commercial model begins with a fundamental pricing shift: <strong>we price against manufacturing economics, not software seats.</strong></p>
 <p>Legacy engineering software is sold as a CAD-style tool on a per-seat licensing model out of a company's IT budget. Because those tools merely evaluate human assumptions rather than generating optimized physical outcomes, they cannot claim a share of the factory’s economic upside.</p>
 <p>Shodh’s generative <em>inverse design</em> capability fundamentally changes this dynamic. Because a 1% yield improvement or a 10-month reduction in scale-up time translates directly to millions of dollars in net-new margin, Shodh bypasses the IT budget and sells directly into the Plant Manager’s P&amp;L. By pricing against the physical value created, Shodh operates a <strong>SaaS floor with deep-tech upside</strong>, capturing both enterprise software predictability and the exponential financial returns of physical asset optimization.</p>
+</div>
+<div class="memo-subsection memo-subsection-2">
 <h3 class="memo-heading">6.2 The Initial Market</h3>
 <p>The initial commercial wedge targets industries where scale-up bottlenecks are acute and the end-product value is massive:</p>
 <ul>
@@ -1232,6 +2431,8 @@ th { background: var(--navy); }
 <li><strong>Pharma and CDMOs:</strong> Extreme time-sensitivity, where delayed scale-up costs &gt;$500K/day.</li>
 <li><strong>Biomanufacturing:</strong> High complexity (shear, mass transfer), where failure rates during scale-up are historically high.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">6.3 Dual-Engine Revenue Model</h3>
 <p>To align with how legacy industries procure technology, Shodh commercialises its foundation model through two distinct modules:</p>
 <p><strong>1. Shodh SCALE (Factory Optimisation): The Predictable Recurring Foundation</strong></p>
@@ -1246,9 +2447,13 @@ th { background: var(--navy); }
 <li><strong>Programme Fee:</strong> ~$250K baseline process-reinvention programme fee.</li>
 <li><strong>Upside:</strong> $1M–$3M in physical validation milestones, plus selective process-IP royalty buyouts if Shodh’s architecture originates a patentable process.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-4">
 <h3 class="memo-heading">6.4 The Commercial Pathway (Land and Expand)</h3>
 <p>Industrial enterprise sales are notoriously slow if they require a rip-and-replace of existing systems. Shodh avoids this by utilizing a phased "land and expand" motion tied entirely to physical proof:</p>
 <blockquote><strong>Scoped Validation (Paid)</strong> → <strong>Prospective Result</strong> → <strong>Private SCALE Site Deployment</strong> → <strong>Expansion across lines/sites</strong> → <strong>Upsell to SYNTH Process Reinvention.</strong></blockquote>
+</div>
+<div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">6.5 Bottom-Up Market Construction ($10B+ TAM)</h3>
 <p>The initial serviceable market is constructed from the ~2,000 top-tier global manufacturing sites across specialty chemicals, pharma, and biologics, creating a highly concentrated, high-value TAM:</p>
 <ul>
@@ -1271,10 +2476,12 @@ th { background: var(--navy); }
 <p>By securing the sticky, recurring site license through Shodh SCALE, and layering on the step-change biotech/materials payouts through Shodh SYNTH, the business model captures the defensive traits of B2B enterprise SaaS alongside the massive asymmetric upside of a frontier physical science company.</p>
 <div class="section-rule"></div>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-6 tone-atmosphere">
+<section class="memo-section memo-section-7 tone-paper">
 <h2 class="memo-heading">7. Team and Organisational Scalability</h2>
 <p>A recurring failure mode for applied AI companies in the physical sciences is degrading into a high-end, bespoke consulting firm. Shodh is structurally designed to avoid this. The objective of the company is to deploy a scalable intelligence platform, not to rent out chemical engineers by the hour.</p>
+<div class="memo-subsection memo-subsection-1">
 <h3 class="memo-heading">7.1 The Core Team: Bridging Frontier AI and Heavy Industry</h3>
 <p>Transforming industrial manufacturing requires a rare intersection of disciplines that traditionally do not overlap. The Shodh operating team was built specifically to bridge Silicon Valley-calibre foundation model research with legacy industrial engineering.</p>
 <p class="lead-in">The current technical core encompasses:</p>
@@ -1283,6 +2490,8 @@ th { background: var(--navy); }
 <li><strong>High-Performance Computing (HPC):</strong> Infrastructure leadership focused on optimizing large-scale training runs and maximizing GPU utilization.</li>
 <li><strong>Process Engineering &amp; Chemistry/Materials:</strong> Domain experts who translate raw factory data and thermodynamic constraints into model-ingestible parameters.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-2">
 <h3 class="memo-heading">7.2 How Programmes Scale: Escaping the Consulting Trap</h3>
 <p>Shodh is not intending to build a separate, isolated team for every new customer. The operating model is strictly defined: <strong>One common platform + standardised data and deployment infrastructure + focused domain support.</strong></p>
 <p>Because the underlying physical principles repeat across domains, the foundation model does the heavy lifting of inverse design. The human effort per programme is deliberately designed to decline over time.</p>
@@ -1290,9 +2499,13 @@ th { background: var(--navy); }
 <li><strong>Standardised Ingestion:</strong> The data pipeline required to ingest chemical kinematics and equipment geometries from a legacy factory is being standardized into a repeatable product workflow.</li>
 <li><strong>Common Model Architecture:</strong> Rather than training a bespoke model from scratch for a new chemical, the system adapts the existing, pre-trained Uniform Physics World Model, vastly reducing compute and human R&amp;D hours per deployment.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">7.3 Evidence of Organisational Scalability</h3>
 <p>To demonstrate progress toward pure software margins, we track the human effort required to achieve a prospective lock.</p>
 <p>During early validations, data harmonization and physical boundary setting required heavy founder and senior-engineer involvement. Today, the ingestion and base-model simulation loops are becoming increasingly automated. While closing large enterprise accounts and navigating final industrial tech-transfers still currently relies heavily on founder involvement, this $55M round is specifically sized to transition these functions to dedicated commercial and deployment leadership.</p>
+</div>
+<div class="memo-subsection memo-subsection-4">
 <h3 class="memo-heading">7.4 The Hiring Plan</h3>
 <p>To execute this transition and manage the parallel validation of dozens of industrial programmes, the $55M financing unlocks critical leadership and operational hires:</p>
 <ul>
@@ -1301,6 +2514,8 @@ th { background: var(--navy); }
 <li><strong>Process and Domain Leads:</strong> Forward-deployed scientific capability—industrial veterans who can speak the language of Plant Managers and seamlessly bridge the model’s outputs to physical factory reality.</li>
 <li><strong>Commercial Leadership:</strong> Dedicated enterprise GTM executives with experience navigating 7-figure deep-tech or CAPEX sales cycles.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">7.5 Advisory Board Reinforcement</h3>
 <p>Because Shodh sells directly to the P&amp;L and CAPEX budgets of legacy industries, enterprise trust is paramount. To accelerate market access and validate the scientific approach at the highest levels, the operating team is reinforced by an active advisory board comprising global industrial and enterprise veterans:</p>
 <ul>
@@ -1312,15 +2527,19 @@ th { background: var(--navy); }
 <p>This board does not replace the operating team; rather, it provides the company with immediate credibility and direct access to the exact multi-billion-dollar global networks required to deploy SCALE and SYNTH at an international level.</p>
 <div class="section-rule"></div>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-7 tone-paper">
+<section class="memo-section memo-section-8 tone-split">
 <h2 class="memo-heading">8. The Round, Use of Funds, Milestones and Contingency</h2>
 <p>Shodh is raising <strong>$55M in equity capital</strong> to scale foundation-model training, execute parallel industrial validation programmes, and establish global commercial deployment capability.</p>
+<div class="memo-subsection memo-subsection-1">
 <h3 class="memo-heading">8.1 Financing Structure</h3>
 <ul>
 <li><strong>Equity:</strong> $55M, intended to provide 24 to 30 months of operational runway and secure the compute required for the next generation of the foundation model.</li>
 <li><strong>Non-Dilutive Leverage:</strong> Following an institutional lead, Shodh has mapped a pathway to secure up to <strong>$20M in government-backed debt</strong>. This provides substantial non-dilutive leverage to buffer hardware procurement costs.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-2">
 <h3 class="memo-heading">8.2 Detailed Use of Funds</h3>
 <p>Capital allocation reflects the reality of building frontier physical AI, where compute and proprietary validation data are the primary assets:</p>
 <ul>
@@ -1329,11 +2548,17 @@ th { background: var(--navy); }
 <li><strong>~20% ($11M) – Industrial Validation &amp; Deployment:</strong> Subsidising or co-funding parallel physical pilot runs (testing raw materials, lab capacity) and building secure, private site-deployment systems.</li>
 <li><strong>~10% ($5M) – Commercial &amp; GTM:</strong> Establishing international commercial operations to manage the enterprise sales cycle across North America, Europe, and Asia.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">8.3 The Capital-to-Capability Mechanism</h3>
 <p>We do not view this capital as R&amp;D burn; it is a direct mechanism to unlock commercial capability. The financial model is built on this exact flow:</p>
 <blockquote><strong>Capital</strong> → <strong>Larger training/inference infrastructure</strong> → <strong>Broader common model</strong> → <strong>Faster failure iteration &amp; lower human adaptation</strong> → <strong>Repeatability across new process classes</strong> → <strong>Private customer deployments</strong> → <strong>Recurring ARR</strong> → <strong>Next valuation inflection.</strong></blockquote>
+</div>
+<div class="memo-subsection memo-subsection-4">
 <h3 class="memo-heading">8.4 Model and Compute Plan</h3>
 <p>To maintain the empirically proven power-law scaling curve (detailed in Section 5.3), Shodh must aggressively scale its hardware footprint. The compute budget is allocated to secure next-generation GPU clusters (e.g., H100/B200 class) to push the model beyond the current parameter boundaries. This capital ensures the model can train continuously on multi-modal physics data rather than waiting for sequential, time-shared batch compute.</p>
+</div>
+<div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">8.5 18–24 Month Milestones</h3>
 <p class="lead-in">This financing is designed to fund the company through a specific set of value-inflection milestones:</p>
 <ul>
@@ -1343,10 +2568,16 @@ th { background: var(--navy); }
 <li><strong>Commercial Milestones:</strong> Conversion of current "Active Validation" partners (e.g., Syngene, Biocon) into paid, recurring SCALE site licences; realization of the first Shodh SYNTH intellectual property/milestone payouts.</li>
 <li><strong>Organisational Milestones:</strong> Multiple parallel validation workstreams fully supported without dependency on the founders; structural decline in human-hours required per programme.</li>
 </ul>
+</div>
+<div class="memo-subsection memo-subsection-6">
 <h3 class="memo-heading">8.6 Why $55M is Not Too Small</h3>
 <p>A standard $15M–$20M software Series A is insufficient for frontier AI. A smaller round would leave the company fundamentally underfunded on compute, breaking the scaling law. It would force sequential rather than parallel industrial validations, delaying the proof of generalisation, and would prematurely force the company back to the capital markets before recurring commercial conversion is fully proven.</p>
+</div>
+<div class="memo-subsection memo-subsection-7">
 <h3 class="memo-heading">8.7 Why $55M is Not Too Large</h3>
 <p>The capital deployment is deliberately staged and tied to measurable scientific and validation outcomes. We are not using this capital to prematurely hire a massive global sales team before the product can be deployed frictionlessly. Hardware procurement is staged against model capability gates, preventing the wasteful overallocation of capital.</p>
+</div>
+<div class="memo-subsection memo-subsection-8">
 <h3 class="memo-heading">8.8 Contingency Plan</h3>
 <p>In the event of hardware supply chain shocks, extended enterprise sales cycles, or broader macroeconomic tightening, Shodh has structured clear downside protections:</p>
 <ul>
@@ -1356,8 +2587,9 @@ th { background: var(--navy); }
 </ul>
 <div class="section-rule"></div>
 <div class="section-rule"></div>
+</div>
 </section>
-<section class="memo-section memo-section-8 tone-split">
+<section class="memo-section memo-section-9 tone-paper">
 <h2 class="memo-heading">9. Principal Risks and How This Round Closes Them</h2>
 <p>Investing in frontier physical AI involves inherent technical and commercial risk. Shodh does not obscure these realities. Instead, this $55M financing plan has been explicitly designed around the identification, measurement, and systematic elimination of these risks.</p>
 <p>The table below mirrors the core underwriting pillars of the business, outlining the primary risk today, the evidence we have already accumulated to mitigate it, and exactly how the capital from this round closes it completely.</p>
@@ -1372,9 +2604,10 @@ th { background: var(--navy); }
 <tr><td><strong>$55M plan may be mis-sized</strong> <br><em>(Is it too much, or not enough to hit milestones?)</em></td><td><strong>Initial compute &amp; operating assumptions:</strong> Rigorous financial modelling tying compute cost to model parameter targets.</td><td><strong>Staged procurement &amp; contingency:</strong> Compute scaled in tranches, protected by up to $20M in government-backed debt as a non-dilutive shock absorber.</td></tr>
 <tr><td><strong>Team may remain founder-dependent</strong> <br><em>(Can the business scale without the CEO in every meeting?)</em></td><td><strong>Existing core technical team:</strong> Deep bench of AI, HPC, and process engineering talent already executing runs.</td><td><strong>Critical leadership hires:</strong> Bringing on dedicated commercial executives, domain leads, and deployment engineers to institutionalize the enterprise sales motion.</td></tr>
 </tbody></table></div>
-<p><strong>Conclusion</strong></p>
+<div class="memo-conclusion"><h4>Conclusion</h4>
 <p>Shodh has already completed the hardest part of the physical AI journey: we have proven that a computational foundation model can predictably manipulate and improve outcomes in a physical factory. The core science is real, and the customer pull is immediate. With this $55M financing, Shodh will transition from a proven scientific breakthrough into the dominant, scalable intelligence platform for the global physical economy.</p>
 <div class="section-rule"></div>
+</div>
 </section></article>
     <footer class="print-footer"><span>Shodh AI · Investor memo</span><span>Confidential</span></footer>
   </main>

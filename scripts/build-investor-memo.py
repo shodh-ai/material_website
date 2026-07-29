@@ -11,6 +11,113 @@ OUTPUT_DIR = ROOT / "public" / "investor-memo"
 OUTPUT = OUTPUT_DIR / "index.html"
 
 
+def cover_page() -> str:
+    return """
+    <section class="memo-cover" aria-label="Shodh confidential investment memorandum cover">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="memo-cover-top">
+        <img src="/shodh-new/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI">
+        <span>Confidential</span>
+      </div>
+      <div class="memo-cover-image">
+        <img src="/pitch-tomorrow/assets/orbit/pexels-cang-hai-2894404-4440227_gm_optimized.jpeg" alt="Industrial process equipment">
+      </div>
+      <div class="memo-cover-title">
+        <strong>SHODH</strong>
+        <h1>THE FOUNDATION MODEL<br>FOR PHYSICAL INTELLIGENCE</h1>
+        <p>From molecule to factory</p>
+      </div>
+      <div class="memo-cover-meta">
+        <span>CONFIDENTIAL INVESTMENT MEMORANDUM</span>
+        <strong>$55M EQUITY FINANCING</strong>
+        <span>JULY 2026</span>
+      </div>
+    </section>
+    """.strip()
+
+
+def executive_summary_visual() -> str:
+    return """
+    <section class="executive-spread executive-opener" aria-label="Executive Summary">
+      <div class="executive-opener-paper">
+        <p class="executive-proof"><strong>In recent prospective industrial validations, Shodh’s uniform physics model compressed a 3-month physical formulation test into 24 hours of computation for a global CRO, and successfully improved chemical factory yield from 82.4% to 96.7% on a mathematically locked run.</strong></p>
+        <div class="executive-opener-title">
+          <span>01 / INVESTMENT MEMORANDUM</span>
+          <h2>Executive<br>Summary</h2>
+        </div>
+      </div>
+      <div class="executive-opener-atmosphere">
+        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+        <span class="executive-side-label">UNIFORM PHYSICS WORLD MODEL</span>
+        <div class="executive-mark">
+          <span>MOLECULE</span>
+          <b>→</b>
+          <span>FACTORY</span>
+        </div>
+        <small>01</small>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-narrative" aria-label="The industrialisation gap and Shodh">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="executive-narrative-heading">
+        <span>THE INDUSTRIALISATION GAP</span>
+        <h2>A common intelligence layer for the physical economy.</h2>
+      </div>
+      <div class="executive-narrative-panel">
+        <p>While billions of dollars have been invested in "Discovery AI" to invent new digital molecules, and "Engineering AI" to optimise finished downstream machines, the physical economy remains bottlenecked by a massive, multi-trillion-dollar void in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecular discovery into a mass-produced physical reality requires surviving formulation stability, chemical route redesign, and factory scale-up. Historically, this entire lifecycle has been a fragmented sequence of expensive, manual physical trial and error.</p>
+        <p>Shodh is a frontier foundation model for physical intelligence built to eliminate this bottleneck. Rather than building bespoke simulations for individual domains, Shodh operates a <strong>Uniform Physics World Model</strong> capable of true multi-scale, cross-domain inverse design. Whether calculating the thermodynamic degradation of a molecule or the fluid dynamics of a 10,000-litre factory vessel, Shodh computationally generates the physical parameters required to achieve a targeted industrial outcome.</p>
+        <p>To commercialise this intelligence layer, Shodh delivers the model through two enterprise modules:</p>
+      </div>
+      <div class="executive-narrative-footer">
+        <p>Having validated the platform across multiple physical scales, and having already secured paid pilots structured for automated conversion into six-figure enterprise SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This round funds the compute required to ride our empirically proven scaling laws, transitioning the company from a proven scientific breakthrough into the dominant intelligence platform for the physical economy.</p>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-modules" aria-label="Shodh Scale and Shodh Synth">
+      <div class="executive-module executive-module-scale">
+        <div class="executive-module-copy">
+          <span>SHODH SCALE / FACTORY INTELLIGENCE</span>
+          <h2>SHODH<br>SCALE</h2>
+          <p><strong>Shodh SCALE:</strong> The recurring-revenue foundation. A factory and formulation deployment that optimises existing processes, capturing a "SaaS floor" base license (e.g., $250K–$500K/year) plus a capped gain-share on the verified economic value created.</p>
+        </div>
+      </div>
+      <div class="executive-module executive-module-synth">
+        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+        <span>SHODH SYNTH / PROCESS INTELLIGENCE</span>
+        <div class="executive-module-icon">⌬</div>
+        <h2>SHODH<br>SYNTH</h2>
+        <p><strong>Shodh SYNTH:</strong> The step-change upside. A process-invention capability that computationally redesigns entire chemical and biological manufacturing routes, yielding massive milestone payouts and selective process-IP royalties.</p>
+        <small>ONE PLATFORM · TWO ENTERPRISE MODULES</small>
+      </div>
+    </section>
+
+    <section class="executive-spread executive-case" aria-label="Investment Case at a Glance">
+      <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
+      <div class="executive-case-heading">
+        <span>INVESTMENT CASE AT A GLANCE</span>
+        <h2>Proven today.<br>Built to generalise.</h2>
+      </div>
+      <div class="executive-case-grid">
+        <div class="executive-case-column">
+          <h3>Proven Today</h3>
+          <div class="executive-case-card"><strong>Multi-Scale Physical Results:</strong> Prospective factory scale-up (Aarti Industries: +14.3 pts in yield) and zero-day formulation prediction (Syngene: matching 3-month wet-lab data in 24 hours).</div>
+          <div class="executive-case-card"><strong>Commercial Traction:</strong> Paid validations actively converting to $250,000/year recurring enterprise site licenses.</div>
+          <div class="executive-case-card"><strong>Frontier Technology:</strong> Core Uniform Physics World Model built, with proven empirical power-law scaling capability.</div>
+          <div class="executive-case-card"><strong>Customer Pull:</strong> 9 active/scoped programmes across pharma, specialty chemicals, biologics, and aerospace.</div>
+        </div>
+        <div class="executive-case-column executive-case-column-dark">
+          <h3>What This Round Establishes</h3>
+          <div class="executive-case-card"><strong>Generalisation:</strong> Repeatability across expanded process classes via dozens of parallel physical validations.</div>
+          <div class="executive-case-card"><strong>Capability Unlocks:</strong> Scaling H100/B200 compute infrastructure to enable zero-shot transfer across unseen domains.</div>
+          <div class="executive-case-card"><strong>Software Margins:</strong> Declining human adaptation effort and computational hours per new programme.</div>
+          <div class="executive-case-card"><strong>Commercial Scale:</strong> Repeatable private SCALE deployments and a scalable organisation with dedicated commercial leadership.</div>
+        </div>
+      </div>
+    </section>
+    """.strip()
+
+
 def unescape_markdown(value: str) -> str:
     return re.sub(r"\\([\\`*{}\[\]()#+\-.!><~&$])", r"\1", value)
 
@@ -183,7 +290,9 @@ def render_markdown(source: str) -> str:
     i = 0
     list_open = False
     section_open = False
+    group_open = False
     section_index = 0
+    subsection_index = 0
 
     def close_list() -> None:
         nonlocal list_open
@@ -193,9 +302,16 @@ def render_markdown(source: str) -> str:
 
     def close_section() -> None:
         nonlocal section_open
+        close_group()
         if section_open:
             out.append("</section>")
             section_open = False
+
+    def close_group() -> None:
+        nonlocal group_open
+        if group_open:
+            out.append("</div>")
+            group_open = False
 
     while i < len(lines):
         raw = lines[i].rstrip()
@@ -254,12 +370,29 @@ def render_markdown(source: str) -> str:
                 number, title = numbered_section.groups()
                 tag = "h2"
                 title = f"{number}. {title}"
+            if tag == "h2" and title == "1. Executive Summary":
+                close_section()
+                section_index += 1
+                out.append(executive_summary_visual())
+                i += 1
+                while i < len(lines):
+                    candidate = unescape_markdown(lines[i].strip())
+                    if re.match(r"^2\.\s+The Industrial Scale-Up Gap", candidate):
+                        break
+                    i += 1
+                continue
             if tag == "h2":
                 close_section()
                 section_index += 1
+                subsection_index = 0
                 tone = ("atmosphere", "paper", "split", "paper", "deep")[(section_index - 1) % 5]
                 out.append(f'<section class="memo-section memo-section-{section_index} tone-{tone}">')
                 section_open = True
+            elif tag == "h3":
+                close_group()
+                subsection_index += 1
+                out.append(f'<div class="memo-subsection memo-subsection-{subsection_index}">')
+                group_open = True
             out.append(f'<{tag} class="memo-heading">{inline_markup(title)}</{tag}>')
             i += 1
             continue
@@ -267,7 +400,20 @@ def render_markdown(source: str) -> str:
         if value in SPECIAL_HEADINGS:
             close_list()
             tag = "h4" if value not in {"Inputs", "Outputs"} else "h5"
+            if tag == "h4":
+                close_group()
+                subsection_index += 1
+                out.append(f'<div class="memo-topic memo-topic-{subsection_index}">')
+                group_open = True
             out.append(f"<{tag}>{inline_markup(value)}</{tag}>")
+            i += 1
+            continue
+
+        if value == "**Conclusion**":
+            close_list()
+            close_group()
+            out.append('<div class="memo-conclusion"><h4>Conclusion</h4>')
+            group_open = True
             i += 1
             continue
 
@@ -277,7 +423,7 @@ def render_markdown(source: str) -> str:
             i += 1
             continue
 
-        bullet = re.match(r"^\*\s+(.*)$", value)
+        bullet = re.match(r"^[*-]\s+(.*)$", value)
         if bullet:
             if not list_open:
                 out.append("<ul>")
@@ -300,6 +446,8 @@ def render_markdown(source: str) -> str:
 
         if value == "This is the scale-up gap.":
             out.append(valley_visual())
+            out.append('<div class="post-valley-essay">')
+            group_open = True
         elif value == "Quantified uncertainty around the recommendation.":
             out.append(io_visual())
         elif value == "SCALE makes existing production more intelligent. SYNTH designs the processes industry should run next.":
@@ -1010,6 +1158,127 @@ th { background: var(--navy); }
   text-transform: uppercase;
 }
 
+/* Image-led A4 cover derived from the pitch opening */
+.memo-brand { display: none; }
+.memo-cover {
+  position: relative;
+  height: 260mm;
+  margin: 0 -10mm 12mm;
+  overflow: hidden;
+  border-radius: 8mm;
+  background:
+    linear-gradient(135deg, rgba(217,233,248,.18), rgba(91,141,190,.18)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: var(--navy);
+  box-shadow: 0 7mm 20mm rgba(0,0,66,.14);
+  break-after: page;
+  page-break-after: always;
+}
+.memo-cover-top {
+  position: absolute;
+  top: 12mm;
+  left: 12mm;
+  right: 12mm;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.memo-cover-top img {
+  width: 9mm;
+  filter: invert(1);
+}
+.memo-cover-top span {
+  padding: 2mm 4mm;
+  border: 1px solid rgba(0,0,66,.26);
+  border-radius: 999px;
+  font-size: 6.7pt;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.memo-cover-image {
+  position: absolute;
+  top: 48mm;
+  right: 0;
+  width: 72%;
+  height: 128mm;
+  overflow: hidden;
+  border-radius: 2mm 0 0 2mm;
+  box-shadow: 0 8mm 22mm rgba(0,0,45,.22);
+}
+.memo-cover-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,50,.18), transparent 34%, rgba(0,0,28,.08));
+}
+.memo-cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% center;
+}
+.memo-cover-title {
+  position: absolute;
+  top: 36mm;
+  left: 12mm;
+  right: 10mm;
+  z-index: 2;
+}
+.memo-cover-title > strong {
+  display: block;
+  margin-bottom: 13mm;
+  font-size: 11pt;
+  letter-spacing: .22em;
+}
+.memo-cover-title h1 {
+  max-width: 176mm;
+  margin: 0;
+  color: #f7f8ff;
+  font-size: 35pt;
+  font-weight: 560;
+  line-height: .96;
+  letter-spacing: -.045em;
+  text-shadow: 0 2mm 7mm rgba(0,0,45,.50);
+}
+.memo-cover-title p {
+  position: absolute;
+  top: 141mm;
+  right: 1mm;
+  margin: 0;
+  color: #fff;
+  font-size: 17pt;
+  font-weight: 560;
+  letter-spacing: -.025em;
+  text-shadow: 0 2mm 6mm rgba(0,0,45,.52);
+}
+.memo-cover-meta {
+  position: absolute;
+  left: 12mm;
+  right: 12mm;
+  bottom: 14mm;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  align-items: end;
+  gap: 6mm;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(0,0,66,.22);
+}
+.memo-cover-meta span,
+.memo-cover-meta strong {
+  color: var(--navy);
+  font-size: 7pt;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.memo-cover-meta strong {
+  font-size: 9pt;
+  letter-spacing: .08em;
+}
+
 /* Alternating editorial rhythm inspired by the pitch deck */
 .memo-content {
   display: block;
@@ -1025,7 +1294,10 @@ th { background: var(--navy); }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-.memo-section:first-child {
+.memo-content > .section-rule:first-child {
+  display: none;
+}
+.memo-content > .memo-section:first-of-type {
   break-before: auto;
   page-break-before: auto;
 }
@@ -1039,16 +1311,16 @@ th { background: var(--navy); }
   line-height: 1;
   letter-spacing: -.06em;
 }
-.memo-section-1::after { content: "02"; }
-.memo-section-2::after { content: "03"; }
-.memo-section-3::after { content: "04"; }
-.memo-section-4::after { content: "05"; }
-.memo-section-5::after { content: "06"; }
-.memo-section-6::after { content: "07"; }
-.memo-section-7::after { content: "08"; }
-.memo-section-8::after { content: "09"; }
-.memo-section-9::after { content: "10"; }
-.memo-section-10::after { content: "11"; }
+.memo-section-1::after { content: "01"; }
+.memo-section-2::after { content: "02"; }
+.memo-section-3::after { content: "03"; }
+.memo-section-4::after { content: "04"; }
+.memo-section-5::after { content: "05"; }
+.memo-section-6::after { content: "06"; }
+.memo-section-7::after { content: "07"; }
+.memo-section-8::after { content: "08"; }
+.memo-section-9::after { content: "09"; }
+.memo-section-10::after { content: "10"; }
 
 .tone-paper {
   background: rgba(255,255,255,.96);
@@ -1126,6 +1398,33 @@ th { background: var(--navy); }
   font-size: 11.6pt;
   line-height: 1.48;
 }
+.memo-section-1 {
+  font-size: 9.1pt;
+  line-height: 1.42;
+}
+.memo-section-1 h2.memo-heading {
+  margin-bottom: 6mm;
+  font-size: 28pt;
+}
+.memo-section-1 h3.memo-heading {
+  margin-top: 6mm;
+  margin-bottom: 2.5mm;
+  padding-top: 3mm;
+  font-size: 15.5pt;
+}
+.memo-section-1 > p:first-of-type {
+  font-size: 10.4pt;
+  line-height: 1.4;
+}
+.memo-section-1 p {
+  margin-bottom: 2.4mm;
+}
+.memo-section-1 ul {
+  margin-bottom: 2.5mm;
+}
+.memo-section-1 li {
+  margin-bottom: 1.2mm;
+}
 .tone-paper > p,
 .tone-paper > ul,
 .tone-paper > blockquote {
@@ -1185,6 +1484,852 @@ th { background: var(--navy); }
 .io-visual .io-card,
 .io-visual .io-core { border-radius: 0; }
 
+/* Reference-led Executive Summary prototype */
+.memo-page-snapshot {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 0;
+  display: block;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+.memo-cover > *:not(.memo-page-snapshot),
+.executive-spread > *:not(.memo-page-snapshot),
+.executive-opener-atmosphere > *:not(.memo-page-snapshot),
+.executive-module-synth > *:not(.memo-page-snapshot) {
+  z-index: 1;
+}
+.executive-module-synth > *:not(.memo-page-snapshot) { position: relative; }
+.memo-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,255,255,.18), transparent 26%),
+    linear-gradient(135deg, rgba(173,207,236,.06), rgba(17,66,110,.12));
+  pointer-events: none;
+}
+.memo-cover > *:not(.memo-page-snapshot) { z-index: 2; }
+
+.executive-spread {
+  position: relative;
+  width: 100%;
+  height: 262mm;
+  overflow: hidden;
+  color: var(--navy);
+  background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+  break-before: page;
+  break-after: page;
+  break-inside: avoid;
+  page-break-before: always;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+.executive-spread h2,
+.executive-spread h3,
+.executive-spread p {
+  margin: 0;
+  max-width: none;
+}
+.executive-opener {
+  display: grid;
+  grid-template-columns: 49% 51%;
+  background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+}
+.executive-opener-paper {
+  position: relative;
+  z-index: 2;
+  padding: 15mm 10mm 13mm 12mm;
+  background: #fff;
+}
+.executive-proof {
+  max-width: 66mm !important;
+  font-size: 10.2pt;
+  font-weight: 500;
+  line-height: 1.58;
+  letter-spacing: -.015em;
+}
+.executive-proof strong {
+  color: var(--navy);
+  font-weight: 520;
+}
+.executive-opener-title {
+  position: absolute;
+  left: 12mm;
+  right: 8mm;
+  bottom: 18mm;
+}
+.executive-opener-title span,
+.executive-side-label,
+.executive-module > span,
+.executive-module-copy > span,
+.executive-narrative-heading > span,
+.executive-case-heading > span {
+  display: block;
+  color: rgba(0,0,66,.62);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+}
+.executive-opener-title h2 {
+  margin-top: 6mm;
+  font-size: 35pt;
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+.executive-opener-atmosphere {
+  position: relative;
+  overflow: hidden;
+}
+.executive-opener-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(155deg, rgba(255,255,255,.04), rgba(47,100,149,.11));
+}
+.executive-side-label {
+  position: absolute !important;
+  top: 16mm;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.executive-mark {
+  position: absolute !important;
+  top: 47%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 3mm;
+  transform: translate(-50%,-50%);
+  color: var(--navy);
+}
+.executive-mark span {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+.executive-mark b {
+  font-size: 18pt;
+  font-weight: 400;
+}
+.executive-opener-atmosphere small {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31mm;
+  padding-top: 16mm;
+  background: rgba(213,228,244,.78);
+  color: var(--navy);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-align: center;
+}
+
+.executive-narrative {
+  padding: 15mm 12mm 13mm;
+}
+.executive-narrative::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(74,125,174,.08)),
+    radial-gradient(circle at 74% 16%, rgba(255,255,255,.16), transparent 27%);
+}
+.executive-narrative-heading {
+  position: relative;
+  z-index: 2;
+  width: 126mm;
+  margin-bottom: 10mm;
+}
+.executive-narrative-heading h2 {
+  margin-top: 5mm;
+  font-size: 28pt;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -.05em;
+}
+.executive-narrative-panel {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr .64fr;
+  gap: 7mm;
+  min-height: 112mm;
+  padding: 9mm;
+  border-radius: 8mm;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.10);
+}
+.executive-narrative-panel p {
+  font-size: 8.5pt;
+  line-height: 1.55;
+}
+.executive-narrative-panel p:last-child {
+  align-self: end;
+  color: rgba(0,0,66,.58);
+  font-size: 8pt;
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.executive-narrative-footer {
+  position: relative;
+  z-index: 2;
+  margin: 7mm 0 0 39mm;
+  padding: 6mm 7mm;
+  border-radius: 6mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.88);
+}
+.executive-narrative-footer p {
+  font-size: 8.3pt;
+  line-height: 1.5;
+}
+.executive-narrative-footer strong { color: #fff; }
+
+.executive-modules {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: #fff;
+}
+.executive-module {
+  position: relative;
+  overflow: hidden;
+}
+.executive-module-scale {
+  display: flex;
+  align-items: flex-end;
+  padding: 14mm 11mm 18mm 12mm;
+  background: #fff;
+}
+.executive-module-copy > span { margin-bottom: 7mm; }
+.executive-module h2 {
+  font-size: 34pt;
+  font-weight: 500;
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+.executive-module p {
+  margin-top: 11mm;
+  font-size: 9.1pt;
+  line-height: 1.55;
+}
+.executive-module-synth {
+  padding: 15mm 10mm 14mm;
+}
+.executive-module-synth::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(51,103,151,.09));
+}
+.executive-module-synth > span { text-align: center; }
+.executive-module-icon {
+  display: grid;
+  width: 31mm;
+  height: 31mm;
+  margin: 69mm auto 0;
+  place-items: center;
+  border-radius: 9mm;
+  background: rgba(255,255,255,.84);
+  color: var(--navy);
+  font-size: 27pt;
+  box-shadow: 0 4mm 9mm rgba(0,0,66,.10);
+}
+.executive-module-synth h2 {
+  margin-top: 25mm;
+}
+.executive-module-synth p {
+  margin-top: 7mm;
+}
+.executive-module-synth small {
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31mm;
+  padding-top: 15mm;
+  background: rgba(213,228,244,.78);
+  color: var(--navy);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-align: center;
+}
+
+.executive-case {
+  padding: 15mm 12mm 12mm;
+}
+.executive-case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(150deg, rgba(255,255,255,.08), rgba(46,99,148,.08));
+}
+.executive-case-heading {
+  position: relative;
+  z-index: 2;
+  width: 132mm;
+  margin-bottom: 8mm;
+}
+.executive-case-heading h2 {
+  margin-top: 5mm;
+  font-size: 27pt;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.executive-case-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+}
+.executive-case-column {
+  min-height: 176mm;
+  padding: 7mm;
+  border-radius: 8mm;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.09);
+}
+.executive-case-column h3 {
+  margin-bottom: 6mm;
+  font-size: 14pt;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.executive-case-card {
+  padding: 5mm 0;
+  border-top: 1px solid rgba(0,0,66,.13);
+  font-size: 8.4pt;
+  line-height: 1.48;
+}
+.executive-case-card strong {
+  display: block;
+  margin-bottom: 1mm;
+}
+.executive-case-column-dark {
+  background: var(--navy);
+  color: rgba(255,255,255,.82);
+}
+.executive-case-column-dark h3,
+.executive-case-column-dark strong {
+  color: #fff;
+}
+.executive-case-column-dark .executive-case-card {
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Whole-memo editorial pagination */
+.memo-section {
+  font-size: 9.45pt;
+  line-height: 1.52;
+}
+.memo-section > h2.memo-heading {
+  max-width: 148mm;
+  margin-bottom: 9mm;
+  padding-top: 3mm;
+  font-size: 31pt;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.052em;
+}
+.memo-section > h2.memo-heading::before {
+  margin-bottom: 6mm;
+}
+.memo-section > p:first-of-type {
+  max-width: 148mm;
+  font-size: 11.2pt;
+  line-height: 1.5;
+}
+.memo-subsection,
+.memo-topic {
+  position: relative;
+  margin: 7mm 0;
+  padding: 7mm;
+  border-radius: 7mm;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.08);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.memo-subsection h3.memo-heading,
+.memo-topic h4 {
+  margin: 0 0 4mm;
+  padding: 0 0 3mm;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0,0,66,.14);
+  font-size: 17.5pt;
+  font-weight: 540;
+  line-height: 1.08;
+}
+.memo-subsection p,
+.memo-topic p {
+  max-width: none;
+}
+.memo-subsection ul,
+.memo-topic ul {
+  margin-top: 3mm;
+}
+.memo-subsection li,
+.memo-topic li {
+  margin-bottom: 2.2mm;
+}
+.memo-subsection .memo-visual,
+.memo-topic .memo-visual {
+  margin-left: 0;
+  margin-right: 0;
+}
+.tone-split {
+  padding-right: 10mm;
+}
+.tone-split::before { display: none; }
+
+/* 02 · Gap — market map, limitation, inverse opportunity */
+.memo-section-2 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-2 > p:nth-of-type(4) {
+  margin: 7mm 0;
+  padding: 7mm 8mm;
+  border-radius: 7mm;
+  background: var(--navy);
+  color: #fff;
+  font-size: 15.5pt;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.13);
+}
+.memo-section-2 .memo-pitch-valley {
+  height: 102mm;
+}
+.memo-section-2 .post-valley-essay {
+  min-height: 205mm;
+  margin: 8mm 0;
+  padding: 12mm 62mm 12mm 11mm;
+  border-radius: 8mm;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.96) 0 66%, rgba(204,224,243,.88) 66%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  box-shadow: 0 5mm 12mm rgba(0,0,66,.09);
+  break-before: page;
+  break-inside: avoid;
+  page-break-before: always;
+  page-break-inside: avoid;
+}
+.memo-section-2 .post-valley-essay p {
+  max-width: none;
+}
+.memo-section-2 .memo-topic {
+  min-height: 112mm;
+  padding: 10mm;
+}
+.memo-section-2 .memo-topic-1 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.95) 0 63%, rgba(214,229,245,.88) 63%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-2 .memo-topic-1 > * {
+  max-width: 97mm;
+}
+.memo-section-2 .memo-topic-2 {
+  min-height: 222mm;
+  background:
+    linear-gradient(145deg, rgba(1,8,35,.97), rgba(25,68,108,.92)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-2 .memo-topic-2 h4,
+.memo-section-2 .memo-topic-2 strong { color: #fff; }
+.memo-section-2 .memo-topic-2 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-2 .memo-topic-2 li::before { background: #fff; }
+.memo-section-2 .memo-topic-2 .pull-quote {
+  background: rgba(255,255,255,.94) !important;
+  color: var(--navy);
+}
+
+/* 03 · Product — one opening essay, then three distinct capability pages */
+.memo-section-3 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 71%, rgba(10,31,59,.96) 71%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 > h2,
+.memo-section-3 > p {
+  max-width: 118mm !important;
+}
+.memo-section-3 .memo-topic {
+  min-height: 183mm;
+  padding: 10mm;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-3 .memo-topic-1 {
+  min-height: 164mm;
+  padding: 8mm;
+  font-size: 8.65pt;
+  line-height: 1.42;
+  background:
+    linear-gradient(135deg, rgba(217,232,247,.22), rgba(92,142,190,.12)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 .memo-topic-1 h5 {
+  margin-top: 7mm;
+}
+.memo-section-3 .memo-topic-1 .io-visual {
+  margin-top: 6mm;
+  margin-bottom: 5mm;
+}
+.memo-section-3 .memo-topic-1 .io-core {
+  min-height: 40mm;
+}
+.memo-section-3 .memo-topic-2 {
+  min-height: 222mm;
+  padding-right: 58mm;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 68%, rgba(213,229,246,.92) 68%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-3 .memo-topic-2::after {
+  content: "SCALE";
+  position: absolute;
+  right: 10mm;
+  bottom: 11mm;
+  color: rgba(0,0,66,.12);
+  font-size: 35pt;
+  font-weight: 600;
+  writing-mode: vertical-rl;
+}
+.memo-section-3 .memo-topic-3 {
+  background:
+    linear-gradient(145deg, rgba(1,8,35,.98), rgba(29,70,110,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-3 .memo-topic-3 h4,
+.memo-section-3 .memo-topic-3 strong { color: #fff; }
+.memo-section-3 .memo-topic-3 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-3 .memo-topic-3 .product-visual {
+  color: var(--navy);
+}
+
+/* 04 · Evidence — proof sequence in paired editorial cards */
+.memo-section-4 {
+  background:
+    linear-gradient(135deg, rgba(216,232,248,.88), rgba(165,199,229,.79)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-4 .memo-subsection {
+  min-height: 76mm;
+}
+.memo-section-4 .memo-subsection:nth-of-type(even) {
+  background:
+    linear-gradient(135deg, rgba(213,230,247,.90), rgba(178,207,234,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-4 .memo-subsection-2 {
+  min-height: 150mm;
+  background: rgba(255,255,255,.92);
+}
+.memo-section-4 .memo-subsection-3,
+.memo-section-4 .memo-subsection-5 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-4 .memo-subsection.memo-subsection-4 {
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-4 .memo-subsection-4 h3,
+.memo-section-4 .memo-subsection-4 strong { color: #fff; }
+.memo-section-4 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-4 .memo-subsection-4 li::before { background: #fff; }
+.memo-section-4 .memo-subsection-5,
+.memo-section-4 .memo-subsection-6 {
+  min-height: 98mm;
+}
+
+/* 05 · Technology — light atmospheric foundation with selective navy depth */
+.memo-section-5 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.90), rgba(152,190,224,.80)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: var(--ink);
+}
+.memo-section-5 > h2,
+.memo-section-5 > h2::before,
+.memo-section-5 > p,
+.memo-section-5 strong { color: var(--navy); }
+.memo-section-5 .memo-subsection {
+  min-height: 86mm;
+}
+.memo-section-5 .memo-subsection-3,
+.memo-section-5 .memo-subsection-5 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-5 .memo-subsection-3 {
+  min-height: 151mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-5 .memo-subsection-3 h3,
+.memo-section-5 .memo-subsection-3 strong { color: #fff; }
+.memo-section-5 .memo-subsection-3 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-5 .memo-subsection-3 li::before { background: #fff; }
+.memo-section-5 .memo-subsection-5 {
+  min-height: 222mm;
+  padding: 12mm;
+  background: rgba(255,255,255,.91);
+}
+
+/* 06 · Commercial model — white economics pages plus a market construction spread */
+.memo-section-6 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-6 .memo-subsection {
+  min-height: 71mm;
+}
+.memo-section-6 .memo-subsection-1,
+.memo-section-6 .memo-subsection-3 {
+  background:
+    linear-gradient(135deg, rgba(216,232,248,.88), rgba(174,205,233,.78)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-6 .memo-subsection-3 {
+  min-height: 222mm;
+  padding: 12mm;
+}
+.memo-section-6 .memo-subsection-4 {
+  min-height: 222mm;
+  break-before: page;
+  page-break-before: always;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-6 .memo-subsection-4 h3,
+.memo-section-6 .memo-subsection-4 strong { color: #fff; }
+.memo-section-6 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-6 .memo-subsection-4 blockquote {
+  margin-top: 10mm;
+  background: rgba(255,255,255,.94);
+  color: var(--navy);
+}
+.memo-section-6 .memo-subsection-4 blockquote strong { color: var(--navy); }
+.memo-section-6 .memo-subsection-5 {
+  min-height: 134mm;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.84);
+}
+.memo-section-6 .memo-subsection-5 h3,
+.memo-section-6 .memo-subsection-5 strong { color: #fff; }
+.memo-section-6 .memo-subsection-5 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-6 .memo-subsection-5 li::before { background: #fff; }
+.memo-section-6 .memo-subsection-5 .market-visual {
+  color: var(--navy);
+}
+
+/* 07 · Team — an editorial organisation page and an advisory page */
+.memo-section-7 {
+  background:
+    linear-gradient(rgba(255,255,255,.96), rgba(255,255,255,.96)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-7 .memo-subsection {
+  min-height: 81mm;
+}
+.memo-section-7 .memo-subsection-1 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.89), rgba(165,199,229,.78)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-7 .memo-subsection-3 {
+  min-height: 106mm;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-7 .memo-subsection-4 {
+  min-height: 151mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-7 .memo-subsection-4 h3,
+.memo-section-7 .memo-subsection-4 strong { color: #fff; }
+.memo-section-7 .memo-subsection-4 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-7 .memo-subsection-4 li::before { background: #fff; }
+.memo-section-7 .memo-subsection-5 {
+  min-height: 222mm;
+  padding: 11mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(170,202,231,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+
+/* 08 · Round — capital architecture, milestones and downside protection */
+.memo-section-8 {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.97) 0 72%, rgba(10,31,59,.96) 72%),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 > h2,
+.memo-section-8 > p { max-width: 119mm !important; }
+.memo-section-8 .memo-subsection {
+  min-height: 73mm;
+}
+.memo-section-8 .memo-subsection-1 {
+  background:
+    linear-gradient(135deg, rgba(215,231,247,.92), rgba(171,203,232,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-3 blockquote {
+  background: var(--navy);
+  color: #fff;
+}
+.memo-section-8 .memo-subsection-3 {
+  min-height: 222mm;
+  padding: 12mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(164,198,229,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-3 blockquote {
+  margin-top: 24mm;
+  padding: 12mm;
+  font-size: 13pt;
+  line-height: 1.5;
+}
+.memo-section-8 .memo-subsection-3 blockquote strong { color: #fff; }
+.memo-section-8 .memo-subsection-4,
+.memo-section-8 .memo-subsection-7 {
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-8 .memo-subsection-5 {
+  min-height: 164mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.84);
+}
+.memo-section-8 .memo-subsection-6 {
+  min-height: 222mm;
+  padding: 12mm;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(164,198,229,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+.memo-section-8 .memo-subsection-5 h3,
+.memo-section-8 .memo-subsection-5 strong { color: #fff; }
+.memo-section-8 .memo-subsection-5 h3 { border-color: rgba(255,255,255,.18); }
+.memo-section-8 .memo-subsection-5 li::before { background: #fff; }
+.memo-section-8 .memo-subsection-7,
+.memo-section-8 .memo-subsection-8 {
+  min-height: 106mm;
+}
+.memo-section-8 .memo-subsection-8 {
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(170,202,231,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+}
+
+/* 09 · Risk — underwriting table with a strong close */
+.memo-section-9 {
+  background: rgba(255,255,255,.97);
+}
+.memo-section-9 .table-wrap {
+  margin: 10mm 0;
+  border-radius: 5mm;
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.10);
+  break-inside: auto;
+  page-break-inside: auto;
+}
+.memo-section-9 table {
+  table-layout: auto;
+}
+.memo-section-9 thead {
+  display: table-header-group;
+}
+.memo-section-9 tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.memo-section-9 th,
+.memo-section-9 td {
+  padding: 3mm;
+  font-size: 6.7pt;
+  line-height: 1.34;
+}
+.memo-section-9 > p:last-of-type {
+  margin-top: 10mm;
+  padding: 11mm;
+  border-radius: 8mm;
+  background:
+    linear-gradient(145deg, rgba(1,9,35,.97), rgba(28,69,108,.93)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  color: rgba(255,255,255,.88);
+  font-size: 12pt;
+  line-height: 1.52;
+}
+.memo-section-9 > p:last-of-type strong { color: #fff; }
+.memo-section-9 .memo-conclusion {
+  min-height: 222mm;
+  padding: 14mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(214,230,247,.92), rgba(157,193,226,.82)),
+    url("/webgl-bg-foundation-v2.png") center / cover;
+  break-before: page;
+  page-break-before: always;
+}
+.memo-section-9 .memo-conclusion h4 {
+  margin-bottom: 12mm;
+  border: 0;
+  font-size: 31pt;
+  font-weight: 500;
+  letter-spacing: -.05em;
+}
+.memo-section-9 .memo-conclusion p {
+  padding: 10mm;
+  border-radius: 7mm;
+  background: var(--navy);
+  color: rgba(255,255,255,.88);
+  font-size: 12pt;
+  line-height: 1.5;
+}
+.memo-section-9 .memo-conclusion p strong { color: #fff; }
+
 @media print {
   html, body {
     background: #bfd3eb !important;
@@ -1200,6 +2345,49 @@ th { background: var(--navy); }
       radial-gradient(circle at 76% 82%, rgba(83,131,181,.18), transparent 36%) !important;
   }
   .memo-shell { padding: 0; }
+  .executive-spread {
+    width: 178mm;
+    height: 262mm;
+  }
+  .memo-page-snapshot {
+    display: block !important;
+  }
+  .memo-section {
+    font-size: 9.2pt;
+    line-height: 1.48;
+  }
+  .memo-subsection,
+  .memo-topic {
+    box-shadow: none;
+  }
+  .memo-section-5 {
+    background:
+      linear-gradient(135deg, rgba(215,231,247,.92), rgba(152,190,224,.84)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-5 > h2,
+  .memo-section-5 > h2::before,
+  .memo-section-5 > p {
+    color: #fff !important;
+  }
+  .memo-section-4 {
+    background:
+      linear-gradient(135deg, rgba(216,232,248,.91), rgba(165,199,229,.83)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 {
+    background:
+      linear-gradient(145deg, rgba(1,9,35,.98), rgba(28,69,108,.95)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 blockquote {
+    background: rgba(255,255,255,.94) !important;
+    color: var(--navy) !important;
+  }
+  .memo-section-8 .memo-subsection-3 blockquote {
+    background: var(--navy) !important;
+    color: #fff !important;
+  }
   h2.memo-heading {
     padding-top: 9mm;
     font-size: 32pt;
@@ -1219,6 +2407,12 @@ th { background: var(--navy); }
     border-radius: 0;
     box-shadow: none;
   }
+  .memo-cover {
+    height: 262mm;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
   .memo-section h2.memo-heading {
     padding-top: 1mm;
   }
@@ -1234,6 +2428,24 @@ th { background: var(--navy); }
     background:
       linear-gradient(135deg, rgba(1,10,28,.98), rgba(34,76,116,.94)),
       url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-4 {
+    background:
+      linear-gradient(135deg, rgba(216,232,248,.91), rgba(165,199,229,.83)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 {
+    background:
+      linear-gradient(145deg, rgba(1,9,35,.98), rgba(28,69,108,.95)),
+      url("/webgl-bg-foundation-v2.png") center / cover !important;
+  }
+  .memo-section-6 .memo-subsection-4 blockquote {
+    background: rgba(255,255,255,.94) !important;
+    color: var(--navy) !important;
+  }
+  .memo-section-8 .memo-subsection-3 blockquote {
+    background: var(--navy) !important;
+    color: #fff !important;
   }
 }
 """
@@ -1261,6 +2473,7 @@ def build() -> None:
       <img src="/shodh-new/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI">
       <span>Investor memo</span>
     </div>
+    {cover_page()}
     <article class="memo-content">{content}</article>
     <footer class="print-footer"><span>Shodh AI · Investor memo</span><span>Confidential</span></footer>
   </main>
