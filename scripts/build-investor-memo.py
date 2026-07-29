@@ -481,13 +481,11 @@ CSS = r"""
 }
 
 * { box-sizing: border-box; }
-html { background: #aebfd8; }
+html { background: #bfd3eb; }
 body {
   margin: 0;
   color: var(--ink);
-  background:
-    linear-gradient(rgba(200, 216, 239, .88), rgba(200, 216, 239, .88)),
-    url("/webgl-bg-foundation-v2.png") center top / cover fixed;
+  background: #bfd3eb;
   font-family: "Syne", Arial, sans-serif;
   font-size: 10.1pt;
   line-height: 1.52;
@@ -864,7 +862,7 @@ th {
 
 /* Foundation Model Bio editorial system */
 body {
-  background: #bfd3eb url("/webgl-bg-foundation-v2.png") center top / cover fixed;
+  background: #bfd3eb;
   color: #080846;
   font-size: 10.25pt;
   line-height: 1.55;
@@ -874,9 +872,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background:
-    linear-gradient(115deg, rgba(216,232,248,.18), rgba(110,154,198,.12)),
-    url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+  display: none;
 }
 body::after {
   content: "";
@@ -884,9 +880,7 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 18% 15%, rgba(255,255,255,.22), transparent 28%),
-    radial-gradient(circle at 76% 82%, rgba(83,131,181,.20), transparent 36%);
+  display: none;
 }
 .screen-header {
   background: rgba(202,222,243,.78);
