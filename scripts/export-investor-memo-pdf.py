@@ -19,6 +19,9 @@ def stamp_footer(raw_pdf: Path, output_pdf: Path) -> None:
     page_count = len(reader.pages)
 
     for index, page in enumerate(reader.pages, start=1):
+        if index == 1:
+            writer.add_page(page)
+            continue
         width = float(page.mediabox.width)
         height = float(page.mediabox.height)
         packet = io.BytesIO()
