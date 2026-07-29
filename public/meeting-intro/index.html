@@ -70,10 +70,24 @@
       min-height: 1180px;
       padding: 62px 58px;
       overflow: hidden;
-      background:
-        url("/webgl-bg-light.png") center bottom / auto 360% no-repeat,
-        #c8d8ef;
+      background: #bfd3eb url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
       box-shadow: 0 24px 70px rgba(0, 0, 66, .16);
+    }
+
+    .page-snapshot {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      pointer-events: none;
+    }
+
+    .page > *:not(.page-snapshot) {
+      position: relative;
+      z-index: 1;
     }
 
     .page-header {
@@ -352,6 +366,7 @@
 
   <main class="document">
     <section class="page">
+      <img class="page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
       <header class="page-header">
         <img src="/shodhai_logo.svg" alt="Shodh AI">
       </header>
@@ -404,6 +419,7 @@
     </section>
 
     <section class="page">
+      <img class="page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
       <header class="page-header">
         <img src="/shodhai_logo.svg" alt="Shodh AI">
       </header>
