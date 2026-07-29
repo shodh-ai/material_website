@@ -36,6 +36,87 @@
       line-height: 1.5;
     }
 
+    .access-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        url("/webgl-bg-light.png") center bottom / auto 360% no-repeat,
+        #c8d8ef;
+    }
+
+    .access-gate[hidden] { display: none; }
+
+    .access-card {
+      width: min(100%, 430px);
+      padding: 34px;
+      border: 1px solid var(--rule);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: 0 20px 60px rgba(0, 0, 66, .16);
+    }
+
+    .access-card img {
+      width: 132px;
+      margin-bottom: 34px;
+      filter: invert(1);
+    }
+
+    .access-card h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .access-card p { margin-bottom: 24px; }
+
+    .access-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .access-form input,
+    .access-form button {
+      min-height: 48px;
+      border-radius: 14px;
+      font: inherit;
+    }
+
+    .access-form input {
+      width: 100%;
+      padding: 0 16px;
+      border: 1px solid rgba(0, 0, 66, .18);
+      color: var(--navy);
+      background: rgba(255, 255, 255, .8);
+      font-weight: 650;
+      letter-spacing: .18em;
+      text-transform: lowercase;
+      outline: none;
+    }
+
+    .access-form input:focus {
+      border-color: var(--navy);
+    }
+
+    .access-form button {
+      padding: 0 20px;
+      border: 0;
+      color: white;
+      background: var(--navy);
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .access-error {
+      min-height: 20px;
+      margin: 12px 0 0 !important;
+      color: #8a1631;
+      font-size: 12px;
+    }
+
     .toolbar {
       position: sticky;
       top: 0;
@@ -346,6 +427,20 @@
   </style>
 </head>
 <body>
+  <div class="access-gate" id="accessGate">
+    <div class="access-card">
+      <img src="/shodhai_logo.svg" alt="Shodh AI">
+      <p class="eyebrow">Private meeting brief</p>
+      <h1>Viewer access</h1>
+      <p>Enter the four-letter password to continue.</p>
+      <form class="access-form" id="accessForm">
+        <input id="accessPassword" type="password" maxlength="4" minlength="4" autocomplete="current-password" aria-label="Viewer password" required>
+        <button type="submit">View</button>
+      </form>
+      <p class="access-error" id="accessError" role="alert"></p>
+    </div>
+  </div>
+
   <div class="toolbar">
     <img src="/shodhai_logo.svg" alt="Shodh AI">
   </div>
@@ -472,5 +567,31 @@
       </section>
     </section>
   </main>
+  <script>
+    (() => {
+      const gate = document.getElementById("accessGate");
+      const form = document.getElementById("accessForm");
+      const input = document.getElementById("accessPassword");
+      const error = document.getElementById("accessError");
+
+      if (sessionStorage.getItem("shodh-meeting-access") === "granted") {
+        gate.hidden = true;
+        return;
+      }
+
+      input.focus();
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (input.value.toLowerCase() === "shod") {
+          sessionStorage.setItem("shodh-meeting-access", "granted");
+          gate.hidden = true;
+          return;
+        }
+        error.textContent = "Incorrect password.";
+        input.value = "";
+        input.focus();
+      });
+    })();
+  </script>
 </body>
 </html>
