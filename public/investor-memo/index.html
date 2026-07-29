@@ -1447,6 +1447,8 @@ th { background: var(--navy); }
 
 /* 02 · Gap — market map, limitation, inverse opportunity */
 .memo-section-2 {
+  padding-left: 18mm;
+  padding-right: 18mm;
   background: rgba(255,255,255,.97);
 }
 .memo-section-2 > p:nth-of-type(4) {
@@ -1466,11 +1468,11 @@ th { background: var(--navy); }
 }
 .memo-section-2 .post-valley-essay {
   min-height: 205mm;
-  margin: 8mm 0;
-  padding: 12mm 62mm 12mm 11mm;
+  margin: 8mm -10mm;
+  padding: 12mm 66mm 12mm 10mm;
   border-radius: 8mm;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.96) 0 66%, rgba(204,224,243,.88) 66%),
+    linear-gradient(90deg, rgba(255,255,255,.96) 0 68%, rgba(204,224,243,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
   box-shadow: 0 5mm 12mm rgba(0,0,66,.09);
   break-before: page;
@@ -1483,15 +1485,34 @@ th { background: var(--navy); }
 }
 .memo-section-2 .memo-topic {
   min-height: 112mm;
+  margin-left: -10mm;
+  margin-right: -10mm;
   padding: 10mm;
 }
 .memo-section-2 .memo-topic-1 {
   background:
-    linear-gradient(90deg, rgba(255,255,255,.95) 0 63%, rgba(214,229,245,.88) 63%),
+    linear-gradient(90deg, rgba(255,255,255,.95) 0 68%, rgba(214,229,245,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
 }
 .memo-section-2 .memo-topic-1 > * {
-  max-width: 97mm;
+  max-width: 106mm;
+}
+.memo-section-2 .memo-topic-1 {
+  font-size: 8.9pt;
+  line-height: 1.42;
+}
+.memo-section-2 .memo-topic-1 p {
+  margin-bottom: 2.6mm;
+}
+.memo-section-2 .memo-topic-1 p.lead-in {
+  margin-top: 4mm;
+  font-size: 10.5pt;
+}
+.memo-section-2 .memo-topic-1 .pull-quote {
+  margin: 4mm 0;
+  padding: 6mm;
+  font-size: 15.5pt;
+  line-height: 1.18;
 }
 .memo-section-2 .memo-topic-2 {
   min-height: 222mm;
@@ -1939,8 +1960,8 @@ th { background: var(--navy); }
     background: transparent !important;
   }
   .memo-section {
-    margin: 0 -4mm;
-    padding: 10mm 4mm 11mm;
+    margin: 0;
+    padding: 10mm 18mm 11mm;
     border-radius: 0;
     box-shadow: none;
   }
@@ -2164,7 +2185,7 @@ th { background: var(--navy); }
 <p>The possible design space can contain thousands of interacting molecular, thermodynamic, transport and equipment variables. Even the most experienced engineering teams must reduce this space through assumptions, isolated simulations and physical trial and error. The result is a long sequence of laboratory experiments, pilot campaigns and process revisions before reliable production can begin.</p>
 <p class="lead-in">The economic penalty is severe:</p>
 <p>Pharmaceuticals: a delayed drug launch can destroy more than $500,000 of revenue per day.</p>
-<p>Energy and materials: a 1% yield loss in a battery factory can represent 1 M – 1M– 10M of annual economic loss.</p>
+<p>Energy and materials: a 1% yield loss in a battery factory can represent $1M–$10M of annual economic loss.</p>
 <p>Process industries: unsuccessful scale transfer can consume years of engineering work, physical experimentation and delayed production.</p>
 <p>These are not software-efficiency problems. They are physical-production problems measured in lost output, wasted material, delayed revenue and stranded industrial capacity.</p>
 </div>
@@ -2374,17 +2395,11 @@ th { background: var(--navy); }
 <p>Sequential domain expansion: major chemistry, biologics and equipment experiments cannot all be trained and evaluated at full scale simultaneously.</p>
 <p>Slower failure iteration: an unsuccessful physical or computational test requires additional data generation, retraining and evaluation, extending the validation cycle.</p>
 <p>Higher adaptation effort: underrepresented physical regimes require more process-specific training and scientific intervention than they should once incorporated into the common base model.</p>
-<p>Add two or three current operational numbers here.</p>
 </div>
 <div class="memo-subsection memo-subsection-3">
 <h3 class="memo-heading">5.3 Empirically Demonstrated Scaling</h3>
 <p>For Shodh, model scaling is not merely a hypothesis.</p>
 <p>Across four model scales from 1B to 10B parameters, Shodh observed a stable power-law relationship between training compute and held-out physical prediction error. A curve fitted only on the smaller models predicted the 10B model’s performance within 2.4%, demonstrating that additional model and compute scale has produced predictable capability gains.</p>
-<p class="lead-in">Add:</p>
-<p>the held-out error reduction from 1B to 10B;</p>
-<p>the total compute range;</p>
-<p>optionally, the goodness of fit or confidence interval.</p>
-<p class="lead-in">Then:</p>
 <p>This result does not imply that every industrial capability emerges automatically with parameter count. It establishes that the underlying physical model continues to improve predictably with scale and provides an empirical basis for financing the next model generation.</p>
 </div>
 <div class="memo-subsection memo-subsection-4">
@@ -2394,7 +2409,6 @@ th { background: var(--navy); }
 <p>lower compute and scientific effort per new programme;</p>
 <p>calibrated uncertainty around industrial recommendations;</p>
 <p>broader service through the common base model across chemicals, biologics and materials.</p>
-<p>For each, include an actual milestone or target where available.</p>
 </div>
 <div class="memo-subsection memo-subsection-5">
 <h3 class="memo-heading">5.5 Why the Capability Is Difficult to Reproduce</h3>

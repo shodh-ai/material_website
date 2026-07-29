@@ -1906,6 +1906,8 @@ th { background: var(--navy); }
 
 /* 02 · Gap — market map, limitation, inverse opportunity */
 .memo-section-2 {
+  padding-left: 18mm;
+  padding-right: 18mm;
   background: rgba(255,255,255,.97);
 }
 .memo-section-2 > p:nth-of-type(4) {
@@ -1925,11 +1927,11 @@ th { background: var(--navy); }
 }
 .memo-section-2 .post-valley-essay {
   min-height: 205mm;
-  margin: 8mm 0;
-  padding: 12mm 62mm 12mm 11mm;
+  margin: 8mm -10mm;
+  padding: 12mm 66mm 12mm 10mm;
   border-radius: 8mm;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.96) 0 66%, rgba(204,224,243,.88) 66%),
+    linear-gradient(90deg, rgba(255,255,255,.96) 0 68%, rgba(204,224,243,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
   box-shadow: 0 5mm 12mm rgba(0,0,66,.09);
   break-before: page;
@@ -1942,15 +1944,34 @@ th { background: var(--navy); }
 }
 .memo-section-2 .memo-topic {
   min-height: 112mm;
+  margin-left: -10mm;
+  margin-right: -10mm;
   padding: 10mm;
 }
 .memo-section-2 .memo-topic-1 {
   background:
-    linear-gradient(90deg, rgba(255,255,255,.95) 0 63%, rgba(214,229,245,.88) 63%),
+    linear-gradient(90deg, rgba(255,255,255,.95) 0 68%, rgba(214,229,245,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
 }
 .memo-section-2 .memo-topic-1 > * {
-  max-width: 97mm;
+  max-width: 106mm;
+}
+.memo-section-2 .memo-topic-1 {
+  font-size: 8.9pt;
+  line-height: 1.42;
+}
+.memo-section-2 .memo-topic-1 p {
+  margin-bottom: 2.6mm;
+}
+.memo-section-2 .memo-topic-1 p.lead-in {
+  margin-top: 4mm;
+  font-size: 10.5pt;
+}
+.memo-section-2 .memo-topic-1 .pull-quote {
+  margin: 4mm 0;
+  padding: 6mm;
+  font-size: 15.5pt;
+  line-height: 1.18;
 }
 .memo-section-2 .memo-topic-2 {
   min-height: 222mm;
@@ -2398,8 +2419,8 @@ th { background: var(--navy); }
     background: transparent !important;
   }
   .memo-section {
-    margin: 0 -4mm;
-    padding: 10mm 4mm 11mm;
+    margin: 0;
+    padding: 10mm 18mm 11mm;
     border-radius: 0;
     box-shadow: none;
   }
