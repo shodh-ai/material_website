@@ -1551,8 +1551,8 @@ th { background: var(--navy); }
 .memo-section-3 .memo-topic-1 {
   min-height: 164mm;
   padding: 8mm;
-  font-size: 8.65pt;
-  line-height: 1.42;
+  font-size: 9.6pt;
+  line-height: 1.5;
   background:
     linear-gradient(135deg, rgba(217,232,247,.22), rgba(92,142,190,.12)),
     url("/webgl-bg-foundation-v2.png") center / cover;
@@ -1561,8 +1561,10 @@ th { background: var(--navy); }
   margin-top: 7mm;
 }
 .memo-section-3 .memo-topic-1 .io-visual {
-  margin-top: 6mm;
+  margin-top: 0;
   margin-bottom: 5mm;
+  break-before: page;
+  page-break-before: always;
 }
 .memo-section-3 .memo-topic-1 .io-core {
   min-height: 40mm;
@@ -1585,6 +1587,8 @@ th { background: var(--navy); }
   writing-mode: vertical-rl;
 }
 .memo-section-3 .memo-topic-3 {
+  font-size: 9.6pt;
+  line-height: 1.5;
   background:
     linear-gradient(145deg, rgba(1,8,35,.98), rgba(29,70,110,.93)),
     url("/webgl-bg-foundation-v2.png") center / cover;
@@ -1593,6 +1597,11 @@ th { background: var(--navy); }
 .memo-section-3 .memo-topic-3 h4,
 .memo-section-3 .memo-topic-3 strong { color: #fff; }
 .memo-section-3 .memo-topic-3 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-3 .memo-topic-3 .product-visual {
+  margin-top: 0;
+  break-before: page;
+  page-break-before: always;
+}
 .memo-section-3 .memo-topic-3 .product-visual {
   color: var(--navy);
 }
