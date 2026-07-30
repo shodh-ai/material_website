@@ -1549,6 +1549,84 @@ th { background: var(--navy); }
   border-color: rgba(255,255,255,.18);
   color: rgba(255,255,255,.84);
 }
+.executive-summary-deck {
+  position: relative;
+  z-index: 2;
+  max-width: 154mm !important;
+  margin: 0 0 7mm;
+  color: rgba(0,0,66,.78);
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+.executive-summary-body,
+.executive-summary-case-linear {
+  position: relative;
+  z-index: 2;
+  padding: 8mm 9mm;
+  border: 1px solid rgba(0,0,66,.1);
+  border-radius: 8mm;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.08);
+}
+.executive-summary-body p {
+  color: var(--ink);
+  font-size: 8.7pt;
+  line-height: 1.46;
+}
+.executive-summary-body p + p {
+  margin-top: 3.5mm;
+  padding-top: 3.5mm;
+  border-top: 1px solid rgba(0,0,66,.12);
+}
+.executive-summary-body .executive-summary-distinction {
+  color: var(--navy);
+  font-size: 9.5pt;
+  line-height: 1.48;
+}
+.executive-summary-body .executive-summary-modules {
+  margin: 3mm 0;
+}
+.executive-summary-body .executive-summary-modules li {
+  margin-top: 2.5mm;
+  padding: 3.5mm 4mm;
+  border: 1px solid rgba(0,0,66,.12);
+  border-radius: 4mm;
+  background: rgba(246,249,253,.92);
+  color: var(--ink);
+  font-size: 8.55pt;
+  line-height: 1.45;
+}
+.executive-summary-case-linear {
+  padding: 8mm 10mm;
+}
+.executive-summary-case-section h3 {
+  margin: 0 0 4mm;
+  color: var(--navy);
+  font-size: 15pt;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.executive-summary-case-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.executive-summary-case-section li {
+  padding: 3.6mm 0;
+  border-top: 1px solid rgba(0,0,66,.13);
+  color: var(--ink);
+  font-size: 8.85pt;
+  line-height: 1.48;
+}
+.executive-summary-case-section li::before { display: none; }
+.executive-summary-case-section li strong {
+  color: var(--navy);
+}
+.executive-summary-case-round {
+  margin-top: 6mm;
+  padding-top: 6mm;
+  border-top: 2px solid var(--navy);
+}
 
 /* Whole-memo editorial pagination */
 .memo-section {
@@ -2224,26 +2302,18 @@ th { background: var(--navy); }
         <span>01 / CONFIDENTIAL INVESTMENT MEMORANDUM</span>
         <h2>1. Executive Summary</h2>
       </header>
-      <div class="executive-summary-lede">
-        <p><strong>Shodh has built a new class of foundation model for the physical world.</strong> Its Uniform Physics World Model predicts, optimises, and designs physical systems across scales—from molecular behaviour to industrial mass production.</p>
-        <p><strong>To our knowledge, Shodh is the first company to demonstrate this kind of joint reasoning across molecular, process and equipment-scale physics within one foundation-model architecture.</strong></p>
-      </div>
-      <div class="executive-summary-columns">
-        <div class="executive-summary-column">
-          <p><strong>This solves the missing intelligence layer in the physical economy.</strong> Billions have funded Discovery AI (molecules) and Engineering AI (machines and engineered systems). One of the largest unresolved bottlenecks remains in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecule into a mass-produced reality currently demands years of expensive, manual physical trial and error. Shodh replaces this guesswork with true cross-domain <em>inverse design</em>.</p>
-          <p>At the molecular level, Shodh compressed a 3-month physical formulation test into 24 hours of computation for a premier global CRO. At the equipment level, a prospectively locked recommendation successfully improved chemical factory yield from 82.4% to 96.7%.</p>
-        </div>
-        <div class="executive-summary-column">
-          <p><strong>Industrialisation provides a high-value commercial entry point.</strong> We are commercialising general physical intelligence starting with pharmaceuticals, CDMOs, and specialty chemicals, deployed via two enterprise modules:</p>
-          <ul class="executive-summary-modules">
-            <li><strong>Shodh SCALE (Recurring SaaS):</strong> Optimises existing processes for a $250K–$500K/year base site license plus a capped gain-share on verified factory economics.</li>
-            <li><strong>Shodh SYNTH (Step-Change Upside):</strong> Computationally invents or redesigns manufacturing routes for massive milestone payouts and selective process-IP royalties.</li>
-          </ul>
-        </div>
-        <div class="executive-summary-column executive-summary-column-accent">
-          <p>To accelerate enterprise deployment, Shodh leverages a heavyweight advisory board—including <strong>Kiran Mazumdar-Shaw</strong> (Founder, Biocon), <strong>Rahul Singhvi</strong> (ex-CEO, &gt;$8B raised), and <strong>Arun Seth</strong> (Enterprise tech veteran)—to secure immediate institutional trust and global market access.</p>
-          <p><strong>Empirical scaling suggests compute expands this capability predictably.</strong> With paid pilots already converting into $250,000/year SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This funds the compute required to ride our proven power-law curve, scaling a world-first scientific breakthrough into a global intelligence platform.</p>
-        </div>
+      <p class="executive-summary-deck"><strong>Shodh has built a new class of foundation model for the physical world.</strong> Its Uniform Physics World Model predicts, optimises, and designs physical systems across scales—from molecular behaviour to industrial mass production.</p>
+      <div class="executive-summary-body">
+        <p class="executive-summary-distinction"><strong>To our knowledge, Shodh is the first company to demonstrate this kind of joint reasoning across molecular, process and equipment-scale physics within one foundation-model architecture.</strong></p>
+        <p><strong>This solves the missing intelligence layer in the physical economy.</strong> Billions have funded Discovery AI (molecules) and Engineering AI (machines and engineered systems). One of the largest unresolved bottlenecks remains in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecule into a mass-produced reality currently demands years of expensive, manual physical trial and error. Shodh replaces this guesswork with true cross-domain <em>inverse design</em>.</p>
+        <p>At the molecular level, Shodh compressed a 3-month physical formulation test into 24 hours of computation for a premier global CRO. At the equipment level, a prospectively locked recommendation successfully improved chemical factory yield from 82.4% to 96.7%.</p>
+        <p><strong>Industrialisation provides a high-value commercial entry point.</strong> We are commercialising general physical intelligence starting with pharmaceuticals, CDMOs, and specialty chemicals, deployed via two enterprise modules:</p>
+        <ul class="executive-summary-modules">
+          <li><strong>Shodh SCALE (Recurring SaaS):</strong> Optimises existing processes for a $250K–$500K/year base site license plus a capped gain-share on verified factory economics.</li>
+          <li><strong>Shodh SYNTH (Step-Change Upside):</strong> Computationally invents or redesigns manufacturing routes for massive milestone payouts and selective process-IP royalties.</li>
+        </ul>
+        <p>To accelerate enterprise deployment, Shodh leverages a heavyweight advisory board—including <strong>Kiran Mazumdar-Shaw</strong> (Founder, Biocon), <strong>Rahul Singhvi</strong> (ex-CEO, &gt;$8B raised), and <strong>Arun Seth</strong> (Enterprise tech veteran)—to secure immediate institutional trust and global market access.</p>
+        <p><strong>Empirical scaling suggests compute expands this capability predictably.</strong> With paid pilots already converting into $250,000/year SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This funds the compute required to ride our proven power-law curve, scaling a world-first scientific breakthrough into a global intelligence platform.</p>
       </div>
     </section>
 
@@ -2253,8 +2323,8 @@ th { background: var(--navy); }
         <span>01 / EXECUTIVE SUMMARY</span>
         <h2>Investment Case at a Glance</h2>
       </header>
-      <div class="executive-summary-case-grid">
-        <section class="executive-summary-case-column">
+      <div class="executive-summary-case-linear">
+        <section class="executive-summary-case-section">
           <h3>Proven Today</h3>
           <ul>
             <li><strong>Frontier AI Breakthrough:</strong> A new class of Uniform Physics World Model successfully built, proving cross-scale reasoning with an empirically measured power-law scaling curve.</li>
@@ -2263,7 +2333,7 @@ th { background: var(--navy); }
             <li><strong>Enterprise Gravity:</strong> 9 active/scoped programmes, backed by an advisory board of globally recognized industrial leaders.</li>
           </ul>
         </section>
-        <section class="executive-summary-case-column executive-summary-case-column-dark">
+        <section class="executive-summary-case-section executive-summary-case-round">
           <h3>What This Round Establishes</h3>
           <ul>
             <li><strong>Generalisation:</strong> Repeatability across expanded process classes via dozens of parallel physical validations.</li>
