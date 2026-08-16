@@ -58,7 +58,7 @@ function routeFromPageChunk(pathname: string) {
   return pageMatch ? `/${pageMatch[1]}` : null;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/_next/static/")) {
@@ -68,7 +68,7 @@ export function middleware(request: NextRequest) {
     }
 
     const viewerCode = request.cookies.get(VIEWER_COOKIE)?.value;
-    return canViewPath(viewerCode, pageRoute)
+    return (await canViewPath(viewerCode, pageRoute))
       ? NextResponse.next()
       : new NextResponse(null, { status: 404 });
   }
@@ -78,7 +78,7 @@ export function middleware(request: NextRequest) {
   }
 
   const viewerCode = request.cookies.get(VIEWER_COOKIE)?.value;
-  if (canViewPath(viewerCode, pathname)) {
+  if (await canViewPath(viewerCode, pathname)) {
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
     response.headers.set("Cache-Control", "private, no-store");
