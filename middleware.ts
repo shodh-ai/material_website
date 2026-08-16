@@ -15,19 +15,30 @@ const publicExactPaths = new Set([
   "/careers",
   "/materials-discovery",
   "/project-skanda",
+  "/meeting-intro",
+  "/meeting-intro/",
+  "/meeting-intro/index.html",
   "/Founders_Associate.png",
   "/Logo_White BG.png",
   "/shodhai_logo.svg",
   "/india-ai-logo.png",
   "/webgl-bg-foundation-v2.png",
+  "/Untitled1.glb",
 ]);
 
-const publicPathPrefixes = ["/shodh-new/"];
+const publicPathPrefixes = ["/shodh-new/", "/blog/", "/research/"];
 
 function isPublicPath(pathname: string) {
   return (
     publicExactPaths.has(pathname) ||
-    publicPathPrefixes.some((prefix) => pathname.startsWith(prefix))
+    publicPathPrefixes.some((prefix) => pathname.startsWith(prefix)) ||
+    (process.env.NODE_ENV !== "production" &&
+      (pathname === "/investor-memo" ||
+        pathname === "/investor-teaser" ||
+        pathname === "/a123-pilot" ||
+        pathname === "/hinduja-commercial-note" ||
+        pathname.startsWith("/indian-railways/") ||
+        pathname.startsWith("/pitch-tomorrow/assets/partner-logos/")))
   );
 }
 
