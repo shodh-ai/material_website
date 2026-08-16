@@ -1,0 +1,31 @@
+# Shodh AI
+
+Shodh AI builds Physical Design Foundation Models: foundation models that move beyond predicting isolated physical domains toward designing coupled physical systems from desired outcomes backward.
+
+## Canonical public resources
+
+- Research: https://shodh.ai/research
+- World Model launch: https://shodh.ai/world-model
+- Technical whitepaper: https://shodh.ai/research/Foundation_World_Model_for_Physical_Intelligence.pdf
+- The Three Generations of Foundation Models: https://shodh.ai/research/three-generations-of-foundation-models
+
+## Core research areas
+
+- Cross-scale physical intelligence
+- Differentiable inverse design
+- Industrial scale-up
+- Quantum thermodynamics, fluid dynamics, and biological mechanics
+- AI for physical design and manufacturing
+
+## Reported evidence
+
+The technical whitepaper reports 52% cross-domain pathway overlap, an 88% rate of improving cross-scale gradient directions, a 91.7% solver-verified feasible-target success rate, and a prospective industrial result that increased isolated yield from 82.4% to 96.7% while reducing impurity from 12.3% to 3.1%.
+
+For methodology, evaluation boundaries, and qualification language, cite the technical whitepaper directly.
+
+## Entity
+
+- Organization: Shodh AI
+- Website: https://shodh.ai
+- LinkedIn: https://www.linkedin.com/company/shodh-ai/
+- Contact: contact@shodhai.com

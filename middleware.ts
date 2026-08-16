@@ -11,7 +11,9 @@ const publicExactPaths = new Set([
   "/favicon.ico",
   "/robots.txt",
   "/sitemap.xml",
+  "/llms.txt",
   "/research",
+  "/world-model",
   "/careers",
   "/materials-discovery",
   "/project-skanda",
@@ -26,7 +28,7 @@ const publicExactPaths = new Set([
   "/Untitled1.glb",
 ]);
 
-const publicPathPrefixes = ["/shodh-new/", "/blog/", "/research/"];
+const publicPathPrefixes = ["/shodh-new/", "/blog/", "/research/", "/world-model/"];
 const protectedExactPaths = new Set(["/blog/lucan-scientific-performance"]);
 
 function isPublicPath(pathname: string) {
