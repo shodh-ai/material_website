@@ -1,9 +1,14 @@
 import { normalizeNextPath } from "@/lib/viewer-access";
 
-export const metadata = {
-  title: "Viewer access · Shodh AI",
-  robots: { index: false, follow: false },
-};
+export function generateMetadata({ searchParams }: { searchParams: { next?: string } }) {
+  const nextPath = normalizeNextPath(searchParams.next);
+  return {
+    title: nextPath === "/blog/lucan-scientific-performance"
+      ? "LUCAN Scientific Performance"
+      : "Viewer access · Shodh AI",
+    robots: { index: false, follow: false },
+  };
+}
 
 export default function AccessPage({
   searchParams,
@@ -12,29 +17,30 @@ export default function AccessPage({
 }) {
   const nextPath = normalizeNextPath(searchParams.next);
   const hasError = searchParams.error === "invalid";
+  const isLucanBenchmark = nextPath === "/blog/lucan-scientific-performance";
 
   return (
     <main className="access-page">
       <form action="/api/viewer-access" method="post" className="access-card">
-        <p className="eyebrow">SHODH AI</p>
-        <h1>Viewer access</h1>
-        <p className="description">
-          Enter the private viewing code you received for this page.
-        </p>
+        {!isLucanBenchmark && <p className="eyebrow">SHODH AI</p>}
+        <h1>{isLucanBenchmark ? "LUCAN Scientific Performance" : "Viewer access"}</h1>
+        {!isLucanBenchmark && <p className="description">Enter the private viewing code you received for this page.</p>}
         <input type="hidden" name="next" value={nextPath} />
-        <label htmlFor="code">Viewing code</label>
+        {!isLucanBenchmark && <label htmlFor="code">Viewing code</label>}
         <input
           id="code"
           name="code"
           type="password"
           autoComplete="one-time-code"
           required
-          minLength={16}
+          minLength={8}
+          aria-label={isLucanBenchmark ? "Password" : undefined}
+          placeholder={isLucanBenchmark ? "Password" : undefined}
           aria-invalid={hasError}
         />
-        {hasError && <p className="error">That code does not grant access to this page.</p>}
-        <button type="submit">Continue</button>
-        <a href="/">Return to homepage</a>
+        {hasError && <p className="error">{isLucanBenchmark ? "Incorrect password." : "That code does not grant access to this page."}</p>}
+        <button type="submit">{isLucanBenchmark ? "Unlock" : "Continue"}</button>
+        {!isLucanBenchmark && <a href="/">Return to homepage</a>}
       </form>
 
       <style>{`

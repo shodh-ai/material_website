@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import styles from "./benchmark.module.css";
 
 type Series = "2.93B" | "10B";
@@ -14,13 +15,20 @@ type Metric = {
   domainMax?: number;
   log?: boolean;
 };
-type Test = { number: string; title: string; note: string; charts: Metric[] };
+type Test = { number: string; title: string; note: string; explanation: ReactNode; charts: Metric[] };
 
 const tests: Test[] = [
   {
     number: "Test 1",
     title: "Domain-responsive routing",
     note: "Permutation p: 0.000155 (2.93B) → 0.000040 (10B)",
+    explanation: (
+      <>
+        <p>A shared model should use common computational pathways across physical domains while still adapting its internal routing to the structure of each domain.</p>
+        <p>At 2.93B, molecular and reactor inputs produced routing differences approximately <strong>11–33 times greater than within-domain routing noise</strong>, while retaining <strong>65.21% shared pathway overlap</strong>. At 10B, cross-domain routing separation increased to approximately <strong>45 times within-domain noise</strong>, with <strong>52% pathway overlap</strong>.</p>
+        <p>The permutation-test probability decreased from <strong>0.000155 at 2.93B to 0.000040 at 10B</strong>, confirming that the routing differences remained statistically significant. At 10B, <strong>45× routing separation</strong> coexists with <strong>52% shared pathway overlap</strong>, indicating stronger domain-responsive specialisation within a still-shared computational substrate.</p>
+      </>
+    ),
     charts: [
       { kind: "range", title: "Cross-domain routing separation", axis: "Separation (× within-domain noise)", values: [{ series: "2.93B", low: 11, high: 33, label: "11–33×" }, { series: "10B", value: 45, label: "45×" }] },
       { kind: "bar", title: "Shared pathway overlap", axis: "Shared pathway overlap (%)", values: [{ series: "2.93B", value: 65.21, label: "65.21%" }, { series: "10B", value: 52, label: "52.00%" }] },
@@ -30,6 +38,13 @@ const tests: Test[] = [
     number: "Test 2",
     title: "Quantum → reactor intervention",
     note: "Lower error is better · same frozen intervention contract and gates",
+    explanation: (
+      <>
+        <p>This test evaluates whether a controlled change in molecular reaction enthalpy produces the corresponding macroscopic temperature and energy response in a held-out reactor.</p>
+        <p>Temperature nRMSE decreased from <strong>0.00720 at 2.93B to 0.00300 at 10B</strong>, representing an approximately <strong>58.3% reduction in error</strong>. Teacher-relative energy error decreased from <strong>0.02322 to 0.01100</strong>, an approximately <strong>52.6% reduction</strong>.</p>
+        <p>Both checkpoints remained below the <strong>0.05 acceptance gates</strong>. At 10B, the quantum-to-reactor pathway retained the expected response while reducing both numerical errors.</p>
+      </>
+    ),
     charts: [
       { kind: "bar", title: "Temperature response error", axis: "Temperature nRMSE", log: true, reference: { value: 0.05, label: "Gate 0.05" }, values: [{ series: "2.93B", value: 0.0072, label: "0.00720" }, { series: "10B", value: 0.003, label: "0.00300" }] },
       { kind: "bar", title: "Energy response error", axis: "Teacher-relative error", log: true, reference: { value: 0.05, label: "Gate 0.05" }, values: [{ series: "2.93B", value: 0.02322, label: "0.02322" }, { series: "10B", value: 0.011, label: "0.01100" }] },
@@ -39,6 +54,13 @@ const tests: Test[] = [
     number: "Test 3",
     title: "Reactor → cell BioFSI",
     note: "High-shear positive control · both checkpoints cross rupture criteria",
+    explanation: (
+      <>
+        <p>This test examines whether reactor-scale turbulent flow can be transferred into cell-scale membrane mechanics through an active two-way fluid-solid interaction pathway.</p>
+        <p>At 2.93B, the predicted maximum tensile stress was <strong>312.45 Pa</strong>, exceeding the <strong>250 Pa rupture criterion</strong>, while maximum area strain reached <strong>4.12%</strong>, exceeding the <strong>3.50% strain criterion</strong>.</p>
+        <p>At 10B, maximum tensile stress increased to <strong>340 Pa</strong> and maximum area strain reached <strong>4.8%</strong>. Both quantities again crossed the same rupture criteria. The 10B work-transfer error was <strong>less than 1×10⁻⁷</strong>, supporting numerical consistency of the coupling operation.</p>
+      </>
+    ),
     charts: [
       { kind: "bar", title: "Maximum tensile stress", axis: "Maximum tensile stress (Pa)", reference: { value: 250, label: "Criterion 250 Pa" }, values: [{ series: "2.93B", value: 312.45, label: "312.45 Pa" }, { series: "10B", value: 340, label: "340 Pa" }] },
       { kind: "bar", title: "Cell area strain", axis: "Area strain (%)", reference: { value: 3.5, label: "Criterion 3.50%" }, values: [{ series: "2.93B", value: 4.12, label: "4.12%" }, { series: "10B", value: 4.8, label: "4.80%" }] },
@@ -46,13 +68,35 @@ const tests: Test[] = [
   },
   {
     number: "Test 4",
-    title: "Full molecule → reactor → cell",
-    note: "End-to-end chain across all three physical scales",
+    title: "Competing multiphysics regimes",
+    note: "Matched nonlinear oxygen-transfer and shear trade-off evaluation",
+    explanation: (
+      <>
+        <p>Real bioreactor operation involves competing physical effects. Increasing impeller speed may initially improve oxygen transfer, but once oxygenation saturates, additional agitation can continue increasing mechanical shear without providing further oxygen-transfer benefit.</p>
+        <p>At 2.93B, increasing agitation from <strong>200 RPM to 250 RPM</strong> decreased mean oxygen concentration by <strong>0.17%</strong>, with an oxygen nRMSE of <strong>0.01835</strong>. Near-blade p95 hydrodynamic shear increased by <strong>17.9%</strong>.</p>
+        <p>At 10B, mean oxygen concentration changed by only <strong>0.08%</strong>, with a lower oxygen nRMSE of <strong>0.0087</strong>. Near-blade p95 shear increased by <strong>18.3%</strong>, preserving the expected mechanical escalation as oxygen transfer remained near its plateau.</p>
+        <p>Shear-field spatial correlation increased from <strong>0.325 at 2.93B to 0.59 at 10B</strong>. The 2.93B result remained below the required <strong>0.50 correlation gate</strong>, while the 10B result <strong>passed the gate</strong>.</p>
+      </>
+    ),
     charts: [
-      { kind: "bar", title: "Full-chain pass rate", axis: "Passing chains (%)", domainMax: 100, values: [{ series: "2.93B", value: null, label: "Not evaluated" }, { series: "10B", value: 91.3, label: "91.3%" }] },
+      { kind: "bar", title: "Absolute mean oxygen concentration change", axis: "Absolute oxygen change (%)", domainMax: 0.2, values: [{ series: "2.93B", value: 0.17, label: "0.17%" }, { series: "10B", value: 0.08, label: "0.08%" }] },
+      { kind: "bar", title: "Oxygen prediction error", axis: "Oxygen nRMSE", log: true, reference: { value: 0.05, label: "Gate 0.05" }, values: [{ series: "2.93B", value: 0.01835, label: "0.01835" }, { series: "10B", value: 0.0087, label: "0.0087" }] },
+      { kind: "bar", title: "Near-blade p95 shear increase", axis: "Shear increase (%)", domainMax: 22, values: [{ series: "2.93B", value: 17.9, label: "+17.9%" }, { series: "10B", value: 18.3, label: "+18.3%" }] },
+      { kind: "bar", title: "Shear-field spatial correlation", axis: "Spatial correlation", domainMax: 0.7, reference: { value: 0.5, label: "Gate 0.50" }, values: [{ series: "2.93B", value: 0.325, label: "0.325 · Fail" }, { series: "10B", value: 0.59, label: "0.59 · Pass" }] },
     ],
   },
 ];
+
+const fullChainMetric: Metric = {
+  kind: "bar",
+  title: "Full-chain pass rate",
+  axis: "Passing chains (%)",
+  domainMax: 100,
+  values: [
+    { series: "2.93B", value: null, label: "Not supported" },
+    { series: "10B", value: 91.3, label: "91.3%" },
+  ],
+};
 
 function MetricChart({ metric, active, id }: { metric: Metric; active: Set<Series>; id: string }) {
   const width = 430;
@@ -89,7 +133,7 @@ function MetricChart({ metric, active, id }: { metric: Metric; active: Set<Serie
         if (!active.has(item.series)) return null;
         const center = margin.left + slot * index + slot / 2;
         const seriesClass = item.series === "10B" ? styles.series10 : styles.series293;
-        if (item.value === null) return <g key={item.series}><line className={seriesClass} x1={center - 38} x2={center + 38} y1={margin.top + innerHeight - 2} y2={margin.top + innerHeight - 2} strokeDasharray="5 5" strokeWidth="3" /><text className={styles.emptyLabel} x={center} y={margin.top + innerHeight - 12} textAnchor="middle">Not evaluated</text><text className={styles.crossXLabel} x={center} y={height - 21} textAnchor="middle">{item.series}</text></g>;
+        if (item.value === null) return <g key={item.series}><line className={seriesClass} x1={center - 38} x2={center + 38} y1={margin.top + innerHeight - 2} y2={margin.top + innerHeight - 2} strokeDasharray="5 5" strokeWidth="3" /><text className={styles.emptyLabel} x={center} y={margin.top + innerHeight - 12} textAnchor="middle">{item.label}</text><text className={styles.crossXLabel} x={center} y={height - 21} textAnchor="middle">{item.series}</text></g>;
         if (metric.kind === "range" && item.low !== undefined && item.high !== undefined) return <g key={item.series}><line className={seriesClass} x1={center} x2={center} y1={y(item.low)} y2={y(item.high)} strokeWidth="11" strokeLinecap="round" /><circle className={seriesClass} cx={center} cy={y(item.low)} r="5" /><circle className={seriesClass} cx={center} cy={y(item.high)} r="5" /><text className={styles.crossValue} x={center} y={y(item.high) - 12} textAnchor="middle">{item.label}</text><text className={styles.crossXLabel} x={center} y={height - 21} textAnchor="middle">{item.series}</text></g>;
         const value = item.value ?? 0;
         if (metric.log) {
@@ -115,19 +159,22 @@ export default function CrossScaleComparison() {
   return (
     <section id="cross-scale-comparison" className={styles.crossScaleSection}>
       <header className={styles.crossScaleHeader}>
-        <div><p className={styles.kicker}>Cross-scale integration evaluation</p><h2>LUCAN 2.93B vs 10B</h2><p>Four frozen tests spanning domain routing, reactor intervention and cell mechanics</p></div>
+        <div><p className={styles.kicker}>Cross-scale integration evaluation</p><h2>LUCAN 2.93B vs 10B</h2><p>Matched checkpoint comparisons are distinguished from separately evaluated capabilities.</p></div>
         <div className={styles.seriesControls} aria-label="Toggle model checkpoints">
           {(["2.93B", "10B"] as Series[]).map((series) => <button key={series} type="button" aria-pressed={activeSeries.has(series)} onClick={() => toggle(series)}><i className={series === "10B" ? styles.control10 : styles.control293} />{series}</button>)}
         </div>
       </header>
       <div className={styles.crossTestGrid}>
-        {tests.map((test, testIndex) => <section className={styles.crossTest} key={test.number}><header><p>{test.number}</p><h3>{test.title}</h3><span>{test.note}</span></header><div className={styles.crossSubplotGrid}>{test.charts.map((metric, chartIndex) => <article className={test.charts.length === 1 ? styles.crossWidePlot : undefined} key={metric.title}><h4>{metric.title}</h4><MetricChart metric={metric} active={activeSeries} id={`cross-${testIndex}-${chartIndex}`} /></article>)}</div></section>)}
+        {tests.map((test, testIndex) => <section className={styles.crossTest} key={test.number}><header><p>{test.number}</p><h3>{test.title}</h3><span>{test.note}</span></header><div className={styles.crossTestCopy}>{test.explanation}</div><div className={styles.crossSubplotGrid}>{test.charts.map((metric, chartIndex) => <article className={test.charts.length === 1 ? styles.crossWidePlot : undefined} key={metric.title}><h4>{metric.title}</h4><MetricChart metric={metric} active={activeSeries} id={`cross-${testIndex}-${chartIndex}`} /></article>)}</div></section>)}
       </div>
-      <footer className={styles.crossNotes}>
-        <p>Each metric has an independent axis. Dashed lines show frozen gates or rupture criteria; they are not rescaled between checkpoints.</p>
-        <p>Test 4 was not evaluated at 2.93B. In Test 3, the 10B work-transfer error was &lt;1×10⁻⁷; the 2.93B result was reported as within numerical precision without a numeric value.</p>
-        <p>Simulation-based, scoped evaluation; these results do not establish universal cross-domain generalisation.</p>
-      </footer>
+      <section className={styles.fullChainSection} aria-labelledby="full-chain-title">
+        <div className={styles.fullChainCopy}>
+          <p className={styles.kicker}>Additional 10B evaluation</p>
+          <h3 id="full-chain-title">Full molecule → reactor → cell chain</h3>
+          <p>The 10B checkpoint connects molecular representation, thermochemical state, reactor response, fluid exposure and downstream cell mechanics in one end-to-end pathway. The full chain achieved a <strong>91.3% pass rate</strong>. The <strong>2.93B model does not support execution of the complete molecule → reactor → cell chain</strong>, so its graph entry is shown as not supported rather than zero.</p>
+        </div>
+        <article><h4>{fullChainMetric.title}</h4><MetricChart metric={fullChainMetric} active={activeSeries} id="full-chain" /></article>
+      </section>
     </section>
   );
 }

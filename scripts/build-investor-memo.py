@@ -38,81 +38,52 @@ def cover_page() -> str:
 
 def executive_summary_visual() -> str:
     return """
-    <section class="executive-spread executive-opener" aria-label="Executive Summary">
-      <div class="executive-opener-paper">
-        <p class="executive-proof"><strong>In recent prospective industrial validations, Shodh’s uniform physics model compressed a 3-month physical formulation test into 24 hours of computation for a global CRO, and successfully improved chemical factory yield from 82.4% to 96.7% on a mathematically locked run.</strong></p>
-        <div class="executive-opener-title">
-          <span>01 / INVESTMENT MEMORANDUM</span>
-          <h2>Executive<br>Summary</h2>
-        </div>
-      </div>
-      <div class="executive-opener-atmosphere">
-        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
-        <span class="executive-side-label">UNIFORM PHYSICS WORLD MODEL</span>
-        <div class="executive-mark">
-          <span>MOLECULE</span>
-          <b>→</b>
-          <span>FACTORY</span>
-        </div>
-        <small>01</small>
-      </div>
-    </section>
-
-    <section class="executive-spread executive-narrative" aria-label="The industrialisation gap and Shodh">
+    <section class="executive-spread executive-summary-overview" aria-label="1. Executive Summary">
       <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
-      <div class="executive-narrative-heading">
-        <span>THE INDUSTRIALISATION GAP</span>
-        <h2>A common intelligence layer for the physical economy.</h2>
-      </div>
-      <div class="executive-narrative-panel">
-        <p>While billions of dollars have been invested in "Discovery AI" to invent new digital molecules, and "Engineering AI" to optimise finished downstream machines, the physical economy remains bottlenecked by a massive, multi-trillion-dollar void in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecular discovery into a mass-produced physical reality requires surviving formulation stability, chemical route redesign, and factory scale-up. Historically, this entire lifecycle has been a fragmented sequence of expensive, manual physical trial and error.</p>
-        <p>Shodh is a frontier foundation model for physical intelligence built to eliminate this bottleneck. Rather than building bespoke simulations for individual domains, Shodh operates a <strong>Uniform Physics World Model</strong> capable of true multi-scale, cross-domain inverse design. Whether calculating the thermodynamic degradation of a molecule or the fluid dynamics of a 10,000-litre factory vessel, Shodh computationally generates the physical parameters required to achieve a targeted industrial outcome.</p>
-        <p>To commercialise this intelligence layer, Shodh delivers the model through two enterprise modules:</p>
-      </div>
-      <div class="executive-narrative-footer">
-        <p>Having validated the platform across multiple physical scales, and having already secured paid pilots structured for automated conversion into six-figure enterprise SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This round funds the compute required to ride our empirically proven scaling laws, transitioning the company from a proven scientific breakthrough into the dominant intelligence platform for the physical economy.</p>
-      </div>
-    </section>
-
-    <section class="executive-spread executive-modules" aria-label="Shodh Scale and Shodh Synth">
-      <div class="executive-module executive-module-scale">
-        <div class="executive-module-copy">
-          <span>SHODH SCALE / FACTORY INTELLIGENCE</span>
-          <h2>SHODH<br>SCALE</h2>
-          <p><strong>Shodh SCALE:</strong> The recurring-revenue foundation. A factory and formulation deployment that optimises existing processes, capturing a "SaaS floor" base license (e.g., $250K–$500K/year) plus a capped gain-share on the verified economic value created.</p>
-        </div>
-      </div>
-      <div class="executive-module executive-module-synth">
-        <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
-        <span>SHODH SYNTH / PROCESS INTELLIGENCE</span>
-        <div class="executive-module-icon">⌬</div>
-        <h2>SHODH<br>SYNTH</h2>
-        <p><strong>Shodh SYNTH:</strong> The step-change upside. A process-invention capability that computationally redesigns entire chemical and biological manufacturing routes, yielding massive milestone payouts and selective process-IP royalties.</p>
-        <small>ONE PLATFORM · TWO ENTERPRISE MODULES</small>
+      <header class="executive-summary-header">
+        <span>01 / CONFIDENTIAL INVESTMENT MEMORANDUM</span>
+        <h2>1. Executive Summary</h2>
+      </header>
+      <p class="executive-summary-deck"><strong>Shodh has built a new class of foundation model for the physical world.</strong> Its Uniform Physics World Model predicts, optimises, and designs physical systems across scales—from molecular behaviour to industrial mass production.</p>
+      <div class="executive-summary-body">
+        <p class="executive-summary-distinction"><strong>To our knowledge, Shodh is the first company to demonstrate this kind of joint reasoning across molecular, process and equipment-scale physics within one foundation-model architecture.</strong></p>
+        <p><strong>This solves the missing intelligence layer in the physical economy.</strong> Billions have funded Discovery AI (molecules) and Engineering AI (machines and engineered systems). One of the largest unresolved bottlenecks remains in the middle: the <strong>Industrialisation Gap</strong>. Translating a digital molecule into a mass-produced reality currently demands years of expensive, manual physical trial and error. Shodh replaces this guesswork with true cross-domain <em>inverse design</em>.</p>
+        <p>At the molecular level, Shodh compressed a 3-month physical formulation test into 24 hours of computation for a premier global CRO. At the equipment level, a prospectively locked recommendation successfully improved chemical factory yield from 82.4% to 96.7%.</p>
+        <p><strong>Industrialisation provides a high-value commercial entry point.</strong> We are commercialising general physical intelligence starting with pharmaceuticals, CDMOs, and specialty chemicals, deployed via two enterprise modules:</p>
+        <ul class="executive-summary-modules">
+          <li><strong>Shodh SCALE (Recurring SaaS):</strong> Optimises existing processes for a $250K–$500K/year base site license plus a capped gain-share on verified factory economics.</li>
+          <li><strong>Shodh SYNTH (Step-Change Upside):</strong> Computationally invents or redesigns manufacturing routes for massive milestone payouts and selective process-IP royalties.</li>
+        </ul>
+        <p>To accelerate enterprise deployment, Shodh leverages a heavyweight advisory board—including <strong>Kiran Mazumdar-Shaw</strong> (Founder, Biocon), <strong>Rahul Singhvi</strong> (ex-CEO, &gt;$8B raised), and <strong>Arun Seth</strong> (Enterprise tech veteran)—to secure immediate institutional trust and global market access.</p>
+        <p><strong>Empirical scaling suggests compute expands this capability predictably.</strong> With paid pilots already converting into $250,000/year SaaS licenses, Shodh is raising <strong>$55M in equity capital</strong>. This funds the compute required to ride our proven power-law curve, scaling a world-first scientific breakthrough into a global intelligence platform.</p>
       </div>
     </section>
 
-    <section class="executive-spread executive-case" aria-label="Investment Case at a Glance">
+    <section class="executive-spread executive-summary-case-page" aria-label="Investment Case at a Glance">
       <img class="memo-page-snapshot" src="/webgl-bg-foundation-v2.png" alt="">
-      <div class="executive-case-heading">
-        <span>INVESTMENT CASE AT A GLANCE</span>
-        <h2>Proven today.<br>Built to generalise.</h2>
-      </div>
-      <div class="executive-case-grid">
-        <div class="executive-case-column">
+      <header class="executive-summary-header">
+        <span>01 / EXECUTIVE SUMMARY</span>
+        <h2>Investment Case at a Glance</h2>
+      </header>
+      <div class="executive-summary-case-linear">
+        <section class="executive-summary-case-section">
           <h3>Proven Today</h3>
-          <div class="executive-case-card"><strong>Multi-Scale Physical Results:</strong> Prospective factory scale-up (Aarti Industries: +14.3 pts in yield) and zero-day formulation prediction (Syngene: matching 3-month wet-lab data in 24 hours).</div>
-          <div class="executive-case-card"><strong>Commercial Traction:</strong> Paid validations actively converting to $250,000/year recurring enterprise site licenses.</div>
-          <div class="executive-case-card"><strong>Frontier Technology:</strong> Core Uniform Physics World Model built, with proven empirical power-law scaling capability.</div>
-          <div class="executive-case-card"><strong>Customer Pull:</strong> 9 active/scoped programmes across pharma, specialty chemicals, biologics, and aerospace.</div>
-        </div>
-        <div class="executive-case-column executive-case-column-dark">
+          <ul>
+            <li><strong>Frontier AI Breakthrough:</strong> A new class of Uniform Physics World Model successfully built, proving cross-scale reasoning with an empirically measured power-law scaling curve.</li>
+            <li><strong>Multi-Scale Physical Results:</strong> Prospective factory scale-up (Aarti Industries: +14.3 pts in yield) and zero-day formulation prediction (Syngene: matching 3-month wet-lab data in 24 hours).</li>
+            <li><strong>Commercial Traction:</strong> Paid validations converting to $250,000/year recurring enterprise SaaS site licenses.</li>
+            <li><strong>Enterprise Gravity:</strong> 9 active/scoped programmes, backed by an advisory board of globally recognized industrial leaders.</li>
+          </ul>
+        </section>
+        <section class="executive-summary-case-section executive-summary-case-round">
           <h3>What This Round Establishes</h3>
-          <div class="executive-case-card"><strong>Generalisation:</strong> Repeatability across expanded process classes via dozens of parallel physical validations.</div>
-          <div class="executive-case-card"><strong>Capability Unlocks:</strong> Scaling H100/B200 compute infrastructure to enable zero-shot transfer across unseen domains.</div>
-          <div class="executive-case-card"><strong>Software Margins:</strong> Declining human adaptation effort and computational hours per new programme.</div>
-          <div class="executive-case-card"><strong>Commercial Scale:</strong> Repeatable private SCALE deployments and a scalable organisation with dedicated commercial leadership.</div>
-        </div>
+          <ul>
+            <li><strong>Generalisation:</strong> Repeatability across expanded process classes via dozens of parallel physical validations.</li>
+            <li><strong>Capability Unlocks:</strong> Scaling H100/B200 compute infrastructure to enable zero-shot transfer across unseen domains.</li>
+            <li><strong>Software Margins:</strong> Declining human adaptation effort and computational hours per new programme.</li>
+            <li><strong>Commercial Scale:</strong> Repeatable private SCALE deployments and a scalable organisation with dedicated commercial leadership.</li>
+          </ul>
+        </section>
       </div>
     </section>
     """.strip()
@@ -481,13 +452,11 @@ CSS = r"""
 }
 
 * { box-sizing: border-box; }
-html { background: #aebfd8; }
+html { background: #bfd3eb; }
 body {
   margin: 0;
   color: var(--ink);
-  background:
-    linear-gradient(rgba(200, 216, 239, .88), rgba(200, 216, 239, .88)),
-    url("/webgl-bg-foundation-v2.png") center top / cover fixed;
+  background: #bfd3eb;
   font-family: "Syne", Arial, sans-serif;
   font-size: 10.1pt;
   line-height: 1.52;
@@ -864,7 +833,7 @@ th {
 
 /* Foundation Model Bio editorial system */
 body {
-  background: #bfd3eb url("/webgl-bg-foundation-v2.png") center top / cover fixed;
+  background: #bfd3eb;
   color: #080846;
   font-size: 10.25pt;
   line-height: 1.55;
@@ -874,9 +843,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background:
-    linear-gradient(115deg, rgba(216,232,248,.18), rgba(110,154,198,.12)),
-    url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+  display: none;
 }
 body::after {
   content: "";
@@ -884,9 +851,7 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 18% 15%, rgba(255,255,255,.22), transparent 28%),
-    radial-gradient(circle at 76% 82%, rgba(83,131,181,.20), transparent 36%);
+  display: none;
 }
 .screen-header {
   background: rgba(202,222,243,.78);
@@ -1522,8 +1487,10 @@ th { background: var(--navy); }
 
 .executive-spread {
   position: relative;
-  width: 100%;
+  width: calc(100% + 20mm);
   height: 262mm;
+  margin-left: -10mm;
+  margin-right: -10mm;
   overflow: hidden;
   color: var(--navy);
   background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
@@ -1561,6 +1528,9 @@ th { background: var(--navy); }
 .executive-proof strong {
   color: var(--navy);
   font-weight: 520;
+}
+.executive-proof + .executive-proof {
+  margin-top: 6mm;
 }
 .executive-opener-title {
   position: absolute;
@@ -1684,13 +1654,13 @@ th { background: var(--navy); }
   line-height: 1.55;
 }
 .executive-narrative-panel p:last-child {
-  align-self: end;
-  color: rgba(0,0,66,.58);
-  font-size: 8pt;
-  font-weight: 700;
-  line-height: 1.38;
-  letter-spacing: .13em;
-  text-transform: uppercase;
+  align-self: auto;
+  color: var(--ink);
+  font-size: 8.5pt;
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -.01em;
+  text-transform: none;
 }
 .executive-narrative-footer {
   position: relative;
@@ -1730,9 +1700,16 @@ th { background: var(--navy); }
   letter-spacing: -.06em;
 }
 .executive-module p {
-  margin-top: 11mm;
+  margin-top: 8mm;
   font-size: 9.1pt;
   line-height: 1.55;
+}
+.executive-module .executive-module-note {
+  margin-top: 7mm;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(0,0,66,.15);
+  font-size: 7.8pt;
+  line-height: 1.48;
 }
 .executive-module-synth {
   padding: 15mm 10mm 14mm;
@@ -1749,7 +1726,7 @@ th { background: var(--navy); }
   display: grid;
   width: 31mm;
   height: 31mm;
-  margin: 69mm auto 0;
+  margin: 28mm auto 0;
   place-items: center;
   border-radius: 9mm;
   background: rgba(255,255,255,.84);
@@ -1758,7 +1735,7 @@ th { background: var(--navy); }
   box-shadow: 0 4mm 9mm rgba(0,0,66,.10);
 }
 .executive-module-synth h2 {
-  margin-top: 25mm;
+  margin-top: 13mm;
 }
 .executive-module-synth p {
   margin-top: 7mm;
@@ -1843,6 +1820,244 @@ th { background: var(--navy); }
   border-color: rgba(255,255,255,.18);
 }
 
+/* Executive Summary: two-page editorial memo */
+.executive-summary-overview,
+.executive-summary-case-page {
+  padding: 13mm 14mm 12mm;
+  background: #c2d7ed url("/webgl-bg-foundation-v2.png") center / cover no-repeat;
+}
+.executive-summary-overview::after,
+.executive-summary-case-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,.11), rgba(50,102,151,.08)),
+    radial-gradient(circle at 77% 14%, rgba(255,255,255,.18), transparent 30%);
+}
+.executive-summary-header {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 7mm;
+  padding-bottom: 6mm;
+  border-bottom: 1px solid rgba(0,0,66,.18);
+}
+.executive-summary-header span {
+  color: rgba(0,0,66,.58);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .2em;
+}
+.executive-summary-header h2 {
+  margin-top: 4mm;
+  color: var(--navy);
+  font-size: 29pt;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.052em;
+}
+.executive-summary-lede {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+  margin-bottom: 6mm;
+}
+.executive-summary-lede p {
+  min-height: 42mm;
+  padding: 6mm;
+  border-radius: 6mm;
+  background: rgba(255,255,255,.88);
+  color: var(--navy);
+  font-size: 9.6pt;
+  line-height: 1.5;
+  box-shadow: 0 3mm 8mm rgba(0,0,66,.07);
+}
+.executive-summary-lede p:last-child {
+  background: var(--navy);
+  color: rgba(255,255,255,.9);
+}
+.executive-summary-lede p:last-child strong { color: #fff; }
+.executive-summary-columns {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5mm;
+}
+.executive-summary-column {
+  min-height: 143mm;
+  padding: 6mm;
+  border: 1px solid rgba(0,0,66,.11);
+  border-radius: 6mm;
+  background: rgba(255,255,255,.77);
+}
+.executive-summary-column p,
+.executive-summary-column li {
+  color: var(--ink);
+  font-size: 8.15pt;
+  line-height: 1.46;
+}
+.executive-summary-column p + p {
+  margin-top: 5mm;
+  padding-top: 5mm;
+  border-top: 1px solid rgba(0,0,66,.13);
+}
+.executive-summary-modules {
+  margin: 5mm 0 0;
+  padding: 0;
+  list-style: none;
+}
+.executive-summary-modules li {
+  padding: 4mm 0;
+  border-top: 1px solid rgba(0,0,66,.13);
+}
+.executive-summary-modules li::before { display: none; }
+.executive-summary-column-accent {
+  border-color: transparent;
+  background: linear-gradient(155deg, rgba(1,8,54,.97), rgba(28,72,112,.94));
+}
+.executive-summary-column-accent p { color: rgba(255,255,255,.85); }
+.executive-summary-column-accent strong { color: #fff; }
+.executive-summary-column-accent p + p {
+  border-color: rgba(255,255,255,.18);
+}
+.executive-summary-case-page {
+  padding-top: 16mm;
+}
+.executive-summary-case-page .executive-summary-header {
+  margin-bottom: 10mm;
+}
+.executive-summary-case-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7mm;
+}
+.executive-summary-case-column {
+  min-height: 194mm;
+  padding: 9mm;
+  border-radius: 8mm;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.08);
+}
+.executive-summary-case-column h3 {
+  margin-bottom: 7mm;
+  color: var(--navy);
+  font-size: 16pt;
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+.executive-summary-case-column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.executive-summary-case-column li {
+  padding: 6mm 0;
+  border-top: 1px solid rgba(0,0,66,.14);
+  color: var(--ink);
+  font-size: 9pt;
+  line-height: 1.52;
+}
+.executive-summary-case-column li::before { display: none; }
+.executive-summary-case-column li strong {
+  display: block;
+  margin-bottom: 1.5mm;
+}
+.executive-summary-case-column-dark {
+  background: var(--navy);
+}
+.executive-summary-case-column-dark h3,
+.executive-summary-case-column-dark strong {
+  color: #fff;
+}
+.executive-summary-case-column-dark li {
+  border-color: rgba(255,255,255,.18);
+  color: rgba(255,255,255,.84);
+}
+.executive-summary-deck {
+  position: relative;
+  z-index: 2;
+  max-width: 154mm !important;
+  margin: 0 0 7mm;
+  color: rgba(0,0,66,.78);
+  font-size: 10.5pt;
+  line-height: 1.5;
+}
+.executive-summary-body,
+.executive-summary-case-linear {
+  position: relative;
+  z-index: 2;
+  padding: 8mm 9mm;
+  border: 1px solid rgba(0,0,66,.1);
+  border-radius: 8mm;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 4mm 10mm rgba(0,0,66,.08);
+}
+.executive-summary-body p {
+  color: var(--ink);
+  font-size: 8.7pt;
+  line-height: 1.46;
+}
+.executive-summary-body p + p {
+  margin-top: 3.5mm;
+  padding-top: 3.5mm;
+  border-top: 1px solid rgba(0,0,66,.12);
+}
+.executive-summary-body .executive-summary-distinction {
+  color: var(--navy);
+  font-size: 9.5pt;
+  line-height: 1.48;
+}
+.executive-summary-body .executive-summary-modules {
+  margin: 3mm 0;
+}
+.executive-summary-body .executive-summary-modules li {
+  margin-top: 2.5mm;
+  padding: 3.5mm 4mm;
+  border: 1px solid rgba(0,0,66,.12);
+  border-radius: 4mm;
+  background: rgba(246,249,253,.92);
+  color: var(--ink);
+  font-size: 8.55pt;
+  line-height: 1.45;
+}
+.executive-summary-case-linear {
+  padding: 8mm 10mm;
+}
+.executive-summary-case-section h3 {
+  margin: 0 0 4mm;
+  color: var(--navy);
+  font-size: 15pt;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.executive-summary-case-section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.executive-summary-case-section li {
+  padding: 3.6mm 0;
+  border-top: 1px solid rgba(0,0,66,.13);
+  color: var(--ink);
+  font-size: 8.85pt;
+  line-height: 1.48;
+}
+.executive-summary-case-section li::before { display: none; }
+.executive-summary-case-section li strong {
+  color: var(--navy);
+}
+.executive-summary-case-round {
+  margin-top: 6mm;
+  padding-top: 6mm;
+  border-top: 2px solid var(--navy);
+}
+
 /* Whole-memo editorial pagination */
 .memo-section {
   font-size: 9.45pt;
@@ -1910,6 +2125,8 @@ th { background: var(--navy); }
 
 /* 02 · Gap — market map, limitation, inverse opportunity */
 .memo-section-2 {
+  padding-left: 18mm;
+  padding-right: 18mm;
   background: rgba(255,255,255,.97);
 }
 .memo-section-2 > p:nth-of-type(4) {
@@ -1929,11 +2146,11 @@ th { background: var(--navy); }
 }
 .memo-section-2 .post-valley-essay {
   min-height: 205mm;
-  margin: 8mm 0;
-  padding: 12mm 62mm 12mm 11mm;
+  margin: 8mm -10mm;
+  padding: 12mm 66mm 12mm 10mm;
   border-radius: 8mm;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.96) 0 66%, rgba(204,224,243,.88) 66%),
+    linear-gradient(90deg, rgba(255,255,255,.96) 0 68%, rgba(204,224,243,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
   box-shadow: 0 5mm 12mm rgba(0,0,66,.09);
   break-before: page;
@@ -1946,15 +2163,34 @@ th { background: var(--navy); }
 }
 .memo-section-2 .memo-topic {
   min-height: 112mm;
+  margin-left: -10mm;
+  margin-right: -10mm;
   padding: 10mm;
 }
 .memo-section-2 .memo-topic-1 {
   background:
-    linear-gradient(90deg, rgba(255,255,255,.95) 0 63%, rgba(214,229,245,.88) 63%),
+    linear-gradient(90deg, rgba(255,255,255,.95) 0 68%, rgba(214,229,245,.88) 68%),
     url("/webgl-bg-foundation-v2.png") center / cover;
 }
 .memo-section-2 .memo-topic-1 > * {
-  max-width: 97mm;
+  max-width: 106mm;
+}
+.memo-section-2 .memo-topic-1 {
+  font-size: 8.9pt;
+  line-height: 1.42;
+}
+.memo-section-2 .memo-topic-1 p {
+  margin-bottom: 2.6mm;
+}
+.memo-section-2 .memo-topic-1 p.lead-in {
+  margin-top: 4mm;
+  font-size: 10.5pt;
+}
+.memo-section-2 .memo-topic-1 .pull-quote {
+  margin: 4mm 0;
+  padding: 6mm;
+  font-size: 15.5pt;
+  line-height: 1.18;
 }
 .memo-section-2 .memo-topic-2 {
   min-height: 222mm;
@@ -1993,8 +2229,8 @@ th { background: var(--navy); }
 .memo-section-3 .memo-topic-1 {
   min-height: 164mm;
   padding: 8mm;
-  font-size: 8.65pt;
-  line-height: 1.42;
+  font-size: 9.6pt;
+  line-height: 1.5;
   background:
     linear-gradient(135deg, rgba(217,232,247,.22), rgba(92,142,190,.12)),
     url("/webgl-bg-foundation-v2.png") center / cover;
@@ -2003,8 +2239,10 @@ th { background: var(--navy); }
   margin-top: 7mm;
 }
 .memo-section-3 .memo-topic-1 .io-visual {
-  margin-top: 6mm;
+  margin-top: 0;
   margin-bottom: 5mm;
+  break-before: page;
+  page-break-before: always;
 }
 .memo-section-3 .memo-topic-1 .io-core {
   min-height: 40mm;
@@ -2027,6 +2265,8 @@ th { background: var(--navy); }
   writing-mode: vertical-rl;
 }
 .memo-section-3 .memo-topic-3 {
+  font-size: 9.6pt;
+  line-height: 1.5;
   background:
     linear-gradient(145deg, rgba(1,8,35,.98), rgba(29,70,110,.93)),
     url("/webgl-bg-foundation-v2.png") center / cover;
@@ -2035,6 +2275,11 @@ th { background: var(--navy); }
 .memo-section-3 .memo-topic-3 h4,
 .memo-section-3 .memo-topic-3 strong { color: #fff; }
 .memo-section-3 .memo-topic-3 h4 { border-color: rgba(255,255,255,.18); }
+.memo-section-3 .memo-topic-3 .product-visual {
+  margin-top: 0;
+  break-before: page;
+  page-break-before: always;
+}
 .memo-section-3 .memo-topic-3 .product-visual {
   color: var(--navy);
 }
@@ -2346,7 +2591,7 @@ th { background: var(--navy); }
   }
   .memo-shell { padding: 0; }
   .executive-spread {
-    width: 178mm;
+    width: 198mm;
     height: 262mm;
   }
   .memo-page-snapshot {
@@ -2402,8 +2647,8 @@ th { background: var(--navy); }
     background: transparent !important;
   }
   .memo-section {
-    margin: 0 -4mm;
-    padding: 10mm 4mm 11mm;
+    margin: 0;
+    padding: 10mm 18mm 11mm;
     border-radius: 0;
     box-shadow: none;
   }
