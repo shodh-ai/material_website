@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const nextPath = normalizeNextPath(formData.get("next"));
   const pathname = new URL(nextPath, request.url).pathname;
 
-  if (!canViewPath(code, pathname)) {
+  if (!(await canViewPath(code, pathname))) {
     const failedUrl = new URL("/access", request.url);
     failedUrl.searchParams.set("next", nextPath);
     failedUrl.searchParams.set("error", "invalid");
