@@ -2,12 +2,17 @@ import styles from "./benchmark.module.css";
 
 const checkpoints = ["1.5B", "2.93B", "10B"];
 
-function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
+function SectionHeading({ eyebrow, title, copy, reference }: { eyebrow: string; title: string; copy?: string; reference?: string }) {
   return (
     <header className={styles.evidenceHeading}>
       <p className={styles.kicker}>{eyebrow}</p>
       <h2>{title}</h2>
-      {copy ? <p>{copy}</p> : null}
+      {reference ? (
+        <div className={styles.evidenceMeta}>
+          {copy ? <p>{copy}</p> : null}
+          <p className={styles.evidenceReference}><strong>Reference</strong>{reference}</p>
+        </div>
+      ) : copy ? <p>{copy}</p> : null}
     </header>
   );
 }
@@ -82,7 +87,7 @@ function QuantumChart() {
   const innerHeight = height - top - bottom;
   const min = 574;
   const max = 583;
-  const x = (index: number) => left + (innerWidth * index) / 2;
+  const x = (index: number) => left + 28 + ((innerWidth - 56) * index) / 2;
   const y = (value: number) => top + innerHeight - ((value - min) / (max - min)) * innerHeight;
   return (
     <svg className={styles.causalChart} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Reaction enthalpy input versus predicted reactor maximum temperature">
@@ -127,7 +132,7 @@ export default function AdditionalEvidence() {
   return (
     <>
       <section className={styles.evidenceSection}>
-        <SectionHeading eyebrow="01 · Capacity" title="Model capacity scaling" copy="Three checkpoints show a consistent empirical improvement as model capacity increases." />
+        <SectionHeading eyebrow="01 · Capacity" title="Model capacity scaling" copy="Three checkpoints show a consistent empirical improvement as model capacity increases." reference="LUCAN Benchmark and Architecture Report, Act V, §5.1.1 “Preliminary Empirical Scaling Behaviour,” p. 46." />
         <div className={styles.disclosure}>Preliminary empirical capacity trend <span>Three checkpoints do not establish a general scaling law.</span></div>
         <div className={styles.trendGrid}>
           <TrendChart title="Activation-barrier MAE" values={[0.115, 0.072, 0.043]} display={["0.115 eV", "0.072 eV", "0.043 eV"]} />
@@ -137,7 +142,7 @@ export default function AdditionalEvidence() {
       </section>
 
       <section className={styles.evidenceSection}>
-        <SectionHeading eyebrow="02 · Cross-scale intervention" title="Quantum-to-reactor causal response" copy="A controlled molecular intervention propagates into a predicted reactor-level response." />
+        <SectionHeading eyebrow="02 · Cross-scale intervention" title="Quantum-to-reactor causal response" copy="At the frozen 2.93B checkpoint, a controlled molecular intervention propagates into a predicted reactor-level response." reference="LUCAN Benchmark and Architecture Report, Act II, §2.2 “Blind Quantum-Enthalpy-to-Reactor Intervention,” pp. 20–21." />
         <div className={styles.causalLayout}>
           <div className={styles.whiteSurface}><QuantumChart /></div>
           <aside className={styles.gatePanel}>
@@ -150,7 +155,7 @@ export default function AdditionalEvidence() {
       </section>
 
       <section className={styles.evidenceSection}>
-        <SectionHeading eyebrow="03 · Constraint enforcement" title="Learned prediction plus deterministic enforcement" copy="The learned forecast is followed by explicit deterministic correction; conservation after correction is not presented as learned conservation." />
+        <SectionHeading eyebrow="03 · Constraint enforcement" title="Learned prediction plus deterministic enforcement" copy="The learned forecast is followed by explicit deterministic correction; conservation after correction is not presented as learned conservation." reference="LUCAN Benchmark and Architecture Report, Act IV, §4.5.2 “Pre- and Post-Correction Conservation Audit,” pp. 38–39." />
         <div className={styles.correctionLayout}>
           <div className={styles.residualPanel}>
             <div className={styles.residualHeader}><span>Raw neural output</span><span>After deterministic correction</span></div>
@@ -165,7 +170,7 @@ export default function AdditionalEvidence() {
       </section>
 
       <section className={styles.evidenceSection}>
-        <SectionHeading eyebrow="04 · Efficiency" title="Workflow speed and solver efficiency" copy="End-to-end execution is evaluated alongside solver-verified optimisation." />
+        <SectionHeading eyebrow="04 · Efficiency" title="Workflow speed and solver efficiency" copy="End-to-end execution is evaluated alongside solver-verified optimisation." reference="LUCAN Benchmark and Architecture Report, Act IV, §§4.6.1–4.6.2 “Workflow Execution and Proposal Latency” and “Solver-Verified Inverse Design,” pp. 41–42." />
         <div className={styles.efficiencyGrid}>
           <article className={styles.latencyPanel}>
             <h3>Proposal latency <span>p50 · lower is better</span></h3>
@@ -184,12 +189,12 @@ export default function AdditionalEvidence() {
         <SectionHeading eyebrow="05 · Prospective physical validation" title="Industrial physical-validation outcomes" copy="Case-specific physical outcomes are shown separately from comparative model benchmarks." />
         <div className={styles.validationGrid}>
           <article className={styles.validationCard}>
-            <p className={styles.miniKicker}>Aarti Industries</p><h3>Specialty chemicals</h3>
+            <p className={styles.miniKicker}>Global specialty chemicals manufacturing partner</p><h3>Specialty chemicals</h3>
             <Bullet label="Isolated yield" baseline={82.4} threshold={96.5} achieved={96.7} max={100} />
             <Bullet label="Impurity" baseline={12.3} threshold={4} achieved={3.1} max={15} higher={false} />
           </article>
           <article className={styles.validationCard}>
-            <p className={styles.miniKicker}>Axella Biotech</p><h3>Biomanufacturing</h3>
+            <p className={styles.miniKicker}>Global biomanufacturing partner</p><h3>Biomanufacturing</h3>
             <Bullet label="Product titer" threshold={6.5} achieved={6.63} max={7.2} />
             <Bullet label="Harvest viability" threshold={75} achieved={78.2} max={90} />
             <Bullet label="HMW aggregates" threshold={2} achieved={1.2} max={3} higher={false} />
@@ -198,44 +203,6 @@ export default function AdditionalEvidence() {
         </div>
       </section>
 
-      <section className={styles.evidenceSection}>
-        <SectionHeading eyebrow="06 · Representation" title="Representation payload reduction" copy="Calculated pre-lift logical payload reduction. These values are not filesystem or cloud-storage savings." />
-        <div className={styles.payloadPanel}>
-          <div className={styles.payloadLegend}><span><i />Scalar-count reduction</span><span><i />Logical byte reduction</span><b>Log scale</b></div>
-          {[
-            ["Continuous flow", 576, 1152], ["Bioreactor", 256, 512], ["Plasma", 42, 84],
-          ].map(([label, scalar, bytes]) => <div className={styles.payloadRow} key={String(label)}><strong>{label}</strong><div><span style={{ width: `${(Math.log10(Number(scalar)) / Math.log10(1152)) * 100}%` }}>{scalar}×</span><span style={{ width: `${(Math.log10(Number(bytes)) / Math.log10(1152)) * 100}%` }}>{bytes}×</span></div></div>)}
-        </div>
-      </section>
-
-      <section className={styles.appendixSection}>
-        <SectionHeading eyebrow="Appendix evidence" title="Molecular evidence dashboard" />
-        <div className={styles.metricDashboard}>
-          <div><span>Chirality violation rate</span><strong>0.080%</strong><p>95% CI [0.06%, 0.11%]</p></div>
-          <div><span>Violating frames</span><strong>1,185</strong><p>of 1,482,000</p></div>
-          <div><span>Affected trajectories</span><strong>12 / 500</strong></div>
-          <div className={styles.preliminaryMetric}><em>Preliminary</em><span>Sampling convergence</span><strong>34 / 50</strong><p>molecules · 68%</p></div>
-          <div className={styles.preliminaryMetric}><em>Preliminary</em><span>Conformer JSD</span><strong>0.037</strong><p>median 0.029 · p95 0.062</p></div>
-          <div className={styles.preliminaryMetric}><em>Preliminary</em><span>Relative free-energy MAD</span><strong>0.62</strong><p>kcal/mol · CI [0.41, 0.88]</p></div>
-          <div><span>Execution yield</span><strong>10 / 10</strong><p>edges</p></div>
-          <div><span>Maximum cycle-closure residual</span><strong>0.15</strong><p>kcal/mol</p></div>
-        </div>
-      </section>
-
-      <section className={styles.appendixSection}>
-        <SectionHeading eyebrow="Appendix evidence" title="Compute accounting" />
-        <div className={styles.computeLayout}>
-          <article className={styles.computeTotal}>
-            <p>10B model-development total</p><strong>89,000</strong><span>H100 GPU-hours</span>
-            <div><i style={{ width: "32%" }} /><i style={{ width: "68%" }} /></div>
-            <ul><li><b />Final 72-GPU campaign: 28,500 hours</li><li><b />Earlier development / recovery / ablations: 60,500 hours</li></ul>
-          </article>
-          <dl className={styles.computeMetrics}>
-            <div><dt>Active forward/backward segment</dt><dd>7,386 hours</dd></div><div><dt>Training exposure</dt><dd>235.4B tokens</dd></div><div><dt>Active training duration</dt><dd>115.4 hours</dd></div><div><dt>Throughput</dt><dd>567,000 tokens/s</dd></div><div><dt>MFU</dt><dd>42.4%</dd></div><div><dt>Communication stalls</dt><dd>11.2%</dd></div><div><dt>Peak VRAM</dt><dd>68.4 GB allocated<br />76.1 GB reserved</dd></div>
-          </dl>
-        </div>
-        <p className={styles.accountingNote}><strong>Accounting boundary:</strong> the separately reported 60,000 physics-generation hours and 53,560 tokenizer-validation hours are not added into the 89,000-hour model-development total.</p>
-      </section>
     </>
   );
 }

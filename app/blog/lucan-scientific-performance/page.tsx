@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import localFont from "next/font/local";
+import type { ReactNode } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import styles from "./benchmark.module.css";
 import AdditionalEvidence from "./AdditionalEvidence";
@@ -26,6 +27,7 @@ type BenchmarkPanel = {
   decimals: number;
   suffix?: string;
   note: string;
+  explanation: ReactNode;
   values: BenchmarkValue[];
 };
 
@@ -36,6 +38,13 @@ const panels: BenchmarkPanel[] = [
     axis: "Barrier MAE (eV)",
     decimals: 3,
     note: "Matched comparator · n=250",
+    explanation: (
+      <>
+        <p>Accurate activation barriers are required to estimate reaction rates and rank competing chemical pathways. LUCAN was evaluated on <strong>250 held-out organometallic transition-state candidates</strong> spanning 12 reaction families.</p>
+        <p>The frozen 10B checkpoint achieved a barrier mean absolute error of <strong>0.043 eV</strong>, compared with <strong>0.051 eV</strong> for MACE-OMol25 under the same protocol. This corresponds to an approximately <strong>15.7% lower barrier error</strong> on the evaluated suite.</p>
+        <p>The aggregate error approaches the conventional chemical-accuracy reference of approximately 1 kcal/mol. The out-of-distribution subset reached a higher error of <strong>0.055 eV</strong>, so chemical accuracy does not extend uniformly across all reaction classes.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 0.043, lucan: true },
       { label: "MACE-OMol25", shortLabel: "MACE-OMol25", value: 0.051 },
@@ -48,6 +57,13 @@ const panels: BenchmarkPanel[] = [
     decimals: 1,
     suffix: "%",
     note: "214/250 vs 178/250",
+    explanation: (
+      <>
+        <p>Barrier accuracy alone is insufficient if the predicted geometry is not a valid transition state. Following DFT refinement, each candidate was required to possess exactly one imaginary vibrational mode aligned with the reaction pathway.</p>
+        <p>LUCAN produced <strong>214 valid transition states from 250 candidates</strong>, corresponding to a valid-Hessian fraction of <strong>85.6%</strong>. MACE-OMol25 produced <strong>178 valid candidates</strong>, or <strong>71.2%</strong>.</p>
+        <p>LUCAN&apos;s valid-Hessian fraction was <strong>14.4 percentage points higher</strong> on the same 250-candidate evaluation set.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 85.6, lucan: true },
       { label: "MACE-OMol25", shortLabel: "MACE-OMol25", value: 71.2 },
@@ -60,6 +76,13 @@ const panels: BenchmarkPanel[] = [
     decimals: 1,
     suffix: "%",
     note: "Held-out geometry Sim-to-Sim",
+    explanation: (
+      <>
+        <p>Wall and impeller shear stress are important for predicting mixing performance, material loading and potential damage to shear-sensitive products.</p>
+        <p>On held-out moving-reactor geometries, LUCAN achieved an impeller shear-stress relative error of <strong>5.8%</strong>, compared with <strong>18.6%</strong> for the evaluated Geo-FNO implementation. This represents an approximately <strong>68.8% reduction in error</strong>.</p>
+        <p>An FP64 OpenFOAM simulation provides the numerical reference. The scope covers the tested geometry family, turbulence model and rheological conditions.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 5.8, lucan: true },
       { label: "Geo-FNO", shortLabel: "Geo-FNO", value: 18.6 },
@@ -72,6 +95,13 @@ const panels: BenchmarkPanel[] = [
     decimals: 1,
     suffix: "%",
     note: "Held-out geometry Sim-to-Sim",
+    explanation: (
+      <>
+        <p>The volumetric mass-transfer coefficient, kLa, measures how effectively oxygen is transferred from the gas phase into the liquid. It is a central operating quantity in chemical and biological reactors.</p>
+        <p>LUCAN achieved a kLa relative error of <strong>6.4%</strong>, compared with <strong>15.2%</strong> for Geo-FNO. This corresponds to an approximately <strong>57.9% reduction in error</strong> under the held-out geometry protocol.</p>
+        <p>The lower kLa error corresponds to more accurate oxygen-uptake prediction across the tested moving-reactor cases.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 6.4, lucan: true },
       { label: "Geo-FNO", shortLabel: "Geo-FNO", value: 15.2 },
@@ -83,6 +113,13 @@ const panels: BenchmarkPanel[] = [
     axis: "Mean nRMSE",
     decimals: 3,
     note: "15% random missingness",
+    explanation: (
+      <>
+        <p>Industrial sensor streams frequently contain missing or irregularly timed measurements. A useful physical model must continue forecasting the system state without access to future observations.</p>
+        <p>Under a preregistered <strong>15% random-missingness schedule</strong>, LUCAN&apos;s complete temporal prediction-and-correction pipeline achieved a mean nRMSE of <strong>0.041</strong>, compared with <strong>0.129</strong> for the Neural ODE baseline. The corresponding p95 errors were <strong>0.052</strong> and <strong>0.144</strong>, respectively.</p>
+        <p>The mean error was approximately <strong>68.2% lower</strong> for LUCAN under the evaluated missing-data protocol.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN pipeline", shortLabel: "LUCAN pipeline", value: 0.041, lucan: true },
       { label: "Neural ODE", shortLabel: "Neural ODE", value: 0.129 },
@@ -95,9 +132,16 @@ const panels: BenchmarkPanel[] = [
     decimals: 0,
     suffix: " ms",
     note: "50 ms physical step",
+    explanation: (
+      <>
+        <p>This evaluation measures how accurately the model predicts the time required for a reactor state to reach 90% of its steady response following a control intervention.</p>
+        <p>At a physical simulation step of <strong>50 milliseconds</strong>, the evaluated baseline produced a timing error of <strong>92 milliseconds</strong>. LUCAN achieved an error of <strong>19 milliseconds</strong>, an approximately <strong>79.3% reduction</strong>.</p>
+        <p>Sub-timestep timing was calculated using LUCAN&apos;s continuous-time decoder at preregistered intermediate query points.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 19, lucan: true },
-      { label: "Declared baseline", shortLabel: "Declared baseline", value: 92 },
+      { label: "Temporal baseline", shortLabel: "Temporal baseline", value: 92 },
     ],
   },
   {
@@ -107,6 +151,13 @@ const panels: BenchmarkPanel[] = [
     decimals: 0,
     suffix: "%",
     note: "1,000 steps · 50 trajectories",
+    explanation: (
+      <>
+        <p>Long-horizon prediction can fail when small errors accumulate into non-physical states, boundary violations or numerical divergence.</p>
+        <p>Across <strong>50 independent 1,000-step trajectories</strong>, LUCAN recorded <strong>0 rollout-validity failures</strong>. The standard autoregressive baseline recorded <strong>9 failures from 50 trajectories</strong>, corresponding to an <strong>18.0% failure rate</strong>.</p>
+        <p>Zero observed failures do not imply a zero underlying failure probability. LUCAN&apos;s rollout-failure rate has a <strong>95% confidence interval of 0.0–7.1%</strong>.</p>
+      </>
+    ),
     values: [
       { label: "LUCAN", shortLabel: "LUCAN", value: 0, lucan: true },
       { label: "AR baseline", shortLabel: "AR baseline", value: 18 },
@@ -118,6 +169,13 @@ const panels: BenchmarkPanel[] = [
     axis: "PBE/PSD nRMSE",
     decimals: 3,
     note: "Full LUCAN vs coupling ablations",
+    explanation: (
+      <>
+        <p>Crystallisation connects molecular thermodynamics and nucleation kinetics with crystal-population dynamics, cooling and macroscopic reactor mixing.</p>
+        <p>On a 50-litre pharmaceutical crystallizer geometry, the fully coupled LUCAN system achieved a population-balance and particle-size-distribution nRMSE of <strong>0.072</strong>. Error increased to <strong>0.115</strong> with unstructured cross-domain coupling and to <strong>0.184</strong> when the population-balance and fluid systems were detached.</p>
+        <p>The fully coupled configuration therefore produced approximately <strong>37.4% lower error than unstructured coupling</strong> and <strong>60.9% lower error than detached coupling</strong>. This supports the contribution of structured interaction between the crystal-population state and bulk reactor transport.</p>
+      </>
+    ),
     values: [
       { label: "Full LUCAN", shortLabel: "Full", value: 0.072, lucan: true },
       { label: "Unstructured", shortLabel: "Unstructured", value: 0.115 },
@@ -215,6 +273,8 @@ function BenchmarkChart({ panel, index }: { panel: BenchmarkPanel; index: number
 
         <text className={styles.xAxisTitle} x={plot.left + innerWidth / 2} y={height - 8} textAnchor="middle">Model / configuration</text>
       </svg>
+
+      <div className={styles.chartExplanation}>{panel.explanation}</div>
     </article>
   );
 }
@@ -236,7 +296,7 @@ export default function LucanScientificPerformancePage() {
           <div className={styles.heroInner}>
             <p className={styles.kicker}>Research · Model evaluation</p>
             <h1>LUCAN Scientific<br />Performance Evaluation</h1>
-            <p className={styles.dek}>Eight task-qualified comparisons under the report&apos;s declared evaluation protocols</p>
+            <p className={styles.dek}>Eight task-qualified comparisons across molecular, process and temporal physics</p>
             <div className={styles.heroMeta}>
               <span>26 July 2026</span>
               <span>8 benchmark tasks</span>
@@ -251,7 +311,7 @@ export default function LucanScientificPerformancePage() {
             <h2>One model, tested across distinct physical regimes.</h2>
           </div>
           <div className={styles.introCopy}>
-            <p>Each comparison follows the task qualification and evaluation protocol declared in the underlying report. The panels retain independent scales so that performance is legible within each scientific task.</p>
+            <p>Each comparison uses a task-specific qualification and evaluation protocol. Independent panel scales keep performance legible within each scientific task.</p>
             <div className={styles.legend} aria-label="Chart legend">
               <span><i className={styles.lucanSwatch} /> LUCAN</span>
               <span><i className={styles.comparatorSwatch} /> Comparator or ablation</span>
@@ -275,7 +335,7 @@ export default function LucanScientificPerformancePage() {
 
         <section className={styles.notes}>
           <p className={styles.kicker}>Method note</p>
-          <p>Each panel uses an independent scale. LUCAN is highlighted; grey bars are the declared comparator or ablation.</p>
+          <p>Each panel uses an independent scale. LUCAN is highlighted; grey bars show the comparator or ablation.</p>
           <p>Source: SHODH/INDIAAI/PHASE-II/2026/01-D, 26 July 2026, Sections 4.1, 4.4 and 4.5. Temporal results are task-level pipeline comparisons and their baselines are not parameter-matched to LUCAN. This is not a universal physical-AI SOTA leaderboard.</p>
         </section>
 

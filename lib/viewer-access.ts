@@ -8,15 +8,23 @@ const BUILT_IN_VIEWER_RULES: ViewerRules = {
   "Shodh-Investor-2026": ["*"],
 };
 
+const LUCAN_BENCHMARK_PATH = "/blog/lucan-scientific-performance";
+
 function getRules(): ViewerRules {
+  const lucanPassword = process.env.PMEC_BLOG_PASSWORD?.trim();
+  const environmentRules: ViewerRules = lucanPassword
+    ? { [lucanPassword]: [LUCAN_BENCHMARK_PATH] }
+    : {};
+
   try {
     const parsed = JSON.parse(process.env.VIEWER_ACCESS_RULES || "{}");
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-      return BUILT_IN_VIEWER_RULES;
+      return { ...BUILT_IN_VIEWER_RULES, ...environmentRules };
     }
 
     return {
       ...BUILT_IN_VIEWER_RULES,
+      ...environmentRules,
       ...(Object.fromEntries(
         Object.entries(parsed).filter(
           ([code, paths]) =>
@@ -27,7 +35,7 @@ function getRules(): ViewerRules {
       ) as ViewerRules),
     };
   } catch {
-    return BUILT_IN_VIEWER_RULES;
+    return { ...BUILT_IN_VIEWER_RULES, ...environmentRules };
   }
 }
 

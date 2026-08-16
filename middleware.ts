@@ -27,8 +27,11 @@ const publicExactPaths = new Set([
 ]);
 
 const publicPathPrefixes = ["/shodh-new/", "/blog/", "/research/"];
+const protectedExactPaths = new Set(["/blog/lucan-scientific-performance"]);
 
 function isPublicPath(pathname: string) {
+  if (protectedExactPaths.has(pathname)) return false;
+
   return (
     publicExactPaths.has(pathname) ||
     publicPathPrefixes.some((prefix) => pathname.startsWith(prefix)) ||
