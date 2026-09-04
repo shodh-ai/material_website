@@ -163,6 +163,10 @@ export default function CareersPage() {
   };
 
   const handleApply = (roleTitle: string) => {
+    if (roleTitle === "AI Engineer Intern") {
+      window.location.href = "/ai-engineer-intern";
+      return;
+    }
     setSelectedRole(roleTitle);
     setFormData((current) => ({ ...current, role: roleTitle }));
     setShowForm(true);
