@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import "./careers.css";
 
 export const metadata: Metadata = {
   title: "Careers | Build AI for Science at Shodh AI",
