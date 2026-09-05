@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
@@ -14,16 +14,12 @@ import {
   ChevronDown,
   Code2,
   Factory,
-  FlaskConical,
   Globe2,
   Moon,
-  Send,
   Sparkles,
   Sun,
   Zap,
 } from "lucide-react";
-import { submitCareerApplication } from "./actions";
-
 const reveal: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
@@ -51,11 +47,30 @@ const openRoles = [
       "High ownership, clear communication, and strong learning velocity",
     ],
     icon: Brain,
+    applicationPath: "/ai-engineer-intern",
+    isOpen: true,
+  },
+  {
+    title: "Founder’s Associate",
+    team: "Founder’s Office",
+    location: "Jaipur, India",
+    type: "Full-time",
+    description:
+      "Work closely with the founding team across strategy, research, operations, partnerships, and execution. Turn ambiguous priorities into clear plans and measurable outcomes.",
+    requirements: [
+      "Exceptional written and verbal communication",
+      "Strong analytical thinking and comfort with ambiguity",
+      "A record of taking ownership and executing difficult projects",
+      "Curiosity about AI, science, and industrial innovation",
+    ],
+    icon: Sparkles,
+    applicationPath: "/founders-associate",
+    isOpen: true,
   },
   {
     title: "ML Research Engineer — Physics Foundation Models",
     team: "Core AI",
-    location: "Bangalore, India",
+    location: "Jaipur, India",
     type: "Full-time",
     description:
       "Build and train our Meso-Foundation Model. Work on 3D Diffusion Transformers, Fourier Neural Operators, and physics-informed architectures across 10M+ synthetic physics simulations.",
@@ -66,11 +81,13 @@ const openRoles = [
       "Published research preferred",
     ],
     icon: Brain,
+    applicationPath: null,
+    isOpen: false,
   },
   {
     title: "Computational Materials Scientist",
     team: "Physics Engine",
-    location: "Bangalore, India",
+    location: "Jaipur, India",
     type: "Full-time",
     description:
       "Design and run Monte Carlo simulations, build physics kernels, and generate the synthetic training data that powers our AI. Bridge first-principles physics and machine learning.",
@@ -81,11 +98,13 @@ const openRoles = [
       "Battery electrochemistry knowledge is a strong plus",
     ],
     icon: Atom,
+    applicationPath: null,
+    isOpen: false,
   },
   {
     title: "Full-Stack Engineer",
     team: "Product",
-    location: "Bangalore, India",
+    location: "Jaipur, India",
     type: "Full-time",
     description:
       "Build the interfaces for our Matter Compiler: the tools factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and SkandaX.",
@@ -96,11 +115,13 @@ const openRoles = [
       "Passion for precise, functional products",
     ],
     icon: Code2,
+    applicationPath: null,
+    isOpen: false,
   },
   {
     title: "Forward Deployed Engineer (FDE)",
     team: "Deployment",
-    location: "Munich / Tokyo / Bangalore",
+    location: "Jaipur, India",
     type: "Full-time",
     description:
       "Deploy SkandaX directly into partner R&D centers and gigafactories. Work on-site with industrial teams to design next-generation material and process recipes.",
@@ -111,41 +132,14 @@ const openRoles = [
       "Excellent communication skills",
     ],
     icon: Factory,
-  },
-  {
-    title: "Research Intern — AI for Science",
-    team: "Core AI",
-    location: "Bangalore, India",
-    type: "Internship · 6 months",
-    description:
-      "Work on frontier problems at the intersection of AI and physics. Contribute to publications, build novel architectures, and help train a Physics Foundation Model.",
-    requirements: [
-      "Currently pursuing an MS/PhD in ML, Physics, or a related field",
-      "Strong Python and PyTorch skills",
-      "Curiosity about scientific AI applications",
-      "Self-driven and eager to publish",
-    ],
-    icon: FlaskConical,
+    applicationPath: null,
+    isOpen: false,
   },
 ];
 
 export default function CareersPage() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
-  const [showForm, setShowForm] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    role: "",
-    experience: "",
-    linkedin: "",
-    message: "",
-  });
 
   useEffect(() => {
     try {
@@ -160,32 +154,6 @@ export default function CareersPage() {
     try {
       localStorage.setItem("shodh-theme", next);
     } catch {}
-  };
-
-  const handleApply = (roleTitle: string) => {
-    if (roleTitle === "AI Engineer Intern") {
-      window.location.href = "/ai-engineer-intern";
-      return;
-    }
-    setSelectedRole(roleTitle);
-    setFormData((current) => ({ ...current, role: roleTitle }));
-    setShowForm(true);
-    setTimeout(() => document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth" }), 100);
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSubmitting(true);
-    setSubmissionError("");
-    try {
-      const result = await submitCareerApplication(formData);
-      if (result.success) setSubmitted(true);
-      else setSubmissionError(result.error ?? "Failed to submit application. Please try again.");
-    } catch {
-      setSubmissionError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   return (
@@ -253,7 +221,7 @@ export default function CareersPage() {
               <p className="careers-eyebrow">WORK WITH US</p>
               <h2>OPEN POSITIONS</h2>
             </div>
-            <p>{String(openRoles.length).padStart(2, "0")} ROLES · BANGALORE AND GLOBAL</p>
+            <p>02 OPEN ROLES · JAIPUR</p>
           </div>
 
           <div className="careers-role-list">
@@ -267,7 +235,7 @@ export default function CareersPage() {
                     <span className="careers-role-icon"><Icon size={23} /></span>
                     <span className="careers-role-name">
                       <strong>{role.title}</strong>
-                      <span>{role.team} · {role.location} · {role.type}</span>
+                      <span>{role.team} · {role.location} · {role.type} · <b className={role.isOpen ? "is-open" : "is-closed"}>{role.isOpen ? "OPEN" : "CLOSED"}</b></span>
                     </span>
                     <span className="careers-role-arrow"><ChevronDown size={22} /></span>
                   </button>
@@ -289,9 +257,15 @@ export default function CareersPage() {
                           {role.requirements.map((requirement) => <li key={requirement}><Check size={15} />{requirement}</li>)}
                         </ul>
                       </div>
-                      <button onClick={() => handleApply(role.title)} className="careers-primary-button">
-                        APPLY FOR THIS ROLE <ArrowRight size={17} />
-                      </button>
+                      {role.applicationPath ? (
+                        <Link href={role.applicationPath} className="careers-primary-button">
+                          APPLY FOR THIS ROLE <ArrowRight size={17} />
+                        </Link>
+                      ) : (
+                        <span className="careers-primary-button careers-closed-button" aria-label={`${role.title} applications are closed`}>
+                          APPLICATIONS CLOSED
+                        </span>
+                      )}
                     </motion.div>
                   )}
                 </motion.article>
@@ -300,49 +274,6 @@ export default function CareersPage() {
           </div>
         </section>
 
-        <section className="careers-open-call">
-          <p className="careers-eyebrow">OPEN CALL</p>
-          <h2>DON&apos;T SEE<br />YOUR ROLE?</h2>
-          <div>
-            <p>Exceptional people rarely fit a template. Tell us what you can build and why this mission matters to you.</p>
-            <button onClick={() => handleApply("General Application")} className="careers-primary-button">
-              SEND A GENERAL APPLICATION <ArrowRight size={17} />
-            </button>
-          </div>
-        </section>
-
-        {showForm && (
-          <section id="application-form" className="careers-application">
-            {submitted ? (
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="careers-success">
-                <span><Check size={36} /></span>
-                <p className="careers-eyebrow">APPLICATION RECEIVED</p>
-                <h2>THANK YOU.</h2>
-                <p>We&apos;ll review your application and get back to you soon.</p>
-                <Link href="/" className="careers-primary-button">BACK TO HOME <ArrowRight size={17} /></Link>
-              </motion.div>
-            ) : (
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="careers-form-heading">
-                  <div><p className="careers-eyebrow">JOIN SHODH AI</p><h2>APPLY NOW</h2></div>
-                  <p>Applying for<br /><strong>{selectedRole}</strong></p>
-                </div>
-                <form onSubmit={handleSubmit} className="careers-form">
-                  <label><span>FULL NAME *</span><input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" /></label>
-                  <label><span>EMAIL *</span><input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="you@email.com" /></label>
-                  <label><span>PHONE</span><input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+91 ..." /></label>
-                  <label><span>LINKEDIN</span><input type="url" value={formData.linkedin} onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })} placeholder="linkedin.com/in/..." /></label>
-                  <label className="careers-form-wide"><span>EXPERIENCE</span><select value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })}><option value="">Select experience</option><option value="0-1">0–1 years · Student / fresh graduate</option><option value="1-3">1–3 years</option><option value="3-5">3–5 years</option><option value="5-10">5–10 years</option><option value="10+">10+ years</option></select></label>
-                  <label className="careers-form-wide"><span>WHY DO YOU WANT TO JOIN SHODH AI? *</span><textarea required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about yourself, what you can build, and what excites you about AI for science." /></label>
-                  {submissionError && <p className="careers-form-error" role="alert">{submissionError}</p>}
-                  <button type="submit" disabled={submitting} className="careers-primary-button careers-submit">
-                    {submitting ? "SUBMITTING..." : <>SUBMIT APPLICATION <Send size={17} /></>}
-                  </button>
-                </form>
-              </motion.div>
-            )}
-          </section>
-        )}
       </main>
 
       <footer className="careers-footer">
