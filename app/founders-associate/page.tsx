@@ -64,8 +64,8 @@ export default function FoundersAssociatePage() {
           alt="Founders Associate"
           className="application-graphic"
           src="/founders-associate-hiring.jpg"
-          width={1225}
-          height={1280}
+          width={1914}
+          height={2000}
           sizes="(max-width: 900px) calc(100vw - 76px), 732px"
           priority
           unoptimized

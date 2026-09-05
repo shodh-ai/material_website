@@ -68,8 +68,8 @@ export default function AIEngineerInternPage() {
           alt="We're hiring an AI Engineer Intern at Shodh AI"
           className="application-graphic"
           src="/ai-engineer-intern-hiring.jpg"
-          width={1175}
-          height={1228}
+          width={1531}
+          height={1600}
           sizes="(max-width: 900px) calc(100vw - 76px), 732px"
           priority
           unoptimized
