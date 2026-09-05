@@ -1,58 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { FormEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   ArrowLeft,
-  Rocket,
-  Zap,
-  Brain,
-  Globe,
+  ArrowRight,
   Atom,
-  Factory,
+  Brain,
+  Check,
+  ChevronDown,
   Code2,
+  Factory,
   FlaskConical,
+  Globe2,
+  Moon,
   Send,
-  CheckCircle2,
-  ChevronRight,
   Sparkles,
-  MapPin,
-  Clock,
+  Sun,
+  Zap,
 } from "lucide-react";
 import { submitCareerApplication } from "./actions";
-import Footer from "@/components/Footer";
 
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0, 0, 0.2, 1] } },
+const reveal: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
 };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const openRoles = [
   {
-    title: "ML Research Engineer - Physics Foundation Models",
+    title: "AI Engineer Intern",
+    team: "Core AI",
+    location: "Jaipur, India",
+    type: "Internship",
+    description:
+      "Build and ship applied AI systems across model development, evaluation, data pipelines, and product integrations. You will work closely with the engineering team on real problems with measurable outcomes.",
+    conversion:
+      "Full-time conversion is evaluated solely on demonstrated performance during the internship.",
+    requirements: [
+      "Strong Python fundamentals and hands-on experience with modern ML frameworks",
+      "Experience building with LLMs, agents, retrieval, or model evaluation",
+      "Ability to move from an open-ended problem to a tested working system",
+      "High ownership, clear communication, and strong learning velocity",
+    ],
+    icon: Brain,
+  },
+  {
+    title: "ML Research Engineer — Physics Foundation Models",
     team: "Core AI",
     location: "Bangalore, India",
     type: "Full-time",
     description:
-      "Build and train our Meso-Foundation Model. Work on 3D Diffusion Transformers, Fourier Neural Operators, and physics-informed architectures. You'll be training models on 10M+ synthetic physics simulations.",
+      "Build and train our Meso-Foundation Model. Work on 3D Diffusion Transformers, Fourier Neural Operators, and physics-informed architectures across 10M+ synthetic physics simulations.",
     requirements: [
-      "Strong background in ML/DL (PyTorch)",
+      "Strong background in ML/DL and PyTorch",
       "Experience with transformers, diffusion models, or neural operators",
       "Physics or materials science intuition is a plus",
       "Published research preferred",
     ],
     icon: Brain,
-    color: "#48cae4",
   },
   {
     title: "Computational Materials Scientist",
@@ -60,15 +73,14 @@ const openRoles = [
     location: "Bangalore, India",
     type: "Full-time",
     description:
-      "Design and run Monte Carlo simulations, build physics kernels (Fick's Law, Butler-Volmer), and generate the synthetic training data that powers our AI. Bridge the gap between first-principles physics and machine learning.",
+      "Design and run Monte Carlo simulations, build physics kernels, and generate the synthetic training data that powers our AI. Bridge first-principles physics and machine learning.",
     requirements: [
       "PhD or MS in Materials Science, Physics, or Chemical Engineering",
       "Experience with DFT, MD, or continuum simulations",
       "Proficiency in Python and scientific computing",
-      "Understanding of battery electrochemistry is a strong plus",
+      "Battery electrochemistry knowledge is a strong plus",
     ],
     icon: Atom,
-    color: "#a855f7",
   },
   {
     title: "Full-Stack Engineer",
@@ -76,15 +88,14 @@ const openRoles = [
     location: "Bangalore, India",
     type: "Full-time",
     description:
-      "Build the interfaces for our Matter Compiler - the tools that factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and the SkandaX platform.",
+      "Build the interfaces for our Matter Compiler: the tools factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and SkandaX.",
     requirements: [
-      "Strong TypeScript/React/Next.js skills",
-      "Experience with 3D visualization (Three.js, WebGL) is a plus",
-      "Backend experience (Node.js, Python, PostgreSQL)",
-      "Passion for building beautiful, functional products",
+      "Strong TypeScript, React, and Next.js skills",
+      "3D visualization experience is a plus",
+      "Backend experience with Node.js, Python, or PostgreSQL",
+      "Passion for precise, functional products",
     ],
     icon: Code2,
-    color: "#22c55e",
   },
   {
     title: "Forward Deployed Engineer (FDE)",
@@ -92,40 +103,40 @@ const openRoles = [
     location: "Munich / Tokyo / Bangalore",
     type: "Full-time",
     description:
-      "Deploy SkandaX directly into partner R&D centers and Gigafactories. Work on-site with Tier-1 OEMs (Tata, BMW, Panasonic) to design next-gen battery recipes using our AI platform.",
+      "Deploy SkandaX directly into partner R&D centers and gigafactories. Work on-site with industrial teams to design next-generation material and process recipes.",
     requirements: [
       "2+ years in a technical customer-facing role",
-      "Strong engineering fundamentals (ML, materials, or manufacturing)",
+      "Strong engineering fundamentals in ML, materials, or manufacturing",
       "Willingness to travel and work on-site with partners",
       "Excellent communication skills",
     ],
     icon: Factory,
-    color: "#f59e0b",
   },
   {
-    title: "Research Intern - AI for Science",
+    title: "Research Intern — AI for Science",
     team: "Core AI",
     location: "Bangalore, India",
-    type: "Internship (6 months)",
+    type: "Internship · 6 months",
     description:
-      "Join our research team and work on cutting-edge problems at the intersection of AI and physics. Contribute to publications, build novel architectures, and help train the world's first Physics Foundation Model.",
+      "Work on frontier problems at the intersection of AI and physics. Contribute to publications, build novel architectures, and help train a Physics Foundation Model.",
     requirements: [
-      "Currently pursuing MS/PhD in ML, Physics, or related field",
-      "Strong coding skills (Python, PyTorch)",
+      "Currently pursuing an MS/PhD in ML, Physics, or a related field",
+      "Strong Python and PyTorch skills",
       "Curiosity about scientific AI applications",
       "Self-driven and eager to publish",
     ],
     icon: FlaskConical,
-    color: "#ec4899",
   },
 ];
 
 export default function CareersPage() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -136,405 +147,220 @@ export default function CareersPage() {
     message: "",
   });
 
-  const handleApply = (roleTitle: string) => {
-    setSelectedRole(roleTitle);
-    setFormData((prev) => ({ ...prev, role: roleTitle }));
-    setShowForm(true);
-    setTimeout(() => {
-      document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("shodh-theme");
+      setTheme(saved === "dark" ? "dark" : "light");
+    } catch {}
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    try {
+      localStorage.setItem("shodh-theme", next);
+    } catch {}
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleApply = (roleTitle: string) => {
+    if (roleTitle === "AI Engineer Intern") {
+      window.location.href = "/ai-engineer-intern";
+      return;
+    }
+    setSelectedRole(roleTitle);
+    setFormData((current) => ({ ...current, role: roleTitle }));
+    setShowForm(true);
+    setTimeout(() => document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth" }), 100);
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSubmitting(true);
+    setSubmissionError("");
     try {
       const result = await submitCareerApplication(formData);
-      if (result.success) {
-        setSubmitted(true);
-      }
+      if (result.success) setSubmitted(true);
+      else setSubmissionError(result.error ?? "Failed to submit application. Please try again.");
     } catch {
-      alert("Something went wrong. Please try again.");
+      setSubmissionError("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#081421] text-white">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm font-medium">Back to Home</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 bg-[#48cae4] rounded-full animate-pulse" />
-            <span className="text-xs text-white/50 tracking-widest uppercase">We're Hiring</span>
-          </div>
+    <div className="careers-page" data-theme={theme}>
+      <div className="careers-fluid-bg" aria-hidden="true" />
+
+      <header className="careers-header">
+        <Link href="/" className="careers-logo" aria-label="Shodh AI home">
+          <Image src="/shodh-new/White%20Shodh%20AI%20Brandmark.svg" alt="Shodh AI" width={52} height={52} priority />
+        </Link>
+        <div className="careers-header-actions">
+          <button className="careers-theme-toggle" onClick={toggleTheme} aria-label={`Use ${theme === "light" ? "dark" : "light"} mode`}>
+            {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
+          </button>
+          <a href="#open-positions" className="careers-pill-link">OPEN POSITIONS</a>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#48cae4]/5 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-[#48cae4]/10 rounded-full border border-[#48cae4]/30 mb-8">
-              <Rocket className="w-4 h-4 text-[#48cae4]" />
-              <span className="text-[#48cae4] text-xs font-bold tracking-widest uppercase">
-                Join Shodh AI
-              </span>
-            </motion.div>
+      <main>
+        <section className="careers-hero">
+          <motion.p initial="hidden" animate="visible" variants={reveal} className="careers-hero-intro">
+            Join the team building intelligence that invents new molecules, materials, processes, and machines — then shows how to make them real.
+          </motion.p>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
-            >
-              BUILD THE FUTURE
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#48cae4] via-[#a855f7] to-[#48cae4]">
-                OF MATTER.
-              </span>
+          <motion.div initial="hidden" animate="visible" variants={stagger} className="careers-hero-title-wrap">
+            <motion.p variants={reveal} className="careers-eyebrow">WE&apos;RE HIRING · INDIAAI MISSION</motion.p>
+            <motion.h1 variants={reveal} className="careers-hero-title">
+              BUILD THE FUTURE<br />OF PHYSICAL<br />INVENTION
             </motion.h1>
+          </motion.div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-xl text-white/70 font-light max-w-2xl mx-auto leading-relaxed mb-10"
-            >
-              We're building the world's first Physics Foundation Model - the "GPT for Materials."
-              Join us in solving the hardest problems at the intersection of AI and science.
+          <a className="careers-scroll-cue" href="#why-shodh" aria-label="Explore careers">
+            <span>EXPLORE</span>
+            <ChevronDown size={18} />
+          </a>
+        </section>
+
+        <section id="why-shodh" className="careers-statement">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+            <motion.p variants={reveal} className="careers-eyebrow">WHY SHODH</motion.p>
+            <motion.h2 variants={reveal}>SCIENCE BECOMES<br />REAL HERE.</motion.h2>
+            <motion.p variants={reveal} className="careers-statement-copy">
+              Work across chemistry, physics, AI, and manufacturing. Build systems that leave the screen and enter labs, pilot plants, and factories.
             </motion.p>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2 text-white/50">
-                <MapPin className="w-4 h-4" />
-                Bangalore · Munich · Tokyo
-              </div>
-              <div className="flex items-center gap-2 text-white/50">
-                <Sparkles className="w-4 h-4" />
-                IndiaAI Mission Partner
-              </div>
-              <div className="flex items-center gap-2 text-white/50">
-                <Globe className="w-4 h-4" />
-                Backed by NVIDIA & Google
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Why Shodh */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
-          >
-            <motion.div variants={fadeInUp} className="p-8 rounded-2xl bg-white/[0.03] border border-white/10">
-              <Zap className="w-8 h-8 text-[#48cae4] mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Frontier Research</h3>
-              <p className="text-white/60 leading-relaxed">
-                Work on problems no one else is solving. Train foundation models on 10M+ physics simulations. Publish at top venues.
-              </p>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="p-8 rounded-2xl bg-white/[0.03] border border-white/10">
-              <Globe className="w-8 h-8 text-[#a855f7] mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Global Impact</h3>
-              <p className="text-white/60 leading-relaxed">
-                Your work directly impacts how batteries, alloys, and materials are designed and manufactured worldwide. Real factories, real products.
-              </p>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="p-8 rounded-2xl bg-white/[0.03] border border-white/10">
-              <Rocket className="w-8 h-8 text-[#f59e0b] mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Sovereign Mission</h3>
-              <p className="text-white/60 leading-relaxed">
-                Selected by IndiaAI Mission. Government-backed compute. NVIDIA & Google partnerships. You're building India's AI for Science stack.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Open Roles */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Open Positions</h2>
-            <p className="text-white/50 text-lg">
-              {openRoles.length} roles across AI, Science, Engineering, and Deployment
-            </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="careers-principles">
+            {[
+              { n: "01", icon: Zap, title: "Frontier research", copy: "Train foundation models on millions of physics simulations and publish work that advances AI for science." },
+              { n: "02", icon: Globe2, title: "Physical impact", copy: "Your work shapes how materials and industrial processes are designed, validated, and manufactured." },
+              { n: "03", icon: Sparkles, title: "Global mission", copy: "Build in India for the world with IndiaAI compute and an international network of research and industry partners." },
+            ].map((item) => (
+              <motion.article key={item.n} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className="careers-principle">
+                <div className="careers-principle-top"><span>{item.n}</span><item.icon size={21} /></div>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+
+        <section id="open-positions" className="careers-roles-section">
+          <div className="careers-section-heading">
+            <div>
+              <p className="careers-eyebrow">WORK WITH US</p>
+              <h2>OPEN POSITIONS</h2>
+            </div>
+            <p>{String(openRoles.length).padStart(2, "0")} ROLES · BANGALORE AND GLOBAL</p>
+          </div>
+
+          <div className="careers-role-list">
             {openRoles.map((role, index) => {
               const Icon = role.icon;
               const isExpanded = expandedRole === index;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden"
-                >
-                  <button
-                    onClick={() => setExpandedRole(isExpanded ? null : index)}
-                    className="w-full p-6 flex items-center gap-4 text-left hover:bg-white/[0.02] transition-colors"
-                  >
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${role.color}15` }}
-                    >
-                      <Icon className="w-6 h-6" style={{ color: role.color }} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-white mb-1">{role.title}</h3>
-                      <div className="flex flex-wrap gap-3 text-xs text-white/40">
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {role.location}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {role.type}
-                        </span>
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase"
-                          style={{
-                            backgroundColor: `${role.color}15`,
-                            color: role.color,
-                          }}
-                        >
-                          {role.team}
-                        </span>
-                      </div>
-                    </div>
-                    <ChevronRight
-                      className={`w-5 h-5 text-white/30 transition-transform ${isExpanded ? "rotate-90" : ""}`}
-                    />
+                <motion.article key={role.title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className={`careers-role ${isExpanded ? "is-expanded" : ""}`}>
+                  <button className="careers-role-summary" onClick={() => setExpandedRole(isExpanded ? null : index)} aria-expanded={isExpanded}>
+                    <span className="careers-role-number">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="careers-role-icon"><Icon size={23} /></span>
+                    <span className="careers-role-name">
+                      <strong>{role.title}</strong>
+                      <span>{role.team} · {role.location} · {role.type}</span>
+                    </span>
+                    <span className="careers-role-arrow"><ChevronDown size={22} /></span>
                   </button>
 
                   {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      className="px-6 pb-6 border-t border-white/5"
-                    >
-                      <div className="pt-4">
-                        <p className="text-white/70 leading-relaxed mb-6">{role.description}</p>
-                        <h4 className="text-sm font-bold text-white/50 tracking-wider uppercase mb-3">
-                          Requirements
-                        </h4>
-                        <ul className="space-y-2 mb-6">
-                          {role.requirements.map((req, i) => (
-                            <li key={i} className="flex items-start gap-2 text-white/60 text-sm">
-                              <CheckCircle2
-                                className="w-4 h-4 shrink-0 mt-0.5"
-                                style={{ color: role.color }}
-                              />
-                              {req}
-                            </li>
-                          ))}
-                        </ul>
-                        <button
-                          onClick={() => handleApply(role.title)}
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-gray-900 text-sm font-bold hover:bg-gray-100 transition-colors"
-                        >
-                          Apply for this role
-                          <Send className="w-4 h-4" />
-                        </button>
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="careers-role-detail">
+                      <div className="careers-role-overview">
+                        <p>{role.description}</p>
+                        {"conversion" in role && role.conversion && (
+                          <div className="careers-conversion-note">
+                            <span>PERFORMANCE-BASED FULL-TIME PATH</span>
+                            <strong>{role.conversion}</strong>
+                          </div>
+                        )}
                       </div>
+                      <div>
+                        <span className="careers-detail-label">WHAT YOU&apos;LL BRING</span>
+                        <ul>
+                          {role.requirements.map((requirement) => <li key={requirement}><Check size={15} />{requirement}</li>)}
+                        </ul>
+                      </div>
+                      <button onClick={() => handleApply(role.title)} className="careers-primary-button">
+                        APPLY FOR THIS ROLE <ArrowRight size={17} />
+                      </button>
                     </motion.div>
                   )}
-                </motion.div>
+                </motion.article>
               );
             })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Application Form */}
-      {showForm && (
-        <section id="application-form" className="py-20 px-6">
-          <div className="max-w-2xl mx-auto">
+        <section className="careers-open-call">
+          <p className="careers-eyebrow">OPEN CALL</p>
+          <h2>DON&apos;T SEE<br />YOUR ROLE?</h2>
+          <div>
+            <p>Exceptional people rarely fit a template. Tell us what you can build and why this mission matters to you.</p>
+            <button onClick={() => handleApply("General Application")} className="careers-primary-button">
+              SEND A GENERAL APPLICATION <ArrowRight size={17} />
+            </button>
+          </div>
+        </section>
+
+        {showForm && (
+          <section id="application-form" className="careers-application">
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-20"
-              >
-                <CheckCircle2 className="w-16 h-16 text-[#22c55e] mx-auto mb-6" />
-                <h2 className="text-3xl font-bold mb-4">Application Submitted!</h2>
-                <p className="text-white/60 text-lg mb-8">
-                  Thank you for your interest in Shodh AI. We'll review your application and get back to you soon.
-                </p>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors"
-                >
-                  Back to Home
-                </Link>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="careers-success">
+                <span><Check size={36} /></span>
+                <p className="careers-eyebrow">APPLICATION RECEIVED</p>
+                <h2>THANK YOU.</h2>
+                <p>We&apos;ll review your application and get back to you soon.</p>
+                <Link href="/" className="careers-primary-button">BACK TO HOME <ArrowRight size={17} /></Link>
               </motion.div>
             ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <h2 className="text-3xl font-bold mb-2">Apply Now</h2>
-                <p className="text-white/50 mb-8">
-                  Applying for: <span className="text-[#48cae4] font-medium">{selectedRole}</span>
-                </p>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm text-white/50 mb-2">Full Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-white/50 mb-2">Email *</label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors"
-                        placeholder="you@email.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm text-white/50 mb-2">Phone</label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors"
-                        placeholder="+91 ..."
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-white/50 mb-2">LinkedIn Profile</label>
-                      <input
-                        type="url"
-                        value={formData.linkedin}
-                        onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors"
-                        placeholder="https://linkedin.com/in/..."
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-white/50 mb-2">Years of Experience</label>
-                    <select
-                      value={formData.experience}
-                      onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors"
-                    >
-                      <option value="" className="bg-[#081421]">Select experience</option>
-                      <option value="0-1" className="bg-[#081421]">0-1 years (Student/Fresh grad)</option>
-                      <option value="1-3" className="bg-[#081421]">1-3 years</option>
-                      <option value="3-5" className="bg-[#081421]">3-5 years</option>
-                      <option value="5-10" className="bg-[#081421]">5-10 years</option>
-                      <option value="10+" className="bg-[#081421]">10+ years</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-white/50 mb-2">
-                      Why do you want to join Shodh AI? *
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#48cae4]/50 focus:ring-1 focus:ring-[#48cae4]/50 transition-colors resize-none"
-                      placeholder="Tell us about yourself, your motivation, and what excites you about AI for Science..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full py-4 rounded-xl bg-white text-gray-900 font-bold text-lg hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                  >
-                    {submitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-gray-400 border-t-gray-900 rounded-full animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        Submit Application
-                      </>
-                    )}
+              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="careers-form-heading">
+                  <div><p className="careers-eyebrow">JOIN SHODH AI</p><h2>APPLY NOW</h2></div>
+                  <p>Applying for<br /><strong>{selectedRole}</strong></p>
+                </div>
+                <form onSubmit={handleSubmit} className="careers-form">
+                  <label><span>FULL NAME *</span><input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" /></label>
+                  <label><span>EMAIL *</span><input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="you@email.com" /></label>
+                  <label><span>PHONE</span><input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+91 ..." /></label>
+                  <label><span>LINKEDIN</span><input type="url" value={formData.linkedin} onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })} placeholder="linkedin.com/in/..." /></label>
+                  <label className="careers-form-wide"><span>EXPERIENCE</span><select value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })}><option value="">Select experience</option><option value="0-1">0–1 years · Student / fresh graduate</option><option value="1-3">1–3 years</option><option value="3-5">3–5 years</option><option value="5-10">5–10 years</option><option value="10+">10+ years</option></select></label>
+                  <label className="careers-form-wide"><span>WHY DO YOU WANT TO JOIN SHODH AI? *</span><textarea required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about yourself, what you can build, and what excites you about AI for science." /></label>
+                  {submissionError && <p className="careers-form-error" role="alert">{submissionError}</p>}
+                  <button type="submit" disabled={submitting} className="careers-primary-button careers-submit">
+                    {submitting ? "SUBMITTING..." : <>SUBMIT APPLICATION <Send size={17} /></>}
                   </button>
                 </form>
               </motion.div>
             )}
-          </div>
-        </section>
-      )}
+          </section>
+        )}
+      </main>
 
-      {/* General Application CTA */}
-      {!showForm && (
-        <section className="py-20 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-12 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10"
-            >
-              <Sparkles className="w-10 h-10 text-[#48cae4] mx-auto mb-6" />
-              <h2 className="text-3xl font-bold mb-4">Don't see your role?</h2>
-              <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
-                We're always looking for exceptional people. Send us a general application and tell us how you'd contribute to the mission.
-              </p>
-              <button
-                onClick={() => handleApply("General Application")}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-gray-900 text-lg font-bold hover:bg-gray-100 transition-colors"
-              >
-                <Send className="w-5 h-5" />
-                Send General Application
-              </button>
-            </motion.div>
-          </div>
-        </section>
-      )}
+      <footer className="careers-footer">
+        <div>
+          <p>MANUFACTURING INTELLIGENCE,<br />GROUNDED IN PHYSICS.</p>
+          <h2>SHODH AI</h2>
+        </div>
+        <nav>
+          <Link href="/research">RESEARCH</Link>
+          <Link href="/materials-discovery">MATERIALS DISCOVERY</Link>
+          <Link href="/project-skanda">PROJECT SKANDA</Link>
+          <Link href="/careers">CAREERS</Link>
+          <a href="https://www.linkedin.com/company/shodh-ai/" target="_blank" rel="noreferrer">LINKEDIN</a>
+          <span>2026 SHODH AI. ALL RIGHTS RESERVED</span>
+        </nav>
+      </footer>
 
-      <Footer />
+      <Link href="/" className="careers-back"><ArrowLeft size={15} /> HOME</Link>
     </div>
   );
 }
