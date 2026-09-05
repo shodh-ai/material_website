@@ -64,16 +64,24 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    if (!process.env.DATABASE_URL) {
-      await saveLocally(application);
-      return NextResponse.json({ success: true }, { status: 201 });
+    if (!process.env.CAREERS_DATABASE_URL) {
+      if (process.env.NODE_ENV === "development") {
+        await saveLocally(application);
+        return NextResponse.json({ success: true }, { status: 201 });
+      }
+
+      console.error("AI Engineer Intern submission failed: CAREERS_DATABASE_URL is missing");
+      return NextResponse.json(
+        { error: "Applications are temporarily unavailable. Please try again shortly." },
+        { status: 503 }
+      );
     }
 
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.CAREERS_DATABASE_URL);
     const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     const source = forwardedFor || request.headers.get("x-real-ip") || "unknown";
     const sourceHash = createHash("sha256")
-      .update(`${source}:${process.env.APPLICATION_HASH_SALT || process.env.DATABASE_URL}`)
+      .update(`${source}:${process.env.APPLICATION_HASH_SALT || process.env.CAREERS_DATABASE_URL}`)
       .digest("hex");
     const userAgent = clean(request.headers.get("user-agent"), 500);
 

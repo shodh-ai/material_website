@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!process.env.DATABASE_URL) {
-    console.error("Founders Associate submission failed: DATABASE_URL is missing");
+  if (!process.env.CAREERS_DATABASE_URL) {
+    console.error("Founders Associate submission failed: CAREERS_DATABASE_URL is missing");
     return NextResponse.json(
       { error: "Applications are temporarily unavailable. Please try again shortly." },
       { status: 503 }
@@ -62,11 +62,11 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.CAREERS_DATABASE_URL);
     const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     const source = forwardedFor || request.headers.get("x-real-ip") || "unknown";
     const sourceHash = createHash("sha256")
-      .update(`${source}:${process.env.APPLICATION_HASH_SALT || process.env.DATABASE_URL}`)
+      .update(`${source}:${process.env.APPLICATION_HASH_SALT || process.env.CAREERS_DATABASE_URL}`)
       .digest("hex");
     const userAgent = clean(request.headers.get("user-agent"), 500);
 
