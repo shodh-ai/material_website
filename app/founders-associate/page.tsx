@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 
 export default function FoundersAssociatePage() {
@@ -59,10 +60,15 @@ export default function FoundersAssociatePage() {
       <div className="backdrop" />
 
       <section className="application-card" aria-label="Founders Associate application">
-        <img
+        <Image
           alt="Founders Associate"
           className="application-graphic"
-          src="/Founders_Associate.png"
+          src="/founders-associate-hiring.jpg"
+          width={1225}
+          height={1280}
+          sizes="(max-width: 900px) calc(100vw - 76px), 732px"
+          priority
+          unoptimized
         />
         {submitted ? (
           <div className="success-message" role="status">

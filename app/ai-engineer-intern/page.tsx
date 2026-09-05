@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
@@ -63,10 +64,15 @@ export default function AIEngineerInternPage() {
       </Link>
 
       <section className="application-card" aria-label="AI Engineer Intern application">
-        <img
+        <Image
           alt="We're hiring an AI Engineer Intern at Shodh AI"
           className="application-graphic"
-          src="/AI_Engineer_Intern.png"
+          src="/ai-engineer-intern-hiring.jpg"
+          width={1175}
+          height={1228}
+          sizes="(max-width: 900px) calc(100vw - 76px), 732px"
+          priority
+          unoptimized
         />
 
         <div className="conversion-note">
