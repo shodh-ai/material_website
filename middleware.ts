@@ -17,6 +17,8 @@ const publicExactPaths = new Set([
   "/research",
   "/world-model",
   "/physical-ai",
+  "/lucan",
+  "/lucan-physical-intelligence",
   "/careers",
   "/materials-discovery",
   "/project-skanda",
@@ -38,6 +40,8 @@ const publicPathPrefixes = [
   "/research/",
   "/world-model/",
   "/physical-ai/",
+  "/lucan/",
+  "/lucan-physical-intelligence/",
 ];
 const protectedExactPaths = new Set(["/blog/lucan-scientific-performance"]);
 

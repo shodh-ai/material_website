@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
 
-export default function PhysicalAIPage() {
+export default function LucanRedirectPage() {
   permanentRedirect("/lucan-physical-intelligence");
 }

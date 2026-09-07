@@ -20,6 +20,12 @@ const researchStructuredData = {
   hasPart: [
     {
       "@type": "TechArticle",
+      name: "LUCAN: A Foundation World Model for Physical Intelligence",
+      url: "https://shodh.ai/lucan-physical-intelligence",
+      citation: "https://shodh.ai/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf",
+    },
+    {
+      "@type": "TechArticle",
       name: "A Foundation World Model for Physical Intelligence",
       url: "https://shodh.ai/world-model",
       citation: "https://shodh.ai/research/Foundation_World_Model_for_Physical_Intelligence.pdf",
@@ -52,10 +58,10 @@ export default function ResearchPage() {
 
       <section className={styles.featured}>
         <p className={styles.label}>Featured</p>
-        <Link href="/world-model" className={styles.featuredLink}>
+        <Link href="/lucan-physical-intelligence" className={styles.featuredLink}>
           <div>
-            <h2>A Foundation World Model for Physical Intelligence</h2>
-            <p>Our technical capability release on cross-scale reasoning and inverse design.</p>
+            <h2>LUCAN: A Foundation World Model for Physical Intelligence</h2>
+            <p>From molecules to manufacturing: cross-scale reasoning, inverse design, and the evidence in our latest whitepaper.</p>
           </div>
           <span>Explore →</span>
         </Link>
