@@ -245,7 +245,7 @@ export default function LucanPage() {
         <section className={styles.evidence}>
           <header>
             <p className={styles.kicker}>Five controlled questions</p>
-            <h2>Evidence should get harder at every step.</h2>
+            <h2>Testing physical intelligence across scales.</h2>
             <p>
               The whitepaper moves from shared computation, to controlled cross-scale interventions, to
               nonlinear coupled regimes, and finally to a declared full-chain composition test.
@@ -306,7 +306,7 @@ export default function LucanPage() {
           <article className={`${styles.figureStory} ${styles.figureStoryReverse}`}>
             <div>
               <p className={styles.kicker}>Competing mechanisms</p>
-              <h2>The best operating point is a boundary, not a maximum.</h2>
+              <h2>Balancing oxygen transfer and mechanical shear.</h2>
               <p>
                 In the reported 10-liter bioreactor sweep, oxygen transfer had effectively plateaued from
                 200 to 250 RPM while near-blade hydrodynamic shear increased by 18.3%. A model that sees
@@ -406,7 +406,7 @@ export default function LucanPage() {
         <section className={styles.evidenceNote}>
           <div>
             <p className={styles.kicker}>How to read the evidence</p>
-            <h2>Model output is not physical ground truth.</h2>
+            <h2>From model predictions to physical validation.</h2>
           </div>
           <div className={styles.evidenceLadder}>
             <div><span>01</span><strong>Model test</strong><p>Frozen model on predefined held-out computational tasks.</p></div>
