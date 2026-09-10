@@ -10,7 +10,7 @@ const syne = localFont({
   weight: "100 900",
 });
 
-const technicalReportHref = "/research/Foundation_World_Model_for_Physical_Intelligence.pdf";
+const technicalReportHref = "/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf";
 
 const articleStructuredData = {
   "@context": "https://schema.org",
@@ -29,7 +29,7 @@ const articleStructuredData = {
     url: "https://shodh.ai",
     logo: { "@type": "ImageObject", url: "https://shodh.ai/Logo_White%20BG.png" },
   },
-  citation: "https://shodh.ai/research/Foundation_World_Model_for_Physical_Intelligence.pdf",
+  citation: "https://shodh.ai/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf",
   about: ["foundation models", "physical intelligence", "inverse design", "industrial scale-up"],
 };
 
