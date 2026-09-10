@@ -19,6 +19,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Cache the versioned whitepaper locally so repeat reads avoid a download.
+        source: '/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' },
+        ],
+      },
+      {
         source: '/shodh-new/assets/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
