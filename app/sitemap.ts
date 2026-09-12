@@ -12,9 +12,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://shodh.ai/research",
-      lastModified: new Date("2026-09-07T00:00:00.000Z"),
+      lastModified: new Date("2026-09-08T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: "https://shodh.ai/research/biomanufacturing-scale-up",
+      lastModified: new Date("2026-09-08T00:00:00.000Z"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: "https://shodh.ai/research/UNIPHY_Biomanufacturing_Whitepaper.pdf",
+      lastModified: new Date("2026-09-08T00:00:00.000Z"),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: "https://shodh.ai/lucan-physical-intelligence",

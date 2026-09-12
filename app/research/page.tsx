@@ -20,6 +20,12 @@ const researchStructuredData = {
   hasPart: [
     {
       "@type": "TechArticle",
+      name: "The Physics of Biomanufacturing Scale-Up",
+      url: "https://shodh.ai/research/biomanufacturing-scale-up",
+      citation: "https://shodh.ai/research/UNIPHY_Biomanufacturing_Whitepaper.pdf",
+    },
+    {
+      "@type": "TechArticle",
       name: "LUCAN: A Foundation World Model for Physical Intelligence",
       url: "https://shodh.ai/lucan-physical-intelligence",
       citation: "https://shodh.ai/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf",
@@ -64,6 +70,17 @@ export default function ResearchPage() {
             <p>From molecules to manufacturing: cross-scale reasoning, inverse design, and the evidence in our latest whitepaper.</p>
           </div>
           <span>Explore →</span>
+        </Link>
+      </section>
+
+      <section className={styles.ideas}>
+        <p className={styles.label}>Interactive research · Biomanufacturing</p>
+        <Link href="/research/biomanufacturing-scale-up" className={styles.ideaLink}>
+          <div>
+            <h2>The Physics of Biomanufacturing Scale-Up</h2>
+            <p>From antibody candidates to production equipment: UNIPHY’s simulation approach, with an interactive look at mixing, oxygen transport and process transfer.</p>
+          </div>
+          <span>→</span>
         </Link>
       </section>
 
