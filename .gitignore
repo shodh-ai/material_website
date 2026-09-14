@@ -4,3 +4,11 @@ node_modules
 out
 .env*
 .DS_Store
+
+# Biotechnology PDFs are delivered separately, not committed.
+/public/biotechnology/whitepapers/*.pdf
+/output/pdf/molecule-to-manufacturing.pdf
+/output/pdf/cell-gene-therapy.pdf
+/output/pdf/scale-up.pdf
+/output/pdf/biologics-manufacturing.pdf
+/output/pdf/formulation-delivery.pdf

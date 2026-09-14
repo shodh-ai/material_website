@@ -19,10 +19,10 @@ const researchStructuredData = {
   publisher: { "@id": "https://shodh.ai/#organization" },
   hasPart: [
     {
-      "@type": "TechArticle",
-      name: "The Physics of Biomanufacturing Scale-Up",
-      url: "https://shodh.ai/research/biomanufacturing-scale-up",
-      citation: "https://shodh.ai/research/UNIPHY_Biomanufacturing_Whitepaper.pdf",
+      "@type": "CollectionPage",
+      name: "Biotechnology: From Molecule to Manufacturing",
+      url: "https://shodh.ai/industries/biotechnology",
+      citation: "https://shodh.ai/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf",
     },
     {
       "@type": "TechArticle",
@@ -74,11 +74,11 @@ export default function ResearchPage() {
       </section>
 
       <section className={styles.ideas}>
-        <p className={styles.label}>Interactive research · Biomanufacturing</p>
-        <Link href="/research/biomanufacturing-scale-up" className={styles.ideaLink}>
+        <p className={styles.label}>Biotechnology · Five connected pieces</p>
+        <Link href="/industries/biotechnology" className={styles.ideaLink}>
           <div>
-            <h2>The Physics of Biomanufacturing Scale-Up</h2>
-            <p>From antibody candidates to production equipment: UNIPHY’s simulation approach, with an interactive look at mixing, oxygen transport and process transfer.</p>
+            <h2>From Molecule to Manufacturing</h2>
+            <p>LUCAN across molecular design, CAR-T, biologics manufacturing, scale-up, purification, formulation and delivery. Five technical pieces on one connected physical system.</p>
           </div>
           <span>→</span>
         </Link>

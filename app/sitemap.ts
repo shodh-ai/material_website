@@ -1,9 +1,22 @@
 import type { MetadataRoute } from "next";
+import { pieces, pieceHref } from "./research/biotechnology/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-08-17T00:00:00.000Z");
 
   return [
+    {
+      url: "https://shodh.ai/industries/biotechnology",
+      lastModified: new Date("2026-09-14T00:00:00.000Z"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    ...pieces.map(piece => ({
+      url: `https://shodh.ai${pieceHref(piece)}`,
+      lastModified: new Date("2026-09-14T00:00:00.000Z"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     {
       url: "https://shodh.ai/",
       lastModified,
@@ -12,21 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://shodh.ai/research",
-      lastModified: new Date("2026-09-08T00:00:00.000Z"),
+      lastModified: new Date("2026-09-14T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.9,
-    },
-    {
-      url: "https://shodh.ai/research/biomanufacturing-scale-up",
-      lastModified: new Date("2026-09-08T00:00:00.000Z"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: "https://shodh.ai/research/UNIPHY_Biomanufacturing_Whitepaper.pdf",
-      lastModified: new Date("2026-09-08T00:00:00.000Z"),
-      changeFrequency: "monthly",
-      priority: 0.8,
     },
     {
       url: "https://shodh.ai/lucan-physical-intelligence",

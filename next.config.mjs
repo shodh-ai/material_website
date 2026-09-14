@@ -4,6 +4,25 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['ssh2'],
   },
+  async redirects() {
+    // Preserve published research URLs when the Biotechnology collection moves.
+    return [
+      { source: '/research/biotechnology', destination: '/industries/biotechnology', permanent: true },
+      { source: '/biotechnology', destination: '/industries/biotechnology', permanent: true },
+      { source: '/research/biomanufacturing-scale-up', destination: '/biotechnology/scale-up', permanent: true },
+      ...Object.entries({
+        'molecule-to-manufacturing': 'molecule-to-manufacturing',
+        'car-t-manufacturing': 'cell-gene-therapy',
+        'scale-up-valley-of-death': 'scale-up',
+        'biologics-manufacturability': 'biologics-manufacturing',
+        'purification-formulation-delivery': 'formulation-delivery',
+      }).map(([legacy, current]) => ({
+        source: `/research/biotechnology/${legacy}`,
+        destination: `/biotechnology/${current}`,
+        permanent: true,
+      })),
+    ];
+  },
   async rewrites() {
     // Serve the marketing site directly at the canonical URL so crawlers read
     // the same document and content that visitors see.
