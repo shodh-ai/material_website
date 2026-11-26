@@ -40,7 +40,7 @@ export const blogPosts: readonly BlogPost[] = [
     slug: industrialWorldModelsSlug,
     title: "From Molecular Discovery to Computational Manufacturing",
     description:
-      "Shodh’s executive brief explains how pre-trained physical models and process-specific knowledge could connect molecular discovery to manufacturing, starting in biopharma.",
+      "Pre-trained physical intelligence for the process industries — starting in biopharma.",
     topic: "Industrial world models",
     date: "2026-11-26",
     cover: {
