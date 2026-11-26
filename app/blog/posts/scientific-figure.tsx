@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import styles from "./scientific-figure.module.css";
 
 type Bar = { label: string; value: number; display: string; tone?: number };
@@ -196,7 +196,15 @@ function Cells() {
   );
 }
 
-export function ScientificFigure({ spec, caption }: { spec: FigureSpec; caption: string }) {
+type FigureFrameProps = {
+  title?: string;
+  subtitle?: string;
+  caption?: string;
+  label?: string;
+  children: ReactNode;
+};
+
+export function FigureFrame({ title, subtitle, caption, label, children }: FigureFrameProps) {
   const figure = useRef<HTMLElement>(null);
   const [entered, setEntered] = useState(false);
   useEffect(() => {
@@ -212,21 +220,29 @@ export function ScientificFigure({ spec, caption }: { spec: FigureSpec; caption:
   }, []);
 
   return (
-    <figure ref={figure} className={styles.figure} data-entered={entered}>
+    <figure ref={figure} className={styles.figure} aria-label={label} data-entered={entered}>
       <div className={styles.card}>
-        <p className={styles.title}>{spec.title}</p>
-        {spec.subtitle && <p className={styles.subtitle}>{spec.subtitle}</p>}
-        {"diagram" in spec
-          ? (spec.diagram === "stencil" ? <Stencil /> : <Cells />)
-          : spec.panels.map((panel) => panel.kind === "bar"
-            ? <Bars key={panel.title} panel={panel} />
-            : <Lines key={panel.title} panel={panel} />)}
-        {"diagram" in spec && spec.diagram === "stencil" && <p className={styles.note}>
-          Offsets in parentheses count elements relative to the centre address in the contiguous field buffer.
-          The stencil uses the centre value for any out-of-bounds or inactive neighbour.
-        </p>}
+        {title && <p className={styles.title}>{title}</p>}
+        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        {children}
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>
+  );
+}
+
+export function ScientificFigure({ spec, caption }: { spec: FigureSpec; caption: string }) {
+  return (
+    <FigureFrame title={spec.title} subtitle={spec.subtitle} caption={caption}>
+      {"diagram" in spec
+        ? (spec.diagram === "stencil" ? <Stencil /> : <Cells />)
+        : spec.panels.map((panel) => panel.kind === "bar"
+          ? <Bars key={panel.title} panel={panel} />
+          : <Lines key={panel.title} panel={panel} />)}
+      {"diagram" in spec && spec.diagram === "stencil" && <p className={styles.note}>
+        Offsets in parentheses count elements relative to the centre address in the contiguous field buffer.
+        The stencil uses the centre value for any out-of-bounds or inactive neighbour.
+      </p>}
+    </FigureFrame>
   );
 }
