@@ -51,7 +51,7 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: tritonSlug,
-    title: "Accelerating reactor data on NVIDIA H100 with bit-exact Triton kernels",
+    title: "Accelerating Reactor Data on NVIDIA H100 with Bit-Exact Triton Kernels",
     description:
       "Fusing transport and reaction kernels sped up our eight-H100 reactor pipeline by 2.49×, with matching trajectory, flux, and metadata digests on all 256 samples.",
     topic: "Scientific computing",
