@@ -1,0 +1,398 @@
+Explicit coordinate carriers, learned distance tails, and runtime
+frame augmentation in an atomwise molecular representation
+Abstract
+Molecular tokens can contain both explicitly encoded coordinates and learned features, but
+these information paths support diﬀerent scientiﬁc claims. We examine a stored atomwise
+representation comprising 32 explicit carrier words and 160 learned scalar features per atom,
+all stored in BF16 precision. In a 2,048-structure support-balanced diagnostic, the learned
+pair-distance decoder had a median structure mean absolute error of 0.05544 angstrom, yet its
+global pair-weighted mean was 0.25051 angstrom and its maximum structure mean absolute error
+was 2.96539 angstrom. The median satisﬁed the original criterion while the global mean and
+maximum failed; the top 100 structures contributed approximately 75% of aggregate absolute
+pair error. A separate 4,096-row stored-bank audit reported a carrier componentwise RMS error
+median of 2.55 × 10−5 angstrom, which does not validate learned distance prediction. Stored
+geometry also exhibited orientation bias: 7.5714% of principal axes in a 32,768-row block sample
+lay within 30 degrees of either laboratory z pole, compared with the uniform-axis expectation of
+13.3975%. In a diﬀerent, paired loader sample, runtime random-frame treatment changed this
+fraction from 7.7484% to 13.7177%, while preserving learned features and limiting the maximum
+distance change across 67,763,506 compared pairs to 0.001556 angstrom. The case study shows
+why coordinate ﬁdelity, learned-feature utility, error denominators, and orientation diagnostics
+must be evaluated separately. It establishes neither a new force ﬁeld nor improved downstream
+physical accuracy.
+1 Introduction and contributions
+A molecular representation may preserve geometry for more than one reason. Coordinates can
+be carried explicitly in a compact numerical format, while an encoder separately learns atomwise
+features from species and interatomic distances. Accurate decoding from the ﬁrst path does not
+demonstrate that the second has learned an equally accurate geometric representation. Likewise,
+rotation-invariant learned features do not imply that the coordinate-bearing part of a stored token
+has an isotropic orientation distribution.
+This paper studies these distinctions in a particular atomwise molecular token containing 192
+bﬂoat16 (BF16) words per atom. Its explicit carrier occupies 32 words and its learned scalar lane
+occupies 160 words. The scientiﬁc question is not whether this architecture is universally preferable,
+but what its saved validation results establish when information paths, metric denominators, and
+sampling designs are made explicit.
+The contribution has three parts. First, we separate centered-coordinate recovery from learned
+pair-distance prediction. Second, we show how a low median structure error can coexist with a
+failed global pair-weighted mean and a substantial error tail. Third, we diagnose stored orientation
+bias and interpret a runtime random-frame treatment that changes the coordinate carrier without
+1
+
+modifying learned features. These parts are linked by a common principle: validation must identify
+both the information being tested and the population or denominator over which it is summarized.
+The evidence supports a focused retrospective case study rather than a claim of architectural
+novelty or state-of-the-art molecular prediction. The study concerns an atomwise 32+160 represen-
+tation, learned distance tails, and runtime orientation treatment, rather than pocket-conditioned
+frame recovery for ﬁxed-order coarse-grained windows. Periodic crystal representations are outside
+its scope.
+2 Related work
+Distance-dependent molecular learning has established precedents. SchNet introduced continuous-
+ﬁlter convolutions for molecular representations and energy and force prediction [ 1]. It provides
+context for learning from continuous molecular geometry, but is not a matched benchmark for the
+present encoder or its distance decoder.
+The source-family names in the saved records also require careful interpretation. OMol25 de-
+scribes molecular DFT data spanning 83 elements [ 2], while Transition1x describes reaction-path
+conﬁgurations for reactive molecular learning [ 3]. Here, labels such as OMol retained, OMol expan-
+sion, SPICE/MD22, and Transition1x/ANI identify retained source families. They do not establish
+that complete published datasets, their preparation procedures, or their benchmark evaluations
+were reproduced.
+Runtime rotations use the quaternion construction associated with Shoemake’s Uniform Random
+Rotations [ 4]. The available supporting material is the C supplement, particularly its quaternion-
+generation and matrix-conversion routines, together with the book-series attribution. The captured
+loader implements a deterministic, ﬁnite pseudorandom counterpart of that construction. Its empir-
+ical validation should therefore be distinguished from a mathematical assertion of exact independent
+Haar sampling.
+3 Scientiﬁc methods and validation protocols
+3.1 Retrospective evidence and validation scope
+The present work reanalyzes captured reports, source implementations, and saved validation con-
+tracts. Two independent checking recipes contain 166 and 200 checks, respectively, for a total of 366
+source/report identity, aggregate-arithmetic, report-linkage, and saved-contract checks. All were
+reported as passing. No additional molecular simulations, original checkpoint execution, full-bank
+scan, or recovery of all original pair-distance arrays was performed. Thus, recomputable aggregate
+arithmetic is distinguished from reported measurements such as medians that require the original
+arrays. The captures and checking recipes are preserved in Supplementary record S1.
+The principal cohorts have diﬀerent purposes: a 2,048-structure support-balanced diagnostic; an
+8,192-structure ﬁxed-test-style reference; a 256-structure informativeness audit; a 4,096-row equal-
+family stored-bank audit; and two distinct 32,768-row orientation samples. They are not pooled
+into a common held-out population.
+2
+
+3.2 Explicit coordinate carrier
+For Cartesian positions xa, preprocessing preserves source atom order and computes the Cartesian
+centroid c and maximum centered radius r. The cubic side and fractional positions are
+r = max
+a
+∥xa − c∥, (1)
+s = max(3r + 2 angstrom , 4 angstrom) , (2)
+fa = (xa − c)/s + 1
+2 . (3)
+The implementation performs centering in ﬂoat64 and forms carrier fractional coordinates in ﬂoat32
+before BF16 packing. Each fractional coordinate is split into a BF16 coarse value and a BF16
+residual scaled by 4096. The side length is similarly split after normalization by 128 angstrom.
+Decoding uses
+bfa = fa,coarse + fa,residual/4096, (4)
+bs = 128 angstrom ( scoarse + sresidual/4096), (5)
+bxa = (bfa − 1
+2 )bs. (6)
+The replicated side header is checked for consistency on decoding. These words recover centered
+geometry, not the absolute centroid. Coordinate-bearing words retain laboratory-frame direction:
+a rotation changes them even though the radial side policy is rotation invariant. Consequently,
+centered-coordinate recovery is neither coordinate-free reconstruction nor byte invariance of the
+whole token.
+The conventional per-structure Euclidean-displacement RMSD between decoded and source-
+centered coordinates is
+ρi =
+"
+1
+ni
+X
+a
+∥bxia − (xia − ci)∥2
+#1/2
+. (7)
+The stored-bank audit instead reports componentwise RMS coordinate error: it averages squared
+errors over both atoms and the three Cartesian components before taking the square root, giving
+ρi/
+√
+3. The saved carrier measurements and inherited bound below retain this componentwise
+convention without rescaling. Both conventions test explicit numerical geometry, separately from
+the learned decoder.
+3.3 Learned scalar features and pair decoder
+The inspected encoder uses atomic-number embeddings, branch embeddings, active/defect/adsorbate
+scalar masks, and interatomic radial distances. Its default hidden width is 384, with six scalar
+message-passing layers and 32 Gaussian radial basis functions whose centers span 0–16 angstrom.
+A normalized linear head followed by Tanh produces 160 learned features per atom. These features
+are subsequently stored in BF16.
+For learned atomwise feature vectors ha, the symmetric pair decoder consumes
+gab =
+
+|ha − hb|, ha ⊙ hb
+
+(8)
+and uses a two-hidden-layer network of width 128 with a Softplus output to predict nonnegative
+distances. A separate head predicts species. Rotation invariance follows from the scalar and
+distance inputs in exact arithmetic, subject to ﬁnite-precision numerical eﬀects. It is not a statement
+about the coordinate carrier. Species prediction tests retention or accessibility of an input attribute:
+atomic numbers are already provided to the encoder.
+3
+
+3.4 Distance metrics and reference contracts
+For structure i with ni ≥ 2 atoms, let Pi = ni(ni − 1) denote the number of ordered oﬀ-diagonal
+pairs. Its learned distance MAE is
+ei = 1
+Pi
+X
+a̸=b
+| bdiab − diab|. (9)
+For M structures, the global pair-weighted mean and equal-structure mean are, respectively,
+Epair =
+P
+i PieiP
+i Pi
+, E structure = 1
+M
+X
+i
+ei. (10)
+The median of ei and its maximum are diﬀerent statistics again. For K ﬁxed row batches Bb, the
+training-style statistic is
+Ebatch = 1
+K
+KX
+b=1
+P
+i∈Bb Piei
+P
+i∈Bb Pi
+, (11)
+with evaluation batch size 64 in the saved reference. It gives each batch equal weight regardless
+of its total pair count. It generally diﬀers from both pooled pair weighting and equal-structure
+weighting and depends on batch composition.
+The original criteria bounded both the median and global mean at 0.1884763333 angstrom and
+the maximum structure MAE at 1.5078106662 angstrom. A later contract instead matched each
+statistic to the corresponding same-checkpoint ﬁxed-test statistic Rm:
+Tm = max(1.25Rm, Fm), (12)
+where Fm is its speciﬁed absolute ﬂoor. This corrects a mismatch between an average of batch-
+weighted errors and diﬀerently weighted validation statistics. It changes the comparison, not the
+predictions.
+3.5 Stored-bank and informativeness protocols
+The stored-bank reconstruction audit sampled 4,096 rows, with 1,024 rows from each of four source-
+labelled families. Selection used 16 manifest-byte blocks per family and 64 contiguous rows per
+block. This equal-family design is neither population weighting of the bank nor an independent
+held-out sample; reported worst rows include training and validation entries. Supported-element
+macro summaries require at least 24 sampled atoms per species.
+The saved informativeness audit compared the trained decoder on full learned features, zeroed
+features, and features shuﬄed among atoms within each structure. It used 256 structures. Linear
+probes used 2,048 training structures and 512 test structures, containing 136,939 and 44,007 atoms.
+The species probe used training-set feature standardization and 500 optimization steps. The com-
+position ridge probe used mean-pooled features and regularization 10−3 to predict source-labelled
+atomic-number fractions. These are reported prior audit executions, not newly executed ablations
+in this study.
+4
+
+3.6 Orientation diagnostic and runtime treatment
+For centered decoded geometry, the orientation diagnostic forms the geometric covariance matrix
+and takes its largest-eigenvalue eigenvector v as an unoriented axis. With eigenvalues λ1 ≥ λ2 ≥ λ3,
+near-degeneracy is assessed using
+δ = (λ1 − λ2)/ max(λ1, 10−30), (13)
+with a threshold of 0.001. Near- z alignment means |v · ez| ≥ cos 30◦. A uniform unoriented axis
+has double-cap probability
+p0 = 1 − cos 30◦ = 0.1339745962. (14)
+The saved practical criterion is an absolute deviation from p0 no greater than 0.03, or three per-
+centage points.
+Both orientation audits sample 128 manifest-byte blocks with 256 contiguous rows per block.
+Their seeds and rows diﬀer. The loader audit alone provides paired before/after measurements.
+Byte-block selection does not produce independent, identically distributed rows, so we use descrip-
+tive eﬀect sizes rather than binomial signiﬁcance calculations.
+The loader deterministically maps a sample key, epoch, and seed through a hash to three ﬁnite
+pseudorandom variates, then constructs the Shoemake quaternion
+q =
+ √
+1 − u1 sin(2πu2),
+√
+1 − u1 cos(2πu2),
+√u1 sin(2πu3), √u1 cos(2πu3)
+
+. (15)
+The corresponding matrix is applied as X ′ = XR T for row-vector coordinates. The loader decodes
+the carrier, rotates centered positions, and repacks only coordinate words 0:6. It preserves the side
+header, every other carrier word, and all learned features. It neither reruns the encoder nor persists
+rotated token copies.
+4 Experimental results
+4.1 A low median coexists with mean and maximum failures
+Table 1 compares the statistics within each cohort. The 2,048-structure diagnostic contains 13,028,372
+ordered pairs. Its median structure MAE of 0.0554395583 angstrom passes the original 0.1884763333
+angstrom criterion, but the global pair-weighted mean of 0.2505095165 angstrom and maximum
+structure MAE of 2.9653882451 angstrom fail their respective criteria. Six structures exceeded the
+original maximum criterion.
+The top 100 structures by absolute pair-error contribution account for 0.7499805231 of total
+absolute pair error, approximately 75%. Large structures receive more pair weight, and their errors
+can therefore dominate the pooled statistic even when most structures have small errors. The
+129–256-atom bin contains only 260 of the 2,048 structures but 9,958,994 of its ordered pairs, with
+a pair-weighted mean of 0.29632318 angstrom. This identiﬁes a size-associated concentration of
+aggregate error without establishing size as its sole cause.
+The 2.96538825 angstrom value is not the largest individual pair error. The structure with that
+MAE has a reported individual-pair maximum of 16.40097427 angstrom, and another captured row
+has an individual-pair maximum of 18.08081627 angstrom. Structure-level MAE and individual-
+pair extremes must not be interchanged.
+5
+
+Table 1: Learned pair-distance summaries in angstrom. Columns identify diﬀerent cohorts, not
+successive improvements. Maximum denotes the maximum per-structure MAE.
+Statistic Support-balanced Fixed-test-style
+Structures 2,048 8,192
+Global pair mean 0.25050952 0.26015436
+Equal-structure mean 0.09960445 0.14995929
+Median structure MAE 0.05543956 0.07294420
+Maximum structure MAE 2.96538825 4.59009499
+Mean of batch pair means 0.10285402 0.15061743
+The 8,192-structure reference contains 124,157,984 ordered pairs. Within that cohort, the global
+pair mean is 0.2601543589 angstrom, the equal-structure mean is 0.1499592894 angstrom, and the
+mean of batch pair means is 0.1506174280 angstrom. Their numerical separation illustrates the
+denominator issue directly. Diﬀerences between this cohort and the support-balanced diagnostic
+are not a controlled performance change.
+Under the later statistic-matched contract, the saved bounds for global pair mean, median, 95th
+percentile, and maximum structure MAE were 0.3251929486, 0.0911802558, 0.5871012844, and
+5.7376187337 angstrom, respectively. The support-balanced results satisfy those later comparisons.
+The checkpoint and principal errors remain unchanged, and the original mean and maximum failures
+remain part of the result.
+4.2 Learned-feature utility is distinct from carrier precision
+The 256-structure informativeness audit reported median distance errors of 0.0541321720, 5.1845675142,
+and 2.7935853372 angstrom for full, zeroed, and atom-shuﬄed learned features. The trained de-
+coder therefore uses useful information in the learned lane on that audit. These controls do not
+quantify all information in the features, establish downstream transfer, or independently validate
+an energy model.
+The linear species probe achieved micro accuracy 0.99609153 but macro recall 0.68834896. Its
+majority-class baseline accuracy of 0.50962347 is a micro baseline, not a macro baseline. High overall
+accuracy is thus compatible with substantially weaker average recall across species. Because atomic
+number is an encoder input, this is a test of accessible species information rather than discovery of
+chemistry. Composition ridge MAE was 0.00608407, below the train-mean baseline of 0.00707591,
+for source-labelled atomic-number fraction targets. Both MAEs average over all 83 element fractions
+per test structure, including absent elements.
+In the separate stored-bank audit, componentwise carrier RMS error had median 2.5504105993 ×
+10−5 and maximum 1.6227229159 × 10−4 angstrom. Learned distance errors were much larger: me-
+dian structure MAE 0.0451902528, global pair mean 0.1187249969, equal-structure mean 0.0645544105,
+and maximum structure MAE 2.4172211842 angstrom. These quantities measure diﬀerent paths
+and diﬀerent losses; their contrast is not an accuracy ratio between interchangeable reconstruction
+methods.
+The saved stored-bank results satisﬁed their inherited statistic-matched criteria, including the
+0.0019458734 angstrom componentwise carrier-RMS median bound. Only 36 species met the
+minimum support of 24 for supported-element summaries. Their reported macro accuracy was
+6
+
+0.99999077, but this sample is not an 83-element balanced validation.
+4.3 Stored orientation bias and paired runtime augmentation
+Table 2 separates the stored-orientation sample from the paired loader sample. In the ﬁrst,
+7.57141113% of axes were within 30 degrees of either z pole, an absolute gap of 5.82604849 per-
+centage points from the uniform-axis expectation. This exceeds the three-point practical criterion.
+No axes were reported as degenerate under the relative eigenvalue-gap rule. The result indicates
+depletion near the z poles, not collapse toward them.
+Table 2: Near-z principal-axis fractions. Each sample has 32,768 rows. Only the two loader entries
+are paired. The uniform-axis target is 13.39745962%.
+Measurement Near-z (%) Absolute gap (points)
+Stored-orientation sample 7.57141113 5.82604849
+Loader sample, before 7.74841309 5.64904653
+Loader sample, after 13.71765137 0.32019175
+Within the loader’s diﬀerent sample, the near- z fraction changed from 7.74841309% before treat-
+ment to 13.71765137% after treatment. The after-treatment gap of 0.32019175 percentage points
+satisﬁes the same practical criterion. This is evidence about this axis-cap statistic in the sampled
+transformed rows, not proof of whole-bank isotropy.
+The saved loader audit compared 67,763,506 pair distances. Its maximum absolute distance
+change was 0.00155574452 angstrom, below the speciﬁed 0.002 angstrom tolerance. Maximum
+determinant and orthogonality errors were both approximately 1.55 × 10−15, below 10−12. Thus,
+the matrices were numerically proper rotations to the stated tolerance, while decoding and BF16
+repacking introduced bounded observed geometric error. The audit recorded no learned-feature
+or noncoordinate-carrier bit mismatches, source-array mutations, changed source token ﬁles, or
+persisted rotated payloads. Reusing a key and epoch was deterministic, and the next epoch changed
+the tested nondegenerate frames.
+5 Discussion and limitations
+5.1 Three validation questions, not one reconstruction score
+The explicit carrier answers whether centered source geometry survives numerical storage. The
+learned decoder answers whether atomwise scalar features support accurate pair-distance predic-
+tion under a particular trained readout. The orientation audit answers how decoded shapes are
+distributed relative to a laboratory axis. A favorable answer to one question cannot substitute for
+another.
+The tail diagnostic is particularly consequential for heterogeneous molecular sizes. Pair weighting
+grows approximately quadratically with atom count, whereas the median gives each structure one
+position in an ordered distribution. Both can be useful, but they describe diﬀerent operational
+risks. A median summarizes typical structure-level behavior; a pooled pair mean reﬂects the total
+absolute error per evaluated pair; and a maximum exposes severe row-level failure. Reporting
+7
+
+all three retains information that a single headline error loses. Pair counts are not independent
+statistical replicates because pairs share atoms and structures.
+Correcting the reference denominator is scientiﬁcally appropriate when it makes the comparison
+well deﬁned. It is not evidence that the representation improved. The later contract establishes
+consistency relative to the same checkpoint’s ﬁxed-test statistics and stated tolerances. It does
+not reverse the original failure or establish application-speciﬁc adequacy. Similarly, passing the
+stored-bank audit under inherited bounds does not erase its sampled maximum structure MAE
+above 2 angstrom.
+5.2 What runtime frames do and do not change
+Distance/scalar inputs can yield rotation-invariant learned features even when stored coordinate
+carriers retain biased source orientations. An isotropic side-length rule removes directional depen-
+dence from the scale, not from the coordinates themselves. Runtime frame augmentation acts on
+that remaining pose information.
+The paired loader result supports the narrow operational conclusion that ephemeral rotation and
+repacking reduced the measured near- z discrepancy while leaving learned features unchanged and
+preserving distances within the observed tolerance. It does not repair the stored bank, improve
+the encoder, or demonstrate improved training. Moreover, one cap statistic does not characterize
+every aspect of an orientation distribution. The ﬁnite deterministic hash construction is useful for
+reproducible pseudorandom augmentation, but does not create mathematically exact independent
+rotations.
+5.3 Evidence and generalization limits
+Block samples contain contiguous rows, and byte-based selection can reﬂect manifest layout and
+record lengths. The equal-family reconstruction sample additionally imposes artiﬁcial family weights.
+Neither design supports an unqualiﬁed whole-bank population estimate. We therefore report de-
+scriptive measurements and practical criteria without inferential conﬁdence intervals derived from
+row, pair, block, or atom counts. No independent molecular trajectories were generated or analyzed
+as statistical replicates in this study.
+The veriﬁcation work establishes saved-evidence consistency, not a fresh replication of model
+behavior. A later source manifest matches the inspected reconstruction, orientation, informative-
+ness, and loader implementations, while an earlier informativeness source diﬀers. A vailability of
+those sources does not authenticate every historical job’s exact execution environment. Counts and
+medians requiring original arrays remain reported measurements.
+The available energy probe uses source-native units whose physical conversion was not frozen, so
+it supports no physical energy-accuracy claim here. Authoritative total-charge labels were unavail-
+able, spin labels lacked multiple training classes, and a conformer-class ontology was not available.
+Species accessibility and composition prediction therefore do not establish charge, spin, conformer,
+force, or dynamical generalization. The present evidence should not be interpreted as validation of
+a molecular potential.
+8
+
+6 Conclusion
+This retrospective case study separates explicit numerical geometry from learned molecular features
+and shows why that separation matters for validation. The carrier preserves centered coordinates
+with small reported componentwise RMS error, while the learned distance decoder retains a sub-
+stantial tail that a low median alone would conceal. Statistic-matched reference comparisons clarify
+denominators but do not change predictions or repair the original failed criteria.
+Stored orientation is a third, independent property. A block sample revealed a practically impor-
+tant principal-axis imbalance, and a distinct paired loader audit showed that runtime random-frame
+treatment brought the measured cap fraction close to its uniform-axis target with bounded observed
+quantization error. Because the treatment preserves learned features, it is geometry augmentation
+rather than representation learning. Together, the results favor explicit reporting of information
+paths, weighting rules, tail summaries, and sampling designs over a single undiﬀerentiated recon-
+struction claim.
+7 Data and Code A vailability
+Supplementary record S1 is a private evidence export containing captured reports, inspected source
+code and contract ﬁles, and the arithmetic/identity-checking recipes and results used for this study.
+The inspected implementations include the coordinate codec, learned encoder and decoder, infor-
+mativeness audit, stored-bank reconstruction audit, orientation audit, and runtime random-frame
+loader. The source records identify private token arrays, source caches, manifests, and a checkpoint,
+but the present reanalysis did not load that checkpoint, scan those arrays, or recover all original
+distance arrays.
+The actual access mechanism for the supplied evidence is the private Supplementary record S1
+export. No public data or code archive, public redistribution permission, reviewer-access arrange-
+ment, or commitment to provide the underlying private bank is established by the available record.
+Exact artifact identities and checking details are recorded in Supplementary record S1.
+References
+[1] K. T. Schütt, P.-J. Kindermans, H. E. Sauceda, S. Chmiela, A. Tkatchenko, and K.-R. Müller.
+SchNet: A continuous-ﬁlter convolutional neural network for modeling quantum interactions.
+Advances in Neural Information Processing Systems 30, 991–1001 (2017).
+[2] D. S. Levine et al. The Open Molecules 2025 (OMol25) Dataset, Evaluations, and Models.
+arXiv:2505.08762v1 (2025). https://arxiv.org/abs/2505.08762v1.
+[3] M. Schreiner, A. Bhowmik, T. Vegge, J. Busk, and O. Winther. Transition1x – a Dataset
+for Building Generalizable Reactive Machine Learning Potentials. arXiv:2207.12858v1 (2022).
+https://arxiv.org/abs/2207.12858v1.
+[4] K. Shoemake. Uniform Random Rotations. Graphics Gems III, 124–132 (1992). A vailable
+algorithm code supplement, urot.c, Qt_Random and Qt_ToMatrix. https://github.com/
+erich666/GraphicsGems/blob/master/gemsiii/urot.c.
+9

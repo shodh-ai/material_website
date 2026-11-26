@@ -1,0 +1,436 @@
+What Passing Solver Checks Establish:
+Periodic Decay, Manufactured Pressure,
+and Failed Boundary Response in Fluid Veriﬁcation
+Abstract
+A numerical acceptance result applies to an observable, a conﬁguration and a stated toler-
+ance. We examine the consequences of keeping those conditions explicit across four retained
+ﬂuid-veriﬁcation campaigns. Ten periodic Taylor–Green cases passed their recorded limits;
+stationary decay-energy errors gave observed resolution orders of 1.987–2.054, and a matched
+moving-frame comparison diﬀered by 0.0868% in its energy-retention ratio. A bounded residual-
+refresh candidate was admitted on four manufactured pressure graphs, although the original
+comparison panel retained failed baseline outcomes. In annular Couette startup, independently
+reconstructed observables from 721 saved planar states agreed with the original reductions, while
+the physical response still failed: maximum surface-torque errors were 5.53–7.06% of the steady
+torque scale, aggregate proﬁle error was 7.327%, and ﬁnal proﬁle error was 5.197%, against
+5% limits. Separate ﬁxed-ﬂow S-bend records showed nonmonotone pressure reﬁnement and a
+corrector-induced change comparable to the medium-to-ﬁne change despite very small surface-
+ﬂux imbalance. These are conﬁguration-speciﬁc tests, not a controlled isolation of one failure
+mechanism. Their combined contribution is an empirical account of why periodic accuracy,
+algebraic admission, observable reconstruction and physical boundary response require separate
+decisions.
+1 Question and contribution
+Fluid software is often examined through a sequence of inexpensive numerical tests before more
+demanding application calculations. A passing test can support a useful, narrow conclusion without
+qualifying every later use of the implementation. The issue is especially clear when a method passes
+periodic decay and algebraic pressure checks, yet misses a physically meaningful velocity or stress
+tolerance at an immersed boundary.
+This study asks what four retained campaigns establish when their conﬁgurations, observables and
+evidence levels are kept separate. The ﬁrst examines periodic vortex decay in a D3Q27 cumulant
+implementation. The second assesses a variable-coeﬃcient pressure solve on manufactured con-
+nected graphs. The third compares annular Couette startup with a continuum reference and tests
+control-surface observables using saved moments. The fourth examines mesh and outer-corrector
+sensitivity in a separate OpenFOAM S-bend calculation. Together they retain both positive results
+and substantive failures, rather than treating a successful numerical check as transferable approval.
+The cumulant lattice Boltzmann formulation and its diagonal corrections are inherited from the
+method family described by Geier et al. [ 1]. Our contribution is the speciﬁc empirical comparison
+of these acceptance layers and the retained-data reconstruction of the Couette observables. We
+introduce neither a new collision model nor a general veriﬁcation theorem. The campaigns diﬀer
+1
+
+in geometry, numerical controls and sometimes solver family; they are not matched experiments
+that identify one cause of the Couette discrepancy. In particular, the periodic cases enable a local
+diagonal correction that the captured Couette conﬁguration disables.
+2 Study design and evidence levels
+The analysis uses original reports, conﬁguration and method records, saved Couette moments, and
+surface summaries from the curved-ﬂow calculations. Existing outputs are examined retrospec-
+tively. We do not rerun collision and streaming, solve new pressure graphs, or advance new ﬂuid
+trajectories. Independent reductions refer to new implementations of calculations on the retained
+data; they do not imply independent generation of those data.
+Table 1 states the observation contract for each campaign. Case identity and complete source
+bindings are retained in a private evidence index. A separate unresolved-check report identiﬁes
+missing inputs and the checks they prevent. The scientiﬁc results below do not depend on treating
+unavailable observations as positive evidence.
+Campaign Numerical conﬁguration and endpoint Present evidence and decision scope
+Periodic decay CPU; ﬂoat32 D3Q27 product equi-
+librium; diagonal correction enabled;
+nine stationary and one moving case
+Original reports and inert method deﬁni-
+tions; analytical decay and gate arithmetic
+checked. No population evolution replay.
+Manufactured
+pressure
+CPU JAX, 64-bit mode disabled;
+four connected graphs; ﬁxed residual-
+refresh controls
+Reported residuals, gradients and admis-
+sion limits checked against the source-
+deﬁned panel. No new matrix–vector resid-
+ual measurement.
+Couette startup CPU; ﬂoat32 evolution; diagonal cor-
+rection disabled; 963 lattice, 720 steps
+to 28.8 s
+Independent moment-based observer reduc-
+tion at all 721 saved times; seven explicit
+central-plane proﬁles and 721 norm sum-
+maries. Physical proﬁle/stress limits re-
+main failed.
+S-bend ﬁxed ﬂow OpenFOAM pimpleFoam; three
+meshes; 512 steps to 20.48 s; outer-
+corrector variants
+Original surface summaries and scalar dif-
+ferences checked. Mesh, temporal and full-
+ﬁeld qualiﬁcation remains incomplete.
+Table 1: Conﬁgurations and evidence levels. A check on retained arithmetic is distinguished from
+a new numerical or physical experiment. The three canonical campaigns report CPU execution; no
+accelerator speedup is measured.
+The samples have diﬀerent meanings. The Taylor–Green matrix contains ten deterministic cases;
+the pressure panel contains four manufactured graphs; the Couette record contains correlated times
+from one startup; and the S-bend records contain mesh and iteration variants. We do not pool them
+into one statistical sample or infer an empirical probability that a passing residual check predicts
+physical accuracy. All tolerances reported here are those speciﬁed in the captured test deﬁnitions.
+Source statements that a panel was ﬁxed before execution are not a substitute for an independently
+dated preregistration.
+2
+
+3 Periodic decay: a positive result with a deﬁned frame compar-
+ison
+3.1 Deﬁnitions and conﬁguration
+The periodic test uses an x– y Taylor–Green velocity mode with nominal lattice amplitude 0.01, a
+product equilibrium, and an enabled local diagonal correction. The nine stationary cases combine
+N = 16 , 24, 32 with relaxation times τ = 0 .6, 0.8, 1.0. A tenth case adds a uniform x velocity
+U = 0.1 at N = 32, τ = 0.8. The lattice viscosity and wave number are
+νℓ = τ − 1/2
+3 , k = 2π
+N . (1)
+The analytical mode amplitude decays as A(n) = A0 exp(−2νℓk2n). Here A0 is the projection of
+the actual stored initial velocity onto the test mode, not an assertion that the initialized ﬂoat32
+state has amplitude exactly equal to the nominal input.
+The energy observable removes the measured spatial mean of each state:
+Ef (n) = 1
+2
+D
+|⃗ u(n) − ⟨⃗ u(n)⟩|2
+E
+, R (n) = Ef (n)
+Ef (0) , R ex(n) = exp( −4νℓk2n). (2)
+This is a per-unit-mass lattice ﬂuctuation energy, not the total kinetic energy of the uniform
+background. The moving-mode projection is translated by U n in x. The intended amplitude
+exponent is 0.5, but integer step counts give slightly diﬀerent realized decay clocks. We evaluate
+the analytical ratios at those actual counts, rather than replacing them with one common terminal
+time.
+Deﬁne the relative energy error as eE = |R/Rex −1|. The reported resolution indicator and matched
+moving-frame discrepancy are
+p16,32 = log[eE(16)/eE(32)]
+log 2 , d U =
+
+RU =0.1
+RU =0
+− 1
+ . (3)
+These deﬁnitions make the denominator of the frame comparison explicit. A small dU is a bounded
+comparison of two energy-retention ratios; it is not exact Galilean invariance of the implementation.
+3.2 Retained results
+All ten cases satisfy the captured scalar gates, including the 5% amplitude and energy limits. The
+other limits are relative mass error 10−6, maximum density departure 0.005, transverse velocity
+10−5, peak lattice Mach number 0.3, and mode purity at least 0.995. The recorded minimum ac-
+cepted 16-to-32 order is 1.0. The observed energy-error orders are 1.986908, 2.000964 and 2.054173
+for the three relaxation times. This supports a near-second-order trend over the retained resolution
+pairs at their rounded decay clocks, rather than a general asymptotic-order proof.
+For the matched N = 32 , τ = 0 .8, n = 65 pair, the stationary energy ratio is 0.3638449309 and
+the moving ratio is 0.3641606455. Equation ( 3) gives dU = 0 .0008677175, or 0.08677175%, below
+the captured 2% limit. The absolute ratio diﬀerence is a diﬀerent quantity and is not the reported
+percentage.
+The source and report deﬁnitions support these analytical and scalar comparisons. They do not
+recover the absent initial population arrays, independently reconstruct A0, or reproduce the evo-
+lution. Geier et al. [ 1] provide the inherited cumulant and correction framework; their published
+3
+
+τ N Steps n e E (%) Amplitude error (%)
+0.6 16 49 4.70982 2.38332
+0.6 24 109 2.10983 1.06054
+0.6 32 195 1.18819 0.595871
+0.8 16 16 3.44572 1.73797
+0.8 24 36 1.53010 0.768005
+0.8 32 65 0.860855 0.431366
+1.0 16 10 1.34198 0.673330
+1.0 24 22 0.577967 0.289403
+1.0 32 39 0.323131 0.161726
+0.8 32, moving 65 0.774830 0.388210
+Table 2: Periodic decay results retained in the original reports. All stationary cases have U = 0 ;
+the last case has U = 0 .1. Errors use each case’s actual integer horizon and stored-initial-state
+amplitude convention.
+Taylor–Green setup has a diﬀerent aspect ratio and initialization. Our ﬁnite test matrix is not a
+matched repetition of that published experiment. Their discussion of incomplete local corrections
+also precludes promoting this one moving-frame result into a claim of general lattice invariance.
+4 Manufactured pressure: numerical admission is a separate end-
+point
+The pressure panel examines connected variable-coeﬃcient graphs with two excluded cells in each
+reported shape. Three graphs use 8 × 9 × 10 arrays and coeﬃcient-contrast multipliers 102, 103 and
+104; a fourth uses 10×11×12 and multiplier 103. They contain 718 and 1318 ﬂuid cells, respectively.
+The source-deﬁned spacing is 0.125 and the four seeds are 20261021– 20261024 in table order. The
+contrast control scales coeﬃcients in one half of the third coordinate. Manufactured ﬁelds deﬁne
+the right-hand side, with a pressure gauge on the connected ﬂuid graph.
+The retained comparison distinguishes the original ﬂoat32 right-hand-side reference from a ﬂoat64
+mean-zero-compatible reference. Removing the remaining compatibility defect in ﬂoat64 changes
+the comparison problem slightly, so gradients against both references are reported. An algebraically
+well-resolved compatible direct solve does not itself measure a physical pressure ﬁeld.
+For a discrete system Ap = b, the fresh residual and a reference-gradient discrepancy have the forms
+rrel = ∥Ap − b∥2,F
+∥b∥2,F
+, g rel = ∥Gp − Gpref ∥2
+∥Gpref ∥2
+, (4)
+where F is the ﬂuid-cell set and G is the source-deﬁned edge-gradient comparison. The sign of b
+follows the corresponding operator convention. The report distinguishes freshly applied matrix-free
+residuals from recursive or preconditioned stopping histories and from a separate assembled full
+sparse-matrix residual.
+The candidate starts from the FFT-preconditioned conjugate-gradient result at relative tolerance
+10−8, absolute tolerance 10−11 and maximum 512 iterations. It permits at most four additional
+phases of 128 iterations, reevaluating the matrix-free residual between phases against a target 10−7.
+These are bounded numerical-transfer controls, not a change to a production default.
+4
+
+Admission requires inclusive limits of 10−7 on the fresh matrix-free residual, 2 × 10−5 on the
+independently assembled full sparse residual, 10−10 on the compatible direct-reference residual, and
+2×10−4 on each gradient comparison. “Independent” here describes the original assembled-reference
+path. Our present examination checks retained values and deﬁnitions; it does not recompute Ap − b
+from recovered graph and solution arrays.
+Shape; contrast Fresh rrel grel, compatible Base pass Candidate
+8 × 9 × 10; 102 9.4084 × 10−8 8.4343 × 10−7 Yes Admit
+8 × 9 × 10; 103 8.1041 × 10−8 3.3308 × 10−6 Yes Admit
+8 × 9 × 10; 104 8.3258 × 10−8 8.7205 × 10−5 No Admit
+10 × 11 × 12; 103 7.6658 × 10−8 4.6783 × 10−6 No Admit
+Table 3: Four retained manufactured-graph candidate admissions. “Base pass” is the original per-
+case aggregate outcome, not a relabeling of the candidate. Both failed baseline outcomes remain
+part of the result.
+All four candidates meet the captured numerical limits, including the two cases whose base compar-
+isons fail. The aggregate base-panel pass therefore remains false. Neither the candidate admissions
+nor the very small compatible direct-reference residuals establish physical calibration, application
+accuracy or robustness beyond these four graphs. They establish a bounded algebraic acceptance
+result under the captured deﬁnitions.
+5 Couette startup: observable agreement preserves the physical
+failure
+5.1 Case and observation deﬁnitions
+The annular case has inner radius ri = 3 m, outer radius ro = 7 m and axial length Lz = 19 .2 m.
+The inner cylinder reaches Ωi = 0 .01 rad s −1 through a two-second smoothstep ramp; the outer
+cylinder remains stationary. A 963 lattice uses ∆x = 0 .2 m, ∆t = 0 .04 s, τ = 0 .8 and reference
+density ρ0 = 1 kg m −3. There are 720 evolution steps and 721 saved states, including the initial
+state, ending at 28.8 s. The physical viscosity used by the observer is
+µ = ρ0
+(τ − 1/2)∆x2
+3∆t = 0.1 Pa s. (5)
+These are stated numerical-to-physical scales, not a calibration against an apparatus.
+The conﬁguration uses 40 immersed-boundary iterations, an exterior moving-least-squares stencil
+and post-stream reconstraint. Its physical marker interpolation is periodic axially, while the pop-
+ulation core rolls periodically in all three Cartesian directions with the radial walls inside the box.
+Native evolution is ﬂoat32. Products and moment reductions are retained as ﬂoat64; enabling a
+64-bit runtime ﬂag does not make the evolved population state double precision. The local diagonal
+correction used in the periodic campaign is disabled here.
+The steady annular reference proﬁle is
+uθ,s(r) = ar + b
+r , a = Ωor2
+o − Ωir2
+i
+r2o − r2
+i
+, b = r2
+i r2
+o(Ωi − Ωo)
+r2o − r2
+i
+. (6)
+5
+
+The transient comparisons use a retained startup reference, not this steady curve at every time.
+For angular velocity ω = uθ/r, that reference solves the axisymmetric incompressible diﬀusion
+problem r3∂tω = ν ∂r(r3∂rω), with ν = µ/ρ0. Fluid starts at rest; the inner-wall angular speed
+follows the speciﬁed two-second cubic-smoothstep ramp and the outer wall remains stationary.
+The axial interpretation is periodic or inﬁnite-cylinder ﬂow with no end plates. Body-ﬁtted radial
+control volumes are advanced with SciPy BDF. The retained proﬁle reference uses 256 radial
+intervals and the control-surface reference uses 512; both primary integrations use relative tolerance
+10−9, angular-speed absolute tolerance 10−12 rad s−1, and maximum time step 0.125 s. These are
+historical reference settings. The reference passed its own recorded admission checks but has not
+been independently re-integrated in the present analysis.
+Two observation sets must be distinguished. The primary surface observer uses z-averaged velocity,
+density-weighted velocity, and second moments from all saved times. The velocity-proﬁle check
+instead averages the central two z planes at each of 1564 Cartesian sample locations satisfying
+4 ≤ r ≤ 6 m, retaining angular duplicates. Seven explicit central-plane proﬁles survive at steps
+0, 25, 50, 100, 200, 400, 720, together with all 721 per-time norm summaries. A full central-plane
+trajectory cannot be reconstructed from z-averaged moments.
+5.2 Independent reconstruction of the saved observer
+We independently implement the observer reductions without importing the original solver. Fourth-
+order centered Cartesian derivatives and bilinear surface interpolation give the Newtonian shear
+component on a cylindrical surface,
+σxx = 2µ ∂xux, σyy = 2µ ∂yuy, σ xy = µ(∂yux + ∂xuy),
+σθr = cos θ sin θ(σyy − σxx) + (cos2 θ − sin2 θ)σxy,
+Q(r, t) = r2Lz
+Z 2π
+0
+σθr(r, θ, t) dθ.
+(7)
+The primary reconstruction uses 256 angular points and four-point radial Gaussian quadrature for
+volume observables. Pressure has zero axial torque on a concentric cylindrical surface by geometry.
+This identity is not an independently measured pressure-accuracy result, and the reconstructed
+stress is not an exact lattice momentum-ﬂux tensor.
+Density-weighted products are formed before averaging over z. For example, the angular momentum
+of an annular volume is reduced from
+LV = ρ0
+Z
+V
+[x ρreluy − y ρrelux] dV, (8)
+with a separate constant-reference-density channel formed from u. The bar denotes the saved
+axial mean and ρrel the dimensionless lattice density. Replacing the average of a product with the
+product of averages would change the observable. The same distinction applies to the convective
+second moments.
+All 721 saved times were reduced. The reconstructed outputs agree with the original 14 channels:
+13 numeric channels and one recomputed ﬁnite-status predicate. One numeric channel is the zero
+pressure-torque identity. They are therefore neither 14 independent experiments nor 14 independent
+empirical measurements. The maximum viscous-torque diﬀerence is 1.33 × 10−15 N m; a density-
+weighted angular-momentum channel diﬀers by at most 2.84 × 10−14 kg m 2 s−1. These unit-speciﬁc
+6
+
+diﬀerences describe agreement of retained arithmetic, not physical error against the continuum
+solution.
+Doubling the angular torque sampling to 512 points gives a maximum diﬀerence of 5.96 × 10−5
+relative to the steady torque scale. The original report also contains doubled radial-volume and
+reference-grid admission results. Our independent reconstruction does not repeat the complete
+doubled radial-volume calculation or the original three-dimensional force-footprint audit. Eﬀec-
+tive loads inferred from storage and ﬂux balances remain control-volume quantities, not directly
+reconstructed wall Cauchy traction.
+5.3 Physical acceptance remains failed
+At each control radius, the surface-stress error is normalized by the retained positive steady torque
+scale Qs = 2.6600493 N m:
+eQ(r) = max
+t
+|Q(r, t) − Qref (r, t)|
+Qs
+. (9)
+This is a maximum over the startup history, not a comparison only at steady state. The three
+control radii are 4.8, 5.0 and 5.2 m. Their errors are shown in Table 4. All exceed the captured 5%
+limit despite the close arithmetic reconstruction.
+For the central-plane proﬁle let ⃗ vj and ⃗ vref,j be the sampled azimuthal velocities. The two reported
+proﬁle endpoints are
+eagg =
+" P
+j∈T ∥⃗ vj − ⃗ vref,j∥2
+2P
+j∈T ∥⃗ vref,j∥2
+2
+#1/2
+, e ﬁnal = ∥⃗ v720 − ⃗ vref,720∥2
+∥⃗ vref,720∥2
+, (10)
+where T comprises the retained time observations with nonzero reference norm; the zero initial
+reference does not contribute to the denominator. The aggregate is reconstructed from all 721
+norm summaries, not from only the seven explicit proﬁles. Independently reducing those seven
+proﬁles supports their pointwise comparisons and the ﬁnal value, but does not authenticate absent
+central-plane arrays at the other times.
+Observable Error (%) Limit (%) Outcome
+Surface torque, r = 4.8 m 7.06174 5 Fail
+Surface torque, r = 5.0 m 6.17514 5 Fail
+Surface torque, r = 5.2 m 5.52880 5 Fail
+Aggregate central-plane proﬁle 7.32722 5 Fail
+Final central-plane proﬁle 5.19725 5 Fail
+Table 4: Retained Couette physical acceptance failures. Surface errors use the steady torque
+scale over the complete saved history; proﬁle errors use the transient-reference norms in Eq. ( 10).
+Successful observer reconstruction does not alter these outcomes.
+The original ﬁnite-state, density, mass, Mach-number, support and wall-slip checks pass. The
+internal shell-balance diagnostic and observer-admission result also pass, while the surface-stress
+and proﬁle checks fail. Thus the saved trajectory is ﬁnite and internally checkable but does not
+meet the speciﬁed physical-response tolerances.
+Deﬁnitions, source bindings and corrected audit history are retained in the private reproducibility
+record.
+7
+
+6 S-bend reference sensitivity: balance and convergence diﬀer
+The separate curved-ﬂow campaign uses OpenFOAM pimpleFoam at ﬁxed ﬂow 8.0424772 × 10−7
+m3 s−1. The retained coarse, medium and ﬁne meshes contain 8471, 55919 and 128345 cells. Each
+ﬁxed-ﬂow record ends after 512 steps at 20.48 s. Surface summaries retain inlet and outlet pressure
+values, inlet and outlet ﬂuxes, and net and absolute wall ﬂux. The pressure-ﬁeld dimensions
+and density binding have not been recovered, so pressure diﬀerences are reported in their native
+convention without conversion to Pa.
+For two conﬁgurations, the pressure and balance comparisons are
+∆p = pin − pout, δ p = 100 ∆pnew − ∆pold
+∆pold
+, ϵ ϕ = |ϕin + ϕout + ϕwall,net|
+|ϕin| . (11)
+A common ﬁxed pressure scale cancels from δp; this does not establish that scale’s physical units.
+The ﬂux signs follow the retained outward-normal convention.
+Conﬁguration Cells Native ∆p ϵϕ
+Coarse ﬁxed ﬂow 8,471 2.31759072 × 10−4 3.1334 × 10−11
+Medium ﬁxed ﬂow 55,919 2.31357443 × 10−4 1.1153 × 10−10
+Fine ﬁxed ﬂow 128,345 2.32634522 × 10−4 1.7718 × 10−10
+Fine, four outer correctors 128,345 2.31199835 × 10−4 1.3578 × 10−10
+Medium, sixteen outer correctors 55,919 2.30528250 × 10−4 1.1352 × 10−10
+Table 5: Retained S-bend surface results. The ﬁne-grid corrector variant is paired with the ﬁne
+ﬁxed-ﬂow case and increases outer correctors from two to four. The sixteen-corrector medium row
+belongs to a separate eight-to-sixteen study; its eight-corrector baseline is not the listed medium
+ﬁxed-ﬂow row. Corrector variants are iteration changes, not additional mesh levels.
+The pressure sequence decreases from coarse to medium and then increases to ﬁne. The medium-to-
+ﬁne relative change is +0.551994%. On the ﬁne mesh, increasing outer correctors from two to four
+changes pressure diﬀerence by −0.616713%, a comparable magnitude. The surface-ﬂux imbalance
+is at most 1.78 × 10−10 across the retained variants, and the reported wall ﬂuxes are zero. Thus
+a highly balanced surface ﬂux does not remove the pressure observable’s sensitivity to iteration
+settings.
+These records do not establish an asymptotic reﬁnement regime. Nonmonotone pressure values,
+nonuniform meshes and cell counts alone do not support a Richardson order or a grid-convergence
+index. The corrector sensitivity cannot be subtracted as an independent mesh-error estimate with-
+out a matched study. In the corrector variants, an unsupported residual-function warning accom-
+panies a record that the residual monitor did not execute. It is not a measurement of a very small
+residual.
+An earlier common-sample postprocessing campaign refers to diﬀerent solver runs. We therefore
+do not join its velocity and near-wall comparisons to this ﬁxed-ﬂow mesh sequence as if they were
+matched ﬁelds. Temporal qualiﬁcation and an application-speciﬁc tolerance are also unresolved.
+The S-bend evidence is an independent solver-family sensitivity example, not a continuum truth
+against which the canonical JAX cases have been validated.
+8
+
+7 Implications and limits of the veriﬁcation ladder
+The four campaigns answer diﬀerent questions. Periodic decay checks a known smooth mode
+under periodic conditions. Manufactured pressure admission checks a discrete algebraic problem
+with a speciﬁed null-space and residual convention. Saved-state reconstruction checks whether an
+observation algorithm consistently reduces its input. Couette startup checks a physical velocity and
+stress response against the retained continuum reference. S-bend reﬁnement examines sensitivity
+to mesh and iteration choices. Passing one endpoint does not logically establish another endpoint
+whose boundary conditions, observable or denominator diﬀer.
+The Couette reconstruction makes this distinction concrete. Very close agreement between two
+reductions rules out some observation-arithmetic discrepancies for the retained moments; it does
+not reduce the 5.53– 7.06% surface-stress disagreement with the reference. Likewise, an internal shell
+balance concerns consistency of storage and resolved ﬂuxes, while a proﬁle comparison concerns
+agreement with a reference response. Neither requires the other to pass. The negative result is
+useful precisely because successful internal checks coexist with failed physical tolerances.
+The evidence does not isolate why the Couette response fails. The periodic and annular cases use
+diﬀerent boundaries and diﬀerent correction ﬂags. They also exercise diﬀerent observables and
+forcing conventions. Diagnosing a causal boundary mechanism would require matched numerical
+interventions. Nothing here attributes the failure to a particular arithmetic contraction mode or
+validates a separate rheology, mixer or stirred-tank application.
+There are bounded reproducibility gaps. Native population trajectories and pressure graph/solution
+vectors are absent, preventing independent evolution and full residual remeasurement. The tran-
+sient annular reference has not been independently re-solved, and only seven complete central-plane
+proﬁles are retained. Three-dimensional force footprints and the full doubled volume observer are
+not independently reconstructed. S-bend pressure units, matched raw velocity ﬁelds and tempo-
+ral convergence remain unqualiﬁed. These gaps restrict the interpretation; they do not erase the
+physical failures that the available observations support.
+8 Conclusion
+The retained campaigns support positive periodic decay and four manufactured-pressure candidate
+admissions, alongside a failed annular physical response and an incompletely qualiﬁed curved-ﬂow
+reference. Independent reconstruction of all saved Couette observer outputs preserves the stress
+and proﬁle failures. In the S-bend records, small surface-ﬂux imbalance coexists with nonmono-
+tone mesh behavior and a material corrector sensitivity. The practical result is a set of distinct
+acceptance decisions with explicit conﬁgurations and denominators. It supports further targeted
+veriﬁcation without treating successful internal arithmetic or algebraic stopping as completed phys-
+ical qualiﬁcation.
+Data and reproducibility
+Original source records, source-bound saved arrays, analysis deﬁnitions, independent reduction out-
+puts and correction histories are privately retained in Supplementary record S1 with a provenance
+index. They have not been publicly released, and external reviewer access and redistribution ar-
+rangements are not established here. The separate unresolved-check report identiﬁes the precise
+9
+
+additional inputs required for broader reproduction. No new ﬂuid evolution was performed for this
+retrospective analysis.
+References
+[1] M. Geier, M. Schönherr, A. Pasquali and M. Krafczyk, “The cumulant lattice Boltzmann equa-
+tion in three dimensions: Theory and validation,” Computers and Mathematics with Applica-
+tions 70 (2015), 507–547. doi:10.1016/j.camwa.2015.05.001.
+10

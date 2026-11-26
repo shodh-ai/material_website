@@ -1,0 +1,280 @@
+Source-faithful static validation of archived CAL V ADOS-2
+interactions: parameter equality, contact-range semantics, and
+backend-dependent test outcomes
+Abstract
+Agreement between residue parameter tables does not establish equality of implemented
+Hamiltonians. We examine a frozen comparison between an archived CAL V ADOS-2 direct-
+coexistence source ﬁxture and a saved OpenABC 1.0.9 comparison. Although the comparison
+reports exact numerical parameter parity, an additional 4σ energy gate shortens four of 210
+unordered canonical residue-pair interactions relative to the ﬁxture’s ﬁxed 2.0 nm contact cut-
+oﬀ. A corrected contact-only implementation passes its original tolerances on saved CPU and
+CUDA arrays comprising ﬁve selected pair types and 23 conﬁgurations. Independent local
+reanalysis reproduces six error statistics, array and contract identities, residue-table mixing,
+and an analytic energy/derivative reference without rerunning OpenMM. A separate, broader
+static harness covers 1,470 contact conﬁgurations, ﬁve bond conﬁgurations, and 30 electrostatic
+conﬁgurations. Its saved Reference report passes all sections, whereas its CUDA report fails
+contact-force and bond tolerances while passing electrostatic/terminal checks. Independent
+report-consistency checks preserve, rather than resolve, these failures. The results distinguish
+parameter agreement, functional equivalence, ﬁxture-speciﬁc numerical agreement, and physical
+validation; integration, ensembles, transferability, and GPU performance remain unestablished.
+1 Introduction and contributions
+Residue-level simulations require a precisely speciﬁed interaction model before numerical agreement
+can be interpreted physically. A residue table supplies coeﬃcients, but the evaluated potential also
+depends on parameter mixing, branch deﬁnitions, cutoﬀ placement, energy shifts, exclusions, and
+unit conventions. Backend selection and force evaluation introduce another level of comparison.
+Consequently, neither matching coeﬃcients nor agreement on a small collection of conﬁgurations
+establishes equality of complete Hamiltonians.
+This study addresses that distinction through a bounded historical CAL V ADOS-2 compari-
+son. The reference ﬁxture is a captured direct-coexistence script associated with Zenodo archive
+10.5281/zenodo.13754000, version 2.0. The candidate comparison identiﬁes OpenABC 1.0.9. These
+identities delimit the inference: the ﬁndings concern the saved comparison, not current OpenABC
+releases or every CAL V ADOS implementation.
+The focused contribution is threefold. First, we explain how identical reported residue parame-
+ters coexist with diﬀerent contact ranges. Second, we quantify what is reproduced from a corrected
+23-conﬁguration contact ﬁxture. Third, we compare those results with the contrasting outcomes of
+a separate, more comprehensive static harness, including its CUDA failures. This bounded imple-
+mentation comparison establishes the scope of the available measurements; it does not introduce a
+new force ﬁeld.
+1
+
+2 Related work
+Tesei and colleagues demonstrated that interaction range aﬀects CAL V ADOS phase-separation
+predictions more strongly than single-chain compaction. Their model-development analysis distin-
+guishes optimization at 2.4 nm from simulations evaluated at 2.0 nm [ 1]. This context motivates
+checking range semantics; it does not independently authenticate the private comparison examined
+here. In particular, the ﬁxed 2.0 nm cutoﬀ below belongs to the captured source ﬁxture, not a
+universal deﬁnition of CAL V ADOS.
+OpenABC provides Python-based access to multiple coarse-grained force ﬁelds through OpenMM.
+Its publication includes cross-engine energy comparisons and separate ensemble and performance
+assessments [ 2]. Those results establish relevant implementation context, not the outcome of this
+archived CAL V ADOS-2/OpenABC 1.0.9 comparison. We therefore distinguish published software
+capabilities from the source-speciﬁc evidence and numerical contracts analyzed here.
+3 Scientiﬁc methods and validation protocols
+Evidence and retrospective analysis
+This is a retrospective analysis of captured code, reports, contracts, conﬁguration lists, and small
+saved arrays. No additional molecular-dynamics simulations or OpenMM backend executions were
+performed in the local reanalysis. Supplied source code was inspected, not executed. Two inde-
+pendent local analyses examined the saved numerical evidence: one recalculated the small-array
+results; the other performed 37 checks of report arithmetic, aggregation of pairwise maxima, thresh-
+old decisions, and links to declared captured sources. Neither analysis constitutes a fresh simulator
+reproduction.
+The archived direct-coexistence source explicitly sets the contact cutoﬀ and shift distance to 2.0
+nm and the electrostatic cutoﬀ and shift distance to 4.0 nm. It excludes directly bonded neighbors
+from both nonbonded terms and enables periodic boundaries. The static pair harnesses instead
+use their default nonperiodic conﬁgurations. Thus, even broad pair coverage is not a periodic
+multichain-system test. Static archive-member comparisons establish that the captured OpenABC
+interaction source matches the corresponding member of the oﬃcial OpenABC 1.0.9 package and
+that the captured direct-coexistence script and residue table match members of Zenodo archive
+10.5281/zenodo.13754000, version 2.0. The source identities and retrieval records are preserved in
+Supplementary record S1. These byte-identity checks do not reproduce the saved backend execu-
+tions.
+Contact potential, mixing, and force convention
+For residue types i, j, the captured preparation uses arithmetic mixing,
+σij = σi + σj
+2 , λ ij = λi + λj
+2 , ϵ = 0.2 × 4.184 = 0 .8368 kJ mol −1. (1)
+2
+
+With rm = 2 1/6σij, rc = 2 .0 nm, and uLJ(r) = 4 ϵ[(σij/r)12 − (σij/r)6], the source-faithful shifted
+Ashbaugh–Hatch contact potential is
+UAH(r) =
+
+
+
+uLJ(r) + (1 − λij)ϵ − λijuLJ(rc), 0 < r < r m,
+λij[uLJ(r) − uLJ(rc)], rm ≤ r < r c,
+0, r ≥ rc.
+(2)
+The identical cutoﬀ-energy shift occurs in both branches. The repulsive-branch derivative is not
+multiplied by hydropathy. Away from branch and cutoﬀ boundaries,
+U ′
+AH(r) = a(r)4ϵ
+[
+−
+12σ12
+ij
+r13 +
+6σ6
+ij
+r7
+]
+, a (r) =
+{
+1, r < r m,
+λij, r m < r < r c. (3)
+For particles at (0, 0, 0) and (r, 0, 0), F1x = + U ′(r) and F2x = −U ′(r); transverse components
+vanish. The shift makes the energy continuous at the cutoﬀ, but is not a force-shifting prescription.
+The tests do not resolve the force exactly at rc.
+The saved OpenABC comparison reports the same 2.0 nm neighbor-list limit and shift distance,
+plus an additional multiplicative step(4σij − r) energy gate. Hence its eﬀective range is the smaller
+of these two distances. This is a functional diﬀerence even when all table entries agree.
+Small corrected contact ﬁxture
+The corrected contact implementation removes that additional gate. Its saved ﬁxture selects A–G,
+C–G, G–G, G–S, and Y–W: ﬁve pair types, not all 210. The ﬁrst four receive ﬁve distance entries
+around their gates and near 1.999 nm; Y–W receives 1.70, 1.90, and 1.999 nm. The denominator
+is 23 conﬁguration entries, including a repeated C–G entry at 1.999 nm. All are on the attractive
+branch. The ﬁxture does not cover repulsion, exclusions, bonds, or electrostatics.
+The original harness requests a single CPU thread or CUDA double precision and evaluates static
+states without advancing its Verlet integrator. Saved energies have shape [23] and forces [23, 2, 3].
+Independent local decoding used pickle-disabled array loading, checked exact array identities against
+the contracts, veriﬁed the two captured residue tables and arithmetic mixing, and recalculated
+maximum absolute, RMS, and relative errors for energy and force. Energy relative error uses a
+pointwise denominator max(|Eref |, 10−12 kJ mol−1); force relative error is a global ﬂattened L2
+ratio. Force RMS includes all Cartesian components. Energy RMS is descriptive, not a frozen
+acceptance gate.
+Separate broader static harness
+The subsequent full-semantics harness uses a diﬀerent captured implementation source and a dif-
+ferent test program. Each of 210 unordered residue pairs is evaluated at 0.90rm, rm − 10−4 nm,
+rm + 10 −4 nm, 1.0, 1.5, 1.999, and 2.001 nm, yielding 1,470 contact conﬁgurations. A separate
+excluded contact pair is evaluated at 0.7 nm. Five bond distances are 0.20, 0.3799, 0.38, 0.3801,
+and 0.55 nm.
+The captured harmonic convention is
+Ub(r) = 1
+2 kb(r − r0)2, r 0 = 0.38 nm , k b = 8033 kJ mol −1 nm−2. (4)
+3
+
+Sequence preparation assigns histidine charge [1 + 10 pH−6]−1, adds +1/ − 1 elementary charge to
+N/C termini, and adds +2/ + 16 amu to their masses. The helper rejects one-residue chains. Its
+shifted screened electrostatic potential is
+UDH(r) = qiqjℓBkBT
+[e−κr
+r − e−κre
+re
+]
+, r < r e = 4.0 nm , (5)
+with zero interaction beyond the cutoﬀ. Here charges are elementary-charge numbers; the captured
+temperature-dependent dielectric calculation determines ℓB, and ionic strength determines κ.
+Five sequence/pH/temperature/salt cases are HGH/5.0/280 K/0.05 M, RHK/6.0/298 K/0.15
+M, DHE/7.0/310 K/0.50 M, AHHHA/7.4/323 K/0.15 M, and KGE/9.0/350 K/0.05 M. Terminal
+pairs, plus one internal pair for AHHHA, are evaluated at 0.5, 1.0, 2.0, 3.999, and 4.001 nm: 30
+electrostatic conﬁgurations. The RHK and DHE terminal pairs have zero charge products and
+therefore test zero-interaction behavior. These are pair evaluations, not sequence trajectories. The
+harness requests CUDA double precision; Reference uses its default properties. Original thresholds
+are retained throughout.
+4 Experimental results
+Parameter parity does not repair the range mismatch
+The saved comparison reports exact numeric parameter-table parity but four prematurely truncated
+pairs among 210. Table 1 gives every aﬀected pair. The additional gate removes up to 0.200 nm
+of the intended range for G–G. It also terminates an interaction shifted at a diﬀerent distance;
+matching the nominal neighbor cutoﬀ therefore does not establish matching evaluated energies or
+forces.
+Table 1: All aﬀected pairs in the frozen comparison. Distances are in nm; the source cutoﬀ is 2.000
+nm for every row. Truncations are displayed at the precision of the gate distances.
+Pair σij Additional gate 4σij Lost range
+A–G 0.477 1.908 0.092
+C–G 0.499 1.996 0.004
+G–G 0.450 1.800 0.200
+G–S 0.484 1.936 0.064
+Reproduced small-array agreement
+Both saved corrected contact datasets pass their original ﬁve gates (Table 2). Local recalculation
+reproduces all six statistics to ﬂoating-point rounding. The independently formulated reference
+matches saved reference energies exactly on these entries; its maximum force diﬀerence is 2.082 ×
+10−17 kJ mol−1 nm−1. This veriﬁes the saved reference and analytic derivative on the supplied
+attractive-branch conﬁgurations, not a new backend execution.
+The CPU maximum relative energy error is sensitive to small absolute discrepancies because the
+shifted reference energy approaches zero near 2.0 nm. Absolute and relative gates assess diﬀerent
+aspects of agreement; no tolerance was changed during reanalysis.
+4
+
+Table 2: Small contact-only ﬁxture: 23 entries on each platform. Energy errors are in kJ mol−1;
+force errors in kJ mol−1 nm−1; relative errors are dimensionless. Values are the saved statistics
+independently recalculated locally, displayed with up to four signiﬁcant ﬁgures.
+Statistic CPU CUDA Frozen limit
+Energy maximum absolute 2.011 × 10−9 1.232 × 10−10 10−6
+Energy RMS 6.751 × 10−10 2.994 × 10−11 Not gated
+Energy maximum relative 2.295 × 10−4 1.847 × 10−7 5 × 10−4
+Force maximum absolute 1.083 × 10−8 5.883 × 10−10 10−5
+Force RMS 1.83 × 10−9 1.243 × 10−10 10−6
+Force relative L2 3.26 × 10−7 2.214 × 10−8 10−5
+Broader Reference pass and CUDA failure
+The broader saved Reference report passes contact, bond, and electrostatic/terminal sections. The
+CUDA report fails overall: contact maximum and RMS force errors exceed their frozen limits, and
+all three bond error statistics exceed theirs. Electrostatic/terminal checks pass. Table 3 retains
+these outcomes and all reported aggregate residuals needed to interpret them.
+Table 3: Separate full-semantics harness. Emax is in kJ mol−1; Fmax and FRMS are in kJ mol−1 nm−1.
+Counts exclude the separate contact-exclusion probe. Error values are displayed with up to four
+signiﬁcant ﬁgures.
+Section/platform Count Emax Fmax FRMS
+Contact/Reference: PASS 1470 4.441 × 10−16 5.329 × 10−14 4.696 × 10−15
+Contact/CUDA: F AIL 1470 8.938 × 10−7 3.16 × 10−5 3.575 × 10−6
+Contact limits 10−6 10−5 10−6
+Bond/Reference: PASS 5 0 0 0
+Bond/CUDA: F AIL 5 6.895 × 10−6 3.83 × 10−5 2.211 × 10−5
+Bond limits 10−9 10−8 10−9
+Electrostatic/Reference: PASS 30 1.776 × 10−15 1.421 × 10−14 1.504 × 10−15
+Electrostatic/CUDA: PASS 30 8.55 × 10−7 2.385 × 10−6 2.634 × 10−7
+Electrostatic limits 10−6 10−5 10−6
+Contact relative force L2 errors are 7.615 × 10−16 for Reference and 5.798 × 10−7 for CUDA,
+both below 10−5. Both reports record zero excluded-pair contact energy and force, against 10−15
+limits in their respective units. Charge, mass, and electrostatic-constant discrepancies are also zero,
+against declared 10−15 limits. The constants check is a numerical comparison of the source-deﬁned
+tuple, not a common-unit physical observable.
+All 37 report-consistency checks pass. They conﬁrm that section decisions follow the declared
+thresholds, that the 210 pair maxima aggregate to the reported contact maxima, and that the
+reports join to the declared captured sources. The CUDA contact maxima occur in the E–G
+entry. These checks establish internal consistency of a failing report, not successful backend parity.
+Missing full-semantics arrays prevent independent reconstruction of individual residuals or their
+RMS values.
+5
+
+5 Discussion and limitations
+The comparison separates two diﬀerent reasons that a favorable preliminary result may not support
+a broader conclusion. Parameter equality fails to establish functional equality because the extra
+distance gate changes the evaluated interaction. Subsequently, a corrected implementation can
+agree on selected attractive-tail conﬁgurations while another implementation source and broader
+harness fail their own numerical contract. Neither inference requires extrapolating static errors into
+an unmeasured thermodynamic eﬀect.
+The small CUDA pass does not override the broader CUDA failure. The harnesses diﬀer in
+implementation source, tested distances, force terms, and acceptance contracts, particularly the
+much tighter bond tolerances. The broader contact test includes repulsive conﬁgurations and
+all canonical pairs; the narrow ﬁxture does not. Conversely, the small ﬁxture has array-level
+reproduction that the broader reports lack. These complementary evidence levels should not be
+collapsed into a single backend-validation label.
+The cause of the broader CUDA residuals is unresolved. Although the captured harness requests
+double precision, neither report arithmetic nor the supplied source establishes a causal explanation
+for the discrepancies. Assigning them to precision would exceed the evidence. Likewise, passing
+Reference tests does not prove universal exactness: zero residuals on ﬁve bond conﬁgurations are
+ﬁnite-test observations.
+Static energy and force evaluation tests neither integration stability nor equilibrium sampling.
+No independent trajectories were analyzed in this study. Periodic multichain exclusions, accumu-
+lated forces in dense systems, thermostat behavior, ensemble observables, phase coexistence, and
+transferability require additional evidence. GPU throughput was not measured. The published
+range-sensitivity results motivate attention to cutoﬀs but do not quantify the physical consequences
+of these four pair-speciﬁc truncations.
+The authenticated OpenABC 1.0.9 source conﬁrms the additional gate in the cutoﬀ-parameterized
+Ashbaugh–Hatch function used in the frozen comparison. This supports the version-bound func-
+tional discrepancy, not a claim about every conﬁguration in that release. Current-release claims
+would require a new, version-bound source comparison.
+6 Conclusion
+For the archived ﬁxed-2.0 nm CAL V ADOS-2 ﬁxture, the saved OpenABC 1.0.9 comparison reports
+matching parameters but four shortened contact ranges. Corrected small contact arrays repro-
+duce their frozen acceptance results under independent local arithmetic and analytic checks. A
+diﬀerent broader static harness passes on Reference but fails contact-force and bond tolerances on
+CUDA. These failures remain scientiﬁcally material even though report-consistency checks succeed.
+Source-faithful validation therefore requires explicit separation of model semantics, ﬁxture coverage,
+numerical thresholds, backend evidence, and subsequent integration and ensemble validation.
+7 Data and Code A vailability
+The supplied private evidence contains captured contact and full-semantics implementation code,
+both harnesses, a parity evaluator, conﬁguration lists, contracts, manifests, comparison reports,
+residue-table artifacts, and four small contact NPZ arrays. The two independent local-check out-
+6
+
+puts are also supplied. Their inventory and limitations are identiﬁed in Supplementary record
+S1. Access in this study was through the private supplied export; no public archive, reviewer-
+access mechanism, or redistribution permission has been established. The export also contains
+the authenticated OpenABC 1.0.9 interaction-source member and the primary archive identity and
+retrieval records. The upstream package and CAL V ADOS archive are available at https://pypi.
+org/project/openabc/1.0.9/ and https://zenodo.org/records/13754000, respectively; these
+upstream resources do not provide access to the private numerical comparison. Raw full-semantics
+energy/force arrays and usable trajectory datasets are absent. Upstream publications identify their
+own code resources, but those resources do not constitute public access to this private compari-
+son. Further sharing of captured code, tables, arrays, and recipes is subject to source-access and
+applicable redistribution/licensing restrictions.
+References
+[1] G. Tesei and K. Lindorﬀ-Larsen. Improved predictions of phase behaviour of intrinsically dis-
+ordered proteins by tuning the interaction range. Open Research Europe 2:94, version 2, 2023
+(2022 collection). doi:10.12688/openreseurope.14967.2.
+[2] S. Liu, C. Wang, A. P. Latham, X. Ding, and B. Zhang. OpenABC enables ﬂexible, simpliﬁed,
+and eﬃcient GPU accelerated simulations of biomolecular condensates. PLoS Computational
+Biology 19(9):e1011442, 2023. doi:10.1371/journal.pcbi.1011442.
+7

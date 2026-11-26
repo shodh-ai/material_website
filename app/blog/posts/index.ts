@@ -5,10 +5,10 @@ import WrongTest, { wrongTestSections } from "./wrong-test";
 import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
 
-const tf32Slug = "how-tf32-changed-the-flow";
-const tf32Assets = `/blog/${tf32Slug}`;
-const tritonSlug = "bit-exact-triton-reactor-kernels";
-const tritonAssets = `/blog/${tritonSlug}`;
+const tf32Slug = "tf32-rheology-flow";
+const tf32Assets = "/blog/how-tf32-changed-the-flow";
+const tritonSlug = "h100-bit-exact-triton";
+const tritonAssets = "/blog/bit-exact-triton-reactor-kernels";
 const wrongTestSlug = "when-scientific-ai-passes-the-wrong-test";
 const wrongTestAssets = `/blog/${wrongTestSlug}`;
 const crystalSlug = "one-crystal-one-token";

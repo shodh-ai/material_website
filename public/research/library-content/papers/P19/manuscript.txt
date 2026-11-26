@@ -1,0 +1,380 @@
+Independent Field and Charge Fidelity Versus Constructed
+Constraints in a Three-Dimensional Electromagnetic Spectral
+Codec
+Abstract
+Electromagnetic reconstruction can satisfy a calibrated energy envelope or a constructed
+charge identity without recovering the reference ﬁeld. We examine this distinction in an inher-
+ited, parameter-free three-dimensional Yee-spectral codec using an explicitly selected set of 32
+scenes representing 16 paired device cases. The design crosses four scene families, four inher-
+ited split labels, and two propagation directions. Scene-level ﬁeld normalized RMSE has mean
+0.0306862 and empirical 95th percentile 0.0539417; complex spectral correlation has minimum
+0.9981622, and weighted spatial phase RMS has maximum 0.0710899 rad. Nevertheless, target-
+charge relative RMSE reaches 0.1427528 while the constructed decoded displacement-divergence-
+minus-charge residual is zero. Reference-material energy retention lies between 0.9977533 and
+0.9998071, but algebra shows that its near-unity upper envelope follows from a reference-derived
+scale rather than independently demonstrating reconstruction or conservation. Raw receiver-
+transfer reciprocity has maximum relative discrepancy 1.58973×10−7 across 16 directional pairs.
+A separate comparison of 563 and 643 raw transfers has maximum discrepancy 0.0616591; it
+measures resolution sensitivity, not convergence order. Four archived analytic controls pro-
+vide complementary, bounded evidence for wave structure, magnetic divergence, total internal
+reﬂection, and interference. The contribution is an evidence-based separation of independent
+ﬁdelity, representation integrity, and raw-solver diagnostics, not a new codec or general physical
+qualiﬁcation.
+1 Introduction and contributions
+A compressed electromagnetic ﬁeld is useful only if the quantities needed for subsequent scientiﬁc
+analysis survive reconstruction. Agreement with a scalar energy target is insuﬃcient when the
+scalar is itself used to normalize the reconstruction. Likewise, agreement between decoded charge
+and decoded displacement divergence is not an independent charge-recovery test when charge is
+computed from that displacement.
+This study asks a speciﬁc question: what do the retained diagnostics of an inherited three-
+dimensional spectral codec establish about independent ﬁeld and charge ﬁdelity, as distinct from
+properties imposed by its representation or calibrated from its input? The object of study is
+the inherited Yee-spectral codec with application binary interface version 4 (ABI4), which has no
+learned parameters; we do not propose a new representation. Its temporal and spatial spectral
+packets, material side channel, magnetic null-space coordinates, and ﬁnite coeﬃcient packing are
+inherited foundations.
+Our contribution has three parts. First, we give the discrete and normalization conventions
+needed to separate target-dependent ﬁdelity from internal consistency. Second, we report recon-
+1
+
+struction measurements for a deliberately selected 4 × 4 × 2 design: 32 directional scenes and
+16 paired device cases. Third, we interpret analytic controls, raw reciprocity, and two-resolution
+transfer comparisons according to the quantities they actually measure. This separation matters
+because strong internal consistency and measurable target error coexist in the same records.
+2 Related work
+The inspected Meep author manuscript explains spatial and temporal staggering on the Yee grid
+and the interpolation needed when combining ﬁeld components or exporting ﬁelds [ 1]. That con-
+text motivates retaining the inherited discrete operators here rather than substituting continuum
+derivatives or treating all channels as collocated. Meep is not the solver evaluated in this study,
+and its published properties do not validate the private implementation.
+A companion retrospective manuscript, “Grid-native latent patchiﬁcation for two-dimensional
+Maxwell-ﬁeld reconstruction: a checkpoint-selection-aware retrospective case study,” examines
+learned two-dimensional convolutional representations, patch indexing, and deterministic correc-
+tion. Here we instead examine an inherited three-dimensional parameter-free spectral codec and
+distinguish reference ﬁdelity from calibrated or constructed diagnostics. The available reports do
+not provide a matched cross-codec comparison.
+The pinned arXiv v1 treatment of waveguide reciprocity derives symmetry of a weighted scat-
+tering matrix, CS = ( CS )T, under stated reciprocity assumptions [ 2]. Equality of ordinary scalar
+transmission coeﬃcients additionally depends on compatible modal and source–receiver normal-
+ization. We therefore describe the measured forward–reverse scalar discrepancy as a raw-transfer
+diagnostic, not a complete scattering-matrix test or a property of decoded ﬁelds.
+3 Scientiﬁc methods and validation protocols
+3.1 Evidence and selected design
+This is a retrospective analysis of retained scalar diagnostics with source inspection; raw ﬁelds and
+tokens were not retained for fresh replay, and no additional simulations were performed for this
+analysis. Independent reductions of saved records check their arithmetic and identity joins, not the
+original ﬁeld measurements.
+The numerical campaign contains 32 raw scene solves and 32 codec evaluations on 643 grids. It
+selects one local directional pair per family and split combination. The families are homogeneous
+wave, total-internal-reﬂection (TIR) interface, double slit, and waveguide scatterer. The inherited
+split labels are train, validation, test, and ood (out-of-distribution); each family–split combina-
+tion contains left_to_right and right_to_left scenes. Thus, there are 16 paired device cases,
+not 32 independent devices. No model is trained on these split labels, and the labels do not make
+the cases independent random validation samples.
+The inherited raw source enables JAX 64-bit arithmetic and speciﬁes Courant parameter 0.45,
+1,024 native-grid time steps, and eight saved frames at steps 1017–1024. Its state consists of electric
+displacement, magnetic ﬁeld, and cell charge. Faraday uses forward staggered diﬀerences, while
+Ampere and continuity use backward adjoints; conductivity is integrated by a midpoint rule. The
+source declares periodic boundaries with an absorbing conductivity proﬁle, rather than a CPML
+claim. The separately recorded bridge environment used JAX 0.10.0 and Torch 2.10.0+cu128 on an
+2
+
+H100; its NumPy versions were 2.4.4 for production and 2.4.2 for consumption. These environment
+observations are not a reconstruction of library consumption for every campaign record.
+3.2 Inherited representation and units
+One logical scene has shape [8, 8, 64, 64, 64], with channels (Ex, Ey, Ez, Hx, Hy, Hz, ρ, ϵr). Its native
+packet has shape [4096, 256] and uses bﬂoat16 (BF16) storage. The supplied decoder source allo-
+cates ﬂoat32 ﬁeld and material workspaces and complex64 periodic spectra; the magnetic null basis
+is stored as complex64. These source declarations distinguish codec reconstruction precision from
+the raw solver’s JAX 64-bit setting, but do not independently verify historical runtime precision.
+Input and output use the same dimensionless code units; no SI conversion is supplied. Electric
+components are scaled by 10−4, magnetic components by 2 × 10−4, charge by 10−5, and material
+values by (ϵr − 1)/15.
+The periodic packet uses an orthonormal spatial real FFT, a rank-two temporal basis, 55,000
+adaptive ﬁeld modes, and 60,000 independently selected charge modes. Signed coeﬃcients have 255
+levels in [−127, 127] and are packed two per ﬁnite BF16 word. Material geometry is stored at full
+spatial resolution, but its values are not exact after reconstruction. Periodic magnetic coeﬃcients
+use two coordinates in the null space of the forward-divergence symbol, with an explicit remaining
+DC coordinate. The separate open- x, periodic- yz lane forbids periodic projection. These are
+representation choices, not new contributions of this study.
+3.3 Discrete charge and magnetic diagnostics
+Let δ+
+i f (n) = f (n + ei) − f (n) and δ−
+i f (n) = f (n) − f (n − ei) denote the inherited code-unit
+diﬀerences. For periodic boundaries these wrap. In the open- x lane, the terminal forward x
+diﬀerence is zero and the initial backward x diﬀerence equals the initial value. Cell material is
+averaged onto electric edges:
+ϵedge
+i (n) = 1
+2 [ϵr(n) + ϵr(n + ei)], (1)
+G(E, ϵr) =
+X
+i
+δ−
+i (ϵedge
+i Ei), DH (H) =
+X
+i
+δ+
+i Hi. (2)
+The material shift at the terminal open- x edge repeats the terminal material value. There is no
+implicit grid-spacing factor in G. A stored charge-operator multiplier α ∈ { 1, 64} supplies the
+declared convention:
+bρ = αG( bE, bϵr). (3)
+Consequently, evaluating αG( bE, bϵr) − bρ with the same construction gives zero independently of
+whether bρ matches the supplied target ρ. Target-charge relative RMSE is
+RMS(bρ − ρ)
+max(RMS(ρ), 10−30) ,
+with both RMS reductions taken over saved frames and spatial sites within a scene. A zero target
+and zero reconstruction error therefore give zero through the denominator ﬂoor. The reported
+values remain retained diagnostics, not freshly remeasured ﬁeld comparisons.
+For periodic synthesis, the stored charge spectrum ﬁrst has its spatial mean removed. With
+backward symbol pi = 1 − e−iki, the longitudinal correction is
+∆Di(k) = p∗
+i ∆ρ(k)P
+j |pj|2 , k ̸= 0, (4)
+3
+
+Here ∆ρ is the Fourier transform of the mean-removed stored desired charge divided by α, minus
+the current unmultiplied displacement divergence; the zero-mode correction is zero. The separately
+recorded electric correction is the RMS change divided by the RMS pre-correction electric ﬁeld,
+with the denominator ﬂoored at 10−30. Both RMS reductions include all eight saved frames, three
+electric components, and spatial sites within a scene. This synthesis precedes the per-frame energy
+scaling in Section 3.5; ﬁnal decoded charge is then derived from the scaled electric ﬁeld and decoded
+material using bρ = αG( bE, bϵr).
+Magnetic divergence uses the forward symbol qi = eiki − 1. The periodic null basis satisﬁes
+q · H = 0 without a post-decoding projection. The reported relative magnetic divergence is
+rH = RMS(DH H)
+
+P
+i |δ+
+i Hi|21/2 , (5)
+with denominator ﬂoored at 10−30. The open- x diagnostic excludes the ﬁrst and last x planes.
+Small rH tests this discrete constraint, not all Maxwell equations.
+3.4 Independent ﬁeld comparisons
+Write F = ( E, H ) and let S divide components by their ﬁxed electric or magnetic scales. The
+scene-level ﬁeld metric is
+eF = RMS[S( bF − F )]
+RMS(SF ) . (6)
+It aggregates the six ﬁeld components, spatial sites, and eight saved frames within a scene, with
+the denominator ﬂoored at 10−30. It is not an energy-weighted error or a pooled campaign voxel
+error.
+The retained spectral comparisons apply spatial real FFTs over the three grid axes, retaining
+the saved-frame and ﬁeld-component axes. The retained coeﬃcients are ﬂattened for scene-level
+reductions, with no additional Hermitian multiplicity weighting. A reference-power mask excludes
+coeﬃcients below 10−10 of peak reference power. Writing Xk and bXk for reference and decoded
+coeﬃcients and wk = |Xk|2, the wrapped phase RMS is
+" P
+k∈M wk arg( bXkX ∗
+k )2
+max(P
+k∈M wk, 10−30)
+#1/2
+.
+Complex spectral correlation is the magnitude of the masked complex inner product normalized by
+the product of the masked spectral norms: 
+P
+k∈M X ∗
+k bXk
+
+max
+ P
+k∈M |Xk|21/2 P
+k∈M | bXk|2
+1/2
+, 10−30
+ .
+Degenerate reference spectra are rejected. These quantities expose phase and spatial structure that
+a scalar energy multiplier cannot determine; their retained values were not freshly remeasured.
+3.5 Reference-derived energy calibration
+The inherited per-frame energy is a material-weighted spatial mean in code units, with µ = 1:
+U (F ; ϵ) = 1
+2
+*X
+i
+ϵedge
+i E2
+i +
+X
+i
+H 2
+i
++
+. (7)
+4
+
+Let F0 be the reference and eF the reconstruction from the actual unscaled BF16 payload. Deﬁne
+U0 = U (F0; ϵ), A = U ( eF ; ϵ), (8)
+B = U ( eF ; bϵ), s = c
+p
+U0/ max(A, B), c = 0.9999. (9)
+The stored multiplier is a BF16 high part plus BF16 low residual, and bF = bs eF . For positive
+reference energy, ignoring scale-storage rounding,
+Rϵ = c2 A
+max(A, B) , Rbϵ = c2 B
+max(A, B) , (10)
+max(Rϵ, Rbϵ) = c2 = 0.99980001. (11)
+The smaller ratio depends only on agreement between the two material interpretations of the
+unscaled ﬁeld. Thus neither ratio independently constrains ﬁeld shape or establishes a conservation
+law. The implementation checks a retention lower bound of 0.995 and upper bound 1+2 ×10−6 after
+BF16 storage. Zero reference energy has an exact-zero policy; invalid positive-energy reconstruction
+fails rather than receiving an arbitrary scale.
+3.6 Raw transfer and statistical summaries
+For a raw receiver trace an, the source computes
+T = ∆t
+X
+n
+ane−iω(n+1)∆t, d (T1, T2) = |T1 − T2|
+max(|T1|, |T2|, 10−30) . (12)
+Reciprocity applies d to the two raw directions of each device case. Resolution sensitivity applies
+it to matched 563 and 643 raw transfers. The latter report records 32 additional coarse solves and
+zero additional native-grid solves, reusing retained native transfers. Neither comparison evaluates
+decoded transfers.
+Percentiles use linear interpolation between sorted scene or pair values: the fractional index
+is (N − 1)q. They describe this explicitly selected set, including targeted diﬃcult regimes; they
+are not conﬁdence intervals or population uncertainty estimates. Paired directions remain paired
+observations.
+4 Experimental results
+4.1 Selected-scene reconstruction
+Table 1 reports the retained scene-level summaries. High spectral correlation coexists with nonzero
+target-charge error, despite the constructed zero Gauss residual; the latter is not an independent
+measure of charge recovery. The largest ﬁeld error, 0.0642646, and smallest spectral correlation
+occur in the ood double-slit left-to-right case; its phase RMS is 0.0710899 rad. The opposite
+direction has target-charge relative RMSE 0.1427528, the set maximum. All eight TIR records
+report zero target-charge error, so the aggregate charge percentile includes zero-error cases rather
+than describing only nonzero-charge scenes.
+Material-side classiﬁcation assigns each decoded permittivity to the nearest declared constituent
+value. The misclassiﬁcation fraction is the number of incorrect constituent labels divided by the
+5
+
+Table 1: Independent ﬁdelity and material diagnostics for 32 selected scenes. Percentiles are
+empirical set descriptions.
+Metric Statistic Value
+Field nRMSE Mean / p95 0.0306862 / 0.0539417
+Complex spectral correlation Min. / p05 0.9981622 / 0.9986507
+Phase RMS (rad) p95 / max. 0.0594879 / 0.0710899
+Target-charge relative RMSE p95 / max. 0.1065627 / 0.1427528
+Interface misclassiﬁcation Max. fraction 0
+Material absolute error Max. 0.0275002
+Table 2: Raw-transfer discrepancies. Limits are the inherited p95 and maximum comparison thresh-
+olds, not uncertainty intervals.
+Comparison p95 Max. Limits
+Reversal, 16 pairs 1.23979 × 10−7 1.58973 × 10−7 0.02 / 0.05
+563 versus 643, 32 scenes 0.0541843 0.0616591 0.12 / 0.25
+number of eligible reference cells, restricted to cells within 10−6 of a declared constituent value.
+The reported zero fraction supports retention of constituent labels at these cells, but does not
+establish exact material-value recovery or characterize mixed-material cells or subcell interface ge-
+ometry. Similarly, the maximum periodic Gauss-synthesis electric correction, 0.0616582, is nonzero
+even though the ﬁnal constructed Gauss residual is zero. The maximum periodic magnetic input-
+projection correction is 3.13419 × 10−7, while maximum decoded relative magnetic divergence is
+3.54912 × 10−6.
+Reference-material energy retention spans 0.9977533–0.9998071; decoded-material retention spans
+0.9984918–0.9998074. These results are consistent with the declared calibrated envelope. They
+must be read alongside, rather than substituted for, the independent errors in Table 1.
+4.2 Raw reciprocity and resolution sensitivity
+Table 2 separates raw-solver transfer diagnostics from codec ﬁdelity. Both reported summaries
+are below their inherited comparison limits. The largest resolution discrepancy occurs in the ood
+homogeneous-wave pair. Its two directions remain observations of the same device case. Agreement
+under reversal does not make either resolution an independent reference solution.
+4.3 Four analytic controls
+The archived CPU and GPU controls evaluate a periodic traveling wave, a discrete divergence-free
+magnetic harmonic, an open- x TIR interface, and an open- x interference ﬁeld. Table 3 gives repre-
+sentative structure-sensitive results. These are four ﬁxtures evaluated on two execution backends,
+not eight independent physical trajectories.
+For the traveling wave, the decoded temporal energy range relative to its mean is 5.82746 × 10−7
+on CPU and 3.49355 × 10−7 on GPU. Its near-0.9998 total-energy retention remains calibrated ev-
+idence; phase slope, envelope, and plane-ﬂux comparisons provide complementary structure tests.
+The magnetic harmonic retains RMS amplitude 0.9975800 on CPU and 0.9975799 on GPU, with
+zero reported post-decoding projection correction. Perturbing all adaptive magnetic coeﬃcient
+6
+
+Table 3: Archived analytic-control diagnostics. CPU and GPU values are separate retained obser-
+vations, not error bars.
+Control Quantity CPU GPU
+Traveling wave Phase-slope relative error 2.01633 × 10−8 1.94866 × 10−8
+Plane-ﬂux mismatch 2.88467 × 10−7 0
+Magnetic harmonic Raw decoded divergence 1.17747 × 10−7 1.16782 × 10−7
+Field correlation 0.9999855 0.9999855
+TIR Fitted reﬂectance 0.9978352 0.9978352
+Normal-power ratio 0.000252055 0.000252058
+Interference Fringe amplitude retention 1.0000782 1.0000782
+Bright-fringe phase RMS (rad) 0.000671750 0.000671739
+values while forbidding the projection function still gives relative divergence 2.20142 × 10−7 and
+2.21850 × 10−7, respectively. This supports the implemented null-coordinate property, not unre-
+stricted electromagnetic validity. The magnetic ﬁxture also records input-charge relative error 1.0
+under its encoder diagnostic; its successful magnetic checks do not establish input-charge agreement.
+The TIR control has zero interface transition width and zero side misclassiﬁcation. Incident
+and reﬂected amplitude retentions are approximately 1.000754 and 0.999670; evanescent-energy
+retention is approximately 1.000499. Nonzero cladding ﬁeld energy is allowed in TIR: the relevant
+leakage diagnostic is normal time-averaged power, not erasure of the evanescent ﬁeld. The ﬁtted
+reﬂectance diﬀers from unity by approximately 0.00216477. The interference control preserves
+intensity fringe bin 14 exactly and visibility retention approximately 0.99999984. The supplied
+target harmonic residuals are ﬁnite, including magnetic-control Faraday relative RMS 6.39847 ×
+10−5; the controls are discrete numerical ﬁxtures, not exact continuum solutions.
+Both backends also record exhaustive ﬁnite-BF16 round trips for all 65,025 signed-coeﬃcient pairs
+and successful shape, ﬁniteness, and bit-transport checks. These establish bounded representation
+behavior, not ﬁeld accuracy by themselves.
+4.4 Historical failure regimes and bridge scope
+The selectors explicitly include regimes associated with historical energy ampliﬁcation 6.892087,
+magnetic projection correction 0.481121, TIR interface width 31 cells, and fringe amplitude re-
+tention 0.108828. Their selected real-source counterparts have ﬁeld nRMSE 0.028564, 0.044933,
+0.011154, and 0.064265, respectively. These are crosswalks to relevant regimes under a diﬀerent
+input contract, not before–after recovery of identical historical adversarial arrays.
+The directly supplied standalone bridge report evaluates the double-slit counterpart and agrees
+with its selected-set scalar record. A TIR scene in the selected set separately has ﬁeld nRMSE
+0.0101723, correlation 0.9999483, and phase RMS 0.00795672 rad. These observations demonstrate
+bounded solver-to-codec evaluation of source-deﬁned raw scenes; neither bridge evidence nor the
+four controls expands the selected design into a comprehensive corpus evaluation.
+5 Discussion and limitations
+The central result is not that constructed constraints are unhelpful, but that they answer diﬀerent
+questions. A ﬁnite, correctly decoded packet, an enforced magnetic null space, and a conservative
+7
+
+scale header are useful integrity properties. Independent ﬁeld comparisons ask whether the reference
+structure survives; target-charge error asks whether the supplied charge is recovered. The selected
+records show why those questions cannot be collapsed: zero constructed Gauss residual coexists
+with target-charge relative RMSE exceeding 0.14, and near-unity calibrated energy coexists with
+nonzero ﬁeld and phase errors.
+The analytic controls add scientiﬁc speciﬁcity. Traveling-wave phase and ﬂux comparisons test
+more than amplitude normalization. The magnetic adversary tests the implemented divergence-
+free coordinate construction without a hidden post-decoding repair. TIR distinguishes permitted
+evanescence from normal power leakage, and the interference control tests fringe frequency, ampli-
+tude, visibility, and phase. Their successes are meaningful within these ﬁxtures; the ﬁnite target
+residuals and input-charge discrepancy prevent treating the ﬁxtures as universal physical certiﬁ-
+cates.
+The retained evidence has material limits. Only one local pair is selected for each family–split
+combination, including deliberately diﬃcult selectors; these 16 device cases do not establish popu-
+lation generalization or complete the 2,000-scene corpus. Only eight late-time frames are compared.
+Raw reciprocity leaves decoded reciprocity undetermined. Two grid sizes quantify transfer sensitiv-
+ity but cannot identify asymptotic convergence order or supply an independently veriﬁed reference
+solution. Scalar retention limits independent remeasurement of spatial errors. Later reader re-
+gressions support stricter stored-dtype and temporal-window semantics but do not retroactively
+extend the numerical campaign to a diﬀerent software candidate. Accordingly, the results support
+a focused reconstruction characterization, not comprehensive electromagnetic qualiﬁcation.
+6 Conclusion
+For the selected 32-scene, 16-device design, the inherited spectral codec exhibits mean ﬁeld nRMSE
+0.0306862 and minimum complex spectral correlation 0.9981622, while target-charge relative RMSE
+reaches 0.1427528. Those independent comparisons carry information that neither the reference-
+calibrated energy envelope nor the constructed decoded charge identity can provide. Archived
+analytic controls and raw-transfer diagnostics strengthen the bounded characterization when their
+scopes are kept separate. The scientiﬁc contribution is a defensible interpretation of reconstruction
+evidence, not a new codec, solver, conservation result, or certiﬁcation.
+7 Data and Code A vailability
+Supplementary record S1 is a private export containing archived source, numerical reports, source-
+binding information, and independent scalar-checking recipes. The source includes the inherited
+generator, codec, evaluator-related modules, and diagnostic scripts. The retained numerical arti-
+facts are scalar reports; raw ﬁeld and token arrays were not retained. The materials exist in the
+private supplementary export, but no public repository, download link, or external access mecha-
+nism has been established, and redistribution permission is not established. The recipes support
+checking retained scalar arithmetic and source associations, not reconstructing the missing experi-
+mental arrays.
+8
+
+8 References
+[1] A. F. Oskooi, D. Roundy, M. Ibanescu, P. Bermel, J. D. Joannopoulos, and S. G. Johnson.
+Meep: A ﬂexible free-software package for electromagnetic simulations by the FDTD method.
+Computer Physics Communications 181, 687–702 (2010). Author manuscript dated 8 January
+2010. https://doi.org/10.1016/j.cpc.2009.11.008.
+[2] G. K. Svendsen, M. W. Haakestad, and J. Skaar. Reciprocity and the scattering matrix of waveg-
+uide modes. arXiv:1301.2458v1 (2013 submission). https://arxiv.org/abs/1301.2458v1.
+9

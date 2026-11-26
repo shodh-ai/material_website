@@ -15,6 +15,7 @@ const publicExactPaths = new Set([
   "/sitemap.xml",
   "/llms.txt",
   "/blog",
+  "/engineering",
   "/research",
   "/world-model",
   "/physical-ai",
@@ -39,6 +40,7 @@ const publicExactPaths = new Set([
 const publicPathPrefixes = [
   "/shodh-new/",
   "/blog/",
+  "/engineering/",
   "/research/",
   "/world-model/",
   "/physical-ai/",

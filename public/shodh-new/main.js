@@ -330,6 +330,7 @@ function syncUI() {
 function setTheme(theme) {
   currentTheme = theme;
   document.body.dataset.theme = theme;
+  document.documentElement.dataset.theme = theme;
 
   // Swap shader colors
   const defaults = theme === 'light' ? DEFAULTS_LIGHT : DEFAULTS_DARK;
@@ -481,12 +482,25 @@ function restoreScrollPosition() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function startPage() {
+  initFooterForm();
+  if (document.documentElement.dataset.nativeScroll === 'true') {
+    initTheme();
+    document.getElementById('loader')?.remove();
+    document.body.classList.remove('loading-lock');
+    return;
+  }
   boot();
   initLenis();
   initViewportResize();
-  initFooterForm();
-});
+}
+
+// The bootstrap loads this file dynamically after choosing the device layout.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startPage, { once: true });
+} else {
+  startPage();
+}
 
 // ─── Footer contact form ────────────────────────────────────────────────────
 function initFooterForm() {

@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "./blog/posts";
+import researchPaths from "../lib/research-routes.json";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-08-17T00:00:00.000Z");
 
   return [
+    ...researchPaths.filter((path) => path !== '/research').map((path) => ({ url: `https://shodh.ai${path}` })),
     {
       url: "https://shodh.ai/",
       lastModified,
@@ -18,12 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: "https://shodh.ai/blog",
+      url: "https://shodh.ai/engineering",
       changeFrequency: "weekly",
       priority: 0.8,
     },
     ...blogPosts.map((post) => ({
-      url: `https://shodh.ai/blog/${post.slug}`,
+      url: `https://shodh.ai/engineering/${post.slug}`,
       lastModified: new Date(post.date),
     })),
     {

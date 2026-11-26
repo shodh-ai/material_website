@@ -1,0 +1,428 @@
+Reconstruction, symmetry response, and reference stability in an
+inherited Fe–Cr geometry tokenizer
+Abstract
+Accurate reconstruction of atomistic coordinates does not by itself establish Euclidean equiv-
+ariance or physical accuracy. We characterize these distinctions for an inherited continuous
+Fe–Cr geometry tokenizer using three separate evidence sets: retained grouped-holdout evalu-
+ation summaries, saved coordinates and transform diagnostics for one synthetic vacancy crop,
+and saved arrays and logs from a separate electronic-structure reference ladder. The native
+representation contains 192 continuous values per atom, comprising 32 carrier values and 160
+learned values. The original evaluation reports a median and 95th percentile of reconstruc-
+tion root-mean-square deviation (RMSD) of 0.00687997 and 0.00861934 Å on 731 correlated
+patches from 120 held-out physical parents. Each defect family has a lower reported median
+error than both a zero-learned-lane control and a relaxed-shadow predictor. Independent re-
+duction of saved base coordinates gives 0.02956387 Å RMSD for one synthetic 100-atom crop;
+the reported oﬀ-axis rotation-equivariance error is 0.03654489 Å, with only its core/context
+aggregation checked independently. These singleton measurements are not population esti-
+mates. Separately, four self-consistent Quantum ESPRESSO calculations on one periodic 16-
+atom Fe–Cr component fail parameter-stability comparisons: changing smearing produces an
+energy diﬀerence of 0.00188310 eV/atom and maximum absolute force- and stress-component
+diﬀerences of 0.02231615 eV/Å and 0.347 GPa, respectively. An independent magnetic ini-
+tialization does not reach a converged self-consistent solution. The results support a bounded
+geometry-reconstruction ﬁnding, not a physically qualiﬁed force model, and demonstrate why
+reconstruction, symmetry response, numerical agreement, and reference stability require distinct
+validation.
+1 Introduction and contributions
+Atomistic representations are often assessed by their ability to reconstruct coordinates. For defect-
+containing alloys, however, several scientiﬁcally diﬀerent requirements can be conﬂated: recovering a
+particular conﬁguration, responding consistently to rotations and translations, preserving chemical
+information, and supporting accurate energies or forces. A small coordinate error addresses the ﬁrst
+requirement under the evaluated sampling and correspondence conventions. It does not establish
+the others.
+This paper examines an inherited Fe–Cr geometry tokenizer trained on local environments con-
+taining C15 self-interstitial clusters, 1
+2 ⟨111⟩ interstitial loops, and spherical voids. The architecture
+is not introduced here. Our contribution is a retrospective empirical characterization that sepa-
+rates three questions supported by diﬀerent records. First, what do the original parent-grouped
+reconstruction summaries establish? Second, what do saved coordinates and reported transforma-
+tion diagnostics establish for one subsequently constructed synthetic crop? Third, is a separately
+calculated physical reference stable enough to support an accuracy comparison?
+1
+
+These questions have diﬀerent populations and chronology. The original August 2026 dataset
+contains 8,000 patches, with 731 test patches derived from 120 physical parents. The October 9
+synthetic diagnostic uses one nonperiodic 100-atom vacancy crop, not a new molecular-dynamics
+trajectory or a sample from the original test population. The October 10 reference ladder uses
+one periodic 16-atom Fe–Cr component. Its energies, forces, and stresses are not predictions of the
+geometry decoder and cannot explain the crop’s reconstruction errors.
+The focused ﬁnding is that favorable grouped-holdout geometry summaries coexist with a nonzero
+reported transformation residual and with an independently unstable physical reference. We retain
+the original reconstruction result at its reported evidence level, distinguish independently reduced
+saved-coordinate errors from retained transform scalars, and report the failed reference comparisons
+without interpreting numerical consistency as physical qualiﬁcation.
+2 Related work
+Euclidean-equivariant networks impose transformation laws on their outputs, rather than merely
+minimizing reconstruction error on a coordinate distribution. Satorras and colleagues formulate
+translation, rotation/reﬂection, and permutation equivariance explicitly and introduce an equiv-
+ariant graph-network architecture [ 2]. This supplies the relevant conceptual distinction: for a
+reconstruction map F and geometric action g, equivariance concerns F (gX ) = gF (X), whereas re-
+construction concerns F (X) ≈ X. A network described in inherited source comments as belonging
+to an EGNN family need not inherit the transformation guarantees of that published architecture.
+The inspected Fe–Cr implementation also uses absolute fractional-coordinate Fourier features and
+a transformer decoder; its behavior must therefore be characterized directly rather than inferred
+from a family name.
+Quantum ESPRESSO provides plane-wave and pseudopotential electronic-structure methods,
+including self-consistent calculations through PWscf [ 1]. That software context does not certify any
+particular private calculation. Self-consistent-ﬁeld (SCF) convergence at ﬁxed numerical parameters
+and stability of energies, forces, and stresses against those parameters are separate tests. The
+reference ladder below examines this distinction using the recorded Quantum ESPRESSO 7.5 inputs
+and outputs.
+The scope here is speciﬁc to Fe–Cr defect geometry and a separate alloy reference calculation.
+The inherited carrier/learned-lane layout and encoder–decoder design are also used in the private
+companion antibody analysis; they are not architectural contributions of this paper. Companion
+analyses of antibody poses and molecular rotational stability concern diﬀerent systems and mea-
+sured outcomes, not independent replications of the Fe–Cr results. We neither infer architectural
+priority nor claim an exhaustive comparison across those studies.
+3 Scientiﬁc methods and validation protocols
+3.1 Retrospective evidence and populations
+This work analyzes retained reports, inspected source, a complete dataset manifest, saved synthetic
+input/output coordinates, and saved reference arrays and logs. No checkpoint inference, original
+HDF5 loading, molecular dynamics, LAMMPS calculation, or Quantum ESPRESSO calculation
+was executed for this manuscript. Independent numerical reductions supplied with the records re-
+2
+
+measure the base synthetic coordinate errors and reference-array diﬀerences; they do not regenerate
+the scientiﬁc calculations. Original test-coordinate errors remain retained summaries. The manifest
+reduction reads all 8,000 records and checks parent-to-split assignments and stored identiﬁers, but
+does not recompute geometry hashes from HDF5 coordinates.
+The accepted dataset represents 1,161 physical parents. All crops from a parent remain in one
+split. There are 936 training parents, 105 validation parents, and 120 test parents. Multiple frames
+and anchors produce correlated patches, so 731 test patches are not 731 independent replicates. The
+retained statistics weight patches equally, not parents equally; no uncertainty interval is inferred
+from their count.
+3.2 Original preparation and crop construction
+The inherited preparation protocol uses a lattice constant of 2.8271412248 Å, C15 parent repetitions
+of 10 × 10 × 10, and extended-defect repetitions of 16 × 16 × 16. Temperatures span 300–1100 K,
+absolute strain is at most 0.01, and chromium fractions span 0.03–0.15 overall, with C15 sampling
+restricted to 0.03–0.10. C15 networks use merged motifs with 4, 6, 8, 10, or 12 net interstitials.
+Loops use an Atomsk Volterra prismatic construction with Poisson ratio 0.33 and radii of 6–12 Å;
+post-relaxation dislocation analysis supplies anchors. Voids have radii of 4.5–9 Å and use relaxed
+cavity-surface anchors.
+The speciﬁed dynamics use a 1 fs step, 5,000 equilibration steps, and 20,000 production steps.
+Forty snapshots are saved at 500-step intervals; PyMBAR equilibration detection and conservative
+correlated-data subsampling select two or three frames per parent. Each selected frame is indepen-
+dently quenched to produce a relaxed shadow. Crops are extracted without isolated-crop relaxation,
+with a 4.5 Å core radius, a 9 Å crop radius, and at most 256 atoms. The inherited screening requires
+ﬁnite hot and shadow payloads, minimum interatomic separation of 1.5 Å, matching Wigner–Seitz
+net defect counts, and a shadow-force threshold recorded as 0.02 eV/Å. That preparation threshold
+is distinct from the explicitly componentwise force diﬀerences used for the reference ladder below.
+The retained environment records list LAMMPS 2025.7.22.2.0, PyMBAR 4.0.3, and OVITO 3.12.0.
+C15 topology is assessed on quenched Wigner–Seitz interstitial dumbbells, using a 2.5 Å connec-
+tion cutoﬀ, 12◦ orientation tolerance, and 15◦ bond-angle and plane tolerances. Required fractions
+are 0.75 for ⟨110⟩ dumbbells, 0.70 for the largest connected physical component, 0.25 for C15 bonds
+among physical connections, and 0.80 for plane matches. For expected net interstitial count n, the
+measured dumbbell count must be at least n, and the minimum C15 bond count is max(2, ⌈0.25n⌉).
+Loop screening requires a closed dislocation line of at least 10 Å and Burgers-vector component
+0.5 within 0.15; void screening requires preserved vacancy count. These are inherited preparation
+criteria, not newly established physical accuracy.
+3.3 Representation, adapter, and inherited network
+Each atom has a continuous 192-value token: a 32-value carrier and a 160-value learned lane.
+There is no discrete codebook. A 5,120-dimensional linear lift appears separately in the source as
+a downstream interface, not the native representation measured here. Exact-header information
+includes atomic numbers, valid count, masks, local box, parent cell, and branch identity. The
+carrier also stores coordinates. Consequently, carrier round-trip accuracy must not be mistaken for
+learned reconstruction.
+3
+
+The adapter maps defect-centered Cartesian crop coordinates xi into a local nonperiodic box,
+ui = xi − o
+L , o = (−12, −12, −12) ˚A, L = 24 ˚A. (1)
+All three periodicity ﬂags are false. The parent simulation cell is retained separately and is not
+substituted for this decoding box. A canonical permutation is applied consistently to coordinates,
+species, forces, and masks before batching. All valid crop atoms are active; core and context
+partition them. Hot positions are the reconstruction target. Shadows are reserved for the frozen
+baseline, not training or model selection. Force arrays are carried as downstream labels and are
+not reconstructed by this geometry decoder.
+The inspected encoder uses 64-dimensional species embeddings, 8-dimensional branch embed-
+dings, 30 fractional-coordinate Fourier features, masks, cell features, and inherited displacement
+inputs. Four width-256 message/update blocks use SiLU nonlinearities, residual updates, layer
+normalization, and masked mean aggregation of pair messages. Pair distances enter through 16
+Gaussian radial basis functions with centers spanning 0–12 Å. This range is not a hard neighbor-
+hood cutoﬀ; messages are aggregated over dense valid-atom pairs. There is no global pooling into
+one conﬁguration token. A layer-normalized linear head with tanh produces 160 values per atom.
+The decoder consumes the learned lane and header features, never the coordinate-bearing carrier
+channels. Its width-256 transformer has four layers, eight attention heads, feed-forward width 512,
+zero dropout, and pre-normalization. For this nonperiodic branch, a sigmoid head predicts three
+fractional coordinates. A lane-only species-logit head is also present, while scalar and site auxil-
+iary heads are disabled. The retained evaluation reports 3,900,717 parameters. Source inspection
+supports this input separation; it does not prove Euclidean equivariance.
+3.4 Training, selection, and original criteria
+The inherited run trains from scratch for 12,000 steps with AdamW, learning rate 3 × 10−4, weight
+decay 10−4, gradient clipping at norm 1, and seed 20260708. The schedule uses 500 warm-up steps
+followed by cosine decay toward 3×10−6. Eight H100 GPUs use NCCL distributed data parallelism,
+per-rank batch 4, and global batch 32. Validation occurs every 250 steps; the checkpoint criterion
+is the lowest validation median learned-lane reconstruction RMSD. The test split is excluded by the
+training loader and reported once after selection. The selected checkpoint is at step 12,000. These
+statements describe the inspected code and recorded protocol, not a replay of historical execution.
+For this branch, the loss comprises mean squared Cartesian position error over active valid atoms
+plus species cross-entropy weighted by 0.1; trajectory, scalar, and site objectives are inactive. The
+source explicitly converts network coordinate inputs to single precision and evaluates coordinate
+errors after converting predictions to double precision. The retained environment lists PyTorch
+2.10.0+cu128 and NumPy 2.4.2. No additional mixed-precision execution claim is made.
+The original criteria were ﬁxed before training and evaluation: overall test RMSD median at
+most 0.02 Å and 95th percentile at most 0.1 Å; each family median at most 0.05 Å and below
+both baselines; at least 40 test patches per family; and ﬁnite learned lanes bounded in absolute
+value by 1.000001. Reported carrier checks and species-count projection require fractions of 1.0.
+These criteria belong to the original grouped evaluation and are not applied to the later synthetic
+singleton.
+4
+
+3.5 Coordinate errors and transformation residuals
+For patch p, let Ap contain its Np valid active atoms, in matched order. With Cartesian residual
+rpi = bxpi − xpi, deﬁne
+epi = ∥rpi∥2, R p =
+0
+@ 1
+Np
+X
+i∈Ap
+e2
+pi
+1
+A
+1/2
+, M p = max
+i∈Ap
+epi. (2)
+Equivalently, the adapter gives rpi = ( bupi − upi)(LI). No rigid alignment, centroid ﬁtting, atom
+reassignment, or periodic minimum-image correction is applied to these nonperiodic crops. Original
+medians and 95th percentiles are summaries across {Rp}, not percentiles across all atom errors.
+The synthetic atom-error 95th percentile instead summarizes {ei} within that one crop.
+Write coordinates as rows of X and let gX = XQ T + 1tT, where Q is a rotation. For the
+encode/decode map F , the reported transformation diagnostic is
+Eg(X) =
+"
+1
+N
+NX
+i=1
+F (gX )i −
+ 
+F (X)iQT + tT2
+2
+#1/2
+. (3)
+The transformation is prescribed, not optimized as a post hoc alignment. The original crop
+box remains the adapter frame; these are active crop transforms, not global-parent recentering
+or Galilean boosts. The synthetic report uses a 47◦ oﬀ-axis rotation and a separate translation
+(0.5, −0.25, 0.1) Å. For either reconstruction or transformation RMSD, disjoint core/context sub-
+sets obey
+R2 = NcoreR2
+core + NcontextR2
+context
+N . (4)
+Base reconstruction is independently reduced from saved coordinates. Transformed decoded coor-
+dinates are not supplied, so independent checking of Eg is limited to this aggregation identity, not
+its coordinate-level residuals.
+4 Experimental results
+4.1 Grouped dataset and retained reconstruction summaries
+Table 1 gives the actual patch and parent denominators. The accepted patches contain 1,946,296
+valid atom instances within 2,048,000 padded slots. The manifest contains no repeated candidate
+identiﬁers or stored exact-geometry hashes, and no parent appears across splits. These are manifest-
+level ﬁndings, not independent coordinate deduplication.
+The original test RMSD mean, median, and 95th percentile are 0.00702142, 0.00687997, and
+0.00861934 Å. The median and 95th percentile of the per-patch maximum atom error are 0.01989227
+and 0.03268981 Å. These retained summaries satisfy the original reconstruction criteria. Table 2
+retains the family-speciﬁc result and both controls.
+The zero-lane control feeds zeros into the trained decoder’s 160-dimensional learned input while
+retaining header inputs. It tests dependence on the learned lane, not an independently optimized
+competing architecture. The relaxed-shadow control predicts hot geometry using the corresponding
+quenched geometry. Its error includes the ﬁnite-temperature displacement that reconstruction is in-
+tended to retain. Every family’s reported median is lower than both controls, but these comparisons
+do not establish compression superiority.
+5
+
+Table 1: Accepted patch counts and distinct test parents. Training, validation, and test columns
+count patches.
+Family Train Validation Test Total Test parents
+C15 cluster 1914 223 263 2400 91
+1
+2 ⟨111⟩ loop 2054 288 258 2600 17
+Spherical void 2592 198 210 3000 12
+All 6560 709 731 8000 120
+Table 2: Original test reconstruction summaries, all in Å. Model p50 and p95 summarize per-patch
+RMSD. The controls report RMSD p50 on the same patches.
+Family Patches Model p50 Model p95 Zero lane p50 Shadow p50
+C15 cluster 263 0.00630546 0.00751022 6.87489709 0.19163345
+1
+2 ⟨111⟩ loop 258 0.00784431 0.00897419 6.90919233 0.23676155
+Spherical void 210 0.00653364 0.00800593 7.08345667 0.23412313
+All 731 0.00687997 0.00861934 6.90719071 0.21764073
+The original evaluation reports all tested carrier/header fractions and species-count projec-
+tion fractions as 1.0, and all learned lanes as ﬁnite and bounded. Carrier copying and quota-
+constrained projection are not learned chemical ﬁdelity. The retained validation evaluation median
+is 0.0071036064 Å; the checkpoint’s stored headline is 0.0071034975 Å. They are distinct retained
+scalars and are not asserted to be exactly equal.
+4.2 One synthetic 100-atom crop
+The saved synthetic diagnostic uses a body-centered cubic (BCC) Fe–Cr vacancy crop containing
+90 Fe and 10 Cr atoms, divided into 14 core and 86 context atoms. It is not a qualiﬁed molecular-
+dynamics conﬁguration. Table 3 reports independently reduced base-coordinate errors from the
+saved CPU and GPU outputs. Those outputs are two numerical realizations of the same case, not
+independent samples.
+Table 3: Independently reduced saved-coordinate reconstruction errors for the synthetic crop, in
+Å. Atom p95 is within the indicated subset, not a patch-population percentile.
+Output Subset Atoms RMSD Atom p95 Maximum atom error
+CPU All 100 0.02956402 0.04546978 0.05232874
+GPU All 100 0.02956387 0.04546970 0.05232976
+GPU Core 14 0.02876000 0.03857420 0.04383036
+GPU Context 86 0.02969267 0.04563572 0.05232976
+The saved CPU/GPU decoded arrays diﬀer by at most 4.2915344 × 10−6 Å in an absolute
+Cartesian component. The reported carrier round-trip RMSD is 5.4105098 × 10−7 Å, whereas the
+reported GPU zero-lane RMSD is 5.13268630 Å. The carrier result measures coordinate storage
+and replay, not the learned decoder.
+6
+
+For the GPU report, rotation alone has reconstruction RMSD 0.03656070 Å and equivariance
+RMSD 0.03654489 Å. Translation alone gives 0.02843830 and 0.01708211 Å, respectively; rota-
+tion plus translation gives 0.03615204 and 0.03682200 Å. These are retained transform scalars.
+Their weighted core/context aggregation is consistent, but transformed output coordinates were
+unavailable for direct remeasurement. The synthetic base reconstruction error is larger than the
+original reported holdout median; the diﬀerence is descriptive, not a new application of the original
+aggregate thresholds. One crop cannot estimate a population generalization error.
+4.3 Separate physical reference protocol
+The physical comparison concerns one periodic 16-atom component with 14 Fe and 2 Cr atoms in an
+orthorhombic cell of approximately 5.6712453 × 5.6429739 × 5.6542824 Å3. Its geometry is distinct
+from the 100-atom crop. Quantum ESPRESSO 7.5 uses spin-polarized PBE inputs, the recorded
+Fe PA W pseudopotential Fe.pbe-spn-kjpaw_psl.0.2.1.UPF, and Cr ultrasoft pseudopotential
+cr_pbe_v1.5.uspp.F.UPF. Spatial symmetry and inversion reduction are disabled. The electronic
+threshold is 10−9 Ry, with at most 300 electronic iterations and mixing parameter 0.2. Forces and
+stresses are requested at ﬁxed geometry.
+Table 4: Recorded reference ladder. Cutoﬀs and smearing width are in Ry. Meshes are unshifted.
+Initial magnetizations are species input parameters for Fe and Cr.
+Case Ewfc Eρ Mesh Width Initial Fe/Cr SCF
+Base 90 1080 33 0.02 0.5/ − 0.3 Converged
+Cutoﬀ 100 1200 33 0.02 0.5/ − 0.3 Converged
+k mesh 100 1200 43 0.02 0.5/ − 0.3 Converged
+Smearing 100 1200 43 0.01 0.5/ − 0.3 Converged
+Magnetic start 100 1200 43 0.01 0.8/ − 0.5 Not converged
+The inputs use the mv smearing option. Cutoﬀ, mesh, and smearing cases reuse the preceding
+converged charge density; the magnetic-start case begins independently from an atomic potential.
+The last case has a recorded 864 s internal time bound, compared with 1750 s for the other inputs.
+Its failure establishes that no converged independent-start comparison was obtained within that
+calculation, not that a diﬀerent initialization can never converge.
+For two reference cases a, b, the stability quantities are
+∆ϵab = |Ea − Eb|/16, (5)
+∆Fab = max
+i,α
+|Fa,iα − Fb,iα|, (6)
+∆σab = max
+α,β
+|σa,αβ − σb,αβ|, (7)
+∆mab = |ma − mb|/16. (8)
+Here m is the recorded total magnetization. The ﬁxed limits are 0.001 eV/atom, 0.01 eV/Å, 0.1 GPa,
+and 0.05 µB/atom, respectively. In particular, ∆F is a maximum absolute Cartesian component,
+not a maximum vector norm. The saved stress convention is σαβ[GPa] = −0.1 sαβ[kbar] for the
+native QE output. The supplied reduction checks this conversion against printed logs.
+7
+
+4.4 Failed reference stability and bounded potential comparison
+All three consecutive reference comparisons fail at least one limit (Table 5). Energy and stress
+exceed their limits in every comparison; force components also exceed their limit for the mesh and
+smearing changes. The total magnetizations of the four converged cases are 28.23, 28.23, 28.37, and
+28.62 µB. Their diﬀerences satisfy the magnetization limit, but do not resolve the energy, force, or
+stress failures.
+Table 5: Independently reduced diﬀerences between saved reference arrays. Limits are shown in
+the ﬁrst row. Every comparison fails overall.
+Comparison ∆ϵ ∆F ∆σ ∆m
+eV/atom eV/Å GPa µB/atom
+Limit 0.001 0.01 0.1 0.05
+Base–cutoﬀ 0.00154149 0.00049879 0.194 0
+Cutoﬀ– k mesh 0.00130226 0.01848263 0.505 0.008750
+k mesh–smearing 0.00188310 0.02231615 0.347 0.015625
+The independent magnetic-start calculation exits with process return code zero but has no con-
+verged SCF result. Earlier bounded reference attempts likewise report nonconverged SCF and
+no comparison despite zero process return codes. Thus process completion is insuﬃcient even for
+SCF convergence, and the four later SCF-converged ladder points remain insuﬃcient for parameter
+stability.
+A separate LAMMPS potential calculation is compared in the saved records with the unqualiﬁed
+smearing-case reference. Independent reduction gives a maximum absolute force-component dif-
+ference of 0.21690665 eV/Å, force-component root-mean-square error (RMSE) of 0.09484036 eV/Å
+over all 48 entries, and stress-component RMSE of 1.35950270 GPa over all nine tensor entries,
+including symmetric oﬀ-diagonal duplicates. These values describe disagreement with an unstable
+reference, not accepted force accuracy and not geometry-tokenizer predictions. An energy-accuracy
+score is undeﬁned because the potential and density-functional theory energy zeros are unaligned.
+5 Discussion and limitations
+The original result is a favorable reconstruction summary under a speciﬁc parent-grouped split and
+nonperiodic local-box convention. Keeping all patches from one physical parent together avoids one
+important leakage route. It does not make patches statistically independent, nor does it establish
+transfer beyond the sampled parent construction, compositions, temperatures, defect sizes, and
+crop protocol. The zero-lane control supports dependence on the learned representation, while
+the shadow control distinguishes reconstruction of hot coordinates from prediction by a quenched
+structure. Neither control establishes a general-purpose atomistic model.
+The synthetic diagnostic addresses a diﬀerent limitation. Its base errors can be independently
+recovered from saved XYZ arrays, but it contains only one constructed conﬁguration. Its reported
+nonzero rotation residual is evidence against treating the recorded implementation as exactly equiv-
+ariant under that diagnostic; it is not an independently remeasured transformed-coordinate result or
+a population rate of symmetry failure. Absolute-coordinate features, header conditioning, canonical
+8
+
+ordering, and learned decoding must be considered together when interpreting symmetry behavior.
+We do not identify a causal mechanism for the measured residual from these records.
+Exact species and count recovery has a narrower meaning than chemical reconstruction. The de-
+coder receives atomic-number header information, and the projection enforces known composition.
+Preserving counts preserves total mass only when the same ﬁxed species-mass table is used. There
+is no decoded velocity or energy channel, so neither momentum nor energy conservation follows.
+Force labels retained alongside coordinates are not force predictions. No dynamics-stability claim
+is supported.
+Physical-reference stability is another independent prerequisite. The 16-atom ladder demon-
+strates failures of the chosen numerical settings to satisfy the ﬁxed stability limits, even where
+SCF converges. Because the potential/reference ﬁxture is not the synthetic crop and the decoder
+does not predict forces, these failures neither cause nor quantify geometry reconstruction error.
+They prevent the separate potential comparison from serving as qualiﬁed physical accuracy. The
+recorded physical-qualiﬁcation protocol requires 24 qualifying complex-defect reference pairs. The
+available records do not supply these pairs, and the component calculation does not meet that
+coverage requirement.
+Historical preparation checks also require their original scope. An earlier C15 evaluation failed
+under connectedness and ﬁxed-radius observables later identiﬁed in the records as invalid. Inde-
+pendently calibrated dumbbell-topology criteria were subsequently applied to new target parents,
+rather than retroactively converting those failures into successes. The historical new-target sum-
+mary reports 148 of 150 frames passing; a later replay reports 147 of 150, with three shadow-force
+failures. Both retain 50 passing parents under a requirement of at least two passing frames per
+parent. These distinct frame counts are not silently reconciled, no cause is inferred, and neither is
+used as current physical qualiﬁcation.
+The supplied reductions report passing results for 150 saved-summary checks, 10 manifest checks,
+58 synthetic-coordinate checks, and 335 reference-array/log checks within their declared scopes, in-
+cluding checks of the arithmetic underlying the reference failures. These checks establish numerical
+consistency and traceability, not physical validity. They do not reproduce original holdout in-
+ference, remeasure transformed decoded coordinates, establish parameter-converged references, or
+provide complex-defect coverage. The original HDF5 dataset and checkpoint were not opened in
+this work, so the original test reconstruction remains a reported measurement rather than a newly
+reproduced one.
+6 Conclusion
+The inherited Fe–Cr tokenizer has retained test reconstruction RMSD median and 95th percentile
+of 0.00687997 and 0.00861934 Å on 731 patches from 120 held-out parents. Family-speciﬁc controls
+support the original geometry-reconstruction result within that dataset and protocol. Independent
+reduction of a separate synthetic crop’s saved base coordinates gives 0.02956387 Å RMSD, while
+retained transform diagnostics report 0.03654489 Å oﬀ-axis rotation-equivariance error. The crop
+provides a bounded diagnostic, not a generalization estimate or a new threshold test.
+A separate 16-atom reference ladder fails energy/force/stress parameter-stability comparisons
+despite four converged SCF calculations; an independent magnetic initialization remains noncon-
+verged. Accordingly, the available evidence supports geometry characterization, not qualiﬁed physi-
+cal prediction. The scientiﬁc signiﬁcance is the explicit separation of reconstruction, transformation
+9
+
+response, numerical consistency, and physical-reference adequacy in evaluating an inherited atom-
+istic representation.
+7 Data and Code A vailability
+The study uses private retained evaluation reports, conﬁguration and manifest records, excerpts of
+the inherited network implementation, adapter/training/evaluation source, saved synthetic input
+and decoded coordinate arrays, and reference inputs, result arrays, and logs. Numerical reduc-
+tion scripts and their recorded outputs exist for the summary, manifest, synthetic-coordinate, and
+reference checks. The actual private export Supplementary record S1 contains a 97-entry repro-
+ducibility inventory. It is not a public archive, and its existence does not establish reviewer access
+or permission to redistribute its underlying records.
+The retained materials are held in the supplied private source export and indexed by Supple-
+mentary record S1. No public download, external access procedure, or redistribution grant is
+established. The original checkpoint and HDF5 dataset are identiﬁed in the inherited records but
+were not executed or opened in this work, and their inclusion in an externally accessible release is
+not established. Transformed decoded coordinate arrays needed to independently remeasure equiv-
+ariance are not included in the supplied evidence. These restrictions limit independent reproduction
+of the original inference and transform measurements.
+References
+[1] P. Giannozzi et al. Advanced capabilities for materials modelling with Quantum ESPRESSO.
+Journal of Physics: Condensed Matter 29, 465901 (2017). Pinned preprint arXiv:1709.10010v1.
+https://doi.org/10.1088/1361-648X/aa8f79.
+[2] V. Garcia Satorras, E. Hoogeboom, and M. Welling. E(n) Equivariant Graph Neural Networks.
+Proceedings of Machine Learning Research 139, 9323–9332 (2021). https://proceedings.mlr.
+press/v139/satorras21a.html.
+10

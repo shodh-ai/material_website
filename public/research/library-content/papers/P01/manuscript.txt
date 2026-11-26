@@ -1,0 +1,367 @@
+Reconstruction Accuracy and Irreversible Ordering in Quantized
+Cyclic-Mechanics Fields
+Abstract
+Small ﬁeld-reconstruction error does not necessarily preserve irreversible state evolution. We
+examine this distinction in a saved reconstruction experiment using a reduced, dimensionless
+central-force lattice family and an inherited strict-bottleneck GridConvAE. Native 323 solutions
+were exported as eleven 17-channel 643 frames by interpolation; material names denote normal-
+ized property labels rather than independently calibrated materials. The principal comparison
+decodes the same BF16 token representation on the same 512 separately seeded holdout trajec-
+tories, before and after a decoded-only damage/plastic constraint. Raw pooled stress and kine-
+matics normalized root-mean-square errors (nRMSE) were 0.0554055721 and 0.0589356678, but
+the raw decoder produced 31,605,800 damage and 639,173,958 accumulated-plastic-strain decre-
+ments, each against 1,342,177,280 adjacent voxel comparisons. Clipping followed by cumulative
+maxima eliminated these decrements by construction, while damage/plastic nRMSE changed
+from 0.0015730692/0.0567105503 to 0.0014920677/0.0532703537. Damage error is materially
+dependent on its frozen denominator ﬂoor. Transition-frame reconstruction outperformed copy-
+ing baselines, and a separate saved transport audit reported exact bit round trips. These results
+support reconstruction through the declared quantized interface, not learned irreversibility, con-
+stitutive validation, forecasting, or fatigue-life prediction.
+1 Introduction and contributions
+Scientiﬁc ﬁeld compression must preserve more than small average discrepancies when downstream
+interpretation depends on temporal inequalities. In cyclic mechanics, damage and accumulated
+equivalent plastic strain are state variables whose decreases can contradict the intended irreversible
+description. A reconstruction can remain close to its reference in a pooled norm while repeatedly
+reversing these variables. Quantization and transport introduce another distinction: accuracy
+measured directly from a ﬂoating-point latent need not describe the representation actually stored
+and decoded.
+The question addressed here is therefore speciﬁc: does small reconstruction error from BF16 token
+values establish irreversible ordering, and what changes when a decoded-only ordering constraint
+is added? We answer using a controlled comparison on the same 512-trajectory holdout from a
+saved experiment. Both paths share the trained checkpoint, supplied frames, normalization, token
+quantization, and learned decoder. The only intervention is deterministic post-processing of damage
+and accumulated plastic strain.
+The empirical contribution has three parts. First, generator qualiﬁcation makes the scope and
+remaining modal concentration of the source ﬁelds explicit. Second, paired raw-versus-contracted
+decoding separates magnitude accuracy from temporal admissibility without comparing diﬀerent
+campaigns as though they were an ablation. Third, copying baselines and serialization checks
+test whether the constrained result is merely an ordered but uninformative output or an artifact
+1
+
+of bypassing the quantized interface. Neither the lattice simulator, GridConvAE, nor cumulative
+maximum is proposed as a new architecture or constitutive law.
+2 Related work
+Scientiﬁc compression literature distinguishes errors in primary ﬁelds from errors in quantities
+derived from them. A hybrid autoencoder pipeline combines quantization, residual processing,
+and constrained post-processing to control primary-data and quantity-of-interest errors [ 1]. This
+provides relevant context for separating reconstruction from constraint satisfaction. Here, however,
+the ﬁnal ordering operation receives decoded values only, not true quantities of interest, and it
+supplies no general primary-ﬁeld error bound.
+Fixed-rate ﬂoating-point array compression provides a complementary context: block transforms
+and embedded coding support speciﬁed storage rates and localized access [ 2]. Those objectives diﬀer
+from testing temporal ordering in a learned bottleneck. Neither reference supplies a measured
+baseline on the present lattice data. No comparative rate–distortion or runtime advantage over
+established scientiﬁc codecs is established by this study.
+3 Scientiﬁc methods
+3.1 Reduced lattice family and exported ﬁelds
+The source generator is a NumPy implementation of a damped, nonperiodic central-force lattice.
+Thirteen undirected neighbor families include axial, face-diagonal, and body-diagonal bonds. For
+endpoints i, j, normalized stiﬀnesses Ei, Ej, and lattice bond length Lij, the code assigns stiﬀnessp
+EiEj/L2
+ij and the lower endpoint yield value. Trial extension subtracts signed plastic extension;
+excess trial force above a hardening-dependent cap updates signed plasticity and accumulated
+equivalent plastic strain. Bond damage combines cyclic overstress and plastic-work contributions
+and reduces subsequent bond forces. Equal and opposite endpoint forces are scattered to the lattice,
+with symmetric nodal stress accumulation.
+Geometry varies through dog-bone neck dimensions and oﬀset, ellipticity, a surface notch, inclu-
+sions, and smooth Fourier material disorder. Aluminum, titanium, steel, and composite are labels
+selecting normalized density, stiﬀness, and yield parameters. Retained dimensional constants doc-
+ument provenance but do not calibrate the dimensionless solve to these materials. One end is
+ﬁxed; the other receives uniform axial traction and two nonuniform transverse traction patterns.
+With the specimen axis along x, the pattern named bending applies y-directed force proportional
+to centered z, generating torque about x rather than a transverse bending moment. The pattern
+named torsion applies transverse forces proportional to negative centered z and centered y, respec-
+tively. Four named load categories select dominant pattern amplitudes while retaining secondary
+phases and frequency ratios. The nonuniform patterns are RMS-normalized to control their nominal
+amplitudes; their names do not establish independent bending and torsional loading modes.
+Velocity advances using internal, external, and damping forces; displacement uses the average of
+old and new velocities. The documented conﬁguration uses eight substeps per exported interval
+and eleven frames. Native ﬁelds are solved on 323 grids and exported to 643: continuous channels
+use trilinear interpolation, while support, relative density, and material labels use nearest-neighbor
+export. The export is not native 643 physical resolution or a convergence demonstration.
+2
+
+The 17 channels comprise relative density, three velocities, damage, accumulated plastic strain,
+von Mises stress, material identiﬁer, three displacements, and six stresses. Despite their names,
+ux, uy, and uz are velocity channels. Exported velocities are rederived by temporal diﬀerentiation
+of displacement; von Mises stress is recomputed from stress components; damage and plastic his-
+tories are made monotone. Consequently, successful checks of these identities partly test declared
+construction operations, not independent physical predictions.
+3.2 Frame codec and quantized representation
+The inherited no-skip GridConvAE receives one normalized 17-channel frame and a plane containing
+normalized time t/10. Its conﬁguration uses base width 48, two residual blocks per stage, a 64×163
+latent, GroupNorm, SiLU activations, strided 3D convolutions, and nearest-neighbor upsampling
+followed by convolutions. Internal residual blocks do not bypass the encoder–decoder bottleneck.
+Exact reshaping of 23 latent patches yields 512 tokens of 512 coeﬃcients per frame. Eleven supplied
+frames yield 5,632 token rows. The reported model has 8.233 million parameters.
+The nominal 17× reduction compares 4,456,448 input-ﬁeld coeﬃcients with 262,144 latent coef-
+ﬁcients per frame. It is a coeﬃcient-count reduction, not a measured compressed-ﬁlesystem ratio:
+model weights, metadata, precision diﬀerences, and archive overhead are not included. The encoder
+observes each supplied current frame; the normalized-time plane does not turn this reconstruction
+task into future-state prediction.
+Tokens are quantized to native BF16 and represented as uint16 bit patterns, rather than nu-
+merically converted to unsigned integers. The evaluator restores these patterns as BF16, converts
+the restored token values to ﬂoat32 for decoding, and reverses channel normalization. A sepa-
+rate saved transport audit serialized C-order bytes, rebuilt a fresh unsigned-integer buﬀer using
+numpy.frombuffer, reshape, and copy, then bit-cast back to BF16 before decoding. This distin-
+guishes scoring quantized values from independently checking their byte reconstruction.
+3.3 Decoded-only ordering constraint
+Let edt(x) and ept(x) denote raw decoded damage and accumulated plastic strain in dimensionless
+lattice-ﬁeld units. The ﬁnal trajectory contract is
+d∗
+t (x) = max
+0≤s≤t
+clip(eds(x), 0, 1), p ∗
+t (x) = max
+0≤s≤t
+max(eps(x), 0). (1)
+All other channels remain unchanged. The operation uses the decoded sequence only: no reference
+damage, true mass, material information, or true previous frame is supplied. It can retain an earlier
+decoded maximum, but does not introduce an externally supplied state. Bounds and nondecreasing
+ordering follow by construction. This is not evidence that the frame network learned irreversibility,
+nor is it a physical validation of the reconstructed trajectory.
+4 Experimental protocol and validation
+4.1 Saved experiment and data separation
+This manuscript retrospectively analyzes the saved experiment and supplied source records; no
+additional simulations, restored-checkpoint inference, or raw-ﬁeld reruns were performed for its
+3
+
+preparation. Retrieved reports have stable identities and independently checked scalar arithmetic.
+Such checks establish report consistency, not reproduction of tensor inference.
+A 2,000-trajectory pilot preceded expansion to 8,000 development trajectories, split into 6,400
+training, 800 validation, and 800 internal test trajectories with split seed 1234. A separate 256-
+trajectory pilot holdout preceded the ﬁnal separately seeded 512-trajectory holdout. The latter
+contains 32 cases in each of the four-material by four-load combinations. Independent trajectories,
+rather than correlated exported voxels, are the experimental units for interpreting generalization.
+The saved training conﬁguration uses initialization seed 0, AdamW, learning rate 2 × 10−4,
+weight decay 10−5, batch size six, and gradient-norm clipping at 1.0. A 16,000-step pilot preceded
+32,000-step full training from scratch. The schedule uses 5% warmup followed by cosine decay.
+Checkpoint selection evaluates the median frame error on 16 validation trajectories every 500 steps;
+the selected full-stage checkpoint was at step 32,000. A repaired training guard no longer classiﬁed
+ﬁnite heterogeneous batch losses as divergence and retained learning-rate reductions as a persistent
+schedule multiplier. The full saved run records zero guard ﬁres and zero nonﬁnite skips. This does
+not constitute a multi-seed training comparison.
+4.2 Source-ﬁeld qualiﬁcation diagnostics
+For each trajectory, the displacement rank-one statistic uses a ﬂoat64 matrix with eleven frame rows
+and columns formed by ﬂattening all three displacement components over the full exported grid.
+Each column is centered over time. The statistic is the largest eigenvalue of the temporal Gram
+matrix divided by the sum of its eigenvalues, with a denominator minimum of 10−30. Reported
+medians and p95 values aggregate these per-trajectory statistics, not individual voxels.
+The relative energy residual is the absolute ﬁnal residual divided by the sum of absolute adja-
+cent changes in stored external work, with a denominator minimum of 10−12. The residual is the
+change from the initial sum of kinetic energy, elastic energy, and accumulated plastic, damping,
+and damage dissipation, minus accumulated external work. Its p95 and maximum are taken across
+trajectories. Plastic-active and damage-active fractions count trajectories whose ﬁnal full-domain
+mean accumulated plastic strain exceeds 10−7 or whose ﬁnal full-domain mean damage exceeds
+10−9, respectively; their denominators are 2,000 pilot trajectories or 512 ﬁnal holdout trajecto-
+ries. Sample-contract failures count trajectories failing at least one source-array check, including
+shape, ﬁniteness, static density/material/mass, constructed ﬁeld identities, irreversible ordering,
+boundary/support conditions, internal force balance, cyclic loading, and nontrivial stress response.
+Pilot feature diagnostics ﬁrst average each frame and channel into 43 spatial blocks and divide
+each channel by its trajectory-speciﬁc coarse-ﬁeld RMS over time and space, ﬂoored at 10−8. The
+feature vector concatenates each frame/channel’s spatial mean, spatial standard deviation, and
+values at four ﬁxed coarse-grid probes with zero-based (Z, Y, X) indices (0, 3, 1), (1, 2, 3), (2, 1, 0),
+and (3, 0, 2). Across the 2,000 trajectories, feature columns are centered and standardized, retaining
+only columns with standard deviation above 10−8. Normalized squared singular values deﬁne
+variance fractions; the participation ratio is the reciprocal sum of their squares, and the component
+counts are the smallest counts reaching 90% and 99% cumulative variance. The capacity check
+tests exact collisions of parameter records and coarse ﬁelds rounded after multiplication by 256
+and stored as signed 16-bit integers. These feature diagnostics diﬀer from the physics audit’s
+collision check on channel-scaled 83 block averages cast to ﬂoat16. Source implementations and
+saved measurements are preserved in Supplementary record S1.
+4
+
+4.3 Frozen normalization and pooled errors
+Normalization uses channel means and standard deviations from a strided 96-frame probe. The
+implementation identiﬁes signal channels at RMS above 10−9, ﬂoors near-constant-channel standard
+deviations at 5% of channel RMS, assigns unit standard deviation to nonsignal channels, and applies
+a ﬁnal standard-deviation minimum of 10−6. The saved full report lists no masked nonsignal
+channels or near-constant-channel adjustments. These input scales are distinct from evaluation
+denominator ﬂoors.
+For evaluated frame–voxel indices a ∈ A, the evaluator accumulates channel error and reference
+sums in ﬂoat64:
+Sc =
+X
+a∈A
+(bxac − xac)2, R c =
+X
+a∈A
+x2
+ac, e c =
+p
+Sc/Nc
+max{
+p
+Rc/Nc, fc}
+, N c = |A|. (2)
+The frozen ﬂoor is fc = max {rpre
+c , 0.05 medianj∈signal rpre
+j }, where the recorded pretraining scale
+is computed from stored mean and standard-deviation statistics. Group errors and the transition
+dynamic score are
+EG =
+ 
+1
+|G|
+X
+c∈G
+e2
+c
+!1/2
+, E dyn =
+ E2
+stress + E2
+kin
+2
+1/2
+. (3)
+Stress comprises σxx, σyy, σzz , σxy, σxz, σyz . Kinematics comprises the three velocity channels and
+displacement_x, displacement_y, displacement_z. Damage, plastic strain, and the separately
+reconstructed von Mises channel are scored individually.
+Damage is ﬂoor-dominated: its recorded pretraining RMS is 1.0008662254 × 10−6, whereas its
+frozen ﬂoor is 4.3068222511 × 10−5. Its nRMSE must not be read as percentage error relative to
+active damage. Full-domain pooling can also dilute errors in small active regions.
+4.4 Ordering and nonvacuity tests
+A decrement is counted when an adjacent decoded diﬀerence is below −10−8. On 512 trajectories,
+ten adjacent transitions and 643 exported voxels give 1,342,177,280 comparisons per irreversible
+channel. This is a counting denominator, not an independent statistical sample size.
+All-frame pooled scores include frames 0–10. Dynamic and separate damage/plastic copying
+comparisons use only frames 1–10, with corresponding denominators recomputed on that frame
+range. Frozen acceptance requires dynamic error to be at most 0.95 times both true previous-frame
+persistence and initial-frame copying; damage and plastic errors must separately beat previous-
+frame persistence by that factor. The ﬁve magnitude thresholds are each 0.30, with zero tolerated
+counted reversals and nonﬁnite values. Floor agreement is checked at absolute tolerance 10−10.
+These criteria test reconstruction and declared ordering, not general mechanical admissibility.
+5 Experimental results
+5.1 Generator qualiﬁcation and retained failures
+The earlier v3.4 generator ﬁxture failed before training: displacement rank-one energy had me-
+dian 0.9971303640, exceeding the frozen 0.997 bound. The repaired v3.5 source applies secondary
+5
+
+Table 1: Source-ﬁeld measurements. These describe generator behavior, not decoded conservation.
+Measurement Pilot ( n = 2,000) Final ( n = 512)
+Displacement rank-one median 0.9935762950 0.9937294775
+Displacement rank-one p95 0.9997757487 0.9998023918
+Relative energy residual p95 0.0031688727 0.0032064492
+Relative energy residual maximum 0.0074197335 0.0046209185
+Plastic-active fraction 0.7550 0.748046875
+Damage-active fraction 0.7825 0.78125
+Sample-contract failures 0 0
+Table 2: All-frame pooled nRMSE on the same 512 holdout trajectories.
+Channel or group Raw Contracted
+Six-component stress 0.0554055721 0.0554055721
+Velocity and displacement 0.0589356678 0.0589356678
+Damage 0.0015730692 0.0014920677
+Accumulated plastic strain 0.0567105503 0.0532703537
+Von Mises channel 0.0396665646 0.0396665646
+traction patterns in all named load categories and RMS-normalizes the nonuniform boundary-force
+patterns. Its newly declared data passed the retained limits. Because these are diﬀerent ﬁxtures,
+they are not a paired causal ablation of the repair.
+Table 1 shows irreversible-channel activity across trajectories and small numerical work/energy
+bookkeeping residuals. Energy p95 and maximum limits were 0.02 and 0.05; both active-fraction
+minima were 0.20. The displacement upper-tail limit was 0.9999. Nevertheless, leading-mode con-
+centration remains high, limiting the claim of mechanical diversity. The pilot inventory additionally
+records feature participation ratio 16.210055793, 41 and 133 components for 90% and 99% feature
+variance, and no exact parameter or sketch collisions. These observed diagnostics do not make the
+declared parameter support an observed corpus size.
+5.2 Principal same-case comparison
+The ﬁnal raw decoder reconstructs stress and kinematics with modest pooled error while violating
+strict ordering extensively. Tables 2 and 3 compare precisely the same quantized representations
+and trajectories. Cumulative maxima remove reversals and modestly improve both irreversible-
+channel magnitude errors on this ﬁxture. Stress, kinematics, and von Mises errors are identical
+because those channels are untouched.
+The independent scalar consistency result gives raw decrement fractions of 0.0235481560 for
+Table 3: Adjacent decrements below −10−8. Each row uses 1,342,177,280 comparisons per channel
+on the same 512 trajectories.
+Decoder path Damage Accumulated plastic strain
+Raw 31,605,800 639,173,958
+Contracted 0 0
+6
+
+Table 4: Transition-only scores, frames 1–10, on the ﬁnal 512 trajectories.
+Path Dynamic Damage Plastic strain
+Contracted codec 0.0581405655 0.0015627981 0.0557743937
+True previous frame 0.2820428399 0.0053460442 0.2347139340
+Repeat initial frame 0.9724810667 0.0206444217 0.8805195343
+Zero ﬁeld 0.9561841931 0.0206444217 0.8805195343
+damage and 0.4762217090 for plastic strain. These fractions quantify how often ordering fails
+among the counted adjacent comparisons, not reversal amplitude or physical consequence. The
+saved ﬁnal audit reports all 16 codec criteria satisﬁed for the contracted path. This success does
+not reverse the raw-network failure: the successful object is the learned decoder followed by an
+explicitly imposed constraint.
+5.3 Copying and transport checks
+Table 4 provides the separate transition-frame comparison. The contracted dynamic score is
+0.0581405655, compared with 0.2820428399 for true previous-frame persistence. Damage and plas-
+tic scores also satisfy the frozen 5% margin. These checks reject trivial copying as an explanation of
+reconstruction quality. They are not fair forecasting comparisons because only the encoder observes
+the supplied current frame.
+The separate saved transport audit reports 512 unique trajectory-token hashes, no duplicates,
+zero bit-roundtrip errors, zero raw or contracted nonﬁnite values, and ten of ten transport criteria
+satisﬁed. Exact transport identity rules out corruption within the tested serialization path; token
+uniqueness establishes only absence of exact collisions in these cases.
+5.4 Internal test diagnostic is a diﬀerent measurement
+The internal 800-trajectory test summarizes 8,800 supplied frames using the training script’s frame
+metric, not Equation 2’s pooled channel-group statistic. Raw mean, median, p95, and maximum
+were 0.0423735722, 0.0376062293, 0.0712772679, and 0.9739562309. The internal gated diagnostic
+yielded 0.0422314692, 0.0375263496, 0.0710904553, and 0.9737967957. That diagnostic uses true
+mass to project density, as well as channel clipping; it is neither the ﬁnal side-channel-free contract
+nor evidence of its stored-token performance. The large maximum also cautions against interpreting
+the mean as uniformly accurate reconstruction.
+6 Discussion and limitations
+The central result is a direct counterexample to identifying small ﬁeld error with irreversible evo-
+lution. A pooled norm measures discrepancy magnitudes, whereas irreversibility constrains signs
+of adjacent changes. The same raw reconstructions exhibit acceptable pooled errors and many for-
+bidden decreases. The decoded-only operation changes the admissible output set without changing
+the learned representation. Its zero reversal counts are guaranteed, while its favorable magnitude
+changes and copying comparisons are empirical observations on the tested ﬁxture.
+The constraint is deliberately narrow. It does not enforce density nonnegativity or mass con-
+7
+
+servation, categorical material identity, agreement between decoded velocities and displacement
+derivatives, or consistency between the decoded von Mises channel and decoded stress tensor. Nor
+does it impose decoded force balance, work balance, or a coupled constitutive evolution. Earlier
+overestimates can be retained by cumulative maxima; monotonicity alone cannot correct an incor-
+rect magnitude history. Active-region absolute errors and engineering observables needed to assess
+such consequences were not established.
+Physical interpretation is restricted by the normalized central-force family, lattice anisotropy,
+native-axis versus canonical-frame interpretation, absence of independent material or reference-
+solver calibration, and lack of resolution convergence. Interpolated neighboring voxels and succes-
+sive frames are correlated. No conﬁdence intervals or voxel-based signiﬁcance claims are warranted
+from the reported counts. One training seed and separately seeded holdout trajectories assess a
+single trained codec within this generator family; they do not quantify training uncertainty, unseen-
+material transfer, future-state forecasting, crack-growth accuracy, or fatigue life.
+The evidence has distinct levels. Saved reports document the original experiment’s measured
+results; captured code explains the operations; independent arithmetic checks conﬁrm aggregate
+relationships and links between source ﬁles and reports. None substitutes for fresh reproduction
+using raw ﬁelds and checkpoint inference. The documented short in-memory parallel-production
+benchmark does not demonstrate completed large-scale production written to persistent storage,
+sustained storage bandwidth, or codec speedup, and is not used to support the scientiﬁc comparison.
+7 Conclusion
+On the same 512 simulated trajectories, low reconstruction error through the BF16 token interface
+coexisted with extensive raw damage and plastic-strain reversals. A decoded-only cumulative-
+maximum contract eliminated these reversals by construction while retaining nontrivial magnitude
+reconstruction and leaving other channels unchanged. The supported conclusion is reconstruction
+with explicitly imposed irreversible ordering in a reduced lattice family. Learned irreversibility and
+validated mechanics remain separate, unestablished claims.
+8 Data and Code A vailability
+The supplied study materials contain generator, training, evaluator, and trajectory-contract source
+text, frozen normalization and threshold records, and saved internal, holdout, and physics re-
+ports. They identify a private shared-storage experiment tree containing the checkpoint and Zarr
+ﬁeld stores; a later inventory records 512 retained holdout Zarr trees. Access to those underly-
+ing arrays and checkpoint requires the project’s storage permissions. No public archive, download
+mechanism, reviewer permission grant, or independently restored inference environment is docu-
+mented. Supplementary record S1 is included in the private result package as an exported inventory
+with captured generator, training, evaluator, trajectory-contract, physics-audit, capacity-audit, and
+transport-audit scripts; frozen records; saved measurement reports; and scalar-consistency records.
+It preserves source identities and veriﬁcation scope, but does not include the underlying ﬁeld arrays,
+stored token arrays, or usable checkpoint. This private export does not establish public or reviewer
+access. Public release and external rerun access are not established by this manuscript.
+8
+
+References
+[1] T. Banerjee, J. Choi, J. Lee, Q. Gong, J. Chen, S. Klasky, A. Rangarajan, and S. Ranka. Scalable
+Hybrid Learning Techniques for Scientiﬁc Data Compression. arXiv:2212.10733v1, 2022. https:
+//arxiv.org/abs/2212.10733v1.
+[2] P. Lindstrom. Fixed-Rate Compressed Floating-Point Arrays. IEEE Transactions on Visualiza-
+tion and Computer Graphics 20(12), 2674–2683, 2014. doi:10.1109/TVCG.2014.2346458.
+9
