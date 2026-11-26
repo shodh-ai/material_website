@@ -3,6 +3,7 @@ import Tf32Rheology, { tf32Sections } from "./tf32-rheology";
 import TritonReactor, { tritonSections } from "./triton-reactor";
 import WrongTest, { wrongTestSections } from "./wrong-test";
 import CrystalToken, { crystalSections } from "./crystal-token";
+import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
 
 const tf32Slug = "how-tf32-changed-the-flow";
 const tf32Assets = `/blog/${tf32Slug}`;
@@ -33,6 +34,22 @@ type BlogPost = {
 };
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    slug: antibodySlug,
+    title: "Making an Antibody Structure Tokenizer Rotation-Invariant Without Retraining",
+    description:
+      "A preprocessing fix made stored tokens bit-identical across 9,760 tested rotations and raised CDR-H3 loop retrieval from 0.165 to 0.531 mAP.",
+    topic: "Scientific validation",
+    date: "2026-11-26",
+    cover: {
+      src: `${antibodyAssets}/rotation-stability.png`,
+      alt: "Median learned-token cosine under rotation increased from 0.177 with deployed preprocessing to 1.000 with either canonical frame.",
+      width: 1467,
+      height: 735,
+    },
+    sections: antibodySections,
+    Content: AntibodyTokenizer,
+  },
   {
     slug: tf32Slug,
     title: "TF32 Saved 7% Runtime and Tripled Our Flow Velocity",
