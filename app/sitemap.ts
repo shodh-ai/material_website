@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { blogPosts } from "./blog/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-08-17T00:00:00.000Z");
@@ -16,6 +17,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: "https://shodh.ai/blog",
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...blogPosts.map((post) => ({
+      url: `https://shodh.ai/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+    })),
     {
       url: "https://shodh.ai/lucan-physical-intelligence",
       lastModified: new Date("2026-09-07T00:00:00.000Z"),
