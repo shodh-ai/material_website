@@ -69,6 +69,15 @@
   font-variant-numeric: tabular-nums;
 }
 
+.bars[data-align-values="true"] .barRow dd {
+  grid-template-columns: minmax(0, 1fr) 10ch;
+}
+
+.bars[data-align-values="true"] .barRow dd strong {
+  text-align: end;
+  white-space: nowrap;
+}
+
 .track {
   position: relative;
   grid-column: 1;

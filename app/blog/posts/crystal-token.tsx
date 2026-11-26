@@ -17,13 +17,13 @@ export default function CrystalToken() {
     <>
       <p>Every machine-learning model for crystals starts by turning a periodic arrangement of atoms into numbers. That step hides a subtle trap: the same physical crystal can be written down in many equally valid ways, with different unit cells, origins and atom orders. If a representation gives each of those descriptions different numbers, a model's predictions can change with the notation instead of the material.</p>
 
-      <p>We built Shodh's crystal token to avoid that trap and to keep geometry precise. Each atom becomes a compact 192-number token. After a standardization step built on established crystallographic tools, <strong>96–100% of equivalent descriptions encode bit-identically</strong> across 512 crystals in 26 descriptions each, and on 1,000 MP20 test crystals atomic positions come back from the token with a 95th-percentile error of <strong>0.00016 Å</strong>.</p>
+      <p>We built Shodh's crystal token to improve consistency across equivalent descriptions and keep geometry precise. Each atom becomes a compact 192-number token. After standardization, the <strong>stored environment channels were bit-identical in 96–100% of tested equivalent cases</strong> across 512 crystals in 26 descriptions each. In a separate round-trip test on 1,000 MP20 crystals, atomic positions came back with a 95th-percentile error of <strong>0.00016 Å</strong>.</p>
 
       <ul>
-        <li><strong>96–100%</strong> of equivalent crystal descriptions encode bit-identically</li>
+        <li><strong>96–100%</strong> of tested equivalent cases had bit-identical stored environment channels</li>
         <li><strong>13,312</strong> equivalent descriptions tested across 512 MP20 crystals</li>
         <li><strong>0.00016 Å</strong> 95th-percentile position error, full round trip on 1,000 MP20 test crystals</li>
-        <li><strong>0</strong> retraining needed: the fix works at the input</li>
+        <li><strong>0</strong> retraining runs for the standardization step</li>
       </ul>
 
       <h2 id="inside-the-token">Inside a Shodh crystal token</h2>
@@ -36,11 +36,11 @@ export default function CrystalToken() {
         <li><strong>130 environment channels</strong>, produced by an encoder from the atom's identity, its periodic neighbourhood and the cell shape.</li>
       </ul>
 
-      <p>Each part has one job, and each can be checked on its own. That separation is what makes the two guarantees below possible.</p>
+      <p>We test the geometry and the environment features separately.</p>
 
       <h2 id="precise-geometry">Precise geometry</h2>
 
-      <p>The position decoder reads only the phase channels. In a full encode–decode round trip on 1,000 MP20 test crystals, every structure was recovered, with the atom types and order intact, a median position error of 0.00006 Å and a 95th percentile of 0.00016 Å. On a separate set of 1,200 larger crystals with 14 to 252 atoms each, every structure was again recovered, with a 95th percentile of 0.00024 Å. The separation is clean in both directions. Setting all 130 environment channels to zero leaves decoded positions exactly unchanged, to the last bit. Setting the phase channels to zero instead moves atoms by 4–5 Å. Geometry lives in exactly one place in the token, so it can be verified directly and never drifts when other parts of the representation change.</p>
+      <p>The position decoder reads only the phase channels. In a full encode–decode round trip on 1,000 MP20 test crystals, every structure was recovered, with the atom types and order intact, a median position error of 0.00006 Å and a 95th percentile of 0.00016 Å. On a separate set of 1,200 larger crystals with 14 to 252 atoms each, every structure was again recovered, with a 95th percentile of 0.00024 Å. In the channel-zeroing tests, decoded positions remained bit-identical after zeroing all 130 environment channels. Zeroing the phase channels moved atoms by 4–5 Å.</p>
 
       <h2 id="equivalent-cells">The equivalent-cell problem</h2>
 
@@ -54,7 +54,7 @@ export default function CrystalToken() {
 
       <h2 id="standardization">The fix: standardize before encoding</h2>
 
-      <p>Before encoding, every crystal now passes through a standardization step built on <a href="https://spglib.readthedocs.io/">spglib</a>: reduction to a standard primitive cell, a choice among the lattice's proper symmetry operations and atom origins, and deterministic atom ordering. Every equivalent description of a crystal maps to the same standardized record, so the encoder always sees the same input. No retraining is needed, and the step works in front of any encoder.</p>
+      <p>The tested pipeline uses <a href="https://spglib.readthedocs.io/">spglib</a> to reduce each crystal to a standard primitive cell before encoding. It chooses among the lattice's proper symmetry operations and atom origins, then orders the atoms deterministically. The standardization step leaves the encoder weights unchanged.</p>
 
       <p>We first tested it on 15 crystals, 12 from MP20 and 3 synthetic, each under six equivalent changes plus a real physical change as a control:</p>
 
@@ -91,17 +91,17 @@ export default function CrystalToken() {
         </table>
       </div>
 
-      <p>The result holds at scale: equivalent descriptions of the same crystal now produce the same token, and predictions made from those tokens agree to within about 1.5% of the predictor's own error, down from as much as 44%.</p>
+      <p>At this scale, stored environment channels were bit-identical in 96–100% of tested cases. Prediction drift fell from 24–44% of the predictor's own error to 1.3–1.7%.</p>
 
-      <p>Unique crystal descriptions are also the goal of string representations such as <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/e23133d34964a0a09f6d076fc4b922a4-Abstract-Conference.html">Mat2Seq</a> and <a href="https://www.nature.com/articles/s41467-023-42870-7">SLICES</a>. We reach the same goal for a continuous per-atom token by standardizing the input with established crystallographic tools, so the guarantee does not depend on the encoder.</p>
+      <p>String representations such as <a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/e23133d34964a0a09f6d076fc4b922a4-Abstract-Conference.html">Mat2Seq</a> and <a href="https://www.nature.com/articles/s41467-023-42870-7">SLICES</a> also aim for consistent crystal descriptions. Our approach standardizes the input of a continuous per-atom tokenizer using established crystallographic tools.</p>
 
       <h2 id="why-it-matters">Why it matters</h2>
 
       <ul>
-        <li><strong>Predictions that follow the material, not the notation.</strong> Rewriting a crystal's unit cell raised a trained model's formation-energy error by 65–72%. Standardized input gives the encoder the same numbers for every equivalent description.</li>
-        <li><strong>A stable identity for each crystal.</strong> Every equivalent description of the same standardized crystal maps to the same token, so the token can serve as a consistent key for that structure.</li>
-        <li><strong>Verifiable geometry.</strong> Positions live in one part of the token and come back with sub-milliångström error, so structures can be reconstructed and checked.</li>
-        <li><strong>Encoder-independent.</strong> Standardization sits in front of the encoder, so any future encoder inherits the same guarantee without retraining.</li>
+        <li><strong>Unit-cell choice affects predictions.</strong> In the raw-input transformer test, rewriting a crystal's unit cell raised formation-energy error by 65–72%.</li>
+        <li><strong>More consistent environment features.</strong> Standardization made stored environment channels match bit for bit in most tested equivalent cases.</li>
+        <li><strong>Verifiable geometry.</strong> Both round-trip sets had sub-milliångström position error at the 95th percentile.</li>
+        <li><strong>A preprocessing change.</strong> Standardization runs before the encoder and leaves the tested weights unchanged.</li>
       </ul>
 
       <h2 id="measurement">How we measured</h2>
@@ -110,7 +110,7 @@ export default function CrystalToken() {
 
       <p><strong>Standardization:</strong> spglib 2.7.0 at symprec 10⁻⁵, designed for clean, database-quality structures such as MP20. Atomic noise of 10⁻⁴ Å or more can change the standardized cell, so noisy experimental or relaxed structures need a tolerance-aware variant.</p>
 
-      <p><strong>Tests:</strong> 15 structures × 6 equivalent changes plus a scale control; 512 MP20 training structures × 26 descriptions (13,312 variants). "Identical" means bit-identical stored values.</p>
+      <p><strong>Tests.</strong> We used 15 structures with six equivalent changes each, plus a scale control. The larger test used 512 MP20 training structures with 26 descriptions each (13,312 variants). In the equivalence tests, “identical” refers to the stored environment channels.</p>
 
       <p><strong>Prediction sensitivity:</strong> transformer regressors trained on raw MP20 descriptions, three seeds, all 9,046 MP20 test structures, prediction only, with two random equivalent basis changes; paired bootstrap confidence intervals with 10,000 resamples. A model trained on raw descriptions must be retrained on standardized inputs to benefit from standardization.</p>
 

@@ -6,7 +6,7 @@ import styles from "./scientific-figure.module.css";
 type Bar = { label: string; value: number; display: string; tone?: number };
 type Line = { label: string; values: number[]; tone?: number };
 export type Panel =
-  | { kind: "bar"; title: string; rows: Bar[]; min?: number; max?: number; log?: boolean; note?: string }
+  | { kind: "bar"; title: string; rows: Bar[]; min?: number; max?: number; log?: boolean; note?: string; alignValues?: boolean }
   | { kind: "line"; title: string; domain: number[]; series: Line[]; unit: string; digits?: number };
 export type FigureSpec = { title: string; subtitle?: string; panels: Panel[] }
   | { title: string; subtitle?: string; diagram: "stencil" | "cell" };
@@ -24,7 +24,7 @@ function Bars({ panel }: { panel: Extract<Panel, { kind: "bar" }> }) {
   return (
     <section className={styles.panel}>
       <h3>{panel.title}</h3>
-      <dl className={styles.bars}>
+      <dl className={styles.bars} data-align-values={panel.alignValues}>
         {panel.rows.map(({ label, value, display, tone = 0 }, index) => {
           const position = scale(value);
           return (

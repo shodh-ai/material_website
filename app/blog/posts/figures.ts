@@ -77,20 +77,45 @@ export const stencil: FigureSpec = {
   diagram: "stencil",
 };
 
+export const reactorReplayRounds = [
+  { original: 1954.933893, chunk4: 524.316537, chunk8: 785.383860 },
+  { original: 1902.530318, chunk4: 820.890659, chunk8: 3030.166667 },
+  { original: 1557.710669, chunk4: 649.069775, chunk8: 1164.083052 },
+].map(({ original, chunk4, chunk8 }, index) => ({
+  round: index + 1,
+  original,
+  chunk4,
+  chunk8,
+  chunk8Speedup: original / chunk8,
+}));
+
+export const medianReactorSpeedup = reactorReplayRounds
+  .map(({ chunk8Speedup }) => chunk8Speedup)
+  .sort((a, b) => a - b)[1].toFixed(2);
+
+const wallTimeFormat = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+export function formatReactorWallTime(seconds: number) {
+  return `${wallTimeFormat.format(seconds)} s`;
+}
+
 export const reactorPipeline: FigureSpec = {
   title: "Eight-GPU pipeline elapsed time",
-  subtitle: "Same H100 node · eight campaigns × 32 samples",
-  panels: [
-    {
-      kind: "bar", title: "Launcher wall time", max: 2000,
-      rows: [
-        { label: "Original GPU pipeline", value: 1954.93, display: "1,954.93 s", tone: 3 },
-        { label: "Triton · chunk 4", value: 524.32, display: "524.32 s (3.73×)", tone: 2 },
-        { label: "Triton · chunk 8", value: 785.38, display: "785.38 s (2.49×)", tone: 1 },
-      ],
-      note: "Chunk 4 · 215/256 metadata digests match. Chunk 8 · 256/256 bit-identical.",
-    },
-  ],
+  subtitle: "Three rounds on the same H100 node · 256 samples per configuration · common time scale",
+  panels: reactorReplayRounds.map(({ round, original, chunk4, chunk8 }) => ({
+    kind: "bar",
+    title: `Round ${round}`,
+    max: 3200,
+    alignValues: true,
+    rows: [
+      { label: "Original GPU pipeline", value: original, display: formatReactorWallTime(original), tone: 3 },
+      { label: "Triton · chunk 4", value: chunk4, display: formatReactorWallTime(chunk4), tone: 2 },
+      { label: "Triton · chunk 8", value: chunk8, display: formatReactorWallTime(chunk8), tone: 1 },
+    ],
+  })),
 };
 
 export const componentPresence: FigureSpec = {

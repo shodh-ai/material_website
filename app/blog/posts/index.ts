@@ -4,6 +4,7 @@ import TritonReactor, { tritonSections } from "./triton-reactor";
 import WrongTest, { wrongTestSections } from "./wrong-test";
 import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
+import { medianReactorSpeedup } from "./figures";
 
 const tf32Slug = "how-tf32-changed-the-flow";
 const tf32Assets = `/blog/${tf32Slug}`;
@@ -68,9 +69,9 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: tritonSlug,
-    title: "Accelerating Reactor Data on NVIDIA H100 with Bit-Exact Triton Kernels",
+    title: `Bit-Exact Triton Reached ${medianReactorSpeedup}× Median Reactor Throughput on Eight H100s`,
     description:
-      "Fusing transport and reaction kernels sped up our eight-H100 reactor pipeline by 2.49×, with matching trajectory, flux, and metadata digests on all 256 samples.",
+      `Across three same-node rounds on eight H100s, Triton achieved ${medianReactorSpeedup}× median throughput and matched the trajectory, flux, and metadata digests for all 256 samples in each round.`,
     topic: "Scientific computing",
     date: "2026-11-25",
     cover: {
@@ -102,11 +103,11 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: crystalSlug,
-    title: "One Crystal, One Token: Building a Crystal Representation That Is Consistent and Precise",
+    title: "Making Crystal Tokens More Consistent Across Equivalent Unit Cells",
     description:
       "Standardizing unit-cell descriptions made stored environment channels bit-identical in 96–100% of tested equivalent cases and preserved sub-milliångström position accuracy.",
     subtitle:
-      "How Shodh’s per-atom crystal token encodes every equivalent description of a crystal identically, and recovers atomic positions to about 0.0002 Å.",
+      "Standardizing equivalent unit cells gave bit-identical stored environment channels in 96–100% of tested cases. Atomic positions had a 95th-percentile round-trip error of 0.00016 Å on 1,000 MP20 test crystals.",
     topic: "Materials representation",
     date: "2026-11-25",
     cover: {
