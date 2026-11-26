@@ -4,7 +4,6 @@ import TritonReactor, { tritonSections } from "./triton-reactor";
 import WrongTest, { wrongTestSections } from "./wrong-test";
 import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
-import { medianReactorSpeedup } from "./figures";
 
 const tf32Slug = "how-tf32-changed-the-flow";
 const tf32Assets = `/blog/${tf32Slug}`;
@@ -69,9 +68,9 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: tritonSlug,
-    title: `Bit-Exact Triton Reached ${medianReactorSpeedup}× Median Reactor Throughput on Eight H100s`,
+    title: "Bit-Exact Triton Kernels Make Our Reactor Solver 12× Faster on H100",
     description:
-      `Across three same-node rounds on eight H100s, Triton achieved ${medianReactorSpeedup}× median throughput and matched the trajectory, flux, and metadata digests for all 256 samples in each round.`,
+      "The Triton solver ran 12× faster on one H100, and its transport stencil ran 36.1× faster in isolation. Three eight-GPU replays preserved every output digest in bit-exact mode, with variable end-to-end throughput.",
     topic: "Scientific computing",
     date: "2026-11-25",
     cover: {
@@ -103,7 +102,7 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: crystalSlug,
-    title: "Making Crystal Tokens More Consistent Across Equivalent Unit Cells",
+    title: "One Crystal, One Token? Testing Equivalent Unit Cells",
     description:
       "Standardizing unit-cell descriptions made stored environment channels bit-identical in 96–100% of tested equivalent cases and preserved sub-milliångström position accuracy.",
     subtitle:

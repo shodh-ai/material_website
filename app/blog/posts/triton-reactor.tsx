@@ -1,7 +1,8 @@
 import { ScientificFigure } from "./scientific-figure";
 import {
   formatReactorWallTime,
-  medianReactorSpeedup,
+  medianChunk4Speedup,
+  medianChunk8Speedup,
   reactorBreakdown,
   reactorPipeline,
   reactorReplayRounds,
@@ -24,10 +25,9 @@ export const tritonSections = [
 export default function TritonReactor() {
   return (
     <>
-      <p>We replayed a 256-sample reactor workload three times on the same eight-H100 node. The bit-exact Triton pipeline reached <strong>{medianReactorSpeedup}× median throughput</strong> relative to the original across the three paired rounds. Its throughput ranged from 0.63× to 2.49×. All 256 samples matched the original SHA-256 digests for trajectories, interface fluxes, and metadata in each round.</p>
+      <p>On one NVIDIA H100, the Triton solver advanced eight reactor samples through 640 steps in <strong>22.46 seconds</strong>, down from <strong>269.27 seconds</strong> with the original PyTorch solver. That is a <strong>12.0× solver speedup</strong>, including snapshot handling. The full data pipeline adds host-side work, which we measured separately across three rounds on eight H100s.</p>
 
       <ul>
-        <li><strong>{medianReactorSpeedup}×</strong> Median paired throughput across three eight-H100 rounds</li>
         <li><strong>36.1×</strong> Transport stencil · 47.387 to 1.314 ms</li>
         <li><strong>7.0×</strong> Reaction update · 10.71 to 1.53 ms</li>
         <li><strong>64.6%</strong> Lower peak memory · 13.883 to 4.914 GB</li>
@@ -107,25 +107,31 @@ export default function TritonReactor() {
 
       <div role="region" aria-labelledby="triton-replay-results" tabIndex={0}>
         <table>
-          <caption id="triton-replay-results">Each configuration processed 256 samples per round. We divided the original wall time by the chunk-8 wall time for each round and took the median of those three ratios.</caption>
-          <thead><tr><th scope="col">Round</th><th scope="col">Original</th><th scope="col">Triton, chunk 4</th><th scope="col">Triton, chunk 8</th><th scope="col">Chunk 8 throughput vs. original</th></tr></thead>
+          <caption id="triton-replay-results">Each configuration processed 256 samples per round. Each throughput ratio divides the original wall time by the Triton wall time in the same round. Each median is taken across the three paired ratios.</caption>
+          <thead><tr><th scope="col">Round</th><th scope="col">Original</th><th scope="col">Chunk 4 time</th><th scope="col">Chunk 8 time</th><th scope="col">Chunk 4 throughput</th><th scope="col">Chunk 8 throughput</th></tr></thead>
           <tbody>
-            {reactorReplayRounds.map(({ round, original, chunk4, chunk8, chunk8Speedup }) => (
+            {reactorReplayRounds.map(({ round, original, chunk4, chunk8, chunk4Speedup, chunk8Speedup }) => (
               <tr key={round}>
                 <th scope="row">{round}</th>
                 <td>{formatReactorWallTime(original)}</td>
                 <td>{formatReactorWallTime(chunk4)}</td>
                 <td>{formatReactorWallTime(chunk8)}</td>
+                <td>{chunk4Speedup.toFixed(2)}×</td>
                 <td>{chunk8Speedup.toFixed(2)}×</td>
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr><th scope="row" colSpan={4}>Median paired throughput</th><td><strong>{medianChunk4Speedup}×</strong></td><td><strong>{medianChunk8Speedup}×</strong></td></tr>
+          </tfoot>
         </table>
       </div>
 
-      <p>Chunk 8 reached <strong>{medianReactorSpeedup}× median paired throughput</strong>. In round 2 it took 3,030.17 s, compared with 1,902.53 s for the original pipeline. The cause of the round 2 slowdown remains unresolved.</p>
+      <p>Chunk 4 ran at 2.32–3.73× original throughput across the three rounds, with a median of <strong>{medianChunk4Speedup}×</strong> and 41 metadata digest mismatches per round. Bit-exact chunk 8 ranged from 0.63× to 2.49×, with a median of <strong>{medianChunk8Speedup}×</strong>. It ran slower than the original in round 2.</p>
 
-      <p>After the 12.0× solver speedup (269.27 s to 22.46 s per eight samples), host-side packing, flux calculation, auditing, and disk writes made up about 80% of the 111 s single-GPU pipeline. On eight GPUs, chunk 4 overlaps that stage across sub-batches. Chunk 8 preserves the original eight-sample reduction shape and processes sub-batch output serially to fit the 256 GB host-memory budget.</p>
+      <p>Host-side packing, flux calculation, auditing, and writes made up about 80% of the optimized 111 s single-GPU pipeline. On eight GPUs, chunk 4 overlaps output work across sub-batches. Chunk 8 preserves the original eight-sample reduction shape and processes sub-batch output serially to fit the 256 GB host-memory budget. That puts host processing and storage on its critical path.</p>
+
+      <p>In the saved chunk-8 campaign logs, the interval covering simulation, snapshots, and raw output writes took 2,943–3,012 s per campaign in round 2, up from 731–770 s in round 1. The timing combines GPU and host stages, so the contribution of host or storage contention to the slowdown remains unresolved.</p>
 
       <h2 id="results">Results</h2>
 
@@ -145,7 +151,7 @@ export default function TritonReactor() {
 
       <h2 id="what-made-it-work">What made it work</h2>
 
-      <p>The transport stencil ran 36.1× faster in isolation. Across three full-node rounds, the bit-exact pipeline delivered {medianReactorSpeedup}× median paired throughput. Measuring the full pipeline captured wall-time variability, and comparing metadata alongside the fields exposed the chunk-size trade-off.</p>
+      <p>Fusing transport and reaction updates reduced solver time. The full-node tests exposed a separate trade-off between overlapping output work and keeping the original FP64 diagnostic reduction grouping. Checking metadata alongside the fields made that trade-off visible.</p>
 
       <h2 id="how-we-measured">How we measured</h2>
 
@@ -153,7 +159,7 @@ export default function TritonReactor() {
 
       <p><strong>Isolated measurements.</strong> The stencil test used an H100 80 GB SXM with PyTorch 2.10.0+cu128 and Triton 3.6.0. CUDA events timed nine rounds of eight calls after warmup. The reaction-update comparison comes from archived section profiles. Both pinned solvers ran on the same H100 with a 128³ grid, eight samples in one chunk, 640 steps, and snapshots every 40 steps. Peak memory is PyTorch's maximum allocated device memory.</p>
 
-      <p><strong>Eight-H100 verification.</strong> Each configuration ran once per round for nine trials on the same node. Each trial launched eight concurrent campaigns of 32 samples, with 64 requested CPUs and 256 GB of requested host memory. Launcher wall time ends when the final campaign process exits. We joined the saved manifest rows by sample ID and compared SHA-256 digests for packed trajectories, interface fluxes, and metadata. Round 1 chunk-4 ULP counts come from direct comparison of the saved FP64 diagnostic values.</p>
+      <p><strong>Eight-H100 verification.</strong> Three configurations × three rounds = nine runs on the same node. Each run launched eight concurrent campaigns of 32 samples, with 64 requested CPUs and 256 GB of requested host memory. Launcher wall time ends when the final campaign process exits. We joined the saved manifest rows by sample ID and compared SHA-256 digests for packed trajectories, interface fluxes, and metadata. Round 1 chunk-4 ULP counts come from direct comparison of the saved FP64 diagnostic values.</p>
 
       <p>References: <a href="https://docs.nvidia.com/cuda/floating-point/index.html">NVIDIA CUDA floating-point guide</a> · <a href="https://triton-lang.org/main/index.html">Triton documentation</a> · <a href="https://pytorch.org/docs/stable/torch.compiler.html">PyTorch torch.compile documentation</a></p>
     </>

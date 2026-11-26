@@ -50,7 +50,7 @@ export default function CrystalToken() {
 
       <p>Any encoder that reads the raw cell sees these descriptions differently. Across 512 MP20 crystals, the environment features of equivalent descriptions fell as low as a cosine similarity of 0.27, and predictions made from them drifted by 24–44% of the predictor's own error. We found the same pattern in encoders with random, untrained weights, which shows the effect comes from the raw input itself. That makes it a general problem for crystal representations, and it calls for a general fix.</p>
 
-      <p>The effect reaches all the way to property prediction. A transformer trained to predict formation energy from raw MP20 descriptions was tested on all 9,046 MP20 test crystals, each rewritten in an equivalent unit cell. Its error rose from 0.043 to about 0.071–0.074 eV/atom, and 86–87% of its predictions moved by more than 0.01 eV/atom. Band-gap error rose by 0.11 eV. The same model given only element identities was exactly unaffected by these basis changes, so the shift comes entirely from how the cell is written.</p>
+      <p>The effect reaches all the way to property prediction. A transformer trained to predict formation energy from raw MP20 descriptions was tested on all 9,046 MP20 test crystals, each rewritten in an equivalent unit cell. Its error rose from 0.043 to about 0.071–0.073 eV/atom, and 86–87% of its predictions moved by more than 0.01 eV/atom. Band-gap error rose by 0.11 eV. The same model given only element identities was exactly unaffected by these basis changes, so the shift comes entirely from how the cell is written.</p>
 
       <h2 id="standardization">The fix: standardize before encoding</h2>
 
@@ -82,10 +82,11 @@ export default function CrystalToken() {
 
       <div role="region" aria-labelledby="crystal-scale" tabIndex={0}>
         <table>
-          <caption id="crystal-scale">512 MP20 crystals × 26 descriptions. Prediction drift uses linear predictors of formation energy and interatomic distances.</caption>
+          <caption id="crystal-scale">512 MP20 crystals × 26 descriptions. Prediction drift uses linear predictors of formation energy and interatomic distances. Dashes mark values unreported in this comparison.</caption>
           <thead><tr><th scope="col"><strong>Measure across equivalent descriptions</strong></th><th scope="col"><strong>Without standardization</strong></th><th scope="col"><strong>With standardization</strong></th></tr></thead>
           <tbody>
-            <tr><th scope="row">Environment channels bit-identical</th><td>lowest similarity 0.27</td><td>96–100% of cases</td></tr>
+            <tr><th scope="row">Lowest environment-feature cosine similarity</th><td>0.27</td><td>—</td></tr>
+            <tr><th scope="row">Share of cases with bit-identical stored environment channels</th><td>—</td><td>96–100%</td></tr>
             <tr><th scope="row">Prediction drift, as share of predictor error</th><td>24–44%</td><td>1.3–1.7%</td></tr>
           </tbody>
         </table>
@@ -98,7 +99,7 @@ export default function CrystalToken() {
       <h2 id="why-it-matters">Why it matters</h2>
 
       <ul>
-        <li><strong>Unit-cell choice affects predictions.</strong> In the raw-input transformer test, rewriting a crystal's unit cell raised formation-energy error by 65–72%.</li>
+        <li><strong>Unit-cell choice affects predictions.</strong> In the raw-input transformer test, rewriting a crystal's unit cell raised formation-energy error by 66–72%.</li>
         <li><strong>More consistent environment features.</strong> Standardization made stored environment channels match bit for bit in most tested equivalent cases.</li>
         <li><strong>Verifiable geometry.</strong> Both round-trip sets had sub-milliångström position error at the 95th percentile.</li>
         <li><strong>A preprocessing change.</strong> Standardization runs before the encoder and leaves the tested weights unchanged.</li>

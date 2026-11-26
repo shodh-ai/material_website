@@ -86,10 +86,15 @@ export const reactorReplayRounds = [
   original,
   chunk4,
   chunk8,
+  chunk4Speedup: original / chunk4,
   chunk8Speedup: original / chunk8,
 }));
 
-export const medianReactorSpeedup = reactorReplayRounds
+export const medianChunk4Speedup = reactorReplayRounds
+  .map(({ chunk4Speedup }) => chunk4Speedup)
+  .sort((a, b) => a - b)[1].toFixed(2);
+
+export const medianChunk8Speedup = reactorReplayRounds
   .map(({ chunk8Speedup }) => chunk8Speedup)
   .sort((a, b) => a - b)[1].toFixed(2);
 
