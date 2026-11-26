@@ -1,0 +1,12 @@
+{
+  "P20": {
+    "slug": "reactor-h100-triton",
+    "ogImage": "/social/reactor-h100-triton.png",
+    "ogAlt": "Finite equivalence and nested performance limits in a fused reactor-field generator"
+  },
+  "LUCAN10B": {
+    "slug": "lucan-10b-physics",
+    "ogImage": "/social/lucan-10b.png",
+    "ogAlt": "LUCAN-10B-Physics cross-scale architecture, Figure 1"
+  }
+}

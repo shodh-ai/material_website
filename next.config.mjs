@@ -23,6 +23,8 @@ const nextConfig = {
       ...Object.entries(articleAliases).filter(([oldSlug, slug]) => oldSlug !== slug).map(([oldSlug, slug]) => ({
         source: `/engineering/${oldSlug}`, destination: `/engineering/${slug}`, statusCode: 301,
       })),
+      // New posts follow the engineering URL scheme; retain the private benchmark.
+      { source: '/blog/:slug((?!lucan-scientific-performance$)[^/]+)', destination: '/engineering/:slug', statusCode: 301 },
     ];
   },
   async rewrites() {

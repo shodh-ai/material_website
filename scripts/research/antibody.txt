@@ -1,0 +1,36 @@
+Rotation dependence enters a learned antibody
+structure tokenizer through its preprocessing and is
+removed by sequence-anchored canonicalization
+Shodh AI Research
+Abstract
+Learned structure tokenizers turn protein coordinates into per-residue tokens for downstream models, and they are usually assumed to inherit the rotation invariance of their
+distance-based encoders. In a preregistered study of a frozen antibody Fv tokenizer, we show
+that this assumption can fail through preprocessing alone. The tokenizer’s 160-dimensional
+learned features were bit-identical under translation but changed almost completely under rotation (median cosine 0.177 across 976 held-out structures). Exact Shapley attribution traced
+99.98% of the change to Fourier features of coordinates expressed in a per-pose bounding
+box. Aligning each antibody to a sequence-anchored joint VH/VL framework frame before
+the unchanged encoder made stored tokens bit-identical under every rigid motion while preserving decoding accuracy and sensitivity to CDR-H3 changes. A germline- and geometrybased guard rejected all 976 chain-label swaps and none of 6,976 valid antibodies. On 6,000
+sequence-cluster-disjoint antibodies in random poses, the ﬁx restored CDR-H3 structural retrieval (mean average precision 0.165 to 0.531) and VH–VL orientation prediction (Spearman
+ρ 0.421 to 0.781), although simple invariant descriptors remained stronger for strict loop
+retrieval.
+
+Introduction
+Protein structure is increasingly passed to learned models as tokens: per-residue vectors or discrete symbols that summarise local and global geometry. Discrete structure alphabets such as
+Foldseek’s 3Di1 made structure search as fast as sequence search, and vector-quantised autoencoders2 now supply the structure tokens of multimodal protein language models.3–7 Inversefolding models learn from predicted structures at scale,8 and benchmarks have begun to compare
+tokenizers on reconstruction, sensitivity and distinctiveness.9 Antibodies are a prominent application. Fast structure predictors such as ABodyBuilder2 and IgFold10–12 produce Fv models for
+millions of sequences from repertoire databases.13, 14 Language models of antibody sequence15, 16
+and structure-aware design models17–19 increasingly expect structural inputs in a learned representation.
+A structure token should not depend on the arbitrary orientation in which the coordinates happen
+to be stored. Geometric deep learning addresses this by building symmetry into the architecture.20
+Invariant networks operate on interatomic distances and angles.21, 22 Equivariant networks carry
+vector or tensor features that rotate with the input.23–27 Structure-prediction networks reason in
+local residue frames.28, 29 Once a tokenizer’s encoder is built from such components, its outputs
+are commonly assumed to inherit the encoder’s invariance.
+That assumption holds only if nothing else in the pipeline sees raw coordinates, and practical
+tokenizers face a tension between invariance and invertibility. A token that can be decoded back
+to coordinates must carry some notion of position. Materials representations have confronted
+the same trade-oﬀ for periodic crystals. Crystal graphs are invariant but not invertible.30, 31
+Generative models such as CDVAE represent structures through fractional coordinates and a
+1
+
+
