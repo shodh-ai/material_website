@@ -4,6 +4,8 @@ import TritonReactor, { tritonSections } from "./triton-reactor";
 import WrongTest, { wrongTestSections } from "./wrong-test";
 import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
+import CrystallizationCodec, { crystallizationAssets, crystallizationSections, crystallizationSlug } from "./crystallization-codec";
+import IndustrialWorldModels, { industrialWorldModelsAssets, industrialWorldModelsSections, industrialWorldModelsSlug } from "./industrial-world-models";
 
 const tf32Slug = "tf32-rheology-flow";
 const tf32Assets = "/blog/how-tf32-changed-the-flow";
@@ -34,6 +36,38 @@ type BlogPost = {
 };
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    slug: industrialWorldModelsSlug,
+    title: "From Molecular Discovery to Computational Manufacturing",
+    description:
+      "Shodh’s executive brief explains how pre-trained physical models and process-specific knowledge could connect molecular discovery to manufacturing, starting in biopharma.",
+    topic: "Industrial world models",
+    date: "2026-11-26",
+    cover: {
+      src: `${industrialWorldModelsAssets}/industrial-model-generations.png`,
+      alt: "Three generations of foundation models: generate, simulate, and design.",
+      width: 1506,
+      height: 615,
+    },
+    sections: industrialWorldModelsSections,
+    Content: IndustrialWorldModels,
+  },
+  {
+    slug: crystallizationSlug,
+    title: "Compress the State, Derive the Rest",
+    description:
+      "Storing eight independent coordinate streams used 25% fewer bytes at matched accuracy. With SZ3, 0.75 MiB matched ZFP’s 2 MiB accuracy and passed all 128 physics audits.",
+    topic: "Materials representation",
+    date: "2026-11-26",
+    cover: {
+      src: `${crystallizationAssets}/temperature-slices.png`,
+      alt: "Reference and reconstructed crystallization temperature slices for standard and shifted process conditions.",
+      width: 1860,
+      height: 1088,
+    },
+    sections: crystallizationSections,
+    Content: CrystallizationCodec,
+  },
   {
     slug: antibodySlug,
     title: "Making an Antibody Structure Tokenizer Rotation-Invariant Without Retraining",
