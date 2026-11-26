@@ -380,7 +380,7 @@
       z-index: 9999;
       pointer-events: none;
       opacity: 1;
-      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.2s ease-out;
     }
     #loader.fade-out {
       opacity: 0;
@@ -1967,8 +1967,7 @@
       .research-launch a svg { transition: none; }
     }
   </style>
-  <style>.site-nav{display:flex;gap:24px;pointer-events:auto;font-size:14px;font-weight:600}.site-nav a{color:inherit;text-decoration:none;min-height:36px;display:inline-flex;align-items:center}.site-nav a:hover{text-decoration:underline}</style>
-  <link id="native-scroll-style" rel="stylesheet" href="native-scroll.css?v=20261126-mobile" media="(max-width: 800px), (pointer: coarse), (prefers-reduced-motion: reduce)">
+  <style>@media(max-width:800px){.site-nav{order:3;flex-basis:100%;justify-content:space-between;gap:12px!important}.hero-header-right{margin-left:auto!important}}.site-nav{display:flex;gap:24px;pointer-events:auto;font-size:14px;font-weight:600}.site-nav a{color:inherit;text-decoration:none;min-height:36px;display:inline-flex;align-items:center}.site-nav a:hover{text-decoration:underline}</style>
 </head>
 <body>
 
@@ -2540,7 +2539,10 @@
   <script id="my-scene-json" type="application/json"></script>
 
   <!-- Scripts -->
-  <script src="bootstrap.js?v=20261126-mobile" defer></script>
+  <script src="vendor/lenis.min.js" defer></script>
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="main.js?v=20261126-loading-only" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

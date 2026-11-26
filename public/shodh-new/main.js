@@ -10,27 +10,8 @@ let activeScene = null;   // current scene instance
 let blobUrl     = null;   // current Blob URL for the patched JSON
 let reloadTimer = null;   // debounce handle
 
-// ─── Asset Preloading State ───────────────────────────────────────────────────
-let allAssetsLoaded = false;   // true when all images + fonts are ready
-let shaderReady     = false;   // true when WebGL shader has rendered
-let loaderDismissed = false;   // prevent double-dismissal
-
-let totalLoaderAssets = 0;
-let loadedLoaderAssets = 0;
-
-function updateLoaderProgress() {
-  loadedLoaderAssets++;
-  const progress = Math.min(loadedLoaderAssets / totalLoaderAssets, 1.0);
-  
-  const path1 = document.getElementById('mask-path-1');
-  const path2 = document.getElementById('mask-path-2');
-  if (path1 && path2) {
-    const len1 = parseFloat(path1.dataset.len || 0);
-    const len2 = parseFloat(path2.dataset.len || 0);
-    path1.style.strokeDashoffset = len1 * (1 - progress);
-    path2.style.strokeDashoffset = len2 * (1 - progress);
-  }
-}
+// The loading overlay does not wait for decorative assets or the GPU scene.
+let loaderDismissed = false;
 
 // ─── Defaults ────────────────────────────────────────────────────────────────
 const DEFAULTS_DARK = {
@@ -115,86 +96,31 @@ function updateSceneJson() {
   document.getElementById('my-scene-json').innerText = JSON.stringify(json);
 }
 
-// ─── Preload First-Paint Assets ──────────────────────────────────────────────
-function preloadAllAssets() {
-  // Orbit images belong to the next scroll section. Waiting for every one of
-  // them leaves first-time visitors on the loading screen for far too long.
-  // They are lazy-loaded by the browser and animate in when that section opens.
-  totalLoaderAssets = 3;
-
-  // Initialize SVG mask paths
-  const path1 = document.getElementById('mask-path-1');
-  const path2 = document.getElementById('mask-path-2');
-  if (path1 && path2) {
-    const len1 = path1.getTotalLength ? path1.getTotalLength() : 40;
-    const len2 = path2.getTotalLength ? path2.getTotalLength() : 40;
-    path1.dataset.len = len1;
-    path2.dataset.len = len2;
-    path1.style.strokeDasharray = len1;
-    path1.style.strokeDashoffset = len1; // Starts fully hidden
-    path2.style.strokeDasharray = len2;
-    path2.style.strokeDashoffset = len2; // Starts fully hidden
-  }
-
-  // 1. Load fonts needed for the first paint.
-  const fontPromise = document.fonts ? document.fonts.ready.then(() => {
-    updateLoaderProgress();
-  }) : Promise.resolve().then(() => updateLoaderProgress());
-
-  // 2. Preload SVG brandmark (likely already cached via <link rel="preload">)
-  const svgPromise = new Promise((resolve) => {
-    const svgImg = new Image();
-    const onLoad = () => { updateLoaderProgress(); resolve(); };
-    svgImg.onload = onLoad;
-    svgImg.onerror = onLoad;
-    svgImg.src = 'White Shodh AI Brandmark.svg';
-  });
-
-  // Combine all
-  return Promise.all([fontPromise, svgPromise])
-    .then(() => {
-      allAssetsLoaded = true;
-      console.log('[Preloader] All assets loaded.');
-      tryDismissLoader();
-    })
-    .catch(() => {
-      // Failsafe: dismiss loader even if some assets fail
-      allAssetsLoaded = true;
-      console.warn('[Preloader] Some assets failed, proceeding anyway.');
-      tryDismissLoader();
-    });
-}
-
-// ─── Loader Dismissal (only when BOTH shader + assets are ready) ─────────────
+// ─── Show the original page while the shader initializes in the background ──
 function tryDismissLoader() {
   if (loaderDismissed) return;
-  if (!allAssetsLoaded || !shaderReady) return;
-
   loaderDismissed = true;
 
   const loader = document.getElementById('loader');
+  document.body.classList.remove('loading-lock');
   if (loader) {
-    // Wait for the final stroke-dashoffset transition (400ms) before fading out
-    setTimeout(() => {
-      loader.classList.add('fade-out');
-      setTimeout(() => {
-        loader.remove();
-        // Unlock scroll after loader is gone
-        document.body.classList.remove('loading-lock');
-      }, 1300);
-    }, 400); // Hold at 100% briefly
-  } else {
-    document.body.classList.remove('loading-lock');
+    loader.classList.add('fade-out');
+    setTimeout(() => loader.remove(), 200);
   }
 
-  // Trigger hero animations
-  if (typeof playHeroAnimations === 'function') {
-    setTimeout(() => {
-      playHeroAnimations();
-      // Restore scroll position after animations are set up
-      restoreScrollPosition();
-    }, 800); // 400ms hold + 400ms delay
-  }
+  playHeroAnimations();
+  restoreScrollPosition();
+}
+
+function loadShaderRuntime() {
+  if (typeof UnicornStudio !== 'undefined') return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'vendor/unicornStudio.umd.js';
+    script.onload = resolve;
+    script.onerror = () => reject(new Error('Background runtime unavailable'));
+    document.head.append(script);
+  });
 }
 
 // ─── Render / reload the scene ───────────────────────────────────────────────
@@ -220,16 +146,11 @@ function renderScene() {
   })
   .then(scene => {
     activeScene = scene;
-    // Mark shader as ready and attempt to dismiss loader
-    shaderReady = true;
-    updateLoaderProgress(); // Add shader to progress
     console.log('[Shader] WebGL scene rendered.');
     tryDismissLoader();
   })
   .catch(err => {
     console.error('[UnicornStudio] addScene failed:', err);
-    // Even on shader failure, try to show the page
-    shaderReady = true;
     tryDismissLoader();
   });
 }
@@ -375,52 +296,24 @@ function initTheme() {
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 async function boot() {
-  // Lock scroll while loading
-  document.body.classList.add('loading-lock');
+  initTheme();
+  setupControls();
+  tryDismissLoader();
 
   try {
-    // Start preloading all assets immediately (runs in parallel with shader setup)
-    preloadAllAssets();
-
-    // Set a failsafe timeout - if assets take too long (15s), dismiss loader anyway
-    setTimeout(() => {
-      if (!loaderDismissed) {
-        console.warn('[Boot] Failsafe timeout - dismissing loader.');
-        allAssetsLoaded = true;
-        shaderReady = true;
-
-        // Force full fill on failsafe
-        const path1 = document.getElementById('mask-path-1');
-        const path2 = document.getElementById('mask-path-2');
-        if (path1) path1.style.strokeDashoffset = 0;
-        if (path2) path2.style.strokeDashoffset = 0;
-
-        tryDismissLoader();
-      }
-    }, 15000);
-
-    const res = await fetch('fluid-config.json');
+    const [res] = await Promise.all([
+      fetch('fluid-config.json'),
+      loadShaderRuntime(),
+    ]);
     if (!res.ok) throw new Error(`HTTP ${res.status} loading fluid-config.json`);
     baseJson = await res.json();
-
     if (!baseJson.history || !baseJson.options) {
       throw new Error('fluid-config.json is missing history/options fields');
     }
-
-    initTheme();        // read saved theme + set data-theme + apply palette
-    setupControls();
-    renderScene();      // will call tryDismissLoader() when shader is ready
-
+    renderScene();
   } catch (err) {
-    console.error('[Boot]', err);
-    const loader = document.getElementById('loader');
-    if (loader) {
-      loader.innerHTML = `
-        <div style="text-align:center;font-family:monospace;padding:2rem">
-          <p style="color:#f87171;font-size:1.1rem">⚠ Could not initialize shader</p>
-          <p style="color:#6b7280;font-size:.85rem;margin-top:.5rem">${err.message}</p>
-        </div>`;
-    }
+    // A decorative-background failure must not cover or lock the website.
+    console.warn('[Background]', err);
   }
 }
 
@@ -482,25 +375,12 @@ function restoreScrollPosition() {
   });
 }
 
-function startPage() {
-  initFooterForm();
-  if (document.documentElement.dataset.nativeScroll === 'true') {
-    initTheme();
-    document.getElementById('loader')?.remove();
-    document.body.classList.remove('loading-lock');
-    return;
-  }
+document.addEventListener('DOMContentLoaded', () => {
   boot();
   initLenis();
   initViewportResize();
-}
-
-// The bootstrap loads this file dynamically after choosing the device layout.
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startPage, { once: true });
-} else {
-  startPage();
-}
+  initFooterForm();
+});
 
 // ─── Footer contact form ────────────────────────────────────────────────────
 function initFooterForm() {
