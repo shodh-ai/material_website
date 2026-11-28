@@ -1,0 +1,601 @@
+Shodh AI Research preprint · November 2026
+WHAT BITWISE REPRODUCTION MISSES IN A GPU
+REACTOR DATA PIPELINE
+Shodh AI Research
+ABSTRACT
+A GPU reactor pipeline reproduced a reference dataset byte for byte, including a
+heat flux with the wrong sign. We examine two questions raised by this result.
+First, what makes two generated records identical? In three eight-GPU replays
+over the same 256 samples, changing the output schedule preserved every tra-
+jectory and interface array but changed 41 metadata hashes. A matched-operand
+control traced three affected records to a batch-dependent FP64 reduction. Sec-
+ond, does an identical record satisfy its declared physics? Both exporters sampled
+a jacket cell’s stored zero temperature. Across all 16 saved frames of two retained
+483 samples, the archived flux was −128.250 kW/m2. Evaluating the same heat-
+transfer law at adjacent fluid faces gave +12.038 to +12.144 kW/m2, outward
+as expected for warmer fluid. We provide the frame-level measurements and a
+notice identifying the affected legacy channel. On an H100, handwritten Triton
+and precision-emulating TorchInductor both matched the eager transport words at
+1.314 and 1.404 ms per call, respectively, versus 47.387 ms for eager. Full-node
+throughput varied across the three rounds.
+1 I NTRODUCTION
+In a stirred tank with a 285 K cooling jacket and liquid near 312 K, heat should leave the fluid.
+Our eager and optimized GPU pipelines both exported a negative jacket heat flux under a positive-
+outward convention. A checksum comparison accepted the result. In the same pipeline, it rejected
+records whose concentration and temperature fields matched exactly because one scalar in their
+metadata changed by a single floating-point increment.
+One sample in the chunk-4 replay
+Saved trajectory
+256 / 256
+Interface flux
+256 / 256
+Metadata
+215 / 256
+matching sample digests
+Figure 1: Three views of the same 256 sam-
+ples. Matching the two arrays alone misses
+41 changed records.
+Two GPU operations make record identity sensitive
+to implementation choices. Kernel fusion changes
+where intermediate roundings can occur ( Whitehead
+& Fit-Florea , 2011), while a change in batch shape
+can change how a library groups the additions in a re-
+duction (PyTorch, 2026a; Demmel & Nguyen, 2013).
+Field plots can hide either effect. Even a wordwise
+check of a transport kernel observes only one opera-
+tor. Figure 1 shows the consequence in a generator
+used to make synthetic data for physics tokenizers.
+We use two independent tests. The first joins three
+archived payloads by sample ID and traces changes
+in the scalar reaction extent back to the device reduc-
+tion. The second recomputes the sign and magnitude
+of jacket heat transfer from the fluid that exchanges heat with the wall. Sections 5.1 and 5.2 report
+the two findings. Section 6 then compares implementations that meet the same wordwise transport
+criterion and measures each output schedule through its final write.
+2 R ELATED WORK
+Repeatability and reduction order . Demmel & Nguyen (2013) show how parallel summation
+can be made reproducible despite floating-point nonassociativity. ReproBLAS implements binned
+1
+
+Shodh AI Research preprint · November 2026
+accumulators for order-independent results across partitions ( Demmel et al. , 2016). These methods
+address the numerical primitive. Our reference is an existing PyTorch reduction whose rounded
+result already belongs to an archived dataset. Replacing its accumulator would define a new baseline
+for that diagnostic.
+Deterministic GPU execution. PyTorch’s deterministic-algorithms mode concerns repeated exe-
+cution on the same inputs, hardware and software ( PyTorch, 2026b). Its numerical accuracy guide
+separately describes how computing on batches and slices can yield different rounded results ( Py-
+Torch, 2026a). Here each sample retains the same local physical inputs while its enclosing sub-batch
+changes size. We track that distinction through spatial reduction, time integration and serialization.
+Stencil fusion and floating-point contraction. Halide separates the stencil computation from its
+execution schedule (Ragan-Kelley et al., 2013). Triton exposes tiling and memory access to the ker-
+nel author ( Tillet et al. , 2019). TorchInductor generates fused kernels from PyTorch graphs ( Ansel
+et al. , 2024). On NVIDIA GPUs, multiply-add contraction can replace two roundings with one
+(Whitehead & Fit-Florea , 2011). CUDA exposes -fmad=false to disable contraction in NVCC
+(NVIDIA, 2025). We test the corresponding Triton setting and precision emulation in Inductor on
+the same eager arithmetic target. This comparison isolates what handwritten code adds once the
+compiler also meets the wordwise criterion.
+3 P RELIMINARIES
+3.1 R EACTOR FIELDS AND TIME DISCRETIZATION
+The generator advances six species concentrations, temperature and residence time inside a bounded
+cylindrical vessel with an impeller mask. A prescribed impeller-speed schedule drives an analytic
+velocity field and a centrifugal pressure closure. Heat exchanges with a sidewall jacket. The in-
+tended use is synthetic data generation for tokenizer training, evaluation and pipeline development.
+Agreement with the reference tests the implementation of this reduced-order model. Experimental
+calibration, resolved impeller flow and plant prediction lie outside the study.
+For a transported field c at cell i, let c−a and c+a denote its two axial neighbors along direction a. An
+out-of-grid or inactive neighbor takes the center value ci. Write h for the spacing used by the stencil,
+ua for the local velocity component and Dc for the field diffusivity. The arithmetic target is
+ga =
+{(ci − c−a )/h, u a ≥ 0,
+(c+a − ci)/h, u a < 0, (1)
+Li(c) = Dc
+∑
+a=x,y,z
+[
+(c+a − 2ci) + c−a]
+h2 −
+∑
+a=x,y,z
+uaga. (2)
+For active cells, the species update takes the form cn+1 = max(0 , cn + ∆t[Li(cn) + sni ]). The
+reaction kernel evaluates the three rates from the old concentrations and temperature. In the ref-
+erence ordering the desired reaction uses ((kdA)B)C, and the two side reactions use (k1A)B and
+k2P . Each rate constant uses a temperature-dependent exponential with its argument clamped to
+[−30, 30]. The temperature update combines transport, reaction heat and jacket exchange. Resi-
+dence time advances in the active volume with a local cap in the swept region.
+Steps and storage. The single-device replay uses ∆t = 0 .0025 s on a 1283 grid. Saving every
+40 steps gives 16 frames over 1.6 s. Seven of the eight full-node campaigns use this schedule. The
+extended-horizon campaign takes 960 steps and saves every 60, producing 16 frames over 2.4 s.
+FP64 carries the transported state. The saved trajectory packs 18 FP32 channels in time–channel–
+z–y–x order, including velocity, pressure, derived rates and geometry. An auxiliary array carries 13
+interface channels for heat, species fluxes, traction and wall velocity.
+3.2 D EFINITION OF OUTPUT IDENTITY
+At operator level we reinterpret FP64 output as 64-bit integers and count unequal words against eager
+CUDA. At trajectory level we compare each packed FP32 channel against the NumPy generator and
+2
+
+Shodh AI Research preprint · November 2026
+run the domain audit. This test reports maximum absolute field difference. At pipeline level we
+join by sample ID and require separate SHA-256 matches for packed trajectory bytes, interface-
+flux frame bytes in order, and the metadata object serialized as sorted-key compact JSON. This last
+test covers diagnostics as well as shapes and schedules. Container paths, compression bytes and
+launcher-specific provenance sit outside these three payloads. Writing H for SHA-256 and C for
+canonical JSON serialization, the comparison key for sample i is
+di =
+(
+H(Ti), H (Fi), H (C(Mi))
+)
+.
+Here Ti and Fi are ordered logical array bytes. We require the same sample IDs on both sides of the
+join, then compare each component of di. When metadata differs, we compare its fields directly and
+hash the canonical object again after removing only the reaction extent. This separates differences
+in that scalar from changes elsewhere in the record.
+4 P ROPOSED METHOD
+4.1 S OLVER AND OUTPUT ARCHITECTURE
+Figure 2 shows one step and its two output paths. The in-place update advances local state after
+transport has finished reading neighbors. Two consumers then observe that update at different preci-
+sions. The snapshot stream stores FP32 fields at selected steps. The diagnostic reduction consumes
+FP64 reaction rates at every step.
+(a) Spatial stencil
+(b) One GPU step and its outputs
++x
+-x
++y
+-y
++z
+-z
+Center and six axial neighbors
+Inactive or out-of-grid neighbor:
+substitute the center value.
+Old FP64 state
+[8, B, Z, Y, X]
+Transport kernel
+row tiles read old state
+Reaction / update kernel
+pointwise FP64 update
+old state
+Saved FP32 fields
+snapshot, then flux export
+FP64 desired rate
+row sum, then extent
+Figure 2: The transport operator reads a seven-point neighborhood (a). A separate buffer carries its
+result to the reaction update (b). The host receives rounded snapshots, while the device integrates a
+rate diagnostic before serializing the metadata.
+Kernel decomposition. The eager solver batches samples on one GPU. Its transport path stacks
+fields and materializes shifted arrays, neighbor selections and gradients through separate tensor op-
+erations. We keep the eight fields in one contiguous FP64 allocation [8, B, Z, Y, X]. The transport
+kernel views field and sample as one leading index k. Each Triton program owns one (k, z, y) row
+tile, and adjacent lanes address adjacent x cells. At B = 8 and X = Y = Z = 128 the launch grid
+is (1, 16,384, 64) with 128 elements and four warps per program. The axial offsets in elements are
+±1, ±X and ±Y X . Bounds masks protect the loads and a separate active mask selects the neighbor
+or center value.
+Each program accumulates advection and diffusion in x, y, z order and writes one transport result
+per field element. A second, pointwise kernel owns a spatial tile for one sample. It reads the eight
+old state values and their transport terms, computes rates and sources, and writes updated state in
+place. Keeping a separate transport buffer ensures that all neighbor reads in Eq. ( 2) see the old state.
+3
+
+Shodh AI Research preprint · November 2026
+The update also emits the desired rate and the largest per-cell consumption ratio for the downstream
+reductions. The heat-release output is written when required. The reference update distributes these
+operations over a chain of pointwise launches.
+4.2 R ECOVERING THE EAGER ARITHMETIC
+An early implementation failed all six FP64 stencil checks on two small grids. Two details were
+consequential. First, a fused multiply-add can round once where eager multiplication followed by
+addition rounds twice. We compile with enable_fp_fusion=False and retain parentheses,
+including the rounded subtraction c+a − 2ci before adding c−a . Second, the tested PyTorch CUDA
+scalar division followed reciprocal multiplication. On four million FP64 inputs, CUDA division
+by the scalar spacing differed from NumPy division for 1,833,864 values. Direct CUDA division
+and CUDA multiplication by the precomputed reciprocal matched on every input. Multiplication,
+addition and subtraction controls each had zero mismatches.
+The kernel therefore loads 1/h and 1/h2 from an FP64 device buffer. It promotes the stored FP32
+velocity to FP64 before multiplying by the gradient. For reaction rates, a separate probe compared
+500,000 exponential evaluations over the clamped range and narrower intervals around zero. Triton’s
+tested exponential paths matched the PyTorch CUDA result word for word. These comparisons
+cover the tested exponential and transport outputs. Saved trajectories exercise the reaction update
+after conversion to FP32.
+From equation to instruction sequence. The x-direction accumulation below is taken from the
+transport kernel after masked neighbor selection. The same accumulator carries into the y and z
+passes.
+grad = tl.where(v >= 0.0, (c - lower) * inv_dx, (upper - c) * inv_dx)
+prod = v64 * grad
+acc_adv = acc_adv + prod
+t = upper - 2.0 * c
+t = t + lower
+acc_lap = acc_lap + t * inv_dx2
+4.3 S NAPSHOT AND HOST PIPELINE
+The impeller speed ramps and then holds constant. The optimized solver reuses the velocity, pres-
+sure and CFL calculation when the speed repeats. It accumulates reaction-bound violations on the
+GPU and checks at save boundaries and completion, avoiding per-step scalar synchronization. Ten
+snapshot arrays share one FP32 transfer on a side stream. A reusable pinned host buffer feeds pre-
+allocated final frame arrays. Host workers can pack, audit and write one sub-batch while the GPU
+advances the next. Separate processes build fluxes and reuse invariant surface quantities. This over-
+lap can keep two sub-batches resident, so the feasible schedule depends on node-level host memory.
+A single packed trajectory occupies 2.25 GiB at the stated shape. The 13-channel FP32 flux ar-
+ray adds 1.625 GiB. Across 256 samples the two logical arrays alone amount to 992 GiB before
+compression. Compressed file sizes and physical transfer volumes depend on chunking and data
+values.
+5 T WO TESTS OF THE GENERATED RECORD
+5.1 I DENTICAL FIELDS AND DIFFERENT REACTION EXTENTS
+We replayed 256 sample IDs on the same eight-GPU node in three rounds. The reference processed
+eight samples per sub-batch. The optimized pipeline at chunk 8 reproduced all three payload digests.
+Chunk 4 retained all 256 trajectory and flux digests in each round but matched only 215 metadata
+digests. In each of the three rounds, exactly 34 diagnostic values differed by one unit in the last
+place (ULP) and seven by two. The absolute extent changes were 2.78 × 10−17 to 2.22 × 10−16
+mol. Restoring the eager extent made each affected metadata object equal to its reference. A curator
+using all three SHA-256 digests to certify a regeneration would reject those 41 records in every
+round, even though a trajectory-only check would accept all 256. This is an observed consequence
+for provenance. We did not measure a change in model predictions.
+4
+
+Shodh AI Research preprint · November 2026
+Reaction extent. For each sample, the solver accumulates a scalar in FP64,
+En+1 = En +
+[(∑
+i
+rnd,i
+)
+∆t
+]
+h3.
+The implementation flattens the spatial dimensions into a row per sample and reduces each row. The
+archived eight-GPU trials changed sub-batch size, raw-output overlap and flux concurrency together.
+An earlier eager-only control changed three of eight metadata digests when the chunk size changed.
+Each round replayed the same 256 sample IDs.
+Same FP64 rate tensor at one solver step
+Each row holds the 1283 spatial cells of one sample.
+0
+1
+2
+3
+4
+5
+6
+7
+Native sum over each of eight rows
+Rows 0-3, then rows 4-7
+sum rows in each group
+Eight split-path row sums
+Accumulate each sequence over 640 steps and compare final FP64 words.
+Figure 3: Matched-operand test. Both calls reduce over the full spatial row of each sample. Only
+the number of rows passed to the GPU operation changes. Each path supplies eight FP64 sums per
+step.
+Matched optimized-solver control. We reran the first eight samples of a campaign with known
+discrepancies on one H100, using the pinned optimized solver at 1283 for 640 steps. Both launches
+used the same seed, save interval, asynchronous snapshot setting and serial output path (zero raw-
+output workers and zero flux workers). Changing only the sub-batch size reproduced both archived
+configurations’ three payload hashes for each of the eight samples. Three metadata records changed.
+As shown in Fig. 3, at every step of the eight-row run we also applied the same GPU row-sum
+operation to two four-row views of the very same FP64 rate tensor. The solver continued with its
+native sum. Accumulating the split sums offline reproduced the actual chunk 4 final values for all
+eight IDs, including the signs and sizes of all three changes (Table 1). The two shapes yielded
+different sums in 1,320 of 5,120 sample-steps. Five samples nevertheless ended at the same FP64
+extent. This isolates the spatial reduction for these samples. The library’s internal summation tree
+and the other 248 IDs were outside this control.
+Table 1: Matched optimized replay. Counts range over 640 steps per sample. The signed change is
+the final chunk 4 extent relative to chunk 8, in FP64 ULPs.
+Sample 0 1 2 3 4 5 6 7
+Unequal step sums 175 169 151 158 160 179 168 160
+Final change (ULP) +2 -1 0 0 0 0 0 +1
+5.2 B OTH EXPORTERS GIVE THE WRONG DIRECTION OF JACKET HEAT FLOW
+Under the archive’s sign convention, a positive heat flux leaves the fluid. For an active fluid cell i
+sharing a face with the jacket, the specified heat-transfer law gives
+q′′i→j = hJ (Tf,i − TJ ). (3)
+The eager and optimized exporters both index temperature with the jacket mask. All 7,920 marked
+cells in each retained frame belong to the solid. The stored temperature there is a zero fill value.
+Substituting it into Eq. ( 3) gives 450(0 − 285) = −128,250 W/m2. The code reads the opposite side
+of the interface from the one the law specifies. Reversing the sign of the archived values would still
+leave their magnitude wrong.
+5
+
+Shodh AI Research preprint · November 2026
+A test against the boundary law. We reopened the two retained 483 sample IDs from each imple-
+mentation and verified the trajectory and interface arrays against their recorded SHA-256 values. At
+each of 16 saved times (0.1–1.6 s), we visited each in-bounds face shared by an active fluid cell and a
+jacket cell. We evaluated Eq. ( 3) using the saved FP32 fluid temperature in FP64, hJ = 450 W/(m2
+K) and TJ = 285 K. All 8,096 such faces per frame gave positive values, ranging from 12,038.31 to
+12,144.05 W/m2 over the audit. The two exporters’ copies gave identical results. As an implementa-
+tion check, we summed incident face values at each jacket cell and compared that array elementwise
+against the later face-based exporter. The arrays agreed exactly at all 64 implementation–sample–
+frame combinations.
+(a)  Which temperature enters the law?
+Jacket heat flux (kW/m2), positive out of fluid
+Stored at jacket cells
+-128.250
+Recomputed per fluid face
++12.038 to +12.144
+-140
+-70
+0
+20
+(b)  Fluid-side flux through the saved frames
+Face mean and min–max range (kW/m2)
+12.04
+12.09
+12.14
+0.1
+0.6
+1.1
+1.6
+Time since start (s)
+Figure 4: (a) The legacy value at a jacket cell and the single-face flux obtained from adjacent fluid
+temperatures. The common scale shows the error in direction and magnitude. (b) The line is the
+mean across faces and both sample IDs. Shading spans their extrema at each saved time. The second
+panel enlarges the positive range.
+Which data products are affected? The defect is in the legacy export of
+interface_fluxes/heat_flux. The temperature integrator computes its own jacket
+source on active cells before this array is written. The tokenizer’s packed trajectory target is a
+separate array. Using the exported flux as a training label, a boundary target or an energy-balance
+input propagates the defect. The audit does not establish that any particular trained checkpoint
+consumed it. The 1283 replay retained generation-time hashes after clearing scratch arrays. Those
+hashes establish exporter parity. Direct physical measurements here cover the two retained 483 IDs.
+The accompanying dataset notice identifies the legacy generator and the affected field. For existing
+records, the fluid-side calculation recovers an instantaneous face flux at saved times. The legacy
+solver advanced 40 fine steps per saved interval in these samples and applied its source to a near-wall
+band. Recovering the exact heat transferred by that update requires fine-step source information. A
+separately versioned conservative solver uses the same shared-face flux for the update and the output.
+6 P ERFORMANCE MEASUREMENTS
+6.1 T RANSPORT , SOLVER AND RUNNER ON ONE GPU
+Isolated operator . We ran the archived stencil functions on an H100 80 GB SXM with PyTorch
+2.10.0+cu128 and Triton 3.6.0. Seed 8800 produces uniform FP64 fields, normally distributed FP32
+velocities scaled by 0.1 and a cylindrical active mask with inactive end planes. All implementations
+receive the same values. Inputs comprise eight fields for each of eight samples, with h = 0 .9/127.
+The two compiled variants use TorchInductor with static shapes. Eager is the unfused reference.
+Precision-emulating Inductor is the exact compiled competitor. After the first call and correctness
+check, each variant receives five warmup calls. CUDA events enclose eight calls per timing round.
+The starting variant rotates across nine rounds. Table 2 reports medians and the observed round
+range.
+Default Inductor differed on 21.93% of output words, with a maximum absolute difference of
+2.84 × 10−14. Setting emulate_precision_casts=True restored exactness at a median
+6
+
+Shodh AI Research preprint · November 2026
+Table 2: Steady-state latency and FP64 output differences against eager CUDA. Each timing obser-
+vation is an eight-call mean.
+Implementation Median (ms) Range (ms) Speedup Unequal words
+Eager PyTorch 47.387 47.373–47.392 1.0× reference
+Inductor, default 1.343 1.332–1.363 35.3× 29,434,441
+Inductor, precision emulation 1.404 1.402–1.436 33.8× 0
+Handwritten Triton 1.314 1.311–1.340 36.1× 0
+latency only 0.089 ms above handwritten Triton. The handwritten kernel reused its output alloca-
+tion. The eager and compiled functions returned new tensors, so the 0.089 ms gap includes the
+effect of the allocation convention. Reading and writing each FP64 field element once accounts for
+2(8)(8)(1283)(8) = 2 ,147,483,648 bytes. Dividing by 1.314 ms gives 1.63 TB/s of effective field
+I/O. Actual HBM traffic also depends on stencil reuse, other inputs and caching. We did not collect
+hardware traffic counters.
+Integrated solver and runner . A separate pinned replay warmed each solver with two samples,
+synchronized the GPU, reset peak memory statistics, then timed an eight-sample call through the
+final synchronization. The call includes snapshots. The archived runner comparison additionally
+includes audit, flux production and storage. Table 3 keeps the measurements tied to their respective
+timers.
+Table 3: Single-device measurements. The profile rows use synchronized sections. The bottom two
+timing rows come from distinct experiments.
+Measurement Eager Optimized Change
+Transport section (ms/step) 48.11 1.40 34.3×
+Reaction and update section (ms/step) 10.71 1.53 7.0×
+Peak allocated GPU memory (decimal GB) 13.883 4.914 −64.6%
+Solver with snapshots, eight samples (s) 269.27 22.46 12.0×
+Complete runner, eight samples (s) 428 111 3.9×
+The companion engineering article’s 12× headline (Shodh AI Research , 2026) refers to the single
+eight-sample solver pair in Table 3, including snapshots. The node study times eight concurrent,
+32-sample campaigns through the final output. An earlier-build 32-sample solver control at chunk 8
+took 9.56 s/sample eager and 8.78 s/sample optimized ( 1.09×). Neither single-device pair estimates
+a typical node speedup.
+The reaction/update profile combines eager rates (3.39 ms) and integration (7.32 ms). Its 7.0× ratio
+compares synchronized sections. The runner comparison matched all eight sample IDs.
+6.2 E IGHT -GPU REPLAY
+Each trial launched eight processes on a single eight-H100 node, one campaign per GPU and 32
+samples per campaign, with 64 requested CPUs and a 256 GB host-memory allocation. The same
+256 IDs appear in every trial. Eager uses a sub-batch of eight. Optimized chunk 4 uses two raw-
+output workers and four flux workers per campaign. Optimized chunk 8 processes sub-batch output
+serially and runs two flux workers per campaign. Both use asynchronous snapshots. The raw-
+output and flux worker counts therefore vary together with chunk size in this matrix. Launcher time
+starts before spawning the processes and ends after the final process exits. Three rounds rotated the
+order as eager/4/8, 4/8/eager and 8/eager/4. With equal sample counts the paired throughput ratio is
+Teager,r/Tm,r.
+Chunk 8 reproduced all three digests for every sample in every round. Its three trials took 4,979.63
+s in total versus 5,415.17 s for eager. Its slowest trial coincided with all eight generation intervals
+shifting to 2,943–3,012 s from 731–770 s in round 1 (Fig. 5). The shift therefore appears across
+the campaigns before final launcher completion. The logs do not resolve its cause into GPU execu-
+7
+
+Shodh AI Research preprint · November 2026
+Table 4: Launcher times for the same work on the same node. The paired summary takes the median
+across rounds. The pooled ratio divides total eager seconds by total candidate seconds for the same
+768 sample executions.
+Round Eager (s) Chunk 4 (s) Chunk 8 (s) Eager / 4 Eager / 8
+1 1,954.93 524.32 785.38 3.73 2.49
+2 1,902.53 820.89 3,030.17 2.32 0.63
+3 1,557.71 649.07 1,164.08 2.40 1.34
+Median paired ratio 2.40 1.34
+Pooled equal-work ratio 2.72 1.09
+0
+500
+1000
+1500
+2000
+2500
+3000
+Elapsed time (s)
+Round 1
+Eager
+Chunk 4
+Chunk 8
+Round 2
+Chunk 4
+Chunk 8
+Eager
+Round 3
+Chunk 8
+Eager
+Chunk 4
+Dots show campaign generation time     |    Ticks show launcher time
+Figure 5: Generation intervals for eight campaigns (dots) and total launcher time (tick), in execution
+order. Generation includes simulation, snapshots and raw output. Flux processing can overlap this
+interval.
+tion, host allocation or filesystem contention. With three rounds on one node, the throughput ratios
+describe these trials and provide little basis for predicting a future allocation.
+7 C ONCLUSIONS AND OUTLOOK
+A record intended for exact regeneration needs a specification for every persisted diagnostic, includ-
+ing its batch partition or an order-independent summation rule. The 41 changed metadata hashes
+show the practical consequence of leaving that choice implicit. The heat-flux comparison asks a dif-
+ferent question of the very same acceptance procedure. Both exporters reproduced heat flowing the
+wrong way because they read the same solid-cell fill value. A boundary test with a known tempera-
+ture ordering catches the defect even without a second implementation. We retain the legacy digests
+as a record of the benchmark and identify the flux channel in the dataset notice. A replacement data
+release would need its own version, reference hashes and a comparison of integrated boundary heat
+with the discrete solver source.
+REPRODUCIBILITY STATEMENT
+The ancillary files contain executable stencil and division tests, per-record hashes, the reduction evi-
+dence, the frame-wise heat-flux audit and the legacy dataset notice. Appendix B gives the commands
+and identifies which checks require the private reactor.
+REFERENCES
+Jason Ansel, Edward Y ang, Horace He, Natalia Gimelshein, Animesh Jain, Michael V oznesensky,
+Bin Bao, Peter Bell, David Berard, Evgeni Burovski, et al. PyTorch 2: Faster machine learn-
+8
+
+Shodh AI Research preprint · November 2026
+ing through dynamic python bytecode transformation and graph compilation. In Proceedings of
+ASPLOS, 2024. URL https://docs.pytorch.org/assets/pytorch2-2.pdf.
+James Demmel and Hong Diep Nguyen. Fast reproducible floating-point summation. In IEEE Sym-
+posium on Computer Arithmetic , pp. 163–172, 2013. URL https://doi.org/10.1109/
+ARITH.2013.9.
+James Demmel, Willow Ahrens, and Hong Diep Nguyen. Efficient reproducible floating point
+summation and BLAS. Technical Report UCB/EECS-2016-121, University of California,
+Berkeley, 2016. URL https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/
+EECS-2016-121.html.
+NVIDIA. CUDA Compiler Driver NVCC , 2025. URL https://docs.nvidia.com/cuda/
+archive/12.8.0/cuda-compiler-driver-nvcc/index.html . CUDA Toolkit
+12.8, option –fmad.
+PyTorch. Numerical Accuracy , 2026a. URL https://docs.pytorch.org/docs/2.10/
+notes/numerical_accuracy.html. PyTorch 2.10 documentation, batched computations
+and slice computations.
+PyTorch. Deterministic Algorithms , 2026b. URL https://docs.pytorch.org/docs/
+2.10/generated/torch.use_deterministic_algorithms.html. PyTorch 2.10
+documentation.
+Jonathan Ragan-Kelley, Connelly Barnes, Andrew Adams, Sylvain Paris, Frédo Durand, and Saman
+Amarasinghe. Halide: A language and compiler for optimizing parallelism, locality, and re-
+computation in image processing pipelines. In Proceedings of PLDI , pp. 519–530, 2013. URL
+https://doi.org/10.1145/2491956.2462176.
+Shodh AI Research. Bit-exact Triton kernels make our reactor solver 12 × faster
+on H100. Engineering article, 2026. URL https://shodh.ai/engineering/
+h100-bit-exact-triton .
+Philippe Tillet, H. T. Kung, and David Cox. Triton: An intermediate language and compiler for
+tiled neural network computations. In Proceedings of MAPL , pp. 10–19, 2019. URL https:
+//doi.org/10.1145/3315508.3329973.
+Nathan Whitehead and Alex Fit-Florea. Precision and Performance: Floating Point and IEEE
+754 Compliance for NVIDIA GPUs . NVIDIA, 2011. URL https://docs.nvidia.com/
+cuda/floating-point/index.html.
+9
+
+Shodh AI Research preprint · November 2026
+A R EPRODUCTION AND MEASUREMENT RECORDS
+A.1 G RID AND PRECISION CHECKS
+Three seed/mask pairs passed the FP64 stencil word test at both 323 and 483. Enabling and disabling
+the fused reaction update yielded matching saved FP32 fields and diagnostics on both grids after
+640 steps. The integrated generator also had zero maximum absolute difference from NumPy on the
+saved FP32 channels at 323, 483 and 1283 (two, four and one samples). These are separate tests of
+operator and snapshot outputs.
+Workload reconstruction. The eight-sample replay used a 0.45 m vessel radius, 0.15 m impeller
+radius, 140 rpm, 328 K initial temperature and a 305 K jacket. Seed 8800 and one chunk covered
+640 steps. The stencil input has six diffusivities of 2 × 10−5, one of 1.5 × 10−5 and one of 10−5.
+First-call compiler and kernel initialization were excluded from Table 2.
+Independent transport replay. On an H100 with PyTorch 2.10.0+cu128 and Triton 3.6.0, the
+standalone benchmark reproduced all three unequal-word counts in Table 2. Median latencies were
+47.381 ms for eager, 1.348 ms for default Inductor, 1.407 ms for precision emulation and 1.321
+ms for handwritten Triton. On four million FP64 inputs, the division probe reproduced 1,833,864
+differences between NumPy and eager CUDA division. CUDA division and explicit reciprocal
+multiplication agreed on every input.
+Performance controls. An earlier 32-sample output-path experiment measured 1.42 versus 7.05
+s/sample for asynchronous versus synchronous saving in a single eight-sample chunk. Across four
+chunks the corresponding observations were 3.94 versus 1.77 s/sample. Three further 32-sample
+runs of the final build on another node gave 10.00, 9.79 and 9.28 s/sample. These timings explain
+why an isolated transfer improvement cannot be assigned a constant multiplier across campaigns.
+Historical optimized 32-sample complete-run observations were 294 and 312 s under different run
+conditions.
+A.2 V ERIFICATION OF THE REPLAY
+The checkpoint pins nine staged source files by SHA-256. The eager and optimized solver digest
+prefixes are 1c81aaf57f88 and 89fb3206f93b. The historical runs did not record shared-
+helper hashes. Replay uses a pinned July repository snapshot ( 7d71fd646ee1) for these depen-
+dencies. We checked all nine staged digests, recomputed the hashes of all 72 retained campaign
+manifests and the canonical metadata hash for each of 2,304 output records. We then compared
+the three recorded digests by sample ID and compared the metadata values directly. The launcher
+removed successful scratch stores after saving their manifests. Our retrospective verification of the
+trajectory and flux comparisons therefore uses the byte hashes taken during generation. The same
+256 IDs recur across rounds.
+Memory and output schedule. An earlier chunk 8 trial with overlapping raw output exceeded its
+host-memory allocation. A live pair of sub-batches can use about 43 GB per campaign. Earlier eight-
+campaign chunk 4/overlap and chunk 8/serial runs used 183 and 198 GB peak user RSS, respectively.
+Their 663 and 808 s times and the 1,637 s original come from a cross-node comparison. At chunk 8
+a separate run that retained only one frame took 0.54 s/sample. It delivered a different amount of
+data.
+10
+
+Shodh AI Research preprint · November 2026
+B E XECUTABLE ARTIFACT
+From anc/stencil, run python benchmark.py on Linux with CUDA, PyTorch
+2.10.0+cu128 and Triton 3.6.0 to reproduce Table 2. The benchmark builds the fields, mask and
+velocity from a fixed seed. It checks FP64 words before timing and fails if either exact configuration
+differs from eager. The bundle includes the kernel in Section 4.2, the scalar-division probe, nine
+launcher times, 72 campaign intervals and 36 stencil round means. The full reactor and campaign
+manifests remain internal.
+Seeded GPU reduction example. Run python anc/reduction/seeded_example.py
+on a CUDA GPU. NumPy’s PCG64 generator (seed 8800) draws four FP64 tensors of shape8×1283
+with entries uniform on [0, 1). For each tensor, the code sums the same spatial rows in one group of
+eight and in two groups of four. On an H100, eight of 32 row sums changed. The four-row result
+shifted by −1 ULP in four rows, +1 in three and −2 in one. Repeating either grouping gave identical
+words. A second process reproduced the input digest and all 32 differences. These synthetic inputs
+exercise the reduction independently of the reactor.
+Checking the heat-flux result. Run python anc/flux/check.py on the included frame-
+level CSV to reproduce the signed range in Fig. 4. The bundle also includes the read-only Zarr audit
+for readers with the saved arrays, the vector figure source and a dataset erratum. The paper’s timing
+observations all use the legacy export.
+Checking the identity result. The bundle supplies per-sample hashes and hexadecimal reaction
+extents for all 2,304 archived records. Run python anc/identity/check.py to compare the
+outputs by sample ID. A second metadata hash removes only the reaction extent before serialization.
+For the fresh control, python anc/reduction/replay.py repeats the time integration on
+CPU from 5,120 recorded pairs of GPU row sums. It checks every final FP64 word against the
+two optimized runs. The released sums allow an independent check from spatial reduction output
+through the final diagnostic; reproducing the rate fields requires the reactor.
+From GPU step sums to a final diagnostic. The replay performs one multiplication by ∆t, a
+second by the binary64 cell volume, and one addition to the running extent on each step, in this
+order. Hexadecimal encodings retain the full FP64 values. For these positive extents the difference
+between their unsigned 64-bit words gives a signed distance in representable values. Figure 6 shows
+this distance after each step.
+Four-row minus eight-row accumulated extent (FP64 ULPs)
+Sample 0
+final +2
+2
+0
+-2
+Sample 1
+final -1
+Sample 2
+final 0
+Sample 3
+final 0
+Sample 4
+final 0
+2
+0
+-2
+ 0
+640
+Sample 5
+final 0
+0
+640
+Sample 6
+final 0
+0
+640
+Sample 7
+final +1
+0
+640
+Solver step
+Figure 6: Time history for each sample in the matched control. All panels use the same ULP scale.
+An endpoint at zero means both partitions arrived at the same final diagnostic, even if earlier sums
+differed.
+11

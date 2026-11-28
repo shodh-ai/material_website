@@ -4,6 +4,10 @@
     "ogImage": "/social/reactor-h100-triton.png",
     "ogAlt": "Finite equivalence and nested performance limits in a fused reactor-field generator"
   },
+  "P26": {
+    "ogImage": "/social/research.png",
+    "ogAlt": "Shodh Research"
+  },
   "LUCAN10B": {
     "slug": "lucan-10b-physics",
     "ogImage": "/social/lucan-10b.png",
