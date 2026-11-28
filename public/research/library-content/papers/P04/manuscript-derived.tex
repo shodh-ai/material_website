@@ -1,0 +1,312 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 1054c68a9321f9760ff49782e8751cd18fc122ab81fa2dfce9cf925595726d37
+% Extracted text SHA-256: 950677fc28c759a0e6861f9ed9136eb28c8572ae4e0e808c8eea87687be97513
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Rotation sensitivity after BF16 storage in coarse-grained molecular encoding and a conditional pocket-frame correction}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Rotation sensitivity after BF16 storage in coarse-grained molecular
+encoding and a conditional pocket-frame correction
+
+\section*{Abstract}
+
+Accurate reconstruction and translation stability do not establish orientation-stable feature
+storage. We examine saved BF16-roundtrip measurements for fixed-order, 512-bead, four-frame
+Dry-MARTINI protein–ligand windows with frames sampled at 20-fs intervals. An original
+256-case audit reported median nominal learned-lane cosines of 0.6382065 under rotation and
+0.9999963 under translation, with decoded transformation errors of 0.3493213 and 0.0006608 Å,
+respectively. Three trained successor pilots exceeded the strict rotation-cosine criterion of 0.9999,
+but none satisfied all frozen reconstruction criteria. A later zero-parameter geometric codec
+instead separates covariant carrier fields from local temporal-position and force components
+defined using a deterministic pocket-conditioned topology frame. Its saved 256-case paired
+comparison satisfied all four criteria: position, velocity and force-log-norm nRMSE were 2.1996\ensuremath{\times}
+10\ensuremath{-}5, 0.0016553 and 0.0027322, and median nominal learned-lane rotation cosine rounded to
+1.0. Nevertheless, decoded rotation error remained nonzero at 0.0006329 Å, and the changed-
+payload fraction was 0.0006143 across the full 160-channel nominal lane, including 139 reserved-
+zero channels. Source analysis distinguishes raw-frame encoding from quantized-frame decoding.
+The evidence supports approximate stored orientation stability within this conditioned setting,
+not exact byte invariance, universal molecular canonicalization or a successful newly trained
+neural successor.
+
+\section*{1 Introduction and contributions}
+
+Molecular encodings can reconstruct coordinates accurately while retaining substantial dependence
+on laboratory orientation. Reconstruction asks whether a decoder recovers a target state; invari-
+ance asks whether equivalent descriptions produce equivalent features. These properties are logi-
+cally distinct, especially when a payload combines explicit Cartesian fields with learned features.
+Translation removal alone does not resolve rotation sensitivity, and numerical storage introduces
+another distinction between exact-arithmetic symmetry and measured behavior after quantization.
+This case study asks whether reconstruction accuracy or translation stability establishes rotation-
+stable storage. The motivating saved audit concerns a coarse-grained trajectory encoder–decoder
+(codec) with two channel groups (lanes): a 32-channel carrier and a 160-channel nominal learned
+lane. It tested bfloat16 (BF16) values packed as unsigned 16-bit payloads, rather than only floating-
+point encoder outputs. Its strong translation cosine coexisted with a much lower rotation cosine.
+The focused contributions are threefold. First, we separate the original audit from later paired
+comparisons and preserve the reconstruction failures of three trained alternatives. Second, we
+analyze a subsequent zero-parameter codec that stores local vector components alongside a covariant
+frame and Cartesian carrier fields. Third, we distinguish its exact-arithmetic local-frame argument
+from its approximate stored-precision results. The retained older corpus contains 10,000,007,168
+1
+
+token equivalents; this is deployment context, not the experimental sample size, and that corpus
+was not re-encoded with the later codec.
+
+\section*{2 Related work}
+
+Frame averaging is an established strategy for constructing invariant or equivariant functions by
+combining evaluations over transformed inputs [ 1]. The present codec does not perform frame
+averaging: it selects one conditioned frame and stores local components in that frame.
+Dym and colleagues identify continuity concerns in frame-based methods and canonicalization [ 2].
+This motivates examining degeneracies and frame-selection boundaries, but does not experimentally
+validate this codec or prove that its particular conditioned construction necessarily fails. Our
+analysis concerns a fixed bead order, an externally supplied pocket coordinate and proper rotations;
+it is not a general canonicalization theorem or an exhaustive novelty assessment.
+
+\section*{3 Scientific methods and validation protocols}
+
+Evidence and population
+This is a retrospective analysis of saved simulated-trajectory reports and captured source, with
+no additional simulations. Original Torch inference was not rerun and checkpoint bytes were not
+deserialized. The original audit selected one four-frame window from each of 256 system records,
+with 512 beads and adjacent 20-fs states. Its source selects among 64 nonoverlapping four-state
+windows in each saved 256-state trajectory array, whose metadata specify a 10,000-step horizon.
+The later comparisons use a frozen held-out manifest of 256 systems with 256 distinct seeds. Four
+adjacent frames are temporally related observations, not four independent trajectory replicates.
+Three identical saved original-audit records are treated as repeated records of one measurement,
+not independent experiments.
+The original audit applied one deterministic Haar-distributed SO(3) rotation per structure and
+translations with each component sampled within [\ensuremath{-}4, 4] nm. Positions, velocities, forces and the
+canonicalization center rotate together; translation changes positions and center but not velocities
+or forces. Later frame-conditioned evaluations also rotate the supplied pocket coordinate. All
+four positions are expressed relative to one fixed trajectory-frame-0 center, calculated as the bead-
+position mean in the loading source, rather than recentering every frame. The codec uses a fixed
+scalar cell length of 160 Å for coordinate storage; no cell-orientation variable is represented.
+Saved evaluations used PyTorch 2.10.0 with CUDA 12.8 on NVIDIA H100 hardware, CUDA
+BF16 autocast and disabled TF32. The original audit additionally reports deterministic algorithms
+enabled. Tokens are rounded to BF16, viewed as uint16 for storage and bit-cast back before feature
+comparison or decoding. The later geometric codec disables autocast internally for its float32
+geometric operations. Repeated encodings of unchanged inputs produced identical payloads in the
+saved controls; this establishes determinism under those conditions, not scientific validity.
+2
+
+Metrics and acceptance criteria
+For target scalar entries yj and reconstructions ˆyj, the evaluator defines
+E(y) =
+q
+N \ensuremath{-}1 PN
+j=1(ˆyj \ensuremath{-} yj)2
+s(y) , s (y) =
+s P
+j(yj \ensuremath{-} ¯y)2
+N \ensuremath{-} 1 .
+Thus the error numerator uses N , whereas the target standard deviation uses PyTorch’s correction
+of 1. Position targets contain all Cartesian entries of the four center-canonical frames; velocity
+targets contain all four velocity fields. Each has N = 256 \ensuremath{\times} 4 \ensuremath{\times} 512 \ensuremath{\times} 3 entries. Normalization is
+pooled over all target scalar entries, not calculated separately per structure.
+Force-log-norm nRMSE applies the same convention to \ensuremath{\ell}(f ) = log(1 + \ensuremath{\parallel}f \ensuremath{\parallel}/f0), where f0 =
+1 kJ (mol nm)\ensuremath{-}1 makes explicit the source’s numeric-unit convention. Its population has 256 \ensuremath{\times} 4 \ensuremath{\times}
+512 magnitudes. This metric measures magnitude reconstruction, not force direction or physical
+consistency.
+Feature cosine is computed separately for each structure after flattening its stored 512 \ensuremath{\times} 160
+nominal learned lane; the reported value is the median of 256 cosines. Carrier cosine is evaluated
+separately. For decoded rotation error, the rotated-input decode is inverse-rotated and compared
+with the original-input decode, not with raw coordinates. Explicitly, the captured evaluators im-
+plement
+db = 10
+vuut 1
+4 \ensuremath{\times} 512
+4X
+t=1
+512X
+i=1
+3X
+a=1
+[QT
+b ˆx(Q)
+bti \ensuremath{-} ˆxbti]2a,
+with db reported in Å when coordinates are numerically in nm. The Cartesian components are
+summed before averaging over frames and beads: there is no additional division by three. We retain
+this source-defined denominator rather than silently substituting a component-averaged convention.
+Translation error uses the same averaging without inverse rotation because both decodes are center-
+canonical. Reported transformation errors are population medians of db.
+The frozen requirements are rotation cosine strictly greater than 0.9999 and reconstruction
+nRMSE no greater than 0.011017595113363723 for position, 0.009157258435577789 for velocity
+and 0.02245340682566166 for force-log norm. The velocity allowance is 1.1 times the baseline value
+0.008324780395979807. All four requirements must hold; small position misses remain failures.
+Conditioned geometric construction
+The later codec requires fixed bead order, a ligand mask and an externally supplied deterministic
+pocket coordinate. The captured preparation source obtains this coordinate from the system builder
+using each system’s seed and stores it in seed-linked metadata; the evaluator retrieves the coordinate
+by seed. It is an external conditioning input, not a pocket inferred from the encoded window alone.
+The underlying pocket-generation algorithm and its parameters are not established by the supplied
+source. Let xi be frame-0 center-canonical positions, p the correspondingly canonical pocket and cL
+the ligand center. The first axis is e1 = (cL \ensuremath{-} p)/\ensuremath{\parallel}cL \ensuremath{-} p\ensuremath{\parallel}. Eight index-weighted topology moments
+use frequencies (2, 3, 5, 7, 11, 13, 17, 19). For bead indices i = 1, . . . ,512, weights alternate between
+sin(i\ensuremath{\surd}\ensuremath{\nu}k) and cos(i\ensuremath{\surd}\ensuremath{\nu}k), starting with sine. Each weight sequence is centered and normalized to
+unit Euclidean norm. The moments and projected candidates are
+mk =
+X
+i
+wki(xi \ensuremath{-} ¯x), u k = mk \ensuremath{-} e1(eT
+1 mk).
+3
+
+Select k\ensuremath{\ast} = arg max k \ensuremath{\parallel}uk\ensuremath{\parallel}, set e2 = uk\ensuremath{\ast}/\ensuremath{\parallel}uk\ensuremath{\ast}\ensuremath{\parallel} and obtain e3 from the normalized cross product
+e1 \ensuremath{\times} e2. The source rejects first-axis or selected-moment norms at or below 10\ensuremath{-}7 and checks proper
+handedness. These are implementation thresholds, not established general conditioning bounds.
+Writing R = [ e1, e2, e3], a proper rotation Q gives R\ensuremath{\prime} = QR when conditioning, ordering and
+selection are preserved in exact arithmetic. For a covariant vector v\ensuremath{\prime} = Qv,
+(R\ensuremath{\prime})T v\ensuremath{\prime} = (QR)T Qv = RT v.
+This source-grounded derivation explains invariant local components. It does not extend to re-
+flections, arbitrary permutations or topology changes. Selection ties and near-ties require separate
+numerical consideration.
+Crucially, encoding projects vectors using the raw, unquantized frame. Decoding recovers the
+first two axes from the BF16 carrier and orthonormalizes them before reconstructing the third.
+The encoder does not use this recovered frame for projection. Raw and recovered frames need not
+coincide, so the algebra above does not establish exact decoded covariance after storage.
+Payload and transforms
+Table 1 summarizes the changed semantics. Positions use temporal differences relative to frame 0
+scaled by 0.25 Å. Twelve Cartesian velocity components remain in carrier channels 3:15 and are
+read directly by the decoder; the vector-target normalization scale is 0.20 nm/ps. The frame-0
+residual corrects the position obtained from the initially BF16-rounded cell-fraction carrier.
+Table 1: Later geometric payload per bead. Ranges are zero-based and stop-exclusive.
+Channels Count Content
+0:3 3 Frame-0 cell fractions
+3:15 12 Cartesian velocities
+15:20, 29:31 7 Metadata
+20:26 6 First two frame axes
+26:29 3 Position residual / 0.025 nm
+31 1 Selector (k\ensuremath{\ast} + 1)/16
+32:41 9 Local temporal deltas
+41:53 12 Local radial forces
+53:192 139 Reserved zeros
+For force scale fs = 150 kJ (mol nm) \ensuremath{-}1, write z = f /fs. The radial transform is T (f ) =
+asinh(\ensuremath{\parallel}z\ensuremath{\parallel})z/\ensuremath{\parallel}z\ensuremath{\parallel}, with the zero limit handled numerically. Decoding uses
+fs sinh(min(\ensuremath{\parallel}T \ensuremath{\parallel}, 5))T /\ensuremath{\parallel}T \ensuremath{\parallel}.
+The inverse therefore clips transformed norms above five; absent raw arrays, the observed frequency
+of clipping cannot be inferred. Unlike the baseline’s componentwise force transform, this radial
+operation preserves vector direction in exact arithmetic.
+4
+
+
+\section*{4 Experimental results}
+
+Original rotation sensitivity
+The original saved audit reports median rotation cosine 0.6382065415382385 versus translation co-
+sine 0.9999963045120239. Median decoded rotation and translation errors are 0.34932129085063934
+and 0.000660822115605697 Å. Thus passing the translation criterion did not establish orientation-
+stable features. Moreover, 0.3113251 of nominal learned-lane uint16 entries changed under transla-
+tion despite its near-unity cosine: cosine similarity and payload equality answer different questions.
+Table 2 keeps this audit separate from the later paired baseline, whose rotation cosine is 0.6273563
+and decoded rotation error 0.3495788 Å. These are distinct saved measurements, not evidence of
+improvement or regression between baseline versions. The original raw tensors were not rerun here.
+Table 2: Saved transformation diagnostics over 256 cases. Cosine and decoded error are medians;
+changed fractions are pooled unequal-entry fractions over the nominal learned lane.
+Measurement Cosine Error (Å) Changed fraction
+Original rotation 0.638207 0.349321 0.996103
+Original translation 0.999996 0.000661 0.311325
+Paired baseline rotation 0.627356 0.349579 0.996233
+Geometric rotation 1.000000 0.000633 0.000614
+Trained alternatives and deterministic correction
+Each trained pilot used 2,048 systems and 12,000 steps. Table 3 shows that all three exceeded the
+rotation-cosine requirement, but none met all reconstruction requirements. The equivariant-basis
+and carrier-reading pilots missed the position threshold by approximately 6.37 \ensuremath{\times} 10\ensuremath{-}7 and 8.89 \ensuremath{\times}
+10\ensuremath{-}7, respectively. These remain failures, alongside their much larger force errors; the equivariant-
+basis pilot also failed the velocity criterion. The local-frame pilot failed position, velocity and force
+criteria. Its velocity nRMSE of 0.1985353 is an observed outcome; the original report’s attribution
+to frame reconstruction from quantized geometry was not independently isolated by a controlled
+causal experiment.
+Table 3: Saved reconstruction and rotation results. P, V and F denote position, velocity and force-
+log-norm nRMSE.
+Method P V F Rot. cosine
+Paired baseline 0.01101760 0.008325 0.022453 0.6273563
+Equivariant basis 0.01101823 0.016482 0.197898 0.9999902
+Local-frame pilot 0.01106995 0.198535 0.023840 0.9999957
+Carrier-reading pilot 0.01101848 0.001655 0.189789 0.9999907
+Geometric codec 0.00002200 0.001655 0.002732 1.0000000
+The later geometric codec has zero parameters and zero optimization steps. Its saved paired
+results satisfy all four requirements: position nRMSE 2.1996344846226916 \ensuremath{\times} 10\ensuremath{-}5, velocity nRMSE
+0.001655292735399779, force-log-norm nRMSE 0.002732211956754327 and median rotation cosine
+1.0. These results describe a different geometric storage strategy, not successful neural training or
+an isolated test of frame conditioning.
+5
+
+Its median decoded rotation error remains nonzero at 0.0006328800227493048 Å. The saved
+changed-payload fraction, 0.0006143093109130859, counts unequal uint16 elements across 256 \ensuremath{\times}
+512 \ensuremath{\times} 160 nominal learned-lane entries, not individual bytes or bits. This denominator includes 139
+reserved-zero channels per bead. Zeros do not improve a nonzero vector’s cosine by themselves, but
+they dilute the full-lane changed-entry fraction. A rounded cosine of 1.0 therefore does not imply
+exact payload invariance.
+The geometric carrier’s median rotation cosine is 0.9501762. Its change is expected because it
+stores Cartesian positions, velocities and frame axes. Requiring that raw carrier to be invariant
+would contradict its covariant role.
+
+\section*{5 Discussion and limitations}
+
+The central result is a separation of scientific requirements. Translation stability, reconstruction
+accuracy, feature orientation stability and decoded covariance must each be tested under the actual
+storage precision. The trained pilots demonstrate the converse limitation as well: near-unity feature
+cosine does not guarantee acceptable position, velocity or force reconstruction.
+The geometric correction provides a useful conditional example. It assigns directional informa-
+tion explicitly to a carrier and uses local components for the nominal learned lane. However, it
+is an ordered, pocket-conditioned construction rather than universal continuous molecular canon-
+icalization. The maximum-projected-moment selection can change at selection boundaries; tie
+margins, perturbation robustness and generalization beyond this population are not established.
+The raw-frame/recovered-frame difference further explains why exact-arithmetic local invariance
+and finite-precision decoded behavior require separate arguments.
+The evidence comprises saved reports, static source and 184 independent local checks of arith-
+metic, cross-report consistency, frozen inequalities, source/held-out/bundle identity and code struc-
+ture. Those checks do not constitute 184 experiments and do not reproduce Torch inference. The
+available summaries do not support confidence intervals, independent external replication, force-
+field validity or long-time trajectory stability.
+Finally, preserving the outer 512 \ensuremath{\times} 192 shape does not preserve token semantics. Older and
+geometric payloads cannot be mixed or assumed compatible with the same downstream model.
+The unchanged outer payload size establishes neither a compression advantage nor downstream
+predictive quality. The older corpus remains unreencoded, so the later held-out result cannot be
+extrapolated to that entire corpus.
+
+\section*{6 Conclusion}
+
+Saved BF16-roundtrip measurements show that translation stability does not establish orientation-
+stable molecular features. Three trained alternatives improved rotation cosine beyond the pre-
+scribed criterion but failed the combined reconstruction requirements. A later zero-parameter
+pocket-frame codec satisfied the four requirements in a saved 256-case paired comparison, while
+retaining nonzero decoded rotation error and a small nonzero changed-payload fraction. Its sup-
+ported conclusion is approximate stored orientation stability for fixed-order, pocket-conditioned,
+512-bead, four-frame, 20-fs windows. Exact decoded covariance, broader applicability and down-
+stream scientific utility remain outside that evidence.
+6
+
+
+\section*{7 Data and Code A vailability}
+
+The supplied private evidence collection contains saved audit and comparison reports, captured
+codec and evaluator source, source and frozen held-out manifests, and independent checking records.
+Supplementary record S1 is the designated private reproducibility inventory for these captured ma-
+terials, static scripts, the checking recipe/receipt and code audit. Access is through the supplied
+private evidence collection; no public archive accession, public redistribution mechanism or re-
+viewer access grant is established here. Bundle inventories identify checkpoint and frame-metadata
+artifacts, but identification is not equivalent to executing or independently inspecting them. Full
+original trajectory arrays and per-system numeric inference results were not available for this anal-
+ysis, and the captured scripts were not executed. Consequently, the materials support report-level
+and source-level verification, not a claim of end-to-end inference reproduction.
+
+\section*{References}
+
+[1] O. Puny, M. Atzmon, H. Ben-Hamu, I. Misra, A. Grover, E. J. Smith, and Y. Lipman. Frame
+A veraging for Invariant and Equivariant Network Design. International Conference on Learning
+Representations, 2022. arXiv:2110.03336v4.
+[2] N. Dym, H. Lawrence, and J. W. Siegel. Equivariant Frames and the Impossibility of Continuous
+Canonicalization. Proceedings of Machine Learning Research 235:12228–12267, 2024.
+7
+
+\end{document}

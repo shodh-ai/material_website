@@ -1,0 +1,328 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 101d7dc4f8aaca7c3c14d0e360d6a6e3bab53b883cccee61eef4fad47ffb8187
+% Extracted text SHA-256: df7c10333d58db18444ca7c23609a6c8bfd177ecf8619d34bffac74f3f5c502d
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Stored-Byte Distinctness and Physical Population Accounting in Scientific Latent Datasets}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Stored-Byte Distinctness and Physical Population Accounting in
+Scientific Latent Datasets
+
+\section*{Abstract}
+
+Stored-vector distinctness does not establish physical-case diversity or learned reconstruc-
+tion. We examine retained chemistry, particle, density, and soft-body artifacts using numeric
+storage readback, provenance joins, checkpoint metadata, and source-bound arithmetic. Nine
+chemistry shards contain 515 finite, distinct vectors, while their manifest labels 494 examples
+as failures. All 8400 particle rows and 1200 reference arrays have verified content identities and
+joins; including the reference lane changes the measured byte accounting. A density checkpoint
+contains no trained weights, and its layout expands scalar slots while reducing storage preci-
+sion. A modular sampling driver yields 12600 parameter tuples rather than 3704400 nominal
+combinations. Finite mathematical controls additionally show why cell-pooling or direct quan-
+tized readback errors are not universal reconstruction lower bounds. These results separate byte
+identity, population coverage, information accounting, and physical validity without claiming
+original model or simulation replay.
+
+\section*{1 Introduction}
+
+A scientific training corpus has several sizes. Its number of files, stored vectors, molecular configu-
+rations, trajectories, and independently varied physical cases need not agree. Likewise, a compact
+stored representation can contain learned features, explicit coordinates, reference geometry, or meta-
+data. A numerical total is scientifically interpretable only after its counting unit and information
+boundary are specified.
+This study examines retained artifacts from a chemistry cache, a particle-dynamics representa-
+tion, a density representation, and a soft-body sampling driver. It contributes a concrete separation
+of stored-byte distinctness, source identity, parameter-space coverage, and representation account-
+ing. The principal evidence consists of reopened numeric storage, complete retained manifests, a
+small checkpoint whose contents can be inspected without executing serialized objects, and source
+expressions checked without running the supplied applications. The analysis does not retrain mod-
+els, rerun physical trajectories, or establish chemical accuracy.
+The cases reveal different issues. A deduplicated chemistry cache is byte-distinct but contains
+predominantly failure-labelled examples. A particle vault has distinct dynamic and reference ten-
+sors, yet its physical population cannot be reconstructed from the clean manifest alone. A density
+checkpoint contains no learned weights, and its metadata-bearing layout expands the number of
+scalar slots while reducing storage precision. A sampling driver’s correlated modular parameters
+generate a much smaller catalogue than a product of nominal knob counts suggests. These findings
+motivate population and information accounting as prerequisites for interpreting scientific recon-
+struction results.
+1
+
+
+\section*{2 Related work}
+
+Lee et al. distinguish exact substring duplication from approximate document duplication in
+language-model datasets and describe methods for detecting both [ 1]. Their work shows why a
+deduplication procedure must define the object and equivalence relation being compared. Here, the
+objects are stored numeric rows and scientific source identities. We do not transfer their language-
+model performance results to these physical datasets or treat a tensor hash as a chemical identity
+test.
+Kapoor and Narayanan’s July 2022 preprint distinguishes a lack of train–test separation from
+a mismatch between an evaluation distribution and the distribution of scientific interest [ 2]. Its
+discussion of nonindependent observations makes the intended scientific claim essential: dependence
+can be appropriate for one target population and inappropriate for another. Our retained-data
+analysis supplies case-specific accounting rather than a universal leakage verdict. Neither cited
+work validates the private simulations, checkpoints, or physical claims examined here. We cite the
+inspected preprint version explicitly; it is not the later journal version.
+
+\section*{3 Materials and checking methods}
+
+This is a retrospective analysis of retained artifacts; no additional model training, neural inference,
+or physical simulations were performed. Supplementary record S1 contains the original retained
+files, source snapshots, provenance receipts, and exact local checking inputs and results. Every
+captured file is bound to its byte length and SHA-256 digest. Local checking calculations were
+run in isolation; supplied application programs were inspected as source text, never imported or
+executed. This separates measurements of retained artifacts from claims about how the original
+model or simulator behaved.
+
+\section*{3.1 Distinctness and provenance}
+
+For stored rows bi and a deterministic content hash h, the measured count is
+Ub = |\{h(bi) : i = 1, . . . , n\}| . (1)
+Different hashes establish different byte inputs. Equal scientific meaning, independence of physical
+cases, and validity of labels are separate questions. A source-identity map \ensuremath{\pi} may instead identify
+a molecular system, simulation parameter case, trajectory, or observation time. The appropriate
+population count is then
+U\ensuremath{\pi} = |\{\ensuremath{\pi}(i) : i = 1, . . . , n\}| , (2)
+provided the corresponding identity fields and their definitions are available. We do not infer U\ensuremath{\pi}
+from Ub when those fields or the raw inputs are missing.
+The chemistry data contain nine numeric shards. Their ZIP structures and a narrowly specified
+tensor-storage schema were checked without pickle deserialization or execution of object construc-
+tors. The underlying little-endian IEEE float16 storage was read directly. Each row was also
+expanded to float32 to test the precise digest convention used by its manifest. For the particle
+vault, all dynamic and reference NPY files were read as numeric uint16 containers holding BF16
+bit patterns. Object arrays were excluded. Every dynamic-row BLAKE2b-128 digest was recom-
+puted and compared with both the clean manifest and its separate provenance row.
+2
+
+
+\section*{3.2 Storage and checkpoint accounting}
+
+Byte accounting uses actual file lengths and includes array headers. Dynamic and reference stor-
+age are reported separately; reference files are amortized over the dynamic rows that use them.
+An amortized accounting contribution is not a literal row-file size. Model weights, query coordi-
+nates, normalization, and other required inputs must also be counted before claiming an end-to-end
+compression ratio.
+The density checkpoint was decoded through a primitive-only metadata grammar that permits
+literal dictionaries, lists, strings, numbers, and references between these values. It permits no global
+resolution, callable execution, persistent tensor identifier, or general object deserialization. Its
+implementation digest was compared with the captured implementation source. Static inspection
+separately checked whether the audit program constructs and saves an empty state dictionary.
+
+\section*{3.3 Parameter catalogue and mathematical controls}
+
+For the soft-body driver, the body of the parameter-selection function was structurally compared
+with a fixed transcription of its arithmetic expressions. A separately written implementation of
+those expressions enumerated 200000 sample indices and tested repetition over one complete period.
+No supplied driver or simulator was executed. This establishes a parameter-tuple catalogue under
+that formula, rather than a count of independent physical realizations.
+Finally, finite mathematical examples test two proposed implications: that a cell-constant recon-
+struction error bounds a decoder with position queries, and that raw BF16 readback error bounds
+any learned reconstruction. These are counterexamples to universal statements, not experimental
+measurements of a scientific model.
+
+\section*{4 Results}
+
+
+\section*{4.1 Chemistry: distinct stored rows and failure labels}
+
+The retained deduplication summary reports 300096 upstream rows, 299581 removals, and 515 re-
+tained rows. The partition arithmetic is consistent. Our direct measurements concern the retained
+cache: nine shards contain 515 finite float16 vectors of length 2048, and all 515 stored rows have
+distinct content hashes. All manifest digests match hashes of the stored values after float32 expan-
+sion; hashes of the unexpanded float16 bytes are a different convention and do not match those
+recorded digests.
+The clean manifest also contains 515 distinct text strings. This is exact string distinctness,
+without molecular canonicalization or a test of chemical equivalence. Its domain labels partition the
+rows into 502 e-fuel, 10 battery, and 3 pharmaceutical examples. Its outcome categories partition
+them into 21 success-labelled and 494 failure-labelled rows. The recorded audit flag is true for
+every row. Thus, the flag and the outcome category describe different properties: a structurally
+admissible retained record can represent a failed candidate. Neither the flag nor a unique vector
+establishes a successful chemical result.
+The upstream removal count remains a saved-summary result: we did not independently reopen
+all 300096 original rows and their tensors. The retained-cache measurements therefore corroborate
+its final contents and digest convention, not the entire historical deduplication execution.
+3
+
+
+\section*{4.2 Particle vault: distinct bytes, reference joins, and byte totals}
+
+All 17 dynamic shards were reopened. Their 8400 BF16 rows have shape 64 \ensuremath{\times} 32, and all 8400
+independently computed row digests match both manifest and provenance. All 1200 reference
+arrays have shape 64 \ensuremath{\times} 16; their content digests match their reference-group identifiers. Each group
+joins to seven dynamic rows with frame indices 0 through 6. Both dynamic rows and reference
+contents are byte-distinct within their respective retained populations.
+The distinction between records and physical populations remains essential. The clean manifest
+has no populated sample identifier or raw path. Its separate provenance supplies 1200 reference
+groups but only 480 distinct sample basenames across the indexed source roots. Basenames alone
+cannot recover the complete source identity. The source audit describes a shared 48-cell generation
+grid with repeated particle-subset exports, but the four original raw-data paths in the vault index
+are no longer present at those recorded locations. We therefore retain that historical source-
+audit interpretation separately from our direct byte and join measurements. We do not claim an
+independently replayed count of 48 physical simulations or certify unseen-parameter generalization.
+Table 1: Measured particle-vault storage, including NPY headers. Reference storage is amortized
+over 8400 dynamic rows. These totals exclude model weights and any other required query or
+normalization inputs.
+Stored component Total bytes Bytes per dynamic row
+Dynamic arrays 34408576 4096.259048
+Reference arrays 2611200 310.857143
+Combined 37019776 4407.116190
+The vault’s recorded mean of 3994.819048 bytes per sample is reproduced by counting only the
+16 full dynamic shards and dividing by all 8400 rows. It omits the final 852096-byte partial shard.
+Including that shard gives the dynamic mean in the table. Adding the reference lane increases
+the mean again. Distinct storage, a correct token count, and complete information accounting are
+therefore three different checks; a pass on one does not imply a pass on the others.
+
+\section*{4.3 Density representation: an empty checkpoint and carried constraints}
+
+The actual 1983-byte checkpoint matches the digest recorded by its historical metadata. It con-
+tains an empty state dictionary and no tensor-storage members. Its embedded implementation
+digest matches the captured implementation source. The audit source constructs the empty state
+dictionary explicitly before saving it. This supports a narrow conclusion about this artifact: the
+checkpoint is metadata, not a collection of trained model parameters. It does not imply that every
+other model in the programme is weightless.
+The input density grid contains 483 = 110592 scalar values. Its layout stores 216 density patches
+of 512 values and one additional 512-slot metadata token:
+nstored = 217 \ensuremath{\times} 512 = 111104 , nstored \ensuremath{-} ninput
+ninput
+= 512
+110592 \ensuremath{\simeq} 0.00462963. (3)
+The scalar-slot count expands by approximately 0.463\%. FP32 input values require 442368 payload
+bytes, whereas 111104 BF16 slots require 222208 payload bytes. This precision-based byte saving
+must not be described as learned scalar compression. It also does not establish a physical-density
+accuracy result.
+4
+
+The implementation reassembles the patch values, clips negative density, and rescales the result
+using the carried electron count. Writing the clipped density as \ensuremath{\rho}+
+i and voxel volume as v, the
+relevant operation has the form
+b\ensuremath{\rho}i = \ensuremath{\rho}+
+i
+Ne
+max
+[U+0010]
+v P
+j \ensuremath{\rho}+
+j , \ensuremath{\varepsilon}
+[U+0011] . (4)
+Here, Ne is read from decoded metadata, and v is reconstructed by adding its two voxel-volume
+metadata slots. The floor \ensuremath{\varepsilon} is the smallest positive normal value for the decoded density’s floating-
+point dtype, implemented as torch.finfo(density.dtype).tiny. The supplied audit expands the
+BF16 tokens to FP32 before decoding. For a finite positive integral above this floor, normalization
+makes the resulting integral equal to the decoded Ne in exact arithmetic using the reconstructed v;
+floating-point equality is not guaranteed, and decoded metadata need not equal its pre-quantization
+values exactly. An identically zero clipped density remains zero for finite metadata. This normal-
+ization can check implementation consistency, but it cannot independently establish spatial-density
+accuracy or agreement with the original pre-storage electron count. We did not execute the original
+framework or remeasure its density predictions.
+
+\section*{4.4 Soft-body driver: correlated knobs and a finite catalogue}
+
+The inspected driver selects a pair of geometry resolutions with period 25 and other parameters
+through modular expressions with periods 9, 7, 6, and 8. Multiple nominal knobs share the same
+underlying residue modulo 7. The joint catalogue therefore has period
+L = lcm(25, 9, 7, 6, 8) = 12600 . (5)
+Enumeration over 200000 consecutive indices yields exactly 12600 distinct full parameter tuples
+and 25 geometry pairs; all tested tuples repeat after L. The naive product of the individual knob
+counts, 3704400, overcounts this catalogue by a factor of 294.
+This result concerns the specified parameter-selection formula. It does not prove that every tuple
+produces an admissible or physically distinct trajectory, that different GPU executions are bitwise
+identical, or that a different sampling driver has the same ceiling. The current captured formula
+matches the transcription in the historical capacity note, but a complete historical execution and
+environment binding was not replayed. Static source inspection also shows that the displayed time
+integrator accepts no constitutive-stress argument; that signature fact is not itself a whole-program
+momentum-balance measurement.
+
+\section*{5 Interpretation and limitations}
+
+These cases support a hierarchy of questions rather than a single corpus-quality score. Are the
+original bytes readable and finite? Do the stored hashes and provenance join? What equivalence
+relation defines a source case? What distribution does a held-out set represent? What information
+reaches the decoder? Which quantities are predicted, and which are copied or enforced? The
+answers must accompany the numerical result they qualify.
+
+\section*{5.1 A weaker reconstruction family is not a universal bound}
+
+Consider two distinct coordinates x1 and x2 assigned to the same spatial cell, with targets yi = xi.
+A cell-constant reconstruction has positive squared error. A decoder that receives the individual
+5
+
+query xi can instead return xi exactly. Similarly, a quadratic target can be represented by a
+nonlinear query decoder even when a per-cell affine fit has nonzero residual. Consequently, the
+error of either weaker reconstruction family is not a universal lower bound for a decoder with
+richer query information. The retained particle-study note explicitly withdraws its earlier universal
+cell-pooling bound for this reason. We do not interpret the note’s obsolete bound language as a
+validated theorem.
+Raw quantized readback provides another useful baseline, but not a universal lower bound on
+reconstruction error. For a scalar observation Q(X) and an available prior, the squared-error
+estimator
+g\ensuremath{\ast}(Q(X)) = E[X | Q(X)] (6)
+can outperform returning the numerical center represented by Q(X). In our finite control, two
+float32 values near 1.0001 and 1.0002 round to the same BF16 value 1. Their conditional mean
+has smaller mean squared error than direct readback. This does not invert the quantizer for
+arbitrary inputs; it demonstrates the role of the target distribution and available prior. It supplies
+no empirical performance claim for any learned codec in the present collection.
+
+\section*{5.2 Coverage and uncertainty}
+
+The direct measurements cover retained storage, manifests, checkpoint metadata, and explicit
+source expressions. They do not reproduce original neural inference or physical dynamics. Hash
+verification authenticates the captured contents, not the truth of their labels. The chemistry
+outcomes are recorded categories; no independent chemical oracle was run. The particle raw-input
+paths are unresolved at their recorded locations, and distinct tensor rows cannot reconstruct the
+missing physical-case map. Parameter enumeration is not a physical uncertainty estimate.
+The four cases were selected from a broader research inventory. Unrecovered cross-vault overlap
+and other specialist audit reports are not used as principal empirical results here. The source notes
+contain later corrections and should not be flattened into an account in which every original claim
+survived. Our two inspected methodological references provide context rather than a comprehensive
+novelty search. No claim of global originality, full-corpus validation, or production readiness follows
+from these results.
+
+\section*{6 Conclusion}
+
+A large count of distinct stored vectors can coexist with a much smaller parameter catalogue, carried
+reference information, failure-labelled examples, or a checkpoint without trained weights. The
+retained artifacts make these distinctions measurable: 515 chemistry vectors survive the reported
+upstream deduplication; 8400 particle rows and 1200 reference arrays have verified byte identities
+and joins; a density layout expands its scalar slots while using lower-precision storage; and a
+modular driver contains 12600 parameter tuples rather than the naive 3704400 combinations.
+The scientific interpretation depends on what each measurement establishes. Stored-byte dis-
+tinctness is valuable, but it is not a substitute for physical-case identity or generalization evidence.
+Explicit metadata and reference lanes can be useful, but they belong inside the information bound-
+ary. Reconstruction baselines can diagnose a representation, but they do not become universal
+lower bounds merely because they remove the learned model. Reporting these boundaries makes
+6
+
+the numerical results assessable without converting unresolved checks into either blanket rejection
+or unsupported success.
+
+\section*{7 Data and code availability}
+
+Supplementary record S1 is a private evidence package containing the retained chemistry numeric
+shards, particle dynamic and reference arrays, source-code snapshots, manifests, checkpoint meta-
+data, and checking scripts, inputs, and results. Its 105 final aggregate and consistency checks
+include measurements of the stored numeric rows and reference arrays.
+No public archive, external-reviewer access mechanism, or redistribution permission is established
+for the private project material or bundled literature. The captured data do not include a replay of
+the original models, all upstream chemistry tensors, or the missing particle raw-input roots. The
+full provenance and specific unresolved checks are recorded separately.
+
+\section*{References}
+
+[1] K. Lee, D. Ippolito, A. Nystrom, C. Zhang, D. Eck, C. Callison-Burch, and N. Carlini. Dedu-
+plicating Training Data Makes Language Models Better. Proceedings of ACL, pp. 8424–8445
+(2022). https://aclanthology.org/2022.acl-long.577/.
+[2] S. Kapoor and A. Narayanan. Leakage and the Reproducibility Crisis in ML-based Science.
+arXiv:2207.07048v1, July 14, 2022. https://arxiv.org/abs/2207.07048v1.
+7
+
+\end{document}

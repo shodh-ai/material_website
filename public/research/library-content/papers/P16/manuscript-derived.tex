@@ -1,0 +1,388 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 98b5b27331cf697b5f4253aea7e37ce27848d98dc658aede7be38f1dc55983fd
+% Extracted text SHA-256: d3da47c96a33247bf5f828165efef347279e216f1564bd6ad6225a580d655633
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Energy Balance and Comparison Observables in a PMMA Impact-Fracture Simulation Audit}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Energy Balance and Comparison Observables in a PMMA
+Impact-Fracture Simulation Audit
+
+\section*{Abstract}
+
+We examine retained computations for two PMMA impact specimens using an affine particle-
+in-cell/material point method coupled to irreversible AT2 damage. The question is whether
+the recorded energy and field comparisons support treating the exploratory coupled setup as
+a predictive fracture model. For TAF1, the declared relative energy residual decreases from
+88.3429\% to 6.9786\% over five retained values of the mechanics Courant–Friedrichs–Lewy (CFL)
+parameter. This is a substantial reduction, but leaves a finite defect and crosses a source
+change that exposed the CFL control. On seven common comparison times through 29.976 \ensuremath{\mu}s,
+all-node relative displacement discrepancies are 41.9292\% and 64.1526\% for TAF1 and TAF2.
+Subtracting the first measured displacement changes these to 42.0446\% and 54.0514\%, with
+unchanged velocity discrepancies of 36.4432\% and 52.6399\%. The reference change alters the
+comparison, rather than demonstrating a better simulator. First particle damage crossings
+of 10\ensuremath{-}3 are distinguished from experimentally resolved crack opening; the homogeneous AT2
+relation explains why a small diffuse-damage crossing need not indicate a crack. Stored-array and
+component-ledger reductions support these descriptive results. Initial-state, clock, projection
+and discretization limits prevent attributing the mismatch uniquely to a constitutive law. The
+evidence diagnoses the adequacy of this particular calibration setup and does not establish a
+validated high-rate PMMA predictor.
+
+\section*{1 Question and experimental context}
+
+An impact-fracture computation can disagree with measurements through its material response,
+boundary history, initial state, discretization or definition of the compared observable. These
+possibilities matter in the retained PMMA computations studied here: an apparent early fracture
+event, a large energy defect and large field discrepancies were reported together. We ask which
+conclusions survive when the energy ledger, displacement reference and damage event are stated
+explicitly. The contribution is a quantitative audit of one coupled setup, denoted M0, using its
+saved results. It is not a new fracture law or a new particle method.
+The experimental reference is the impact study of Eid, Seghir and Réthoré [ 1], with accompa-
+nying data [ 2]. Their specimens have an in-plane size of 140 \ensuremath{\times} 70 mm, a circular hole of diameter
+30 mm and a 15 mm notch extending from the hole edge. A projectile loads a waveguide attached
+to the specimen. The hole converts the compressive input into tensile loading, and reflections at
+the free boundary contribute to the subsequent response. The reported projectile speeds for TAF1
+and TAF2 are 30.5 and 22 m s\ensuremath{-}1. These are projectile speeds before waveguide impact; they are
+not uniform initial specimen velocities.
+The reference uses finite-element digital image correlation (DIC), with triangular linear elements
+and a crack-conforming twin-node description. Displacements are spatially regularized and filtered
+in time using a five-frame, second-order Savitzky–Golay filter before temporal differentiation to
+velocity [1]. Thus adjacent field samples are not independent measurements. The published effective
+elastic constants were identified from the pre-crack response under a plane-strain assumption using
+measured edge displacement histories. Their use below does not independently identify a dynamic
+fracture constitutive law.
+1
+
+The present analysis uses the two calibration specimens TAF1 and TAF2. Both the prescribed
+impacted-edge kinematics and the interior comparison targets derive from the same DIC records.
+Interior discrepancies therefore diagnose the calibration setup; they do not constitute a held-out
+validation. All computational results below come from retained arrays, reports and source descrip-
+tions. No new mechanical simulation or experiment is introduced.
+
+\section*{2 Implemented model and retained comparison}
+
+
+\section*{2.1 Exploratory material hypothesis}
+
+M0 combines quadratic-kernel affine particle-in-cell (APIC) transfer with a material point method
+(MPM) mechanics update and history-driven irreversible AT2 damage. Let sa be the singular values
+of the deformation gradient, ea = log(max( sa, 10\ensuremath{-}12)), and \ensuremath{\langle}x\ensuremath{\rangle}+ = max( x, 0), \ensuremath{\langle}x\ensuremath{\rangle}\ensuremath{-} = min( x, 0).
+The implemented spectral quadratic-Hencky split and degradation are
+\ensuremath{\psi}\ensuremath{\pm} = \ensuremath{\mu}
+3\ensuremath{\sum}
+a=1
+\ensuremath{\langle}ea\ensuremath{\rangle}2
+\ensuremath{\pm} + \ensuremath{\lambda}
+2
+\ensuremath{\langle} 3\ensuremath{\sum}
+a=1
+ea
+\ensuremath{\rangle}2
+\ensuremath{\pm}
+, g(d) = (1 \ensuremath{-} k)(1 \ensuremath{-} d)2 + k, (1)
+\ensuremath{\psi}(F, d) = g(d)\ensuremath{\psi}+(F ) + \ensuremath{\psi}\ensuremath{-}(F ), H(t) = max
+\ensuremath{\tau} \ensuremath{\leq}t
+\ensuremath{\psi}+(F (\ensuremath{\tau} )). (2)
+Here d \ensuremath{\in} [0, 1] is damage, \ensuremath{\lambda} and \ensuremath{\mu} are the Lamé parameters associated with E and \ensuremath{\nu}, and H
+is the tensile history. The principal stress is formed from the degraded tensile and undegraded
+compressive parts. This describes the implemented hypothesis, without asserting that this finite-
+strain extension has been experimentally identified for PMMA.
+Table 1: Exploratory M0 parameters and fixed numerical setting. The extrusion is a numerical
+dimension, not an established experimental thickness.
+Quantity Value
+Density \ensuremath{\rho} 1200 kg m\ensuremath{-}3
+Young’s modulus E; Poisson ratio \ensuremath{\nu} 6 GPa; 0.3
+Fracture energy Gc 417.9326667 J m\ensuremath{-}2
+Damage length \ensuremath{\ell}; residual stiffness k 2 mm; 10\ensuremath{-}6
+Mechanics grid spacing h 1 mm
+Grid dimensions 145 \ensuremath{\times} 75 \ensuremath{\times} 6 nodes
+Numerical extrusion bn 2 mm
+Particle counts: TAF1; TAF2 142956; 144108
+Table 1 specifies the material card used by the retained runs. The value of Gc in Supplement S1
+was formed as (1\ensuremath{-}\ensuremath{\nu}2)K2
+IC /E using the fitted crack-propagation-law parameter KIC = 1.66 MPa\ensuremath{\surd}m
+reported by Eid et al. [ 1] as an exploratory card input. The 2 mm length is an exploratory choice
+rather than an independently identified length scale. M0 contains no rate dependence. Neither
+the derivation of Gc nor the effective elastic fit establishes that these parameters form a validated
+dynamic PMMA law.
+On the active reference-grid graph, the recorded damage functional has the form
+Ah(d; H) =
+\ensuremath{\sum}
+i
+Vi
+[
+g(di)Hi + Gc
+2\ensuremath{\ell} d2
+i
+]
++ Gc\ensuremath{\ell}
+2h2
+\ensuremath{\sum}
+\{i,j\}
+Vi + Vj
+2 (dj \ensuremath{-} di)2. (3)
+2
+
+The edge sum counts each active Cartesian nearest-neighbour edge once; Vi is the projected reference
+volume. The irreversible lower obstacle is the maximum of the particle-projected lower bound
+and the previously converged reference-grid damage. A projected red-black Gauss–Seidel solve
+with relaxation factor one updates this field, followed by mapping to particles with non-healing
+controls. Mechanics and particle damage storage use float32; the reference-grid damage operator
+and projected Karush–Kuhn–Tucker residual use float64. The stopping control is a maximum
+projected residual of 10 Pa, with at most 5000 full sweeps. It is a nonlinear solve control, not an
+experimental accuracy tolerance. Both baseline reports record convergence of their damage solves.
+
+\section*{2.2 Boundary, time and spatial support}
+
+Measured impacted-edge histories prescribe grid velocity. The source samples this boundary history
+at mechanics substep midpoints and separately projects the out-of-plane grid velocity to zero. We
+call this the implemented plane-strain constraint, while recognizing that a finite extrusion with that
+projection still requires checks of its fields and reactions. The numerical extrusion does not supply
+the experimental specimen thickness. Absolute three-dimensional experimental force or energy
+cannot be inferred from it.
+Seven common physical targets are retained: 0, 4.996, 9.992, 14.988, 19.984, 24.980 and
+29.976 \ensuremath{\mu}s. TAF1 uses exact measured samples at native indices 0, 2, 4, 6, 8, 10, 12. TAF2 uses
+its exact first sample and piecewise-linear interpolation between adjacent native samples for the
+later six targets. There is no additional retiming in this comparison. Integer mechanics substeps
+land at each declared target; the CFL parameter controls the schedule while the observation times
+remain fixed.
+The saved field comparison averages the four equal-in-plane-coordinate particle layers, then
+projects to DIC reference nodes using local linear moving weighted least squares. Its compact-
+support weight is (1 \ensuremath{-} r/R)2 for r < R , with R = 3 a and particle spacing a. The prescribed
+checks require at least six neighbours, design rank three and a normal-matrix condition number
+no greater than 108; the lattice-rounding tolerance is 2 \ensuremath{\times} 10\ensuremath{-}5a. Failure of a support or condition
+check prohibits extrapolation. These projection settings are shared by the absolute and incremental
+comparison contracts. The retained prediction and target arrays have exactly matching coordinates
+and times. This analysis reproduces discrepancies of those saved projected arrays, rather than
+independently replaying the particle-to-DIC projection.
+The all-supported masks contain 3429 nodes for TAF1 and 3465 for TAF2. A separate interior
+mask requires x \ensuremath{-} xmin \ensuremath{\geq} 2h, where xmin is the impacted-edge coordinate of the DIC nodes. It
+contains 3360 and 3398 nodes. Excluding this boundary band reduces direct inclusion of prescribed-
+edge values; it does not make the remaining measurements independent of the imposed boundary
+record.
+
+\section*{2.3 Field definitions and normalization}
+
+Let qs
+ni and qm
+ni denote the saved simulated and measured vectors at time n and node i in a specified
+mask M. We report
+\ensuremath{\varepsilon}q =
+[\ensuremath{\sum}6
+n=0
+\ensuremath{\sum}
+i\ensuremath{\in}M \ensuremath{\parallel}qs
+ni \ensuremath{-} qm
+ni\ensuremath{\parallel}2
+]1/2
+[\ensuremath{\sum}6
+n=0
+\ensuremath{\sum}
+i\ensuremath{\in}M \ensuremath{\parallel}qm
+ni\ensuremath{\parallel}2
+]1/2 , RMSEq =
+[ \ensuremath{\sum}6
+n=0
+\ensuremath{\sum}
+i\ensuremath{\in}M \ensuremath{\parallel}qs
+ni \ensuremath{-} qm
+ni\ensuremath{\parallel}2
+7|M|
+] 1/2
+. (4)
+These are uniform node/frame Frobenius and vector root-mean-square discrepancies, without area
+or temporal quadrature weights. The three stored vector components are included; the compared
+3
+
+out-of-plane components are zero. A global relative discrepancy uses the global target norm, rather
+than averaging seven framewise percentages.
+Two measured displacement targets are kept distinct:
+um,abs
+ni = um
+ni, u m,inc
+ni = um
+ni \ensuremath{-} um
+0i. (5)
+The saved simulation starts with zero displacement; the same simulated displacement is used against
+each target. The two target versions have identical underlying displacement samples, geometry,
+times and velocity. They differ exactly by subtraction of the first measured displacement. For
+the incremental first frame the measured norm and error are both zero, so its framewise relative
+discrepancy is undefined; this does not prevent the global norm in Eq. ( 4) from being defined.
+
+\section*{3 Declared energy balance}
+
+The energy diagnostic uses tracked energy E = K + U + \ensuremath{\Gamma}, comprising particle translational plus
+APIC affine kinetic energy, recoverable elastic energy and the recorded fracture functional contri-
+bution. Let Wg, Wc, Wb be cumulative gravity, contact and prescribed-boundary work. Let \ensuremath{\Delta}Kc,
+\ensuremath{\Delta}Kb and \ensuremath{\Delta}Kp be cumulative kinetic changes from contact, boundary and plane-strain projections.
+The source declares
+Dc = Wc \ensuremath{-} \ensuremath{\Delta}Kc, D b = Wb \ensuremath{-} \ensuremath{\Delta}Kb, D p = \ensuremath{-}\ensuremath{\Delta}Kp, (6)
+RE = E + Dc + Db + Dp \ensuremath{-} E0 \ensuremath{-} Wg \ensuremath{-} Wc \ensuremath{-} Wb, (7)
+\ensuremath{\eta}E = |RE|
+max\{|E0|, |E|, |Wg|, |Wc|, |Wb|, |Dc|, |Db|, |Dp|, 10\ensuremath{-}30 J\} . (8)
+The scale in Eq. ( 8) is the implemented numerical ledger scale. It is not simply boundary work,
+initial energy or a measured experimental energy. The symbols Dc, Db, Dp preserve the source’s
+bookkeeping convention; in particular boundary and plane-strain projection terms are numerical
+constraint terms, not measured material dissipation. Their inclusion must be stated before inter-
+preting the residual.
+Stored-component reductions reproduce the declared residuals. They test the arithmetic iden-
+tity from saved components, not an independent derivation of those components from particle states
+or reaction histories. A ledger can be arithmetically consistent while RE remains large. The base-
+line TAF1 recorded boundary work is 1677.72 J m\ensuremath{-}1 after division by the numerical extrusion. Its
+boundary projection term Db/bn is 674.26 J m\ensuremath{-}1, and its plane-strain term Dp/bn is 830.75 J m\ensuremath{-}1.
+These terms are substantial on the same scale as the imposed work and cannot be omitted or
+relabelled as physical fracture dissipation. They are per-unit-thickness numerical quantities; the
+experimental thickness remains unspecified here.
+Table 2 shows a monotone reduction of the declared final energy defect across all five saved
+levels. The baseline TAF2 final value is 87.6280\%. The first three TAF1 values reproduce the
+originally summarized sequence; the two finer levels extend the descriptive trend. Independent
+reductions of the stored component ledgers support the displayed values, including the two finer
+levels. This is evidence that the retained temporal schedules affect the diagnostic strongly, while
+the finest retained result still has a 6.9786\% defect.
+There is a source-version qualification: the baseline and refined mechanics cores differ. Their
+inspected text difference is restricted to exposure and validation of the CFL argument, scheduling
+substitution and returned metadata. This narrows the change but is not a formal demonstration
+of compiled or runtime equivalence. Consequently we do not fit an asymptotic order, extrapolate a
+4
+
+Table 2: TAF1 retained temporal ladder at fixed h = 1 mm , \ensuremath{\ell} = 2 mm and common final time
+29.976 \ensuremath{\mu}s. The event is the first saved particle maximum d > 10\ensuremath{-}3. The first row uses the baseline
+source; the remaining rows use the source exposing an explicit CFL parameter.
+Mechanics CFL Steps Final 100\ensuremath{\eta}E Threshold time ( \ensuremath{\mu}s)
+0.250000 324 88.3429 1.20274
+0.125000 642 44.0329 1.30736
+0.062500 1284 21.7618 1.47079
+0.031250 2568 11.4524 1.49413
+0.015625 5136 6.9786 1.43577
+zero-defect limit or attribute the full sequence to timestep alone under a proven fixed executable.
+Temporal reduction also leaves spatial, particle-density and grid-phase effects unresolved.
+
+\section*{4 Field-reference and initial-state results}
+
+Table 3: Global discrepancies on the seven common times. Percentages use Eq. ( 4); N is the number
+of nodes in the specified mask. Each displacement reference has its own target denominator.
+Specimen Mask N 100\ensuremath{\varepsilon}u,abs 100\ensuremath{\varepsilon}u,inc 100\ensuremath{\varepsilon}v
+TAF1 All supported 3429 41.9292 42.0446 36.4432
+TAF1 Interior 3360 43.7037 43.9188 37.6298
+TAF2 All supported 3465 64.1526 54.0514 52.6399
+TAF2 Interior 3398 65.9291 55.8402 54.0600
+The original approximately 64\% displacement result for TAF2 corresponds to the absolute
+target, while approximately 54\% corresponds to the incremental target (Table 3). The predic-
+tion is unchanged. Both the error numerator and the target denominator change under reference
+subtraction. Selecting the smaller percentage therefore cannot establish a numerical or physical
+improvement. TAF1 provides a useful contrast: its relative displacement discrepancy changes only
+slightly and increases under subtraction.
+Dimensional discrepancies retain the same distinction. The all-node displacement vector RMSE
+is 60.84 \ensuremath{\mu}m for the TAF1 absolute target and 58.41 \ensuremath{\mu}m for its incremental target; TAF2 gives
+96.16 and 74.70 \ensuremath{\mu}m. TAF1’s smaller incremental RMSE alongside a slightly larger relative dis-
+crepancy illustrates why the target denominator matters. Velocity RMSE is unchanged at 3.353
+and 4.693 m s\ensuremath{-}1 for TAF1 and TAF2. Excluding the impacted-edge band increases each relative
+discrepancy moderately, so the all-node aggregates are not concealing a close interior match.
+The recovered initializer arrays have exactly zero initial velocity for both runs. Under the
+retained private analysis mapping and its unit labels, the first measured velocity vector RMS is
+3.180814 and 5.277886 m s\ensuremath{-}1. Those are nodewise vector RMS values, not projectile velocities. The
+initial simulated velocity is zero, hence the first-frame velocity relative discrepancy is one. The
+initial absolute measured displacement is also nonzero, whereas the simulated displacement is zero.
+Reference subtraction removes this displacement offset but does not change the initial velocity
+mismatch.
+The private extractor separates the synthetic reference output from the nonzero-numbered
+5
+
+data outputs, and maps the first actual data output to the first time-vector entry, labelled zero.
+The publication-linked exporter can prepend an artificial zero field, so a zero reference output
+is not evidence of physical rest. This resolves the bookkeeping convention used for the retained
+calculation, while leaving the physical initial-state assumption open. A complete camera-to-solver
+clock join, upstream unit conversion, filtering and derivative provenance, and consistency of initial
+displacement, velocity and stress remain necessary for a physical interpretation. Nonzero first-
+retained velocity by itself cannot isolate a missing constitutive mechanism.
+
+\section*{5 Damage threshold versus crack initiation}
+
+The numerical event in Table 2 is the first saved time when any particle damage exceeds 10\ensuremath{-}3. TAF1
+crosses between 1.20274 and 1.49413 \ensuremath{\mu}s over the retained ladder, without a monotone threshold
+time. Baseline TAF2 crosses at 0.277556 \ensuremath{\mu}s; the TAF1 range must not be assigned to both speci-
+mens. These values depend on a declared damage threshold and sampled solver clock.
+Equation ( 3) explains why this is a weak crack indicator. For spatially homogeneous H, van-
+ishing damage gradient and a zero lower obstacle, stationarity gives
+dhom = 2(1 \ensuremath{-} k)H
+Gc/\ensuremath{\ell} + 2(1 \ensuremath{-} k)H . (9)
+Thus positive tensile history produces small diffuse damage even without a resolved crack surface
+or opening. Equation ( 9) is a homogeneous subproblem relation; it does not reconstruct the hetero-
+geneous specimen or predict the location of a crack. It does show why identifying a small threshold
+crossing with crack initiation is unwarranted.
+The experimental event has a different definition and clock. Eid and colleagues identify initiation
+and branching from crack-lip opening at twin nodes along the observed path [ 1]. Their TAF1
+account places an earlier crack to the left of the hole near 40 \ensuremath{\mu}s and the right-notch crack near
+60 \ensuremath{\mu}s after camera trigger. The latter is not the first crack anywhere in the specimen. First
+retained DIC-derived elastic-parameter samples near 59.95 \ensuremath{\mu}s for TAF1 and 62.89 \ensuremath{\mu}s for TAF2 do
+not, by file position alone, establish identical event criteria for both cases.
+The camera trigger includes an experimental timing convention associated with wave travel
+through the waveguide. Its correspondence to the solver’s initial state has not been fully established.
+Moreover, the paired field comparison ends at 29.976 \ensuremath{\mu}s, before those reported TAF1 opening
+events. No unqualified numerical-to-experimental initiation-time ratio follows from these records.
+A defensible timing comparison would first define a simulated opening or path event comparable
+to the observed one, assign its spatial location, and join the two clocks.
+
+\section*{6 Interpretation and limits}
+
+Three results constrain the interpretation of M0. First, the energy diagnostic is strongly schedule-
+sensitive and remains finite at the finest retained level. Its projection terms are explicitly numerical
+bookkeeping. Second, a substantial field mismatch persists under both displacement conventions
+and in the interior mask. The material response is not the only uncontrolled cause because the
+imposed boundary, reference subtraction and initial state enter the same comparison. Third, a
+small AT2 crossing is not equivalent to an experimentally resolved crack-opening event. Treating
+these three diagnostics as interchangeable evidence of a failed fracture law would exceed what they
+measure.
+6
+
+The retained evidence therefore does not support using this setup as a validated high-rate
+predictor. It also does not establish that all rate-independent AT2 models fail for the experiment,
+or that adding rate dependence would resolve the discrepancies. Such attribution would require a
+controlled comparison after numerical and input consistency have been addressed. The exploratory
+Gc and \ensuremath{\ell}, inherited effective elasticity, at-rest initialization and constraint treatment remain coupled
+choices in M0.
+Several limits remain material to the result. The analysis reproduces saved-array differences
+and stored-ledger arithmetic, rather than independent particle-energy, reaction-force or projection
+replay. There is no established spatial, particles-per-cell, grid-phase or length-scale convergence
+study for this comparison, no demonstrated zero-defect temporal limit, and no complete executed-
+runtime equivalence proof. The experimental processing record does not yet supply a complete
+velocity uncertainty model or a full initial-state and clock reconciliation. Repeat-run evidence is
+not established by these two specimen records. Calibration dependence precludes independent
+physical validation, and unknown experimental thickness prevents absolute experimental three-
+dimensional energy claims. A separate unresolved-evidence report specifies the missing checks;
+these limitations are part of the scientific scope, not additional measured failures.
+
+\section*{7 Conclusions}
+
+The PMMA case supports a bounded diagnosis of a coupled APIC/MPM–AT2 setup. Its five
+retained TAF1 schedules reduce the declared final energy residual from 88.3429\% to 6.9786\%,
+with source-version and convergence qualifications. Its displacement comparison depends materi-
+ally on the reference convention for TAF2, while large velocity and interior discrepancies remain.
+Its first d > 10\ensuremath{-}3 event is a damage-threshold crossing and cannot be substituted for observed
+crack initiation. These results preserve the negative evidence while narrowing its inference: nu-
+merical balance, model inputs and observable definitions must be resolved before a fracture-law or
+predictive-accuracy claim can be assessed.
+Evidence availability . The retained computational evidence is a private source bundle, desig-
+nated Supplement S1, containing the source bindings, saved-result definitions and reduction records
+underlying this audit. It is not a published dataset or an independently replayed solver result. The
+experimental article and accompanying public data are cited below. No new experimental data are
+claimed.
+
+\section*{References}
+
+[1] E. Eid, R. Seghir and J. Réthoré, “Crack branching at low tip speeds: spilling the T,” Journal
+of Theoretical, Computational and Applied Mechanics (2023). doi:10.46298/jtcam.10172.
+[2] E. Eid, R. Seghir and J. Réthoré, accompanying experimental data for “Crack branching at low
+tip speeds: spilling the T,” Zenodo (2023). doi:10.5281/zenodo.8256346.
+7
+
+\end{document}

@@ -8,6 +8,10 @@
     "ogImage": "/social/charts/p26.png",
     "ogAlt": "Figure 1: matching sample digests in one chunk-4 replay sample: saved trajectory 256/256, interface flux 256/256, metadata 215/256"
   },
+  "P27": {
+    "ogImage": "/social/beyond-reconstruction-error.png",
+    "ogAlt": "Beyond Reconstruction Error · Shodh Research"
+  },
   "LUCAN10B": {
     "slug": "lucan-10b-physics",
     "ogImage": "/social/lucan-10b.png",

@@ -1,0 +1,563 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: dae11ba9b0d07d8fc654004e1d8b048bb5cc865a6a960cdc8fd7ef80c6b1432e
+% Extracted text SHA-256: b931b9492a59f3e3d5e537b08051964d527ad62ea82dfcb72627053812589ca7
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Finite Equivalence and Nested Performance Limits in a Fused Reactor-Field Generator}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Finite Equivalence and Nested Performance Limits in a Fused
+Reactor-Field Generator
+
+\section*{Abstract}
+
+Kernel fusion can preserve a numerical reference while changing the dominant costs of sci-
+entific data generation. We examine this interaction in a bounded reduced-order stirred-reactor
+field generator with FP64 transported state and FP32 stored output. The evidence distinguishes
+an original Torch GPU port, a first transport/reaction fusion, and a later merged-kernel compar-
+ison against a conservative shared-face thermal reference. The first fusion reduced the measured
+stencil section from 48.10694 to 1.40098 ms per step, a factor of 34.34, while a matched eight-
+sample campaign decreased from 428 to 111 integer shell seconds. These are different timing
+scopes. Stored-FP32 parity to NumPy, finite FP64 bitwise agreement with Torch, and saved
+digest agreement were also separate tests. The later merge passed 18 unit cases and three
+batch-three trajectory comparisons containing 162 paired saved-field digests. On a shared node,
+its device sequence improved by 1.39238 times, but the complete eight-sample chunk, including
+saves, improved by only 1.10104 times. Concurrent campaigns exposed host-memory limits,
+including an out-of-memory failure. An earlier 48-triple eager precision study rejected both
+FP32 variants under a conjunctive energy-ledger contract despite small temperature errors and
+transport defects below the specified bound; later native-FP32 timing and smoke results con-
+cern a different implementation. The case demonstrates useful finite numerical equivalence and
+substantial local acceleration, but also shows why neither establishes universal equality, physical
+calibration, or a multiplicative production-throughput gain.
+
+\section*{1 Introduction and contributions}
+
+Scientific field generators often combine numerical integration with output conversion, validation,
+serialization, and downstream encoding. Optimizing the integration loop can therefore change,
+rather than remove, the limiting resource. A second difficulty is numerical: preserving stored data
+is not the same as preserving every internal floating-point operation, and neither is evidence that
+the underlying physical model is accurate.
+This paper studies these distinctions in an explicit advection–diffusion–reaction and heat genera-
+tor for a procedurally defined stirred vessel. Its intended role is bounded field-contract testing and
+data-pipeline development. The flow is an analytic moving-reference-frame (MRF) envelope, not a
+resolved rotating-mesh calculation. The reaction mechanism and thermal properties are declared
+synthetic pilot inputs rather than plant-calibrated chemistry.
+The focused contribution is a retrospective analysis of finite numerical equivalence and nested per-
+formance limits. We distinguish three implementation stages. The original Torch port establishes
+the eager GPU arithmetic baseline. The first FP64 fusion combines transport and pointwise reac-
+tion/update work into separate fused kernels, together with caching, synchronization, save-path,
+and host-pipeline changes. A later comparison starts from a different, conservative shared-face
+1
+
+thermal reference and merges its transport and reaction/update kernels while retaining thermal-
+face work and reductions separately. These stages do not share a single unchanged numerical or
+timing baseline.
+We organize the evidence around three questions. First, which quantities were actually equal,
+and over which finite test populations? Second, how much of a local kernel gain survives at chunk,
+campaign, and concurrent-node scope? Third, which adverse outcomes constrain extensions to
+greater concurrency or lower precision? This organization retains successful comparisons alongside
+slow repeats, metadata differences, precision-gate failures, and host out-of-memory failures. It does
+not treat implementation comments or acceptance labels as experimental proof.
+
+\section*{2 Related work}
+
+Triton provides tile-based programming and compiler optimization for custom GPU computation
+[1]. That work supplies context for expressing fused tensor operations with a tiled compiler; the
+numerical equivalence and timings examined here depend on the captured reactor implementation
+and its tests, not on the compiler paper.
+The Roofline technical report relates attainable floating-point performance to operational inten-
+sity and sustainable memory bandwidth, and motivates bound and bottleneck analysis [ 2]. We use
+this perspective only to distinguish resource limits. The cited version is University of California,
+Berkeley Technical Report UCB/EECS-2008-134, not the later journal publication. No hardware-
+counter traffic measurements or sustainable-bandwidth characterization are available for the present
+case, so we do not construct a measured Roofline or claim bandwidth-optimal execution.
+The present study is consequently narrower than a general GPU compiler evaluation or a new
+reactor discretization. It examines a specific numerical chain, the finite evidence for preserving it,
+and the attenuation of measured gains as the timed workload expands.
+
+\section*{3 Scientific methods and numerical model}
+
+
+\section*{3.1 Retrospective design and computational configuration}
+
+This analysis uses captured source, reports, logs, manifests, and scalar results. No additional GPU
+simulations, raw-field measurements, or token-shard replays were performed. Saved-record consis-
+tency checks can establish agreement between retained results and source identities, but cannot
+substitute for rerunning the original experiments. The private inventory and original evidence are
+retained in Supplementary record S1.
+The reported GPU environment was an NVIDIA H100 with 80 GB device memory, Torch
+2.10.0+cu128, and Triton 3.6.0. Production-shaped samples used a cubic grid of 1283 points,
+640 explicit steps, \ensuremath{\Delta}t = 0 .0025 s, and saving every 40 steps. Thus the horizon was 1.6 s and the
+output contained 16 frames at 0.1-s intervals, without an initial-time frame. The stored layout was
+time, channel, Z, Y, X, with 18 FP32 channels. The transported state comprised six concentrations,
+temperature, and mixing age, held in FP64 on the reference fused paths. Analytic velocity and
+pressure were computed using FP64 expressions and converted to FP32 before transport or storage.
+Initial states were constructed with the NumPy reference and transferred to the GPU; the effective
+random seed was the configured seed plus sample index. Samples within a chunk shared geometry
+and controls but differed in initial state.
+2
+
+
+\section*{3.2 Geometry and analytic flow envelope}
+
+The procedural vessel had radius R = 0 .45 m and height H = 0 .90 m, with a masked impeller
+of radius Ri = 0 .15 m at height zi = 0 .45 m. The grid spacing was h = 2 R/(N \ensuremath{-} 1), where N
+is the number of grid points per axis. The active-fluid mask excluded vessel and impeller solids;
+the jacket mask identified sidewall exchange. Signed-distance geometry was inserted during final
+packing, replacing the simulator’s placeholder geometry plane.
+For cylindrical radius r, define \ensuremath{\xi} = min(r/R, 1), \ensuremath{\zeta} = z/H , and
+W = (1 \ensuremath{-} \ensuremath{\xi}2)2, V = sin 2(\ensuremath{\pi}\ensuremath{\zeta} ), (1)
+I = exp
+[
+\ensuremath{-}
+( z \ensuremath{-} zi
+0.22H
+) 2]
+. (2)
+If n(t) is the impeller speed in revolutions per minute, \ensuremath{\omega}(t) = 2 \ensuremath{\pi}n(t)/60 has units s \ensuremath{-}1. The
+ramp duration was tr = max(10\ensuremath{\Delta} t, 0.2Nt\ensuremath{\Delta}t), with n(t) = n\ensuremath{\infty} min(max(t/tr, 0), 1). Here Nt is the
+number of explicit time steps. The prescribed envelope was
+u\ensuremath{\theta} = 0.28\ensuremath{\omega}rW V (0.35 + 0.65I), (3)
+a = 0.018\ensuremath{\omega}Ri, (4)
+ur = \ensuremath{-}arW \ensuremath{\pi}
+H sin(2\ensuremath{\pi}\ensuremath{\zeta} ), (5)
+uz = 2a(1 \ensuremath{-} \ensuremath{\xi}2)(1 \ensuremath{-} 3\ensuremath{\xi}2)V. (6)
+The cylindrical components were transformed to Cartesian components, with the inverse radius set
+to zero on the axis. Velocity was zeroed in solids. The centrifugal pressure estimate was
+p = \ensuremath{\rho}u2
+\ensuremath{\theta}
+2 \ensuremath{-}
+\ensuremath{\langle} \ensuremath{\rho}u2
+\ensuremath{\theta}
+2
+\ensuremath{\rangle}
+fluid
+, (7)
+with zero solid pressure. Here the brackets denote an active-fluid spatial mean. This is a framewise
+gauge estimate, not a pressure-Poisson solution. The analytic envelope and solid masking do not
+establish a resolved incompressible flow around moving blades.
+
+\section*{3.3 Transport, reactions, and stored observables}
+
+For a transported scalar f , the cellwise operator was
+LDf = D
+\ensuremath{\sum}
+j=x,y,z
+f +
+j \ensuremath{-} 2f + f \ensuremath{-}
+j
+h2 \ensuremath{-}
+\ensuremath{\sum}
+j=x,y,z
+ujGjf, (8)
+where Gjf = (f \ensuremath{-} f \ensuremath{-}
+j )/h for nonnegative uj, and (f +
+j \ensuremath{-} f )/h otherwise. Inactive or out-of-domain
+neighbors were replaced by the center value. This imposed the implemented no-flux stencil without
+periodic wrapping. Axis contributions were accumulated in the fixed order x, y, z. This cellwise
+advective operator should not be confused with the later shared-face thermal operator.
+Writing concentrations as A, B, C, P, S1, S2, the synthetic network was
+A + B + C \ensuremath{-} \ensuremath{\to}P, A + B \ensuremath{-} \ensuremath{\to}S1, P \ensuremath{-} \ensuremath{\to}S2. (9)
+3
+
+The rates were rd = kdABC , r1 = k1AB, and r2 = k2P , in mol m \ensuremath{-}3 s\ensuremath{-}1. Rate constants used
+kj(T ) = kj,ref exp
+[
+clip
+(
+\ensuremath{-} Ej
+Rg
+( 1
+Ts
+\ensuremath{-} 1
+Tref
+)
+, \ensuremath{-}30, 30
+)]
+, (10)
+where Ts = clip( T, 250, 550) K, Tref = 330 K, and Rg is the molar gas constant. In order d, 1, 2,
+activation energies were 42000, 47000, 56000 J mol \ensuremath{-}1, and reference constants were 10\ensuremath{-}5 m6 mol\ensuremath{-}2
+s\ensuremath{-}1, 2 \ensuremath{\times} 10\ensuremath{-}4 m3 mol\ensuremath{-}1 s\ensuremath{-}1, and 2 \ensuremath{\times} 10\ensuremath{-}3 s\ensuremath{-}1. These values define the pilot, not calibrated reaction
+kinetics.
+The species source vector was
+s = (\ensuremath{-}rd \ensuremath{-} r1, \ensuremath{-}rd \ensuremath{-} r1, \ensuremath{-}rd, rd \ensuremath{-} r2, r1, r2). (11)
+Each active concentration used the explicit update cn+1 = max(cn + \ensuremath{\Delta}t(LDcn + sn), 0), with zero
+inactive state. Heat release was ˙q = \ensuremath{-} \ensuremath{\sum}
+j \ensuremath{\Delta}Hjrj, with enthalpies \ensuremath{-}82000, \ensuremath{-}45000, \ensuremath{-}18000 J mol\ensuremath{-}1.
+The declared properties were \ensuremath{\rho} = 1020 kg m \ensuremath{-}3, cp = 3900 J kg \ensuremath{-}1 K\ensuremath{-}1, species diffusivity 2 \ensuremath{\times} 10\ensuremath{-}5
+m2 s\ensuremath{-}1, thermal diffusivity 1.4 \ensuremath{\times} 10\ensuremath{-}5 m2 s\ensuremath{-}1, and jacket coefficient 450 W m \ensuremath{-}2 K\ensuremath{-}1.
+The first-fusion thermal update used cellwise transport plus ˙q/(\ensuremath{\rho}cp) and a jacket-band source
+hc(Tj \ensuremath{-} T )/(\ensuremath{\rho}cph). Mixing age used the same cellwise advection with half the species diffusivity,
+a unit active-fluid source, and nonnegative clipping. An upper clamp of \ensuremath{\Delta}t/2 was applied to all
+active cells in the horizontal band |z \ensuremath{-} zi| \ensuremath{\leq} 1.5h, without a radial restriction to the impeller radius.
+It is an impeller-contact mixing-age diagnostic, not a through-flow residence-time distribution.
+Stored observables comprised velocity components, gauge pressure, temperature, the six con-
+centrations, desired reaction rate, heat release, mixing age, signed distance, and three masks. The
+saved state followed the update, while reaction-rate and heat-release snapshots used rates evaluated
+from the old state at that step. This sampling convention was part of the chain being preserved.
+
+\section*{3.4 Conservative shared-face thermal variant}
+
+The later reference replaced cellwise temperature transport with shared-face exchange. For an
+oriented internal fluid face from cell l to u, its implemented advective and diffusive powers were
+Fa = \ensuremath{\rho}cpuf (Tup \ensuremath{-} T )h2, (12)
+Fd = \ensuremath{-}\ensuremath{\rho}cpDT
+Tu \ensuremath{-} Tl
+h h2, (13)
+where uf was the mean of adjacent stored velocity components and T was the active-fluid mean
+temperature at that fine step. The upwind temperature Tup was Tl for uf \ensuremath{\geq} 0 and Tu otherwise;
+both neighboring temperatures were old-state values taken before the update. Each signed face
+power was subtracted from cell l and added to cell u, so positive power transferred heat from l to
+u. This pairwise exchange conserves the domain sum independently of discrete velocity divergence.
+It does not establish local equivalence between mean-referenced and absolute-temperature advec-
+tion when the masked discrete velocity has nonzero divergence. Inactive faces carried no internal
+transport; explicit fluid–jacket faces exchanged hc(T \ensuremath{-} Tj)h2 W, with outward heat positive and
+face multiplicity retained. Temperature rates followed by division by \ensuremath{\rho}cph3.
+Every fine step contributed to interval-integrated energies Qa, Qd, Qr, Qj, in joules. With U =
+\ensuremath{\rho}cph3 \ensuremath{\sum}
+fluid T , the ledger compared
+\ensuremath{\Delta}Upred = Qa + Qd + Qr \ensuremath{-} Qj (14)
+4
+
+to the measured state-energy change. Its two dimensionless tests were
+eb = |\ensuremath{\Delta}U \ensuremath{-} \ensuremath{\Delta}Upred|
+max(|\ensuremath{\Delta}U |, |Qa| + |Qd| + |Qr| + |Qj|, 1 J) , (15)
+et = |Qa| + |Qd|
+max(|\ensuremath{\Delta}U |, |Qr| + |Qj|, 1 J) . (16)
+Every interval required both eb \ensuremath{\leq} 10\ensuremath{-}8 and et \ensuremath{\leq} 0.02. The second quantity measures closed-
+domain net transport imbalance, not spatial error against an independently known temperature
+field. Legacy cellwise thermal mode carried no corresponding conservation claim.
+
+\section*{4 Validation protocols and timing definitions}
+
+
+\section*{4.1 Four distinct evidence levels}
+
+Stored-output parity to NumPy required zero maximum absolute error over compared FP32 fields
+and a passing domain audit. This is a finite comparison of stored values. FP64 bitwise gates instead
+compared the fused arithmetic with the accepted eager Torch chain, including integer views of state
+tensors where specified. A third level compared retained raw-field, flux, metadata, diagnostic, or
+latent digests. Digest agreement concerns the serialized quantities covered by those digests; it is not
+a new measurement of the original arrays. Independent physical accuracy would require external
+reference solutions or experimental observations and was not tested here.
+The runtime stability limits were \ensuremath{\Delta}t maxfluid
+\ensuremath{\sum}
+j |uj|/h \ensuremath{\leq} 0.45, \ensuremath{\Delta}t max(Ds, DT )/h2 \ensuremath{\leq} 0.16, and
+maximum reaction consumption fraction per step at most 0.1. Consumption ratios used old con-
+centrations with a 10\ensuremath{-}8 mol m \ensuremath{-}3 concentration floor. Reaction violations and NaNs accumulated
+on the device and were checked at saves and loop completion before affected output could proceed.
+Domain checks also covered finite fields, binary static masks, absolute solid-velocity components
+no greater than 10\ensuremath{-}7 m s \ensuremath{-}1, absolute framewise fluid-mean gauge pressure no greater than 10\ensuremath{-}2
+Pa, nonnegative concentrations and rates, fluid temperatures of 250–550 K, and the conservative
+ledger when applicable. The solid-velocity audit tolerance is distinct from the model’s exact zero
+assignment in solids.
+
+\section*{4.2 Operation-order discipline and finite test populations}
+
+The first fusion disabled fused multiply-add contraction, passed scalar parameters through FP64
+tensors, and reproduced Torch CUDA scalar division as multiplication by a precomputed reciprocal.
+These choices constrained rounding order rather than proving an algebraic equivalence theorem.
+Its final record contains six stencil cases: grids 32 and 48, each with three seeds and both geometry-
+derived and random activity patterns across the set. It also records fused-update on/off trajectory
+comparisons at those two grids over 640 steps, and stored-FP32 NumPy parity at grids 32, 48
+with multiple chunks, and 128. The excerpted final parity record does not enumerate all sample
+counts, so these three grid configurations are not presented as a larger known trajectory population.
+A separate eight-sample production-grid campaign compared raw, interface-flux, and metadata
+digests.
+The later merged-kernel unit gate contained 18 enumerated cases at grids 32 and 48, batch
+B = 3. Cases covered conservative and legacy thermal modes, real and random states, real masks
+and random masks activating boundary planes, and selected heat-output settings. This was not a
+5
+
+full Cartesian product. Full-trajectory comparisons used separate processes, seed 8800 with sample
+offsets 0, 1, 2, and 640 steps: conservative mode at both grids and legacy mode at grid 32. The
+resulting three batch comparisons comprised nine sample-trajectory pairs and 3\ensuremath{\times}3\ensuremath{\times}18 = 162 saved-
+field digest comparisons, plus diagnostic-list digests. A further production-shaped comparison used
+one 1283 sample. The harvester comparison used only the 16 overlapping sample identifiers in its
+larger reference manifest.
+
+\section*{4.3 Timing scopes}
+
+All speed ratios below are treference/tcandidate within the stated scope. A stencil-section time is not
+a solver time. The original section profiler synchronized sections, measured 20 steps, and emulated
+saves every 20 steps; section sums can exceed an unsynchronized loop time. Solver/chunk wall
+time includes initialization and saved-array production, but not necessarily packing, validation,
+writing, or encoding. Campaign wall time includes solver and host productionization, including
+interface-flux output in the matched runner comparison. Harvester time additionally includes con-
+text processing, encoding, shard handling, and draining. Concurrent-node elapsed time measures
+simultaneous campaigns and exposes shared host resources.
+For the later device-sequence benchmark, CUDA events timed 60 steps after 8 warmup steps. The
+sequence included the fluid-temperature mean, thermal-face kernel, and either the transport/update
+pair or merged kernel. The old in-place and new ping-pong timing loops evolved their states
+independently; their timings are not equality tests. Full-chunk timing used two calls per path, with
+the second reported to reduce compilation influence. Measurements were taken on a shared node
+and are indicative, not an isolated scaling study.
+Campaign shell timings were integer seconds. The optimized runner also supplied an inner
+floating-point campaign timer. Both conventions are retained rather than treating their small
+difference as numerical measurement precision.
+
+\section*{5 Experimental results}
+
+
+\section*{5.1 Finite equivalence and pre-existing NumPy differences}
+
+All six final stencil cases matched the eager Torch FP64 chain bitwise. The two recorded fused-
+update trajectory comparisons matched stored fields and diagnostics, and all three final grid-level
+NumPy parity configurations reported zero stored-FP32 error with passing audits. These results
+coexist with explicitly observed FP64 NumPy/GPU differences. In the stencil tests, maximum
+absolute internal differences ranged from 1.819 \ensuremath{\times} 10\ensuremath{-}12 to 2.910 \ensuremath{\times} 10\ensuremath{-}11. An operation-isolation
+report attributed approximately 46\% of sampled random FP64 scalar-division results to one-unit-
+in-the-last-place differences between reciprocal multiplication on CUDA and NumPy division. The
+exponential probe covered 500000 points in the clamped range: Triton and Torch agreed bitwise,
+whereas Torch CUDA and NumPy CPU were not bitwise identical, with maximum relative dif-
+ference 2.22036 \ensuremath{\times} 10\ensuremath{-}16. Thus stored parity must not be restated as internal FP64 equality to
+NumPy.
+The eight-sample runner comparison reported matching raw, interface-flux, and metadata digests
+for every sample. In the later conservative-reference comparison, all 18 unit cases passed. All 162
+saved-field digest pairs and the three diagnostic digests agreed, including full thermal ledgers. The
+6
+
+single production-shaped sample had equal raw and metadata digests. These are finite historical
+results, not evidence for arbitrary-input equality or independent physical accuracy.
+
+\section*{5.2 First fusion: local gain and campaign gain}
+
+The first implementation consolidated state, hoisted static masks, cached velocity/pressure at
+unchanged angular speed, removed recurring host synchronizations, fused transport and reac-
+tion/update work, and packed saves into a reused pinned transfer buffer. Output was written
+directly into final host-array slices. Host packing, audits, Zarr writing, and interface-flux compu-
+tation could overlap subsequent simulation work.
+T able 1. First-fusion results at mixed measurement scopes: stencil-section time, recorded peak
+device allocation, and matched eight-sample campaign shell time.
+Measurement Reference First fusion
+Stencil section (ms/step) 48.10694 1.40098
+Recorded peak device allocation (GB) 13.88315 4.91363
+Matched campaign shell wall (s) 428 111
+Matched campaign samples 8 8
+The stencil-section ratio in Table 1 was 34.3381. The original 32-sample solver benchmark at
+chunk 8, including saves, recorded 10.17066 s/sample. An exclusive-node control recorded 9.56183
+s/sample for the original and 8.78420 s/sample for the optimized path. Increasing optimized chunk
+size to 16 and 32 gave 10.75913 and 16.14312 s/sample, respectively. Larger chunks did not improve
+that save-including workload.
+The changed-output isolation run, saving only at step 640, recorded 0.54052 s/sample. It demon-
+strates the importance of output frequency, but is not a matched whole-solver speedup against the
+standard save-every-40-steps baseline.
+For the matched eight-sample campaign, the original integer shell time was 428 s, or 53.5
+s/sample; the optimized shell time was 111 s. Their shell ratio was approximately 3.86. The op-
+timized inner campaign timer was 110.713714 s, or 13.839214 s/sample. The original log supplied
+solver time but no equivalent inner campaign timer. A separate optimized 32-sample campaign
+recorded 293.871418 inner seconds, or 9.18348 s/sample, and 295 shell seconds. This different
+batch is not a matched comparison with the eight-sample baseline. A later final-module 32-sample
+campaign recorded 9.75355 inner s/sample.
+
+\section*{5.3 Save-path variation and adverse repeats}
+
+The variation was large enough to affect interpretation. One-chunk asynchronous saving recorded
+1.42459 s/sample, while the same node’s one-chunk synchronous case recorded 7.05477. For 32
+samples on that node, synchronous and asynchronous cases recorded 1.76706 and 3.93725 s/sample,
+respectively. The asynchronous choice was therefore not uniformly faster across these runs. Three
+final-module solver repeats elsewhere recorded 10.00102, 9.79494, and 9.27748 s/sample, each with
+the same recorded peak device allocation. These slow results are part of the evidence, not outliers
+removed to support the best case. Reports proposed allocator, page-touch, and transparent-huge-
+page explanations, but no controlled intervention established a specific root cause.
+7
+
+
+\section*{5.4 Concurrent campaigns and host-memory limits}
+
+Eight concurrent campaigns each requested 32 samples, under a 256-GB host-memory allocation
+and 64 CPUs. Their controls covered equipment and operating-condition changes, training, vali-
+dation, and test tasks, and a longer-horizon case of 960 steps. The three attempts in Table 2 had
+different buffering and worker settings.
+T able 2. Concurrent-node outcomes for eight campaigns requesting 32 samples each. Rows are
+recorded manifest rows; RSS denotes peak user resident-set size, and OOM denotes an
+out-of-memory failure.
+Configuration Rows Wall (s) RSS (GB) Outcome
+Chunk 8, overlap 192 984 257.4 OOM
+Chunk 4, overlap 256 663 183.1 Metadata differs
+Chunk 8, serial 256 808 197.9 Completed
+The first attempt used four host-promotion and four flux workers per campaign. Two campaigns
+were killed by out-of-memory events; six produced their requested rows. The chunk- 4 attempt
+used two promotion and four flux workers. The final chunk- 8 attempt disabled overlapping host
+promotion and used two flux workers. Reported peaks are user resident-set-size measurements, not
+GPU memory consumption or independently measured cgroup peaks. The approximate two-chunk
+trajectory estimate of 43 GB per campaign would require 344 GB for eight campaigns, already
+exceeding the allocation before other overhead.
+The retrospective report describes raw/flux equality but reaction-extent metadata differences
+for chunk 4, and full identity for the serial chunk- 8 attempt. The directly retained original-solver
+chunk-size control is narrower: three of eight metadata digests differed between chunk 4 and chunk
+8. This establishes that chunk-sensitive metadata differences also occurred without the new fusion.
+It does not independently verify every row in the wider campaign claim or uniquely establish
+reduction order as the cause. No complete 256-row array/metadata comparison was independently
+rehashed in this analysis.
+
+\section*{5.5 Later merge against the conservative reference}
+
+The merged kernel read old-state neighborhoods, retained transport terms in registers, immediately
+applied the pointwise update, and wrote to a ping-pong state partner. The shared-face thermal
+kernel, fluid-temperature mean, diagnostic reductions, and save path remained separate. This re-
+tained their reference reduction expressions and avoided materializing the transport tensor, without
+claiming that all step work became one kernel.
+T able 3. Shared-node conservative-scheme measurements at 1283, B = 8: device sequence and
+second save-including full chunk. Ratios are reference time divided by merged-path time;
+measurements are indicative.
+Scope Two kernels Merged Ratio
+Device sequence (ms/step) 3.38089 2.42813 1.39238
+Second full chunk (s) 13.05643 11.85828 1.10104
+Second chunk (s/sample) 1.63205 1.48229 1.10104
+8
+
+The measurements in Table 3 used 1283, B = 8, and the conservative thermal scheme. First-call
+chunk times were 13.22102 and 12.69773 s for the reference and merged paths. The full chunk
+covered 640 steps including saves and device-to-host output, but excluded a complete campaign or
+harvester. Shared-node execution limits all these timing comparisons.
+A one-rank harvester trial completed two campaigns, retained and drained 16 samples with no
+recorded rejections, and reported consistent shard payload and manifest checks. Raw and latent
+digests agreed for all 16 overlapping identifiers; metadata and context digests also agreed. The
+reference contained 256 rows, but only the overlap was compared. Its 75.6-s rank wall included
+compilation and bundle loading and has no matched harvester baseline from which to infer a
+throughput gain.
+
+\section*{5.6 Separate lower-precision investigations}
+
+The earlier eager precision study used 24 configurations with two sample offsets each, giving 48
+FP64/naive-FP32/shifted-FP32 triples at production shape. For each of two control regimes, it
+included eight box corners and four seeded interior draws. The hotter regime spanned initial
+temperatures 328–348 K, jacket temperatures 285–305 K, and 60–200 rpm; the mixing regime used
+312–328 K, 295–320 K, and the same speed range. All fused kernels were disabled for this study.
+Shifted FP32 stored \ensuremath{\delta}T = T \ensuremath{-} T0, with campaign-constant T0 equal to initial temperature.
+It reconstructed absolute temperature for rates and saves, shifted jacket differences consistently,
+and accumulated its thermal ledger in FP64 from reconstructed quantities and FP32-computed
+rates. Other transported fields remained absolute FP32. This implementation differs from both
+the default FP64 fusion and the later native-FP32 candidate.
+T able 4. Eager precision study: audit and ledger pass counts and maximum interval defects over
+48 paired FP64/naive-FP32/shifted-FP32 triples. Each precision path has a pass-count
+denominator of 48.
+Metric over 48 triples FP64 Naive FP32 Shifted FP32
+Audit and ledger passes 48 0 0
+Maximum et 1.25 \ensuremath{\times} 10\ensuremath{-}16 4.90 \ensuremath{\times} 10\ensuremath{-}8 7.77 \ensuremath{\times} 10\ensuremath{-}9
+Maximum eb 1.09 \ensuremath{\times} 10\ensuremath{-}10 0.24945 1.37 \ensuremath{\times} 10\ensuremath{-}7
+As summarized in Table 4, every FP32 sample failed the 10\ensuremath{-}8 energy-roundoff requirement,
+while every transport defect remained below 0.02. The aggregate audit label referred to transport,
+but its implementation included the conjunctive ledger result. Calling these outcomes a two-
+percent transport violation would therefore be incorrect. Metadata construction rejected both
+FP32 variants in all 48 cases. Nevertheless, maximum final-frame temperature errors relative to
+the FP64 stored output were only 0.07421875 K for naive FP32 and 3.05176 \ensuremath{\times} 10\ensuremath{-}5 K for shifted
+FP32. Small field errors did not satisfy the separate ledger contract.
+Downstream encoding remained a diagnostic experiment: rejected variants used the FP64 target-
+free context. Median fractions of changed token elements were 0.49694 and 0.14846 for naive and
+shifted FP32. All decoded checks were finite and within the study’s 200–700-K fluid-temperature
+range. Those permissive decode checks did not override failed numerical acceptance tests.
+A later native shifted-FP32 candidate had a batch-one merged-kernel median of 0.125856 ms
+versus 0.233088 ms for FP64, a ratio of 1.85202. A separate three-repeat batch-eight chunk com-
+9
+
+parison recorded median sample times of 1.101469 s for FP64 and 1.021254 s for native shifted
+FP32: the ratio of medians was 1.07855, with passing recorded audits. Other batch/save controls
+included an asynchronous batch-eight median ratio of 0.89822, favoring FP64. These later small
+passing runs do not reverse the earlier cohort’s failures, nor establish blanket FP32 certification or
+a production end-to-end gain.
+
+\section*{6 Discussion and limitations}
+
+The main finding is the separation of numerical contracts and performance boundaries. The first
+fusion preserved tested Torch arithmetic while retaining stored NumPy parity, despite documented
+internal NumPy/CUDA differences. The later merge preserved tested conservative-reference state
+transitions and diagnostic digests. Neither result requires claiming that NumPy and CUDA imple-
+ment all operations identically.
+Disabling contraction, preserving accumulation order, using FP64 scalar tensors, and repro-
+ducing reciprocal multiplication explain how the implementation sought finite bitwise agreement.
+They do not prove equality for arbitrary inputs, different compiler releases, all GPU hardware,
+or untested mask/state combinations. Saved-field agreement also does not cover every unsaved
+fine-step quantity. Diagnostic digest equality extends coverage to the serialized ledger and other
+recorded diagnostics, but does not turn a numerical regression test into physical validation.
+The performance results show a sequence of exposed limits. Removing redundant device passes
+and launches greatly reduced a local stencil section. Saved-array production then became prominent
+and variable. The combined device, save-path, and host-pipeline changes improved the matched
+campaign, while concurrent runs exposed the host-memory cost of overlapping production stages.
+The out-of-memory canary demonstrates that a buffering strategy suitable for one campaign can
+fail when replicated across a node. Serial host promotion completed under the tested allocation,
+at a longer node wall time than the chunk- 4 overlapping alternative, while retaining the original
+chunk size.
+Similarly, the later merged sequence gained more than its save-including chunk. The native-
+FP32 kernel ratio exceeded its chunk ratio. These attenuations are consistent with work remaining
+outside the optimized kernel. They do not identify a unique hardware bottleneck: there are no
+counters sufficient to distinguish sustainable bandwidth, cache effects, host page management,
+and other contention mechanisms quantitatively. The large slow-run variation and shared-node
+measurements preclude a universal throughput estimate or tight confidence interval.
+No product of the reported speedups is scientifically justified. The first stencil, eight-sample
+campaign, later conservative device sequence, full chunk, native-FP32 candidate, and harvester
+all differ in timed scope, numerical baseline, or implementation. The changed-save experiment
+additionally changes the requested output. Even equal sample dimensions do not make those
+measurements interchangeable.
+Precision acceptance is also contract-specific. Shifted temperature substantially reduced stored
+temperature error in the eager cohort, but did not meet its strict interval energy-roundoff bound.
+That is a failure under a stated numerical criterion, not evidence of general physical invalidity.
+Conversely, later native-FP32 smoke passes are finite successes under a different implementation
+and acceptance context. The retained logs do not fully identify the exact source and execution
+environment used for the native-FP32 benchmarks, limiting attribution of these results to a precisely
+specified implementation.
+10
+
+Finally, the model itself remains bounded. Its analytic flow, masked geometry, explicit reaction
+network, and declared material properties provide controlled data-generation structure. They do
+not resolve moving-blade hydrodynamics, turbulence, plant chemistry, or independent calorimetry.
+Original output arrays were not rehashed here, and broader campaign identity claims have weaker
+retained verification coverage than the enumerated later digest pairs. Failed or interrupted host-
+packing successors also do not diagnose a universal multi-rank deadlock; retained failure logs include
+out-of-memory events and ambiguous version names. These limitations constrain generalization
+without negating the useful finite regression results.
+
+\section*{7 Conclusion}
+
+This case supports a bounded conclusion: FP64 fusion preserved the compared numerical ref-
+erences and substantially accelerated selected device work, while broader workloads exposed save
+costs, host productionization, and memory-residency limits. The later conservative-reference merge
+provides particularly explicit finite coverage through enumerated unit cases, trajectory digests, and
+a production-shaped sample, but only indicative shared-node performance.
+The transferable methodological lesson is to report the numerical object, finite population, output
+schedule, timer, and workload boundary together. Stored parity, internal bitwise equality, serial-
+ized metadata agreement, and physical accuracy answer different questions. Kernel acceleration,
+full-chunk acceleration, and concurrent-node throughput likewise require separate denominators.
+Keeping these distinctions intact makes successful optimization informative without obscuring its
+failures or extending its claims beyond the evidence.
+
+\section*{8 Data and Code A vailability}
+
+The private research export contains generator source snapshots, timing and parity harnesses,
+scripts for the precision study, logs, reports, scalar JSON results, and selected manifests with saved
+digests. Supplementary record S1 retains the original captures, source identities, local verification
+inputs and recipes, and reference records. These materials are held in the existing private research
+export; no public repository, archive identifier, or reviewer-access service is established, and no
+redistribution permission is implied.
+The historical precision protocol names saved token arrays, and the harvester results report a
+retained latent shard and payload checks. Those arrays and the original raw trajectory stores
+were not replayed or rehashed in this analysis. The harvester intentionally did not persist raw
+trajectories. The current export is not a complete runnable public dataset and does not provide
+every array needed for independent reproduction. Access and redistribution require authorization
+from the private storage holders; no grant is implied here. The two cited background publications
+are publicly accessible through the publication records listed in the references.
+
+\section*{References}
+
+[1] P. Tillet, H. T. Kung, and D. Cox. Triton: An Intermediate Language and Compiler for Tiled
+Neural Network Computations. Proceedings of the 3rd ACM SIGPLAN International Workshop
+11
+
+on Machine Learning and Programming Languages (MAPL), 10 pages (2019). https://doi.
+org/10.1145/3315508.3329973.
+[2] S. W. Williams, A. Waterman, and D. A. Patterson. Roofline: An Insightful Visual Performance
+Model for Floating-Point Programs and Multicore Architectures. University of California, Berke-
+ley Technical Report UCB/EECS-2008-134 (2008). https://www2.eecs.berkeley.edu/Pubs/
+TechRpts/2008/EECS-2008-134.html.
+12
+
+\end{document}

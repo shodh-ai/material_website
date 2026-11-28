@@ -11,7 +11,28 @@
       "sha256": "aa9dbe505497589c704154058617bb684e6ee875e84a053b6e87760fffbaed89",
       "pages": 17,
       "text": "papers/lucan-10b/manuscript.txt",
-      "downloadName": "LUCAN_10B_arXiv_Research_Manuscript.pdf"
+      "downloadName": "LUCAN_10B_arXiv_Research_Manuscript.pdf",
+      "tex": "papers/lucan-10b/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/lucan-10b/LUCAN_10B_arXiv_Research_Manuscript-latex.zip"
+    },
+    {
+      "id": "P27",
+      "title": "Beyond Reconstruction Error: Falsification Tests for Scientific Representations",
+      "domain": "Research methods",
+      "question": "What evidence is needed to show that a scientific representation preserves the properties its users depend on?",
+      "abstract": "Scientific representations can reconstruct selected values accurately while losing information or physical properties required by a scientific claim. We introduce fail-closed validation, which binds each claim to a population, lawful transformations, physical quantities, a total stored-byte budget, frozen thresholds and reference evidence. The validator returns PASS, FAIL or ABSTAIN. A seven-system retrospective audit, supported by a screen of 1,211 pull requests, identified failures involving objective substitution, physical parity, split ancestry, metric denominators and evidence custody. In a recovered paired experiment, the held-out normalized objective fell by 96.98%, yet both frozen raw-unit superiority gates failed. In cylindrical flow, a fixed-order operator replay was bitwise reproducible while a separate physical trajectory exceeded its radial error gate. An archived single-shock comparison reports lower reconstruction error for two external codecs than for the frozen learned representation. In the sealed benchmark of 160 physical units, fail-closed validation rejected 4,186 of 4,320 prescribed mutant variants, compared with 2,055 for reconstruction alone. It abstained on 640 of 640 withheld-evidence controls.",
+      "authors": [
+        "Shodh AI Research"
+      ],
+      "authorType": "Organization",
+      "publicationType": "Preprint",
+      "pdf": "papers/P27/beyond_reconstruction_error.pdf",
+      "sha256": "c851eb196f4a4594f125ea62ae12bf7c5e9b6694c161783f2232ffac27689c9e",
+      "pages": 10,
+      "tex": "papers/P27/beyond_reconstruction_error.tex",
+      "latexBundle": "papers/P27/beyond_reconstruction_error_latex.zip",
+      "downloadName": "beyond_reconstruction_error.pdf"
     },
     {
       "id": "P26",
@@ -33,7 +54,9 @@
       "sha256": "c2ad1ca9d8e6e4cd3917f3019f42128656181e7eedde2d10c1d56eba6f2c66a6",
       "pages": 11,
       "text": "papers/P26/manuscript.txt",
-      "downloadName": "What-Bitwise-Reproduction-Misses-in-a-GPU-Reactor-Data-Pipeline.pdf"
+      "tex": "papers/P26/manuscript.tex",
+      "downloadName": "What-Bitwise-Reproduction-Misses-in-a-GPU-Reactor-Data-Pipeline.pdf",
+      "latexBundle": "papers/P26/triton-reactor-latex.zip"
     },
     {
       "id": "P01",
@@ -54,7 +77,10 @@
       "text": "papers/P01/manuscript.txt",
       "report": "papers/P01/verification-report.pdf",
       "downloadName": "Reconstruction-Accuracy-and-Irreversible-Ordering-in-Quantized-Cyclic-Mechanics-Fields.pdf",
-      "bibtex": "papers/P01/references.bib"
+      "bibtex": "papers/P01/references.bib",
+      "tex": "papers/P01/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P01/Reconstruction-Accuracy-and-Irreversible-Ordering-in-Quantized-Cyclic-Mechanics-Fields-latex.zip"
     },
     {
       "id": "P02",
@@ -74,7 +100,10 @@
       "text": "papers/P02/manuscript.txt",
       "report": "papers/P02/verification-report.pdf",
       "downloadName": "Source-faithful-static-validation-of-archived-CALVADOS-2-interactions-parameter-equality-contact-range-semantics-and-backend-dependent-test-outcomes.pdf",
-      "bibtex": "papers/P02/references.bib"
+      "bibtex": "papers/P02/references.bib",
+      "tex": "papers/P02/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P02/Source-faithful-static-validation-of-archived-CALVADOS-2-interactions-parameter-equality-contact-range-semantics-and-backend-dependent-test-outcomes-latex.zip"
     },
     {
       "id": "P03",
@@ -88,7 +117,10 @@
       "pages": 13,
       "text": "papers/P03/manuscript.txt",
       "report": "papers/P03/verification-report.pdf",
-      "downloadName": "Toward-pose-robust-residue-faithful-antibody-tokenization-Stored-byte-diagnostics-and-a-framework-anchored-design.pdf"
+      "downloadName": "Toward-pose-robust-residue-faithful-antibody-tokenization-Stored-byte-diagnostics-and-a-framework-anchored-design.pdf",
+      "tex": "papers/P03/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P03/Toward-pose-robust-residue-faithful-antibody-tokenization-Stored-byte-diagnostics-and-a-framework-anchored-design-latex.zip"
     },
     {
       "id": "P04",
@@ -107,7 +139,10 @@
       "text": "papers/P04/manuscript.txt",
       "report": "papers/P04/verification-report.pdf",
       "downloadName": "Rotation-sensitivity-after-BF16-storage-in-coarse-grained-molecular-encoding-and-a-conditional-pocket-frame-correction.pdf",
-      "bibtex": "papers/P04/references.bib"
+      "bibtex": "papers/P04/references.bib",
+      "tex": "papers/P04/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P04/Rotation-sensitivity-after-BF16-storage-in-coarse-grained-molecular-encoding-and-a-conditional-pocket-frame-correction-latex.zip"
     },
     {
       "id": "P06",
@@ -126,7 +161,10 @@
       "text": "papers/P06/manuscript.txt",
       "report": "papers/P06/verification-report.pdf",
       "downloadName": "Registered-Fourier-phase-geometry-after-bfloat16-storage-separating-reconstruction-from-learned-feature-quality.pdf",
-      "bibtex": "papers/P06/references.bib"
+      "bibtex": "papers/P06/references.bib",
+      "tex": "papers/P06/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P06/Registered-Fourier-phase-geometry-after-bfloat16-storage-separating-reconstruction-from-learned-feature-quality-latex.zip"
     },
     {
       "id": "P07",
@@ -146,7 +184,10 @@
       "text": "papers/P07/manuscript.txt",
       "report": "papers/P07/verification-report.pdf",
       "downloadName": "Explicit-coordinate-carriers-learned-distance-tails-and-runtime-frame-augmentation-in-an-atomwise-molecular-representation.pdf",
-      "bibtex": "papers/P07/references.bib"
+      "bibtex": "papers/P07/references.bib",
+      "tex": "papers/P07/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P07/Explicit-coordinate-carriers-learned-distance-tails-and-runtime-frame-augmentation-in-an-atomwise-molecular-representation-latex.zip"
     },
     {
       "id": "P09",
@@ -165,7 +206,10 @@
       "text": "papers/P09/manuscript.txt",
       "report": "papers/P09/verification-report.pdf",
       "downloadName": "Contraction-precision-sensitivity-in-a-coupled-D3Q19-rheology-particulate-workflow.pdf",
-      "bibtex": "papers/P09/references.bib"
+      "bibtex": "papers/P09/references.bib",
+      "tex": "papers/P09/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P09/Contraction-precision-sensitivity-in-a-coupled-D3Q19-rheology-particulate-workflow-latex.zip"
     },
     {
       "id": "P10",
@@ -179,7 +223,10 @@
       "pages": 11,
       "text": "papers/P10/manuscript.txt",
       "report": "papers/P10/verification-report.pdf",
-      "downloadName": "Physical-response-diagnostics-ensemble-agreement-and-fixed-coordinate-fidelity-in-residue-level-IDP-simulations.pdf"
+      "downloadName": "Physical-response-diagnostics-ensemble-agreement-and-fixed-coordinate-fidelity-in-residue-level-IDP-simulations.pdf",
+      "tex": "papers/P10/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P10/Physical-response-diagnostics-ensemble-agreement-and-fixed-coordinate-fidelity-in-residue-level-IDP-simulations-latex.zip"
     },
     {
       "id": "P11",
@@ -193,7 +240,10 @@
       "pages": 9,
       "text": "papers/P11/manuscript.txt",
       "report": "papers/P11/verification-report.pdf",
-      "downloadName": "Metric-semantics-and-geometry-constraints-in-neural-mixer-inverse-design-a-retrospective-retained-artifact-case-study.pdf"
+      "downloadName": "Metric-semantics-and-geometry-constraints-in-neural-mixer-inverse-design-a-retrospective-retained-artifact-case-study.pdf",
+      "tex": "papers/P11/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P11/Metric-semantics-and-geometry-constraints-in-neural-mixer-inverse-design-a-retrospective-retained-artifact-case-study-latex.zip"
     },
     {
       "id": "P12",
@@ -213,7 +263,10 @@
       "text": "papers/P12/manuscript.txt",
       "report": "papers/P12/verification-report.pdf",
       "downloadName": "Grid-native-latent-patchification-for-two-dimensional-Maxwell-field-reconstruction-a-checkpoint-selection-aware-retrospective-case-study.pdf",
-      "bibtex": "papers/P12/references.bib"
+      "bibtex": "papers/P12/references.bib",
+      "tex": "papers/P12/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P12/Grid-native-latent-patchification-for-two-dimensional-Maxwell-field-reconstruction-a-checkpoint-selection-aware-retrospective-case-study-latex.zip"
     },
     {
       "id": "P13",
@@ -227,7 +280,10 @@
       "pages": 10,
       "text": "papers/P13/manuscript.txt",
       "report": "papers/P13/verification-report.pdf",
-      "downloadName": "What-Passing-Solver-Checks-Establish-Periodic-Decay-Manufactured-Pressure-and-Failed-Boundary-Response-in-Fluid-Verification.pdf"
+      "downloadName": "What-Passing-Solver-Checks-Establish-Periodic-Decay-Manufactured-Pressure-and-Failed-Boundary-Response-in-Fluid-Verification.pdf",
+      "tex": "papers/P13/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P13/What-Passing-Solver-Checks-Establish-Periodic-Decay-Manufactured-Pressure-and-Failed-Boundary-Response-in-Fluid-Verification-latex.zip"
     },
     {
       "id": "P14",
@@ -247,7 +303,10 @@
       "text": "papers/P14/manuscript.txt",
       "report": "papers/P14/verification-report.pdf",
       "downloadName": "Discrete-Constraints-Harmonic-Modes-and-Reconstruction-Fidelity-in-Periodic-Fluid-and-Magnetic-Autoencoders.pdf",
-      "bibtex": "papers/P14/references.bib"
+      "bibtex": "papers/P14/references.bib",
+      "tex": "papers/P14/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P14/Discrete-Constraints-Harmonic-Modes-and-Reconstruction-Fidelity-in-Periodic-Fluid-and-Magnetic-Autoencoders-latex.zip"
     },
     {
       "id": "P15",
@@ -261,7 +320,10 @@
       "pages": 10,
       "text": "papers/P15/manuscript.txt",
       "report": "papers/P15/verification-report.pdf",
-      "downloadName": "Peak-and-Spectral-Agreement-Do-Not-Establish-Field-Reconstruction.pdf"
+      "downloadName": "Peak-and-Spectral-Agreement-Do-Not-Establish-Field-Reconstruction.pdf",
+      "tex": "papers/P15/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P15/Peak-and-Spectral-Agreement-Do-Not-Establish-Field-Reconstruction-latex.zip"
     },
     {
       "id": "P16",
@@ -275,7 +337,10 @@
       "pages": 7,
       "text": "papers/P16/manuscript.txt",
       "report": "papers/P16/verification-report.pdf",
-      "downloadName": "Energy-Balance-and-Comparison-Observables-in-a-PMMA-Impact-Fracture-Simulation-Audit.pdf"
+      "downloadName": "Energy-Balance-and-Comparison-Observables-in-a-PMMA-Impact-Fracture-Simulation-Audit.pdf",
+      "tex": "papers/P16/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P16/Energy-Balance-and-Comparison-Observables-in-a-PMMA-Impact-Fracture-Simulation-Audit-latex.zip"
     },
     {
       "id": "P18",
@@ -289,7 +354,10 @@
       "pages": 10,
       "text": "papers/P18/manuscript.txt",
       "report": "papers/P18/verification-report.pdf",
-      "downloadName": "Reconstruction-symmetry-response-and-reference-stability-in-an-inherited-Fe-Cr-geometry-tokenizer.pdf"
+      "downloadName": "Reconstruction-symmetry-response-and-reference-stability-in-an-inherited-Fe-Cr-geometry-tokenizer.pdf",
+      "tex": "papers/P18/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P18/Reconstruction-symmetry-response-and-reference-stability-in-an-inherited-Fe-Cr-geometry-tokenizer-latex.zip"
     },
     {
       "id": "P19",
@@ -303,7 +371,10 @@
       "pages": 9,
       "text": "papers/P19/manuscript.txt",
       "report": "papers/P19/verification-report.pdf",
-      "downloadName": "Independent-Field-and-Charge-Fidelity-Versus-Constructed-Constraints-in-a-Three-Dimensional-Electromagnetic-Spectral-Codec.pdf"
+      "downloadName": "Independent-Field-and-Charge-Fidelity-Versus-Constructed-Constraints-in-a-Three-Dimensional-Electromagnetic-Spectral-Codec.pdf",
+      "tex": "papers/P19/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P19/Independent-Field-and-Charge-Fidelity-Versus-Constructed-Constraints-in-a-Three-Dimensional-Electromagnetic-Spectral-Codec-latex.zip"
     },
     {
       "id": "P20",
@@ -323,7 +394,10 @@
       "text": "papers/P20/manuscript.txt",
       "report": "papers/P20/verification-report.pdf",
       "downloadName": "Finite-Equivalence-and-Nested-Performance-Limits-in-a-Fused-Reactor-Field-Generator.pdf",
-      "bibtex": "papers/P20/references.bib"
+      "bibtex": "papers/P20/references.bib",
+      "tex": "papers/P20/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P20/Finite-Equivalence-and-Nested-Performance-Limits-in-a-Fused-Reactor-Field-Generator-latex.zip"
     },
     {
       "id": "P21",
@@ -337,7 +411,10 @@
       "pages": 9,
       "text": "papers/P21/manuscript.txt",
       "report": "papers/P21/verification-report.pdf",
-      "downloadName": "Separate-Gates-for-Reconstruction-Symmetry-and-Population-Size-in-an-Adsorbate-Slab-Codec.pdf"
+      "downloadName": "Separate-Gates-for-Reconstruction-Symmetry-and-Population-Size-in-an-Adsorbate-Slab-Codec.pdf",
+      "tex": "papers/P21/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P21/Separate-Gates-for-Reconstruction-Symmetry-and-Population-Size-in-an-Adsorbate-Slab-Codec-latex.zip"
     },
     {
       "id": "P25",
@@ -351,7 +428,10 @@
       "pages": 7,
       "text": "papers/P25/manuscript.txt",
       "report": "papers/P25/verification-report.pdf",
-      "downloadName": "Stored-Byte-Distinctness-and-Physical-Population-Accounting-in-Scientific-Latent-Datasets.pdf"
+      "downloadName": "Stored-Byte-Distinctness-and-Physical-Population-Accounting-in-Scientific-Latent-Datasets.pdf",
+      "tex": "papers/P25/manuscript-derived.tex",
+      "latexKind": "derived",
+      "latexBundle": "papers/P25/Stored-Byte-Distinctness-and-Physical-Population-Accounting-in-Scientific-Latent-Datasets-latex.zip"
     }
   ]
 }

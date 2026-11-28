@@ -1,0 +1,1592 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: aa9dbe505497589c704154058617bb684e6ee875e84a053b6e87760fffbaed89
+% Extracted text SHA-256: 7c586faf03129c766a3a94555d8df0a15edab7126e2efd3b8c67cbe21725c654
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{LUCAN-10B-Physics: A Sparse Foundation Model for Cross-Scale Physical Prediction}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+
+LUCAN-10B-Physics: A Sparse Foundation
+Model for Cross-Scale Physical Prediction
+
+
+Shodh AI Technical Report
+Shodh AI Research
+
+
+\noindent 11.39B\quad 731,998\quad 14 of 25\par
+
+
+\noindent total parameters, 9.8\% active on\quad tokens/s across eight H100s\quad primary continuum rows with\par
+
+
+\noindent one token path\quad lowest error\par
+
+
+
+
+\section*{Abstract}
+
+LUCAN-10B-Physics is an 11.39B-parameter hybrid foundation model
+that combines Mamba2 with 12 causal attention–mixture-of-experts layers,
+each selecting one of 35 specialists alongside a shared expert. Only 9.8\%
+of stored parameters lie on a single token path. Modality-specific stems
+connect periodic crystal geometry, molecular fingerprints for biopharma-
+ceutical properties, and continuum fields to one shared backbone.
+Multi-donor sparse upcycling and FP32 router calibration lower latent val-
+idation error by 10.5\%; the archived checkpoint exercises 412/420 routed
+slots. LUCAN records the lowest error on 14 of 25 primary multi-step
+comparisons against configured FNO and U-Net baselines on PDEBench,
+with up to 1,000 test trajectories per task, and The Well. Simulation pre-
+training reduces four-shot out-of-distribution error by 17.7\% for Cylinder
+wake and 19.0\% for fluid–structure interaction.
+The optional TCPI projection attains a maximum relative Sod mass resid-
+ual of 6.57 \ensuremath{\times} 10\ensuremath{-}9 and 0.0\% Stefan positivity violations in paired replay.
+Frozen-checkpoint scalar readouts improve over both matched descriptor
+baselines on the full-split TDC AqSolDB corpus of 9,980 molecules and five-
+fold Matbench Phonons. Eight H100s sustain 731,998 tokens/s of back-
+bone throughput. These results establish measured operating points across
+physical scales; constraint satisfaction, prediction accuracy, and hardware
+throughput are evaluated separately.
+An earlier 1,000-case Stefan workload gives a reported 71.1\ensuremath{\times} CPU wall-
+time ratio at different achieved errors. On the first fixed Stefan test case,
+the warmed v2 surrogate takes 23.64 ms, running 2.90\ensuremath{\times} faster than a
+qualifying 512-cell H100 CUDA numerical solver (68.47 ms) and 10.45\ensuremath{\times}
+faster than the CPU solver (246.99 ms).
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 1\par
+
+
+% Extracted chunk 2
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+\noindent SECTION 1\quad INTRODUCTION\par
+
+
+A shared model across physical scales
+Physical simulation supports engineering decisions across transport, fluid mechanics, phase
+change, materials, and biopharmaceutical development. Numerical solvers encode governing
+equations and boundary conditions explicitly, while learned surrogates trade a training in-
+vestment for repeated prediction. Fourier Neural Operators (FNO) [1] and U-Net models [2]
+provide strong task-specific baselines, but sharing representations across different equations,
+geometries, and molecular inputs requires a broader interface.
+Multiple Physics Pretraining (MPP) [3] studies autoregressive pretraining across hetero-
+geneous physical systems. Poseidon [4] uses a multiscale operator transformer for PDE
+transfer. WALRUS, introduced in November 2025 as arXiv:2511.15684, is a cross-domain
+foundation model for continuum dynamics [5]. These systems motivate shared physical
+representations. Our empirical rollout scorecard compares LUCAN with the fitted FNO
+and U-Net baselines; it does not establish a measured ranking against Poseidon, MPP, or
+WALRUS.
+LUCAN-10B-Physics combines a causal Mamba2 recurrence [6] with 12 causal attention–
+MoE blocks. Hybrid state-space, attention, and sparse-expert designs also appear in
+Jamba [7]. We adapt that systems principle to a common width of 3,072 with task-specific
+physical encoders and readouts. Each block contains 35 routed specialists and one shared
+expert. The model stores 11.39 billion parameters, with 1,116,550,468 parameters on the
+width-256 single-token path. The resulting 9.8\% structural fraction describes selective
+execution, rather than batch memory or total attention cost.
+Sparse initialization and routing. Sparse Upcycling reuses pretrained dense checkpoints
+to initialize experts [8]; Drop-Upcycling introduces partial reinitialization to promote spe-
+cialization [9]. Our multi-donor initialization, specialist adaptation, and train-fitted FP32
+router calibration are evaluated both as an archived recipe and as a controlled three-seed
+factorial. The recipe reduces pooled latent validation error from 1.20333 to 1.07667, while
+the archived test audit reaches 412 of 420 routed layer–expert slots.
+
+\noindent Continuum and experimental evidence.\quad We report matched horizons on\par
+
+PDEBench [10] and The Well [11], and real-only versus simulation-then-real adaptation
+on RealPDEBench, published at ICLR 2026 [12]. The 25 primary rollout rows use relative
+L2 for PDEBench and VRMSE for The Well. LUCAN has the lowest unrounded error on
+14 rows. Four-shot simulation pretraining lowers LUCAN’s Cylinder and FSI OOD errors
+by 17.7\% and 19.0\%, respectively. Frozen-backbone readout controls measure the effect of
+decoder choice.
+Physical constraints and cross-modality reuse. TCPI imposes a prescribed global
+inventory or admissible output bounds when the required physical information is available.
+Paired replay measures its effect on identical decoded fields. The same frozen checkpoint
+also supplies representations for Matbench crystal properties and TDC biopharmaceutical
+and molecular properties. Matched raw-descriptor MLP and FP64 Ridge controls identify
+where the residual representation helps and where simpler fits remain stronger.
+Deployment scope. H100 measurements report backbone latency and data-parallel weak
+scaling separately from complete surrogate execution. The earlier 1,000-case Stefan compar-
+ison reports a 71.1\ensuremath{\times} CPU wall-time ratio at different achieved errors (Table 9). On the first
+fixed Stefan test case, the warmed v2 surrogate takes 23.64 ms, running 2.90\ensuremath{\times} faster than
+a qualifying 512-cell H100 CUDA numerical solver (68.47 ms) and 10.45\ensuremath{\times} faster than the
+CPU solver (246.99 ms). Section 9 states the remaining timing and unified-pretraining
+limitations; Appendix A records the dataset rosters and reproduction requirements.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 2\par
+
+
+% Extracted chunk 3
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+\noindent SECTION 2\quad ARCHITECTURE\par
+
+
+Cross-scale tokens and physical outputs
+
+
+\section*{2.1 One token interface across physical scales}
+
+Let um be a physical input, sm its modality stem, and Pm,t an optional patch or site indexing
+operator. Learned lifts map native tokens to a common width:
+
+\noindent xm,t = Lm (sm (Pm,t um )) ,\quad Lm : Rm \ensuremath{-}\ensuremath{\to} R3072 ,\quad m \ensuremath{\in} \{48, 192, 256\}.\par
+
+Width 192 is used for crystal sites; width 256 is used for biopharmaceutical molecular
+descriptors and continuum patches. Width 48 remains an additional supported interface.
+A task mask identifies valid sites or patches and excludes padding from scalar pooling and
+physical integrals.
+
+\noindent Crystals\quad Biopharmaceutical /\quad Continuum fields\par
+
+molecular properties
+
+\noindent Crystal sites in periodic cells\quad Molecular graphs from SMILES Sampled fields and geometry\par
+
+
+\noindent Species, distances and lattice\quad Radius-2 Morgan fingerprints  Local patches and physical\par
+
+
+\noindent information\quad coordinates\par
+
+
+\noindent Width-192 crystal tokens\quad Width-256 descriptor token\quad Width-256 grid tokens\par
+
+Modality stems \ensuremath{-}\ensuremath{\to} learned lifts \ensuremath{-}\ensuremath{\to} shared 3,072-D LUCAN backbone
+
+\noindent Masked pool + crystal head\quad Masked pool + property head\quad Multiscale field decoder +\par
+
+optional TCPI
+
+Figure 1: Scale ladder. Crystal, biopharmaceutical molecular-property, and continuum encoders
+and readouts share the same 3,072-dimensional backbone.
+
+
+\section*{2.2 Crystal distance–lattice stem}
+
+For species Zi and Cartesian positions ri , the geometric encoder summarizes local composi-
+tion and radial distances. For a periodic cell with lattice matrix A, define a minimum-image
+displacement by
+\ensuremath{\star}
+
+\noindent nij \ensuremath{\in} arg min3 krj \ensuremath{-} ri + Ank2 ,\quad dij = krj \ensuremath{-} ri + Anij\par
+
+\ensuremath{\star}
+k2 .
+n\ensuremath{\in}Z
+
+For crystal sites, writing e(Z) for species features, \ensuremath{\rho}(d) for radial-basis features, and \ensuremath{\ell}(A)
+for periodic-cell descriptors, the site pathway can be expressed as
+
+\noindent [U+F8EE]\quad [U+F8F9]\par
+
+X
+
+\noindent ai = [U+F8F0]e(Zi ),\quad e(Zj ) \ensuremath{\otimes} \ensuremath{\rho}(dij ), \ensuremath{\ell}(A)[U+F8FB] ,  ssite\par
+
+
+\noindent i\quad = E192 (ai ) \ensuremath{\in} R192 .\par
+
+j6=i
+
+The stem summarizes species, radial distances, and periodic-cell geometry for crystal-
+property prediction. Minimum-image distances incorporate the crystal lattice without re-
+quiring an additional force-field model.
+
+\section*{2.3 Molecular graph and continuum stems}
+
+A molecular graph G parsed from SMILES supplies a radius-2, 256-bit Morgan fingerprint, a
+circular graph-derived descriptor [13]. With an optional train-fitted descriptor normalization
+N , the molecular token is
+
+\noindent f (G) = Morgan2,256 (G) \ensuremath{\in} \{0, 1\}256 ,\quad smol = E256 (N (f (G))) \ensuremath{\in} R256 .\par
+
+This descriptor forms a single token for the molecular scalar pathway. It is a graph-derived
+fingerprint rather than a claim that a new graph neural network was trained in these exper-
+iments.
+The continuum stem standardizes channels with training-split statistics, extracts local field
+patches, and includes physical coordinates and patch metadata. In schematic form,
+
+sgrid
+
+\noindent t\quad = E256 ([N (Pt u), xt , \ensuremath{\mu}t ]) .\par
+
+
+
+
+\noindent Shodh AI Technical Report\quad 3\par
+
+
+% Extracted chunk 4
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+The task determines patch stride, channel layout, and valid-cell mask. The readout maps
+contextual tokens back to the native prediction grid. In the reported decoders, raw fields
+and coordinates also reach the readout alongside contextual backbone features.
+
+\section*{2.4 Mamba2 recurrence and FP32 sparse routing}
+
+The causal Mamba2 layer [6] combines a causal convolution with an input-dependent state-
+space recurrence:
+ht = Āt ht\ensuremath{-}1 + B̄t xt ,  zt = Ct ht + Dxt .
+Twelve blocks follow, each with 24 causal attention heads and a sparse feed-forward module.
+Given a block input v, router logits and probabilities are
+
+\noindent g(v) = Wg v + bg\quad in FP32,\quad p(v) = softmax(g(v)),\par
+
+
+\noindent r = arg max gj (v),\quad f (v) = pr (v)Er (v) + Eshared (v).\par
+
+j\ensuremath{\in}\{1,...,35\}
+
+The shared expert contributes on every token path. A batch can exercise several routed
+specialists even though each token selects one per block. The recurrence has linear sequence-
+length cost at fixed state width; the retained causal attention still has a quadratic token-pair
+count. Measured wall time includes attention, dispatch, memory traffic, and kernel launches.
+
+\section*{2.5 Multiscale spectral-dilated and scalar readouts}
+
+The v1 spatial decoder combines Fourier modes, locally dilated convolutions, and low-rank
+cross-attention to frozen backbone patches. Coordinates and an input residual retain native-
+grid information. The staged v2 decoder adds a multiscale correction to a frozen v1 predic-
+
+\noindent tion:\quad [U+0010]\quad [U+0011]\par
+
+ybv2 = ybv1,frozen + \ensuremath{\Delta}multiscale xraw , \{h(3) , h(6) , h(9) , h(12) \} .
+Signed 192-component projections mix the four backbone taps at each scale. Cross-attention
+and FiLM condition a width-96, three-scale convolutional pyramid, with a full-resolution
+Fourier branch retaining 16 or 24 modes. Readout selection uses the matched development-
+validation metric, not the test score.
+For a validity mask bt and last-layer token state ht , the scalar pathway uses masked pooling
+and a residual readout:
+
+\noindent P\quad [U+0010]\quad [U+0011]\par
+
+
+\noindent bt ht\quad e .\par
+
+e + \ensuremath{\Delta}\ensuremath{\theta} [h̄, d]
+
+\noindent h̄ = Pt\quad ,\quad yb = fraw (d)\par
+
+t bt
+
+Here de denotes normalized raw descriptors. A feature-only head uses h̄ alone. Matched
+descriptor-only MLP and Ridge controls retain the same raw information, target, and split;
+the residual head adds contextual features and readout capacity.
+
+\section*{2.6 TCPI: admissibility and exact inventory projection}
+
+For a positive channel, softplus \ensuremath{\varphi}(ai ) = log(1+eai ) is a smooth option; the numerical control
+uses \ensuremath{\varphi}(ai ) = max(0, ai ). Let qi = \ensuremath{\varphi}(ai ),PM \ensuremath{\geq} 0 be the input-derived inventory, vi > 0 the
+cell volume, and V the valid-cell set. If j\ensuremath{\in}V vj qj > 0,
+
+\noindent M qi\quad X\par
+
+
+\noindent ybi = P\quad ,\quad vi ybi = M.\par
+
+
+\noindent j\ensuremath{\in}V vj qj\quad i\ensuremath{\in}V\par
+
+
+When M = 0, the positive-channel output is the zero field. A positive target with zero
+normalizer requires an explicit runtime guard. The discrete ledger is checked after output
+casting. For a signed periodic field, the affine correction
+P
+M \ensuremath{-} j\ensuremath{\in}V vj aj
+
+\noindent ybi = ai +\quad P\par
+
+j\ensuremath{\in}V vj
+
+preserves the signed global integral. For Sod, the density inventory is initialized from the
+input and advanced using known boundary fluxes. For Stefan, temperature is lower-clamped
+and solid fraction uses
+bi = min(1, max(0, ai )).
+\ensuremath{\phi}
+
+
+
+\noindent Shodh AI Technical Report\quad 4\par
+
+
+% Extracted chunk 5
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+This phase map is piecewise differentiable, with unit derivative inside (0, 1) and zero outside.
+Exact global inventory in arithmetic, numerical ledger residual, local PDE conservation,
+and field accuracy are distinct properties. The paired experiments in Section 5 measure the
+specified constraints and analytical-reference errors separately.
+
+
+\noindent SECTION 3\quad MODEL SCALING\par
+
+
+Upcycling and specialist routing
+Multi-donor construction. Sparse Upcycling [8] initializes experts from pretrained check-
+points, while Drop-Upcycling [9] motivates controlled reinitialization to encourage special-
+ization. LUCAN’s five routed groups alternate between two donor checkpoints. A hidden-
+channel permutation Pg transforms an expert’s two feed-forward matrices as
+
+(W1 , W2 ) 7\ensuremath{-}\ensuremath{\to} (Pg W1 , W2 Pg> ),
+
+preserving its function before Gaussian perturbation. Specialist adaptation and train-fitted
+FP32 router calibration then refine the initialized model. The archived recipe lowers pooled
+latent validation error from 1.20333 to 1.07667, a 10.5\% reduction.
+
+\noindent A Historical native TEST routing\quad B Historical TEST\quad C Sealed checkpoint\par
+
+
+
+\noindent Domain 1\quad 1.4\par
+
+
+\noindent 15.0\quad 800\par
+
+1.2
+
+
+
+
+Within-layer pairs
+12.5
+
+
+
+
+Traffic share (\%)
+Domain 2
+
+\noindent 1.0\quad 600\par
+
+
+
+Load CV
+10.0
+
+\noindent Domain 3\quad 0.8\par
+
+
+\noindent 7.5\quad 400\par
+
+0.6
+
+\noindent Domain 4\quad 5.0\quad 0.4\par
+
+200
+
+\noindent 2.5\quad 0.2\par
+
+Domain 5
+
+\noindent 0.0\quad 0.0\quad 0\par
+
+
+\noindent 1\quad 7\quad 14\quad 21\quad 28\quad 35\quad 1\quad 4\quad 8\quad 12\quad 0\quad 2\quad 4\quad 6\quad 8\par
+
+
+\noindent Expert ID\quad Transformer layer\quad FC1 + FC2 cosine\quad 1e\ensuremath{-}3\par
+
+
+
+
+
+Figure 2: Routing, traffic and expert-weight measurements on the archived five-domain evaluation.
+The checkpoint uses 412/420 routed layer–expert slots. The maximum absolute unaligned expert-
+weight cosine is 0.008469 across 7,140 pairs. CV denotes traffic coefficient of variation.
+Table 1: Archived multi-donor upcycling, specialist adaptation and FP32 router calibration com-
+pared with an uncalibrated clone. Error is pooled latent relative L2 . This recipe comparison is
+distinct from the matched factorial below.
+
+
+\noindent Measurement\quad Uncalibrated clone Calibrated LUCAN-10B\par
+
+
+\noindent Validation error\quad 1.20333\quad 1.07667\par
+
+
+\noindent Active validation slots\quad 81/420\quad 310/420\par
+
+
+\noindent Mean validation layer CV\quad 3.21\quad 1.77\par
+
+
+\noindent Active slots on archived test panel\quad —\quad 412/420\par
+
+
+\noindent Maximum absolute unaligned weight cosine\quad 1.000000\quad 0.008469\par
+
+
+
+\section*{3.1 Three-seed donor-by-calibration factorial}
+
+The controlled factorial holds specialist adaptation, token exposure, and Gaussian pertur-
+bation scale \ensuremath{\sigma} = 0.005 fixed. The single-donor arm repeats the same donor checkpoint; the
+multi-donor arm uses both. The calibration contrast toggles a router bias fitted on TRAIN.
+Validation contains 12 cases; the sealed five-domain test split contains 10 cases. Table 2
+reports arm means and the available paired 95\% confidence intervals for the effects.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 5\par
+
+
+% Extracted chunk 6
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+Table 2: Three-seed factorial with matched specialist adaptation. Upper panel: mean errors and
+mean active test slots. Lower panel: paired TEST contrasts with their reported 95\% CIs. A
+negative contrast favors the added component; intervals describe contrasts, rather than per-arm
+error uncertainty.
+
+Donors FP32 calibration VAL error TEST error TEST slots / 420
+
+\noindent Single\quad Off\quad 1.20839\quad 1.17993\quad 193.3\par
+
+
+\noindent Single\quad On\quad 1.20708\quad 1.17747\quad 394.7\par
+
+
+\noindent Multi\quad Off\quad 1.20430\quad 1.17552\quad 192.3\par
+
+
+\noindent Multi\quad On\quad 1.20488\quad 1.17518\quad 395.0\par
+
+
+
+\noindent Paired TEST contrast\quad Mean difference\quad 95\% CI\par
+
+
+\noindent Multi minus single donor, averaged over calibration\quad \ensuremath{-}0.003350 [\ensuremath{-}0.005405, \ensuremath{-}0.002826]\par
+
+
+\noindent Calibration on minus off, averaged over donors\quad \ensuremath{-}0.001401 [\ensuremath{-}0.002264, \ensuremath{-}0.000724]\par
+
+
+\noindent Donor–calibration interaction\quad +0.002111 [+0.001210, +0.005485]\par
+
+The positive interaction indicates a smaller calibration gain with multi-donor initialization.
+The validation calibration interval includes zero. Within the multi-donor test arm, cali-
+bration increases observed slot coverage from 45.8\% to 94.0\%. The archived checkpoint’s
+412-slot audit and the factorial’s 395.0 mean slots are different evaluations and should not
+be substituted for each other.
+
+\section*{3.2 Error aggregation and expert diversity}
+
+The pooled latent score weights domains by target-squared magnitude. One domain supplies
+89.6\% of the denominator on the ten-case test panel. Equal-domain mean contrasts remain
+negative: \ensuremath{-}0.003462 for donors and \ensuremath{-}0.001777 for calibration, with negative point contrasts
+in each domain. The 10.5\% archived recipe improvement should therefore be read alongside
+the controlled factorial, rather than attributed to calibration alone.
+Unaligned weight cosine is sensitive to the construction permutations and does not estab-
+lish functional diversity by itself. After reversing those permutations, the mean seed-level
+median cosine changes from 0.002452 to 0.002345 between single- and multi-donor experts.
+Functional-output cosine changes from 0.6224 to 0.5896 and directional-Jacobian cosine
+from 0.2138 to 0.2014. Within each arm, experts share pre-router probe inputs; cross-arm
+activations come from each model’s own held-out pass.
+
+
+\noindent SECTION 4\quad CONTINUUM PREDICTION\par
+
+
+Multi-step rollout evaluation
+
+
+\section*{4.1 Matched horizons and trajectory partitions}
+
+PDEBench [10] uses 1,000 test trajectories for 1D Advection, 1D Burgers, 1D Reaction–
+Diffusion, and 2D Darcy Flow; 2D Reaction–Diffusion uses 100. Darcy is a static coefficient-
+to-pressure map. Dynamic tasks begin from the same observed frame and recursively feed
+predictions into later steps. The Well [11] retains its published whole-trajectory partitions
+for Gray–Scott, Active Matter, Shear Flow, and Rayleigh–Bénard. Appendix A gives the
+complete rosters.
+For a prediction at horizon t, relative L2 compares the field error norm with the target
+norm. The Well uses per-channel variance-normalized RMSE,
+s
+MSE(b  yn,c,t , yn,c,t )
+
+\noindent VRMSEn,c,t =\quad ,\par
+
+Vari (yn,i,c,t ) + 10\ensuremath{-}7
+
+aggregated across channels and trajectories. Active Matter relative-L2 rows are supplemen-
+tary. The 25 primary rows comprise the 13 PDEBench rows and 12 The Well VRMSE rows;
+they do not include those three supplementary rows.
+Validation-selected readouts. For The Well, the spatial objective combines variance-
+normalized RMSE with relative L2 and a one- to three-step pushforward curriculum. A
+staged v2 candidate replaces v1 only if it improves the matched validation metric: first-step
+
+
+
+\noindent Shodh AI Technical Report\quad 6\par
+
+
+% Extracted chunk 7
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+mean VRMSE for The Well and mean relative L2 for PDEBench and RealPDEBench. This
+gate selected 21 of 23 candidates across rollout and transfer experiments. The Burgers and
+Darcy rows retain v1, with no v2 candidates in that sweep; the other LUCAN rollout rows
+use v2.
+
+\section*{4.2 Field comparisons and rollout behavior}
+
+LUCAN records the lowest error in 14 of 25 primary comparisons. Relative to FNO,
+static Darcy error is approximately 8.5\ensuremath{\times} lower; Advection at step 10 is 8.5\ensuremath{\times} lower; and
+Rayleigh–Bénard step-10 VRMSE is 3.75\ensuremath{\times} lower. These are row-specific ratios, rather than
+an aggregate benchmark speed or accuracy factor.
+Gray–Scott and Rayleigh–Bénard favor LUCAN at longer reported horizons, while U-Net
+remains strongest on the primary Active Matter rows. Shear Flow favors LUCAN at steps
+1 and 5 and FNO at step 10. Reporting all horizons and baselines preserves these operating
+differences rather than reducing the study to the win count.
+Table 3: Continuum prediction on PDEBench and The Well at t = 1, 5, 10, with one static
+prediction for Darcy. N counts test trajectories. Lower is better; bold marks the lowest unrounded
+error among the three configured methods.
+
+
+\noindent Dataset\quad N\quad t Measure LUCAN-10B\quad FNO\quad U-Net\par
+
+PDEBench
+
+\noindent 1D Advection\quad 1000\quad 1\quad Rel. L2\quad 0.00067 0.00329  0.00061\par
+
+
+\noindent 5\quad Rel. L2\quad 0.00185 0.01168\quad 0.00451\par
+
+
+\noindent 10\quad Rel. L2\quad 0.00333 0.02848\quad 0.02190\par
+
+
+\noindent 1D Burgers\quad 1000\quad 1\quad Rel. L2\quad 0.00401 0.00508\quad 0.00460\par
+
+
+\noindent 5\quad Rel. L2\quad 0.05303 0.05682\quad 10.88610\par
+
+
+\noindent 10\quad Rel. L2\quad 0.09942 0.12530 8.31 \ensuremath{\times} 108\par
+
+
+\noindent 1D Reaction–Diffusion 1000\quad 1\quad Rel. L2\quad 0.00014 0.00014\quad 0.07650\par
+
+
+\noindent 5\quad Rel. L2\quad 0.00094 0.00068\quad 1.20228\par
+
+
+\noindent 10\quad Rel. L2\quad 0.00138 0.00115  19.33048\par
+
+
+\noindent 2D Darcy Flow\quad 1000\quad 1\quad Rel. L2\quad 0.02951 0.25136\quad 0.51650\par
+
+
+\noindent 2D Reaction–Diffusion 100\quad 1\quad Rel. L2\quad 0.96580 0.97531  0.96537\par
+
+
+\noindent 5\quad Rel. L2\quad 0.97628 1.03273  0.97377\par
+
+
+\noindent 10\quad Rel. L2\quad 0.97525 1.05820\quad 0.98600\par
+
+The Well
+
+\noindent Gray–Scott\quad 120\quad 1\quad VRMSE\quad 0.18929\quad 0.22863  0.18314\par
+
+
+\noindent 5\quad VRMSE\quad 0.58317\quad 1.03718\quad 0.91264\par
+
+
+\noindent 10\quad VRMSE\quad 1.33598\quad 1.96542\quad 1.94491\par
+
+
+\noindent Active Matter\quad 26\quad 1\quad VRMSE\quad 3.23628\quad 5.33087  2.54440\par
+
+
+\noindent 5\quad VRMSE\quad 14.58457\quad 55.67803 11.90089\par
+
+
+\noindent 10\quad VRMSE\quad 13.08445\quad 29.87972  7.51500\par
+
+
+\noindent 26\quad 1\quad Rel. L2\quad 0.12295\quad 0.16503\quad 0.20068\par
+
+
+\noindent 5\quad Rel. L2\quad 0.91517\quad 2.53734  0.83014\par
+
+
+\noindent 10\quad Rel. L2\quad 1.22464\quad 2.16258  1.00621\par
+
+
+\noindent Shear Flow\quad 112\quad 1\quad VRMSE\quad 0.01636\quad 0.03080\quad 0.23875\par
+
+
+\noindent 5\quad VRMSE\quad 0.17242\quad 0.22500\quad 0.86179\par
+
+
+\noindent 10\quad VRMSE\quad 0.52795\quad 0.45843\quad 6.87916\par
+
+
+\noindent Rayleigh–Bénard\quad 175\quad 1\quad VRMSE\quad 0.43313\quad 1.87671\quad 3.02995\par
+
+
+\noindent 5\quad VRMSE\quad 2.46888\quad 12.73057  51.85465\par
+
+
+\noindent 10\quad VRMSE\quad 5.88615\quad 22.09398 178.92939\par
+
+The 25 primary comparisons use relative L2 for PDEBench and VRMSE for The Well. The three
+Active Matter relative-L2 rows report a different weighting of field error and are supplementary.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 7\par
+
+
+% Extracted chunk 8
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+\noindent Reference\quad LUCAN-10B\quad FNO\quad U-Net\par
+
+
+
+
+
+Darcy
+
+
+
+
+Reaction–diffusion
+
+
+
+
+Cylinder wake
+
+
+
+
+1.0
+
+0.8
+
+
+Sod density
+0.6
+
+0.4
+
+0.2
+
+
+
+\noindent 0\quad 1\quad 0\quad 1\quad 0\quad 1\quad 0\quad 1\par
+
+
+1.0
+
+0.8
+
+
+
+
+Stefan phase
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+\noindent 0\quad 1\quad 0\quad 1\quad 0\quad 1\quad 0\quad 1\par
+
+
+
+
+
+Figure 3a: Matched reference and predicted fields for Darcy, reaction–diffusion, Cylinder wake,
+Sod density, and Stefan phase fraction. Each row uses the same field or case across models.
+
+\noindent Gray–Scott\quad Shear Flow\quad Cylinder · OOD\par
+
+
+\section*{2.0                                                                                                                                                                                           LUCAN-10B-Physics}
+
+
+\noindent 0.12\quad FNO\par
+
+
+
+
+
+VRMSE (log scale)
+U-Net
+1.5
+
+
+
+Relative L2
+
+\noindent 100\quad 0.11\par
+
+
+
+\noindent VRMSE\quad 1.0\par
+
+0.10
+10\ensuremath{-}1
+
+\noindent 0.5\quad 0.09\par
+
+
+
+
+\noindent 1\quad 3\quad 5\quad 7\quad 10\quad 1\quad 3\quad 5\quad 7\quad 10\quad 4\quad 8\quad 16\quad 32\par
+
+
+\noindent Forecast step\quad Forecast step\quad Real training trajectories\par
+
+
+\noindent Active Matter\quad Rayleigh–Bénard\quad FSI · OOD\par
+
+60
+
+\noindent 102\quad 0.085\par
+
+
+
+
+
+VRMSE (log scale)
+0.080
+
+
+Relative L2
+40
+
+VRMSE
+
+\noindent 101\quad 0.075\par
+
+
+
+\noindent 20\quad 0.070\par
+
+
+
+\noindent 100\quad 0.065\par
+
+
+0
+
+\noindent 1\quad 3\quad 5\quad 7\quad 10\quad 1\quad 3\quad 5\quad 7\quad 10\quad 4\quad 8\quad 16\quad 32\par
+
+
+\noindent Forecast step\quad Forecast step\quad Real training trajectories\par
+
+
+
+
+
+Figure 3b: Multi-step The Well rollouts and OOD transfer after simulation pretraining for Cylin-
+der and FSI. Rollout panels show mean VRMSE; transfer panels show mean trajectory relative L2
+against the number of real training trajectories. The original measured curves are retained.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 8\par
+
+
+% Extracted chunk 9
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+\noindent SECTION 5\quad EMPIRICAL CONTROLS\par
+
+
+Readouts and physical conservation
+
+
+\section*{5.1 Frozen-backbone readout ablation}
+
+The original readout comparison holds the frozen LUCAN backbone and physical inputs
+fixed while fitting a one-layer linear probe, a two-layer MLP, or a two-layer spectral-dilated
+decoder. Table 4 preserves both field errors and the applicable absolute mass-ledger resid-
+uals. These original readout values precede the staged validation-selected v2 scorecard in
+Table 3; the two tables measure different readout protocols.
+Table 4: Readout ablation on the same frozen backbone. Relative L2 and absolute signed mass-
+ledger differences are evaluated on matched physical grids. Dashes indicate that no applicable
+ledger is reported. Bold marks the lowest unrounded mean within each metric block.
+
+
+\noindent Relative L2\quad Absolute mass residual\par
+
+
+\noindent Dataset\quad N\quad t\quad Linear\quad MLP Spectral Linear MLP\quad Spectral\par
+
+
+\noindent 1D Advection\quad 1 0.06352 0.05718 0.00078 0.0152 0.0004 4.41 \ensuremath{\times} 10\ensuremath{-}5\par
+
+1000
+
+\noindent 5 0.30958 0.27710 0.00247 0.0772 0.0018\quad 0.0002\par
+
+
+\noindent 10 0.58900 0.52053 0.00457 0.1579 0.0036\quad 0.0005\par
+
+
+\noindent 1D Burgers\quad 1000 1 0.09792 0.08253 0.00401 0.0262 0.0028\quad 0.0003\par
+
+
+\noindent 5 0.40724 0.33124 0.05303 0.1137 0.0128\quad 0.0032\par
+
+
+\noindent 10 0.64361 0.51210 0.09942 0.1901 0.0240\quad 0.0084\par
+
+
+\noindent 1D Reaction–Diffusion 1000 1 0.13120 0.07441 0.00043\quad —\quad —\quad —\par
+
+
+\noindent 5 0.05496 0.06309 0.00177\quad —\quad —\quad —\par
+
+
+\noindent 10 0.09831 0.05644 0.00380\quad —\quad —\quad —\par
+
+
+\noindent 2D Darcy Flow\quad 1000 1 0.50575 0.49913 0.02951\quad —\quad —\quad —\par
+
+
+\noindent 2D Reaction–Diffusion 100 1 1.04557 0.98065 0.96609\quad —\quad —\quad —\par
+
+
+\noindent 5 1.08538 1.04411 0.99118\quad —\quad —\quad —\par
+
+
+\noindent 10 1.32491 1.14829 1.03735\quad —\quad —\quad —\par
+
+
+\noindent Euler Sod\quad 64 1 0.36738 0.26095 0.05930\quad —\quad —\quad —\par
+
+
+\noindent Stefan phase change\quad 64 1 0.01163 0.01003 0.00019\quad —\quad —\quad —\par
+
+At the first prediction, the spectral decoder reduces relative L2 by approximately 81\ensuremath{\times} on
+Advection, 24\ensuremath{\times} on Burgers, 303\ensuremath{\times} on 1D Reaction–Diffusion, and 17\ensuremath{\times} on Darcy relative
+to the linear probe. The corresponding Sod and Stefan ratios are approximately 6.2\ensuremath{\times} and
+60\ensuremath{\times}. The smaller change on 2D Reaction–Diffusion is retained in the full table. These
+controls establish the importance of the readout at fixed backbone features; they do not by
+themselves isolate the value of backbone pretraining.
+
+\section*{5.2 Discontinuities, positivity and exact inventories}
+
+Table 5 compares neural operators against analytical references on 64 held-out cases per
+task. Table 6 uses a separate 16-case cohort per task and switches TCPI off and on for
+the same decoded fields. This pairing isolates the projection from changes in training data,
+backbone, or decoder.
+Table 5: Held-out analytical neural-operator comparisons, N = 64 per task. Lower field error and
+positivity-violation rate are better.
+
+
+\noindent Task\quad Metric\quad LUCAN-10B\quad FNO\quad U-Net\par
+
+
+\noindent Euler Sod\quad Mean Rel. L2\quad 0.059302\quad 0.065957 0.071271\par
+
+
+\noindent Positivity violations (\%)\quad 0.00\quad 0.00\quad 0.00\par
+
+
+\noindent Stefan phase change Mean Rel. L2\quad 0.000192 7.92 \ensuremath{\times} 10\ensuremath{-}5 0.000274\par
+
+
+\noindent Positivity violations (\%)\quad 2.57\quad 20.90\quad 19.74\par
+
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 9\par
+
+
+% Extracted chunk 10
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+Table 6: Matched TCPI replay, N = 16 per task. Raw and constrained predictions share the same
+decoded cases. A dash indicates that the displayed mass-residual ledger does not apply.
+
+
+\noindent Task\quad Metric\quad LUCAN raw LUCAN + TCPI\par
+
+
+\noindent Euler Sod\quad Pooled Rel. L2\quad 0.11526\quad 0.08923\par
+
+
+\noindent Positivity violations (\%)\quad 0.00\quad 0.00\par
+
+
+\noindent Max. rel. mass residual\quad 0.15622\quad 6.57 \ensuremath{\times} 10\ensuremath{-}9\par
+
+
+\noindent Stefan phase change Pooled Rel. L2\quad 0.00957\quad 0.00451\par
+
+
+\noindent Positivity violations (\%)\quad 37.16\quad 0.00\par
+
+
+\noindent Max. rel. mass residual\quad —\quad —\par
+
+On the 64-case Sod comparison, the spectral readout reaches 0.059302 mean relative L2 ,
+versus 0.065957 for FNO and 0.071271 for U-Net. In the paired replay, TCPI lowers pooled
+Sod error from 0.11526 to 0.08923 and the maximum relative mass residual from 0.15622 to
+6.57 \ensuremath{\times} 10\ensuremath{-}9 , with zero positivity violations. For Stefan, paired positivity violations fall from
+37.16\% to 0.00\% and pooled error from 0.00957 to 0.00451. The separate 64-case Stefan
+table retains FNO’s lower field error and the raw spectral decoder’s 2.57\% violation rate.
+
+\noindent Sod shock tube\quad Stefan phase change\par
+
+
+\section*{1.0                                                                                                                 Analytical reference}
+
+6
+LUCAN raw
+LUCAN constrained
+0.8
+4
+
+
+
+
+Solid fraction
+Density
+0.6
+2
+
+0.4
+0
+
+0.2
+\ensuremath{-}2
+
+
+\noindent 0.00\quad 0.25\quad 0.50\quad 0.75\quad 1.00\quad 0\quad 5\quad 10\quad 15\quad 20\par
+
+
+\noindent Position (normalized)\quad Position (mm)\par
+
+
+
+
+Figure 4: Sod density and Stefan phase fraction on representative paired-replay cases. Analytical
+references, raw LUCAN outputs, and constrained outputs share the same coordinates.
+The separate 1,000-case Stefan workload appears in Table 9 in Section 8. Its CPU and H100
+operating points have different achieved errors and are distinct from both analytical cohorts
+above.
+
+
+\noindent SECTION 6\quad EXPERIMENTAL TRANSFER\par
+
+
+Simulation helps when real data is scarce
+RealPDEBench provides paired simulated and experimental velocity fields for Cylinder wake
+and fluid–structure interaction (FSI) [12]. We compare fitting on real data alone with
+simulation pretraining followed by experimental adaptation. Both protocols use the frozen
+11.39B backbone and the same experimental trajectory budget.
+
+\section*{6.1 Trajectory budgets, windows and OOD scoring}
+
+A shot is a distinct experimental training trajectory, with k \ensuremath{\in} \{4, 8, 16, 32\}. The full test
+rosters cover 4,827 windows from 92 Cylinder trajectories and 2,731 windows from
+45 FSI trajectories. OOD scores average the held-out trajectories: 10 for Cylinder and
+12 for FSI. Window counts describe the full test panels, rather than the number of OOD
+trajectories or independent training shots.
+Development excludes test overlap, deduplicates FSI validation coordinates, and preserves
+published test-row multiplicity. A fixed stem supplies cached v1 features; staged v2 fits a
+residual on frozen v1. Validation gating retains v1 for real-only Cylinder at four and eight
+shots. Both protocols use the same mean-trajectory relative-L2 metric and shot budget;
+Appendix A gives the window-sampling rules.
+
+
+\noindent 17.7\%\quad 19.0\%\par
+
+
+\noindent Cylinder wake error reduction\quad FSI error reduction\par
+
+
+\noindent 0.13621 to 0.11207\quad 0.08564 to 0.06935\par
+
+
+
+
+\noindent Shodh AI Technical Report\quad 10\par
+
+
+% Extracted chunk 11
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+Table 7: RealPDEBench OOD mean-trajectory relative L2 . One shot equals one experimental
+training trajectory. Bold marks the lowest unrounded error among the three models within each
+protocol and shot budget.
+
+
+\noindent Real-only\quad Simulation then real\par
+
+
+\noindent Scenario\quad k LUCAN-10B\quad FNO\quad U-Net LUCAN-10B\quad FNO\quad U-Net\par
+
+
+\noindent Cylinder\quad 4\quad 0.13621\quad 0.14667 0.11105\quad 0.11207\quad 0.12469 0.10852\par
+
+
+\noindent 8\quad 0.10929\quad 0.11746 0.10087\quad 0.10132\quad 0.10409 0.10062\par
+
+
+\noindent 16\quad 0.08623\quad 0.09352 0.08786\quad 0.08581\quad 0.09495 0.09047\par
+
+
+\noindent 32\quad 0.08236\quad 0.09030 0.08652\quad 0.08294\quad 0.09091 0.08818\par
+
+
+\noindent FSI\quad 4\quad 0.08564\quad 0.10382\quad 0.07100\quad 0.06935\quad 0.08748\quad 0.06648\par
+
+
+\noindent 8\quad 0.07374\quad 0.09202\quad 0.06647\quad 0.06606\quad 0.08338\quad 0.06431\par
+
+
+\noindent 16\quad 0.06819\quad 0.08371\quad 0.06382\quad 0.06463\quad 0.08123\quad 0.06323\par
+
+
+\noindent 32\quad 0.06438\quad 0.07925\quad 0.06236\quad 0.06263\quad 0.07763\quad 0.06159\par
+
+
+
+\section*{6.2 Effect of simulation pretraining}
+
+At four shots, LUCAN’s Cylinder error falls from 0.13621 to 0.11207 (17.7\%), and FSI
+error from 0.08564 to 0.06935 (19.0\%). These compare the same model’s real-only and
+simulation-then-real fits.
+LUCAN leads Cylinder at 16 and 32 shots under both protocols, four of the 16 scenario–
+protocol–shot comparisons. U-Net leads every displayed FSI row. Simulation-pretraining
+gains are distinct from baseline win rates.
+
+
+\noindent SECTION 7\quad CROSS-MODALITY TRANSFER\par
+
+
+Crystals and biopharmaceutical properties
+The same frozen checkpoint used for continuum prediction supplies representations for
+Matbench crystal properties [14] and Therapeutics Data Commons biopharmaceutical and
+molecular properties [15]. The periodic crystal-site stem has width 192, and the molecular
+graph-derived descriptor stem has width 256. Task-specific encoders and lightweight scalar
+heads adapt to each input and target; the comparison holds descriptor inputs and splits
+fixed across the LUCAN residual head, raw MLP, and FP64 Ridge controls.
+
+\section*{7.1 Scalar protocol and aggregation}
+
+For a training set Dtr , descriptor normalization is fitted on training inputs and applied
+unchanged to validation and test. Let den = Ntr (dn ), let h̄n be the masked pooled frozen-
+backbone state, and let yn be the target in its native units. The three prediction families
+are
+ybnMLP = f\ensuremath{\psi} (den ),
+ybRidge = w> den + b,
+
+\noindent n\quad \ensuremath{\lambda}\par
+
+
+ybnLUCAN = fraw (den ) + \ensuremath{\Delta}\ensuremath{\theta} ([h̄n , den ]).
+\ensuremath{-}1 P
+
+\noindent The per-split score is MAE = Ntest\quad n |b\par
+
+yn \ensuremath{-} yn |. Model selection uses validation MAE.
+The development panel uses one Matbench fold and one TDC scaffold split. The full-split
+panel uses all five Matbench folds and three TDC scaffold seeds. Matbench and TDC
+values average fold or seed MAEs. TDC test rosters can overlap across seeds, so they are
+not three disjoint test populations. The reported AqSolDB corpus contains 9,980 molecules
+before scaffold partitioning; that corpus size is not the held-out sample count for every seed.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 11\par
+
+
+% Extracted chunk 12
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+Table 8: Scalar test MAE for LUCAN-10B and matched descriptor-only baselines. Development-
+panel and full-split results have different coverage. Bold marks the lowest point estimate among
+the three methods within each panel; native target units are retained.
+
+
+\noindent Development-panel MAE\quad Full-split MAE\par
+
+
+\noindent Dataset\quad Unit\quad LUCAN MLP\quad Ridge LUCAN\quad MLP Ridge\par
+
+
+\noindent Matbench JDFT2D\quad meV/atom\quad 46.55\quad 50.99\quad 92.05\quad 47.57 47.07\quad 64.28\par
+
+
+\noindent Matbench Phonons\quad cm\ensuremath{-}1\quad 70.50\quad 74.58\quad 86.39\quad 77.24 78.35\quad 95.22\par
+
+
+\noindent TDC AqSolDB\quad log mol/L\quad 1.494\quad 1.509\quad 1.550\quad 1.429 1.442\quad 1.631\par
+
+
+\noindent TDC Lipophilicity\quad log D\quad 0.748\quad 0.751\quad 0.821\quad 0.778 0.763\quad 0.814\par
+
+Across the retained crystal and biopharmaceutical tasks, LUCAN-10B improves over both
+descriptor-only baselines on AqSolDB (1.429 versus 1.442 for MLP and 1.631 for Ridge) and
+Matbench Phonons (77.24 versus 78.35 and 95.22). The other full-split results are closely
+comparable with the best descriptor baseline: JDFT2D is 47.57 versus 47.07 for MLP, and
+Lipophilicity is 0.778 versus 0.763. These are point-estimate comparisons; the table does
+not establish statistical significance for the small MAE differences.
+
+\section*{7.2 Heterogeneous scaffolds and multi-species crystals}
+
+AqSolDB spans heterogeneous molecular scaffolds, and Phonons spans different crystal com-
+positions and structures. The frozen nonlinear representation and residual readout can en-
+code interactions that are less accessible to one global linear descriptor map. This interpre-
+tation is consistent with the lower AqSolDB and Phonons MAEs and the close comparisons
+on JDFT2D and Lipophilicity.
+This interpretation is a hypothesis about representation and bias–variance tradeoffs, rather
+than a causal identification from these tables. The residual pathway also adds head capacity.
+The smaller development study was exploratory: its residual design had been informed
+by earlier test results before validation-based checkpoint selection. The broader full-split
+evaluation increases coverage, but independent blinded confirmation remains separate from
+the reported point estimates.
+
+
+\noindent SECTION 8\quad GPU DEPLOYMENT\par
+
+
+Measured H100 latency and throughput
+
+
+\section*{8.1 Single-device latency and measurement boundaries}
+
+The synthetic-token profile uses NVIDIA H100 80 GB HBM3, BF16 width-256 inputs, FP32
+routing, and PyTorch 2.10.0+cu128. Each single-device configuration uses ten synchronized
+timed forwards after warm-up. Across the reported configurations, the stated latency end-
+points are 18.1–47.95 ms; the 18.1 ms value belongs to a separate earlier setting and is
+not assigned a sequence length in the controlled series below.
+The directly comparable batch-one sequence sweep measures 26.43, 27.77, 30.54, 35.34,
+and 47.95 ms at 256, 512, 1,024, 2,048, and 4,096 tokens. A 16\ensuremath{\times} sequence-length increase
+therefore costs 1.81\ensuremath{\times} measured wall time in that sweep. At 256 tokens and batch 64, the
+median is 100.18 ms. These are backbone measurements, rather than complete encoder–
+decoder workload timings. The model retains causal attention, so the sequence sweep is not
+evidence of an entirely linear-cost architecture.
+
+\section*{8.2 Data-parallel weak scaling}
+
+With 256 tokens per sequence and batch 32 per data-parallel replica, summed throughput
+is 126,181, 238,381, 366,472, and 731,998 tokens/s on one, two, four, and eight H100s.
+Eight GPUs achieve 5.80\ensuremath{\times} the one-GPU rate and 72.5\% parallel efficiency. Peak allocated
+memory is 23.66 GB per device in the eight-GPU run.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 12\par
+
+
+% Extracted chunk 13
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+
+
+\noindent A Single-H100 latency\quad B Data-parallel weak scaling\par
+
+
+
+\noindent Batch one\quad 5.80\ensuremath{\times} gain; 72.5\% efficiency\par
+
+
+
+
+
+Throughput (1,000 tokens/s)
+
+\noindent 50\quad 1000\par
+
+
+\noindent Earlier setting: 18.1 ms*\quad Linear ideal\par
+
+
+
+
+
+Median latency (ms)
+
+\noindent 45\quad 800\quad Measured\par
+
+
+40
+600
+35
+400
+30
+200
+25
+
+
+\noindent 20\quad 0\par
+
+
+\noindent 6\quad 2\quad 4\quad 8\quad 6\quad 1\quad 2\quad 4\quad 8\par
+
+
+\noindent 25\quad 51\quad 1\quad ,02\quad 2\quad ,04\quad 4\quad ,09\par
+
+H100 GPUs
+Tokens per sequence
+
+
+
+
+Figure 5: H100 deployment measurements. (A) Controlled batch-one backbone latency against
+sequence length; the separate 18.1 ms earlier endpoint is annotated without placing it on that curve.
+(B) Data-parallel weak scaling at batch 32 per GPU, with linear ideal scaling shown for reference.
+Only measured configurations are plotted.
+
+\section*{8.3 Solver crossover and evaluation scope}
+
+On the first fixed Stefan test case, the warmed v2 surrogate takes 23.64 ms, running 2.90\ensuremath{\times}
+faster than a qualifying 512-cell H100 CUDA numerical solver (68.47 ms) and 10.45\ensuremath{\times}
+faster than the CPU solver (246.99 ms). At batch 1,000, coarser numerical solvers qualify
+and run faster.
+The earlier 1,000-case workload in Table 9 takes 2.97 s for the H100 surrogate and 210.94
+s for the 512-cell CPU enthalpy solver. The corresponding pooled relative-L2 errors are
+0.00279 and 1.67 \ensuremath{\times} 10\ensuremath{-}5 . The 71.1\ensuremath{\times} wall-time ratio describes these two operating points.
+It cannot be interpreted as an accuracy-matched solver speedup or extrapolated to different
+geometries, hardware, batch sizes, or numerical resolutions.
+Table 9: Earlier solver workloads at different accuracy and an accuracy-qualified batch-one Stefan
+comparison. Panel (a) reports total wall time and pooled relative L2 for the earlier 1,000-case
+workload. Panel (b) reports latency on the first fixed Stefan test case; numerical solvers use 512
+cells. Time ratios in panel (b) divide numerical-solver latency by warmed v2-surrogate latency.
+
+(a) Earlier 1,000-case workload: different achieved errors
+
+
+\noindent Method\quad Hardware / grid\quad Wall time (s) Pooled relative L2\par
+
+
+\noindent LUCAN surrogate One NVIDIA H100\quad 2.97\quad 0.00279\par
+
+
+\noindent Enthalpy solver CPU, 512 cells\quad 210.94\quad 1.67 \ensuremath{\times} 10\ensuremath{-}5\par
+
+
+(b) First fixed Stefan test case: batch one
+
+
+\noindent Method\quad Hardware / grid\quad Latency (ms) Time / surrogate\par
+
+
+\noindent Warmed v2 surrogate\quad One NVIDIA H100\quad 23.64\quad 1.00\ensuremath{\times}\par
+
+
+\noindent Qualifying CUDA solver H100, 512 cells\quad 68.47\quad 2.90\ensuremath{\times}\par
+
+
+\noindent CPU solver\quad CPU, 512 cells\quad 246.99\quad 10.45\ensuremath{\times}\par
+
+Backbone token throughput, complete surrogate latency, and numerical-solver wall time
+answer different deployment questions. Accuracy-matched comparisons require a common
+reference, physical inputs, output grid, forecast interval, and timing boundary, with numer-
+ical resolution chosen independently to meet the same error and constraint criteria.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 13\par
+
+
+% Extracted chunk 14
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+
+\noindent SECTION 9\quad LIMITATIONS\par
+
+
+Scope and remaining scientific boundaries
+Non-equivalent solver timings. The earlier 1,000-case Stefan CPU and H100 measure-
+ments use different hardware and achieve different errors. Their wall-time ratio is a workload
+observation, rather than an accuracy-matched acceleration claim. Likewise, single-device se-
+quence sweeps and data-parallel weak scaling have different execution boundaries. TCPI’s
+global inventory or admissibility guarantee does not establish local PDE consistency, point-
+wise accuracy, or long-horizon stability.
+Future unified cross-modality pretraining. The shared checkpoint is reused through
+separate modality stems and task heads; the present experiments do not demonstrate one
+joint crystal–molecular–continuum pretraining objective or a universally aligned tokenizer.
+Future work should jointly train and evaluate those interfaces on disjoint molecular, crystal,
+and continuum systems, with independent test custody. Earlier panel results informed
+some readout refinements, so independent blinded evaluation remains necessary to confirm
+transfer beyond the reported benchmark and scalar coverage.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 14\par
+
+
+% Extracted chunk 15
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+APPENDIX A
+
+Dataset rosters and reproducibility
+
+A.1 Published trajectory rosters
+Table A1 records the trajectory populations used by the continuum experiments. Counts are
+trajectories, rather than patches, training pairs, or sampled windows. The DaRUS entries
+are public source-file identifiers for the PDEBench data, not internal execution identifiers.
+Table A1: Continuum trajectory rosters. Train and VAL form development populations; TEST
+is the held-out roster. Dynamic prediction and static Darcy evaluation use the task definitions in
+Section 4.
+
+
+\noindent Task\quad Source pin\quad Train\quad VAL\quad TEST\par
+
+
+\noindent 1D Advection\quad DaRUS 255674\quad 8100\quad 900\quad 1000\par
+
+
+\noindent 1D Burgers\quad DaRUS 281363\quad 8100\quad 900\quad 1000\par
+
+
+\noindent 2D Darcy\quad DaRUS 133219\quad 8100\quad 900\quad 1000\par
+
+
+\noindent 1D Reaction–Diffusion\quad DaRUS 133181\quad 8100\quad 900\quad 1000\par
+
+
+\noindent 2D Reaction–Diffusion\quad DaRUS 133017\quad 810\quad 90\quad 100\par
+
+
+\noindent Active Matter\quad The Well a\quad 175\quad 24\quad 26\par
+
+
+\noindent Gray–Scott\quad The Well a\quad 960\quad 120\quad 120\par
+
+
+\noindent Rayleigh–Bénard\quad The Well a\quad 1400\quad 175\quad 175\par
+
+
+\noindent Shear Flow\quad The Well a\quad 896\quad 112\quad 112\par
+
+a
+The Well uses its published whole-trajectory partitions [11]. Numerical reproduction must pin
+the corresponding source files and their byte-level identities.
+PDEBench keeps the published outer test roster and ranks development trajectories by
+SHA-256 for validation. The Well follows upstream train, validation, and test partitions.
+Dynamic-grid fits use four equally spaced training starts per trajectory and validate from
+start zero. Darcy uses one static input–target map. Normalization statistics are fitted on
+training inputs only.
+A.2 Experimental and scalar partitions
+RealPDEBench is pinned to revision 0ae4426085d250787f96d5456bc0d30ce5f277d2. Real-
+only and simulation-then-real arms share the experimental trajectory budget, test panels,
+and scoring rules. Up to 16 training and four validation windows are used per trajectory;
+duplicate validation coordinates are counted once, while published test multiplicity is pre-
+served. Full test panels and OOD trajectory subsets are distinguished in Section 6.
+The scalar development panel uses one Matbench fold and one TDC scaffold seed. The full-
+split panel uses five Matbench folds and three TDC scaffold seeds. Reported Matbench and
+TDC errors average fold or seed MAEs in native units. Scalar model selection uses validation
+MAE and retains the same raw descriptors across baselines and the residual pathway.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 15\par
+
+
+% Extracted chunk 16
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+A.3 Selection, uncertainty and numerical replay
+Primary rollout heads are selected on a separate development-validation metric. A v2
+residual replaces v1 only when that matched metric improves. The original readout ablation
+and the staged rollout scorecard are separate protocols and should not be pooled into one
+readout comparison.
+The donor-by-calibration factorial reports three-seed arm means and paired 95\% effect in-
+tervals. The available summaries do not supply per-arm factorial confidence intervals or
+per-row scalar uncertainty, and no such intervals are inferred from rounded point estimates.
+Analytical operator comparisons use 64 cases per task, paired TCPI replay uses 16, and the
+earlier Stefan timing workload uses a separate 1,000-case cohort.
+Reproduction requires the frozen backbone, task encoders and heads, exact partitions, nor-
+malization statistics, validation-selection decisions, numerical references, valid-cell masks,
+and cell weights. Prediction-level records are needed to recompute paired effects and uncer-
+tainty. H100 replay must record dtype, routing precision, token length, batch size, paral-
+lelism mode, synchronization, timing boundaries, and allocated memory. This report pro-
+vides the numerical tables and protocol distinctions; it does not replace the model weights
+and prediction records needed for execution.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 16\par
+
+
+% Extracted chunk 17
+
+
+\noindent SHODH AI RESEARCH\quad LUCAN-10B-Physics\par
+
+
+
+BIBLIOGRAPHY
+
+
+\section*{References}
+
+
+[1] Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, et al. Fourier Neural Operator for
+Parametric Partial Differential Equations. ICLR, 2021. https://arxiv.org/abs/2010.08895.
+[2] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-Net: Convolutional Networks for
+Biomedical Image Segmentation. MICCAI, 2015. https://arxiv.org/abs/1505.04597.
+[3] Michael McCabe, Bruno Régaldo-Saint Blancard, Liam Holden Parker, et al. Multiple Physics
+Pretraining for Physical Surrogate Models. arXiv:2310.02994, 2023. https://arxiv.org/abs/
+2310.02994.
+[4] Maximilian Herde, Bogdan Raonić, Tobias Rohner, et al. Poseidon: Efficient Foundation
+Models for PDEs. NeurIPS, 2024; arXiv:2405.19101. https://arxiv.org/abs/2405.19101.
+[5] Michael McCabe, Payel Mukhopadhyay, Tanya Marwah, et al. Walrus: A Cross-Domain
+Foundation Model for Continuum Dynamics. arXiv:2511.15684, first submitted 19 November
+2025. https://arxiv.org/abs/2511.15684v1.
+[6] Tri Dao and Albert Gu. Transformers are SSMs: Generalized Models and Efficient Algorithms
+Through Structured State Space Duality. ICML, 2024; arXiv:2405.21060. https://arxiv.
+org/abs/2405.21060.
+[7] Opher Lieber, Barak Lenz, Hofit Bata, et al. Jamba: A Hybrid Transformer–Mamba Language
+Model. arXiv:2403.19887, 2024. https://arxiv.org/abs/2403.19887.
+[8] Aran Komatsuzaki, Joan Puigcerver, James Lee-Thorp, et al. Sparse Upcycling: Training
+Mixture-of-Experts from Dense Checkpoints. ICLR, 2023; arXiv:2212.05055. https://arxiv.
+org/abs/2212.05055.
+[9] Taishi Nakamura, Takuya Akiba, Kazuki Fujii, Yusuke Oda, Rio Yokota, and Jun Suzuki.
+Drop-Upcycling: Training Sparse Mixture of Experts with Partial Re-initialization. ICLR,
+2025; arXiv:2502.19261. https://arxiv.org/abs/2502.19261.
+[10] Makoto Takamoto, Timothy Praditia, Raphael Leiteritz, et al. PDEBench: An Exten-
+sive Benchmark for Scientific Machine Learning. NeurIPS Datasets and Benchmarks, 2022;
+arXiv:2210.07182. https://arxiv.org/abs/2210.07182.
+[11] Ruben Ohana, Michael McCabe, Lucas Meyer, et al. The Well: A Large-Scale Collection of
+Diverse Physics Simulations for Machine Learning. NeurIPS Datasets and Benchmarks, 2024;
+arXiv:2412.00568. https://arxiv.org/abs/2412.00568.
+[12] Peiyan Hu, Haodong Feng, Hongyuan Liu, et al. RealPDEBench: A Benchmark for Complex
+Physical Systems with Real-World Data. ICLR, 2026. https://openreview.net/forum?id=
+y3oHMcoItR.
+[13] David Rogers and Mathew Hahn. Extended-Connectivity Fingerprints. Journal of Chemical
+Information and Modeling, 50(5):742–754, 2010. https://doi.org/10.1021/ci100050t.
+[14] Alexander Dunn, Qi Wang, Alex Ganose, Daniel Dopp, and Anubhav Jain. Benchmarking
+Materials Property Prediction Methods: The Matbench Test Set and Automatminer Ref-
+erence Algorithm. npj Computational Materials, 6:138, 2020. https://doi.org/10.1038/
+s41524-020-00406-3.
+[15] Kexin Huang, Tianfan Fu, Wenhao Gao, et al. Therapeutics Data Commons: Machine Learn-
+ing Datasets and Tasks for Drug Discovery and Development. NeurIPS Datasets and Bench-
+marks, 2021; arXiv:2102.09548. https://arxiv.org/abs/2102.09548.
+
+
+
+
+
+\noindent Shodh AI Technical Report\quad 17\par
+
+
+\end{document}

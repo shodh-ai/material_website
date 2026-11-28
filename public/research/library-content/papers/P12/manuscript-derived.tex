@@ -1,0 +1,396 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 251c871a596ecc98286c82ad63235596a9ab91eb9f2d95ff6a4903cf2f1ad1a0
+% Extracted text SHA-256: ea3b26cd95dcbb50b04dc68c345adb4c083a36a00a6f55eec4cc1b8c9a823f40
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Grid-native latent patchification for two-dimensional Maxwell-field reconstruction: a checkpoint-selection-aware retrospective case study}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Grid-native latent patchification for two-dimensional Maxwell-field
+reconstruction: a checkpoint-selection-aware retrospective case
+study
+
+\section*{Abstract}
+
+Reconstructing spatial electromagnetic fields from compact learned representations requires
+separating representation size, reconstruction error and deterministic constraint enforcement.
+We retrospectively examine captured numerical reports for convolutional autoencoders that re-
+construct four-frame, ten-channel trajectories on a periodic 96 \ensuremath{\times} 96 grid. A 48-channel latent
+on 48 \ensuremath{\times} 48 sites contains 110592 scalars, giving a dynamic-input/latent scalar-count ratio of
+3.33. Exact rearrangement into 2 \ensuremath{\times} 2 latent patches produces 576 tokens of width 192 without
+further reducing the scalar count. The fixed-vault convolutional model reports raw median/95th-
+percentile joint relative- L2 errors of 0.01989/0.06932 on 200 validation trajectories; a separately
+trained patchified model with a live transformer reports 0.02941/0.08154 on 256. After a deter-
+ministic correction that also uses an external permittivity map, these become 0.01897/0.05641
+and 0.02734/0.06700. Three stream-trained configurations also satisfy the recorded corrected
+median and 95th-percentile criterion below 0.1, but all five configurations have maximum errors
+above 0.1, and correction increases the maximum in two stream cases. Archived pooled-token
+baselines have substantially larger reported errors, although unmatched cohorts, optimization
+and checkpoint policies preclude causal attribution to pooling alone. The results establish fi-
+nite reconstruction feasibility for these grid-native configurations, not losslessness of the learned
+bridge or learned electromagnetic conservation. All headline scores are checkpoint-selected val-
+idation results rather than independent-test estimates.
+
+\section*{1 Introduction and contributions}
+
+Learned representations of electromagnetic trajectories must preserve spatially distributed infor-
+mation while making the representation suitable for downstream computation. Three questions
+are easily conflated: whether the learned encoder retains enough information for reconstruction,
+whether conversion of a spatial latent to a token sequence introduces additional information loss,
+and whether a reconstructed field satisfies a chosen discrete constraint. These questions require
+different evidence.
+This paper presents a focused retrospective case study of grid-native convolutional latents for
+two-dimensional Maxwell-field reconstruction. Its numerical basis is five retained grid-native eval-
+uation reports, an archive of pooled-token baseline evaluations, and a separate spectral/resampling
+diagnostic. The contribution is an interpretation of those finite results with explicit accounting
+for checkpoint selection, scalar counts, sampling and postprocessing. It is not a new transformer
+architecture or a claim of globally novel tokenization.
+The principal observations are that the retained grid-native models achieve low joint trajectory
+reconstruction errors under the recorded validation protocol, and that their spatial latents admit
+1
+
+exact patch indexing into a flat sequence. The latter statement concerns only a permutation
+of stored entries. Learned encoding, positional arithmetic, transformer processing and decoding
+remain distinct operations. Similarly, a small divergence residual after deterministic correction
+demonstrates constraint satisfaction by construction, not acquisition of Maxwell dynamics by the
+network.
+
+\section*{2 Related work}
+
+Perceiver uses asymmetric cross-attention to map a large input array into a smaller latent array,
+followed by latent attention [ 1]. This provides context for the archived pooled-token implementa-
+tions examined here. It does not predict a reconstruction floor for electromagnetic fields, and an
+implementation-specific failure cannot establish an intrinsic limitation of the architecture.
+Vision Transformer processes sequences obtained from flattened image patches, with learned
+embeddings and positional information [ 2]. The present case uses patches of a convolutional spatial
+latent rather than directly embedding image pixels. Our exactness argument applies to unprojected
+patch rearrangement and its inverse; it does not establish invertibility of ViT, positional additions or
+a trained transformer. Neither reference supplies evidence for the numerical Maxwell reconstruction
+results reported below.
+
+\section*{3 Scientific methods and validation protocol}
+
+
+\section*{3.1 Task, source fields and metric}
+
+The learned input and output are tensors X \ensuremath{\in} R4\ensuremath{\times}10\ensuremath{\times}96\ensuremath{\times}96 containing
+Ex, Ey, Ez, Bx, By, Bz, \ensuremath{\rho}, Jx, Jy, Jz. They are drawn from source arrays with 17 channels; static ma-
+terial/source and initial-condition channels are not reconstructed by the learned field latent. The
+captured generator describes a periodic, two-dimensional, z-invariant Yee finite-difference time-
+domain construction, with four stored frames comprising two consecutive-step pairs. Its implemen-
+tation enables JAX float64 computation and stores frames in float32. The arrays retain native Yee
+offsets: Ex and Ey occupy (i + 1/2, j) and (i, j + 1/2), Ez and \ensuremath{\rho} occupy nodes, and Bx, By, Bz
+occupy (i, j + 1/2), (i + 1/2, j) and (i + 1/2, j + 1/2), respectively. Current components share the
+corresponding electric-field offsets. In each implemented step from n to n + 1, the stored frame
+contains the updated electric field and charge, the arithmetic average of the old and new magnetic
+half-step fields, and the total source-plus-conduction current at n + 1/2. Thus the current stored in
+the later frame of a consecutive pair belongs to the interval connecting that pair, not the interval fol-
+lowing it. Magnetic divergence uses forward differences, whereas electric-displacement and current
+divergence use backward differences on this unit-spacing periodic grid. The joint reconstruction
+metric compares these native arrays, not colocated instantaneous continuum fields. These source
+definitions describe the intended numerical population, not an independently reproduced solver
+validation.
+Training estimates a mean \ensuremath{\mu}c and standard deviation \ensuremath{\sigma}c for each dynamic channel from sampled
+training data and applies eXc = (Xc \ensuremath{-} \ensuremath{\mu}c)/\ensuremath{\sigma}c. Here, fixed-vault denotes training on stored trajecto-
+ries indexed by a fixed manifest, in contrast to live-stream sampling. Fixed-manifest statistics use
+up to 256 sampled training trajectories; the stream implementation samples 256 live trajectories
+2
+
+Table 1: Retained grid-native configurations. All use a 48 \ensuremath{\times} 48 latent grid and disabled skip paths.
+Steps are completed training steps; selected denotes the restored checkpoint step. Counts refer to
+the dynamic field representation only.
+Model nval C Latent scalars R Steps / selected
+Fixed-vault 200 48 110592 3.333 16000 / 15500
+Patchified 256 48 110592 3.333 40000 / 39750
+Stream A 256 128 294912 1.250 50000 / 48000
+Stream B 256 96 221184 1.667 50000 / 49500
+Stream C 256 96 221184 1.667 50000 / 35250
+for this purpose. Evaluation reverses this normalization before computing, for each trajectory,
+r( bX, X ) = \ensuremath{\parallel} bX \ensuremath{-} X\ensuremath{\parallel}2
+max(\ensuremath{\parallel}X\ensuremath{\parallel}2, 10\ensuremath{-}12) . (1)
+Both norms include all four frames, all ten channels and all grid sites. Thus r is a joint relative- L2
+error, not a standard-deviation-normalized error or a mean of channel-wise relative errors. Channel
+weighting follows the native numerical scales of the source arrays; the metric is not an SI-calibrated
+electromagnetic error. Quantiles and maxima are over trajectories, not grid cells or frames. The
+reported trajectory counts do not authenticate statistical independence of their underlying physical
+scenes.
+
+\section*{3.2 Grid-native representation and scalar accounting}
+
+The convolutional family uses circular-padding convolutions, residual GroupNorm/SiLU blocks,
+strided downsampling, a spatial latent and an upsampling decoder. All five retained reports disable
+encoder–decoder skip paths, so the reconstruction cannot bypass the stated spatial bottleneck
+through those paths. The fixed-vault report specifies base width 96 and four residual blocks per
+configured stage. Its saved training record reports 40 devices and global batch 320; this is not a
+matched scaling experiment.
+All retained latents have spatial width 48. For C latent channels, the dynamic-input/latent
+scalar-count ratio is
+R = 4 · 10 · 962
+C · 482 . (2)
+Consequently, C = 48 gives 110592 latent scalars and R = 10 /3, rather than 2.5. The stream
+latents have C = 128 , 96, 96, respectively. Table 1 separates these representation counts from re-
+construction scores. These ratios omit model weights, normalization state and the external material
+map used by correction. They are neither end-to-end codec bitrates nor like-for-like compression
+levels across the configurations.
+
+\section*{3.3 Patch indexing versus learned processing}
+
+For a latent z \ensuremath{\in} RC\ensuremath{\times}g\ensuremath{\times}g and patch size p dividing g, let q = g/p. One indexing convention is
+Tiq+j, cp2+ap+b = zc, ip+a, jp+b, (3)
+3
+
+where 0 \ensuremath{\leq} i, j < q , 0 \ensuremath{\leq} a, b < p and 0 \ensuremath{\leq} c < C . Each latent entry appears exactly once. Integer
+quotient and remainder recover its patch and within-patch coordinates, giving an exact inverse
+without numerical arithmetic on the field values. Therefore
+N = (g/p)2, D = Cp2, N D = Cg 2. (4)
+At C = g = 48 , p = 1 , 2, 4 yields [N, D] = [2304 , 48], [576, 192], [144, 768]. Patch size changes
+sequence geometry, not the total number of entries.
+The captured bridge performs the broader operation
+z\ensuremath{\prime} = P \ensuremath{-}1[U+0000]
+F (P (z) + A) \ensuremath{-} A
+[U+0001]
+, (5)
+where P is patch rearrangement, A is a positional array and F is either the identity or a Trans-
+formerEncoder. The retained patchified report uses learned positions, p = 2 and a live transformer
+at width 192. Subtracting positions after a learned nonidentity map does not invert that map.
+Even with identity F , floating-point addition and subtraction need not preserve bits: in float32
+round-to-nearest arithmetic, z = 16777216 and A = 1 give (z + A) \ensuremath{-} A = 16777215. The described
+Linear(D, 5120) lift is a possible interface, not evidence of executed integration with a trained
+ten-billion-parameter model.
+
+\section*{3.4 Deterministic correction}
+
+The magnetic component of the postprocessor is a periodic discrete Fourier Hodge projection. On
+an evaluation grid of width g = 96, the unit-spacing forward-difference symbols are
+kx = exp(2\ensuremath{\pi}imx/g) \ensuremath{-} 1, k y = exp(2\ensuremath{\pi}imy/g) \ensuremath{-} 1. (6)
+For every nonzero Fourier mode, it computes
+\ensuremath{\varphi} = kx bBx + ky bBy
+|kx|2 + |ky|2 , (7)
+bB\ensuremath{\prime}
+x = bBx \ensuremath{-} k\ensuremath{\ast}
+x\ensuremath{\varphi}, bB\ensuremath{\prime}
+y = bBy \ensuremath{-} k\ensuremath{\ast}
+y\ensuremath{\varphi}. (8)
+Thus kx bB\ensuremath{\prime}
+x + ky bB\ensuremath{\prime}
+y = 0 in exact arithmetic. The zero mode is unchanged. The implementation uses
+float64/complex128 intermediate calculations and casts corrected fields to float32.
+The complete correction also changes charge and in-plane electric fields. It first removes each
+frame’s spatial charge mean. For the frame pairs (0, 1) and (2, 3), it then replaces the later charge
+by the earlier mean-adjusted charge minus \ensuremath{\Delta}t times the backward divergence of the later frame’s
+current, using \ensuremath{\Delta}t = 0 .5. It obtains the original relative permittivity map from source channel
+11, outside the ten-channel learned representation, and forms edge permittivities by arithmetic
+averaging of neighboring node values.
+For each frame, the electric correction uses the periodic operator L\ensuremath{\psi} = D\ensuremath{-}
+x (\ensuremath{\varepsilon}xD+
+x \ensuremath{\psi})+D\ensuremath{-}
+y (\ensuremath{\varepsilon}yD+
+y \ensuremath{\psi}).
+Its right-hand side is the backward divergence of \ensuremath{\varepsilon}E minus the spatially mean-subtracted charge;
+the right-hand side’s own mean is also removed to satisfy periodic compatibility. Starting from
+zero potential, the conjugate-gradient loop performs 200 iterations, with updates active only when
+|\ensuremath{\langle}p, Lp\ensuremath{\rangle}| > 10\ensuremath{-}24 and the squared residual norm exceeds 10\ensuremath{-}16 times its initial value. Inactive up-
+dates have zero step and recurrence coefficients; the active recurrence denominator for the squared
+residual includes an additive 10\ensuremath{-}30. The solve uses float64 arithmetic and subtracts the forward
+4
+
+potential gradient from Ex, Ey before casting to float32. These are implementation specifications,
+not demonstrated bounds on Gauss-law or continuity residuals.
+Accordingly, we label reconstruction scores “after correction,” rather than attributing them solely
+to magnetic projection. The full electric/charge correction has not been independently validated;
+the separate algebra checks concern magnetic projection only. The reported magnetic residual is
+\ensuremath{\eta}B = RMS(D+
+x Bx + D+
+y By)q
+mean(B2x + B2y ) + 10\ensuremath{-}20
+. (9)
+This is a discrete unit-spacing residual with its own denominator, distinct from trajectory recon-
+struction error.
+
+\section*{3.5 Selection and retrospective verification}
+
+Periodic raw median error on a validation subset selects the checkpoint subsequently restored
+for headline evaluation. Final scoring reuses the fixed validation list. The results are therefore
+checkpoint-selected validation results, not a fresh independent test. The reports do not authenticate
+exact historical row/seed identities or subset nesting across evaluations.
+This study is a retrospective reanalysis with no additional physical simulations. No original
+checkpoint was loaded, no trained-model inference was repeated and no supplied scientific source
+was executed. Separately written NumPy code checked patch indexing and magnetic projection
+algebra on synthetic grids of widths 16, 32 and 96. These structural checks support the indexing
+and discrete projection interpretation; they do not reproduce original neural predictions, solver
+trajectories or full electric/charge correction. Captured sources, full numerical report values and
+checking records are retained in Supplementary record S1.
+
+\section*{4 Experimental results}
+
+
+\section*{4.1 Grid-native reconstruction}
+
+Table 2 gives the canonical restored-checkpoint scores. The fixed-vault model has the lowest re-
+ported median and 95th percentile among the five retained grid-native configurations. Its raw
+median/95th percentile are 0.01989/0.06932, changing to 0.01897/0.05641 after correction. The
+patchified live-transformer model reports 0.02941/0.08154 raw and 0.02734/0.06700 after correc-
+tion. This establishes that low reconstruction error was attained in the recorded patchified config-
+uration. Because training duration, configuration and evaluation counts differ, it does not measure
+an isolated transformer-bridge penalty or establish a zero-cost bridge theorem.
+All five corrected medians and 95th percentiles are below the recorded 0.1 criterion. All five
+maxima remain above 0.1. Correction lowers p95 in each configuration, but raises the maximum
+from 0.15079 to 0.16546 in Stream B and from 0.17717 to 0.18983 in Stream C. A distributional
+improvement therefore does not imply improvement for every trajectory. Stream C also illustrates
+why raw and corrected endpoints must remain separate: its raw p95 exceeds 0.1, whereas its
+corrected p95 does not.
+The saved corrected magnetic-divergence residuals cluster near 3.6 \ensuremath{\times} 10\ensuremath{-}8. The independent
+synthetic calculation gives float64 relative divergence of approximately 2.3 \ensuremath{\times} 10\ensuremath{-}16 to 3.4 \ensuremath{\times} 10\ensuremath{-}16,
+rising to approximately 3.6 \ensuremath{\times} 10\ensuremath{-}8 to 3.8 \ensuremath{\times} 10\ensuremath{-}8 after float32 requantization. This agreement is
+5
+
+Table 2: Joint trajectory relative- L2 errors for the selected checkpoints. The complete correction
+uses the original permittivity map and modifies charge and electric fields as well as magnetic fields.
+Full-precision summaries are retained in Supplementary record S1.
+Raw After correction
+Model p50 p95 Max p50 p95 Max
+Fixed-vault 0.01989 0.06932 0.12598 0.01897 0.05641 0.11353
+Patchified 0.02941 0.08154 0.16546 0.02734 0.06700 0.15266
+Stream A 0.03079 0.08743 0.14003 0.02913 0.07436 0.13234
+Stream B 0.03229 0.09474 0.15079 0.03089 0.08087 0.16546
+Stream C 0.03259 0.10027 0.17717 0.03155 0.09303 0.18983
+consistent with the projection algebra and storage precision. It is not an independent verification
+of the original inference results.
+
+\section*{4.2 Stream sampling}
+
+The three stream configurations record 57582, 46151 and 76982 distinct slot/seed/sample-identifier
+tuples from 300006, 200004 and 400008 reads, respectively. Their recorded histories show at most
+6000 live slots. These observations support repeated consumption of a recycling slot store, but
+identity tuples do not prove distinct tensor content or independent physical experiments.
+In the inspected implementation, array files and metadata sidecars are replaced and read sep-
+arately. The histories therefore do not establish that each array and its metadata describe the
+same historical snapshot. The claimed 6 GB bound on storage or RAM use was not independently
+measured. The three configurations are not established independent-seed replications, and differ-
+ences in capacity and data consumption prevent attributing their ordering solely to width or data
+freshness.
+
+\section*{4.3 Archived baseline outcomes}
+
+The retained baseline archive comprises twenty fleet and seven robust pooled-token evaluation
+reports from 37 listed matching directories; ten directories lacked evaluation reports. Complete
+historical campaign coverage is therefore not established, and no outcomes are assigned to those
+ten directories. Fleet and robust are archive labels, not demonstrated scientific properties. The
+robust records describe a training divergence guard that can restore a validation-selected checkpoint
+and reduce the learning rate; their headline scores identify restored validation-selected checkpoints.
+The fleet reports have no explicit best-checkpoint field. These labels do not define a controlled
+architectural or training comparison. Evaluation counts are 96, 128 or 300, unlike the later 200/256
+evaluations. None of the retained baseline corrected medians or p95 values meets 0.1.
+The best recorded raw median is 0.1623137072 and the best corrected median is 0.1607412472,
+both from the same 300-trajectory fleet record. Its raw/corrected p95 values are 0.45944/0.43122. A
+stable robust configuration reports raw/corrected medians 0.22339/0.22179 on 96 trajectories. Se-
+vere outcomes are also present: one fleet report has raw median/p95/max 37.783/233.024/581.431,
+increasing after correction to 58.848/381.729/938.642. Another robust configuration remains near
+unit error, with raw/corrected medians 0.99940/0.99924. A divergence-guard event therefore cannot
+by itself be interpreted as successful reconstruction.
+6
+
+These records establish a finite empirical implementation comparison: the retained later grid-
+native configurations attain much smaller reported errors than the archived pooled-token imple-
+mentations under their respective protocols. They do not establish a mathematical representation
+floor or isolate pooling as the cause. Model capacity, optimization, data cohorts and checkpoint
+selection are confounded.
+
+\section*{4.4 Spectral and resampling reference}
+
+The separate diagnostic aggregates 192 two-dimensional time-slice fields, each containing ten chan-
+nels, rather than evaluating four-frame trajectories. Its normalized-spectrum energy fraction out-
+side the per-axis mode- 16 box is 0.1106126670; the distinct radial-cutoff fraction is 0.1167919636.
+This shows appreciable normalized spectral content beyond that box but does not determine the
+error of a learned encoder.
+Bilinear downsampling to width 48 and upsampling to 96, with aligned-corner interpolation
+disabled, yields median/p95 0.0848936476/0.2486859232 after denormalization. The median is
+below 0.1, but the tail is not. The width- 96 roundtrip has error near 2 \ensuremath{\times} 10\ensuremath{-}8. These are specific
+resampling constructions, not optimality bounds. Their per-slice population and metric granularity
+also prevent treating their quantiles as a paired comparison with the trajectory-model scores.
+
+\section*{5 Discussion and limitations}
+
+The scientific significance of this case is the separation of spatial representation learning from
+token indexing. Retaining a grid-native latent permits a token interface whose rearrangement is
+exactly reversible while leaving the encoder free to learn features before downsampling. A width- 48
+latent is therefore not equivalent to bilinear restriction of each physical channel to a width- 48 field.
+The observed reconstruction results are consistent with useful learned features, but unmatched
+diagnostic and model populations do not quantify that mechanism causally.
+Scalar accounting further changes the interpretation. The fixed and patchified cases reduce the
+dynamic scalar count by 3.33, while the wider stream latents reduce it by only 1.25 or 1.67. A
+lower error at a different latent size is not a matched compression result. Moreover, correction
+receives side information that a complete field codec would have to supply separately. Neither
+patch indexing nor the small corrected divergence residual makes the full learned system lossless
+or removes its computational and physical-validation costs.
+Constraint satisfaction and reconstruction fidelity are related but different endpoints. The mag-
+netic Hodge operation removes a discrete longitudinal component by construction. The evaluated
+complete correction changes additional quantities, and the observed increases in maximum error
+show that its aggregate benefit is not uniform. The retained magnetic residuals do not establish
+learned conservation, full Gauss-law or continuity correctness, faithful time stepping, continuum
+convergence or recovered electromagnetic dynamics.
+The main statistical limitation is reuse of validation data for checkpoint selection and scoring.
+No fresh test cohort or authenticated independent-seed replication supports uncertainty estimates.
+We therefore do not infer confidence intervals from trajectories, frames, grid cells or the number of
+archived reports. Exact training-stream/validation disjointness and physical distinctness are not
+established, so memorization cannot be ruled out. Scalar report summaries also cannot reproduce
+7
+
+the original quantiles without per-trajectory errors or prediction arrays. Current source captures
+explain the reported methods but are not exact historical environment attestations.
+These limitations bound the result to a finite reconstruction case study. A stronger compar-
+ison would require matched latent budgets, authenticated common evaluation trajectories, inde-
+pendently selected test data, controlled bridge ablations and reconstruction of the full correction
+diagnostics.
+
+\section*{6 Conclusion}
+
+The captured primary reports establish low checkpoint-selected validation errors for five grid-native
+Maxwell-field reconstruction configurations. A 48 \ensuremath{\times} 48 \ensuremath{\times} 48 spatial latent can be rearranged exactly
+into 576 width-192 tokens, and one retained model processes those tokens with a live transformer
+while maintaining a corrected median/p95 of 0.02734/0.06700. This is finite evidence for the tested
+representation and interface, not proof of a lossless learned bridge or integration with a larger
+trained model.
+Interpretation must account for the representation sizes and failure cases: dynamic scalar-count
+ratios vary from 1.25 to 3.33, correction consumes an external permittivity map, every retained
+model has maximum error above 0.1, and two stream maxima worsen after correction. Archived
+baseline failures motivate grid-native representations empirically, without demonstrating a univer-
+sal pooling limitation. Exact indexing, selected validation accuracy and constructed constraint
+satisfaction should remain separately reported.
+
+\section*{7 Data and Code A vailability}
+
+Captured training, patchification, generator, streaming, correction and spectral-diagnostic source
+files, together with numerical evaluation reports, exist in a private local export. Supplementary
+record S1 contains the captured records, full-precision summaries and independent checking in-
+puts/results. Access established for this study is limited to that private export; no public archive,
+external distribution grant or reviewer-access mechanism is established.
+The inspected source reads trajectory arrays from private manifest and reservoir locations. Orig-
+inal target/prediction arrays and checkpoint contents were not collected or loaded for this re-
+analysis; quantiles were not reproduced and inference was not replayed. Independent checking
+scripts and their saved outputs exist for report arithmetic, static-definition consistency and syn-
+thetic patch/projection algebra. These artifacts support the bounded checks described here, not
+full reproduction of the original training or solver campaign.
+
+\section*{References}
+
+[1] A. Jaegle, F. Gimeno, A. Brock, A. Zisserman, O. Vinyals, and J. Carreira. Perceiver: Gen-
+eral Perception with Iterative Attention. Proceedings of the 38th International Conference on
+Machine Learning, PMLR 139, 4651–4664 (2021). https://proceedings.mlr.press/v139/
+jaegle21a.html.
+8
+
+[2] A. Dosovitskiy et al. An Image is Worth 16x16 Words: Transformers for Image Recognition
+at Scale. International Conference on Learning Representations (2021). arXiv:2010.11929v2.
+https://arxiv.org/abs/2010.11929v2.
+9
+
+\end{document}

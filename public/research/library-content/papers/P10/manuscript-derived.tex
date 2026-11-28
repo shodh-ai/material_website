@@ -1,0 +1,600 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 56b674defee5a0689d36b63499e7b32e285a46a510b531b15168df789ace202f
+% Extracted text SHA-256: 6ba7c70fdb98290b5bc913601fdcf9e7eb7287e492868433c2d346ede725ab3b
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Physical-response diagnostics, ensemble agreement, and fixed-coordinate fidelity in residue-level IDP simulations}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Physical-response diagnostics, ensemble agreement, and
+fixed-coordinate fidelity in residue-level IDP simulations
+
+\section*{Abstract}
+
+Reliable use of residue-level simulations requires separate evidence for physical response,
+sampled ensembles, and numerical implementation. We examine these questions through a ret-
+rospective comparison of a development study of the ACTR/NCOA3 transactivation domain,
+a fixed-condition four-construct CAL V ADOS2 panel, and deposited-coordinate reference diag-
+nostics. Retained ACTR reports contain twelve 200 ns HPS-Urry replicas at two temperatures.
+Their second-half equal-bead radius-of-gyration means increase from 2.271425 to 2.346678 nm,
+opposite to the decreasing direction specified in the development provenance. Temperature is
+confounded with execution node, and the study does not establish a causal temperature ef-
+fect or a completed physical acceptance test. Separately, independent reductions of 240,000
+saved samples from 24 CAL V ADOS2 replicas reproduce the frozen four-construct sampling and
+comparison criteria after a 20\% cut. The largest rank-normalized split diagnostic is 1.0001992,
+and the median absolute relative radius error against the supplied reference values is 4.7953\%.
+PTMA lies outside the preferred uncertainty-ratio band while the aggregate panel still sat-
+isfies its predeclared rule. A reported private 32-frame cross-engine energy replay and later
+coordinate-readback diagnostics address different numerical questions; their original outputs
+are not available here for independent reproduction. Published OpenABC reference tables
+provide supporting methodological context, but cannot authenticate that private replay. The
+combined evidence shows why agreement within one validation target cannot qualify another.
+It supports bounded ensemble agreement for the specified panel and preserves a separate de-
+velopment discrepancy and reference-reproduction limits, without asserting a new force field or
+general physical qualification.
+
+\section*{1 Introduction}
+
+Intrinsically disordered protein (IDP) simulations are often evaluated through a compact set of
+observables, including the radius of gyration, Rg. Agreement in such an observable can arise under
+several scientifically different circumstances. Replicas may agree because they sample the same
+distribution, because they retain a common initialization bias, or because the observable does
+not resolve a relevant difference. A model may reproduce an average size at a fixed condition
+while failing to supply the intended evidence about a change of conditions. Numerical agreement
+between two implementations at fixed coordinates tests another property: whether the exercised
+energy expressions and conventions agree on those inputs.
+These distinctions matter when simulations will support subsequent representation learning or
+scientific inference. A finite trajectory, an apparently stable mean, and an energy comparison are
+useful observations, but each has a specific denominator and interpretation. Combining them into
+a single notion of a successful simulation obscures which requirement was actually examined. Prac-
+tical sampling guidance therefore emphasizes diverse starting conditions, time-series diagnostics,
+correlation and uncertainty, while retaining the possibility of states that the observed trajectories
+did not visit [ 3].
+1
+
+We study this problem using three evidence sets from an existing residue-level simulation inves-
+tigation. First, an ACTR HPS-Urry development panel recorded a radius response under two nom-
+inal temperatures. Second, a separate CAL V ADOS2 panel assessed four other constructs at fixed,
+construct-specific conditions using frozen sampling and experimental-comparison rules. Third,
+a retained research inventory described a deposited-coordinate energy replay and later numeri-
+cal readback investigations. The available evidence is uneven: original reports and configuration
+sources support the ACTR summaries; complete saved arrays permit independent re-reduction of
+the CAL V ADOS2 panel; the private replay and later observer outcomes remain source-reported
+summaries.
+Our contribution is the joint analysis of these distinct validation targets and their actual ev-
+idence levels. We retain both the ACTR direction discrepancy and the positive fixed-condition
+panel. We also examine why a fixed-coordinate reference comparison, even if successful within its
+own scope, would not resolve either ensemble question. No inherited Hamiltonian, simulation pack-
+age, sampling diagnostic, or reference dataset is introduced as a new method here. In particular,
+the four-construct study is neither an ACTR rerun nor a universal validation of residue-level IDP
+models.
+
+\section*{2 Related work and validation targets}
+
+OpenABC provides an OpenMM-based implementation environment for existing coarse-grained
+biomolecular models [ 1]. Its published validation includes comparisons of fixed-configuration ener-
+gies across OpenMM and reference engines: HPS against HOOMD-Blue, Mpipi against LAMMPS,
+and MOFF against GROMACS. The accompanying supplement specifies model conventions and
+provides numerical tables [ 2]. This is an appropriate precedent for implementation comparisons,
+with the important qualification that the compared configurations had themselves been generated
+by earlier simulations. A replay with zero integration calls describes the reevaluation stage, not a
+claim that its source coordinates were created without dynamics.
+The inspected OpenABC supplement describes HPS as combining nearest-neighbor harmonic
+bonds, screened electrostatics, and an Ashbaugh–Hatch contact interaction. It attributes the Urry-
+scale parameter choices to earlier work. The CAL V ADOS 2.0 source archive supplies the inherited
+source and parameter context for the separate fixed-condition study considered here [ 4]. We use
+these sources for attribution and model context. Their published or archived results do not establish
+the behavior of a different private run without a matching implementation, configuration, and
+observable definition.
+Uncertainty in a sampled observable is distinct from error in the interaction model. Correlated
+time observations cannot be counted as independent preparations, and nominal uncertainty intervals
+describe only the variation represented by their construction [ 3]. The present panel uses a particular
+fixed sequence of cuts, convergence diagnostics, effective sample-size calculations, and resampling
+decisions. Those numerical choices belong to its recorded protocol; they are not universal thresholds
+prescribed by the cited sampling guidance.
+Table 1 sets out the three questions used in this analysis. The distinction concerns both what
+is measured and what evidence is available. A positive outcome in one row does not remove an
+unresolved requirement in another.
+2
+
+Table 1: Validation targets and evidence available for this retrospective analysis. The three studies
+use different systems, inputs, and observables.
+Target Scientific question Evidence used here
+Physical-response
+diagnostic
+Does the recorded ACTR size re-
+sponse follow the direction speci-
+fied for the development compari-
+son?
+Original development report, prove-
+nance, configuration and runner;
+independent arithmetic on saved
+replica summaries.
+Fixed-condition
+ensemble agree-
+ment
+Do six replicas per construct sat-
+isfy the specified sampling and
+reference-comparison rules?
+Frozen protocol, all saved scalar
+and coordinate arrays, receipt
+chains and independently imple-
+mented reductions.
+Fixed-coordinate
+fidelity
+Do exercised implementations
+agree on deposited configurations,
+and where does a later numerical
+discrepancy appear?
+Published OpenABC methods and
+tables; private replay and observer
+outcomes retained at inventory-
+summary level.
+
+\section*{3 Methods}
+
+
+\section*{3.1 Retrospective evidence and scope}
+
+No molecular dynamics, checkpoint inference, or fresh cross-engine replay was executed for this
+manuscript. Independent calculations reduce existing reports and saved arrays. For ACTR, the cur-
+rent analysis checks replica-summary arithmetic and source/configuration consistency; raw ACTR
+coordinate traces and their segment records were not available in the current evidence collection.
+For the four-construct panel, all saved chunks, associated receipt chains, and the exact original
+protocol were available. Independent reductions check the scalar time series, coordinate-based Rg,
+sampling statistics, and the aggregate decision.
+The private deposited-coordinate replay and subsequent observer results require a different
+evidentiary treatment. Their values are included as findings reported by the retained research
+inventory, not as independently reproduced numerical measurements. Original unrounded outputs,
+assertion records, and coordinate/parameter arrays for those particular studies were not captured.
+Published OpenABC validation is considered separately, rather than substituted for those private
+artifacts.
+The experimental reference numbers used by the private studies are retained inputs. For ACTR,
+the captured provenance reports their literature origin and classifies the simulation as development
+rather than held-out validation. Exact experimental conditions, raw scattering curves, experi-
+mental uncertainties, terminal chemistry, and the stated parameterization overlap have not been
+independently verified from the full primary article bodies in the current evidence set. This analysis
+preserves that provenance classification without presenting it as a newly authenticated experimental
+benchmark.
+3
+
+
+\section*{3.2 Observable definitions}
+
+For coordinates xi of N residue beads, define the equal-bead and mass-weighted centers and radii
+by
+x = 1
+N
+NX
+i=1
+xi, Rg,eq =
+"
+1
+N
+NX
+i=1
+\ensuremath{\parallel}xi \ensuremath{-} x\ensuremath{\parallel}2
+2
+\#1/2
+, (1)
+xcm =
+P
+i mixiP
+i mi
+, Rg,mw =
+[U+0014] P
+i mi\ensuremath{\parallel}xi \ensuremath{-} xcm\ensuremath{\parallel}2
+2P
+i mi
+[U+0015]1/2
+. (2)
+The ACTR comparison uses second-half equal-bead diagnostic means. The fixed-condition panel
+uses mass-weighted Rg after its specified cut. These definitions and averaging windows are kept
+separate throughout. For the panel’s source-specific residue masses, the N- and C-terminal mass
+increments are 2 and 16 atomic mass units, respectively. The coordinate reduction uses the saved
+Cartesian arrays directly; it does not introduce a new alignment, minimum-image transformation,
+or periodic rewrapping convention.
+Let Rr denote the time mean retained for replica r. Within a condition with R replicas, we
+report
+R = 1
+R
+RX
+r=1
+Rr, s 2
+rep = 1
+R \ensuremath{-} 1
+RX
+r=1
+(Rr \ensuremath{-} R)2. (3)
+The ACTR standard deviation describes spread of the six recorded replica means. It is not a
+confidence interval or an estimate obtained by treating individual frames as independent. The
+fixed-condition panel estimates uncertainty in its mean using the explicit hierarchical resampling
+procedure below.
+
+\section*{3.3 ACTR development comparison}
+
+The retained configuration specifies a 71-residue ACTR/NCOA3 transactivation-domain sequence,
+with three compact and three extended starts at each of 278.15 and 318.15 K. Each of the twelve
+replicas targets 200 ns, for 2,400 ns aggregate. A 10 fs integration step and observations every 5,000
+steps yield 4,000 saved frames per replica, or 48,000 across both conditions. The reported size
+comparison uses the second half of each run as a development diagnostic. This window is not
+asserted to be a validated equilibration cutoff.
+The configured interaction model is OpenABC HPS-Urry, with contact energy scale 0.2 kcal/mol,
+\ensuremath{\mu} = 1 , \ensuremath{\Delta} = 0 .08, relative dielectric constant 80, and model ionic strength 0.2 M. The inspected
+runner computes a condition-specific Debye screening length from temperature, ionic strength, and
+dielectric constant, and supplies it to the screened electrostatic interaction. Thus temperature
+also changes this configured screening length. The recorded integrator uses a friction of 1 ps\ensuremath{-}1,
+a 40 nm periodic box, and mixed-precision CUDA execution. The source configuration includes
+residue charges without explicit terminal charges, because the experimental terminal chemistry
+is unresolved. These are the private run’s conventions, not a claim of exact reproduction of all
+experimental conditions.
+Crucially, the two temperatures are assigned to different execution nodes. The recorded design
+therefore does not isolate a temperature effect from node or backend effects. The intended qualita-
+tive direction is a smaller Rg at the higher temperature, as specified by the retained development
+provenance. The report explicitly leaves the formal scientific direction assessment unscored. No
+equilibration, effective sample size, rank-normalized convergence, or raw-scattering goodness-of-fit
+result from the separate panel is transferred retrospectively to ACTR.
+4
+
+
+\section*{3.4 Fixed-condition CAL V ADOS2 panel}
+
+The second study contains DSS1, PTMA, NHE6cmdd, and ANAC046, with conditions recorded in
+Table 2. Each construct has six replicas: three compact and three extended starts with separate
+recorded seeds. The protocol uses a Langevin middle integrator, a 10 fs step, friction 0.01 ps\ensuremath{-}1, and
+double-precision CUDA execution. Each replica contains 108 steps, corresponding to 1,000 ns, and
+stores observations every 10,000 steps. Thus there are 10,000 saved samples per replica, 60,000 per
+construct, and 240,000 over the panel. These durations describe the original recorded study, not
+new dynamics in this work.
+All four constructs use the source’s single-chain cubic periodic-box rule
+L = [0.38(N \ensuremath{-} 1) + 4] nm. (4)
+The first 20\% of each scalar series is discarded, leaving 8,000 observations per replica and 192,000
+across the panel. The corresponding retained duration is 800 ns per replica. The protocol de-
+scribes the constructs as a fixed-condition held-out panel; that designation is retained as a protocol
+classification and is not generalized to independence from every model-development dataset.
+Table 2: Construct-specific inputs in the frozen CAL V ADOS2 protocol. I is ionic strength. The
+reference Rg and uref are supplied experimental values and uncertainties, not independently remea-
+sured experimental data.
+Construct Residues T (K) pH I (M) Rg,ref \ensuremath{\pm} uref (nm)
+DSS1 71 288 7.4 0.17 2.5 \ensuremath{\pm} 0.1
+PTMA 111 288 7.4 0.16 3.7 \ensuremath{\pm} 0.2
+NHE6cmdd 116 288 7.4 0.17 3.2 \ensuremath{\pm} 0.2
+ANAC046 167 298 7.0 0.14 3.6 \ensuremath{\pm} 0.3
+
+\section*{3.5 Frozen sampling and uncertainty rules}
+
+For each post-cut replica, the drift diagnostic compares the first and last of four equal chronological
+blocks. Their absolute mean difference, divided by the absolute full retained mean, must not exceed
+0.10. A separate split-half comparison, normalized by that retained mean, must not exceed 0.05 in
+any replica. Both normalizations use an absolute-mean floor of 10\ensuremath{-}12 nm in the recorded assessor.
+The rank-normalization and folding approach follows Vehtari et al. [ 5]; the thresholds and
+single-replica ESS rule below remain choices of the frozen study protocol. The rank-normalized
+diagnostic splits each of the six retained series into two equal halves. If rj is the average rank of
+a value among the pooled split observations and M is the pooled count, the assessor maps ranks
+through \ensuremath{\Phi}\ensuremath{-}1[(rj \ensuremath{-} 3/8)/(M + 1/4)], where \ensuremath{\Phi} is the standard-normal cumulative distribution. The
+diagnostic is computed both on these normalized values and on ranks of absolute deviations from
+the pooled median. For either normalized split matrix, with m chains of length n, the conventional
+variance ratio used by the frozen assessor is
+W = 1
+m
+mX
+r=1
+s2
+r, B = n Varr(zr), bR =
+[U+0014] (n \ensuremath{-} 1)W/n + B/n
+W
+[U+0015]1/2
+. (5)
+Here the within-chain variances and the variance of chain means use sample denominators. The
+larger bulk or folded value must be at most 1.05. In this study m = 12 and n = 4 , 000 after
+5
+
+splitting. These diagnostics test the observed scalar series under the fixed rule; passing them does
+not prove complete exploration of configuration space.
+For a post-cut series of length n0 = 8 , 000, the effective sample-size (ESS) calculation uses
+centered lag correlations. The original assessor obtains autocovariances by a fast Fourier transform
+and divides each lag product sum by the number of available pairs. Consecutive positive lag pairs
+are accumulated until the first nonpositive pair. Writing K for the last included pair, its rule is
+\ensuremath{\tau} = 1 + 2
+KX
+k=1
+(b\ensuremath{\rho}2k\ensuremath{-}1 + b\ensuremath{\rho}2k), N eff = max\{1, min(n0, n0/\ensuremath{\tau} )\}. (6)
+The minimum is 200 per replica and 1,200 after summing the six replica estimates. The independent
+reduction uses direct lag-dot products for the same definition, rather than importing the original
+analysis source. Clipping at the observed count is part of this particular estimator.
+Start-state agreement first requires a relative separation of at least 0.30 between the recorded
+compact and extended initial Rg group means. This initial separation is their extended-minus-
+compact mean difference divided by the average of those two means, with the same positive nu-
+merical floor. For the post-cut means, let Rc and Re be the averages over the three compact and
+three extended starts. Their absolute difference must not exceed
+A = max
+(
+2
+r
+s2c
+3 + s2e
+3 , 0.05
+
+% Extracted chunk 5
+
+
+Rc + Re
+2
+
+% Extracted chunk 9
+
+
+)
+, (7)
+where s2
+c and s2
+e describe variation among the respective replica means. Initial size values are
+retained progress records; compact initial configurations were not regenerated here.
+For uncertainty in the panel mean, the frozen procedure performs 2,000 seeded hierarchical
+circular-block bootstrap draws. Each draw selects six replicas with replacement. For each selected
+replica, circular temporal blocks are sampled with replacement, concatenated, and truncated to
+its retained sample count; their mean supplies that selected replica’s contribution. The six contri-
+butions are then averaged. Replica-specific block lengths are \ensuremath{\lceil}n0/Neff \ensuremath{\rceil}, restricted to [1, n0]. The
+standard deviation of bootstrap means, using a sample denominator, supplies the model standard
+error, smodel. The 2.5th and 97.5th percentiles give the stated interval. The independent reduction
+retains the original seeds and circular-block law, with precomputed circular window sums; it does
+not execute the supplied analysis code.
+The comparison ratio for construct a is the frozen operational quantity
+za = |Ra \ensuremath{-} Ra,ref |q
+s2
+a,model + u2
+a,ref
+, e a = |Ra \ensuremath{-} Ra,ref |
+Ra,ref
+. (8)
+The denominator combines the bootstrap model standard error with the reported experimental
+uncertainty as the protocol specifies. It does not add force-field or other systematic errors. No
+calibrated hypothesis-test probability or full-scattering agreement is inferred from za. The aggregate
+rule requires all four sampling outcomes, at least three za \ensuremath{\leq} 2, none above 3, median ea \ensuremath{\leq} 0.10,
+and maximum ea \ensuremath{\leq} 0.20.
+
+\section*{3.6 Independent saved-array reduction and precision}
+
+The panel’s saved scalar arrays retain double-precision Rg, whereas the coordinate arrays are single
+precision. Coordinate-based Rg was independently recomputed with the source-specific masses.
+6
+
+Agreement is evaluated under a conservative propagation bound for coordinate rounding, rather
+than demanding bit identity with an observable originally computed before coordinate conversion.
+The largest absolute difference in the panel is 3.210902 \ensuremath{\times} 10\ensuremath{-}6 nm; every checked coordinate/scalar
+pair remains within its recorded conservative bound.
+Independent statistical reductions reproduce the original sampling decisions and comparison
+numbers at their stated numerical tolerances. A standard-library inverse-normal quantile is used
+instead of the source’s approximation for rank normalization. Tiny resulting numerical differ-
+ences are not interpreted as a different scientific outcome. These calculations establish consistency
+of the retained samples and methods. They do not reproduce the original OpenMM dynamics,
+independently establish every runtime parameter consumed by the engine, or qualify a different
+implementation.
+
+\section*{4 Results}
+
+
+\section*{4.1 ACTR: a retained development discrepancy}
+
+The six ACTR replica means at each condition give the summaries in Table 3. The high-minus-
+low difference is +0.0752539632 nm. The experimental values reported by the retained provenance
+instead decrease by 0.24 nm. Thus the observed development diagnostic has the opposite sign to
+the comparison direction specified in that provenance. It does not supply the intended positive
+evidence about physical response.
+Table 3: Retained ACTR second-half equal-bead diagnostic summaries. Each condition has three
+compact and three extended starts. The standard deviation is across six replica means. Reference
+numbers are copied from development provenance, not independently checked experimental mea-
+surements.
+T (K) Replicas Mean Rg (nm) Replica SD (nm) Reported reference Rg (nm)
+278.15 6 2.271425 0.078096 2.63
+318.15 6 2.346678 0.065386 2.39
+At 278.15 K, compact and extended mean sizes are 2.270728 and 2.272122 nm, respectively. At
+318.15 K, the corresponding means are 2.348007 and 2.345350 nm. That proximity does not convert
+the development study into an equilibrated or held-out benchmark. In particular, its reported
+difference in direction coexists with unresolved experimental inputs and the temperature–node
+confounding. The formal scientific assessment remains unscored, rather than being retroactively
+relabeled a completed acceptance failure or success.
+
+\section*{4.2 Four-construct panel: agreement under the original fixed rule}
+
+All 24 CAL V ADOS2 replica series satisfy the original drift, split-half, rank-normalized, ESS, and
+start-state checks. The independently reduced means and intervals appear in Table 4. The aggre-
+gate median absolute relative error is 0.0479526813, and the largest relative error is 0.1226623393
+for PTMA. Three constructs have z \ensuremath{\leq} 2; PTMA has z = 2 .268158, below the absolute limit of 3.
+The panel therefore satisfies its frozen aggregate rule without requiring that every construct meet
+the preferred band.
+The model bootstrap standard errors are 0.003406, 0.006218, 0.003951, and 0.007623 nm for
+DSS1, PTMA, NHE6cmdd, and ANAC046, respectively. The central estimates in Table 4 are av-
+7
+
+Table 4: Independently re-reduced mass-weighted Rg results after the specified cut. Intervals are
+the frozen hierarchical-bootstrap percentile intervals for the model mean. They omit force-field and
+experimental systematic uncertainty. The z ratio uses the supplied reference uncertainty through
+Eq. 8.
+Construct Mean Rg (nm) Model 95\% interval (nm) z 100e (\%)
+DSS1 2.637509 [2.630920, 2.644308] 1.374289 5.500345
+PTMA 4.153851 [4.141701, 4.165956] 2.268158 12.266234
+NHE6cmdd 3.069114 [3.061511, 3.077141] 0.654303 4.090191
+ANAC046 3.680021 [3.665165, 3.694945] 0.266650 2.222797
+erages of the six retained replica means; bootstrap means are used to estimate uncertainty rather
+than replace these central estimates. The intervals quantify uncertainty under the specified resam-
+pling procedure and observed state coverage. They are not population-wide evidence of force-field
+accuracy.
+Table 5 shows the sampling diagnostics. The largest rank-normalized split value is approx-
+imately 1.0001992. The smallest individual ESS is 2,807.45, well above the stated per-replica
+threshold. The largest observed first/last-block drift is 2.6198\%, and the largest split-half differ-
+ence is 1.4692\%. These are outcomes for mass-weighted Rg in these four systems and observation
+windows. They do not establish convergence of every possible structural observable.
+Table 5: Fixed-condition sampling diagnostics independently reduced from the saved scalar series.
+Maxima are over the six replicas for each construct; the reported rank statistic is the larger bulk
+or folded value. Pooled ESS is the sum of the six estimator values.
+Construct bRmax Minimum ESS Pooled ESS Drift max (\%) Split-half max (\%)
+DSS1 1.000071 7263.79 46645.77 0.8875 0.6005
+PTMA 1.000124 4511.07 27987.91 0.7664 1.0177
+NHE6cmdd 1.000063 4225.94 26972.20 1.2777 1.4692
+ANAC046 1.000199 2807.45 17372.91 2.6198 1.4456
+In construct order, the compact–extended retained-mean differences are 0.004753, 0.000229,
+0.003451, and 0.000552 nm. They lie below the source-specific allowances of 0.131875, 0.207693,
+0.153456, and 0.184001 nm. The recorded initial group relative separations are all above 1.36, rather
+than merely meeting the 0.30 requirement. Initial state separation therefore supplies a stronger
+check than comparing starts that were already similar in Rg, while still leaving unvisited-state and
+observable-specific sampling limits.
+
+\section*{4.3 Deposited-coordinate references and numerical observations}
+
+The retained inventory reports a private replay of 32 deposited configurations across HPS, Mpipi,
+and MOFF, with no integration or minimization calls during reevaluation. The inventory reports
+that all 32 passed their upstream assertions. Its reported counts and rounded energy differences
+are retained in Table 6. The original private coordinate arrays, unrounded energy terms, asser-
+tion records, and complete replay implementation were unavailable for independent checking. The
+table consequently reports an inventory finding; it is not a newly reproduced cross-engine bench-
+mark. The inventory describes a CPU, software-version-pinned replay rather than a complete
+8
+
+executable/native-library lock or GPU qualification.
+Table 6: Private deposited-coordinate replay as reported by the retained research inventory. The
+original private replay outputs are not independently reproduced here. Rounded CSV maxima and
+reported assertion tolerances are distinct quantities, both in kJ/mol.
+Model Reference engine Frames Tolerance Rounded term maximum
+HPS HOOMD-Blue 10 0.01 0.0055103629
+Mpipi LAMMPS 11 0.01 0.0100
+MOFF GROMACS 11 0.02 0.0198
+The published OpenABC supplement separately contains ten configurations in each of its
+MOFF, HPS, and Mpipi energy-comparison tables, for 30 published rows [ 2]. This published
+comparison is distinct from the private inventory’s 10/11/11-frame study. The published rounded
+entries also warrant care: the HPS Urry contact column contains a printed difference of 0.01 kJ/mol
+in one configuration, despite a prose description of exact agreement. A displayed rounded differ-
+ence cannot recover an unrounded private assertion result. Published methodological agreement
+therefore supplies context without authenticating the private rerun, its software environment, or
+its numerical tolerance.
+The same inventory reports later zero-step coordinate observations. Among 100 position rows,
+88 changed relative to commanded coordinates before first force capture, with a maximum differ-
+ence of 7.105427357601002 \ensuremath{\times} 10\ensuremath{-}15 nm; first force capture introduced no additional changed rows.
+A tested box-add/subtract arithmetic hypothesis matched those observed rows, but did not authen-
+ticate the engine’s native ordering. Original stage-specific coordinate arrays and observer outputs
+were not supplied here, so these remain reported diagnostics.
+A separate full-chain force triage in the inventory records a residual under serialized binary64
+parameters of
+1.0375627494303984 \ensuremath{\times} 10\ensuremath{-}4 kJ/(mol nm).
+Under a CUDA-storage parameter hypothesis, the reported residual is
+7.822559169383161 \ensuremath{\times} 10\ensuremath{-}10 kJ/(mol nm).
+That contrast narrows a possible representation explanation without proving actual runtime pa-
+rameter consumption. It also lacks an authoritative matching full-HPS force-accuracy threshold
+in the available evidence. A two-particle harmonic tolerance, a per-particle norm bound, or an
+energy-ledger closure cannot supply that missing criterion.
+
+\section*{5 Discussion}
+
+The principal empirical contrast is two-sided. The ACTR report records a size response that
+does not support its intended development comparison, while the independent fixed-condition re-
+reduction supports the positive panel decision under its own original rules. Neither outcome removes
+the other. They concern different proteins, models, conditions, definitions of Rg, averaging windows,
+and evidence levels. The different ACTR node assignments further prevent a causal interpretation
+based on temperature alone.
+The fixed-condition result is useful because it retains both individual and aggregate outcomes.
+PTMA does not meet the preferred z \ensuremath{\leq} 2 band, but the predeclared rule explicitly permits one
+9
+
+such case if none exceeds 3 and the relative-error limits hold. Reporting only an aggregate pass
+would hide this structure; declaring the panel failed solely because PTMA misses the preferred band
+would instead change the rule after observing the results. The appropriate statement is agreement
+under the specified four-construct criterion, with the individual discrepancy visible.
+Sampling uncertainty is not an uncertainty budget for the physical model. The hierarchical
+bootstrap addresses variation represented by the six observed replica series and their circular tem-
+poral blocks. It does not include errors in the force field, source experimental uncertainties beyond
+the supplied values, experimental conditions, terminal chemistry, or states absent from the trajec-
+tories. The operational combined ratio is therefore informative within the comparison contract but
+is not a calibrated probability that the model is physically correct. Likewise, low scalar convergence
+statistics and close starting-class means do not prove equilibration of every coordinate-dependent
+observable.
+Fixed-coordinate fidelity supplies an orthogonal kind of evidence. Agreement of exercised en-
+ergies can constrain implementation differences at the compared coordinates and conventions. It
+cannot establish a correct distribution of coordinates, a physical response to changed conditions, or
+an acceptable force error when the matching reference criterion is unknown. The inherited model
+and software contexts are essential to such an interpretation: coefficients, cutoffs, shifts, exclusions,
+precision, and parameter representations can each change what is being compared. This paper’s
+ensemble outcomes do not requalify separate contact-term or numerical-precision studies as new
+independent experiments.
+The tiny reported coordinate-readback differences illustrate a related distinction between locat-
+ing a discrepancy and identifying its mechanism. A stage at which rows first differ is an observation
+about the exercised measurement path. Matching an arithmetic hypothesis does not identify all
+internal ordering or parameter-consumption operations. Numerical smallness also does not supply
+a physical acceptance threshold. The original arrays and intervention records would be needed to
+reproduce those reported observations and assess stronger mechanism claims.
+The current evidence supports a more substantial reproduction statement for the CAL V ADOS2
+panel than for the other studies. All saved samples were available and their scalar statistics and
+coordinate-based radii were independently reduced. This checks retained-data consistency and the
+specified decision. It remains distinct from rerunning the dynamics with independently recon-
+structed software and reference inputs. For ACTR, only report-level summaries and methods were
+checked. For the private replay and observers, the original inventory remains the evidence source.
+These differences are retained rather than averaged into a single validation score.
+Several experimental and reuse questions remain. The detailed primary ACTR experimental
+and parameterization article bodies were unavailable in the captured citation set, so the specific
+experimental numbers and development classification are attributed to private provenance. Raw
+scattering curves, uncertainties, terminal chemistry and applicable reuse permissions remain unre-
+solved. The fixed-condition panel’s reference numbers and uncertainty entries likewise retain their
+supplied-source status. None of these limitations can be eliminated by a narrower sampling interval
+or by agreement between two numerical implementations.
+
+\section*{6 Conclusion}
+
+Physical-response diagnostics, ensemble agreement, and fixed-coordinate implementation fidelity
+answer different questions in residue-level IDP simulation. The retained ACTR development com-
+parison gives a high-minus-low size difference of +0.075254 nm, opposite to the direction specified
+by its provenance; its node–temperature confounding and unassessed convergence remain explicit.
+10
+
+A separate four-construct CAL V ADOS2 panel, independently re-reduced from all saved samples,
+satisfies its original sampling and aggregate reference-comparison rules, with median relative ra-
+dius error 4.7953\% and PTMA outside the preferred uncertainty-ratio band. These findings coexist
+without contradiction.
+The private deposited-coordinate replay and later readback/force diagnostics retain a distinct
+source-reported status until their original artifacts can be checked. Published OpenABC compar-
+isons support the rationale for that validation target, but do not authenticate the private results.
+The resulting scientific lesson is to preserve the observable, population, protocol and evidence level
+attached to each conclusion. The bounded positive panel result does not establish a new force field,
+universal IDP accuracy, or a completed physical qualification of all related simulations.
+
+\section*{7 Data and code availability}
+
+The current study uses privately retained research reports, provenance and configuration records,
+inspected method sources, saved fixed-condition scalar and coordinate arrays, and independently
+authored reduction code. The original ACTR raw traces and the private deposited-coordinate
+replay and observer arrays are not included in the frozen evidence supplied to this draft. Public
+literature and the archived CAL V ADOS source provide their separately stated background and
+method context. No public release of the private research collection, external access procedure, or
+redistribution permission is established here. Supplementary record S1 retains the private source
+evidence and independently authored reduction code. A separate verification report records the
+remaining specific reproduction, experimental-source and access checks.
+
+\section*{References}
+
+[1] S. Liu, C. Wang, A. P. Latham, X. Ding, and B. Zhang. OpenABC enables flexible, simplified,
+and efficient GPU accelerated simulations of biomolecular condensates. PLoS Computational
+Biology 19(9), e1011442 (2023). https://doi.org/10.1371/journal.pcbi.1011442.
+[2] S. Liu, C. Wang, A. P. Latham, X. Ding, and B. Zhang. Supplementary text to OpenABC en-
+ables flexible, simplified, and efficient GPU accelerated simulations of biomolecular condensates
+(2023). Publisher supplementary attachment to https://doi.org/10.1371/journal.pcbi.
+1011442; Tables J, L and M.
+[3] A. Grossfield, P. N. Patrone, D. R. Roe, A. J. Schultz, D. W. Siderius, and D. M. Zuckerman.
+Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations
+[Article v1.0]. Living Journal of Computational Molecular Science 1(1), 5067 (2019). https:
+//doi.org/10.33011/livecoms.1.1.5067.
+[4] G. Tesei, T. K. Schulze, R. Crehuet, and K. Lindorff-Larsen. CAL V ADOS: Coarse-graining Ap-
+proach to Liquid-liquid phase separation Via an Automated Data-driven Optimisation Scheme.
+Source archive, version 2.0 (2024). https://doi.org/10.5281/zenodo.13754000.
+[5] A. Vehtari, A. Gelman, D. Simpson, B. Carpenter, and P.-C. Bürkner. Rank-normalization, fold-
+ing, and localization: An improved bR for assessing convergence of MCMC. arXiv:1903.08008v5
+(2021). https://arxiv.org/abs/1903.08008v5. Related journal DOI: https://doi.org/10.
+1214/20-BA1221.
+11
+
+\end{document}

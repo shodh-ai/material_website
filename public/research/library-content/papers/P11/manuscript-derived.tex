@@ -1,0 +1,417 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: d96ff5ff7cd76a19edd19df09f71400137e1d1b6bac1e26643d879de1560e678
+% Extracted text SHA-256: aa19567e6181ed750dcb0c41e51d43897621d296a99f741273c6d643408c4cb1
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Metric semantics and geometry constraints in neural mixer inverse design: a retrospective retained-artifact case study}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Metric semantics and geometry constraints in neural mixer inverse
+design: a retrospective retained-artifact case study
+
+\section*{Abstract}
+
+Neural inverse design can optimize a geometric surrogate without establishing the perfor-
+mance of the resulting hard geometry. This case study separates geometric decoder objectives,
+differentiable porous-flow scores, hard-grid diagnostics, and a subsequently smoothed surface.
+Stored numerical fields and meshes support a bounded explanation of their non-equivalence. The
+geometric quantity called a thermal-dead-zone proxy is a squared occupancy-gradient penalty,
+not a fraction of cold or stagnant fluid cells. A volume-connected decoder reported zero proxy
+penalty but 291810 thresholded solid components; its distinct hard-grid evaluation yielded a
+cold/slow fraction of 0.3156383064. A differentiable optimizer subsequently reported a soft
+diagnostic of 0.0777688250 and soft solid fraction of 0.2077771425. The saved output, hard-
+thresholded and evaluated under the hard-grid protocol, instead yielded a cold/slow fraction
+of 0.3029557981 and hard solid fraction of 0.1528625488. These are different observables and
+protocols, not a calibrated soft-to-hard error estimate. Surface smoothing preserved triangle in-
+dices but reduced measured area by 75.8632232\% and retained 9070 boundary edges. The earlier
+flow evaluation therefore does not certify the smoothed surface. The contribution is a retained-
+artifact account of why objective satisfaction, hard-grid diagnostics, and surface qualification
+must remain separate scientific claims.
+
+\section*{1 Introduction and contributions}
+
+Inverse design of a mixer requires a chain of statements: a representation must describe material,
+an objective must measure a relevant property, a forward calculation must evaluate the proposed
+geometry, and the exported surface must retain the properties attributed to it. A small objective
+value at one stage does not establish the next statement. This issue is particularly important when
+the same descriptive label is attached to a geometric penalty and to a field-derived fraction.
+The present case study examines a frozen-foundation geometric decoder, a manufacturability
+variant, a volume-connected variant, differentiable optimizers V1 and V2, a hard-grid audit, and a
+smoothed final mesh. These names identify computational stages, not certifications. The central
+contribution is a bounded retrospective explanation, supported by remeasurement of retained fields
+and surfaces, of why a geometric proxy or soft optimization score cannot certify a hard-geometry
+mixer.
+Three distinctions organize the analysis. First, an occupancy-gradient penalty contains no ve-
+locity or temperature observation. Second, a sigmoid-weighted porous diagnostic and a percentile-
+thresholded hard-fluid fraction have different geometry, thresholds, and denominators. Third, un-
+changed surface indexing does not imply unchanged geometry or validated flow after smoothing.
+The results also expose dependence between nominal candidate cases and a mismatch between the
+timing of logged optimizer metrics and exported geometry. No new differentiable-physics method
+or physically validated mixer is claimed.
+1
+
+
+\section*{2 Related work}
+
+Holl et al. describe differentiable PDE planning and control, including problem-dependent obser-
+vations and a combination of observation and control objectives [ 1]. Their formulation makes the
+chosen observation map and loss part of the task definition. This is relevant to interpreting an
+inverse-design score: differentiation provides sensitivity of the specified calculation, not an auto-
+matic interpretation of its objective as an experimentally measured property. Their study does not
+benchmark the mixer examined here.
+Papadopoulos and Suli analyze a constrained material-distribution problem for Stokes flow [ 2]. In
+the supplied author manuscript dated March 27, 2022, the formulation includes a volume constraint
+and the analysis establishes conditional finite-element convergence toward isolated local minimiz-
+ers. Their material variable near one permits fluid flow; the occupancy used here near one denotes
+solid. Moreover, their constrained Stokes problem is not the periodic, finite-time lattice-Boltzmann
+calculation, soft-penalty optimization, or surface-export sequence examined below. Its convergence
+results cannot certify this pipeline. These works provide methodological context rather than mea-
+sured baselines, calibration references, or evidence against differentiable simulation and topology
+optimization in general.
+
+\section*{3 Scientific methods and validation protocols}
+
+
+\section*{3.1 Retrospective scope and geometric representation}
+
+The analysis uses captured source, saved reports and optimization histories, original numerical
+arrays, and the actual unsmoothed and smoothed OBJ meshes. Local checking scripts reopened
+the stored arrays and meshes, recomputed scalar diagnostics and triangle geometry, and compared
+retained fields elementwise. No original neural inference, checkpoint execution, optimizer execution,
+or flow simulation was rerun. Thus, remeasurement establishes properties of retained artifacts,
+while reports and source establish the recorded computational procedure. Exact checking inputs
+and results are preserved in Supplementary record S1.
+The frozen-foundation bridge reports 3337537 trainable decoder parameters and zero trainable
+foundation parameters. Arithmetic from the captured decoder architecture independently repro-
+duces the decoder count. This supports the architecture description, but not a replayed binding
+to the original foundation checkpoint or a claim about its predictive utility. The decoder maps
+conditioning tokens and a pooled embedding to a scalar field called a signed distance field (SDF).
+This designation alone does not establish the signed-distance property. Negative values denote solid
+for hard thresholding. Source-supported interpolation and field calculations use float32; decoder
+source also permits optional bfloat16 autocasting and enables TF32 in relevant routines. Historical
+precision flags and complete launch bindings are not established by source defaults.
+
+\section*{3.2 Geometric proxy and soft constraints}
+
+For decoder objectives, let s be the resampled scalar field, \ensuremath{\sigma} the logistic function, and \ensuremath{\langle}·\ensuremath{\rangle} an
+arithmetic mean. Occupancy and its area-like measure are
+o = \ensuremath{\sigma}(\ensuremath{-}s/0.08), A = 1
+3
+3\ensuremath{\sum}
+j=1
+\ensuremath{\langle}|\ensuremath{\Delta}jo|\ensuremath{\rangle}. (1)
+2
+
+Each directional difference mean is taken over the adjacent pairs available in that direction, with
+no physical spacing factor. Consequently, A is an occupancy-gradient measure, not a dimensionally
+calibrated interfacial area. The revised decoder variants define
+G = [0.055 \ensuremath{-} A]2
++, [a]+ = max(0, a). (2)
+The original decoder source instead uses [0.030 \ensuremath{-} A]2
++. Both thresholds are reported explicitly
+because the retained stages should not be assigned an identical historical objective. Neither expres-
+sion contains temperature or velocity. The quantity called a thermal-dead-zone proxy is a squared
+geometric penalty, not a fraction of cold or stagnant cells. In particular, G = 0 only means that
+the selected gradient threshold has been attained.
+The decoder pressure proxy is likewise geometric:
+Pg = 0.45 + 2.75\ensuremath{\langle}o\ensuremath{\rangle} + 1.85B + 0.85A, (3)
+where B is obtained by averaging occupancy over the last two spatial dimensions and maximizing
+over the first spatial dimension. In the source’s (z, y, x) ordering, these are planes normal to z,
+whereas the flow calculations below are forced along x, the last spatial dimension. This geometric
+proxy has no independent pressure calibration. The manufacturability variant adds SDF total
+variation, a mean absolute discrete Laplacian, local unsupported-material penalties, and a soft
+reachability penalty. The latter propagates occupancy-weighted reachability through a 3 \ensuremath{\times} 3 \ensuremath{\times}
+3 neighborhood for 32 iterations from end-region and core seeds; it is not a hard connectivity
+constraint. Its mixer objective uses a soft volume interval [0.20, 0.38] with weight 2. The volume-
+connected variant replaces that term with 180(\ensuremath{\langle}o\ensuremath{\rangle} \ensuremath{-} 0.26)2 and reduces the regularization weights.
+Thresholded component counts use o > 0.5 and the default three-dimensional face connectivity
+of the captured labeling call. These finite soft penalties do not certify connected or fabrication-
+qualified material.
+
+\section*{3.3 Hard-grid forward convention}
+
+The hard-grid audit thresholds a sampled field at s < 0, then clears obstacles on the first and
+last two axial planes. Earlier extraction uses nearest-index sampling; preparation for differentiable
+optimization uses trilinear interpolation to 643 with aligned corners disabled. Hard solid volume is
+the obstacle-cell fraction over the full grid, including cleared planes.
+The captured JAX flow calculation uses D3Q27 velocities cq \ensuremath{\in} \{\ensuremath{-}1, 0, 1\}3, single-relaxation-time
+collision with \ensuremath{\tau} = 0 .62, and axial body forcing Fx = 10 \ensuremath{-}6. Its weights for \ensuremath{\parallel}cq\ensuremath{\parallel}1 = 0 , 1, 2, 3 are
+respectively 8/27, 2/27, 1/54, and 1/216. With density and momentum obtained from populations,
+the equilibrium and collision are
+f eq
+q = wq\ensuremath{\rho}
+[
+1 + 3cq · u + 9
+2 (cq · u)2 \ensuremath{-} 3
+2 |u|2
+]
+, (4)
+f \ensuremath{\ast}
+q = fq \ensuremath{-} \ensuremath{\tau} \ensuremath{-}1(fq \ensuremath{-} f eq
+q ) + 3wqcqxFx. (5)
+Streaming uses periodic rolling on all three axes. Obstacle populations are reversed by bounceback,
+and obstacle velocity is zeroed. The retained successful hard-grid routine uses momentum divided
+by density without the half-force velocity correction present in an earlier source version. Both
+source versions remain evidence, rather than interchangeable solver executions. Initialization uses
+unit density and zero velocity; collision density is clipped to [10\ensuremath{-}6, 106]. Arrays are retained as
+float32 fields and Boolean obstacles.
+3
+
+Clearing obstacle endplanes does not impose a physically specified inlet or outlet on this periodic
+calculation. The temperature-like scalar is updated separately, after the flow iterations, using the
+final velocity:
+T k+1 = \ensuremath{\chi}
+[
+T k + 0.08\ensuremath{\Delta}hT k \ensuremath{-} bux(T k \ensuremath{-} T k
+x\ensuremath{-}1)
+]
++ 0.25(1 \ensuremath{-} \ensuremath{\chi}), (6)
+followed by resetting the first axial plane to 1. Here \ensuremath{\chi} is the fluid indicator, b = 0.15 for the hard
+calculation, \ensuremath{\Delta}h is the six-neighbor periodic difference operator, and initial T = 0 .25 except on
+the reset plane. The maintained x = 0 plane lies within a periodically differenced domain; it is
+not a physical inlet condition. The diffusion stencil uses neighbor values across obstacle interfaces
+without interface masking before solid cells are reset to 0.25, so those interfaces are not insulating
+scalar boundaries. The scalar iteration count equals the recorded flow iteration count; this is not a
+simultaneously coupled thermal LBM.
+For hard-fluid cells F, speed vi, and the NumPy 35th percentile q35 computed only over fluid
+speeds, the diagnostic is
+Dh =
+\ensuremath{\sum}
+i 1i\ensuremath{\in}F 1Ti<0.301vi<q35
+max(1, |F |) . (7)
+Both inequalities are strict; ties at the speed percentile are excluded. The denominator includes all
+fluid cells, not just cold cells or a downstream subregion. This is a relative-threshold diagnostic,
+not an absolute stagnation criterion.
+The audit pressure uses fluid-only density means at axial indices 2 and Nx \ensuremath{-} 3:
+Ph = 10 5 [¯\ensuremath{\rho}2 \ensuremath{-} ¯\ensuremath{\rho}Nx\ensuremath{-}3]+
+3 . (8)
+If a section has no fluid cells, the hard source falls back to its full-plane mean. Stored-field re-
+measurement follows the captured NumPy reduction and percentile conventions; float64 geometric
+reductions are identified separately below. Decimal values are rounded representations of retained
+numerical results, not uncertainty intervals. The source calls the pressure scale a bar-ish audit
+unit. We therefore use scaled lattice pressure or audit pressure, without assigning independently
+calibrated bar, SI speed, temperature, or time.
+
+\section*{3.4 Differentiable porous calculation and objectives}
+
+For differentiable optimizers V1 and V2, solid occupancy and fluid weight are
+\ensuremath{\alpha} = M \ensuremath{\sigma}(\ensuremath{-}s/0.06), w f = 1 \ensuremath{-} \ensuremath{\alpha}, (9)
+where M = 0 on the first and last two axial planes and one elsewhere. Velocity is multiplied by
+wf , and streamed populations are blended as (1 \ensuremath{-} \ensuremath{\alpha})fq + \ensuremath{\alpha}f¯q. The scalar update uses \ensuremath{\chi} = wf
+and b = 0.18, rather than the hard coefficient 0.15. These choices describe porous geometry, not a
+differentiable implementation of an identical hard obstacle calculation.
+Let \ensuremath{\varepsilon} = 10 \ensuremath{-}6. The reference speed and soft diagnostic are
+vr = max
+( \ensuremath{\langle}vwf \ensuremath{\rangle}
+\ensuremath{\langle}wf \ensuremath{\rangle} + \ensuremath{\varepsilon} , 10\ensuremath{-}7
+)
+, (10)
+Ds =
+\ensuremath{\sum}
+i wf,i \ensuremath{\sigma}((0.30 \ensuremath{-} Ti)/0.025) \ensuremath{\sigma}((0.65vr \ensuremath{-} vi)/(0.15vr + 10\ensuremath{-}8))\ensuremath{\sum}
+i wf,i + \ensuremath{\varepsilon} . (11)
+4
+
+Speed includes a 10\ensuremath{-}18 floor inside the square root. Soft solid volume is V = \ensuremath{\langle}\ensuremath{\alpha}\ensuremath{\rangle} over the entire
+grid. Soft pressure Ps uses the same density-difference scale as Ph, but porosity-weighted section
+means with \ensuremath{\varepsilon} in each denominator. Thus the soft and hard diagnostics differ in threshold definitions,
+geometry, normalizations, and scalar transport.
+For compactness, let RP = [Ps \ensuremath{-} 2]2
++, Q = (V \ensuremath{-} 0.24)2, FV = [0.20 \ensuremath{-} V ]2
++, FS = [0.055 \ensuremath{-} TV(s)]2
++,
+and let L be the mean absolute periodic six-neighbor SDF Laplacian. Total variation is the mean
+of the three directional mean absolute adjacent differences. The scalar-gradient reward is
+H = \ensuremath{\langle}|T \ensuremath{-} Ty\ensuremath{-}1|wf \ensuremath{\rangle}
+\ensuremath{\langle}wf \ensuremath{\rangle} + \ensuremath{\varepsilon} . (12)
+It is a specified scalar-gradient statistic, not measured species mixing. The losses are
+J1 = 40Ds + 5RP + 25Q
++ 0.02TV + 0.01L \ensuremath{-} 0.2H, (13)
+J2 = 60Ds + 5RP + 220Q + 480FV + 35FS
++ 0.08TV + 0.04L \ensuremath{-} 0.25H. (14)
+In both captured optimizer sources, each device replica starts from the loaded float32 base field plus
+an independent standard-normal array multiplied by 0.01; Adam’s first and second moments start
+at zero. These source specifications do not authenticate the historical base-field identity. Adam
+uses learning rates 0.03 and 0.008 for V1 and V2, respectively, with coefficients 0.9 and 0.999 and
+denominator offset 10\ensuremath{-}8. Updated SDF values are clipped to [\ensuremath{-}2.5, 2.5]. Nonfinite gradient entries
+are replaced by zero in the source. The source stops early if the selected history row has Ds < 10\ensuremath{-}4;
+neither recorded run reaches that threshold. The source default of 80 flow and scalar steps is not
+an authenticated historical launch argument.
+Metrics are computed before each parameter update. Each history row selects the minimum-loss
+replica for that iteration, but export saves the post-update SDF using the preceding loss ranking.
+The report field named best is the last recorded row, not a global or best-ever optimum. This
+timing matters when binding logged values to saved geometry.
+
+\section*{4 Experimental results}
+
+
+\section*{4.1 Decoder stages and hard-grid dependence}
+
+The original geometric decoder and the volume-connected variant both report zero geometric dead-
+zone penalty. The manufacturability variant instead collapses soft solid volume to 0.0008011368.
+The volume-connected variant retains soft volume 0.2541742325 but reports 291810 solid com-
+ponents under the stated threshold and face connectivity. Its occupancy-gradient measure is
+0.4074925184, comfortably exceeding the geometric penalty threshold. This combination is consis-
+tent with a zero gradient penalty and highly fragmented material, not a connected mixer.
+Stored fields reproduce the hard-grid results in Table 2. The initial 643, 220-step state and
+the volume-connected 1283, 260-step state change candidate generation, resolution, and horizon
+together. They are not a grid-convergence comparison or an isolated objective ablation.
+At each of the first two resolutions, the named mixer and companion TPMS cases have exactly
+equal retained density, speed, temperature, and obstacle arrays. They therefore provide one distinct
+5
+
+Table 1: Recorded decoder-stage mixer quantities. The proxy column is a squared geometric
+penalty, and volume is soft occupancy.
+Stage Geometric penalty Soft volume
+Original geometric decoder 0 0.2697357833
+Manufacturability variant 0.0030227543 0.0008011368
+Volume-connected variant 0 0.2541742325
+Table 2: Hard-grid results remeasured from retained fields. Pressure is scaled lattice pressure. Each
+row is a distinct retained state, not a matched-resolution experiment.
+State Grid/steps Dh Hard volume Ph
+Initial decoder 643/220 0.2469879518 0.3515625000 0.3993511200
+Volume-connected 1283/260 0.3156383064 0.2402954102 0.3894170125
+Final V2 hard grid 643/260 0.3029557981 0.1528625488 0.4490216573
+retained field state at each resolution, not two independent physical observations. Different fine-
+mesh counts and case labels do not remove this dependence; the four labels must not be pooled as
+four independent samples.
+For the initial state, the diagnostic counts 41984 cold/slow cells among 169984 fluid cells. For the
+volume-connected state it counts 502880 among 1593216. Their fluid-speed percentile thresholds
+are approximately 7.63875414 \ensuremath{\times} 10\ensuremath{-}6 and 1.27540025 \ensuremath{\times} 10\ensuremath{-}5, respectively. A geometric proxy
+value of zero and Dh = 0.3156383064 are different observables, not interchangeable error rates or a
+calibrated discrepancy.
+
+\section*{4.2 Differentiable optimization and saved-output binding}
+
+The recorded histories contain 50 iterations for differentiable optimizer V1 and 75 for V2, each
+using eight device replicas. These are two optimization executions with replica selection, not an
+independent experimental seed ensemble. Table 3 gives the final recorded minimum-loss replica
+metrics.
+Table 3: Final logged pre-update porous metrics. These are not measurements of the exported
+hard CAD surface.
+Optimizer Iterations Ds Soft volume Ps
+V1 50 0.06703582406 0.06344477832 0.2185503691
+V2 75 0.07776882499 0.20777714252 0.2980232239
+V1’s lower soft diagnostic accompanies severe material loss. V2’s recorded soft volume is larger,
+but the dead-zone weight, volume terms, regularization, scalar-gradient reward, learning rate, and
+run length all change. No isolated causal effect of the added volume-floor term can be inferred. A
+common input path also does not establish matched starts: the currently retained initialization file
+has a modification time later than V1’s output. Matched-start identity therefore remains unverified.
+The saved post-update V2 SDF has remeasured soft volume 0.2078960871 using float64 reduction,
+distinct from the logged pre-update value 0.2077771425. Hard thresholding this saved SDF and
+6
+
+clearing the endplanes exactly reproduces the later 643 hard-audit obstacle. Its retained 260-step
+fields give 67278 cold/slow cells among 222072 fluid cells, hence Dh = 0 .3029557981, hard volume
+0.1528625488, and audit pressure 0.4490216573. The associated percentile speed is approximately
+1.84271175 \ensuremath{\times} 10\ensuremath{-}5. These are the supported hard-geometry results. The optimizer’s approximately
+0.07777 and 0.2078 values are not final CAD performance. Because geometry treatment, diagnostic
+thresholds, transport, and possibly horizon differ, the comparison cannot isolate a soft-to-hard
+causal mechanism.
+
+\section*{4.3 Smoothed final mesh}
+
+The recorded preparation applies 12 iterations of uniform Laplacian surface smoothing with coeffi-
+cient 0.35, followed by centroid and bounding-box-extent rescaling. Remeasurement of the actual
+meshes shows unchanged vertex count, face count, and exact triangle indices, but a large geometric
+change.
+Table 4: Remeasured final surface properties. Area is in stored coordinate units squared; edge
+properties refer to indexed triangles.
+Quantity Unsmoothed Smoothed
+Vertices 229163 229163
+Faces 482692 482692
+Surface area 166896.944206 40283.542900
+Boundary edges 9070 9070
+Indexed nonmanifold edges 0 0
+Two-face orientation conflicts 0 0
+Vertices outside [0, 63]3 0 5321
+Area decreases by 75.8632232\%. Vertex-average centroid and coordinate extents approximately
+persist, but bounding-box positions shift. The smoothed surface is not watertight: the retained
+boundary edges preclude interpreting it as a closed, fabrication-qualified solid. Absence of indexed
+nonmanifold edges or two-face orientation conflicts does not assess self-intersections. Most impor-
+tantly, the retained flow audit predates smoothing; it does not certify the altered final surface.
+
+\section*{5 Discussion and limitations}
+
+The observed failures occur at different logical interfaces. The geometric decoder can satisfy an
+area-like threshold through occupancy variation without producing connected material. The man-
+ufacturability variant demonstrates a different failure, loss of almost all soft solid volume despite
+soft regularization. The volume-connected variant recovers material but not hard connectivity.
+These results concern the particular objectives and retained stages, rather than an intrinsic failure
+of topology optimization.
+Differentiable optimization changes the observation contract. Its smooth diagnostic weights cold-
+ness, slowness, and fluid occupancy continuously, whereas the hard diagnostic counts cells below
+a relative speed percentile. Even with an identical velocity field these definitions need not agree.
+Porous population blending, porosity-weighted velocity, different scalar advection, and unbound
+7
+
+historical horizons add further distinctions. Consequently, neither subtracting the two diagnostic
+values nor treating their ratio as an error estimate would be scientifically justified.
+The pressure scale illustrates the same problem. A numerical target and a factor of 105 do
+not establish a physical pressure unit. The retained calculations support finite-time scaled lattice-
+pressure and scalar-field diagnostics under the specified periodic convention. They do not establish
+flow convergence, dimensional material properties, independently calibrated speed, temperature
+or time, residence time, species mixing, chemical yield, or plant performance. Physical validation
+would require a specified physical domain, boundary conditions, dimensional mapping, convergence
+assessment, and comparison with suitable observations.
+Retained-artifact remeasurement strengthens the account beyond report-only interpretation: ar-
+rays were actually reopened, diagnostics recomputed, duplicate fields identified, and mesh geometry
+measured. It cannot reconstruct missing historical bindings. The original checkpoint execution,
+authenticated launch arguments, matched-start identity, and full precision configuration remain
+unresolved. The replica-selected histories also provide no independent trajectory ensemble from
+which to estimate uncertainty.
+Finally, surface smoothing is a scientific transformation, not merely a presentation change. A sub-
+stantial area reduction and open boundary edges prevent assigning the earlier voxel-flow results to
+the smoothed surface. Mesh-to-grid re-extraction, after-smoothing flow evaluation, self-intersection
+testing, and manufacturing-tolerance assessment would be necessary before advancing stronger ge-
+ometry claims.
+
+\section*{6 Conclusion}
+
+This retrospective case study separates three non-equivalent quantities: a squared geometric penalty,
+a porous sigmoid-weighted cold/slow score, and a hard-fluid percentile diagnostic. Their values
+cannot certify one another. The volume-connected decoder’s zero proxy penalty coexists with frag-
+mented thresholded material and a nonzero hard diagnostic. Differentiable optimizer V2 preserves
+more soft occupancy than V1 in its recorded run, but its logged metrics do not directly describe
+the exported post-update geometry or the final smoothed mesh.
+The strongest supported endpoint is the saved V2 hard-grid state: its retained fields yield a
+cold/slow fraction of 0.3029557981 and hard solid fraction of 0.1528625488 under the stated finite-
+time numerical protocol. The smoothed surface remains open and lacks an after-smoothing forward
+evaluation. The general lesson is to bind every performance statement to its observable, geometry,
+denominator, boundary convention, numerical horizon, and actual saved output.
+
+\section*{7 Data and Code A vailability}
+
+Supplementary record S1 is an existing private export containing captured source text, original
+reports and optimization histories, numerical SDF, obstacle and field arrays, both actual OBJ
+meshes, the exact local checking scripts, checking inputs and results, and the full supplied primary
+reference PDFs. The local remeasurement used these retained numerical and geometric artifacts;
+the arrays and meshes are not merely references to unavailable raw data.
+The access mechanism established by the evidence is a private export only. No documented
+public, external-scientist, or reviewer access mechanism, archive link, or redistribution permission
+8
+
+is established for the project artifacts or bundled references. The original foundation and decoder
+checkpoint execution and historical launch bindings are not reproduced by this export. Supple-
+mentary record S1 and the separate verification record distinguish retained measurements from
+source-based interpretations and pending checks.
+
+\section*{References}
+
+[1] P. Holl, V. Koltun, and N. Thuerey. Learning to Control PDEs with Differentiable Physics. In-
+ternational Conference on Learning Representations (2020). https://vladlen.info/papers/
+PDE-control.pdf.
+[2] I. P. A. Papadopoulos and E. Süli. Numerical analysis of a topology optimization problem
+for Stokes flow. Author manuscript, March 27, 2022. https://people.maths.ox.ac.uk/suli/
+bp-analysis.pdf.
+9
+
+\end{document}

@@ -1,0 +1,461 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 687e1c0c5a222b27674ccdd249dca3de88bf446a262946dc9ee70085e195e3f0
+% Extracted text SHA-256: d6ba03c3218c76b81c439bdf46cb09b3fc66022f8058450b2d4ed636b58ba270
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Peak and Spectral Agreement Do Not Establish Field Reconstruction}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Peak and Spectral Agreement Do Not Establish Field
+Reconstruction
+
+\section*{Abstract}
+
+Scientific-field codecs can appear accurate under a selected diagnostic while failing a dif-
+ferent reconstruction contract. We examine saved measurements from a selected preliminary
+hypersonic peak-fitting test, a distinct linked full-training quality assessment, and reactor-field
+spectral variants. In the preliminary test, the predicted maximum kinetic-energy density was
+1.06938784 times the target maximum, but mean kinetic-energy-density retention was only
+0.04041034; field and divergence diagnostics remained adverse. The linked full-training check-
+point separately failed its scalar-speed spectral gate. In reactor-field panels, changing from a
+multiframe vector-spectrum objective to an audit-aligned final-frame speed objective was associ-
+ated with improved fitted slopes: a stronger aligned variant reached a mean slope of \ensuremath{-}3.4880426
+against \ensuremath{-}3.4090753 for the reference. Its continuity-residual discrepancy and energy error nev-
+ertheless remained above their recorded gates. Wavelet-tail variants approached the reference
+slope more closely while worsening these other diagnostics. Equations and finite mathematical
+examples explain the non-equivalence of peak, mean, power, slope, directional-field and con-
+tinuity measurements. These retrospective results support explicit metric contracts and joint
+reporting, not independent generalization or physically validated reconstruction.
+
+\section*{1 Introduction and contributions}
+
+A scientific-field codec reconstructs more than a scalar summary. Its output may be evaluated
+through localized extrema, bulk energy, spatial alignment, vector direction, spectral distribution
+and discrete balance residuals. These measurements answer different questions. A peak can be
+recovered while the surrounding field is nearly absent; a fitted spectral exponent can agree while
+amplitude or direction is wrong. Consequently, interpreting a successful diagnostic requires speci-
+fying its observable, support, reduction and reference population.
+This article presents a bounded empirical case study of these distinctions. The evidence comprises
+saved numerical reports and captured source definitions, rather than a new architecture or new
+physical experiment. The central comparisons are a selected preliminary hypersonic peak-fitting
+test (hereafter, the smoke), a distinct full-training checkpoint assessment, and reactor-field variants
+whose spectral training objective changed toward the evaluator’s definition. We call the latter
+population CSTR, following the recorded thermal-runaway benchmark, and retain A123 as the
+companion slurry benchmark name.
+The contribution is to connect the reported measurements to their actual mathematical contracts.
+We distinguish maximum kinetic-energy density from mean kinetic-energy density and total energy,
+vector spectra from scalar-speed spectra, and global mass summaries from normalized continuity-
+residual discrepancies. We also examine the limits of the nominal evaluation population after
+adaptation. This study shares tokenizer lineage with a separate periodic fluid/magnetic harmonic-
+decoder study, but its principal measurements concern hypersonic peak-versus-mean reconstruction
+1
+
+and CSTR spectral-objective alignment, not harmonic recovery or discrete curl constraints. The
+scientific outcome is not a qualified codec: apparently favorable peak and slope measurements
+coexist with important reconstruction failures.
+
+\section*{2 Related work}
+
+WIRE uses complex Gabor activations for visual implicit neural representations [ 1]. Its inspected
+formulation preserves complex-valued intermediate representations and takes the real part of the
+output for real signals. This provides relevant architectural context, but the captured implemen-
+tation here is not identical to complex WIRE. Despite its class name, its activation is the real
+Gaussian-windowed cosine
+a(x) = exp
+[U+0000]
+\ensuremath{-}(\ensuremath{\sigma}x)2[U+0001]
+cos(\ensuremath{\omega}x).
+We therefore describe this decoder as Gabor-inspired. The captured decoder also includes coordi-
+nate Fourier features, latent/metadata conditioning and dyadic residual heads. The cited visual
+reconstruction results do not establish shock reconstruction or conservation for this implementation.
+Focal Frequency Loss compares complex Fourier coefficients with adaptive frequency weighting
+in image reconstruction and synthesis [ 2]. Its coefficient distance retains amplitude and phase
+information; the dynamic weights emphasize currently difficult frequencies. This is conceptually
+different from reducing power into radial shells and fitting a scalar slope. Focal Frequency Loss is
+not an empirical comparator evaluated in the present evidence, and its image results do not validate
+physical shocks. Neither reference supplies the benchmark measurements reported below. Our use
+of these references is restricted to the inspected full-text formulations.
+
+\section*{3 Scientific methods and validation protocols}
+
+Evidence and populations
+This is a retrospective reanalysis of saved summaries, captured computational definitions and cur-
+rent manifest metadata. No additional neural training, neural inference or physical simulation was
+performed. Later local arithmetic and finite-array tests are distinguished from the original codec
+experiments throughout.
+The peak-fitting smoke used one selected hypersonic sample and 5,000 optimization steps. The
+linked full-training record instead reports 50,000 steps on 72 ranks, with 78,000 fluid rows and 70,000
+graph rows. These 148,000 mixed rows are not 148,000 fluid trajectories. Its quality assessment
+selects training-manifest examples; it does not constitute full-population qualification. Neither its
+checkpoint nor its selected evaluation population is identified with the smoke.
+The CSTR candidate reports use 323 grids, 16 frames and 8 channels, with a 2,048-value learned
+latent and a 65-value metadata header. The evaluator supplies or rebuilds metadata from the target
+reference and conditions physical decoding on it. These measurements are therefore not latent-only
+reconstruction, and the dimensions do not establish a bit-compression ratio. Saved configurations
+use bfloat16 training; the captured evaluation path encodes under bfloat16 autocasting on CUDA
+and casts latents, decoded fields and metric inputs to float32. The earlier vector-spectrum helper
+disables autocasting and uses float32 unless given float64 input.
+The inspected source generator prescribes analytic synthetic A123 slurry and Aarti CSTR fields
+over normalized spatial and temporal coordinates, with jamming, runaway and cooling envelopes.
+2
+
+These are formula-defined benchmark tensors, distinct from a transported-state advection–diffusion–
+reaction generator described in a companion reactor study. The captured definition does not au-
+thenticate execution of that exact source snapshot in every historical quality-assessment run. Exact
+historical input arrays and source-execution bindings remain unavailable; no resolved reactor dy-
+namics are inferred from the CSTR labels. Source and companion-version bindings are retained
+with Supplementary record S1.
+An earlier captured header has six interleaved statistics per channel—mean, standard deviation,
+minimum, maximum and lower/upper quantiles—plus five aggregate values. With eight channels
+this gives 53 values. Its affine normalization uses the per-channel mean and standard deviation,
+with a 10\ensuremath{-}6 standard-deviation floor. This source establishes a header convention, not the identity
+of every historical decoder diagnostic.
+Peak, mean and field measurements
+Let vc(t, x) denote the velocity components and r(t, x) the raw density channel. Throughout, hats
+denote reconstructed quantities and unhatted quantities denote their references. The captured
+kinetic-energy-density convention is
+\ensuremath{\rho} = softplus(r), e (t, x) = 1
+2 \ensuremath{\rho}(t, x)
+3X
+c=1
+vc(t, x)2.
+For the space-time support Ω of a case, define
+emax = max
+i\ensuremath{\in}Ω
+ei, ¯e = 1
+|Ω|
+X
+i\ensuremath{\in}Ω
+ei, E \ensuremath{\Sigma} =
+X
+i\ensuremath{\in}Ω
+ei.
+These are respectively a maximum, mean and discrete total. The total is a sample sum, not an
+independently calibrated physical integral. Equal prediction/target sample counts make their mean
+and sum ratios equal, but neither ratio follows from a maximum ratio.
+For fraction f , let Sf contain the kf = max(1 , \ensuremath{\lfloor}f |Ω|\ensuremath{\rfloor}) highest-energy target cells, selected over
+flattened space and time. The peak relative-L1 objective is
+L1,f = 1
+kf
+X
+i\ensuremath{\in}Sf
+|bei \ensuremath{-} ei|
+max(|ei|, 1) .
+The reported narrow support uses f = 0.01. The wider objective instead uses f = 0.05 and
+Llog,f = 1
+kf
+X
+i\ensuremath{\in}Sf
+[log(1 + max(bei, 0)) \ensuremath{-} log(1 + max(ei, 0))]2 .
+Thus the narrow relative loss and wider logarithmic loss have different supports and penalties. A
+gate correlation describes agreement with a gate target, not field accuracy. We retain the smoke
+report’s field relative-L2 and unmasked divergence MSE as separate reported diagnostics; their raw
+values have no independently established SI calibration here.
+Spectral contracts
+For a field g on a cubic grid with N cells per axis, write Fg for a full spatial fast Fourier transform
+(FFT); // denotes integer division. Given a shell assignment b(k), define the shell mean
+Pj =
+P
+b(k)=j Q(k)
+max(nj, 1) , n j = \#\{k : b(k) = j\}.
+3
+
+The old objective operates on multiframe vector fields. Each spatial transform uses all velocity
+channels, with
+Qold(k) = 1
+2
+3X
+c=1
+|Forthovc(k)|2.
+Time contributes multiple fields to the training reduction rather than selecting only the final frame.
+With B = max(4, N//2) and radius rk from FFT frequencies, its shells are
+bold(k) = clamp
+[U+0012][U+0016] rk
+max(rmax, 10\ensuremath{-}12) (B \ensuremath{-} 1)
+[U+0017]
+, 0, B \ensuremath{-} 1
+[U+0013]
+.
+The fitted window begins at a = max(1 , min(2, B \ensuremath{-} 2)) and ends, exclusively, at b = max( a +
+2, min(B, \ensuremath{\lceil}0.85B\ensuremath{\rceil})).
+The corrected observable is final-frame scalar speed,
+s(x) =
+3X
+c=1
+vc(T, x)2
+!1/2
+, Q new = |F(s \ensuremath{-} ¯s)|2,
+using an unnormalized FFT. For integer-frequency coordinates q = N fftfreq(N ) on each axis,
+bnew(q) = clamp(round \ensuremath{\parallel}q\ensuremath{\parallel}, 0, N//2).
+The audit fits shells j \ensuremath{\in} [\ensuremath{\ell}, h), where
+\ensuremath{\ell} = max(2, N//10), h = max(\ensuremath{\ell} + 4, \ensuremath{\lfloor}0.45N \ensuremath{\rfloor}).
+Writing xj = log max(j, 1) and yj = log max(Pj, 10\ensuremath{-}12), the fitted exponent is
+\ensuremath{\beta} =
+P
+j(xj \ensuremath{-} ¯x)(yj \ensuremath{-} ¯y)
+max\{P
+j(xj \ensuremath{-} ¯x)2, \ensuremath{\varepsilon}x\} .
+The audit uses \ensuremath{\varepsilon}x = 10 \ensuremath{-}12. The newer training loss uses 10\ensuremath{-}8, bounds the upper slice by the
+available shell count, and reduces squared prediction/target slope differences across cases. It follows
+the audit definition but is not byte-identical to it.
+Table 1: Spectral contracts for the CSTR comparison. All spectra are shell means, not shell-
+integrated physical energy.
+Property Old training objective Audit-aligned objective
+Observable Multiframe velocity vector Final-frame scalar speed
+FFT Full, orthonormal Full, unnormalized
+Mean removal Not in captured helper Spatial speed mean removed
+Power Half channel-summed squared
+magnitude
+Squared scalar magnitude
+Shells Radius-normalized, floored Integer radius,
+rounded/clamped
+Fit window [a, b) defined above [\ensuremath{\ell}, h) defined above
+Power floor 10\ensuremath{-}12 10\ensuremath{-}12
+4
+
+The linked full-training QA has yet another implementation; in its fit window below, \ensuremath{\ell} denotes its
+own lower endpoint, max(2, \ensuremath{\lfloor}0.12B\ensuremath{\rfloor}), rather than the CSTR lower endpoint. On final-frame scalar
+speed at 1283, it removes the mean, uses an unnormalized FFT and radius-normalized floored shell
+means with B = N//2. It fits by least squares with an intercept over [max(2, \ensuremath{\lfloor}0.12B\ensuremath{\rfloor}), max(\ensuremath{\ell} +
+4, \ensuremath{\lfloor}0.55B\ensuremath{\rfloor})), using a 10\ensuremath{-}20 power floor. It must not be substituted for the CSTR audit definition.
+Continuity, energy and aggregation
+For the CSTR audit, each raw density value is retained if nonnegative and softplus-transformed if
+negative; the resulting density is then floored at 10\ensuremath{-}6. This elementwise rule differs from applying
+softplus everywhere in the smoke energy convention. Let DMAC denote the discrete divergence of
+face fluxes on a staggered marker-and-cell (MAC) grid. Define the cellwise discrete residual
+Rn = (\ensuremath{\rho}n+1 \ensuremath{-} \ensuremath{\rho}n) + DMAC(\ensuremath{\rho}up
+n un+1/2).
+The implementation averages adjacent cell velocities onto interior faces, midpoints velocity in time,
+upwinds density from the earlier time, and uses an open positive- x outlet with ambient inflow
+density 1; other exterior velocity faces are zero. Its time-indexed normalized residual is
+qn = \ensuremath{\langle}|Rn|\ensuremath{\rangle}x
+max(\ensuremath{\langle}|\ensuremath{\rho}n+1 \ensuremath{-} \ensuremath{\rho}n|\ensuremath{\rangle}x, 1) + max(\ensuremath{\langle}|DMAC(\ensuremath{\rho}up
+n un+1/2)|\ensuremath{\rangle}x, 1) .
+The quantity recorded as mass\_loss\_pct is
+C = 100 \ensuremath{\langle}|bqn \ensuremath{-} qn|\ensuremath{\rangle}n
+max(\ensuremath{\langle}|qn|\ensuremath{\rangle}n, 1) .
+We call it normalized continuity-residual discrepancy, not the fraction of total mass lost. Default
+timestep and spacing are effectively 1 in this difference contract; these constants and field semantics
+lack independent physical calibration.
+The CSTR energy diagnostic adds a density-weighted nonnegative temperature/enthalpy proxy
+to the kinetic sample sum. When available, the evaluator substitutes the decoded enthalpy head
+into that field before computing energy. Its error is
+H = 100 |bE \ensuremath{-} E|
+max(|E|, 10\ensuremath{-}8) .
+This domain-specific diagnostic is not the full-training QA’s global kinetic-energy comparison.
+Wavelet-tail supervision uses relative Haar detail-band residual MSE, normalized by target detail
+power floored at 10\ensuremath{-}8, averaged across bands and two levels, and then averaged between final-frame
+velocity and speed losses.
+For case i, spectral relative error is
+di = |b\ensuremath{\beta}i \ensuremath{-} \ensuremath{\beta}i|
+max(|\ensuremath{\beta}i|, 10\ensuremath{-}6) .
+Saved summaries compute casewise means and float32 95th percentiles. For the candidate panels,
+the dimensionless temporal-spike diagnostic is the maximum squared velocity second difference
+divided by the larger of its mean and 10\ensuremath{-}12. The second difference is taken across consecutive
+frames, its squared components are summed, and the maximum and mean are taken over space
+5
+
+and time within each case. Unlike the full-training temporal proxy, this diagnostic does not spatially
+average velocity before differencing. Recorded percentile gates are C \ensuremath{\leq} 2\%, H \ensuremath{\leq} 10\% and d \ensuremath{\leq} 0.05;
+these are evaluation contracts, not scientist-validated physical tolerances. A mean of casewise ratios
+is not a ratio of mean slopes. We use saved di aggregates rather than reconstructing them from
+aggregate slopes.
+Finite mathematical validation
+Later local tests used float64 arrays, ten random cases across 163 and 243 grids, and four analytic
+examples, with a predeclared 10\ensuremath{-}10 arithmetic tolerance. They tested gain versus slope and energy,
+sign and translation invariance, peak versus mean, and vector versus speed observables under the
+stated discrete conventions. These tests, implemented with NumPy 2.3.5, check mathematical
+non-implications, not original model inference.
+For fixed density and nonzero gain a, bv = av multiplies kinetic energy and speed power by
+a2. With inactive power floors, logbPj = log Pj + 2 log |a|, so the fitted slope is unchanged. A sign
+reversal also preserves speed while changing vector direction. A periodic translation changes Fourier
+phase but not power, and can create nonzero aligned field error. Finally, v(x) = (cos x, sin x, 0)
+has constant speed but nonconstant vector components: its mean-removed speed spectrum vanishes
+although its vector spectrum does not. These standard finite examples explain why a fitted exponent
+is neither field recovery nor inertial-range-law validation.
+
+\section*{4 Experimental results}
+
+Peak fitting without bulk reconstruction
+The selected hypersonic smoke achieved close agreement on its maximum and narrow target-selected
+tail, but not on the bulk field. Table 2 reports the post-smoke diagnostics together to avoid
+interpreting peak agreement as general recovery.
+The maximum ratio therefore describes a successful extremum fit in this selected case, not ap-
+proximate recovery of total energy. The reconstructed mean kinetic-energy density was only a small
+fraction of the reference mean, and the reported field relative-L2 remained near unity. The maxi-
+mum divergence overshoot and unmasked divergence MSE provide additional adverse diagnostics
+under the recorded convention. Velocity divergence need not vanish in compressible flow, however,
+and these measurements are not independently calibrated tests of the density-weighted continuity
+equation or physical conservation. The well-correlated gate and small narrow-tail loss therefore do
+not override the poor bulk and field diagnostics.
+Distinct full-training QA failure
+The full-training summary reports completion PASS. Its exact linked checkpoint QA reports F AIL:
+decoded and reference final-frame scalar-speed slopes were \ensuremath{-}4.1108651 and \ensuremath{-}6.3195229, respec-
+tively, producing spectral relative error 0.34949755 against 0.05. This measurement used 1283
+fields and the distinct full-training spectral implementation described above.
+The same QA reported passing global mass and kinetic-energy summaries. These global-sum
+checks do not contradict spectral failure, nor do they satisfy the later CSTR continuity-residual
+contract. The rotation consistency check was explicitly an invariance proxy, and the text-fragment
+6
+
+Table 2: Post-smoke diagnostics for the selected hypersonic case after 5,000 steps. Energy-density
+and divergence values are in the captured numerical convention, without independently established
+SI calibration.
+Diagnostic Value
+Predicted maximum kinetic-energy density 39,750,408
+Target maximum kinetic-energy density 37,171,180
+Maximum ratio 1.06938784
+Predicted mean kinetic-energy density 544,259.5625
+Target mean kinetic-energy density 13,468,323
+Mean retention ratio 0.04041034
+Mean relative error 0.959589656
+Gate correlation 0.996647
+Top-1\% relative L1 0.0231164
+Top-5\% log-energy MSE 14.80047
+Reported field relative L2 0.99999976
+Maximum absolute divergence ratio 10.4145
+Unmasked divergence MSE 4146.985
+check was a proxy rather than atomistic topology validation. Completion and those proxy passes
+do not establish full scientific qualification.
+CSTR spectral alignment and remaining failures
+Table 3 compares the seven candidate panels central to the old-versus-aligned comparison. Names
+describe the recorded variants rather than implying a controlled intervention. The old-vector
+lower/higher-weight and audit-aligned moderate/strong variants each record 1,500 continuation
+steps, with slope-loss weights 10/30 and 30/100, respectively; all four record QA mass and energy
+weights of 100 and 30. The three wavelet variants each record 2,000 continuation steps, slope-
+loss weights of 40, 60 and 35 in table order, and zero QA mass and energy weights. These are
+configuration-specific loss multipliers, not comparable effect sizes across the different objectives.
+Continuation ancestry and other settings also differ; variant crosswalks are retained in Supplemen-
+tary record S1. The CSTR reference mean slope was \ensuremath{-}3.4090753. All entries are saved casewise
+aggregates; rounding in the table does not alter gate assignments.
+The old vector variants remained near \ensuremath{-}5.26 under the final-frame speed audit despite their slope-
+training objective. The strong aligned variant reached \ensuremath{-}3.4880426 with mean spectral relative error
+0.02316399. Its CSTR spectral 95th percentile passed the recorded gate. Continuity discrepancy
+and energy error did not: their means were 15.32657\% and 18.11088\%, and their 95th percentiles
+were 15.67740\% and 18.18186\%.
+The mild- and stronger-coupling wavelet variants reached slopes near \ensuremath{-}3.412, yet had larger
+continuity and energy discrepancies than the strong aligned variant. Their spectral agreement is
+therefore a tradeoff in these records, not evidence of jointly accurate thermodynamic reconstruction.
+The mixed-manifest wavelet variant also passed the CSTR spectral gate while failing the other
+contracts.
+All seven full panels reported overall F AIL and failure count 200. This is not a statement
+that every CSTR spectral check failed. The companion A123 branch remained spectrally outside
+7
+
+Table 3: CSTR results within reused candidate panels. Each panel contains 100 CSTR and 100
+A123 rows. ¯\ensuremath{\beta} is mean decoded slope, ¯d and d95 summarize casewise spectral relative error, and
+¯C, ¯H are mean continuity discrepancy and energy error in percent.
+Variant ¯\ensuremath{\beta} ¯d d95 ¯C ¯H
+Old vector, lower weight \ensuremath{-}5.261656 .543427 .545194 14 .81017 11 .46261
+Old vector, higher weight \ensuremath{-}5.265267 .544486 .546238 15 .29098 12 .11382
+Audit-aligned, moderate \ensuremath{-}3.852128 .129963 .132730 16 .25037 18 .60241
+Audit-aligned, strong \ensuremath{-}3.488043 .023164 .026334 15 .32657 18 .11088
+Wavelet, mild coupling \ensuremath{-}3.412379 .001199 .002866 27 .72021 38 .56628
+Wavelet, mixed manifest \ensuremath{-}3.420659 .003398 .005109 29 .98826 34 .89359
+Wavelet, stronger coupling \ensuremath{-}3.412995 .001413 .003414 25 .40436 37 .61141
+the gate, with spectral 95th percentile approximately 0.182923; its energy 95th percentile was
+11.35641\%, and its temporal-spike 95th percentile was 232.88837 against a recorded threshold of
+100. The saved configurations froze that branch, and the panels reuse the nominal benchmark
+rather than constituting independent replications.
+Current manifest overlap and reference consistency
+The current metadata audit inspected 3,000 manifest rows: a 1,000-row fine-tuning manifest and
+a 2,000-row manifest labeled out-of-distribution (OOD). The fine-tuning manifest exactly matches
+the 1,000 CSTR records in the latter. Every reference path among the first 100 CSTR evaluation
+rows appears in that current training manifest. The first 100 A123 reference paths do not appear
+in the CSTR-only file, but ancestral-training independence is unknown.
+The current first-100 reference-slope means, accumulated in float64, are \ensuremath{-}3.4090752959 for CSTR
+and \ensuremath{-}6.1556583834 for A123. They agree with the saved float32 aggregate means \ensuremath{-}3.4090752602
+and \ensuremath{-}6.1556587219 within the predeclared absolute tolerance 10\ensuremath{-}6 max(1, |recorded mean |). This
+supports consistency of current metadata with the saved slope summaries, not exact historical-array
+identity. The current OOD manifest modification time postdates the historical candidate audits;
+the original historical manifest hashes and arrays have not been authenticated.
+
+\section*{5 Discussion and limitations}
+
+The observations illustrate a hierarchy of information loss rather than a single universal ranking of
+metrics. A maximum constrains an extremum but leaves its occupied volume unspecified. A target-
+selected tail loss constrains a subset but does not require the remainder of the field to be correct.
+Scalar speed removes direction, power removes phase, radial shelling removes angular structure, and
+a slope further reduces a spectrum to an exponent. Continuity discrepancy measures a separate
+discrete relation involving density evolution, fluxes and boundary treatment. Agreement at one
+level need not imply agreement at another.
+The smoke is a direct empirical example: peak and gate agreement coexist with poor mean
+retention, near-unit field relative error and a maximum absolute velocity divergence exceeding the
+target maximum. The CSTR records provide a complementary example: a slope can approach the
+8
+
+reference while continuity and energy discrepancies remain large. Reporting these together changes
+the scientific interpretation from successful reconstruction to selective metric agreement.
+The spectral code change cannot be reduced to an isolated change from vector velocity to speed.
+Temporal selection, FFT normalization, shell assignment, fitting range and numerical regulariza-
+tion also differ. Variant weights, continuation histories, gradient restrictions and thermodynamic
+objectives vary. The association between alignment and improved audit slope is consistent with
+the identified contract mismatch, but these records are not a matched causal ablation. Likewise,
+the wavelet results do not establish a universal failure of wavelets: they show that the captured
+auxiliary detail losses did not establish joint success under the recorded contracts.
+Population limits are equally important. The current CSTR training/evaluation overlap pre-
+vents treating an unchanged OOD label as a quarantined holdout after adaptation. Consistency
+of current reference-slope aggregates is weaker than authenticated historical replay. Row counts
+do not establish independent physical trajectories, and repeated candidate panels do not provide
+independent replicates. We therefore report neither a pooled pass rate nor a confidence interval or
+independent generalization claim.
+The original field arrays and checkpoints were not available for this reanalysis. Consequently,
+spatial error patterns, casewise replay, unit calibration and exact historical runtime/source bind-
+ing remain unresolved. Global-sum agreement, residual discrepancy and proxy tests should not
+be relabeled as validated physical conservation, exact equivariance or atomistic topology. A sepa-
+rate periodic fluid/magnetic harmonic decoder and a separate temporal generator are outside this
+experiment; their results cannot close these gaps.
+
+\section*{6 Conclusion}
+
+In this retrospective scientific-field codec study, recovered extrema and improved fitted spectra did
+not establish accurate reconstructed fields. The selected hypersonic smoke fitted its maximum while
+retaining little mean kinetic-energy density and exhibiting adverse field and divergence diagnostics.
+The distinct full-training checkpoint failed its own spectral assessment despite completion. Audit-
+aligned CSTR variants improved the measured slope, but continuity-residual and energy contracts
+remained unsatisfied; wavelet-tail variants displayed a different tradeoff rather than joint success.
+The practical implication is to publish metric contracts alongside outcomes: observable, spa-
+tial and temporal support, transform normalization, shelling, fit range, denominator, reduction,
+conditioning information and population relationship. Such specificity makes selective successes in-
+terpretable without turning them into unsupported claims of field accuracy or physical validation.
+
+\section*{7 Data and Code A vailability}
+
+Supplementary record S1 is a materialized private export containing captured original source text,
+saved reports and manifest metadata, together with exact local checking inputs, executable check-
+ing scripts and their saved results. It also contains the primary reference PDFs and inspection
+records. The original application source is retained as text; the executable local scripts perform
+bounded arithmetic, static metadata and finite-array checks rather than rerunning original training
+or decoding.
+9
+
+No documented external public or reviewer access mechanism, public archive link, or redistribu-
+tion permission is established for this private export. Original field arrays and model checkpoints
+are not supplied as replayable artifacts here. The export therefore preserves the evidence used
+for the retrospective comparisons but does not establish end-to-end reproducibility of the histor-
+ical neural experiments. Artifact identities, variant crosswalks and specific unresolved checks are
+retained in the structured verification record.
+
+\section*{References}
+
+[1] V. Saragadam, D. LeJeune, J. Tan, G. Balakrishnan, A. Veeraraghavan, and
+R. G. Baraniuk. WIRE: Wavelet Implicit Neural Representations. Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp.18507–
+18516 (2023). https://openaccess.thecvf.com/content/CVPR2023/html/Saragadam\_WIRE\_
+Wavelet\_Implicit\_Neural\_Representations\_CVPR\_2023\_paper.html.
+[2] L. Jiang, B. Dai, W. Wu, and C. C. Loy. Focal Frequency Loss for Image Reconstruction
+and Synthesis. Proceedings of the IEEE/CVF International Conference on Computer Vision,
+pp.13919–13929 (2021). https://openaccess.thecvf.com/content/ICCV2021/html/Jiang\_
+Focal\_Frequency\_Loss\_for\_Image\_Reconstruction\_and\_Synthesis\_ICCV\_2021\_paper.
+html.
+10
+
+\end{document}
