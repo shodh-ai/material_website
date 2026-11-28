@@ -1,7 +1,7 @@
 """Build the existing reviewed library with canonical URLs under shodh.ai/research.
 
-The origin stays on its existing Vercel project. Only explicit public library
-routes are proxied; existing main-site research articles and PDFs remain intact.
+All source, manuscript assets, and generated pages live in this repository.
+The main website serves the generated files directly through local rewrites.
 """
 from pathlib import Path
 import html
