@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" font-family="system-ui, sans-serif" role="img" aria-labelledby="title">
+  <title id="title">Three generations of foundation models</title>
+  <rect x="0" y="0" width="720" height="405" rx="0" fill="#f8fafc"/>
+  <rect x="13" y="23" width="210" height="109" rx="7" fill="#fff"/>
+  <text x="118" y="54" font-size="18" font-weight="700" fill="#142638" text-anchor="middle">Molecular discovery</text>
+  <text x="118" y="85" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Structure prediction</text>
+  <text x="118" y="106" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">and therapeutic design</text>
+  <text x="238" y="82" font-size="23" font-weight="400" fill="#46596a" text-anchor="middle">→</text>
+  <rect x="255" y="23" width="210" height="109" rx="7" fill="#ebf3f8"/>
+  <text x="360" y="54" font-size="18" font-weight="700" fill="#142638" text-anchor="middle">Shodh</text>
+  <text x="360" y="85" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Process design</text>
+  <text x="360" y="106" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Technology transfer · scale-up</text>
+  <text x="480" y="82" font-size="23" font-weight="400" fill="#46596a" text-anchor="middle">→</text>
+  <rect x="497" y="23" width="210" height="109" rx="7" fill="#fff"/>
+  <text x="602" y="48" font-size="18" font-weight="700" fill="#142638" text-anchor="middle">Physical</text>
+  <text x="602" y="70" font-size="18" font-weight="700" fill="#142638" text-anchor="middle">manufacturing</text>
+  <text x="602" y="95" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Quality, yield and</text>
+  <text x="602" y="116" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">production economics</text>
+  <text x="20" y="184" font-size="32" font-weight="700" fill="#142638" text-anchor="start">Industrial World Models</text>
+  <text x="20" y="212" font-size="18" font-weight="400" fill="#46596a" text-anchor="start">Three generations of foundation models</text>
+  <rect x="13" y="238" width="210" height="142" rx="7" fill="#fff"/>
+  <text x="118" y="266" font-size="15" font-weight="700" fill="#4e687d" text-anchor="middle">GENERATION I</text>
+  <text x="118" y="302" font-size="27" font-weight="700" fill="#142638" text-anchor="middle">Generate</text>
+  <text x="118" y="332" font-size="16" font-weight="400" fill="#142638" text-anchor="middle">p(data)</text>
+  <text x="118" y="357" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Digital information</text>
+  <text x="238" y="309" font-size="23" font-weight="400" fill="#46596a" text-anchor="middle">→</text>
+  <rect x="255" y="238" width="210" height="142" rx="7" fill="#fff"/>
+  <text x="360" y="266" font-size="15" font-weight="700" fill="#4e687d" text-anchor="middle">GENERATION II</text>
+  <text x="360" y="302" font-size="27" font-weight="700" fill="#142638" text-anchor="middle">Simulate</text>
+  <text x="360" y="332" font-size="16" font-weight="400" fill="#142638" text-anchor="middle">State t → State t+1</text>
+  <text x="360" y="357" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Forward physical evolution</text>
+  <text x="480" y="309" font-size="23" font-weight="400" fill="#46596a" text-anchor="middle">→</text>
+  <rect x="497" y="238" width="210" height="142" rx="7" fill="#e4f0f8"/>
+  <text x="602" y="266" font-size="15" font-weight="700" fill="#4e687d" text-anchor="middle">GENERATION III</text>
+  <text x="602" y="302" font-size="27" font-weight="700" fill="#142638" text-anchor="middle">Design</text>
+  <text x="602" y="332" font-size="16" font-weight="400" fill="#142638" text-anchor="middle">Target → Optimal process</text>
+  <text x="602" y="357" font-size="15" font-weight="400" fill="#46596a" text-anchor="middle">Industrial World Models</text>
+</svg>

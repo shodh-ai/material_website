@@ -27,6 +27,7 @@ type BlogPost = {
   date: string;
   cover: {
     src: string;
+    cardSrc?: string;
     alt: string;
     width: number;
     height: number;
@@ -45,6 +46,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-26",
     cover: {
       src: `${industrialWorldModelsAssets}/industrial-model-generations.png`,
+      cardSrc: `${industrialWorldModelsAssets}/industrial-model-generations.svg`,
       alt: "Three generations of foundation models: generate, simulate, and design.",
       width: 1506,
       height: 615,
@@ -77,6 +79,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-26",
     cover: {
       src: `${antibodyAssets}/rotation-stability.png`,
+      cardSrc: `${antibodyAssets}/rotation-stability.svg`,
       alt: "Median learned-token cosine under rotation increased from 0.177 with deployed preprocessing to 1.000 with either canonical frame.",
       width: 1467,
       height: 735,
@@ -93,6 +96,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${tf32Assets}/tf32-rheology-velocity.png`,
+      cardSrc: `${tf32Assets}/tf32-rheology-velocity.svg`,
       alt: "Mean axial velocity over 1,600 steps for TF32, FP32 and FP64. The TF32 trajectory stays above the FP64 reference.",
       width: 1620,
       height: 918,
@@ -111,6 +115,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${tritonAssets}/solver-breakdown.png`,
+      cardSrc: `${tritonAssets}/solver-breakdown.svg`,
       alt: "Original and optimized reactor step breakdowns. Transport fell from 48.11 ms to 1.40 ms per step.",
       width: 1938,
       height: 997,
@@ -129,6 +134,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${wrongTestAssets}/component-presence.png`,
+      cardSrc: `${wrongTestAssets}/component-presence.svg`,
       alt: "Collision-test results at two checkpoints, with a separate check for component presence.",
       width: 1497,
       height: 574,
@@ -147,6 +153,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${crystalAssets}/equivalent-unit-cells.png`,
+      cardSrc: `${crystalAssets}/equivalent-unit-cells.svg`,
       alt: "Two valid unit cells for one periodic crystal pattern.",
       width: 1400,
       height: 650,
