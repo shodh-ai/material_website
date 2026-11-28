@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" font-family="system-ui, sans-serif" role="img" aria-labelledby="title">
+  <title id="title">TF32 leaves a faster axial flow</title>
+  <rect x="0" y="0" width="720" height="405" rx="0" fill="#faf9f6"/>
+  <text x="24" y="41" font-size="28" font-weight="700" fill="#142638" text-anchor="start">TF32 leaves a faster axial flow</text>
+  <text x="24" y="68" font-size="16" font-weight="400" fill="#46596a" text-anchor="start">128³ lattice · matched initial state · 1,600 coupled steps</text>
+  <rect x="81" y="85" width="22" height="10" rx="2" fill="#b64d32"/>
+  <text x="111" y="97" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Original JAX · default TF32</text>
+  <rect x="398" y="85" width="22" height="10" rx="2" fill="#657386"/>
+  <text x="428" y="97" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Original JAX · FP64</text>
+  <rect x="81" y="108" width="22" height="10" rx="2" fill="#2366a0"/>
+  <text x="111" y="120" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Original JAX · FP32 highest</text>
+  <rect x="398" y="108" width="22" height="10" rx="2" fill="#22786c"/>
+  <text x="428" y="120" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Fused Pallas · FP32</text>
+  <path d="M81 261.0L673 261.0" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="266.0" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">0</text>
+  <path d="M81 227.57L673 227.57" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="232.57" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">4</text>
+  <path d="M81 194.14L673 194.14" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="199.14" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">8</text>
+  <path d="M81 160.71L673 160.71" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="165.71" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">12</text>
+  <text x="87" y="141" font-size="16" font-weight="400" fill="#46596a" text-anchor="start">Mean axial velocity (mm/s)</text>
+  <polyline points="81.00,146.65 120.47,166.56 159.93,182.37 199.40,195.07 238.87,204.93 278.33,212.73 317.80,218.75 357.27,223.55 396.73,227.46 436.20,230.62 475.67,233.28 515.13,235.75 554.60,237.63 594.07,239.18 633.53,240.57 673.00,241.87" fill="none" stroke="#b64d32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="81.00,147.08 120.47,168.48 159.93,185.73 199.40,199.73 238.87,211.11 278.33,220.36 317.80,227.87 357.27,233.95 396.73,238.88 436.20,242.86 475.67,246.07 515.13,248.66 554.60,250.75 594.07,252.44 633.53,253.79 673.00,254.88" fill="none" stroke="#657386" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="81.00,147.08 120.47,168.47 159.93,185.72 199.40,199.72 238.87,211.11 278.33,220.35 317.80,227.86 357.27,233.94 396.73,238.87 436.20,242.85 475.67,246.06 515.13,248.65 554.60,250.74 594.07,252.43 633.53,253.78 673.00,254.87" fill="none" stroke="#2366a0" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+  <polyline points="81.00,147.08 120.47,168.47 159.93,185.72 199.40,199.72 238.87,211.11 278.33,220.35 317.80,227.86 357.27,233.94 396.73,238.87 436.20,242.85 475.67,246.06 515.13,248.65 554.60,250.74 594.07,252.43 633.53,253.78 673.00,254.87" fill="none" stroke="#22786c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1 9"/>
+  <text x="83" y="289" font-size="16" font-weight="400" fill="#46596a" text-anchor="start">FP32 velocity difference from FP64 (µm/s)</text>
+  <path d="M81 353.0L673 353.0" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="358.0" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">0</text>
+  <path d="M81 312.23L673 312.23" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="68" y="317.23" font-size="16" font-weight="400" fill="#46596a" text-anchor="end">1</text>
+  <polyline points="81.00,342.82 120.47,334.62 159.93,328.10 199.40,322.92 238.87,318.83 278.33,315.61 317.80,313.07 357.27,311.11 396.73,309.62 436.20,308.52 475.67,307.50 515.13,306.71 554.60,306.25 594.07,306.01 633.53,305.72 673.00,305.45" fill="none" stroke="#2366a0" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+  <polyline points="81.00,342.83 120.47,334.49 159.93,327.84 199.40,322.58 238.87,318.45 278.33,315.20 317.80,312.65 357.27,310.69 396.73,309.22 436.20,308.14 475.67,307.14 515.13,306.38 554.60,305.95 594.07,305.75 633.53,305.48 673.00,305.24" fill="none" stroke="#22786c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1 9"/>
+  <text x="81.0" y="374" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">100</text>
+  <text x="199.4" y="374" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">400</text>
+  <text x="357.27" y="374" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">800</text>
+  <text x="515.13" y="374" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">1,200</text>
+  <text x="673.0" y="374" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">1,600</text>
+  <text x="377" y="394" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">Lattice steps</text>
+</svg>

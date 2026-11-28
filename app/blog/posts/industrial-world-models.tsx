@@ -9,7 +9,6 @@ import {
   ProcessDevelopmentWorkflows,
   SpatialTemporalCoupling,
 } from "./industrial-world-models-diagrams";
-import styles from "./industrial-world-models.module.css";
 
 export const industrialWorldModelsSlug = "industrial-world-models";
 export const industrialWorldModelsAssets = `/blog/${industrialWorldModelsSlug}`;
@@ -27,10 +26,7 @@ export const industrialWorldModelsSections = [
 export default function IndustrialWorldModels() {
   return (
     <>
-      <div className={styles.lead}>
-        <p className={styles.kicker}>EXECUTIVE BRIEF</p>
-        <p>AI can now design molecules.<br />We build the World Models to manufacture them.</p>
-      </div>
+      <p>AI can help scientists design molecules for new medicines, but a promising molecule only reaches patients if it can be made reliably at scale. Even as discovery gets faster, figuring out how to manufacture a new drug still relies heavily on physical experiments. We’re building computer models that learn from simulations and experiments to help teams design and test manufacturing processes, starting with medicines made using living cells.</p>
 
       <h2 id="technological-inflection">01. The technological inflection</h2>
 

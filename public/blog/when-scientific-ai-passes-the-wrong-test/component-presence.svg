@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" font-family="system-ui, sans-serif" role="img" aria-labelledby="title">
+  <title id="title">What the collision check missed</title>
+  <rect x="0" y="0" width="720" height="405" rx="0" fill="#fff"/>
+  <text x="24" y="41" font-size="28" font-weight="700" fill="#142638" text-anchor="start">What the collision check missed</text>
+  <rect x="26" y="62" width="22" height="10" rx="2" fill="#b64d32"/>
+  <text x="56" y="74" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Original selection · 30,000 steps</text>
+  <rect x="370" y="62" width="22" height="10" rx="2" fill="#2366a0"/>
+  <text x="400" y="74" font-size="17" font-weight="400" fill="#46596a" text-anchor="start">Guarded selection · 20,000 steps</text>
+  <path d="M298 100L298 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="298" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">0</text>
+  <path d="M365.2 100L365.2 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="365.2" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">200</text>
+  <path d="M432.4 100L432.4 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="432.4" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">400</text>
+  <path d="M499.6 100L499.6 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="499.6" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">600</text>
+  <path d="M566.8 100L566.8 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="566.8" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">800</text>
+  <path d="M634 100L634 344" fill="none" stroke="#d9e2eb" stroke-width="1"/>
+  <text x="634" y="368" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">1,000</text>
+  <text x="283" y="148" font-size="19" font-weight="400" fill="#142638" text-anchor="end">Passed collision check</text>
+  <rect x="298" y="126" width="336.0" height="17" rx="2" fill="#2366a0"/>
+  <text x="642.0" y="140" font-size="18" font-weight="400" fill="#142638" text-anchor="start">1,000</text>
+  <rect x="298" y="149" width="336.0" height="17" rx="2" fill="#b64d32"/>
+  <text x="642.0" y="163" font-size="18" font-weight="400" fill="#142638" text-anchor="start">1,000</text>
+  <text x="283" y="220" font-size="19" font-weight="400" fill="#142638" text-anchor="end">Shaft and blades present</text>
+  <rect x="298" y="198" width="336.0" height="17" rx="2" fill="#2366a0"/>
+  <text x="642.0" y="212" font-size="18" font-weight="400" fill="#142638" text-anchor="start">1,000</text>
+  <text x="306.0" y="235" font-size="18" font-weight="400" fill="#142638" text-anchor="start">0</text>
+  <text x="283" y="292" font-size="19" font-weight="400" fill="#142638" text-anchor="end">Passed full combined check</text>
+  <rect x="298" y="270" width="64.85" height="17" rx="2" fill="#2366a0"/>
+  <text x="370.85" y="284" font-size="18" font-weight="400" fill="#142638" text-anchor="start">193</text>
+  <text x="306.0" y="307" font-size="18" font-weight="400" fill="#142638" text-anchor="start">0</text>
+  <text x="466" y="392" font-size="16" font-weight="400" fill="#46596a" text-anchor="middle">Candidates out of 1,000</text>
+</svg>

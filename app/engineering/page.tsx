@@ -44,10 +44,10 @@ export default function BlogIndex() {
             <Link href={`/engineering/${post.slug}`}>
               <Image
                 alt=""
-                src={post.cover.src}
-                width={post.cover.width}
-                height={post.cover.height}
-                sizes="(max-width: 640px) 88vw, (max-width: 1023px) 44vw, (max-width: 1309px) 29vw, 22rem"
+                src={post.cover.cardSrc ?? post.cover.src}
+                width={post.cover.cardSrc ? 720 : post.cover.width}
+                height={post.cover.cardSrc ? 405 : post.cover.height}
+                unoptimized
               />
               <span className={styles.eyebrow}>{post.topic}</span>
               <h2>{post.title}</h2>
