@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { mountFluid } from "../engineering/fluid-scene";
 import {
   ArrowLeft,
   ArrowRight,
@@ -138,13 +139,18 @@ const openRoles = [
 ];
 
 export default function CareersPage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  // Dark by default, like the rest of the site; a saved light choice is respected.
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
+  const fluidRef = useRef<HTMLDivElement>(null);
+
+  // The same live fluid background (and palettes) as the home, research and engineering pages.
+  useEffect(() => (fluidRef.current ? mountFluid(fluidRef.current, theme) : undefined), [theme]);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("shodh-theme");
-      setTheme(saved === "dark" ? "dark" : "light");
+      setTheme(saved === "light" ? "light" : "dark");
     } catch {}
   }, []);
 
@@ -158,7 +164,7 @@ export default function CareersPage() {
 
   return (
     <div className="careers-page" data-theme={theme}>
-      <div className="careers-fluid-bg" aria-hidden="true" />
+      <div ref={fluidRef} className="careers-fluid-bg" aria-hidden="true" />
 
       <header className="careers-header">
         <Link href="/" className="careers-logo" aria-label="Shodh AI home">

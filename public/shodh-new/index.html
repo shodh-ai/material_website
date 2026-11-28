@@ -23,8 +23,9 @@
 
   <script>
     // Set the palette before first paint, without waiting for the shader runtime.
-    try { document.documentElement.dataset.theme = localStorage.getItem('shodh-theme') || 'light'; }
-    catch (_) { document.documentElement.dataset.theme = 'light'; }
+    // Dark is the default; a visitor's light-mode choice is remembered.
+    try { document.documentElement.dataset.theme = localStorage.getItem('shodh-theme') === 'light' ? 'light' : 'dark'; }
+    catch (_) { document.documentElement.dataset.theme = 'dark'; }
   </script>
   <!-- Google Fonts (Plus Jakarta Sans + Space Grotesk only; Syne loaded locally) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1937,7 +1938,6 @@
       80% { transform: scaleX(1); opacity: .3; }
       100% { transform: scaleX(1); opacity: 0; }
     }
-    .research-launch-label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
     .research-launch-title { font-size: 14px; font-weight: 500; line-height: 1.5; }
     .research-launch-title strong { font-weight: 700; }
     .research-launch-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
@@ -1952,7 +1952,6 @@
     }
     @media (max-width: 1050px) {
       .research-launch { gap: 16px; }
-      .research-launch-label { display: none; }
       .research-launch-links { gap: 18px; }
     }
     @media (max-width: 768px) {
@@ -2024,7 +2023,6 @@
       <div class="hero-wrapper">
         <header class="hero-header">
           <aside class="research-launch" aria-label="LUCAN whitepaper launch">
-            <span class="research-launch-label">New whitepaper</span>
             <p class="research-launch-title"><strong>LUCAN</strong> — Physical intelligence, across scales.</p>
             <nav class="research-launch-links" aria-label="Explore our research">
               <a href="/research/LUCAN_Physical_Intelligence_Whitepaper_v3.pdf" target="_blank" rel="noopener noreferrer">Read the whitepaper <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
@@ -2542,7 +2540,7 @@
   <script src="vendor/lenis.min.js" defer></script>
   <script src="vendor/gsap.min.js" defer></script>
   <script src="vendor/ScrollTrigger.min.js" defer></script>
-  <script src="main.js?v=20261126-loading-only" defer></script>
+  <script src="main.js?v=20261128-dark-default" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

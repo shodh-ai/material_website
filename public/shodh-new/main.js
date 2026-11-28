@@ -271,9 +271,9 @@ function setTheme(theme) {
 }
 
 function initTheme() {
-  // Read saved preference (default: light)
-  let saved = 'light';
-  try { saved = localStorage.getItem('shodh-theme') || 'light'; } catch(_) {}
+  // Read saved preference (default: dark)
+  let saved = 'dark';
+  try { saved = localStorage.getItem('shodh-theme') === 'light' ? 'light' : 'dark'; } catch(_) {}
 
   currentTheme = saved;
   document.body.dataset.theme = saved;
