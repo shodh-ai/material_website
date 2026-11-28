@@ -11,6 +11,7 @@ import runpy
 import shutil
 
 from research_art import art_svg
+from build_static import share_links
 
 SOURCE = Path(__file__).resolve().parent
 DIST = SOURCE.parent.parent / 'public/research/library-content'
@@ -75,7 +76,7 @@ page = page.replace(MAIN + '/papers/lucan-10b/LUCAN_10B_arXiv_Research_Manuscrip
 structured = {'@context':'https://schema.org','@type':'ScholarlyArticle','name':title,'headline':title,'abstract':abstract,'url':MAIN+'/antibody-pose-canonicalization','encoding':{'@type':'MediaObject','contentUrl':pdf,'encodingFormat':'application/pdf'}}
 page = re.sub(r'<script type="application/ld\+json">.*?</script>', lambda _: '<script type="application/ld+json">' + json.dumps(structured).replace('<', '\\u003c') + '</script>', page)
 page = re.sub(r'<meta property="og:image:alt"[^>]+>', '<meta property="og:image:alt" content="Sequence-anchored frame: align, then encode">', page)
-body = f'''<main id="main" tabindex="-1"><div class="container"><div class="breadcrumb"><a href="/research">All research</a></div><header class="paper-heading"><span class="eyebrow">Research paper</span><h1>{html.escape(title)}</h1><div class="actions"><a class="button" href="{pdf}">Read paper PDF</a><a class="text-link" href="/engineering/antibody-tokenizer-rotation-invariance">Engineering overview</a></div></header><div class="paper-content"><section class="abstract"><h2>Abstract</h2><p>{html.escape(abstract)}</p></section><figure><img class="social-figure" src="{figure}" alt="Rotation stability by preprocessing choice"><figcaption>Rotation stability under the evaluated preprocessing variants. Refer to the manuscript for methods and limitations.</figcaption></figure></div></div></main>'''
+body = f'''<main id="main" tabindex="-1"><div class="container"><div class="breadcrumb"><a href="/research">All research</a></div><header class="paper-heading"><span class="eyebrow">Research paper</span><h1>{html.escape(title)}</h1><div class="actions"><a class="button" href="{pdf}">Read paper PDF</a><a class="text-link" href="/engineering/antibody-tokenizer-rotation-invariance">Engineering overview</a></div>{share_links(MAIN + '/antibody-pose-canonicalization', title)}</header><div class="paper-content"><section class="abstract"><h2>Abstract</h2><p>{html.escape(abstract)}</p></section><figure><img class="social-figure" src="{figure}" alt="Rotation stability by preprocessing choice"><figcaption>Rotation stability under the evaluated preprocessing variants. Refer to the manuscript for methods and limitations.</figcaption></figure></div></div></main>'''
 page = re.sub(r'<main id="main".*?</main>', lambda _: body, page)
 (DIST / 'antibody-pose-canonicalization.html').write_text(page)
 

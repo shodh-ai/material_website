@@ -107,3 +107,30 @@ if (search) {
     open(paper);
   });
 })();
+
+// Share row on paper pages: the device share sheet where available, plus copy link.
+document.querySelectorAll("[data-native-share]").forEach((button) => {
+  if (!navigator.share) return;
+  button.hidden = false;
+  button.addEventListener("click", () => {
+    navigator.share({ title: button.dataset.title, url: button.dataset.url }).catch(() => {});
+  });
+});
+document.querySelectorAll("[data-copy-link]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const url = button.dataset.url;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch (_) {
+      const field = document.createElement("textarea");
+      field.value = url;
+      document.body.append(field);
+      field.select();
+      document.execCommand("copy");
+      field.remove();
+    }
+    const label = button.textContent;
+    button.textContent = "Link copied";
+    setTimeout(() => { button.textContent = label; }, 2000);
+  });
+});

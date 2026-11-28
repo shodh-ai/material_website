@@ -116,3 +116,7 @@ html{background:var(--bg);transition:background-color .5s ease}body{background:t
 .dialog-open,.dialog-open body{overflow:hidden}
 @media(max-width:560px){.dialog-body{padding:24px 20px 22px}.dialog-body h2{font-size:19px}.dialog-abstract{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.abstract-dialog[open],.abstract-dialog[open]::backdrop{animation:none}}
+
+/* Share row on paper pages */
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:20px}.share-label{margin-right:4px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.share-pill{display:inline-flex;align-items:center;min-height:34px;padding:6px 14px;border:1px solid var(--glass-border);border-radius:999px;background:var(--glass-bottom);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);font-size:13px;font-weight:600;line-height:1.2;cursor:pointer;transition:background-color .25s ease,border-color .25s ease}.share-pill:hover{background:var(--glass-top);border-color:var(--glass-border-hover);color:var(--ink)}.share-pill[hidden]{display:none}
