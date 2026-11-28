@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 import "./careers.css";
 
 export const metadata: Metadata = {
-  title: "Careers | Build AI for Science at Shodh AI",
+  title: "Careers | Build Physical AI at Shodh AI",
   description:
-    "Join Shodh AI to build physics foundation models, scientific machine learning systems, and AI for materials discovery and manufacturing.",
+    "Join a high-agency Physical AI research lab. Four roles across GPU/TPU systems, frontier models, computational physics and biologics, and exceptional builders. Apply with proof of work.",
   alternates: { canonical: "/careers" },
   openGraph: {
-    title: "Careers | Build AI for Science at Shodh AI",
+    title: "Careers | Build Physical AI at Shodh AI",
     description:
-      "Open roles across scientific machine learning, materials science, engineering, and deployment.",
+      "Four roles. One shipped artifact. Show us what you built, what you owned, and what you proved wrong.",
     url: "/careers",
   },
 };
