@@ -23,7 +23,10 @@ export default function BlogIndex() {
     topic,
     title,
     description,
-    cover: { src: cover.src, width: cover.width, height: cover.height },
+    // Cards prefer the crisp vector cover (720 × 405) when a post provides one.
+    cover: cover.cardSrc
+      ? { src: cover.cardSrc, width: 720, height: 405 }
+      : { src: cover.src, width: cover.width, height: cover.height },
   }));
   return <EngineeringIndex posts={posts} description={description} />;
 }

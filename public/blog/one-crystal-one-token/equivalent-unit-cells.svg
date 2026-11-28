@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" font-family="system-ui, sans-serif" role="img" aria-labelledby="title">
+  <title id="title">Equivalent unit cells of the same crystal</title>
+  <rect x="0" y="0" width="720" height="405" rx="0" fill="#fff"/>
+  <defs>
+    <g id="lattice" fill="#173e64">
+      <circle id="atom" r="5" cx="0" cy="0"/>
+      <use href="#atom" x="100"/><use href="#atom" x="200"/>
+      <use href="#atom" y="97"/><use href="#atom" x="100" y="97"/><use href="#atom" x="200" y="97"/>
+      <use href="#atom" y="194"/><use href="#atom" x="100" y="194"/><use href="#atom" x="200" y="194"/>
+    </g>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#1b4f79"/></marker>
+  </defs>
+  <text x="181" y="46" font-size="24" font-weight="700" fill="#142638" text-anchor="middle">Original unit cell</text>
+  <path d="M93 330V233L193 233V330Z" fill="#e6f0f8" stroke="#1b4f79" stroke-width="2"/>
+  <path d="M93 330L93 233" fill="none" stroke="#1b4f79" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M93 330L193 330" fill="none" stroke="#1b4f79" stroke-width="2" marker-end="url(#arrow)"/>
+  <use href="#lattice" x="113" y="96"/>
+  <circle cx="156" cy="110" r="5" fill="#b1762b"/>
+  <circle cx="256" cy="110" r="5" fill="#b1762b"/>
+  <circle cx="156" cy="207" r="5" fill="#b1762b"/>
+  <circle cx="256" cy="207" r="5" fill="#b1762b"/>
+  <circle cx="156" cy="304" r="5" fill="#b1762b"/>
+  <circle cx="256" cy="304" r="5" fill="#b1762b"/>
+  <text x="83" y="288" font-size="19" font-weight="400" fill="#142638" text-anchor="end">b</text>
+  <text x="148" y="352" font-size="19" font-weight="400" fill="#142638" text-anchor="start">a</text>
+  <text x="539" y="46" font-size="24" font-weight="700" fill="#142638" text-anchor="middle">Equivalent unit cell</text>
+  <path d="M451 330V233L551 136V233Z" fill="#e6f0f8" stroke="#1b4f79" stroke-width="2"/>
+  <path d="M451 330L451 233" fill="none" stroke="#1b4f79" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M451 330L551 233" fill="none" stroke="#1b4f79" stroke-width="2" marker-end="url(#arrow)"/>
+  <use href="#lattice" x="471" y="96"/>
+  <circle cx="514" cy="110" r="5" fill="#b1762b"/>
+  <circle cx="614" cy="110" r="5" fill="#b1762b"/>
+  <circle cx="514" cy="207" r="5" fill="#b1762b"/>
+  <circle cx="614" cy="207" r="5" fill="#b1762b"/>
+  <circle cx="514" cy="304" r="5" fill="#b1762b"/>
+  <circle cx="614" cy="304" r="5" fill="#b1762b"/>
+  <text x="441" y="288" font-size="19" font-weight="400" fill="#142638" text-anchor="end">b</text>
+  <text x="506" y="292" font-size="19" font-weight="400" fill="#142638" text-anchor="start">a + b</text>
+  <text x="360" y="382" font-size="19" font-weight="400" fill="#46596a" text-anchor="middle">The periodic atomic pattern is unchanged</text>
+</svg>

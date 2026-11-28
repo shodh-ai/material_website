@@ -14,6 +14,28 @@
       "downloadName": "LUCAN_10B_arXiv_Research_Manuscript.pdf"
     },
     {
+      "id": "P26",
+      "title": "What Bitwise Reproduction Misses in a GPU Reactor Data Pipeline",
+      "domain": "Fluid dynamics",
+      "question": "What can bitwise replay verify, and how can identical GPU outputs still get the reactor physics wrong?",
+      "abstract": "A GPU reactor pipeline reproduced a reference dataset byte for byte, including a heat flux with the wrong sign. We examine two questions raised by this result. First, what makes two generated records identical? In three eight-GPU replays over the same 256 samples, changing the output schedule preserved every trajectory and interface array but changed 41 metadata hashes. A matched-operand control traced three affected records to a batch-dependent FP64 reduction. Second, does an identical record satisfy its declared physics? Both exporters sampled a jacket cell’s stored zero temperature. Across all 16 saved frames of two retained 48³ samples, the archived flux was −128.250 kW/m². Evaluating the same heat-transfer law at adjacent fluid faces gave +12.038 to +12.144 kW/m², outward as expected for warmer fluid. We provide the frame-level measurements and a notice identifying the affected legacy channel. On an H100, handwritten Triton and precision-emulating TorchInductor both matched the eager transport words at 1.314 and 1.404 ms per call, respectively, versus 47.387 ms for eager. Full-node throughput varied across the three rounds.",
+      "limitations": [
+        "The jacket-flux audit covers all 16 saved frames of two retained 48³ samples.",
+        "Full-node throughput varied across three rounds on the same eight-GPU node."
+      ],
+      "authors": [
+        "Shodh AI Research"
+      ],
+      "authorType": "Organization",
+      "publicationType": "Preprint",
+      "engineeringPath": "/engineering/h100-bit-exact-triton",
+      "pdf": "papers/P26/What-Bitwise-Reproduction-Misses-in-a-GPU-Reactor-Data-Pipeline.pdf",
+      "sha256": "c2ad1ca9d8e6e4cd3917f3019f42128656181e7eedde2d10c1d56eba6f2c66a6",
+      "pages": 11,
+      "text": "papers/P26/manuscript.txt",
+      "downloadName": "What-Bitwise-Reproduction-Misses-in-a-GPU-Reactor-Data-Pipeline.pdf"
+    },
+    {
       "id": "P01",
       "title": "Reconstruction Accuracy and Irreversible Ordering in Quantized Cyclic-Mechanics Fields",
       "domain": "Mechanics",

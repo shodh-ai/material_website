@@ -6,6 +6,7 @@ import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
 import CrystallizationCodec, { crystallizationAssets, crystallizationSections, crystallizationSlug } from "./crystallization-codec";
 import IndustrialWorldModels, { industrialWorldModelsAssets, industrialWorldModelsSections, industrialWorldModelsSlug } from "./industrial-world-models";
+import WorldModelsClock, { worldModelsClockAssets, worldModelsClockSections, worldModelsClockSlug } from "./world-models-more-than-one-clock";
 
 const tf32Slug = "tf32-rheology-flow";
 const tf32Assets = "/blog/how-tf32-changed-the-flow";
@@ -27,6 +28,7 @@ type BlogPost = {
   date: string;
   cover: {
     src: string;
+    cardSrc?: string;
     alt: string;
     width: number;
     height: number;
@@ -37,6 +39,25 @@ type BlogPost = {
 
 export const blogPosts: readonly BlogPost[] = [
   {
+    slug: worldModelsClockSlug,
+    title: "Industrial World Models Need More Than One Clock",
+    description:
+      "A channel simulation had 0.24% velocity error and 10.33% polymer shear-stress error. We examine how errors carry across physics, representations, spatial resolutions, and timescales.",
+    subtitle:
+      "Four coupled dimensions, examined through our work on bioreactors, scientific representations, viscoelastic flow and learned dynamics.",
+    topic: "Industrial world models",
+    date: "2026-11-28",
+    cover: {
+      src: `${worldModelsClockAssets}/stress-feedback-and-grid-refinement.png`,
+      cardSrc: `${worldModelsClockAssets}/grid-refinement-cover.svg`,
+      alt: "Velocity and shear-stress errors fall under grid refinement, and removing polymer stress feedback increases the mean flow.",
+      width: 1650,
+      height: 561,
+    },
+    sections: worldModelsClockSections,
+    Content: WorldModelsClock,
+  },
+  {
     slug: industrialWorldModelsSlug,
     title: "From Molecular Discovery to Computational Manufacturing",
     description:
@@ -45,6 +66,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-26",
     cover: {
       src: `${industrialWorldModelsAssets}/industrial-model-generations.png`,
+      cardSrc: `${industrialWorldModelsAssets}/industrial-model-generations.svg`,
       alt: "Three generations of foundation models: generate, simulate, and design.",
       width: 1506,
       height: 615,
@@ -77,6 +99,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-26",
     cover: {
       src: `${antibodyAssets}/rotation-stability.png`,
+      cardSrc: `${antibodyAssets}/rotation-stability.svg`,
       alt: "Median learned-token cosine under rotation increased from 0.177 with deployed preprocessing to 1.000 with either canonical frame.",
       width: 1467,
       height: 735,
@@ -93,6 +116,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${tf32Assets}/tf32-rheology-velocity.png`,
+      cardSrc: `${tf32Assets}/tf32-rheology-velocity.svg`,
       alt: "Mean axial velocity over 1,600 steps for TF32, FP32 and FP64. The TF32 trajectory stays above the FP64 reference.",
       width: 1620,
       height: 918,
@@ -105,10 +129,13 @@ export const blogPosts: readonly BlogPost[] = [
     title: "Bit-Exact Triton Kernels Make Our Reactor Solver 12× Faster on H100",
     description:
       "The Triton solver ran 12× faster on one H100, and its transport stencil ran 36.1× faster in isolation. Three eight-GPU replays preserved every output digest in bit-exact mode, with variable end-to-end throughput.",
+    subtitle:
+      "Fused Triton kernels sped up the transport calculation for our 3D reactor training data by 36.1× and the eight-sample solver by 12× on one H100. The bit-exact configuration matched the original outputs for all 256 samples in each of three eight-GPU runs.",
     topic: "Scientific computing",
     date: "2026-11-25",
     cover: {
       src: `${tritonAssets}/solver-breakdown.png`,
+      cardSrc: `${tritonAssets}/solver-breakdown.svg`,
       alt: "Original and optimized reactor step breakdowns. Transport fell from 48.11 ms to 1.40 ms per step.",
       width: 1938,
       height: 997,
@@ -127,6 +154,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${wrongTestAssets}/component-presence.png`,
+      cardSrc: `${wrongTestAssets}/component-presence.svg`,
       alt: "Collision-test results at two checkpoints, with a separate check for component presence.",
       width: 1497,
       height: 574,
@@ -145,6 +173,7 @@ export const blogPosts: readonly BlogPost[] = [
     date: "2026-11-25",
     cover: {
       src: `${crystalAssets}/equivalent-unit-cells.png`,
+      cardSrc: `${crystalAssets}/equivalent-unit-cells.svg`,
       alt: "Two valid unit cells for one periodic crystal pattern.",
       width: 1400,
       height: 650,

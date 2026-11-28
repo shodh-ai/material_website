@@ -23,7 +23,7 @@ runpy.run_path(str(builder), run_name='__main__')
 nav = '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/engineering">Engineering</a><a href="/careers">Careers</a></nav>'
 for path in DIST.glob('*.html'):
     text = path.read_text()
-    text = re.sub(r'(href|src)="/(?!/)', r'\1="/research/', text)
+    text = re.sub(r'(href|src)="/(?!/|engineering(?:/|"))', r'\1="/research/', text)
     text = text.replace(MAIN + '/"', MAIN + '"')
     text = re.sub(r'<nav aria-label="Main navigation">.*?</nav>', lambda _: nav, text)
     # The Shodh AI logo (header and footer) returns to the main home page.

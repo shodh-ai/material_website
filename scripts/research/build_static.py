@@ -39,8 +39,11 @@ def build():
     def byline(p):
         return f'<p class="paper-meta byline">By {e(", ".join(p["authors"]))}</p>' if p.get('authors') else ''
 
+    def paper_status(p):
+        return f"{e(p.get('publicationType', 'Working paper'))} · {p['pages']} pages"
+
     def card(p):
-        return f'''<article class="paper-row reveal" data-paper="{e(p['id'])}" data-domain="{domain_key(p['domain'])}"><div class="card-art">{art_svg(p['domain'])}</div><div class="paper-summary"><span class="eyebrow">{e(p['domain'])}</span><h3><a href="/{p['slug']}">{e(p['title'])}</a></h3>{byline(p)}<p>{e(p['question'])}</p><details class="list-abstract"><summary>Abstract</summary><p>{e(p['abstract'])}</p></details><span class="paper-meta">Working paper · {p['pages']} pages</span></div><a class="read-link" href="/{p['slug']}">Read paper <span aria-hidden="true">→</span></a></article>'''
+        return f'''<article class="paper-row reveal" data-paper="{e(p['id'])}" data-domain="{domain_key(p['domain'])}"><div class="card-art">{art_svg(p['domain'])}</div><div class="paper-summary"><span class="eyebrow">{e(p['domain'])}</span><h3><a href="/{p['slug']}">{e(p['title'])}</a></h3>{byline(p)}<p>{e(p['question'])}</p><details class="list-abstract"><summary>Abstract</summary><p>{e(p['abstract'])}</p></details><span class="paper-meta">{paper_status(p)}</span></div><a class="read-link" href="/{p['slug']}">Read paper <span aria-hidden="true">→</span></a></article>'''
 
     def shell(title, description, path, body, p=None, kind='CollectionPage', extra=None):
         image = p['ogImage'] if p else '/social/research.png'
@@ -48,7 +51,7 @@ def build():
         if p:
             structured.update(headline=p['title'], abstract=p['abstract'], encoding={'@type': 'MediaObject', 'contentUrl': BASE + p['pdf'], 'encodingFormat': 'application/pdf'})
             if p.get('authors'):
-                structured['author'] = [{'@type': 'Person', 'name': a} for a in p['authors']]
+                structured['author'] = [{'@type': p.get('authorType', 'Person'), 'name': a} for a in p['authors']]
         elif kind == 'CollectionPage':
             structured['hasPart'] = [{'@type': 'ScholarlyArticle', 'name': item['title'], 'url': BASE + '/' + item['slug']} for item in papers]
         if extra:
@@ -77,7 +80,9 @@ def build():
         report = f'<a href="{e(p["report"])}">Read the verification notes</a>' if p.get('report') else ''
         notes = f'<details class="research-notes"><summary>Scope & supporting notes</summary><div>{limitations}{report}</div></details>' if limitations or report else ''
         refs = f'<a href="{e(p["bibtex"])}" class="text-link" download>References (BibTeX)</a>' if p.get('bibtex') else ''
-        content = f'''<div class="container"><div class="breadcrumb"><a href="/">All papers</a></div><header class="paper-heading" data-domain="{domain_key(p['domain'])}"><div class="heading-art">{art_svg(p['domain'])}</div><span class="eyebrow">{e(p['domain'])}</span><h1>{e(p['title'])}</h1>{byline(p)}<p class="paper-meta">Working paper · {p['pages']} pages</p><div class="actions"><a href="{e(p['pdf'])}" class="button">Read PDF</a><a href="{e(p['pdf'])}" class="button secondary" download="{e(p.get('downloadName', p['title'] + '.pdf'))}">Download PDF</a><a href="{e(p['text'])}" class="text-link">Read extracted text</a>{refs}</div></header><div class="paper-content"><section class="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p>{e(p['abstract'])}</p></section>{notes}<p class="publication-note">This is a working paper. Please refer to the manuscript for methods, results, and limitations.</p></div><section class="related"><h2>Related papers</h2><div class="related-grid">{''.join(f'<a href="/{q["slug"]}"><h3>{e(q["title"])}</h3></a>' for q in papers if q['domain'] == p['domain'] and q['id'] != p['id'])}</div></section></div>'''.replace('<div class="related-grid"><a href=', '<div class="related-grid"><a class="reveal" href=').replace('</a><a href=', '</a><a class="reveal" href=')
+        engineering = f'<a href="{e(p["engineeringPath"])}" class="text-link">Engineering overview</a>' if p.get('engineeringPath') else ''
+        publication_type = e(p.get('publicationType', 'Working paper').lower())
+        content = f'''<div class="container"><div class="breadcrumb"><a href="/">All papers</a></div><header class="paper-heading" data-domain="{domain_key(p['domain'])}"><div class="heading-art">{art_svg(p['domain'])}</div><span class="eyebrow">{e(p['domain'])}</span><h1>{e(p['title'])}</h1>{byline(p)}<p class="paper-meta">{paper_status(p)}</p><div class="actions"><a href="{e(p['pdf'])}" class="button">Read PDF</a><a href="{e(p['pdf'])}" class="button secondary" download="{e(p.get('downloadName', p['title'] + '.pdf'))}">Download PDF</a><a href="{e(p['text'])}" class="text-link">Read extracted text</a>{refs}{engineering}</div></header><div class="paper-content"><section class="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p>{e(p['abstract'])}</p></section>{notes}<p class="publication-note">This is a {publication_type}. Please refer to the manuscript for methods, results, and limitations.</p></div><section class="related"><h2>Related papers</h2><div class="related-grid">{''.join(f'<a href="/{q["slug"]}"><h3>{e(q["title"])}</h3></a>' for q in papers if q['domain'] == p['domain'] and q['id'] != p['id'])}</div></section></div>'''.replace('<div class="related-grid"><a href=', '<div class="related-grid"><a class="reveal" href=').replace('</a><a href=', '</a><a class="reveal" href=')
         # Flat HTML files plus Vercel cleanUrls give canonical extensionless URLs.
         (DIST / (p['slug'] + '.html')).write_text(shell(p['title'], p['abstract'][:250], '/' + p['slug'], content, p))
     about = '<div class="container"><section class="about-page"><span class="eyebrow">About Shodh Research</span><h1>Exploring AI<br>for science.</h1><div class="about-copy"><p>Our research explores how learned representations interact with the structure of physical systems, from molecules and materials to fluid dynamics and electromagnetics.</p><p>Each manuscript describes the methods, evidence, and limits of its findings. We share this work as working papers for researchers to read and build on.</p><a class="button" href="/">Explore the papers</a></div></section></div>'

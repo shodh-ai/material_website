@@ -171,7 +171,7 @@ export default function EngineeringIndex({ posts, description }: { posts: Engine
                   src={post.cover.src}
                   width={post.cover.width}
                   height={post.cover.height}
-                  sizes="(max-width: 640px) 88vw, (max-width: 1023px) 44vw, (max-width: 1309px) 29vw, 22rem"
+                  unoptimized
                 />
               </div>
               <span className={styles.eyebrow}>{post.topic}</span>

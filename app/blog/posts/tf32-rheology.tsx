@@ -14,6 +14,8 @@ export const tf32Sections = [
 export default function Tf32Rheology() {
   return (
     <>
+      <p>When we use fluid simulations to train AI for engineering, small errors in the calculations can change what the model learns. In our tests, a default GPU shortcut saved 7% of simulation time, but by the end the fluid was flowing about three times as fast and had nearly ten times as much energy from its motion as in a more precise run. We traced the difference to how the GPU rounded its numbers and wrote new GPU code that ran the simulation 9.1× faster than the original at comparable accuracy.</p>
+
       <p>On NVIDIA GPUs, JAX can lower eligible FP32 dot and einsum contractions to TF32 by default. Tensor Cores round the operands to 10 fraction bits, down from FP32’s 23, before accumulating in FP32. Setting JAX’s default matmul precision to “highest” when compiling the solver requests full FP32 precision for those contractions. <a href="https://docs.jax.dev/en/latest/201/precision.html">JAX matmul precision</a></p>
 
       <p>In our H100 replay, default TF32 saved <strong>7% of simulation time</strong> (3.34 vs. 3.59 s/sample), while final mean axial velocity was <strong>3.13×</strong> and kinetic energy was <strong>9.85×</strong> the FP64 result. FP32 highest and fused Pallas each had about <strong>0.016% pooled axial-velocity nRMSE</strong> and <strong>0.16% final mean-velocity error</strong> against FP64. TF32 had <strong>20.5% pooled error</strong> and <strong>212.6% endpoint error</strong>. Pallas ran the FP32 simulation <strong>9.10× faster</strong> than the precision-matched original.</p>
