@@ -7,7 +7,6 @@ import html
 import json
 import re
 from pathlib import Path
-from urllib.parse import quote
 from xml.sax.saxutils import escape as xml
 
 from research_art import art_svg, domain_key
@@ -17,18 +16,6 @@ DIST = ROOT.parent.parent / 'public/research/library-content'
 BASE = 'https://shodh.ai/research'
 e = lambda value: html.escape(str(value), quote=True)
 
-
-def share_links(url, title):
-    """Share row for a paper page: plain links (no trackers) plus copy-link and the
-    device share sheet, which app.js enables where supported."""
-    u, t = quote(url, safe=''), quote(title, safe='')
-    pill = 'class="share-pill"'
-    return ('<div class="share" role="group" aria-label="Share this paper"><span class="share-label">Share</span>'
-            f'<button type="button" {pill} data-native-share data-url="{e(url)}" data-title="{e(title)}" hidden>Share…</button>'
-            f'<a {pill} href="https://www.linkedin.com/sharing/share-offsite/?url={u}" target="_blank" rel="noopener noreferrer">LinkedIn</a>'
-            f'<a {pill} href="https://twitter.com/intent/tweet?url={u}&amp;text={t}" target="_blank" rel="noopener noreferrer">X</a>'
-            f'<a {pill} href="mailto:?subject={t}&amp;body={u}">Email</a>'
-            f'<button type="button" {pill} data-copy-link data-url="{e(url)}">Copy link</button></div>')
 # Dark is the default theme; the home page's light-mode choice (shodh-theme) carries over.
 THEME_BOOT = "<script>try{document.documentElement.dataset.theme=localStorage.getItem('shodh-theme')==='light'?'light':'dark'}catch(_){}</script>"
 # Same sun/moon toggle as the home page header.
@@ -98,7 +85,7 @@ def build():
         bundle = f'<a href="{e(p["latexBundle"])}" class="button secondary" download>Download LaTeX package</a>' if p.get('latexBundle') else ''
         latex_note = '<p class="publication-note">The LaTeX package contains a PDF-derived transcription.</p>' if p.get('latexKind') == 'derived' else ''
         publication_type = e(p.get('publicationType', 'Working paper').lower())
-        content = f'''<div class="container"><div class="breadcrumb"><a href="/">All papers</a></div><header class="paper-heading" data-domain="{domain_key(p['domain'])}"><div class="heading-art">{art_svg(p['domain'])}</div><span class="eyebrow">{e(p['domain'])}</span><h1>{e(p['title'])}</h1>{byline(p)}<p class="paper-meta">{paper_status(p)}</p><div class="actions"><a href="{e(p['pdf'])}" class="button">Read PDF</a><a href="{e(p['pdf'])}" class="button secondary" download="{e(p.get('downloadName', p['title'] + '.pdf'))}">Download PDF</a>{bundle}{refs}{engineering}</div>{share_links(BASE + '/' + p['slug'], p['title'])}</header><div class="paper-content"><section class="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p>{e(p['abstract'])}</p></section>{notes}{latex_note}<p class="publication-note">This is a {publication_type}. Please refer to the manuscript for methods, results, and limitations.</p></div><section class="related"><h2>Related papers</h2><div class="related-grid">{''.join(f'<a href="/{q["slug"]}"><h3>{e(q["title"])}</h3></a>' for q in papers if q['domain'] == p['domain'] and q['id'] != p['id'])}</div></section></div>'''
+        content = f'''<div class="container"><div class="breadcrumb"><a href="/">All papers</a></div><header class="paper-heading" data-domain="{domain_key(p['domain'])}"><div class="heading-art">{art_svg(p['domain'])}</div><span class="eyebrow">{e(p['domain'])}</span><h1>{e(p['title'])}</h1>{byline(p)}<p class="paper-meta">{paper_status(p)}</p><div class="actions"><a href="{e(p['pdf'])}" class="button">Read PDF</a><a href="{e(p['pdf'])}" class="button secondary" download="{e(p.get('downloadName', p['title'] + '.pdf'))}">Download PDF</a>{bundle}{refs}{engineering}</div></header><div class="paper-content"><section class="abstract" aria-labelledby="abstract-title"><h2 id="abstract-title">Abstract</h2><p>{e(p['abstract'])}</p></section>{notes}{latex_note}<p class="publication-note">This is a {publication_type}. Please refer to the manuscript for methods, results, and limitations.</p></div><section class="related"><h2>Related papers</h2><div class="related-grid">{''.join(f'<a href="/{q["slug"]}"><h3>{e(q["title"])}</h3></a>' for q in papers if q['domain'] == p['domain'] and q['id'] != p['id'])}</div></section></div>'''
         # Flat HTML files plus Vercel cleanUrls give canonical extensionless URLs.
         (DIST / (p['slug'] + '.html')).write_text(shell(p['title'], p['abstract'][:250], '/' + p['slug'], content, p))
     about = '<div class="container"><section class="about-page"><span class="eyebrow">About Shodh Research</span><h1>Exploring AI<br>for science.</h1><div class="about-copy"><p>Our research explores how learned representations interact with the structure of physical systems, from molecules and materials to fluid dynamics and electromagnetics.</p><p>Each manuscript describes the methods, evidence, and limits of its findings. We share this work as working papers for researchers to read and build on.</p><a class="button" href="/">Explore the papers</a></div></section></div>'
@@ -107,7 +94,7 @@ def build():
     # LUCAN-10B is now a full catalog manuscript supplied by the author.
     selected = [next(p for p in papers if p['id'] == pid) for pid in ['P01', 'P06', 'P14', 'P18', 'P21']]
     guide_description = 'A reading guide to Shodh working papers on reconstruction fidelity, symmetry response, and physical constraints.'
-    guide = '<div class="container"><div class="breadcrumb"><a href="/">All research</a></div><header class="paper-heading"><span class="eyebrow">Reading guide</span><h1>Beyond reconstruction error</h1><p>' + guide_description + '</p>' + share_links(BASE + '/beyond-reconstruction-error', 'Beyond reconstruction error') + '</header><div class="paper-content"><h2>Separate the questions</h2><p>The papers below examine distinct questions about learned scientific representations: how closely a decoded field matches its input, how stored features respond to transformations, and which physical constraints a decoder enforces. Each question requires its own evidence.</p><p>This guide collects existing working papers. Refer to each manuscript for its methods, results, and limitations.</p></div><div class="paper-list">' + ''.join(card(p) for p in selected) + '</div></div>'
+    guide = '<div class="container"><div class="breadcrumb"><a href="/">All research</a></div><header class="paper-heading"><span class="eyebrow">Reading guide</span><h1>Beyond reconstruction error</h1><p>' + guide_description + '</p></header><div class="paper-content"><h2>Separate the questions</h2><p>The papers below examine distinct questions about learned scientific representations: how closely a decoded field matches its input, how stored features respond to transformations, and which physical constraints a decoder enforces. Each question requires its own evidence.</p><p>This guide collects existing working papers. Refer to each manuscript for its methods, results, and limitations.</p></div><div class="paper-list">' + ''.join(card(p) for p in selected) + '</div></div>'
     (DIST / 'beyond-reconstruction-error.html').write_text(shell('Beyond reconstruction error', guide_description, '/beyond-reconstruction-error', guide, extra={'hasPart': [{'@type': 'ScholarlyArticle', 'name': p['title'], 'url': BASE + '/' + p['slug']} for p in selected]}).replace(BASE + '/social/research.png', BASE + '/social/charts/beyond-reconstruction-error.png'))
     urls = ['/', '/about', '/beyond-reconstruction-error'] + ['/' + p['slug'] for p in papers]
     (DIST / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{xml(BASE + path)}</loc></url>\n' for path in urls) + '</urlset>\n')
