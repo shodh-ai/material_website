@@ -45,3 +45,65 @@ if (search) {
   reset.addEventListener("click", () => { domain = "All topics"; search.value = ""; update(); });
   update();
 }
+
+// Glass cards rise in as they scroll into view. Only content below the fold is
+// hidden first, so nothing on screen flickers and nothing stays hidden without JS.
+(() => {
+  const items = [...document.querySelectorAll(".reveal")];
+  if (!items.length || !("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.filter((entry) => entry.isIntersecting).forEach((entry, i) => {
+      const el = entry.target;
+      observer.unobserve(el);
+      el.style.transitionDelay = `${Math.min(i, 6) * 70}ms`;
+      el.classList.remove("reveal-pending");
+      setTimeout(() => { el.style.transitionDelay = ""; }, 1200);
+    });
+  }, { rootMargin: "0px 0px -6% 0px" });
+  for (const el of items) {
+    if (el.getBoundingClientRect().top > innerHeight * 0.94) {
+      el.classList.add("reveal-pending");
+      observer.observe(el);
+    }
+  }
+})();
+
+// "Abstract" on a paper card opens a small centred note instead of expanding the
+// card. Without <dialog> support the original inline <details> still works.
+(() => {
+  if (typeof HTMLDialogElement !== "function") return;
+  const byId = new Map(papers.map((p) => [p.id, p]));
+  const dialog = document.createElement("dialog");
+  dialog.className = "abstract-dialog";
+  dialog.setAttribute("aria-labelledby", "abstract-dialog-title");
+  dialog.innerHTML = '<div class="dialog-body"><button class="dialog-close" type="button" aria-label="Close abstract"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12"/></svg></button><span class="eyebrow"></span><h2 id="abstract-dialog-title"></h2><p class="dialog-abstract"></p><a class="button dialog-read" href="">Read paper <span aria-hidden="true">→</span></a></div>';
+  document.body.append(dialog);
+  const [eyebrow, title, text, read] = [".eyebrow", "h2", ".dialog-abstract", ".dialog-read"].map((s) => dialog.querySelector(s));
+
+  function open(paper) {
+    eyebrow.textContent = paper.domain;
+    title.textContent = paper.title;
+    text.textContent = paper.abstract;
+    read.href = "/research/" + paper.slug;
+    document.documentElement.classList.add("dialog-open");
+    dialog.showModal();
+    dialog.querySelector(".dialog-close").focus();
+  }
+
+  // Unlock page scrolling on every way out; the async "close" event alone is not
+  // always delivered promptly (e.g. in background tabs).
+  const unlock = () => document.documentElement.classList.remove("dialog-open");
+  const shut = () => { dialog.close(); unlock(); };
+  dialog.addEventListener("close", unlock);
+  dialog.addEventListener("cancel", unlock); // Esc key
+  dialog.querySelector(".dialog-close").addEventListener("click", shut);
+  // A click on the dimmed backdrop (outside the note) closes it.
+  dialog.addEventListener("click", (event) => { if (event.target === dialog) shut(); });
+  document.addEventListener("click", (event) => {
+    const summary = event.target.closest(".list-abstract > summary");
+    const paper = summary && byId.get(summary.closest("[data-paper]")?.dataset.paper);
+    if (!paper) return;
+    event.preventDefault();
+    open(paper);
+  });
+})();

@@ -519,3 +519,36 @@
     min-width: 29rem;
   }
 }
+
+/* Engineering index (app/engineering/engineering-index.tsx): full-page fluid background,
+   so the page swaps the shared light header for its own and themes the footer. */
+.site:has([data-eng-index]) {
+  background: #01050b;
+  transition: background-color .5s ease;
+}
+
+.site:has([data-eng-index][data-theme="light"]) {
+  background: #f5f5f7;
+}
+
+.site:has([data-eng-index]) > .header {
+  display: none;
+}
+
+.site:has([data-eng-index]) .footer {
+  position: relative;
+  z-index: 1;
+  border-top-color: rgba(255, 255, 255, .18);
+}
+
+.site:has([data-eng-index]) .footerInner {
+  color: rgba(255, 255, 255, .72);
+}
+
+.site:has([data-eng-index][data-theme="light"]) .footer {
+  border-top-color: rgba(0, 0, 66, .18);
+}
+
+.site:has([data-eng-index][data-theme="light"]) .footerInner {
+  color: rgba(0, 0, 66, .72);
+}

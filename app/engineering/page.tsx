@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { blogPosts } from "../blog/posts";
-import styles from "../blog/(public)/blog.module.css";
+import EngineeringIndex, { type EngineeringCard } from "./engineering-index";
 
 const description = "Engineering notes on physical simulation, scientific AI, and the systems behind Shodh’s research.";
 
@@ -19,44 +17,16 @@ export const metadata: Metadata = {
 };
 
 export default function BlogIndex() {
-  return (
-    <>
-      <header className={styles.hero}>
-        
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <h1>Engineering<span>.</span></h1>
-            <p>{description}</p>
-          </div>
-          <Image
-            className={styles.heroSymbol}
-            src="/blog/hero/shodh-symbol.svg"
-            width={144}
-            height={144}
-            alt=""
-            unoptimized
-          />
-        </div>
-      </header>
-      <section className={styles.cardGrid} aria-label="Articles">
-        {blogPosts.map((post) => (
-          <article className={styles.card} key={post.slug}>
-            <Link href={`/engineering/${post.slug}`}>
-              <Image
-                alt=""
-                src={post.cover.cardSrc ?? post.cover.src}
-                width={post.cover.cardSrc ? 720 : post.cover.width}
-                height={post.cover.cardSrc ? 405 : post.cover.height}
-                unoptimized
-              />
-              <span className={styles.eyebrow}>{post.topic}</span>
-              <h2>{post.title}</h2>
-              <p className={styles.summary}>{post.description}</p>
-            </Link>
-          </article>
-        ))}
-      </section>
-    </>
-  );
+  // Only plain card data crosses into the client component (not the article bodies).
+  const posts: EngineeringCard[] = blogPosts.map(({ slug, topic, title, description, cover }) => ({
+    slug,
+    topic,
+    title,
+    description,
+    // Cards prefer the crisp vector cover (720 × 405) when a post provides one.
+    cover: cover.cardSrc
+      ? { src: cover.cardSrc, width: 720, height: 405 }
+      : { src: cover.src, width: cover.width, height: cover.height },
+  }));
+  return <EngineeringIndex posts={posts} description={description} />;
 }
-

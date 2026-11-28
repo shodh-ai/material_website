@@ -42,7 +42,9 @@
   transition: filter .45s ease, opacity .45s ease;
 }
 
-.careers-page[data-theme="dark"] .careers-fluid-bg { filter: brightness(.22) saturate(.7) hue-rotate(175deg); }
+/* Live fluid scene (navy in dark mode); the light image is only a loading fallback. */
+.careers-page[data-theme="dark"] .careers-fluid-bg { background-image: none; }
+.careers-fluid-bg canvas { display: block; width: 100% !important; height: 100% !important; }
 .careers-page main, .careers-header, .careers-footer, .careers-back { position: relative; z-index: 1; }
 
 .careers-header {

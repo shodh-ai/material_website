@@ -39,7 +39,7 @@ const nextConfig = {
       source: `/research/${prefix}/:path*`,
       destination: `${origin}/${prefix}/:path*`,
     }));
-    const publicFiles = ['app.js', 'styles.css', 'catalog.json', 'routes.json'].map((name) => ({
+    const publicFiles = ['app.js', 'brand-background.js', 'styles.css', 'catalog.json', 'routes.json'].map((name) => ({
       source: `/research/${name}`,
       destination: `${origin}/${name}`,
     }));
