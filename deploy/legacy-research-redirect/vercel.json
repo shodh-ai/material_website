@@ -1,0 +1,39 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://shodh.ai/research",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://shodh.ai/research",
+      "statusCode": 301
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://shodh.ai/sitemap.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://shodh.ai/robots.txt",
+      "statusCode": 301
+    },
+    {
+      "source": "/:slug.html",
+      "destination": "https://shodh.ai/research/:slug",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://shodh.ai/research/:path*",
+      "statusCode": 301
+    }
+  ]
+}

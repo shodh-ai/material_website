@@ -22,7 +22,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
             <span>Engineering</span>
           </Link>
           <nav aria-label="Main navigation">
-            <Link href="/engineering" className={styles.navCurrent} aria-current="location">Engineering</Link>
+            <Link href="/">Home</Link>
             <a href="/research">Research</a><Link href="/careers">Careers</Link>
           </nav>
         </div>

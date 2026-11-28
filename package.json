@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "echo Built!",
     "start": "next start",
-    "lint": "next lint --no-lint"
+    "lint": "next lint --no-lint",
+    "research:build": "python3 scripts/research/publish.py"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

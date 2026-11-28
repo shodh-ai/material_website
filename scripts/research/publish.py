@@ -1,7 +1,7 @@
 """Build the existing reviewed library with canonical URLs under shodh.ai/research.
 
-The origin stays on its existing Vercel project. Only explicit public library
-routes are proxied; existing main-site research articles and PDFs remain intact.
+All source, manuscript assets, and generated pages live in this repository.
+The main website serves the generated files directly through local rewrites.
 """
 from pathlib import Path
 import html
@@ -10,26 +10,48 @@ import re
 import runpy
 import shutil
 
+from research_art import art_svg
+
 SOURCE = Path(__file__).resolve().parent
 DIST = SOURCE.parent.parent / 'public/research/library-content'
 MAIN = 'https://shodh.ai/research'
 builder = SOURCE / 'build_static.py'
-for name in ['styles.css', 'app.js']:
+for name in ['styles.css', 'app.js', 'brand-background.js']:
     shutil.copy2(SOURCE / name, DIST / name)
 runpy.run_path(str(builder), run_name='__main__')
 
-nav = '<nav aria-label="Main navigation"><a href="/research">Research</a><a href="/engineering">Engineering</a><a href="/careers">Careers</a></nav>'
+nav = '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/engineering">Engineering</a><a href="/careers">Careers</a></nav>'
 for path in DIST.glob('*.html'):
     text = path.read_text()
     text = re.sub(r'(href|src)="/(?!/|engineering(?:/|"))', r'\1="/research/', text)
     text = text.replace(MAIN + '/"', MAIN + '"')
     text = re.sub(r'<nav aria-label="Main navigation">.*?</nav>', lambda _: nav, text)
+    # The Shodh AI logo (header and footer) returns to the main home page.
+    text = text.replace('<a class="brand" href="/research/" aria-label="Shodh Research home">', '<a class="brand" href="/" aria-label="Shodh AI home">')
+    text = text.replace('<footer><a class="brand" href="/research/">', '<footer><a class="brand" href="/" aria-label="Shodh AI home">')
     path.write_text(text)
 
 home = DIST / 'index.html'
 text = home.read_text()
-stack = '''<section class="architecture" aria-labelledby="stack-title"><h2 id="stack-title">Our physical intelligence stack</h2><ol class="stack-diagram" aria-label="Skanda, LURTEE, Fail-Closed, LUCAN, Inverse Design"><li>Skanda</li><li>LURTEE</li><li>Fail-Closed</li><li>LUCAN</li><li>Inverse Design</li></ol></section>'''
-featured = '''<section class="related"><h2>Featured papers &amp; technical reports</h2><div class="related-grid"><a href="/research/antibody-pose-canonicalization"><span class="eyebrow">Research paper</span><h3>Sequence-anchored antibody canonicalization</h3></a><a href="/research/lucan-10b-physics"><span class="eyebrow">Technical whitepaper</span><h3>LUCAN: Physical intelligence</h3></a><a href="/world-model"><span class="eyebrow">Technical report</span><h3>A foundation world model for physical intelligence</h3></a></div></section><section class="related"><h2>Ideas &amp; perspectives</h2><div class="related-grid"><a href="/research/three-generations-of-foundation-models"><h3>The three generations of foundation models</h3></a><a href="/research/beyond-reconstruction-error"><h3>Beyond reconstruction error</h3></a><a href="/engineering"><h3>Engineering at Shodh</h3></a></div></section>'''
+steps = ['Skanda', 'LURTEE', 'Fail-Closed', 'LUCAN', 'Inverse Design']
+stack = ('<section class="architecture reveal" aria-labelledby="stack-title"><h2 id="stack-title">Our physical intelligence stack</h2>'
+         '<ol class="stack-diagram" aria-label="Skanda, LURTEE, Fail-Closed, LUCAN, Inverse Design">'
+         + ''.join(f'<li>{name}</li>' for name in steps)
+         + '</ol></section>')
+# Featured work as a glass bento: the LUCAN figure leads, then the antibody figure and the world-model report.
+featured = ('<section class="related featured"><h2>Featured papers &amp; technical reports</h2><div class="bento">'
+            '<a class="bento-card bento-main reveal" href="/research/lucan-10b-physics"><div class="bento-media"><img src="/research/social/lucan.png" width="1200" height="630" loading="lazy" alt="LUCAN illustrative reconstruction: bioreactor flow field and 3D cell-membrane rupture"></div>'
+            '<span class="eyebrow">Technical whitepaper</span><h3>LUCAN: Physical intelligence</h3><span class="read-link">Read the whitepaper <span aria-hidden="true">→</span></span></a>'
+            '<a class="bento-card reveal" href="/research/antibody-pose-canonicalization"><div class="bento-media"><img src="/blog/antibody-tokenizer-rotation-invariance/rotation-stability.png" width="1467" height="735" loading="lazy" alt="Rotation stability by preprocessing choice"></div>'
+            '<span class="eyebrow">Research paper</span><h3>Sequence-anchored antibody canonicalization</h3></a>'
+            '<a class="bento-card reveal" href="/world-model" data-domain="foundation"><div class="card-art">' + art_svg('Physical foundation models') + '</div>'
+            '<span class="eyebrow">Technical report</span><h3>A foundation world model for physical intelligence</h3></a>'
+            '</div></section>'
+            '<section class="related ideas"><h2>Ideas &amp; perspectives</h2><div class="related-grid">'
+            '<a class="reveal" href="/research/three-generations-of-foundation-models"><h3>The three generations of foundation models</h3><span class="read-link" aria-hidden="true">→</span></a>'
+            '<a class="reveal" href="/research/beyond-reconstruction-error"><h3>Beyond reconstruction error</h3><span class="read-link" aria-hidden="true">→</span></a>'
+            '<a class="reveal" href="/engineering"><h3>Engineering at Shodh</h3><span class="read-link" aria-hidden="true">→</span></a>'
+            '</div></section>')
 text = re.sub(r'<section class="related"><h2>Featured research</h2>.*?</section>', lambda _: stack + featured, text)
 home.write_text(text)
 (DIST / 'home.html').write_text(text)
