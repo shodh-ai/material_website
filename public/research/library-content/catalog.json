@@ -13,7 +13,8 @@
       "text": "papers/lucan-10b/manuscript.txt",
       "downloadName": "LUCAN_10B_arXiv_Research_Manuscript.pdf",
       "tex": "papers/lucan-10b/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/lucan-10b/LUCAN_10B_arXiv_Research_Manuscript-latex.zip"
     },
     {
       "id": "P27",
@@ -78,7 +79,8 @@
       "downloadName": "Reconstruction-Accuracy-and-Irreversible-Ordering-in-Quantized-Cyclic-Mechanics-Fields.pdf",
       "bibtex": "papers/P01/references.bib",
       "tex": "papers/P01/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P01/Reconstruction-Accuracy-and-Irreversible-Ordering-in-Quantized-Cyclic-Mechanics-Fields-latex.zip"
     },
     {
       "id": "P02",
@@ -100,7 +102,8 @@
       "downloadName": "Source-faithful-static-validation-of-archived-CALVADOS-2-interactions-parameter-equality-contact-range-semantics-and-backend-dependent-test-outcomes.pdf",
       "bibtex": "papers/P02/references.bib",
       "tex": "papers/P02/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P02/Source-faithful-static-validation-of-archived-CALVADOS-2-interactions-parameter-equality-contact-range-semantics-and-backend-dependent-test-outcomes-latex.zip"
     },
     {
       "id": "P03",
@@ -116,7 +119,8 @@
       "report": "papers/P03/verification-report.pdf",
       "downloadName": "Toward-pose-robust-residue-faithful-antibody-tokenization-Stored-byte-diagnostics-and-a-framework-anchored-design.pdf",
       "tex": "papers/P03/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P03/Toward-pose-robust-residue-faithful-antibody-tokenization-Stored-byte-diagnostics-and-a-framework-anchored-design-latex.zip"
     },
     {
       "id": "P04",
@@ -137,7 +141,8 @@
       "downloadName": "Rotation-sensitivity-after-BF16-storage-in-coarse-grained-molecular-encoding-and-a-conditional-pocket-frame-correction.pdf",
       "bibtex": "papers/P04/references.bib",
       "tex": "papers/P04/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P04/Rotation-sensitivity-after-BF16-storage-in-coarse-grained-molecular-encoding-and-a-conditional-pocket-frame-correction-latex.zip"
     },
     {
       "id": "P06",
@@ -158,7 +163,8 @@
       "downloadName": "Registered-Fourier-phase-geometry-after-bfloat16-storage-separating-reconstruction-from-learned-feature-quality.pdf",
       "bibtex": "papers/P06/references.bib",
       "tex": "papers/P06/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P06/Registered-Fourier-phase-geometry-after-bfloat16-storage-separating-reconstruction-from-learned-feature-quality-latex.zip"
     },
     {
       "id": "P07",
@@ -180,7 +186,8 @@
       "downloadName": "Explicit-coordinate-carriers-learned-distance-tails-and-runtime-frame-augmentation-in-an-atomwise-molecular-representation.pdf",
       "bibtex": "papers/P07/references.bib",
       "tex": "papers/P07/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P07/Explicit-coordinate-carriers-learned-distance-tails-and-runtime-frame-augmentation-in-an-atomwise-molecular-representation-latex.zip"
     },
     {
       "id": "P09",
@@ -201,7 +208,8 @@
       "downloadName": "Contraction-precision-sensitivity-in-a-coupled-D3Q19-rheology-particulate-workflow.pdf",
       "bibtex": "papers/P09/references.bib",
       "tex": "papers/P09/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P09/Contraction-precision-sensitivity-in-a-coupled-D3Q19-rheology-particulate-workflow-latex.zip"
     },
     {
       "id": "P10",
@@ -217,7 +225,8 @@
       "report": "papers/P10/verification-report.pdf",
       "downloadName": "Physical-response-diagnostics-ensemble-agreement-and-fixed-coordinate-fidelity-in-residue-level-IDP-simulations.pdf",
       "tex": "papers/P10/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P10/Physical-response-diagnostics-ensemble-agreement-and-fixed-coordinate-fidelity-in-residue-level-IDP-simulations-latex.zip"
     },
     {
       "id": "P11",
@@ -233,7 +242,8 @@
       "report": "papers/P11/verification-report.pdf",
       "downloadName": "Metric-semantics-and-geometry-constraints-in-neural-mixer-inverse-design-a-retrospective-retained-artifact-case-study.pdf",
       "tex": "papers/P11/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P11/Metric-semantics-and-geometry-constraints-in-neural-mixer-inverse-design-a-retrospective-retained-artifact-case-study-latex.zip"
     },
     {
       "id": "P12",
@@ -255,7 +265,8 @@
       "downloadName": "Grid-native-latent-patchification-for-two-dimensional-Maxwell-field-reconstruction-a-checkpoint-selection-aware-retrospective-case-study.pdf",
       "bibtex": "papers/P12/references.bib",
       "tex": "papers/P12/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P12/Grid-native-latent-patchification-for-two-dimensional-Maxwell-field-reconstruction-a-checkpoint-selection-aware-retrospective-case-study-latex.zip"
     },
     {
       "id": "P13",
@@ -271,7 +282,8 @@
       "report": "papers/P13/verification-report.pdf",
       "downloadName": "What-Passing-Solver-Checks-Establish-Periodic-Decay-Manufactured-Pressure-and-Failed-Boundary-Response-in-Fluid-Verification.pdf",
       "tex": "papers/P13/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P13/What-Passing-Solver-Checks-Establish-Periodic-Decay-Manufactured-Pressure-and-Failed-Boundary-Response-in-Fluid-Verification-latex.zip"
     },
     {
       "id": "P14",
@@ -293,7 +305,8 @@
       "downloadName": "Discrete-Constraints-Harmonic-Modes-and-Reconstruction-Fidelity-in-Periodic-Fluid-and-Magnetic-Autoencoders.pdf",
       "bibtex": "papers/P14/references.bib",
       "tex": "papers/P14/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P14/Discrete-Constraints-Harmonic-Modes-and-Reconstruction-Fidelity-in-Periodic-Fluid-and-Magnetic-Autoencoders-latex.zip"
     },
     {
       "id": "P15",
@@ -309,7 +322,8 @@
       "report": "papers/P15/verification-report.pdf",
       "downloadName": "Peak-and-Spectral-Agreement-Do-Not-Establish-Field-Reconstruction.pdf",
       "tex": "papers/P15/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P15/Peak-and-Spectral-Agreement-Do-Not-Establish-Field-Reconstruction-latex.zip"
     },
     {
       "id": "P16",
@@ -325,7 +339,8 @@
       "report": "papers/P16/verification-report.pdf",
       "downloadName": "Energy-Balance-and-Comparison-Observables-in-a-PMMA-Impact-Fracture-Simulation-Audit.pdf",
       "tex": "papers/P16/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P16/Energy-Balance-and-Comparison-Observables-in-a-PMMA-Impact-Fracture-Simulation-Audit-latex.zip"
     },
     {
       "id": "P18",
@@ -341,7 +356,8 @@
       "report": "papers/P18/verification-report.pdf",
       "downloadName": "Reconstruction-symmetry-response-and-reference-stability-in-an-inherited-Fe-Cr-geometry-tokenizer.pdf",
       "tex": "papers/P18/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P18/Reconstruction-symmetry-response-and-reference-stability-in-an-inherited-Fe-Cr-geometry-tokenizer-latex.zip"
     },
     {
       "id": "P19",
@@ -357,7 +373,8 @@
       "report": "papers/P19/verification-report.pdf",
       "downloadName": "Independent-Field-and-Charge-Fidelity-Versus-Constructed-Constraints-in-a-Three-Dimensional-Electromagnetic-Spectral-Codec.pdf",
       "tex": "papers/P19/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P19/Independent-Field-and-Charge-Fidelity-Versus-Constructed-Constraints-in-a-Three-Dimensional-Electromagnetic-Spectral-Codec-latex.zip"
     },
     {
       "id": "P20",
@@ -379,7 +396,8 @@
       "downloadName": "Finite-Equivalence-and-Nested-Performance-Limits-in-a-Fused-Reactor-Field-Generator.pdf",
       "bibtex": "papers/P20/references.bib",
       "tex": "papers/P20/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P20/Finite-Equivalence-and-Nested-Performance-Limits-in-a-Fused-Reactor-Field-Generator-latex.zip"
     },
     {
       "id": "P21",
@@ -395,7 +413,8 @@
       "report": "papers/P21/verification-report.pdf",
       "downloadName": "Separate-Gates-for-Reconstruction-Symmetry-and-Population-Size-in-an-Adsorbate-Slab-Codec.pdf",
       "tex": "papers/P21/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P21/Separate-Gates-for-Reconstruction-Symmetry-and-Population-Size-in-an-Adsorbate-Slab-Codec-latex.zip"
     },
     {
       "id": "P25",
@@ -411,7 +430,8 @@
       "report": "papers/P25/verification-report.pdf",
       "downloadName": "Stored-Byte-Distinctness-and-Physical-Population-Accounting-in-Scientific-Latent-Datasets.pdf",
       "tex": "papers/P25/manuscript-derived.tex",
-      "latexKind": "derived"
+      "latexKind": "derived",
+      "latexBundle": "papers/P25/Stored-Byte-Distinctness-and-Physical-Population-Accounting-in-Scientific-Latent-Datasets-latex.zip"
     }
   ]
 }

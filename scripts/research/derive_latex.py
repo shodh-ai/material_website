@@ -5,6 +5,7 @@ import json
 import re
 import unicodedata
 from pathlib import Path
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[2]
 LIBRARY = ROOT / "public/research/library-content"
@@ -81,6 +82,21 @@ def transcribe(title, pdf, text, output):
     output.write_text("\n".join(document + [r"\end{document}", ""]))
 
 
+def package(title, source, pdf, pdf_url, archive):
+    readme = (
+        f"{title}\n\n"
+        "PDF-derived LaTeX package\n\n"
+        "Extract the ZIP, then run tectonic main.tex or xelatex main.tex.\n"
+        "The editable source follows the published PDF's extracted text.\n"
+        "Use the published PDF for the exact equations, tables, and figures.\n\n"
+        f"Published PDF: {pdf_url}\n"
+        f"PDF SHA-256: {digest(pdf)}\n"
+    )
+    with ZipFile(archive, "w") as bundle:
+        bundle.writestr(ZipInfo("main.tex"), source.read_bytes(), compress_type=ZIP_DEFLATED)
+        bundle.writestr(ZipInfo("README.txt"), readme, compress_type=ZIP_DEFLATED)
+
+
 def main():
     catalog = json.loads(CATALOG.read_text())
     for paper in catalog["papers"]:
@@ -89,16 +105,22 @@ def main():
         pdf = LIBRARY / paper["pdf"]
         assert digest(pdf) == paper["sha256"], paper["id"]
         source = pdf.with_name("manuscript-derived.tex")
+        archive = pdf.with_name(pdf.stem + "-latex.zip")
         transcribe(paper["title"], pdf, LIBRARY / paper["text"], source)
-        paper.update(tex=source.relative_to(LIBRARY).as_posix(), latexKind="derived")
+        package(paper["title"], source, pdf, "https://shodh.ai/research/" + paper["pdf"], archive)
+        paper.update(
+            tex=source.relative_to(LIBRARY).as_posix(),
+            latexKind="derived",
+            latexBundle=archive.relative_to(LIBRARY).as_posix(),
+        )
     CATALOG.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n")
 
-    transcribe(
-        "Rotation dependence in an antibody structure tokenizer and sequence-anchored canonicalization",
-        ROOT / "public/blog/antibody-tokenizer-rotation-invariance/antibody-tokenizer-pose-dependence.pdf",
-        Path(__file__).with_name("antibody.txt"),
-        LIBRARY / "papers/antibody-pose-canonicalization/manuscript-derived.tex",
-    )
+    title = "Rotation dependence in an antibody structure tokenizer and sequence-anchored canonicalization"
+    pdf_path = "blog/antibody-tokenizer-rotation-invariance/antibody-tokenizer-pose-dependence.pdf"
+    pdf = ROOT / "public" / pdf_path
+    source = LIBRARY / "papers/antibody-pose-canonicalization/manuscript-derived.tex"
+    transcribe(title, pdf, Path(__file__).with_name("antibody.txt"), source)
+    package(title, source, pdf, "https://shodh.ai/" + pdf_path, source.with_name("antibody-pose-canonicalization-latex.zip"))
 
 
 if __name__ == "__main__":
