@@ -1,4 +1,3 @@
-import PlainEnglishSummary from "../../plain-english-summary";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -34,7 +33,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
       url: canonical,
       type: "article",
       authors: [blogAuthor],
-      images: [{ url: post.cover.src, alt: post.cover.alt, width: post.cover.width, height: post.cover.height, type: "image/png" }],
+      images: [{ url: post.cover.src, alt: post.cover.alt }],
     },
     twitter: {
       card: "summary_large_image",
@@ -64,7 +63,6 @@ export default function BlogArticle({ params }: PageProps) {
           <time dateTime={post.date}>{postDate.format(new Date(post.date))}</time>
         </p>
       </header>
-      <PlainEnglishSummary {...post.plainEnglish} />
       <div className={styles.articleLayout}>
         <nav className={styles.contents} aria-label="On this page">
           <p>On this page</p>

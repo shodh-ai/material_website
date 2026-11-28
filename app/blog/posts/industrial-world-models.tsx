@@ -26,6 +26,8 @@ export const industrialWorldModelsSections = [
 export default function IndustrialWorldModels() {
   return (
     <>
+      <p>AI can help scientists design molecules for new medicines, but a promising molecule only reaches patients if it can be made reliably at scale. Even as discovery gets faster, figuring out how to manufacture a new drug still relies heavily on physical experiments. We’re building computer models that learn from simulations and experiments to help teams design and test manufacturing processes, starting with medicines made using living cells.</p>
+
       <h2 id="technological-inflection">01. The technological inflection</h2>
 
       <p>AlphaFold and computational models from Google DeepMind, Isomorphic Labs, Chai and Boltz have demonstrated increasingly powerful methods for structure prediction, molecular interactions and therapeutic design.<sup><a href="#note-1">[1–3]</a></sup></p>

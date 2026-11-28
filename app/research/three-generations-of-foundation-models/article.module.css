@@ -456,8 +456,3 @@
   .nextArticle a { width: 100%; justify-content: center; white-space: normal; text-align: center; }
   .footer { align-items: flex-start; flex-direction: column; gap: 22px; }
 }
-
-.plainEnglishWrap {
-  width: min(1160px, calc(100% - 40px));
-  margin: 2rem auto;
-}

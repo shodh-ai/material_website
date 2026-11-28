@@ -1,4 +1,3 @@
-import PlainEnglishSummary from "../../blog/plain-english-summary";
 import Image from "next/image";
 import Link from "next/link";
 import localFont from "next/font/local";
@@ -89,14 +88,6 @@ export default function ThreeGenerationsArticle() {
             <div className={styles.meta}><span>Shodh AI</span><span>17 August 2026</span><span>9 min read</span></div>
           </div>
         </header>
-
-        <div className={styles.plainEnglishWrap}>
-          <PlainEnglishSummary
-            whyItMatters="Designing medicines, materials, and factories requires models that respect physical laws."
-            whatSurprisedUs="Progress in generating digital content has not removed the experimental work needed to connect molecules, equipment, and manufacturing outcomes."
-            whatWeBuilt="We are developing a physical-model stack that connects these scales so teams can work backwards from a desired product to feasible process conditions."
-          />
-        </div>
 
         <section className={`${styles.opening} ${styles.newOpening}`}>
           <div className={styles.openingLead}>

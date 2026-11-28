@@ -14,6 +14,8 @@ export const wrongTestSections = [
 export default function WrongTest() {
   return (
     <>
+      <p>A passing score only helps if it tells us whether a design will work. All 1,000 reactor designs from our model passed a test that checked whether the moving parts would hit the vessel. Every design was missing the shaft and mixing blades. We added a check that those parts exist and took the same approach in four other investigations, testing directly for what the original scores had missed.</p>
+
       <p>In a separate project, giving a tokenizer's decoder another frame's tokens changed its reconstruction error by less than 0.01%. A temperature input was doing the work we expected the tokens to do.</p>
 
       <p>Machine-learning researchers call this <em>shortcut learning</em><sup><a href="#note-6">[6]</a></sup> or <em>specification gaming</em><sup><a href="#note-7">[7]</a></sup>: a model finds a cheaper route to a good score than the one its designers intended. It is well documented in image classification and reinforcement learning. In scientific AI it takes physical forms: a missing component, an unused input, a vanished vector field, the same simulation hidden behind unique file hashes.</p>

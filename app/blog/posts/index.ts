@@ -24,11 +24,6 @@ type BlogPost = {
   title: string;
   description: string;
   subtitle?: string;
-  plainEnglish: {
-    whyItMatters: string;
-    whatSurprisedUs: string;
-    whatWeBuilt: string;
-  };
   topic: string;
   date: string;
   cover: {
@@ -45,11 +40,6 @@ type BlogPost = {
 export const blogPosts: readonly BlogPost[] = [
   {
     slug: worldModelsClockSlug,
-    plainEnglish: {
-      whyItMatters: "A useful factory simulation must track how different physical processes affect one another over time.",
-      whatSurprisedUs: "In one channel test, liquid speed was within 0.24% of the reference while polymer stress was off by 10.33%.",
-      whatWeBuilt: "We built coupled flow tests and checks across representations, grid sizes, and time steps to expose errors that a speed score can hide."
-    },
     title: "Industrial World Models Need More Than One Clock",
     description:
       "A channel simulation had 0.24% velocity error and 10.33% polymer shear-stress error. We examine how errors carry across physics, representations, spatial resolutions, and timescales.",
@@ -69,11 +59,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: industrialWorldModelsSlug,
-    plainEnglish: {
-      whyItMatters: "Designing a promising medicine only helps if it can be manufactured reliably at scale.",
-      whatSurprisedUs: "Faster molecular discovery still leaves teams relying on extensive physical experiments to work out manufacturing processes.",
-      whatWeBuilt: "We are building models that learn from simulations and experiments to help design manufacturing processes, starting with biopharma."
-    },
     title: "From Molecular Discovery to Computational Manufacturing",
     description:
       "Pre-trained physical intelligence for the process industries — starting in biopharma.",
@@ -91,11 +76,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: crystallizationSlug,
-    plainEnglish: {
-      whyItMatters: "Crystal-growth simulations produce large amounts of data that are expensive to store.",
-      whatSurprisedUs: "Compressing each measurement separately left all 128 tested runs failing our physics checks at the tested size limit, even when numerical errors looked small.",
-      whatWeBuilt: "We saved eight streams of key measurements and rebuilt the rest with the simulator’s equations, making all 128 runs pass physics checks at that size limit and using 25% less space at matched accuracy with the same compressor."
-    },
     title: "Compress the State, Derive the Rest",
     description:
       "Storing eight independent coordinate streams used 25% fewer bytes at matched accuracy. With SZ3, 0.75 MiB matched ZFP’s 2 MiB accuracy and passed all 128 physics audits.",
@@ -112,11 +92,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: antibodySlug,
-    plainEnglish: {
-      whyItMatters: "An AI model should recognize the same antibody however its 3D structure is turned.",
-      whatSurprisedUs: "Turning the structure changed the saved description in all 9,760 rotation tests.",
-      whatWeBuilt: "We aligned structures before passing them to the existing model, making the saved descriptions match exactly in every rotation test and improving similar-loop retrieval without retraining."
-    },
     title: "Making an Antibody Structure Tokenizer Rotation-Invariant Without Retraining",
     description:
       "A preprocessing fix made stored tokens bit-identical across 9,760 tested rotations and raised CDR-H3 loop retrieval from 0.165 to 0.531 mAP.",
@@ -134,11 +109,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: tf32Slug,
-    plainEnglish: {
-      whyItMatters: "Errors in fluid simulations can change what an engineering AI learns from them.",
-      whatSurprisedUs: "A default GPU shortcut saved 7% of runtime but made the simulated fluid flow about three times as fast as in a more precise run.",
-      whatWeBuilt: "We traced the problem to rounding and wrote GPU code that ran the simulation 9.1× faster than the original at comparable accuracy."
-    },
     title: "TF32 Saved 7% Runtime and Tripled Our Flow Velocity",
     description:
       "We traced a persistent momentum bias to TF32 rounding in a lattice Boltzmann solver, checked it against FP64, and recovered GPU throughput with a fused Pallas kernel.",
@@ -156,11 +126,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: tritonSlug,
-    plainEnglish: {
-      whyItMatters: "Faster reactor simulations help us generate more training data for scientific AI.",
-      whatSurprisedUs: "Default compiler settings changed about 22% of the transport calculation’s output values by tiny amounts.",
-      whatWeBuilt: "We wrote custom GPU kernels that made the solver 12× faster on one H100 and reproduced every saved output byte for all 256 samples in each of three eight-GPU runs in exact-match mode."
-    },
     title: "Bit-Exact Triton Kernels Make Our Reactor Solver 12× Faster on H100",
     description:
       "The Triton solver ran 12× faster on one H100, and its transport stencil ran 36.1× faster in isolation. Three eight-GPU replays preserved every output digest in bit-exact mode, with variable end-to-end throughput.",
@@ -180,11 +145,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: wrongTestSlug,
-    plainEnglish: {
-      whyItMatters: "A passing score only helps if it tells us whether a design will work.",
-      whatSurprisedUs: "All 1,000 generated reactor designs passed a collision test even though every one lacked a shaft and mixing blades.",
-      whatWeBuilt: "We added a check that the parts exist and used direct checks in four other investigations to catch failures that the original scores missed."
-    },
     title: "When Scientific AI Passes the Wrong Test",
     description:
       "Five cases where a passing score concealed a physical or numerical failure, and the controls that exposed each one.",
@@ -204,11 +164,6 @@ export const blogPosts: readonly BlogPost[] = [
   },
   {
     slug: crystalSlug,
-    plainEnglish: {
-      whyItMatters: "An AI model should make the same prediction for different valid descriptions of the same crystal.",
-      whatSurprisedUs: "Changing only that description raised one model’s error in predicting crystal formation energy by 66–72%.",
-      whatWeBuilt: "We standardized the descriptions before encoding them, making the saved descriptions of each atom’s surroundings match exactly in 96–100% of the equivalent cases tested."
-    },
     title: "One Crystal, One Token? Testing Equivalent Unit Cells",
     description:
       "Standardizing unit-cell descriptions made stored environment channels bit-identical in 96–100% of tested equivalent cases and preserved sub-milliångström position accuracy.",

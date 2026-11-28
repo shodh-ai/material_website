@@ -15,6 +15,8 @@ export const crystalSections = [
 export default function CrystalToken() {
   return (
     <>
+      <p>Scientists can describe the same crystal in several valid ways, and an AI model should give the same prediction for each one. In one test, changing only the description raised the model’s error in predicting the energy change when a crystal forms by 66–72%. We standardized how crystals are described before passing them to the model, and the saved numbers describing each atom’s surroundings matched exactly in 96–100% of the equivalent cases we tested.</p>
+
       <p>We built Shodh's crystal token to improve consistency across equivalent descriptions and keep geometry precise. Each atom becomes a compact 192-number token. After standardization, the <strong>stored environment channels were bit-identical in 96–100% of tested equivalent cases</strong> across 512 crystals in 26 descriptions each. In a separate round-trip test on 1,000 MP20 crystals, atomic positions came back with a 95th-percentile error of <strong>0.00016 Å</strong>.</p>
 
       <ul>

@@ -519,27 +519,3 @@
     min-width: 29rem;
   }
 }
-
-.plainEnglish {
-  max-width: 58rem;
-  margin-bottom: 2.5rem;
-  padding: clamp(1.1rem, 3vw, 1.75rem);
-  border: 1px solid var(--line, #00004226);
-  border-inline-start: 3px solid var(--accent, #486f9c);
-  border-radius: 6px;
-  color: var(--ink, #000042);
-  background: #edf3fa;
-  font-size: 1rem;
-  line-height: 1.65;
-  overflow-wrap: anywhere;
-}
-
-.plainEnglish h2 {
-  margin-bottom: .8rem;
-  font-size: 1.125rem;
-  line-height: 1.3;
-}
-
-.plainEnglish p + p {
-  margin-top: .7rem;
-}
