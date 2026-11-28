@@ -27,6 +27,8 @@ export default function TritonReactor() {
     <>
       <p>We generate 3D simulations of how chemicals move and react inside a reactor to train and test scientific AI. When we tried speeding up the transport calculation with default <code>torch.compile</code> settings, about 22% of its output values changed by tiny amounts. We wrote custom Triton kernels that combined GPU operations, speeding up that calculation by 36.1× and the solver by 12× on one H100. On eight GPUs, the exact-match configuration reproduced the saved trajectories, flow across interfaces, and metadata byte for byte for all 256 samples in each of three runs.</p>
 
+      <p>Research preprint <a href="/research/what-bitwise-reproduction-misses-in-a-gpu-reactor-data-pipeline">What Bitwise Reproduction Misses in a GPU Reactor Data Pipeline</a>.</p>
+
       <ul>
         <li><strong>36.1×</strong> Transport stencil · 47.387 to 1.314 ms</li>
         <li><strong>7.0×</strong> Reaction update · 10.71 to 1.53 ms</li>
