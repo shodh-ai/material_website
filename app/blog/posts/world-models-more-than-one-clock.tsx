@@ -17,8 +17,6 @@ export const worldModelsClockSections = [
 export default function WorldModelsClock() {
   return (
     <>
-      <p>To design industrial equipment with a simulation, we need to know how well it captures the forces that shape what we see. In one channel test, the error in the liquid’s speed was 0.24%, while the error in the stress from dissolved polymers was 10.33%. That stress matters because it changes how the liquid flows. We test how the pieces of a model affect one another, including when some changes happen much faster than others.</p>
-
       <p>In a 128³ channel calculation, the relative L<sub>2</sub> errors against an analytical reference were 0.24% for velocity and 10.33% for polymer shear stress. Both numbers describe the same flow over the same 0.32-second interval. Judging the calculation only by its velocity would miss an error in the quantity that feeds back into momentum.</p>
 
       <p>At Shodh, this is why we examine four connected dimensions: physics, representation, spatial resolution and time. Our work spans bioreactors, molecular and material interfaces, polymer-fluid models and learned dynamics. The common requirement is that accuracy inside each component must survive the exchanges between components.</p>

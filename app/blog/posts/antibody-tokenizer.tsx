@@ -43,8 +43,6 @@ const rotationStability: FigureSpec = {
 export default function AntibodyTokenizer() {
   return (
     <>
-      <p>An AI model should recognize the same antibody however its 3D structure is turned. In all 9,760 rotation tests, turning the structure changed how our model recorded its shape. We lined up each structure before passing it to the existing model, so no retraining was needed. The saved descriptions then matched exactly in every rotation test, and the model became much better at finding antibodies with similarly shaped loops.</p>
-
       <p><a href={`${antibodyAssets}/antibody-tokenizer-pose-dependence.pdf`}>Read the research paper (PDF)</a></p>
 
       <ul>

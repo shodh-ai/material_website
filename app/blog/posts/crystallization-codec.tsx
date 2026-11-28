@@ -26,8 +26,6 @@ const auditRows = [
 export default function CrystallizationCodec() {
   return (
     <>
-      <p>Simulations of how crystals grow can produce so much data that storing whole batches of runs becomes expensive. When we compressed each measurement separately, none of the 128 runs passed our physics checks at the tested size limit, even when the numerical errors looked small. We saved eight streams of key measurements and used the simulator’s equations to reconstruct the rest. At the same size limit all 128 runs passed, and at the same accuracy the new format used 25% less space with the same compression software.</p>
-
       <p>A reduced-order crystallization simulator writes 46 MiB of FP32 fields per trajectory. Many of its 23 fields depend on a smaller physical state and the process conditions, including phase fraction, crystal mass, dissolved solute, supersaturation, and the heat totals. We store only that state and rebuild the dependent fields at decode time. To measure the compressor and representation effects separately, we ran ZFP and SZ3 on both the original 23 fields and the eight stored coordinates.</p>
 
       <ul>
