@@ -1,0 +1,436 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 3015fdb73f33ddac1c5b999d498504f8b5da17f247cad15ee64a4a250e386e1b
+% Extracted text SHA-256: 50197f51d093134dc7fefcb99f4e452b6d5fafda647e3648dee30c09fea485bf
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Contraction-precision sensitivity in a coupled D3Q19 rheology–particulate workflow}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Contraction-precision sensitivity in a coupled D3Q19
+rheology–particulate workflow
+
+\section*{Abstract}
+
+Floating-point storage type alone does not determine the arithmetic of compiled lattice
+Boltzmann contractions. We examine contraction-precision sensitivity in one coupled D3Q19
+rheology–particulate workflow using paired saved reports for two particulate initializations at
+identical physical parameters, a 1283 grid, and 1600 lattice steps. Changing only the reference
+stepper’s matrix-multiplication precision context from default to highest substantially changed
+its saved trajectory summaries: default-to-highest final specific kinetic-energy ratios were 9.8175
+and 9.7829, and final mean-shear ratios were 3.1239 and 3.1162. A structure-of-arrays imple-
+mentation and a Pallas implementation had equal recorded scalar and channel summaries; the
+structure-of-arrays implementation agreed much more closely with the highest-precision-context
+reference than with the default reference. Agreement was not exact: the largest remaining chan-
+nel normalized root-mean-square error was 0.006783. Stage diagnostics and captured compiler
+output support contraction arithmetic and cancellation in near-equilibrium population differ-
+ences as an explanation, without establishing an effective numerical-force field. Both distinct
+trajectory families passed the saved harness audits. This case therefore distinguishes internal
+audit consistency from trajectory fidelity and identifies contraction precision as a consequential
+numerical control in this particular workflow, rather than establishing a continuum solution or
+a general result for lattice Boltzmann rheology.
+
+\section*{1 Introduction and contributions}
+
+A numerical reference can be reproducible under its own implementation contract yet remain sen-
+sitive to arithmetic choices that are not apparent from array dtype. This distinction matters in
+lattice Boltzmann workflows where small differences between populations and their equilibrium
+values feed a shear estimate, a viscosity update, and subsequent collision steps. Internal identities
+and admissibility tests can remain satisfied even when the resulting velocity and shear trajectories
+differ substantially.
+This paper studies one such case: a forced, isothermal D3Q19 Bhatnagar–Gross–Krook (BGK)
+workflow coupled to shear-dependent viscosity and particulate transport in a branched-pipe wall
+geometry. The evidence comprises four saved paired comparison reports, stage diagnostics, a single-
+population perturbation control, source snapshots, and captured compiler records. The two samples
+share all physical parameters and differ only in their initial particulate seed. They are not two
+physical systems or a parameter sweep.
+The focused contribution is threefold. First, a comparison retaining the reference stepper while
+changing its matrix-multiplication precision context links contraction precision to a large change
+in final bulk diagnostics. Second, alternative implementations agree more closely at the saved-
+summary level with the precision-controlled reference, while retaining measurable channel errors.
+Third, compiler, stage, and control records help distinguish a repeated arithmetic effect from the
+1
+
+response to one isolated initial perturbation. Together these results show why passing a consistency
+audit does not by itself establish fidelity to a particular numerical trajectory. They do not establish
+a new constitutive model, an independently validated continuum solution, or the prevalence of this
+behavior across other lattice Boltzmann implementations.
+
+\section*{2 Related work}
+
+Precision sensitivity in lattice Boltzmann methods is not a new general observation. Lehmann
+et al. compare 64-bit, 32-bit, and customized 16-bit formats across several systems, including
+arrangements that separate reduced-precision storage from FP32 arithmetic [ 1]. Their favorable
+FP32 findings are conditional on those implementations and test systems. They neither validate
+the present coupled workflow nor provide a matched numerical benchmark for it.
+The relevant distinction here is between stored dtype and contraction arithmetic. JAX docu-
+ments controls for the default precision of matrix multiplication and convolution with 32-bit inputs,
+including a context manager and per-operation settings [ 2]. Thus, float32 inputs do not uniquely
+specify the arithmetic used by a compiled contraction. Contemporary API documentation explains
+this distinction but does not establish the historical JAX version, backend configuration, or ex-
+ecutable used for any saved report. The present contribution is the controlled comparison and
+associated diagnostic evidence within one recorded workflow.
+
+\section*{3 Scientific methods and validation protocols}
+
+Study design and evidence scope
+This is a retrospective numerical case study; no additional solver simulations were performed for
+this manuscript. Four historical reports compare jax-soa, pallas, and jax-highest against
+the default jax reference, and jax-soa against jax-highest. Comparisons remain paired by
+particulate initialization, denoted A and B. Each trajectory uses a 1283 grid, 1600 lattice steps,
+and 16 saved frames at steps 100, 200, . . . ,1600. These constitute two seed-defined initializations,
+not independent physical replicates; repeated appearances in different reports do not increase the
+trajectory count.
+The new independent verification consists of 150 recorded-identity, saved-arithmetic, cross-report,
+control-log, and static-source/compiler checks, all of which passed. These checks did not execute
+the supplied solver or recompute channel errors from original target arrays. Those arrays and the
+complete historical environment are absent from the captured verification. Exact saved outputs
+and original records are retained in Supplementary record S1.
+2
+
+Lattice dynamics and rheological coupling
+For populations fi, velocities ci, and weights wi, the static source describes the isothermal D3Q19
+relations
+\ensuremath{\rho} =
+18\ensuremath{\sum}
+i=0
+fi, u =
+\ensuremath{\sum}
+i fici
+max(\ensuremath{\rho}, 10\ensuremath{-}8) , (1)
+f eq
+i = \ensuremath{\rho}wi
+[
+1 + ci · u
+c2s
++ (ci · u)2
+2c4s
+\ensuremath{-} |u|2
+2c2s
+]
+, c2
+s = 1
+3 . (2)
+The weights are 1/3 for rest, 1/18 for axial directions, and 1/36 for diagonal directions. The source
+stores C and W as float32. The non-equilibrium moment estimate is
+\ensuremath{\Pi}neq
+\ensuremath{\alpha}\ensuremath{\beta} =
+\ensuremath{\sum}
+i
+(fi \ensuremath{-} f eq
+i )ci\ensuremath{\alpha}ci\ensuremath{\beta}, (3)
+D\ensuremath{\alpha}\ensuremath{\beta} = \ensuremath{-}
+\ensuremath{\Pi}neq
+\ensuremath{\alpha}\ensuremath{\beta}
+2\ensuremath{\rho}c2s\ensuremath{\tau}prev
+, ˙\ensuremath{\gamma} =
+\ensuremath{\surd}
+2
+\ensuremath{\sum}
+\ensuremath{\alpha},\ensuremath{\beta}
+D2
+\ensuremath{\alpha}\ensuremath{\beta} + 10\ensuremath{-}20. (4)
+Here \ensuremath{\tau}prev is the previous-step relaxation time. With particulate solid volume fraction \ensuremath{\varphi}, the
+Carreau–Yasuda viscosity and concentration correction are
+\ensuremath{\mu}CY = \ensuremath{\mu}\ensuremath{\infty} + (\ensuremath{\mu}0 \ensuremath{-} \ensuremath{\mu}\ensuremath{\infty})[1 + (\ensuremath{\lambda} ˙\ensuremath{\gamma})a](n\ensuremath{-}1)/a, (5)
+\ensuremath{\mu}\ensuremath{\ast} = \ensuremath{\mu}CY
+[
+max
+(
+1 \ensuremath{-} \ensuremath{\varphi}
+\ensuremath{\varphi}m
+, 0.05
+)] \ensuremath{-}[\ensuremath{\eta}]\ensuremath{\varphi}m
+, (6)
+\ensuremath{\mu} = min\{\ensuremath{\mu}\ensuremath{\ast}, (\ensuremath{\tau}max \ensuremath{-} 0.5)\ensuremath{\rho}c2
+s\}, (7)
+\ensuremath{\tau} = clip
+(
+0.5 + \ensuremath{\mu}
+max(\ensuremath{\rho}, 10\ensuremath{-}8)c2s
+, 0.50011, \ensuremath{\tau} max
+)
+. (8)
+Here the lattice parameters are \ensuremath{\mu}0 = 0.16, \ensuremath{\mu}\ensuremath{\infty} = 0.0035, \ensuremath{\lambda} = 8.2, n = 0.2128, a = 0.64, \ensuremath{\varphi}m = 0.63,
+[\ensuremath{\eta}] = 2 .0, and \ensuremath{\tau}max = 3.0. The collision update in fluid cells is
+f post
+i = fi \ensuremath{-} fi \ensuremath{-} f eq
+i
+\ensuremath{\tau} + wi
+cix
+c2s
+Fx, F x = 6.0 \ensuremath{\times} 10\ensuremath{-}7. (9)
+Streaming uses directional rolling with the supplied wall handling. Wall velocities are zeroed, wall
+post-collision populations are reset to unit-density zero-velocity equilibrium, and opposite-direction
+populations are selected at wall destinations. The geometry and periodic- x rolling are historical
+implementation conventions, not prescribed inlet/outlet data or a canonical analytical pipe-flow
+benchmark.
+Both samples start from the same source-defined fluid state: unit density, a predominantly
+parabolic streamwise velocity profile with a sinusoidal axial modulation, equilibrium populations,
+and initial fluid relaxation time 0.82. The initial particulate field is a smooth deterministic trigono-
+metric modulation, rescaled to mean fluid solid fraction 0.08 and clipped to its prescribed bounds.
+Its seed alone differs between A and B.
+Particulate transport and declared units
+The historical particulate update uses centered face fluxes. Overbars denote separate arithmetic
+averages of concentration and particle velocity across the face; the subscript + denotes the neigh-
+3
+
+boring cell in the positive \ensuremath{\alpha} direction. For an open fluid–fluid face,
+J\ensuremath{\alpha},+ = \ensuremath{\varphi} vp\ensuremath{\alpha} \ensuremath{-} Dp(\ensuremath{\varphi}+ \ensuremath{-} \ensuremath{\varphi}) \ensuremath{-} Km\ensuremath{\varphi}( ˙\ensuremath{\gamma}+ \ensuremath{-} ˙\ensuremath{\gamma}), (10)
+with Dp = 2 .0 \ensuremath{\times} 10\ensuremath{-}3 and Km = 2 .0 \ensuremath{\times} 10\ensuremath{-}4 in lattice units; closed faces have zero flux. Particle
+velocity includes hindered settling,
+vp = u \ensuremath{-} vs max(1 \ensuremath{-} \ensuremath{\varphi}, 0)4.65ez, v s = 1.25 \ensuremath{\times} 10\ensuremath{-}4. (11)
+The update is
+\ensuremath{\varphi}n+1 = clip
+(
+\ensuremath{\varphi}n \ensuremath{-}
+\ensuremath{\sum}
+\ensuremath{\alpha}
+[J\ensuremath{\alpha},+ \ensuremath{-} J\ensuremath{\alpha},\ensuremath{-}], 0, 0.95\ensuremath{\varphi}m
+)
+, (12)
+followed by zeroing wall values. Face differences telescope before clipping; clipping prevents a claim
+of exact conservation. The configured particle diameter is 5.0 \ensuremath{\times} 10\ensuremath{-}5 m; settling in these reports is
+explicitly prescribed in lattice units.
+The historical declared conversion is \ensuremath{\Delta}x = 10 \ensuremath{-}3 m and \ensuremath{\Delta}t = 10 \ensuremath{-}3 s, with density scale 1000
+kg/m3, velocity scale 1 m/s, and dynamic-viscosity scale 1 Pa s. Shear and strain are divided by
+\ensuremath{\Delta}t; pressure is the isothermal gauge quantity c2
+s(\ensuremath{\rho} \ensuremath{-} \ensuremath{\rho}ref ) times the pressure scale, with a framewise
+fluid-density reference. Extra stress is 2\ensuremath{\mu}D. This mapping is declared rather than experimentally
+calibrated rheology. X64 is enabled for derived-field conversion, which uses float64 elementwise
+arithmetic before packing float32 targets; it does not imply float64 lattice dynamics. State target
+fields are zero in walls.
+Precision intervention and comparison metrics
+The default reference delegates to the batched JAX stepper. The jax-highest variant wraps that
+same stepper in jax.default\_matmul\_precision("highest"); it changes contraction precision,
+not the constitutive equations, and is not an FP64 truth solution. The jax-soa implementation
+expresses direction sums through channel arrays and explicit additions/subtractions. Pallas pro-
+vides another candidate implementation, whose role here is evaluated through its saved comparisons
+rather than assumed independence of every code path.
+For channel q, let cq and rq denote candidate and reference target values, respectively. The
+original harness computes
+nRMSEq =
+\ensuremath{\surd}
+\ensuremath{\langle}(cq \ensuremath{-} rq)2\ensuremath{\rangle}
+max(
+\ensuremath{\surd}
+\ensuremath{\langle}r2q \ensuremath{\rangle}, 10\ensuremath{-}300)
+. (13)
+The averages pool all 16 frames and all lattice cells, including wall zeros, separately for each paired
+sample. Arithmetic is float64 on the saved float32 target arrays. By contrast, final bulk values use
+only fluid cells at step 1600. In particular,
+Ef =
+\ensuremath{\langle} |u|2
+2
+\ensuremath{\rangle}
+fluid,1600
+(14)
+is a specific kinetic-energy diagnostic, not integrated or density-weighted energy. Grid cells and
+repeated outputs are not independent replicates, and no confidence intervals are inferred from them.
+The saved harness audits test internal properties rather than external accuracy. Particulate
+mass drift is the maximum absolute fractional change in the fluid-cell solid-fraction sum relative
+4
+
+to the first saved frame (step 100), with that baseline sum floored at 10\ensuremath{-}12. It does not bound
+changes during the unsaved interval from step zero to step 100. The historical snapshot includes
+18 named checks, including mass drift at most 5\%, stress-identity relative error at most 2 \ensuremath{\times} 10\ensuremath{-}5
+on active cells, absolute framewise gauge-pressure mean at most 10\ensuremath{-}3 Pa, Mach number below 0.3,
+and relaxation-time bounds. Report prose elsewhere mentions 32 checks; this coverage gap is not
+resolved by reconstructing a 32-check suite or by substituting current audit settings.
+
+\section*{4 Experimental results}
+
+Reference-precision sensitivity
+Changing the reference precision context produces a large separation in final velocity-derived and
+shear diagnostics. Table 1 reports values from the paired default-versus-highest comparison; dis-
+played decimals are rounded from the saved values, not estimates with uncertainty.
+Table 1: Final fluid-cell diagnostics under the declared mapping. Ef has units m 2/s2 and mean
+shear has units s \ensuremath{-}1. Ratios are default divided by highest.
+Quantity Precision context A B
+Ef Default 3.6524636471 \ensuremath{\times} 10\ensuremath{-}6 3.6395838379 \ensuremath{\times} 10\ensuremath{-}6
+Highest 3.7203656689 \ensuremath{\times} 10\ensuremath{-}7 3.7203668057 \ensuremath{\times} 10\ensuremath{-}7
+Ratio 9.8174856242 9.7828628947
+Mean shear Default 0.2751940787 0.2745169997
+Highest 0.0880941376 0.0880941749
+Ratio 3.1238637003 3.1161765253
+These are ratios of final bulk diagnostics, not tenfold or threefold nRMSE values. For example,
+the pooled shear-channel nRMSE of highest against default is 0.19121103888426583 for A and
+0.1930672210683576 for B. The final mean streamwise velocities are approximately 0.002290 and
+0.002288 m/s under default precision, compared with 0.000733525 m/s under highest precision.
+The imposed force and physical parameters are unchanged.
+Agreement among alternative implementations
+The SoA and Pallas reports have equal saved bulk values and equal channel-error summaries for
+each sample, as well as matching recorded digest prefixes. This establishes recorded agreement,
+not a new independent full-byte comparison of their absent arrays. Both differ from the default
+reference. Table 2 shows selected channels and the worst channel, preserving sample pairing and
+reference direction.
+Agreement improves strongly when highest replaces default as reference, but does not become
+bit-exact or satisfy a uniform 10\ensuremath{-}6 channel tolerance. The exact worst-channel values for SoA
+versus highest are 0.006776605623877569 and 0.006782976864327476. Normal stress discrepancies
+remain larger than streamwise-velocity and shear discrepancies; the available summaries do not
+establish that these residual errors are harmless.
+At the final frame, SoA’s relative differences from highest in Ef are 1.2987138989 \ensuremath{\times} 10\ensuremath{-}5 and
+1.2452370637 \ensuremath{\times} 10\ensuremath{-}5 for A and B. Corresponding mean-shear differences are 7.6117693177 \ensuremath{\times} 10\ensuremath{-}6
+5
+
+Table 2: Pooled channel nRMSE. S denotes SoA and P denotes Pallas; their saved errors against
+default are equal. The worst channel in every listed comparison is stresszz .
+Candidate/reference Sample ux Pressure Shear Worst
+S or P/default A 0.18671153 0.52084574 0.19121006 0.84654456
+B 0.18830605 0.52775796 0.19306626 0.84592513
+Highest/default A 0.18671258 0.52089450 0.19121104 0.84641184
+B 0.18830708 0.52780602 0.19306722 0.84579429
+S/highest A 4.48666414 \ensuremath{\times} 10\ensuremath{-}6 0.00073067 2.74615570 \ensuremath{\times} 10\ensuremath{-}5 0.00677661
+B 4.47299007 \ensuremath{\times} 10\ensuremath{-}6 0.00073071 2.74775086 \ensuremath{\times} 10\ensuremath{-}5 0.00678298
+and 6.6814391312\ensuremath{\times}10\ensuremath{-}6. Final fluid sums of solid fraction are equal in the paired summaries. Small
+bulk differences do not contradict the larger pooled normal-stress errors: they measure different
+quantities over different denominators and domains.
+Stage and compiler evidence
+Stage probes compare reference and SoA operations at matched input within each probe. Each
+precision mode first develops its own state for 100 steps, so the default and highest probes do
+not share an identical developed state across modes. Their within-probe discrepancies nevertheless
+provide useful localization (Table 3).
+Table 3: Selected within-probe reference–SoA nRMSE values. Each column uses its own precision-
+developed state; these are not cross-mode identical-state errors.
+Stage Default probe Highest probe
+Density 1.16505955 \ensuremath{\times} 10\ensuremath{-}7 1.16528268 \ensuremath{\times} 10\ensuremath{-}7
+ux 1.09861848 \ensuremath{\times} 10\ensuremath{-}3 9.21474029 \ensuremath{\times} 10\ensuremath{-}8
+uy 6.97468972 \ensuremath{\times} 10\ensuremath{-}2 9.37988987 \ensuremath{\times} 10\ensuremath{-}8
+uz 1.01001352 \ensuremath{\times} 10\ensuremath{-}1 9.37362344 \ensuremath{\times} 10\ensuremath{-}8
+Equilibrium 8.61107044 \ensuremath{\times} 10\ensuremath{-}6 1.65032694 \ensuremath{\times} 10\ensuremath{-}7
+Non-equilibrium populations 3.55637701 \ensuremath{\times} 10\ensuremath{-}2 6.84150191 \ensuremath{\times} 10\ensuremath{-}4
+Shear 5.77717181 \ensuremath{\times} 10\ensuremath{-}4 3.04549431 \ensuremath{\times} 10\ensuremath{-}4
+Streamed populations 8.01760810 \ensuremath{\times} 10\ensuremath{-}6 2.73133176 \ensuremath{\times} 10\ensuremath{-}8
+Density discrepancies remain near 10\ensuremath{-}7, whereas default transverse-velocity discrepancies are
+much larger relative to their small reference RMS values. The largest absolute transverse-velocity
+differences in the default probe are about 7.9 \ensuremath{\times} 10\ensuremath{-}5 lattice units. Under highest precision the
+velocity discrepancies approach 10\ensuremath{-}7 relative. Non-equilibrium populations remain more sensitive
+than equilibrium populations, as expected when subtracting nearly equal quantities. Not every
+downstream stage improves proportionally: viscosity and relaxation-time nRMSE remain of similar
+magnitude between probes.
+Captured optimized HLO contains contraction-related GEMM fusion, and the associated PTX
+contains 152 TF32 conversion sites and 64 TF32 tensor-contraction sites. These static instruction
+sites establish compiled TF32 use in that captured batch-four module; they are not dynamic exe-
+cution counts or per-sample whole-environment attestations. Together with the precision-context
+6
+
+comparison, the records support a contraction-precision explanation for the observed separation.
+They do not measure an effective stochastic forcing distribution or close a numerical-force budget.
+Perturbation control and audit outcomes
+A historical control perturbed one population at one fluid site by one positive float32 unit in the
+last place, then advanced both states with the same default reference. Population, relaxation-
+time, and particulate discrepancies were reported as zero at the first 100-step checkpoint and every
+subsequent checkpoint through step 1600. This control does not support the proposed explanation
+that an arbitrary isolated one-ULP perturbation necessarily grows beyond a 10\ensuremath{-}6 field tolerance.
+It also does not establish monotone decay before step 100, global stability, absence of chaos, or a
+Lyapunov exponent.
+An earlier short reference–SoA comparison did fail its stated 10\ensuremath{-}6 criterion, with worst reported
+nRMSE 0.015720989447758318. The later highest-reference comparison represents improved agree-
+ment under a changed reference contract, not a retroactive pass of that original comparison.
+All four full-length reports record successful reference and candidate audits, despite the two
+distinct trajectory families. Candidate particulate relative mass drift is 1.1920928955078125 \ensuremath{\times} 10\ensuremath{-}7
+under the first-saved-frame baseline defined above. Other candidate metrics include maximum Mach
+number about 0.053713, relaxation times approximately 0.999–1.085, and stress-identity relative
+errors below 3.6 \ensuremath{\times} 10\ensuremath{-}7. These are saved harness outcomes. They establish internal consistency as
+reported by that harness, not external physical accuracy.
+
+\section*{5 Discussion and limitations}
+
+The strongest evidence is the precision intervention within the reference stepper: changing its
+contraction context reproduces the lower-energy, lower-shear family approached by the alternative
+implementations. This is more discriminating than a comparison between two layouts alone, be-
+cause layout changes can alter both reduction order and compiler lowering. The SoA/Pallas saved
+agreement and the stage diagnostics reinforce the interpretation without making highest an exact
+solution.
+The numerical mechanism is plausible and source-supported. Momentum contractions can sub-
+tract contributions whose net is small; equilibrium populations depend on that momentum; and
+fi \ensuremath{-} f eq
+i subtracts quantities much larger than their difference. A schematic perturbation satisfies
+\ensuremath{\delta}f neq
+i = \ensuremath{\delta}fi \ensuremath{-} \ensuremath{\delta}f eq
+i , (15)
+so a small absolute equilibrium error can be a large fraction of a near-equilibrium residual. Its
+second moment feeds shear, which feeds viscosity and collision relaxation. Repeated arithmetic
+differences in this feedback loop need not resemble a single initial perturbation. This explains why
+the one-site control cannot settle the effect of a changed contraction throughout a trajectory. The
+evidence supports this mechanism but does not isolate every contraction’s contribution or establish
+a measured additional force.
+Audit consistency and trajectory fidelity answer different questions. Bounds, gauge pressure,
+and the stress identity can hold for both flow states because they test admissibility or relations
+among jointly derived quantities. In particular, a stress field derived from the same strain and
+viscosity as the shear diagnostic can satisfy its algebraic identity while differing from another
+7
+
+implementation’s field. Neither audit success nor agreement among alternative implementations
+substitutes for continuum validation.
+Several scientific limits remain. There is no grid refinement, time-step refinement, parameter
+sweep, calibrated rheological experiment, analytical benchmark, or FP64 dynamical reference. The
+two closely related particulate initializations provide paired corroboration at one configuration,
+not a population estimate. Pooled nRMSE includes walls and all saved times, while final bulk
+diagnostics emphasize fluid cells at one time; neither reveals the spatial structure of residual errors.
+The remaining normal-stress error warrants attention rather than dismissal.
+Provenance also bounds the interpretation. The currently captured raw generator explicitly
+disables TF32 and differs from the historical snapshot. That snapshot supports method inter-
+pretation, not per-job source attestation. Earlier reports omit the reference-kernel field emitted
+by the later captured validation source, and the historical environment is not immutably bound
+to every report. Furthermore, the validation source bypasses its published-digest comparison for
+nondefault references or non-1600-step runs. Consequently, a true reference-reproduction flag in
+the highest-reference report is not evidence that it matches the default trajectory; its saved digest
+prefixes differ. The 18-versus-32 audit-count discrepancy likewise remains a source/run coverage
+gap. Supplementary record S1 preserves these distinctions alongside the exact records.
+A prospective investigation could use identical developed states across precision modes, preserve
+target arrays and complete executable provenance, and compare against higher-precision dynamics
+and refinement studies. Those tests were not performed here. Operational suitability was not
+evaluated.
+
+\section*{6 Conclusion}
+
+In this fixed D3Q19 rheology–particulate workflow, contraction precision materially changes saved
+trajectory diagnostics despite unchanged physical parameters and float32 lattice storage. Default-
+to-highest final specific kinetic-energy ratios are approximately 9.8 and mean-shear ratios approx-
+imately 3.12 for both particulate initializations. SoA and Pallas have equal recorded summaries,
+and SoA agrees much more closely with the highest-context reference than with default, although
+its worst pooled channel error remains approximately 0.006783.
+The controlled precision comparison, stage diagnostics, compiler evidence, and isolated perturba-
+tion control support a contraction-sensitive numerical mechanism rather than a general assertion of
+perturbation growth. Successful saved audits coexist with distinct flow states. The resulting lesson
+is specific but important: internal consistency, reference reproduction, and trajectory fidelity must
+be evaluated separately when contraction arithmetic is part of the numerical method.
+
+\section*{7 Data and Code A vailability}
+
+The evidence exists as private captured comparison reports, diagnostic logs, source captures, histor-
+ical source snapshots, compiler records, and a saved-evidence verification recipe and result. Exact
+original records and numerical outputs are preserved in the private Supplementary record S1 (ID:
+S1). The captured sources include the comparison harness, precision wrapper, SoA implementa-
+tion, stage and perturbation scripts, and target-conversion routines. The verification recipe checks
+recorded identities, arithmetic, cross-report consistency, control records, and static source/compiler
+relationships; it is not a solver-reproduction script.
+8
+
+The original target arrays are not included in this captured verification, and the original harness
+states that its comparison arrays were held in memory rather than written as target stores. Com-
+plete historical environment provenance is also unavailable here. Access to the captured materials is
+through the existing private supplementary record; no public archive, reviewer-access entitlement,
+or availability-on-request permission is established. Thus the supplied record supports inspection of
+saved evidence, not independent reconstruction of the original trajectories from a complete archived
+execution environment.
+
+\section*{References}
+
+[1] M. Lehmann, M. J. Krause, G. Amati, M. Sega, J. Harting, and S. Gekle. Accuracy and
+performance of the lattice Boltzmann method with 64-bit, 32-bit, and customized 16-bit number
+formats. Physical Review E 106, 015308 (2022). doi:10.1103/PhysRevE.106.015308.
+[2] The JAX Authors. jax.default\_matmul\_precision. JAX API documentation. https://docs.
+jax.dev/en/latest/\_autosummary/jax.default\_matmul\_precision.html. Accessed 26 Oc-
+tober 2026.
+9
+
+\end{document}

@@ -1,0 +1,779 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 390a9ae9f99e138ab45af5d766ff67a09d77a46b6a6793f08b2796ef513003cf
+% Extracted text SHA-256: 5918876eaedfef0dad17c16834ce2dfe282125323777c1d35c384eaab3ab4acf
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Toward pose-robust, residue-faithful antibody tokenization: Stored-byte diagnostics and a framework-anchored design}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Shodh AI Research Research manuscript draft | September 2026
+TOWARD POSE -ROBUST , RESIDUE -FAITHFUL
+ANTIBODY TOKENIZATION :
+STORED -BYTE DIAGNOSTICS AND A
+FRAMEWORK -ANCHORED DESIGN
+Shodh AI Research
+ABSTRACT
+An antibody representation should distinguish changes in complementarity-
+determining region (CDR) geometry without confusing them with a rigid change
+of pose. Coordinate reconstruction alone does not establish this distinction. We
+examine a frozen coarse-grained antibody tokenizer with 32 carrier and 160
+learned values per residue, using archived reconstruction comparisons, stored-
+byte transformation audits and source-level residue-retention evidence. On the
+same 103,680 historical frames, the reported median bead error is 0.0121 Å with
+an exact decoder sidecar, 0.0510 Å with a token-derived header and 0.0726 Å
+with direct carrier decoding. A separate 256-structure production-path audit has
+median learned-lane rotation cosine 0.1782 despite a small decoded rotation dis-
+crepancy of 0.02155 Å. A matched 1,000-structure counterfactual identifies axis-
+aligned reboxing and recanonicalization as a major amplifier of pose sensitivity,
+but not its sole source. We specify a joint heavy/light-chain framework align-
+ment that preserves internal geometry analytically and define CDR-specific, anti-
+collapse and external-comparison tests for its evaluation. The contribution is a
+scoped empirical diagnosis and a testable antibody representation design; a suc-
+cessful pose-robust repair, downstream benefit and external superiority are not yet
+demonstrated. Corpus accounting distinguishes 7.568 billion accepted bead-row
+opportunities from a fully persisted token bank.
+
+\section*{1 I NTRODUCTION}
+
+Antibody structures combine a comparatively conserved framework with variable loops that con-
+tribute to antigen recognition. A representation that retains the framework but loses the geometry or
+identity of a complementarity-determining region can be numerically accurate in an average sense
+while being unsuitable for an antibody-specific task. Conversely, two coordinate files related only
+by rotation and translation describe the same isolated structure. Their differences should not dom-
+inate a representation intended for pose-independent retrieval or learning. These requirements are
+complementary: nuisance-pose suppression is useful only if meaningful internal variation remains
+accessible.
+Antibody-specific structure prediction has made large computational structural collections practical.
+IgFold and ImmuneBuilder illustrate the availability of predicted structures and the importance of
+separately evaluating difficult CDR regions ( Ruffolo et al. , 2023; Abanades et al. , 2023). Such
+predictions supply structural hypotheses, not experimentally verified conformational ensembles. A
+tokenizer that accurately reconstructs a predicted or simulated input has demonstrated fidelity to that
+input; it has not independently established its biological accuracy, antigen affinity or developability.
+This distinction becomes particularly important when a large number of conformations are generated
+around each seed structure.
+Our setting is the LUCAN/LURTEE Lobe 1-C antibody workstream, which uses one C \ensuremath{\alpha} bead per
+amino-acid residue. It is distinct from the protein–ligand Lobe 1-CG workstream, despite the his-
+torical reuse of the internal symbol L1CG. The frozen antibody codec combines explicit geometric
+1
+
+Shodh AI Research Research manuscript draft | September 2026
+carriers with a learned residue-wise block. The scientific question is whether low reconstruction
+error in this architecture also implies a stable, biologically faithful representation of the antibody.
+The existing records support a more precise answer than either a blanket success or failure claim.
+Exact-sidecar decoding reconstructs native-pose inputs accurately in the historical benchmark. Y et
+the learned block is strongly rotation-sensitive under production preprocessing. Importantly, its
+decoded transformation discrepancy remains small on that same production path. Thus token insta-
+bility and coordinate instability are not interchangeable. Separate residue-retention records further
+show why reconstruction of the retained input is insufficient to certify preservation of a full antibody
+sequence.
+We make three contributions. First, we specify the frozen architecture and distinguish learned-
+token information, quantized carriers and exact decoder side information. Second, we assemble
+route-matched reconstruction comparisons and recompute summaries from retained per-structure
+pose metrics, explicitly separating production behavior from raw-codec counterfactuals. Third, we
+formulate a framework-anchored, full-residue design and a matched evaluation protocol that targets
+CDR recovery, pose robustness and useful local sensitivity together. This is a diagnostic-and-design
+manuscript, not a claim that a repaired tokenizer has already outperformed antibody representation
+methods.
+
+\section*{2 R ELATED WORK}
+
+Antibody structures, identities and local evaluation. SAbDab organizes antibody structures
+with heavy/light-chain pairing and structural annotations ( Dunbar et al. , 2014). ANARCI as-
+signs standardized antigen-receptor numbering, allowing equivalent residue positions to be matched
+across variable-length sequences ( Dunbar and Deane , 2016). These resources motivate correspon-
+dence based on chain identity and numbering rather than a fixed sequence prefix. IgFold and Im-
+muneBuilder predict antibody structures from sequence and evaluate loop-specific accuracy ( Ruf-
+folo et al. , 2023; Abanades et al. , 2023). Our task is different: encoding and recovering supplied
+C\ensuremath{\alpha} conformations. Their prediction scores cannot be compared directly with our reconstruction
+errors, and a C \ensuremath{\alpha} codec does not recover full backbone dihedrals or side-chain interactions without
+an additional, separately validated reconstruction stage.
+Antibody and protein structural tokenization. Igloo encodes antibody-loop sequence and
+backbone-dihedral information and evaluates structural retrieval and incorporation into language
+models ( Fang et al. , 2026). It is therefore a closer representation comparator than a crystal-string
+tokenizer, but its loop-level, richer-input contract differs from a whole-antibody C \ensuremath{\alpha} codec. S 2ALM
+combines sequence and structure information using Foldseek-derived 3Di tokens and evaluates an-
+tibody tasks ( Yin et al., 2025). Foldseek’s structural alphabet encodes local tertiary interactions for
+efficient structure search ( van Kempen et al., 2024). Neither a structural alphabet nor a task embed-
+ding should be assumed to provide an invertible Cartesian decoder. Their evaluation requires shared
+applicable endpoints rather than invented reconstruction capabilities.
+
+Equivariance and canonical frames. EGNN constructs Euclidean-equivariant graph networks
+(Satorras et al. , 2021). A message-passing network with invariant pairwise distances is not auto-
+matically invariant if its node inputs also contain absolute fractional coordinates and oriented cell
+components. Frame Averaging provides a systematic alternative for adapting networks to sym-
+metries ( Puny et al. , 2022); work on equivariant frames also establishes limitations on globally
+continuous canonicalization ( Dym et al. , 2024). Our proposed reference fit is an antibody-specific,
+correspondence-conditioned construction, not a new general equivariance theorem. It requires well-
+conditioned anchors and must be evaluated after quantization.
+2
+StructTokenBench evaluates protein structure tokenizers through fine-grained local information
+and efficiency, and finds that no method dominates all evaluated perspectives (Yuan et al., 2025).
+Here we focus on the interaction of production preprocessing, exact-sidecar dependence,
+stored-byte pose sensitivity and antibody residue completeness. These diagnostics motivate a
+framework-anchored candidate and a matched evaluation protocol; the effectiveness of that
+candidate remains unmeasured.
+
+Shodh AI Research Research manuscript draft | September 2026
+Representation, recoverability and utility. SLICES and CDV AE provide useful methodological
+precedents for separating representation properties, structural recovery and downstream generation
+(Xiao et al., 2023; Xie et al., 2022). They operate on periodic materials, not paired antibody confor-
+mations. We adopt the requirement for explicit architecture, shared-data comparisons and separate
+utility evidence, not their crystal-specific datasets or primitive-cell tests. For antibodies, the corre-
+sponding tests concern rigid pose, residue correspondence, loop fidelity and inter-chain arrangement.
+No numerical ranking against SLICES, Mat2Seq or CDV AE is implied.
+
+\section*{3 R EPRESENTATION AND SCIENTIFIC CONTRACT}
+
+An input is an ordered C \ensuremath{\alpha} trace X 2 RN \ensuremath{\times}3 in Å, residue types ai 2 f 0, . . . ,19g, and available
+biological chain/residue identities. A rigid pose change acts as gX = XR \ensuremath{\top}+1t\ensuremath{\top}, with R 2 SO(3).
+The production adapter computes an axis-aligned bounding box (AABB):
+oj = min
+i
+Xij, u i = Xi [U+0000] o,
+bj = maxf1.5(max
+i
+Xij [U+0000] min
+i
+Xij) + 2, 4g,
+C = diag(b), f i = uiC \ensuremath{-}1.
+(1)
+The additive constants have units of Å. This is an artificial coordinate box for a nonperiodic
+molecule, not a physical crystal cell. Residues are sorted by type, fractional coordinates rounded to
+10\ensuremath{-}6 and an original-index tie-break. Biological identity must be restored before comparing rows
+under transformations; coordinate sorting alone is not biological residue numbering.
+For each residue, the stored tensor is Yi = [ ci, zi] 2 R192, where ci 2 R32 is the carrier and
+zi 2 R160 the learned block. V alues are quantized to BF16 and persisted as uint16 bit patterns.
+A learned decoder reconstructs fractional coordinates from z and an exact header m containing
+residue types, box, masks and branch information. Its output is ˆu = D(QBF16(z), m)C. Exact
+here means the transmitted sidecar values rather than values reconstructed from BF16 carrier fields;
+model arithmetic can still cast inputs to its working precision.
+Three properties must be distinguished. Pose consistency concerns whether corresponding learned
+rows agree under g. Geometric recovery concerns ˆu relative to the supplied input or to a transformed
+decoded output. Residue fidelity concerns whether all relevant biological residues, including CDR
+insertions and FR4, were admitted before encoding. A decoder cannot recover omitted residues
+merely by reconstructing the truncated input accurately. The complete tensor need not be invariant
+because its carrier intentionally contains pose-dependent information.
+
+\section*{4 F ROZEN ARCHITECTURE AND PROPOSED DESIGN BOUNDARY}
+
+
+\section*{4.1 E NCODER AND DECODER}
+
+The reviewed source specifies approximately 3.90 million parameters in the frozen specialist.
+Each node input concatenates a 64-dimensional residue-type embedding, 30 sine/cosine fractional-
+coordinate features at frequencies (1, 2, 4, 8, 16), 12 generic displacement slots, three masks, an
+eight-dimensional branch embedding and 15 box features. The displacement slots are zero in this
+static-conformation antibody branch. Box features contain nine oriented components, three row
+lengths and three inter-row cosines. The generic embedding table has 120 entries; the antibody
+input vocabulary is the 20 bead types, not atomic numbers.
+Four dense message-passing layers use 256 hidden values, SiLU message/update networks and Lay-
+erNorm. Pairwise distances enter through 16 Gaussian radial features with centers spanning 0–12 Å;
+this parameter range is not a hard neighborhood cutoff. V alid-pair messages are averaged, includ-
+ing the dense pair construction. A LayerNorm–linear–tanh head produces 160 learned values per
+3
+
+Shodh AI Research Research manuscript draft | September 2026
+A  Frozen antibody codec: measured architecture
+Input / production adapter
+One CA bead per residue
+Minimum-coordinate shift
+Axis-aligned box + row sort
+Biological identity map retained
+Learned encoder
+Coordinate Fourier + cell inputs
+Four dense message-passing layers
+256 hidden / 160 tanh outputs
+Scalar distance RBF messages
+Stored representation
+N x 192 BF16 values
+32 carrier + 160 learned
+Exact cell / species / masks
+Write, close and reopen
+Diagnostic route 1
+Direct carrier coordinates
+Header from quantized carrier
+No learned decoder
+Not the supported learned route
+Diagnostic route 2
+160 learned values
+Header from quantized carrier
+Same frozen decoder
+Measures header sensitivity
+Supported learned route
+160 learned values + exact header
+Four-layer / eight-head transformer
+Nonperiodic sigmoid position head
+No carrier-coordinate access
+Rigid-cell tests and production reboxing are distinct interventions on this same checkpoint.
+Figure 1: Frozen codec and the three compared decoding routes. The full tensor and exact sidecar
+form the supported recoverable representation. Good learned-decoder reconstruction is not evidence
+that the carrier alone is precise, that side information is negligible or that the learned block is pose-
+invariant.
+residue. There is no pooling that converts the molecule into one token.
+h(0)
+i = Win[e(ai), \ensuremath{\varphi}(fi), 012, masksi, e(k), \ensuremath{\psi}(C)],
+m(\ensuremath{\ell})
+i = 1
+N
+\ensuremath{\sum}
+j
+M\ensuremath{\ell}(h(\ensuremath{\ell})
+i , h(\ensuremath{\ell})
+j , RBF(dij)),
+h(\ensuremath{\ell}+1)
+i = LN
+(
+h(\ensuremath{\ell})
+i + MLP\ensuremath{\ell}[h(\ensuremath{\ell})
+i , m(\ensuremath{\ell})
+i ]
+)
+.
+(2)
+Here k is the internal branch identifier. Equation 2 summarizes valid unpadded inputs; the imple-
+mentation applies explicit padding masks. Although dij is invariant to a rigid motion of the physical
+coordinates, \ensuremath{\varphi}(fi) and \ensuremath{\psi}(C) generally are not. The source’s historical “EGNN-family” label is
+therefore not a proof of the complete encoder’s equivariance.
+The decoder concatenates the learned block with exact-header features and uses four transformer
+layers, width 256, eight attention heads and feed-forward width 512, with zero dropout. A sig-
+moid head produces nonperiodic fractional coordinates. The learned route does not read carrier
+coordinates in columns 0–14. A separate direct-carrier route does. The reviewed training objective
+includes active-residue coordinate squared error and a residue-type cross-entropy term weighted by
+0.1; generic trajectory heads are not evidence of learned antibody dynamics. The original freeze
+record describes warm-start adaptation on 528 antibody seeds with 16 conformations each. Generic
+source defaults are not asserted to be the exact historical optimization schedule.
+
+\section*{4.2 C ARRIER , SIDE INFORMATION AND STORAGE}
+
+Carrier columns 0–2 contain fractional coordinates; 3–14 reserve generic displacement slots; column
+15 encodes bead type; 16 is an unused mass slot; 17–18 hold active/defect flags; 19–27 repeat box
+components; 28 stores normalized residue count; 29 stores the branch code; 30–31 are reserved. The
+deployed Branch256 serialization maps global branch 18 to trained internal branch 7. The symmetry
+harness uses the frozen internal carrier convention. Neither convention changes the learned-block
+comparison, but complete-package byte claims must name the branch adapter.
+The tensor payload is
+Btensor = 2 [U+0001] 192N = 384N bytes,
+Btotal = Btensor + Bsidecar + Bindices + Bprovenance + Bcontainer. (3)
+4
+
+Shodh AI Research Research manuscript draft | September 2026
+Thus one residue row costs 3,072 bits, and the sequence length is N rows, not 192N discrete vo-
+cabulary tokens. Exact sidecars additionally store int16 residue types, three uint8 masks and
+nine float64 box components: 5N + 72 bytes per structure before offsets, lengths, branch codes
+and other records. Laboratory-pose recovery also needs the removed origin when it is not otherwise
+available.
+For N = 230, the tensor alone occupies 88,320 bytes (86.25 KiB), versus 2,760 bytes for raw FP32
+C\ensuremath{\alpha} coordinates. This 32-fold coordinate-payload expansion is not a matched scientific-function
+comparison, but it rules out calling the present fixed-width tensor a demonstrated storage compres-
+sor. Full encoded file sizes, latency, peak memory and rate–distortion curves are not available as
+controlled measurements. Dense message passing has quadratic pair complexity; this source prop-
+erty is not a measured throughput result.
+
+\section*{5 E VIDENCE AND EVALUATION METHODOLOGY}
+
+
+\section*{5.1 S OURCE ADMISSION AND STUDY POPULATIONS}
+
+We inspected the remote repository’s default head on 24 September 2026, pinned the relevant source
+and compact records, and examined retained local audit artifacts. The manuscript combines three
+distinct empirical populations, without adding their sizes as independent evidence:
+• Historical decoder-route comparison: 6,480 antibodies, 103,680 frames and 23,995,328
+beads; 2,160 antibodies each from train, validation and test archive labels. Each selected
+antibody contributes 16 frames. The reported aggregate therefore includes training-labelled
+structures and is not an unseen-antibody generalization estimate.
+• Official V2 pose audit: 256 distinct molecule identifiers from accepted test-labelled
+sources, 128 per source node. Each receives one seeded proper rotation and an admit-
+ted one-Å translation. Labels and distinct identifiers do not establish a homology-separated
+biological test set.
+• AABB counterfactual: 1,000 distinct molecule identifiers, 500 per node across 40 source
+archives, with matched rigid-cell and production-reboxing interventions. Its possible over-
+lap with the 256-structure audit is not treated as independent replication.
+package as REPORTED\_NOT\_VERIFIED: the full raw-payload and immutable-runtime closures
+are incomplete. This limits independent reproducibility, not the arithmetic reproducibility of the
+locally retained metric summaries ( Shodh AI Research, 2026a;b;c).
+
+\section*{5.2 M ATCHED RECONSTRUCTION ROUTES}
+
+The historical evaluator writes BF16 tensors and exact sidecars, uses a separate decoder process
+without source-coordinate access, then compares outputs with reopened sources. It evaluates three
+routes on the same inputs: learned block plus exact header, learned block plus token-derived header,
+and direct carrier coordinates plus carrier-derived box. For each bead, error is ei = kˆui [U+0000] uik2
+in Å. Table 1 reports pooled bead-error percentiles, not the median of per-antibody RMSDs. No
+post-hoc structural alignment is part of this Cartesian recovery metric. These are information-path
+comparisons at a shared outer interface, not equally compressed or independently trained external
+baselines.
+
+\section*{5.3 P OSE TESTS AND AGGREGATION}
+
+The raw diagnostic rotates the existing coordinate box with the structure, retaining the original
+fractional coordinates, or translates within the existing box. It isolates sensitivity to a different
+representation of the same physical geometry but can expose the model to box orientations outside
+5
+Trainer and metric SHA-256 identities match retained records; checkpoint identity is
+source-reported, with bytes unavailable. NumPy reaggregates saved metrics and reproduces
+counterfactual cosines from reopened BF16 arrays. Historical round-trip values remain
+receipt-derived, without raw-output replay. No training, simulation or neural replay was added.
+The repository classifies the historical scientific
+
+Shodh AI Research Research manuscript draft | September 2026
+Table 1: Historical same-data decoding comparison after serialization. All rows use the same
+103,680 frames and 23,995,328 beads, including train-labelled data. Errors are pooled per-bead
+Euclidean distances. These source-pinned aggregate results have not been independently replayed.
+Decoding route p50 (Å) p95 (Å) ei \ensuremath{\leq} 0.05 Å
+Learned block + exact sidecar 0.012072 0.026388 99.7273\%
+Learned block + token-derived header 0.051002 0.091535 48.2781\%
+Direct carrier + token-derived header 0.072575 0.161281 27.5598\%
+its production training distribution. The production path instead transforms Cartesian coordinates,
+reruns Equation 1 and sorting, and restores residue correspondence before comparison. These are
+different scientific contracts, not interchangeable versions of one metric.
+The recorded audits persist full BF16-as- uint16 tensors, close and reopen them, and compute
+learned-block cosine from the recovered values:
+cg(X) = hvec(˜z(X)), vec(˜z(gX ))i
+k vec(˜z(X))k2 k vec(˜z(gX ))k2
+, ˜z = readback(QBF16(z)). (4)
+No nontrivial transformation law is declared for this scalar learned block, so corresponding rows
+are compared directly. A conventional equivariant baseline would instead require its declared group
+action before comparison. Repeated unchanged inputs provide a bit-identity control. This tests
+repeatability, not sensitivity to meaningful geometric changes.
+Let ˆu and ˆug be decoded coordinates in their respective minimum-shift frames, with origins o and
+og. Production decoded transformation discrepancy is
+Eg(X) =
+[
+1
+N
+\ensuremath{\sum}
+i
+kˆug,i + og [U+0000] ((ˆui + o)R\ensuremath{\top} + t)k2
+2
+]1/2
+. (5)
+This compares two decoded outputs under the known transformation. It is not ground-truth recon-
+struction error and does not optimize an alignment. We summarize it across structures separately
+from cg. The historical cosine decision bar is strictly greater than 0.9999. Empirical 5th–95th per-
+centile ranges describe these panels, not confidence intervals or population-wide guarantees.
+
+\section*{6 R ESULTS}
+
+
+\section*{6.1 A CCURATE RECONSTRUCTION DEPENDS ON THE DECODER INFORMATION PATH}
+
+The exact-sidecar learned route has substantially smaller reported error than either alternative (Ta-
+ble 1). Replacing only the exact header with a header recovered from quantized carrier fields raises
+median bead error from 0.012072 to 0.051002 Å. The result establishes sensitivity to the available
+metadata, not a defect in using declared side information. Direct carrier reconstruction is less ac-
+curate still. Conversely, these measurements do not show that the learned representation alone is
+sufficient, or that its information is biologically useful. A learned-block shuffle/zero experiment
+with unchanged exact metadata is needed to quantify the residual contribution more directly.
+The separate 2,000-antibody canary reports 32,000 frames and 7,408,848 persisted rows, with me-
+dian readback bead error 0.012077 Å. It is a non-additive subset, not additional corpus capacity
+or an independent external benchmark. The older freeze record’s 0.067 Å carrier floor describes a
+different route and population; it must not replace the exact-sidecar results in Table 1 (Shodh AI
+Research, 2026a).
+
+\section*{6.2 P RODUCTION TOKENS ARE ROTATION -SENSITIVE DESPITE STABLE DECODED}
+
+GEOMETRY
+Production rotation cosine has median 0.178169 and empirical 5th–95th percentile range 0.018854–
+0.446340; none of the 256 structures exceeds 0.9999. Nevertheless, median production decoded
+discrepancy is 0.021549 Å, with 5th–95th percentiles 0.020148–0.023292 Å. Translation passes the
+6
+
+Shodh AI Research Research manuscript draft | September 2026
+
+Path Transform Median learned cosine Median Eg (Å)
+Raw codec Rotation 0.905397 4.165817
+Raw codec Translation 0.990389 0.017301
+Production AABB Rotation 0.178169 0.021549
+Production AABB Translation 1.000000 5.52 \ensuremath{\times} 10\ensuremath{-}16
+B  Same-structure pose comparisons after BF16 storage
+0
+0
+0.25
+0.25
+0.5
+0.5
+0.75
+0.75
+1
+1
+1,000 structures: rotation cosine
+AABB path
+Rigid-cell path
+0.01
+0.1
+1
+10
+Production
+0.02155 A
+Raw diagnostic
+4.166 A
+256 structures: decoded discrepancy
+Log axis / median dot / 5th--95th percentile range
+Figure 2: Distributions recomputed from retained per-structure metrics. Left: the compound produc-
+tion adapter decreases learned rotation cosine relative to the rigid-cell diagnostic in all 1,000 paired
+cases. Right: on the separate 256-structure panel, the production path has far smaller decoded ro-
+tation discrepancy despite lower latent cosine. Percentile ranges are descriptive; the two panels are
+not pooled.
+cosine bar for all 256 structures, with decoded discrepancies at numerical-noise scale. Recomputed
+summaries agree with the official V2 receipt ( Shodh AI Research, 2026b).
+The raw diagnostic yields a higher rotation cosine but a much larger decoded discrepancy,
+4.165817 Å at the median. The reversal shows why latent similarity is not a substitute for decoded
+behavior and why preprocessing must be included in the claim. It does not imply that production
+rotation destroys the antibody by several Å. A historical narrative quoted a different approximately
+4 Å raw audit; that value is not the official production-path result. Likewise, a higher cosine does
+not establish better retrieval without an actual retrieval task.
+
+\section*{6.3 T HE COMPOUND PRODUCTION ADAPTER AMPLIFIES POSE SENSITIVITY}
+
+On the matched 1,000-structure panel, median learned rotation cosine is 0.901512 for a rigidly
+rotated existing box and 0.174049 after production AABB reboxing and recanonicalization. The
+median paired decrease is 0.722301, and the recomputed decrease is positive in all 1,000 cases.
+Neither path has any structure above the 0.9999 bar. The maximum pair-distance change under the
+applied physical rotation is 4.26 [U+0002] 10\ensuremath{-}14 Å, excluding a meaningful deformation of the input as the
+explanation (Shodh AI Research, 2026c).
+The adapter changes several coupled quantities: box lengths, fractional-coordinate features and
+coordinate-dependent order. It is therefore appropriate to identify a compound adapter amplifi-
+cation, not a single-feature causal ablation. The rigid-cell failure separately rules out AABB re-
+boxing as the sole source of sensitivity. Median absolute relative box-axis change is 0.11775, with
+p95 0.28288. Covariance-eigenvalue anisotropy has Pearson correlation 0.01354 and Spearman
+7
+Learned rotation cosine; one rotation / structure
+Table 2: Official V2 audit, the same 256 structures under each path. Learned cosine and decoded
+transformation discrepancy are different endpoints. Saved flags report bit identity for all
+unchanged-input full-token controls. Raw-path figures are diagnostic, not the production verdict.
+
+Shodh AI Research Research manuscript draft | September 2026
+correlation 0.00559 with production cosine. These near-zero associations do not support a simple
+monotonic anisotropy explanation within this panel; they do not rule out every nonlinear or out-of-
+population shape effect.
+
+\section*{6.4 R ESIDUE COMPLETENESS IS A SEPARATE FAILURE AXIS}
+
+The historical July handoff documents truncation of each chain at 115 residues and reports clipped
+CDR-H3 segments and FR4 loss. It reports 15,116 CDR-H3-clipped antibodies (10.16\%) and
+92.10\% FR4 clipping in its sequence audit, together with a limited longer-input probe. The un-
+derlying per-antibody varlen\_analysis.json was not available in the inspected evidence set;
+these figures are historical reports, not newly verified prevalence estimates. The source preregis-
+tration independently retains the Tier-1 CDR-H3/FR4 truncation issue as unresolved, and explicitly
+states that excluding increment archives with N > 256 does not repair it ( Shodh AI Research ,
+2026d;a).
+The mechanism is straightforward. A prefix map T115(s) = s1:115 is non-injective: distinct full
+chains sharing a prefix become identical inputs. Any encoder composed with that map necessarily
+loses the distinguishing suffix. Reconstruction against T115(s) cannot diagnose the omitted residues.
+This observation motivates insertion-aware identity and full-residue admission; it is not a quantita-
+tive demonstration that every structure in the accepted increment is truncated, nor that a completed
+full-corpus repair exists.
+
+\section*{6.5 S CALE ACCOUNTING DOES NOT ESTABLISH DIVERSITY OR PERSISTENCE}
+
+The reconciled corpus contains 2,042,821 antibody seed records and 32,685,136 frame records, cor-
+responding to 7,568,346,192 accepted real-bead rows: 5,528,711,504 base rows plus 2,039,634,688
+accepted increment rows. These are coordinate-cache-backed row opportunities, not a retained full
+[N, 192] token bank. The physically persisted non-additive canary contains 7,408,848 rows. Full
+tensor materialization at the current width would require 2,906,244,937,728 bytes before sidecars
+and container overhead ( Shodh AI Research, 2026e).
+The exposure audit reports an exact distinct-token-structure union for the increment, but not for
+the combined base/increment corpus because the base global token-hash payload was not retained.
+Zero overlap under a first-115-residue production key is not full-sequence identity certification.
+Sixteen conformations from one antibody also do not provide sixteen independent folds. These
+qualifications prevent scale, conformational sampling, unique biology and storage persistence from
+being conflated.
+
+\section*{7 F RAMEWORK -ANCHORED DESIGN FOR A POSE -ROBUST SUCCESSOR}
+
+
+\section*{7.1 B IOLOGICAL CORRESPONDENCE AND ONE JOINT FRAME}
+
+We specify a candidate composition rather than a completed repair. Full heavy/light sequences and
+C\ensuremath{\alpha} identities are mapped using IMGT numbering. Framework integer positions 1–26, 39–55, 66–
+104 and 118–128 define fitting candidates. Insertion-labelled positions are excluded from the fit
+but retained in the structure and transformed with all other residues. Ambiguous chain mapping,
+duplicate labels or non-unique sequence-to-coordinate correspondence cause rejection rather than
+silent cropping.
+For target and reference framework coordinates XF , YF , weights sum to one and allocate half to
+each chain. Require at least 60 heavy-chain anchors, 60 light-chain anchors and 130 total anchors.
+With weighted centers \ensuremath{\mu}X , \ensuremath{\mu}Y , compute
+H = (XF [U+0000] \ensuremath{\mu}X )\ensuremath{\top}W (YF [U+0000] \ensuremath{\mu}Y ) = U \ensuremath{\Sigma}V \ensuremath{\top},
+Q = U diag(1, 1, sign det(U V \ensuremath{\top}))V \ensuremath{\top},
+K(X) = ( X [U+0000] \ensuremath{\mu}X )Q + \ensuremath{\mu}Y .
+(6)
+This is standard weighted proper-rotation alignment, used here with an antibody-specific admission
+contract. One joint transform is applied to both chains. Independently fitting each chain would
+8
+
+Shodh AI Research Research manuscript draft | September 2026
+C  Proposed framework-anchored composition (not an evaluated repair)
+Biological correspondence
+Full H/L sequences + CA trace
+IMGT / insertion-aware identity
+Retain CDR and FR4 residues
+Reject ambiguous mapping
+One joint rigid pose fit
+H and L each carry half weight
+Framework anchors only
+Proper rotation / no reflections
+Apply to ALL beads together
+Frozen codec composition
+Canonical coordinates -> AABB
+Existing encoder and decoder
+Store inverse-pose information
+New version if bytes change
+Global rigid motion is removed; internal loop geometry and H/L relative arrangement are not fitted away.
+Required tests: stored-byte pose consistency + CDR recovery + local-geometry perturbation sensitivity.
+A theoretical property of the rigid fit is not evidence that the quantized neural pipeline passes.
+Figure 3: Proposed framework-anchored composition. Solid boxes specify the candidate pathway,
+not completed measurements. A single rigid transform preserves pair distances and inter-chain
+geometry in exact arithmetic. Stored-byte invariance, CDR recovery and downstream benefit still
+require experiments.
+remove relative heavy/light orientation, a potentially relevant geometric variable. CDR coordinates
+are transformed, not replaced by reference coordinates or used to force loop similarity.
+
+\section*{7.2 A NALYTIC SCOPE AND FINITE -PRECISION RISKS}
+
+Under fixed, valid biological correspondence and a unique nondegenerate alignment optimum, a
+global input rotation is absorbed by the fitted Q, so K(gX ) = K(X) in exact arithmetic. Since
+the operation is rigid, kK(X)i [U+0000] K(X)jk2 = kXi [U+0000] Xjk2 for all pairs. Thus the canonicalization
+operation itself does not flatten loops or change heavy/light relative arrangement. This statement is
+not an empirical guarantee for the encoder–quantizer–decoder composition.
+The candidate contract requires centered-anchor singular-value ratio at least 10\ensuremath{-}3, cross-covariance
+ratio at least 10\ensuremath{-}4 and joint framework-fit RMSD at most 4 Å. These are proposed admission
+rules, not established biological coverage guarantees. Symmetry, nearly degenerate fits, number-
+ing changes, quantization boundaries and sorting ties can still produce discontinuities. Each stored
+frame is fitted independently, so transform jitter across an ensemble must be reported. Repeated
+structures and legacy bytes require separate compatibility tests.
+The successor path is X 7! K(X) 7! AABB(K(X)) 7! E, with the frozen decoder’s box con-
+ditioning retained. Absolute-pose recovery requires the inverse rigid transform; its bytes must be
+counted. A full uncompressed FP64 rotation and translation use 96 bytes per frame, before other
+metadata. The reference and numbering contract also require version identifiers. If canonicalized
+tokens differ from legacy tokens, the result is a new token language even if similarity is high.
+
+\section*{7.3 C URRENT IMPLEMENTATION STATUS}
+
+The local archive contains canonicalization code, reference/panel preparation and an execution con-
+tract. The recorded GPU attempts terminated at runtime preflight before the measured model path
+executed; no admitted result table establishes canonicalized learned-token consistency, inverse-pose
+recovery or legacy-byte compatibility. We therefore include no repaired-method numerical row.
+This is an unexecuted experimental comparison, not a measured scientific failure of canonicaliza-
+tion (Shodh AI Research, 2026f).
+
+\section*{8 M ATCHED BENCHMARK AND FALSIFICATION PROTOCOL}
+
+The remaining study should test the proposed repair against the current codec, simple coordinate
+baselines and external antibody/protein representations on shared structures. Table 3 states the roles;
+it is an experimental specification, not a performance ranking. Crystal-cell equivalences are inappli-
+cable to these isolated C \ensuremath{\alpha} traces.
+9
+
+Shodh AI Research Research manuscript draft | September 2026
+Table 3: Required comparison panel. Only the historical decoding routes and pose paths above have
+results in this manuscript. Published external methods have different input/output contracts; not all
+support Cartesian reconstruction.
+Method Matched role Fairness condition
+Current frozen codec Native-pose reference Same exact-sidecar budget and
+residue map
+Framework fit + frozen
+codec
+Proposed pose repair Count inverse pose, reference and
+admission losses
+Coordinate quantization
+/ carrier
+Simple recovery baseline Same precision choices, metadata and
+coordinate frame
+EGNN-based
+autoencoder
+Conventional geometric baseline Matched inputs, training data, latent
+budget and tuning
+Igloo Loop retrieval / structural sensitivity Supply required backbone inputs;
+report richer-input track separately
+Foldseek 3Di / S 2ALM Local structural or downstream
+representation
+Use supported inputs/endpoints; do
+not assume an invertible decoder
+Same-data cohorts and fair symmetry metrics. Use a frozen, fully numbered paired-antibody
+structure cohort plus the retained internal cohort. Separate experimental and predicted structures,
+cluster sequence-related antibodies before splitting, keep all conformations of one antibody in one
+partition, and audit external pretraining overlap where information is available. Report the intersec-
+tion on which all compared methods are applicable and every exclusion. Full-backbone models must
+not receive reconstructed atoms silently treated as ground truth. For C\ensuremath{\alpha}-only data, limit comparisons
+to supported methods or label the extra modeling step.
+Apply random rotations, near-\ensuremath{\pi} rotations, translations and row permutations with identities restored.
+Invariant discrete methods use exact token equality; continuous scalar methods use both distance
+and cosine; equivariant methods use the declared inverse group action. Report actual write–close–
+reopen results at FP32, FP16 and BF16 where supported. Pair these metrics with source-coordinate
+recovery, framework-aligned CDR-H1/H2/H3 and L1/L2/L3 C \ensuremath{\alpha} RMSD, residue coverage, inter-
+chain contacts and full-antibody geometry. A CDR metric should use a framework fit, not refit the
+CDR itself and remove the error being measured.
+Anti-collapse and information-path ablations. Zero or shuffle the learned block while retain-
+ing metadata; zero/shuffle carriers where applicable; remove absolute fractional features; remove
+oriented box entries while retaining intrinsic size/Gram information; compare joint-framework fit-
+ting with no fit and a clearly labelled PCA baseline; vary precision; and introduce controlled local
+CDR perturbations while leaving the framework fixed. Distinguishing a global pose change from
+an internal perturbation is the key requirement. Norms, pairwise distances and geometric error must
+accompany cosine, which alone is insensitive to positive rescaling. Repeated-input bit identity is a
+lawful control, not an anti-collapse result.
+For an internal loop perturbation \ensuremath{\delta}CDR, measure both the decoded change and representation dis-
+tance kz(X + \ensuremath{\delta}CDR) [U+0000] z(X)k. A constant or geometry-blind representation can pass a pose test
+but should fail this paired sensitivity test. Thresholds and perturbation magnitudes must be frozen
+on development data before final evaluation. Feature-removal interventions on an existing model
+and retrained architecture ablations should be reported separately, because removing inputs without
+retraining changes the input distribution.
+Compression, efficiency and utility. Report actual bytes per antibody, bits per retained residue,
+row/sequence length, encoder and decoder time, peak device memory and metadata overhead. Com-
+pare several widths/precisions to obtain rate–distortion curves rather than extrapolating from one
+BF16 point. For utility, start with pose-perturbed CDR-H3 structural retrieval or conformational-
+neighborhood retrieval on held-out antibody clusters. A matched-capacity predictor should use
+identical training splits, labels, optimization budgets and multiple seeds. Affinity or developability
+claims require independent labels and a separate task; they do not follow from C \ensuremath{\alpha} reconstruction.
+No external scores, rate–distortion advantage or downstream gain are supplied here because those
+experiments have not been established.
+10
+
+Shodh AI Research Research manuscript draft | September 2026
+
+\section*{9 D ISCUSSION AND LIMITATIONS}
+
+The evidence supports a specific and useful separation. Native-pose coordinate reconstruction can
+be accurate with the declared exact sidecar, while a learned representation remains highly sensitive
+to arbitrary global rotation. Production reboxing can worsen latent consistency and simultaneously
+avoid the large decoded discrepancies of a raw rotated-box diagnostic. A method that is judged by
+only one of these endpoints can therefore be mischaracterized in either direction.
+The exact sidecar is legitimate when disclosed and counted. The learned decoder’s exclusion of
+carrier coordinates prevents one simple reconstruction shortcut, but it does not establish that the
+learned block is sufficient for biological tasks. The route comparison shows metadata dependence;
+it does not prove that metadata alone explains reconstruction. Likewise, the proposed joint frame-
+work alignment preserves geometry before encoding by construction, but it cannot restore already
+truncated residues and has not been shown to preserve CDRs after the complete learned and quan-
+tized path.
+The evidence limitations are substantive. Historical reconstruction receipts lack a complete local
+raw-output replay and immutable environment closure. Pose metrics are available per structure,
+but original stored-token mirrors are incomplete locally. The tested cohorts do not establish broad
+homology-separated generalization; one rotation per structure is not uniform robustness over SO(3).
+The historical CDR truncation percentages are not independently recomputed. The original check-
+point, production adapter and source snapshot are distinct artifacts, and the source’s nominal 512-
+bead interface does not override the accepted increment’s N [U+0014] 256 scope. Results on this antibody
+branch cannot be transferred to IDP , LLPS or protein–ligand representations.
+
+\section*{10 C ONCLUSION}
+
+We studied a frozen antibody tokenizer through separate tests of information flow, stored-byte pose
+behavior and residue completeness. The archived comparisons show strong exact-sidecar recon-
+struction, substantial rotation sensitivity in learned tokens, and a large compound preprocessing
+effect that is not explained by a change in the underlying rigid geometry. These findings motivate
+a joint framework-anchored representation contract that preserves internal geometry analytically
+while making CDR recovery, anti-collapse behavior and downstream utility explicit empirical re-
+quirements. The present contribution is the diagnosis, architecture specification and testable design.
+A demonstrated pose-robust, CDR-preserving successor remains to be established.
+DATA, CODE AND EVIDENCE AVAILABILITY
+The inspected default repository revision is 1d00d2d916c88 in
+shodh-ai/skanda\_simulation. The remote antibody source-closure branch was also
+checked at c03b3348eca0. Checkpoint, trainer, official-metric and counterfactual-metric
+SHA-256 identifiers begin 19abbb431869, 93f1509efa23, e496b4e18886 and
+9d1493bf83195, respectively. Full identities and source paths are retained in the manuscript
+11
+Section 8 specifies the remaining evaluations: canonical-pose measurements,
+full-residue/CDR-specific recovery and sensitivity, matched external comparisons, rate-distortion
+and efficiency measurements, and a downstream task. Until these are completed, the evidence
+supports a diagnosis of the current codec and a testable framework-anchored design, not a
+demonstrated repair, downstream benefit or superiority over external methods.
+
+
+
+
+
+
+
+
+build's private Supplementary record S1 (supplementary/S1.json): reports, metrics, paired tokens
+and recipes. Canonicalization code/preparation files are local. Public/reviewer access is not
+established. Checkpoint bytes and replay artifacts are absent. Reanalysis adds no simulation or
+neural replay; reconstruction PASS remains source-reported.
+
+Shodh AI Research Research manuscript draft | September 2026
+AUTHOR , AFFILIATION AND DECLARATIONS
+Shodh AI Research. Institutional authorship and affiliation are used for this draft; individual contri-
+bution roles are not inferred. The work concerns Shodh AI’s own representation-development pro-
+gramme, creating an institutional interest in its application. No external funding or individual con-
+flict declaration is asserted without a verified record. This research manuscript is not peer-reviewed
+or accepted by ICLR; the official ICLR 2022 style is used solely as the requested publication-format
+template.
+REFERENCES
+B. Abanades, W. K. Wong, F. Boyles, G. Georges, A. Bujotzek, and C. M. Deane. ImmuneBuilder:
+Deep-Learning models for predicting the structures of immune proteins. Communications Biology, 6:575,
+2023. doi:10.1038/s42003-023-04927-7.
+J. Dunbar et al. SAbDab: the structural antibody database. Nucleic Acids Research, 42(D1):D1140–D1146,
+2014. doi:10.1093/nar/gkt1043.
+J. Dunbar and C. M. Deane. ANARCI: antigen receptor numbering and receptor classification. Bioinformatics,
+32(2):298–300, 2016. doi:10.1093/bioinformatics/btv552.
+N. Dym, H. Lawrence, and J. W. Siegel. Equivariant frames and the impossibility of continuous
+canonicalization. In ICML, 2024. https://arxiv.org/abs/2402.16077.
+A. Fang, R. G. Alberstein, S. Kelow, and F. A. Dreyer. Tokenizing loops of antibodies. mAbs, 2026.
+doi:10.1080/19420862.2026.2645271. Preprint: .
+O. Puny, M. Atzmon, H. Ben-Hamu, I. Misra, A. Grover, E. J. Smith, and Y . Lipman. Frame averaging for
+invariant and equivariant network design. In ICLR, 2022. https://arxiv.org/abs/2110.03336.
+J. A. Ruffolo, L.-S. Chu, S. P . Mahajan, and J. J. Gray. Fast, accurate antibody structure prediction from deep
+learning on massive set of natural antibodies. Nature Communications, 14:2389, 2023.
+doi:10.1038/s41467-023-38063-x.
+V . G. Satorras, E. Hoogeboom, and M. Welling. E(n) equivariant graph neural networks. In ICML, PMLR
+139:9323–9332, 2021. https://proceedings.mlr.press/v139/satorras21a.html.
+Shodh AI Research. Frozen antibody tokenizer source, Branch256 round-trip comparison and source
+preregistration. Skanda simulation, snapshot 1d00d2d916c88,
+BRANCH256\_ROUNDTRIP\_FINAL.json, GATE\_RESULT\_RETRY1.json, and
+LURTEE\_LOBE1\_C\_V2\_1\_0\_RC1\_SOURCE\_PREREGISTRATION.json. Restricted industrial
+evidence; historical results not independently replayed.
+Shodh AI Research. Lobe-1C official V2 production-path SE(3) audit.
+v2/evidence\_job\_277837/FINAL\_AUDIT.json and PER\_STRUCTURE\_METRICS.npz, 12
+Metric-file SHA-256 prefix e496b4e18886. Retained local records and
+incomplete-runtime-closure declaration.
+Shodh AI Research. Lobe-1C cell-anisotropy and reboxing counterfactual.
+triage\_v2/local\_evidence/RESULT.json and PER\_STRUCTURE\_METRICS.npz, 13
+Result SHA-256 prefix 895a22a12329; metric-file prefix 9d1493bf83195.
+Shodh AI Research. Lobe-1C macromolecule handoff, 30 Retained
+HANDOFF\_LOBE1C\_20260730.md, Section 6. Historical residue-truncation report; underlying
+per-antibody audit not available for this manuscript.
+Shodh AI Research. Lobe-1C exposure reconciliation and source-retention census.
+EXPOSURE\_RECONCILIATION.json and SOURCE\_RETENTION\_CENSUS.json,
+Reconciliation SHA-256 prefix 50700c34ad06. Coordinate-backed capacity is distinguished from
+persisted token payload.
+Shodh AI Research. Option-C canonical-pose contract v3.4 and terminal execution receipts.
+OPTION\_C\_CANONICAL\_POSE\_CONTRACT\_V3\_4.candidate.json; retained terminal receipts
+for jobs 280089 and 280222. Candidate specification, not completed repair evidence.
+M. van Kempen et al. Fast and accurate protein structure search with Foldseek. Nature Biotechnology,
+42:243–246, 2024; published online 2023. doi:10.1038/s41587-023-01773-0.
+12
+2026a. Files:
+Aug. 2026b.
+Aug. 2026c.
+Jul 2026d.
+Aug. 2026e.
+Aug. 2026f.
+arxiv.org/abs/2509.08707v1
+
+Shodh AI Research Research manuscript draft | September 2026
+H. Xiao, R. Li, X. Shi, Y . Chen, L. Zhu, X. Chen, and L. Wang. An invertible, invariant crystal representation
+for inverse design of solid-state materials using generative deep learning. Nature Communications,
+14:7027, 2023. doi:10.1038/s41467-023-42870-7.
+T. Xie, X. Fu, O.-E. Ganea, R. Barzilay, and T. Jaakkola. Crystal diffusion variational autoencoder for periodic
+material generation. In ICLR, 2022. https://openreview.net/forum?id=03RLpj-tc\_.
+M. Yin et al. S 2ALM: Sequence-structure pre-trained large language model for comprehensive antibody
+representation learning. Research, 2025, article 0721. doi:10.34133/research.0721. Preprint:
+.
+X. Y uan, Z. Wang, M. D. Collins, and H. Rangwala. Protein structure tokenization: Benchmarking and new
+recipe. In ICML, PMLR 267:73645–73670, 2025.
+https://proceedings.mlr.press/v267/yuan25i.html.
+13
+arxiv.org/abs/2411.15215v1
+COMPANION-STUDY DISCLOSURE
+The historical branch-trainer source is also examined as method evidence in a companion
+adsorbate-codec study. This is shared implementation lineage, not evidence of a common
+checkpoint execution or measured population. The present antibody cohorts and framework design
+address separate empirical and design questions.
+
+\end{document}

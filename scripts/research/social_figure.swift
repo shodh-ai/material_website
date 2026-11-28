@@ -34,7 +34,8 @@ for sel in doc.findString(caption, withOptions: []) {
     line.extendForLineBoundaries()
     let text = (line.string ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
     guard text.hasPrefix(caption) else { continue }
-    let next = text.dropFirst(caption.count).first
+    // Accept "Figure 1:", "Figure 1." and "Fig. 1 |" style labels.
+    let next = text.dropFirst(caption.count).drop { $0 == " " }.first
     guard next == ":" || next == "." || next == "|" else { continue }
     found = (page, line.bounds(for: page))
     break
