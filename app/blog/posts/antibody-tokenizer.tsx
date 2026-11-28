@@ -43,7 +43,7 @@ const rotationStability: FigureSpec = {
 export default function AntibodyTokenizer() {
   return (
     <>
-      <p>A structure tokenizer should give the same tokens for the same antibody however it is oriented. Ours did not: after a random rotation, its learned features kept a median cosine of only <strong>0.177</strong> to the original. We traced the problem to one preprocessing step and fixed it without retraining. Aligning each antibody to a fixed reference frame before the unchanged encoder made stored tokens bit-identical under all <strong>9,760 tested rotations</strong>, and restored CDR-H3 loop retrieval on 6,000 new antibodies in random poses from <strong>0.165 to 0.531 mAP</strong>, close to the 0.539 the tokenizer reaches in its stored pose.</p>
+      <p>An AI model should recognize the same antibody however its 3D structure is turned. In all 9,760 rotation tests, turning the structure changed how our model recorded its shape. We lined up each structure before passing it to the existing model, so no retraining was needed. The saved descriptions then matched exactly in every rotation test, and the model became much better at finding antibodies with similarly shaped loops.</p>
 
       <p><a href={`${antibodyAssets}/antibody-tokenizer-pose-dependence.pdf`}>Read the research paper (PDF)</a></p>
 

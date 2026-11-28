@@ -105,6 +105,8 @@ export const blogPosts: readonly BlogPost[] = [
     title: "Bit-Exact Triton Kernels Make Our Reactor Solver 12× Faster on H100",
     description:
       "The Triton solver ran 12× faster on one H100, and its transport stencil ran 36.1× faster in isolation. Three eight-GPU replays preserved every output digest in bit-exact mode, with variable end-to-end throughput.",
+    subtitle:
+      "Fused Triton kernels sped up the transport calculation for our 3D reactor training data by 36.1× and the eight-sample solver by 12× on one H100. The bit-exact configuration matched the original outputs for all 256 samples in each of three eight-GPU runs.",
     topic: "Scientific computing",
     date: "2026-11-25",
     cover: {
