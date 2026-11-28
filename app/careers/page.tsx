@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { mountFluid } from "../engineering/fluid-scene";
+import ApplicationForm from "./application-form";
+import { careerRoles } from "../../lib/careers-application";
 import {
   ArrowLeft,
   ArrowRight,
@@ -14,7 +16,6 @@ import {
   Check,
   ChevronDown,
   Code2,
-  Factory,
   Globe2,
   Moon,
   Sparkles,
@@ -31,117 +32,14 @@ const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const openRoles = [
-  {
-    title: "AI Engineer Intern",
-    team: "Core AI",
-    location: "Jaipur, India",
-    type: "Internship",
-    description:
-      "Build and ship applied AI systems across model development, evaluation, data pipelines, and product integrations. You will work closely with the engineering team on real problems with measurable outcomes.",
-    conversion:
-      "Full-time conversion is evaluated solely on demonstrated performance during the internship.",
-    requirements: [
-      "Strong Python fundamentals and hands-on experience with modern ML frameworks",
-      "Experience building with LLMs, agents, retrieval, or model evaluation",
-      "Ability to move from an open-ended problem to a tested working system",
-      "High ownership, clear communication, and strong learning velocity",
-    ],
-    icon: Brain,
-    applicationPath: "/ai-engineer-intern",
-    isOpen: true,
-  },
-  {
-    title: "Founder’s Associate",
-    team: "Founder’s Office",
-    location: "Jaipur, India",
-    type: "Full-time",
-    description:
-      "Work closely with the founding team across strategy, research, operations, partnerships, and execution. Turn ambiguous priorities into clear plans and measurable outcomes.",
-    requirements: [
-      "Exceptional written and verbal communication",
-      "Strong analytical thinking and comfort with ambiguity",
-      "A record of taking ownership and executing difficult projects",
-      "Curiosity about AI, science, and industrial innovation",
-    ],
-    icon: Sparkles,
-    applicationPath: "/founders-associate",
-    isOpen: true,
-  },
-  {
-    title: "ML Research Engineer — Physics Foundation Models",
-    team: "Core AI",
-    location: "Jaipur, India",
-    type: "Full-time",
-    description:
-      "Build and train our Meso-Foundation Model. Work on 3D Diffusion Transformers, Fourier Neural Operators, and physics-informed architectures across 10M+ synthetic physics simulations.",
-    requirements: [
-      "Strong background in ML/DL and PyTorch",
-      "Experience with transformers, diffusion models, or neural operators",
-      "Physics or materials science intuition is a plus",
-      "Published research preferred",
-    ],
-    icon: Brain,
-    applicationPath: null,
-    isOpen: false,
-  },
-  {
-    title: "Computational Materials Scientist",
-    team: "Physics Engine",
-    location: "Jaipur, India",
-    type: "Full-time",
-    description:
-      "Design and run Monte Carlo simulations, build physics kernels, and generate the synthetic training data that powers our AI. Bridge first-principles physics and machine learning.",
-    requirements: [
-      "PhD or MS in Materials Science, Physics, or Chemical Engineering",
-      "Experience with DFT, MD, or continuum simulations",
-      "Proficiency in Python and scientific computing",
-      "Battery electrochemistry knowledge is a strong plus",
-    ],
-    icon: Atom,
-    applicationPath: null,
-    isOpen: false,
-  },
-  {
-    title: "Full-Stack Engineer",
-    team: "Product",
-    location: "Jaipur, India",
-    type: "Full-time",
-    description:
-      "Build the interfaces for our Matter Compiler: the tools factories and R&D teams use daily. Work on real-time 3D visualization, simulation dashboards, and SkandaX.",
-    requirements: [
-      "Strong TypeScript, React, and Next.js skills",
-      "3D visualization experience is a plus",
-      "Backend experience with Node.js, Python, or PostgreSQL",
-      "Passion for precise, functional products",
-    ],
-    icon: Code2,
-    applicationPath: null,
-    isOpen: false,
-  },
-  {
-    title: "Forward Deployed Engineer (FDE)",
-    team: "Deployment",
-    location: "Jaipur, India",
-    type: "Full-time",
-    description:
-      "Deploy SkandaX directly into partner R&D centers and gigafactories. Work on-site with industrial teams to design next-generation material and process recipes.",
-    requirements: [
-      "2+ years in a technical customer-facing role",
-      "Strong engineering fundamentals in ML, materials, or manufacturing",
-      "Willingness to travel and work on-site with partners",
-      "Excellent communication skills",
-    ],
-    icon: Factory,
-    applicationPath: null,
-    isOpen: false,
-  },
-];
+const roleIcons = [Code2, Brain, Atom, Sparkles];
+const openRoles = careerRoles.map((role, index) => ({ ...role, icon: roleIcons[index] }));
 
 export default function CareersPage() {
   // Dark by default, like the rest of the site; a saved light choice is respected.
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
+  const [selectedRole, setSelectedRole] = useState("");
   const fluidRef = useRef<HTMLDivElement>(null);
 
   // The same live fluid background (and palettes) as the home, research and engineering pages.
@@ -181,7 +79,7 @@ export default function CareersPage() {
       <main>
         <section className="careers-hero">
           <motion.p initial="hidden" animate="visible" variants={reveal} className="careers-hero-intro">
-            Join the team building intelligence that invents new molecules, materials, processes, and machines — then shows how to make them real.
+            {"We are a small, high-agency research lab building Physical AI from bare silicon up to foundation models. We use AI agents heavily as force multipliers—which means we don’t hire people who wait for Jira tickets or grind LeetCode. We hire entrepreneur-level builders who can command agents, catch subtle lies in code and physics, and own hard problems from zero to verified proof."}
           </motion.p>
 
           <motion.div initial="hidden" animate="visible" variants={stagger} className="careers-hero-title-wrap">
@@ -227,7 +125,7 @@ export default function CareersPage() {
               <p className="careers-eyebrow">WORK WITH US</p>
               <h2>OPEN POSITIONS</h2>
             </div>
-            <p>02 OPEN ROLES · JAIPUR</p>
+            <p>{String(openRoles.length).padStart(2, "0")} OPEN ROLES · JAIPUR</p>
           </div>
 
           <div className="careers-role-list">
@@ -236,26 +134,21 @@ export default function CareersPage() {
               const isExpanded = expandedRole === index;
               return (
                 <motion.article key={role.title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={reveal} className={`careers-role ${isExpanded ? "is-expanded" : ""}`}>
-                  <button className="careers-role-summary" onClick={() => setExpandedRole(isExpanded ? null : index)} aria-expanded={isExpanded}>
+                  <button className="careers-role-summary" onClick={() => setExpandedRole(isExpanded ? null : index)} aria-expanded={isExpanded} aria-controls={`role-detail-${role.id}`}>
                     <span className="careers-role-number">{String(index + 1).padStart(2, "0")}</span>
                     <span className="careers-role-icon"><Icon size={23} /></span>
                     <span className="careers-role-name">
                       <strong>{role.title}</strong>
-                      <span>{role.team} · {role.location} · {role.type} · <b className={role.isOpen ? "is-open" : "is-closed"}>{role.isOpen ? "OPEN" : "CLOSED"}</b></span>
+                      <span>{role.skills}</span>
                     </span>
                     <span className="careers-role-arrow"><ChevronDown size={22} /></span>
                   </button>
 
                   {isExpanded && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="careers-role-detail">
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="careers-role-detail" id={`role-detail-${role.id}`}>
                       <div className="careers-role-overview">
                         <p>{role.description}</p>
-                        {"conversion" in role && role.conversion && (
-                          <div className="careers-conversion-note">
-                            <span>PERFORMANCE-BASED FULL-TIME PATH</span>
-                            <strong>{role.conversion}</strong>
-                          </div>
-                        )}
+
                       </div>
                       <div>
                         <span className="careers-detail-label">WHAT YOU&apos;LL BRING</span>
@@ -263,15 +156,9 @@ export default function CareersPage() {
                           {role.requirements.map((requirement) => <li key={requirement}><Check size={15} />{requirement}</li>)}
                         </ul>
                       </div>
-                      {role.applicationPath ? (
-                        <Link href={role.applicationPath} className="careers-primary-button">
-                          APPLY FOR THIS ROLE <ArrowRight size={17} />
-                        </Link>
-                      ) : (
-                        <span className="careers-primary-button careers-closed-button" aria-label={`${role.title} applications are closed`}>
-                          APPLICATIONS CLOSED
-                        </span>
-                      )}
+                      <a href="#apply" onClick={() => setSelectedRole(role.id)} className="careers-primary-button">
+                        APPLY WITH PROOF OF WORK <ArrowRight size={17} />
+                      </a>
                     </motion.div>
                   )}
                 </motion.article>
@@ -280,6 +167,7 @@ export default function CareersPage() {
           </div>
         </section>
 
+        <ApplicationForm selectedRole={selectedRole} onRoleChange={setSelectedRole} />
       </main>
 
       <footer className="careers-footer">

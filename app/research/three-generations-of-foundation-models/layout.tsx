@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     modifiedTime: "2026-08-17T00:00:00.000Z",
     authors: ["https://shodh.ai"],
     tags: ["Foundation Models", "Physical AI", "Inverse Design"],
-    images: [{ url: "/webgl-bg-foundation-v2.png", width: 1600, height: 900, alt: "The Three Generations of Foundation Models by Shodh AI" }],
+    images: [{ url: "/research/three-generations-of-foundation-models/opengraph-image", width: 1200, height: 630, alt: "The Three Generations of Foundation Models by Shodh AI" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Three Generations of Foundation Models",
     description: "From domain physics to the coupled physical stack.",
-    images: ["/webgl-bg-foundation-v2.png"],
+    images: ["/research/three-generations-of-foundation-models/opengraph-image"],
   },
 };
 

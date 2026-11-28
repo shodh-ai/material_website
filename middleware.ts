@@ -6,6 +6,7 @@ const publicExactPaths = new Set([
   "/access",
   "/founders-associate",
   "/api/founders-associate",
+  "/api/careers",
   "/ai-engineer-intern",
   "/api/ai-engineer-intern",
   "/api/viewer-access",

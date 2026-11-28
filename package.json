@@ -8,7 +8,8 @@
     "postbuild": "echo Built!",
     "start": "next start",
     "lint": "next lint --no-lint",
-    "research:build": "python3 scripts/research/publish.py"
+    "research:build": "python3 scripts/research/publish.py",
+    "test:careers": "node scripts/test-careers.cjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

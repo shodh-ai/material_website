@@ -68,14 +68,15 @@ page = (DIST / 'lucan-10b-physics.html').read_text()
 page = page.replace(html.escape(lucan['title'], quote=True), html.escape(title, quote=True))
 page = page.replace(html.escape(lucan['abstract'][:250], quote=True), html.escape(description, quote=True))
 page = page.replace(MAIN + '/lucan-10b-physics', MAIN + '/antibody-pose-canonicalization')
-page = page.replace(MAIN + '/social/lucan-10b.png', figure)
+# Share a different figure from the paper than the Engineering article does (rotation-stability).
+social = MAIN + '/social/charts/antibody-pose-canonicalization.png'
+page = page.replace(MAIN + '/social/lucan-10b.png', social)
 page = page.replace(MAIN + '/papers/lucan-10b/LUCAN_10B_arXiv_Research_Manuscript.pdf', pdf)
 structured = {'@context':'https://schema.org','@type':'ScholarlyArticle','name':title,'headline':title,'abstract':abstract,'url':MAIN+'/antibody-pose-canonicalization','encoding':{'@type':'MediaObject','contentUrl':pdf,'encodingFormat':'application/pdf'}}
 page = re.sub(r'<script type="application/ld\+json">.*?</script>', lambda _: '<script type="application/ld+json">' + json.dumps(structured).replace('<', '\\u003c') + '</script>', page)
-page = re.sub(r'<meta property="og:image:alt"[^>]+>', '<meta property="og:image:alt" content="Rotation stability by preprocessing choice">', page)
+page = re.sub(r'<meta property="og:image:alt"[^>]+>', '<meta property="og:image:alt" content="Sequence-anchored frame: align, then encode">', page)
 body = f'''<main id="main" tabindex="-1"><div class="container"><div class="breadcrumb"><a href="/research">All research</a></div><header class="paper-heading"><span class="eyebrow">Research paper</span><h1>{html.escape(title)}</h1><div class="actions"><a class="button" href="{pdf}">Read paper PDF</a><a class="button secondary" href="/research/papers/antibody-pose-canonicalization/antibody-pose-canonicalization-latex.zip" download>Download LaTeX package</a><a class="text-link" href="/engineering/antibody-tokenizer-rotation-invariance">Engineering overview</a></div></header><div class="paper-content"><section class="abstract"><h2>Abstract</h2><p>{html.escape(abstract)}</p></section><p class="publication-note">The LaTeX package contains a PDF-derived transcription.</p><figure><img class="social-figure" src="{figure}" alt="Rotation stability by preprocessing choice"><figcaption>Rotation stability under the evaluated preprocessing variants. Refer to the manuscript for methods and limitations.</figcaption></figure></div></div></main>'''
 page = re.sub(r'<main id="main".*?</main>', lambda _: body, page)
-page = page.replace('content="1200"', 'content="1467"').replace('content="630"', 'content="735"')
 (DIST / 'antibody-pose-canonicalization.html').write_text(page)
 
 js = DIST / 'app.js'
