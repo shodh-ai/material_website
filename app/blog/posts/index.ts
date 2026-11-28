@@ -6,6 +6,7 @@ import CrystalToken, { crystalSections } from "./crystal-token";
 import AntibodyTokenizer, { antibodyAssets, antibodySections, antibodySlug } from "./antibody-tokenizer";
 import CrystallizationCodec, { crystallizationAssets, crystallizationSections, crystallizationSlug } from "./crystallization-codec";
 import IndustrialWorldModels, { industrialWorldModelsAssets, industrialWorldModelsSections, industrialWorldModelsSlug } from "./industrial-world-models";
+import WorldModelsClock, { worldModelsClockAssets, worldModelsClockSections, worldModelsClockSlug } from "./world-models-more-than-one-clock";
 
 const tf32Slug = "tf32-rheology-flow";
 const tf32Assets = "/blog/how-tf32-changed-the-flow";
@@ -37,6 +38,25 @@ type BlogPost = {
 };
 
 export const blogPosts: readonly BlogPost[] = [
+  {
+    slug: worldModelsClockSlug,
+    title: "Industrial World Models Need More Than One Clock",
+    description:
+      "A channel simulation had 0.24% velocity error and 10.33% polymer shear-stress error. We examine how errors carry across physics, representations, spatial resolutions, and timescales.",
+    subtitle:
+      "Four coupled dimensions, examined through our work on bioreactors, scientific representations, viscoelastic flow and learned dynamics.",
+    topic: "Industrial world models",
+    date: "2026-11-28",
+    cover: {
+      src: `${worldModelsClockAssets}/stress-feedback-and-grid-refinement.png`,
+      cardSrc: `${worldModelsClockAssets}/grid-refinement-cover.svg`,
+      alt: "Velocity and shear-stress errors fall under grid refinement, and removing polymer stress feedback increases the mean flow.",
+      width: 1650,
+      height: 561,
+    },
+    sections: worldModelsClockSections,
+    Content: WorldModelsClock,
+  },
   {
     slug: industrialWorldModelsSlug,
     title: "From Molecular Discovery to Computational Manufacturing",

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 405" width="720" height="405" font-family="system-ui, sans-serif" role="img" aria-labelledby="title">
+  <title id="title">Velocity and shear-stress errors under grid refinement</title>
+  <rect width="720" height="405" fill="#f8fafc"/>
+  <g fill="#142638">
+    <text x="28" y="45" font-size="31" font-weight="700">One flow, two error curves</text>
+    <text x="28" y="73" font-size="18" fill="#46596a">Oldroyd-B channel · relative error against the continuum reference</text>
+  </g>
+  <path d="M29 109H53" stroke="#22786c" stroke-width="4"/>
+  <text x="65" y="116" fill="#46596a" font-size="19">Velocity</text>
+  <path d="M177 109H201" stroke="#b64d32" stroke-width="4"/>
+  <text x="213" y="116" fill="#46596a" font-size="19">Polymer shear stress</text>
+  <path d="M97 304.83H684" stroke="#d4dee8"/>
+  <text x="86" y="310.83" text-anchor="end" font-size="17" fill="#46596a">0.25%</text>
+  <path d="M97 260.31H684" stroke="#d4dee8"/>
+  <text x="86" y="266.31" text-anchor="end" font-size="17" fill="#46596a">1%</text>
+  <path d="M97 215.79H684" stroke="#d4dee8"/>
+  <text x="86" y="221.79" text-anchor="end" font-size="17" fill="#46596a">4%</text>
+  <path d="M97 171.26H684" stroke="#d4dee8"/>
+  <text x="86" y="177.26" text-anchor="end" font-size="17" fill="#46596a">16%</text>
+  <text x="126" y="348" text-anchor="middle" font-size="19" fill="#46596a">32³</text>
+  <text x="345" y="348" text-anchor="middle" font-size="19" fill="#46596a">64³</text>
+  <text x="564" y="348" text-anchor="middle" font-size="19" fill="#46596a">128³</text>
+  <polyline points="126,247.50 345,280.70 564,306.14" stroke="#22786c" stroke-width="4" fill="none"/>
+  <circle cx="126" cy="247.50" r="5" fill="#22786c"/>
+  <circle cx="345" cy="280.70" r="5" fill="#22786c"/>
+  <circle cx="564" cy="306.14" r="5" fill="#22786c"/>
+  <text x="579" y="312.14" fill="#22786c" font-size="22" font-weight="700">0.24%</text>
+  <polyline points="126,159.37 345,172.68 564,185.31" stroke="#b64d32" stroke-width="4" fill="none"/>
+  <circle cx="126" cy="159.37" r="5" fill="#b64d32"/>
+  <circle cx="345" cy="172.68" r="5" fill="#b64d32"/>
+  <circle cx="564" cy="185.31" r="5" fill="#b64d32"/>
+  <text x="579" y="191.31" fill="#b64d32" font-size="22" font-weight="700">10.33%</text>
+  <text x="345" y="380" text-anchor="middle" font-size="18" fill="#46596a">Grid size · fixed physical domain</text>
+</svg>
