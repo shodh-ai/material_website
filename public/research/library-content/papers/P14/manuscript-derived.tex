@@ -1,0 +1,552 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: ebb9464aba4e7ff7e0b83df8e7d7d07a404f61c05bacc7019ac04bce9f037a75
+% Extracted text SHA-256: dd343509ef1117cc62a6d58600e6578bc5e0ff46b47bcd36a81f5f273014d573
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Discrete Constraints, Harmonic Modes, and Reconstruction Fidelity in Periodic Fluid and Magnetic Autoencoders}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Discrete Constraints, Harmonic Modes, and Reconstruction Fidelity
+in Periodic Fluid and Magnetic Autoencoders
+
+\section*{Abstract}
+
+Divergence-free decoding restricts a reconstructed vector field but does not determine its
+fidelity. We examine this distinction in a retrospective case study of periodic three-dimensional
+fluid, magnetic, and scalar autoencoders with mixed continuous and finite-scalar-quantized la-
+tents. We derive the consequences of the implemented unit-index centered-difference operators,
+including the zero-mean obstruction of a periodic curl, the role of constant harmonic heads, and
+the additional checkerboard null modes on even grids. We distinguish channel-relative energy ob-
+jectives from total-energy and log-energy diagnostics. Historical training reports, contemporary
+documentary gates, later reconstruction audits, and separate synthetic algebra tests are analyzed
+without pooling their populations. In the later fluid audit, the validation-labeled set has com-
+ponentwise MSE 2.912117 [U+0002] 10\ensuremath{-}6 and mean absolute discrete divergence 2.814595 [U+0002] 10\ensuremath{-}10, but
+relative vorticity MSE 0.458089 fails the recorded reconstruction criterion. Every path in both
+audit lists occurs in the retained training manifest, precluding an independently quarantined
+validation interpretation. Multiscale magnetic comparisons exhibit modality tradeoffs rather
+than a uniformly superior variant. A later joint candidate also retains substantial spectral and
+rheological energy errors despite low divergence. The evidence supports a bounded conclusion:
+construction can enforce a compatible discrete constraint, whereas mean recovery, amplitude,
+spatial alignment, and cross-domain fidelity require distinct measurements and authenticated
+evaluation populations.
+
+\section*{1 Introduction and contributions}
+
+Autoencoders for vector-valued scientific fields face two different requirements. Their outputs
+should respect relevant structural constraints, and they should reconstruct the particular input
+field accurately. These requirements are related but not interchangeable. A decoder that always
+produces a discrete divergence-free velocity can still misplace vortices, suppress small-scale struc-
+ture, or recover the wrong bulk flow. A magnetic decoder can satisfy the corresponding divergence
+constraint while substantially misestimating a background field.
+Periodic domains make this distinction especially transparent. Taking the curl of a periodic vec-
+tor potential produces a divergence-free field under compatible differentiation, but its spatial mean
+vanishes. A constant background velocity or magnetic field therefore needs a separate representa-
+tional path. Moreover, a finite-difference implementation has a different null space from continuum
+differentiation. These details matter when a structural identity is used to interpret small numerical
+divergence as evidence of reconstruction quality.
+Energy objectives introduce another distinction. The squared amplitude of a vector field can
+be summarized by spatial means, spatial sums, separate channel contributions, or logarithmic
+discrepancies. Although these quantities are related, their regularization and channel weighting
+differ. An objective called volume-integrated energy need not equal either a physical energy integral
+1
+
+or the energy diagnostic used in an audit. Matching energy also does not fix the spatial arrangement
+of that energy.
+This paper studies these issues through a bounded retrospective analysis of periodic three-
+dimensional fluid and magnetic autoencoders and their scalar branches. The contribution is not a
+new divergence-free parameterization or a new quantization method. It is a joint account of which
+properties follow from the captured construction, which reconstruction failures remain observable,
+and how evaluation membership limits the inference.
+Specifically, we provide a self-contained description of the implemented periodic operators, har-
+monic and multiscale decoding paths, and hybrid quantizers; distinguish the principal reconstruc-
+tion and energy metrics; and compare several levels of historical and later evidence without treating
+them as interchangeable experiments. The resulting argument is deliberately narrower than a claim
+of general-purpose physical representation: compatibility with one discrete divergence operator is
+established separately from fidelity to the sampled fields.
+
+\section*{2 Related work}
+
+Richter-Powell and colleagues establish neural constructions that satisfy divergence and continuity
+constraints by design [ 1]. Their periodic continuum theorem explicitly allows a missing constant
+vector field. This is directly relevant to the bulk-flow and magnetic-background obstruction con-
+sidered here. We refer to the 2022 NeurIPS paper through its arXiv version 3. Its continuum
+expressiveness result does not establish universality of a finite-resolution, quantized decoder with
+a centered-difference curl.
+Finite scalar quantization bounds individual latent coordinates and maps them to fixed scalar
+levels, thereby defining an implicit product codebook [ 2]. Straight-through training supplies an
+approximate gradient through quantization. We use the 2023 arXiv version 2 preprint for this
+methodological context. The mixed continuous/SplitFSQ quantizers in the present case study are
+a particular implementation with continuous coordinates, scalar-level assignments, and an addi-
+tional utilization proxy. Neither the cited FSQ construction nor observed marginal bin occupancy
+demonstrates that every joint code combination occurs in this implementation. No external bench-
+mark values from either reference are used.
+
+\section*{3 Scientific methods and validation protocols}
+
+
+\section*{3.1 Retrospective scope and evidence populations}
+
+The analysis uses captured source text, training reports, audit reports, manifests, and independently
+generated finite algebra diagnostics. No retrieved code was executed, no checkpoint or pickle
+was loaded, and no original raw field array was loaded during this reanalysis. There was no
+additional neural training, neural inference, or physical simulation. The new calculations concern
+saved-record consistency and separately implemented synthetic algebra, not a replay of the original
+computational environment.
+We distinguish historical training-final losses; a contemporary documentary gate with train- and
+validation-labeled lists; a later actual reconstruction audit; a separate stress audit; per-domain
+magnetic and scalar comparisons; a later joint candidate and rheology audit; and new synthetic
+2
+
+Table 1: Evidence populations and their interpretation. Counts are not pooled.
+Evidence Recorded scope Interpretation
+Fluid training-final Training reduc-
+tion
+Optimization record, not audit accuracy
+Contemporary fluid gate 100 + 100 paths Earlier documentary contract
+Later fluid reality audit 100 + 100 paths Actual saved reconstruction audit
+Later fluid stress audit 64 cases Perturbation and failure diagnostics
+Multiscale comparisons 64 per domain Within-source Hartmann/Arrhenius com-
+parison
+Later joint core audit 64 per domain Separate candidate and training history
+Rheology audit 128 cases Fluid head on trajectory channels
+Synthetic algebra 40 cases and two
+grids
+Finite arithmetic, not neural validation
+operator tests. Table 1 summarizes the populations most important to interpretation. Counts are
+numbers of recorded cases or paths, not authenticated independent physical trajectories.
+All 100 later fluid audit train paths and all 100 validation-labeled paths occur in the retained
+4096-store training manifest. The two audit lists are path-disjoint, but each spans 83 parent
+directories and they share 22 parent directories. Thus the labels do not demonstrate independently
+quarantined validation. Directory grouping is not independent authentication of physical identity,
+and membership in earlier warm-start training is not fully reconstructed.
+For the multiscale comparisons, the captured loader selects the first N sorted Hartmann and
+Arrhenius paths. Training reports list 5000 samples per domain, while the audit selects the first 64
+per domain; the source contains no exclusion split. Exact historical execution and array identities
+remain incomplete. We therefore use the term audit set, not held-out set.
+
+\section*{3.2 Periodic discrete operators}
+
+Let G = ZN1 [U+0002] ZN2 [U+0002] ZN3 be a periodic lattice with V = N1N2N3 sites. A scalar field is f : G ! R,
+and a vector field is u : G ! R3. Indices wrap modulo the corresponding grid length. For coordinate
+unit vectors ej, define
+Djf (n) = f (n + ej) [U+0000] f (n [U+0000] ej)
+2 , j = 1, 2, 3. (1)
+These derivatives use unit grid indices, without physical spacing factors. Define discrete divergence
+D and curl C by
+Du = D1u1 + D2u2 + D3u3, (2)
+CA = (D2A3 [U+0000] D3A2, D 3A1 [U+0000] D1A3, D 1A2 [U+0000] D2A1). (3)
+The shift operators commute, so DiDj = DjDi and DCA = 0 in exact arithmetic. With ¯f =
+V \ensuremath{-}1 P
+n\ensuremath{\in}G f (n), periodic telescoping also gives Djf = 0 and CA = 0 . Floating-point implemen-
+tations leave small residuals. Reported divergence values are diagnostics of this operator, not
+independently calibrated SI measurements.
+A basic vector decoder therefore has the form
+bu = \ensuremath{\alpha}CA + h, h 2 R3, (4)
+3
+
+where \ensuremath{\alpha} is spatially uniform within a sample and h is broadcast over the grid. The constant
+harmonic head supplies a mean that a periodic curl cannot represent. For a pure-curl prediction,
+Jensen’s inequality gives
+1
+3V
+X
+n
+kbu(n) [U+0000] u(n)k2 [U+0015] 1
+3 k¯uk2. (5)
+More generally, writing u\ensuremath{\prime} = u [U+0000] ¯u and bu\ensuremath{\prime} = bu [U+0000] bu yields the exact decomposition
+M (bu, u) = M (bu\ensuremath{\prime}, u\ensuremath{\prime}) + 1
+3 kbu [U+0000] ¯uk2. (6)
+Here M is the componentwise MSE defined below. Replacing the predicted mean with the target
+mean is an oracle diagnostic of this decomposition, not a deployable reconstruction procedure.
+On an even lattice, centered differentiation has additional null modes. Its Fourier symbol is
+i sin(2\ensuremath{\pi}kj/Nj), which vanishes at both zero and the Nyquist frequency. At nonzero frequency
+vectors whose components are each zero or Nyquist, the entire curl symbol vanishes. For example,
+q(n) = (( [U+0000]1)n1, 0, 0) has zero discrete divergence and zero mean but cannot be represented as
+a periodic centered-difference curl plus a constant. A constant harmonic head repairs the mean
+obstruction, not every discrete null-space obstruction.
+
+\section*{3.3 Gains, gates, and additional solenoidal paths}
+
+A spatially uniform scalar a and constant vector b preserve divergence under the isotropic affine
+map u 7! au + b. Unequal channel gains generally do not: if G = diag(g1, g2, g3), then
+D(Gu) =
+X
+j
+gjDjuj, (7)
+which need not vanish when P
+j Djuj = 0 . For a spatial scalar gate s(n), the exact discrete
+expression is
+D(su)(n) = 1
+2
+X
+j
+[s(n + ej)uj(n + ej) [U+0000] s(n [U+0000] ej)uj(n [U+0000] ej)] . (8)
+There is no general cancellation. In contrast, applying a gate to the potential before differentiation
+gives C(sA), whose matching divergence still vanishes. Componentwise scaling of the potential also
+remains inside the curl and is distinct from channel scaling of the decoded vector.
+The captured single-scale source additionally permits profiles p1(n2, n3), p2(n1, n3), and p3(n1, n2).
+Each component is constant along its own derivative direction, so their combined divergence is zero.
+These profiles and optional potential-based refinement preserve the structural identity. Their pres-
+ence in captured source does not authenticate their exact historical activation in every checkpoint.
+
+\section*{3.4 Hybrid multiscale architecture}
+
+The single-scale reference maps 1283 inputs to a 163 latent lattice with 48 channels, of which 16 use
+the continuous path. The captured multiscale architecture first applies a three-dimensional Haar
+transform, followed by convolutions and strided downsampling. Its latent lanes have spatial sizes
+and channel counts 83/32, 163/48, and 323/24. They respectively contain 16, 16, and 12 continuous
+channels; the remaining coordinates are scalar-quantized independently within each lane.
+4
+
+For a continuous latent coordinate z, the implemented map is qc(z) = 2 tanh( z/2). For a discrete
+coordinate, let t = tanh(z) and
+L = f[U+0000]1, [U+0000]2/3, [U+0000]1/3, 0, 1/3, 2/3, 1g, Q (t) = argmin
+\ensuremath{\ell}\ensuremath{\in}L
+jt [U+0000] \ensuremath{\ell}j. (9)
+The forward value is Q(t), implemented as t+stopgrad(Q(t)[U+0000]t) for straight-through differentiation.
+Discrete channels are partitioned into four groups with the same seven levels. A soft assignment
+proportional to exp[[U+0000](t[U+0000]\ensuremath{\ell})2/0.05] defines a marginal normalized-entropy proxy. This proxy and the
+recorded quantization discrepancy are implementation-specific diagnostics. They do not measure
+exact retained information or a stored-bit compression rate.
+Writing quantized lanes as z8, z16, z32, the multiscale vector heads have the forms
+bu = CAu(z16) + hu(z8) + 0.25C [s(z32)As(z32)] , (10)
+bB = CAB(z8, z16, z32) + hB(z8). (11)
+The scalar decoder directly fuses all lanes and has five outputs in the audited configuration. The
+radiation decoder is a direct six-channel tensor head. Its existence does not demonstrate trained ra-
+diation reconstruction or physical tensor validity. Fluid and magnetic inputs are routed separately;
+the Arrhenius branch conditions on temperature and two reactant concentrations and predicts those
+fields together with a third concentration and reaction rate.
+
+\section*{3.5 Metrics and energy objectives}
+
+For C-channel fields x, bx : G ! RC, define
+M (bx, x) = 1
+CV
+X
+n,c
+(bxc(n) [U+0000] xc(n))2. (12)
+This is the raw reconstruction metric. The fluid audit also reports
+R2 = kbu [U+0000] uk2
+kuk2 + 10\ensuremath{-}12 , (13)
+R\ensuremath{\omega} = M (Cbu, Cu)
+M (Cu, 0) + \ensuremath{\varepsilon}\ensuremath{\omega}
+. (14)
+Norms include all sites and components. The later fluid evaluator uses \ensuremath{\varepsilon}\ensuremath{\omega} = 10 \ensuremath{-}30; the multiscale
+reported vorticity loss uses 10\ensuremath{-}10. These are distinct regularization conventions. R\ensuremath{\omega} is a relative
+MSE, not a relative RMS error, and cohort means cannot generally be converted by taking a single
+square root.
+Let Sc(u) = P
+n uc(n)2 and K(u) = 1
+2
+P
+c Sc(u). The implemented channel-sum objective is
+LchE = 1
+3
+3X
+c=1
+jSc(bu) [U+0000] Sc(u)j
+Sc(u) + 10\ensuremath{-}8 . (15)
+It has no explicit density or cell-volume factor. It averages channel-relative discrepancies rather
+than taking the relative discrepancy of total vector energy. Separate audit diagnostics are
+RK = jK(bu) [U+0000] K(u)j
+jK(u)j + 10\ensuremath{-}12 , (16)
+AK =
+
+% Extracted chunk 3
+
+log max(K(bu), 10\ensuremath{-}30) [U+0000] log max(K(u), 10\ensuremath{-}30)
+
+% Extracted chunk 5
+
+. (17)
+5
+
+A captured training loss instead squares the difference between logarithms of spatial-mean energies
+with additive 10\ensuremath{-}12 regularization. Multiscale training includes absolute differences of logarithms
+of total vector squared amplitudes with additive 10\ensuremath{-}8 regularization. These definitions are not
+automatically equivalent to AK.
+For constant density \ensuremath{\rho} and uniform cell volume \ensuremath{\Delta}V , a physical kinetic energy would be \ensuremath{\rho}\ensuremath{\Delta}V K(u).
+Common factors cancel from an unregularized relative ratio and from a log-energy difference. With
+regularization, cancellation requires scaling the regularizer consistently. Likewise, converting sums
+to means requires scaling additive regularizers. There is no inevitable relative-error growth pro-
+portional to voxel count. Under a uniform gain a, K(au) = a2K(u), while divergence can remain
+zero.
+The radial spectral discrepancy uses an unnormalized forward real-input discrete Fourier trans-
+form. Power is averaged over channels and then over the stored half-spectrum coefficients in each
+of 12 radial frequency bins, without conjugate-multiplicity weights. This defines a bin-averaged
+diagnostic rather than a shell-integrated physical energy spectrum. With channel-averaged power
+Px(k) and bins Bb, it is
+Lrad = 1
+jIj
+X
+b\ensuremath{\in}I
+[log(1 + hPbxiBb) [U+0000] log(1 + hPxiBb)]2 , (18)
+where I contains nonempty bins. Frequencies are in index units; the outer edge uses the captured
+strict upper-bound convention. This statistic discards Fourier phase. The local vorticity diagnos-
+tic instead compares centered-difference curls after circular 33 averaging using an absolute-error
+reduction. Energy, radial spectra, voxelwise vorticity, and local smoothed vorticity therefore test
+different properties.
+
+\section*{3.6 Preparation, arithmetic, and audit decisions}
+
+The captured fluid reader selects velocity or trajectory channels, takes the first frame when ap-
+plicable, converts to float32, replaces nonfinite values by zero, and resizes to 1283 by trilinear
+interpolation when needed. The later fluid audit normalizes inputs with a constant channel-mean
+vector and one shared standard deviation, then denormalizes outputs. The shared scale preserves
+the discrete divergence property. The multiscale reader converts channel-last Hartmann arrays to
+channel-first float tensors and resizes when required. These preparation steps can affect the target
+field and should not be confused with physical calibration.
+The retained multiscale training source uses AdamW and supports CUDA bfloat16 autocast
+with gradient scaling. Captured audit functions use evaluation mode without an explicit autocast
+context. Exact historical package versions and runtime bindings are not established by source text
+alone.
+The later fluid vorticity gate requires mean R\ensuremath{\omega} [U+0014] 0.25 and its casewise 95th percentile [U+0014] 0.60.
+Its log-energy limits are 0.10 for the mean and 0.25 for the 95th percentile. Divergence limits are
+10\ensuremath{-}7 for mean absolute divergence and 10\ensuremath{-}6 for the 95th percentile of casewise maxima. These are
+recorded diagnostic contracts, not externally validated physical tolerances.
+Separate new float64 algebra calculations use NumPy 2.3.5 and a predeclared arithmetic tolerance
+of 10\ensuremath{-}10. The random tests comprise 20 trials on each of two periodic grids, 163 and 243, for 40 cases
+in total. Separate analytic counterexamples are evaluated on both grid sizes. These calculations
+check operator cancellation, mean-error decomposition, gain behavior, and energy scaling; they test
+the stated algebra locally, not the learned models.
+6
+
+Table 2: Later fluid reconstruction audit. Except for case counts, entries are case means unless
+marked p95 (the casewise 95th percentile). Both labeled lists occur in the retained training manifest
+and do not constitute independently quarantined validation.
+Metric Train-labeled Validation-labeled
+Cases 100 100
+Componentwise MSE 2.730878 [U+0002] 10\ensuremath{-}6 2.912117 [U+0002] 10\ensuremath{-}6
+Relative L2 0.294821 0.296723
+Relative energy error 0.052315 0.042931
+Absolute log-energy error 0.033557 0.030256
+Relative vorticity MSE 0.474494 0.458089
+Relative vorticity MSE, p95 0.549369 0.613239
+Radial spectral discrepancy 0.012003 0.011863
+Mean absolute divergence 2.786640 [U+0002] 10\ensuremath{-}10 2.814595 [U+0002] 10\ensuremath{-}10
+Target mean absolute divergence 6.371008 [U+0002] 10\ensuremath{-}5 6.398082 [U+0002] 10\ensuremath{-}5
+
+\section*{4 Experimental results}
+
+
+\section*{4.1 Training-final values and documentary gates}
+
+The selected energy-repaired fluid reference has a historical training-final reconstruction loss of
+1.667281 [U+0002] 10\ensuremath{-}6 and relative L2 value 0.129984. These are training reductions, not the later
+audit measurements. A second learning-rate continuation records reconstruction 1.688426 [U+0002] 10\ensuremath{-}6
+and relative L2 0.148683. Their similar raw MSEs do not establish equivalent energy or relative
+reconstruction behavior.
+The contemporary documentary gate records a pass on 100 train- and 100 validation-labeled
+paths. For its validation-labeled set it reports MSE 2.912083 [U+0002] 10\ensuremath{-}6, relative L2 0.296719, rela-
+tive energy error 0.042925, energy-error 95th percentile 0.047140, and mean absolute divergence
+2.813930 [U+0002] 10\ensuremath{-}10. These are retained as documentary values, not substituted for the later actual
+JSON values in Table 2.
+
+\section*{4.2 Low divergence does not resolve vorticity error}
+
+The later reality audit fails its voxelwise-vorticity check. On the validation-labeled set, both mean
+relative vorticity MSE 0.458089 and its 95th percentile 0.613239 exceed the respective limits. Low
+divergence, low absolute log-energy error, and a small radial spectral discrepancy do not remove
+this failure. The target itself has nonzero divergence under the same stencil, so exact solenoidality
+of the prediction also need not reproduce every target component.
+The separate 64-case stress audit records MSE 2.397006 [U+0002] 10\ensuremath{-}6, mean absolute divergence
+2.697498 [U+0002] 10\ensuremath{-}10, and absolute log-energy error 0.014545. Nevertheless, relative vorticity MSE
+is 0.415995. The mean fitted spectral slope is [U+0000]5.374599 for predictions versus [U+0000]4.034473 for tar-
+gets, with mean absolute slope error 1.340127. The stress gate fails spectral-slope, vorticity, and
+phase-interface checks. These fitted slopes are diagnostics on the captured fields, not evidence that
+either field realizes an independently validated inertial-range law.
+The phase-interface diagnostic gives a gradient-steepness ratio of 32.7161, but it applies a velocity-
+only checkpoint to a scalar \ensuremath{\varphi} replicated into three channels. It is a proxy failure, not an indepen-
+7
+
+Table 3: Multiscale audit comparisons: 64 cases per domain. Fluid vorticity is relative MSE;
+reconstruction columns are componentwise MSE.
+Model Fluid MSE Fluid vort. Magnetic MSE Scalar MSE
+Pre-routing baseline 3.8785 [U+0002] 10\ensuremath{-}4 0.02575 2.01278 3 .9552 [U+0002] 10\ensuremath{-}4
+Magnetic-input routing 4.3062 [U+0002] 10\ensuremath{-}4 0.04449 0.70913 2 .7665 [U+0002] 10\ensuremath{-}3
+Harmonic anchor 2.6606 [U+0002] 10\ensuremath{-}4 0.02431 0.33804 6 .1233 [U+0002] 10\ensuremath{-}4
+Harmonic energy-weighted 3.3547 [U+0002] 10\ensuremath{-}4 0.05506 0.54570 7 .6626 [U+0002] 10\ensuremath{-}4
+Sharp harmonic balance 2.8701 [U+0002] 10\ensuremath{-}4 0.02255 0.51936 4 .7869 [U+0002] 10\ensuremath{-}4
+dently validated phase-field reconstruction experiment. The important conclusion is that small
+raw MSE and a compatible divergence constraint did not certify local reconstruction in this stress
+population.
+
+\section*{4.3 Gain alternatives and evaluator ambiguity}
+
+The per-channel post-curl gain training report records divergence 1.135488 [U+0002] 10\ensuremath{-}6, larger than
+2.257618 [U+0002] 10\ensuremath{-}10 in the selected reference training report. Its contemporary Markdown audit, how-
+ever, records validation mean absolute divergence 2.790532[U+0002]10\ensuremath{-}10. These records do not constitute
+a matched empirical gain ablation. The captured generic evaluator constructs a default model and
+permits partial checkpoint loading; the exact historical gain-path evaluation is unresolved. Partial
+loading is a source-level possibility, not an established explanation for the discrepancy.
+The isotropic-gain documentary audit preserves low divergence, 3.079795 [U+0002] 10\ensuremath{-}10, while its val-
+idation relative energy error is 0.089741 and its gate fails on energy. A separate scratch-training
+document records final MSE 1.0982 [U+0002] 10\ensuremath{-}4 and radial spectral discrepancy 2.099282. These partic-
+ular alternatives do not establish universal inadequacy of isotropic gains or scratch training. The
+algebraic distinction between isotropic and anisotropic post-curl gains remains valid independently
+of their historical evaluator binding.
+
+\section*{4.4 Magnetic harmonic anchoring and modality tradeoffs}
+
+Table 3 reports the saved multiscale comparisons using descriptive model names. The sequence
+includes correction of magnetic input routing and introduction of direct supervision of the harmonic
+magnetic head against the spatial target mean. These are combined historical modifications, not
+an isolated causal intervention.
+The harmonic-anchor variant has lower magnetic MSE than the sharp harmonic-balance variant,
+0.33804 versus 0.51936. The latter instead improves relative fluid-vorticity MSE and scalar MSE
+within this comparison. Its magnetic mean absolute divergence is 5.284846 [U+0002] 10\ensuremath{-}8, but this struc-
+tural residual is not a ranking of magnetic reconstruction accuracy. The multiscale vorticity value
+0.02255 is a relative MSE, not a percentage RMS error.
+The saved magnetic harmonic MSE is nearly equal to full magnetic MSE for the harmonic-anchor
+variants. For example, the harmonic-anchor report gives 0.3380369043 for the harmonic error and
+0.3380369041 for full reconstruction. This is consistent with a dominant mean contribution at the
+recorded precision, but the absent original arrays prevent a complete spatial-error decomposition.
+Training-final magnetic reconstruction for that variant is 1.062824, distinct from its audit value.
+8
+
+The separation between training reductions and audit summaries remains necessary even within
+one named variant.
+
+\section*{4.5 Later joint candidate}
+
+The later joint candidate is evaluated from a recorded resume artifact; a directory label does
+not authenticate cumulative optimizer steps. In its separate core audit, fluid MSE is 0.029359,
+relative vorticity MSE is 1.332971, and radial spectral discrepancy is 14.7002, while mean absolute
+divergence remains 1.405821 [U+0002] 10\ensuremath{-}8. Its magnetic MSE is 0.067119, but magnetic radial spectral
+discrepancy is 9.678850. Better performance on one amplitude-sensitive summary does not establish
+uniformly better field reconstruction.
+The separate 128-case rheology audit applies the fluid head to trajectory channels corresponding
+to velocity. It records mean absolute log-energy error 2.88487, relative vorticity MSE 1.031074, and
+mean absolute divergence 1.758416 [U+0002] 10\ensuremath{-}9. The population contains 55 Carreau–Yasuda-labeled
+and 73 power-law-labeled cases, without an authenticated independent-trajectory count. These
+adverse energy and vorticity results remain part of the assessment despite the small divergence
+residual.
+
+\section*{4.6 Independent finite algebra diagnostics}
+
+The separate synthetic calculations confirm the expected cancellations and counterexamples at
+the declared arithmetic tolerance. They support zero divergence of a compatible curl, zero mean
+of a periodic curl, the mean-error decomposition, and quadratic energy scaling under uniform
+gain. They also demonstrate nonzero divergence after anisotropic post-curl gains and spatial scalar
+gates, and the centered-difference checkerboard obstruction. These are finite local demonstrations
+of standard identities and failure mechanisms, not original neural inference or physical validation.
+Exact inputs, recipes, residuals, and saved-record checking details are retained in Supplementary
+record S1.
+
+\section*{5 Discussion and limitations}
+
+
+\section*{5.1 What is guaranteed, and what remains to be learned}
+
+The compatible curl/divergence pair supplies a meaningful construction-level property: in exact
+arithmetic, all decoded curl contributions have zero matching discrete divergence. Constant bulk
+terms and the additional explicitly solenoidal paths preserve it. This property is useful because it
+does not depend on optimization successfully minimizing a divergence penalty. It remains limited
+to the specified operator, boundary convention, and transformations applied after decoding.
+Harmonic heads address a separate representational necessity. A nonzero spatial mean cannot
+pass through a periodic curl, and energy matching cannot recover a missing mean if the architecture
+forbids it. Equation 6 makes the resulting error floor explicit. Nevertheless, adding a constant does
+not make the centered-difference decoder complete on even grids: Nyquist null modes remain. Con-
+tinuum representation results and discrete decoder expressiveness must therefore be kept separate.
+The measurements demonstrate why structural feasibility should not serve as a proxy for fidelity.
+Energy is a scalar summary; radial spectral losses further discard spatial phase. Neither controls the
+location or sign alignment of individual eddies. The later fluid audit provides a concrete example
+9
+
+in which divergence and energy diagnostics are favorable while voxelwise vorticity reconstruction
+fails. The stress and later joint-candidate results extend this distinction under different populations
+and contracts rather than replicating a single common accuracy experiment.
+
+\section*{5.2 Energy normalization and multimodal interpretation}
+
+Equation 15 places equal outer weight on channel-relative discrepancies. Consequently, a weak
+transverse component may matter strongly to that objective even when a dominant longitudinal
+or background component controls total energy. Conversely, errors with opposite signs across
+channels can partially cancel in total-energy differences while remaining visible to the channel-
+relative objective. Log-energy diagnostics are different again, especially near a regularization floor.
+Density, cell volume, spatial sums, and spatial means must be tracked consistently, but a large
+grid does not by itself imply a large relative energy error. The evidence does not support an
+inevitable voxel-count amplification mechanism. The objective’s scientific interpretation instead
+depends on its denominators, channel aggregation, field normalization, and treatment of small
+target energies.
+The multiscale comparisons also resist a single overall ranking. The harmonic-anchor and sharp
+harmonic-balance variants trade magnetic reconstruction against selected fluid and scalar metrics.
+Routing, supervision, loss weights, and training histories are not isolated. Thus the comparison
+describes observed behavior within the audit source, not a causal estimate of the benefit of any one
+architectural change. Scalar channels also represent different quantities; an all-channel MSE is a
+numerical summary of the captured preparation, not an automatically dimensionally commensurate
+physical error.
+
+\section*{5.3 Evaluation scope and reproducibility limits}
+
+The central generalization limit is explicit training-manifest overlap. Path-disjoint audit lists can
+still contain training members, shared parent groups, or related states of the same physical system.
+Here every later fluid audit path occurs in the retained training manifest. The multiscale selection
+code likewise does not establish an exclusion split. Directory names cannot independently resolve
+physical identity, and prior warm-start membership remains incompletely reconstructed. We there-
+fore provide no pooled success rate, confidence interval based on assumed independent trajectories,
+or independently quarantined generalization estimate.
+The captured evaluator and model sources are sufficient to describe intended operations, but they
+do not fully authenticate historical runtime bindings. In particular, the inconsistent per-channel-
+gain divergence records cannot be resolved into a matched ablation without the relevant artifact
+and loader trace. The later joint candidate’s checkpoint provenance likewise does not establish its
+cumulative optimizer duration.
+Saved-record consistency checks support many transcriptions and aggregate calculations, but
+small differences between separately reduced scalar summaries remain. They are retained without
+changing scientific thresholds. Original scalar arrays and intermediate reductions were not replayed.
+The finite synthetic tests establish arithmetic behavior only over their declared cases; they do not
+supply missing physical calibration, solver validation, radiation validation, or learned reconstruction
+evidence.
+10
+
+
+\section*{6 Conclusion}
+
+Periodic fluid and magnetic autoencoders can enforce a compatible discrete divergence constraint
+through curl-based decoding, but this construction neither guarantees a correct spatial mean nor
+certifies reconstruction fidelity. Constant harmonic heads restore the mean path, while even-grid
+centered-difference null modes delimit the resulting representation. Uniform isotropic scaling pre-
+serves the divergence identity; unequal post-curl channel gains and spatial scalar gates generally
+do not.
+The retrospective measurements reinforce these distinctions. The later fluid audit fails its
+voxelwise-vorticity criterion, and the separate stress audit fails both vorticity and spectral-slope
+checks, despite small raw MSE, low divergence, and favorable energy summaries. Multiscale mag-
+netic comparisons show modality tradeoffs, and the later joint candidate retains substantial spec-
+tral and rheological energy errors. Training-manifest overlap and incomplete historical runtime
+authentication restrict these results to bounded audit comparisons. A scientifically interpretable
+evaluation must therefore report construction-level constraints, harmonic mean recovery, energy
+normalization, spatial reconstruction diagnostics, and population provenance separately.
+
+\section*{7 Data and Code A vailability}
+
+Supplementary record S1 is a private export containing original source, report, and manifest cap-
+tures; exact local checking inputs, scripts, and results; and the two primary reference PDFs. The
+source captures include model, loss, quantizer, loader, training, and evaluation code as text. Sepa-
+rate scripts implement the local saved-record checks and synthetic-algebra calculations. The export
+is not a public archive, and no public or reviewer access mechanism or permission to redistribute
+the original project artifacts is documented.
+The original neural checkpoints and raw field arrays were not loaded in this reanalysis. Complete
+reproduction of the original training and inference environment is not established by the private text
+captures. The separate local synthetic-algebra and saved-record calculations have retained inputs
+and recipes in Supplementary record S1; their reproducibility scope is those finite calculations, not
+the original neural experiments. The cited primary papers are publicly available through their
+arXiv records.
+
+\section*{References}
+
+[1] J. Richter-Powell, Y. Lipman, and R. T. Q. Chen. Neural Conservation Laws: A Divergence-Free
+Perspective. Advances in Neural Information Processing Systems 35 (2022). arXiv:2210.01741v3.
+https://arxiv.org/abs/2210.01741.
+[2] F. Mentzer, D. Minnen, E. Agustsson, and M. Tschannen. Finite Scalar Quantization: VQ-V AE
+Made Simple. arXiv:2309.15505v2 (2023). https://arxiv.org/abs/2309.15505.
+11
+
+\end{document}

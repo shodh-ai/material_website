@@ -53,6 +53,12 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/research/papers/:paper/:file.tex',
+        headers: [
+          { key: 'Content-Type', value: 'text/plain; charset=utf-8' },
+        ],
+      },
+      {
         source: '/shodh-new/assets/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },

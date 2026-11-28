@@ -1,0 +1,345 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: 5bc95400c1d90fd135fe26c8fba779b6f1933477130b631525c8d8b5757e670a
+% Extracted text SHA-256: f848eb40695d36e2530b2dd5c2d0009bc842f110d2937890e94d38e8bc9c0207
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Registered Fourier-phase geometry after bfloat16 storage: separating reconstruction from learned feature quality}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Registered Fourier-phase geometry after bfloat16 storage:
+separating reconstruction from learned feature quality
+
+\section*{Abstract}
+
+Accurate reconstruction from a hybrid representation need not demonstrate the quality of
+its learned features. We examine a captured organic-crystal representation containing 32 carrier
+channels, 30 deterministic signed Fourier-phase channels and 130 neural residual channels per
+atom. Source dependency analysis establishes that fractional-coordinate reconstruction uses
+only the phase channels: the frozen decoder discards its batch argument and does not use the
+residual channels. An isolated NumPy implementation independently decoded all 1200 stored
+base-state payloads, covering 134 parent identifiers, with 9600 checks passing. Reference-cell
+coordinate root-mean-square deviation (RMSD) had median 1.68188 [U+0002] 10\ensuremath{-}4 and maximum
+3.09576 [U+0002] 10\ensuremath{-}4 Angstrom; the maximum discrepancy from saved RMSD values was 3.16 [U+0002] 10\ensuremath{-}8
+Angstrom. Cell reconstruction was less precise, with maximum length and angle errors of
+0.07565 Angstrom and 0.131842 degrees. Saved transformation results support registered origin,
+proper-rotation and permutation actions, but not general cell-basis equivalence. We retain an
+original failed origin test and explain its subsequent measurement-adapter correction. These
+results establish stored geometric recoverability and narrowly specified covariance, not learned
+semantic quality, compression superiority or predictive utility.
+
+\section*{1 Introduction and contributions}
+
+Crystal representations must reconcile geometric information with equivalences induced by coordi-
+nate conventions. A rigid rotation changes Cartesian coordinates without changing the material;
+an origin shift changes fractional coordinates; atom permutations change row order. Whether a
+representation should remain identical, transform covariantly or require registration depends on
+its intended use. These alternatives are scientifically different, even when each produces a high
+similarity score after an appropriate comparison.
+A second distinction concerns hybrid representations that combine deterministic geometry with
+neural outputs. If coordinates are explicitly encoded in some channels, successful reconstruction
+can establish the fidelity of those channels and their numerical readout without testing whether the
+neural features capture useful chemistry. The relevant question is therefore not simply whether a
+decoder reconstructs a crystal, but which stored information actually determines its output.
+We address that question for a frozen, 192-channel-per-atom organic-crystal representation stored
+in bfloat16 (BF16). The focused contributions are a source-level dependency analysis of its coor-
+dinate readout, an independent reconstruction of every captured base-state payload, and an inter-
+pretation of registered symmetry tests that preserves both a historical failure and its later adapter
+correction. Rotation-invariant cell Gram information provides the geometric context, while sep-
+arate cell errors prevent the exceptionally small fractional-coordinate readout error from being
+mistaken for equally precise recovery of the full physical cell. The argument concerns this captured
+representation and cohort, rather than a general claim of unique crystal encoding.
+1
+
+Table 1: Captured cohort. Role names are source labels, not independent demonstrations of
+generalization.
+Role Frames Parents
+val\_sel 400 45
+val\_rep 400 45
+ood 400 44
+Pooled 1200 134
+
+\section*{2 Related work}
+
+SLICES studies an invertible, invariant crystal string representation for inverse design using gener-
+ative deep learning [ 1]. Mat2Seq studies invariant crystalline sequences for language-model-enabled
+generation [ 2]. These approaches contextualize the importance of invertibility and invariance, but
+their objectives should not be conflated with registered comparison of a continuous hybrid repre-
+sentation.
+No matched SLICES or Mat2Seq benchmark is supplied for the present cohort. Accordingly,
+published aggregate scores are not compared with the errors reported here, and no common recon-
+struction metric or compression advantage is assumed. The signed-phase and group-action algebra
+used below is established mathematics, not a priority claim. Our contribution is the evidence-
+based separation of what this particular stored reconstruction measures from what would require
+evaluation of learned features.
+
+\section*{3 Scientific methods and validation protocols}
+
+
+\section*{3.1 Cohort and evidential scope}
+
+This study is a retrospective reanalysis of captured arrays, serialized payloads, reports and source
+code; no additional simulations or learned-model inference were performed. The frozen cohort
+contains 1200 unique frames, with 400 each labelled val\_sel, val\_rep and ood. Parent identifiers
+parsed from the documented sample-identifier convention number 45, 45 and 44, respectively, with
+no overlap between roles. Thus the cohort covers 134 parent identifiers, not 1200 independent
+materials. Atom counts range from 14 to 252, with median 136.
+The loader receipt describes a larger 8000-frame, 585-parent corpus, including 6800 training
+frames, parent-split disjointness and unique frame hashes. Those larger claims were not indepen-
+dently rebuilt from all parent arrays. In particular, the present checks do not independently repro-
+duce training-parent exclusion. Selection-labelled validation data, val\_sel, are not an untouched
+independent test; the label ood alone does not establish distributional novelty or transferability. All
+reported quantiles describe pooled frames without iid confidence intervals or inferential significance.
+
+\section*{3.2 Channel structure and decoder dependencies}
+
+Each atom stores 32 carrier channels, 30 deterministic phase channels and 130 neural residual
+channels. Zero-based full-token slices are 0:32, 32:62 and 62:192, respectively. Although the adapter
+historically names the entire 32:192 slice as learned, only its 130-channel residual is neural output.
+The encoder explicitly concatenates deterministic absolute phases with the retained neural-head
+2
+
+outputs.
+The adapter constructs carrier-derived metadata and passes a batch to the decoder. However, the
+frozen coordinate decoder explicitly discards that argument and computes fractional coordinates
+directly from its first 30 input channels. Neither carrier-derived batch data nor the 130 residual
+channels enter this fractional reconstruction. A separate learned species head remains present,
+but the adapter returns ordered atomic numbers retained explicitly in the payload. Agreement of
+those numbers therefore verifies retention, not species-prediction accuracy. These are direct source
+dependencies, not causal inferences about training.
+
+\section*{3.3 Signed phases and registered origin action}
+
+For each fractional component x and frequency k 2 f1, 2, 4, 8, 16g, the stored pair is
+pk(x) =
+[U+0012]sin(2\ensuremath{\pi}kx)
+cos(2\ensuremath{\pi}kx)
+[U+0013]
+, a k =
+[U+0014] atan2(pk,1, pk,2)
+2\ensuremath{\pi}
+[U+0015]
+1
+, (1)
+where [[U+0001]]1 denotes reduction modulo one. The source groups three sine components followed by three
+cosine components at each frequency. Coarse-to-fine readout starts with bx1 = a1 and recursively
+chooses the nearest branch:
+bk = round(kbxprev [U+0000] ak), bxk = (ak + bk)/k. (2)
+The final estimate is reduced modulo one. Signed sine/cosine pairs retain phase and origin informa-
+tion that magnitudes alone discard; higher frequencies refine the selected branch after quantization.
+Under x 7! [x + s]1, comparison first applies the inverse action, with \ensuremath{\theta} = 2\ensuremath{\pi}ks:
+preg
+k =
+[U+0012]cos \ensuremath{\theta} [U+0000] sin \ensuremath{\theta}
+sin \ensuremath{\theta} cos \ensuremath{\theta}
+[U+0013]
+pk(x + s). (3)
+Representation comparisons use the 30 phase and 130 residual channels, excluding carriers. This
+is registered covariance, not equality of raw bytes under origin shifts. The implementation leaves
+all 130 residual channels unchanged during this registration. Permutation comparison similarly
+restores row correspondence using the known inverse permutation; it is not a test of universal
+canonical sequence invariance.
+
+\section*{3.4 Cell information and geometric metrics}
+
+For a row-basis cell matrix L, the Gram matrix satisfies
+G = LLT, (LQT)(LQT)T = G (4)
+for proper orthogonal Q. Rotation tests transform the Cartesian lattice basis consistently. The
+source constructs 15 cell features from nine scaled Gram entries, three scaled lengths and three
+inter-vector cosines, stabilized on a 1/4096 grid. This input construction is distinct from storing
+the cell itself. General integer basis changes L 7! U L instead give G 7! U GUT and are not covered
+by rotation invariance.
+The stored cell is recovered from carrier channels 19:28, reshaped to 3 [U+0002] 3 and multiplied by
+20 Angstrom. Every atom row must carry exactly the same stored cell. Coordinate error uses
+3
+
+the reference cell, not this decoded cell. With reference fractional coordinates fi and decoded
+coordinates bfi, the implemented metric is
+\ensuremath{\delta}i = bfi [U+0000] fi [U+0000] round( bfi [U+0000] fi), E f =
+vuut 1
+n
+nX
+i=1
+k\ensuremath{\delta}iLref k2
+2. (5)
+Thus differences are wrapped componentwise into the centered unit interval before Cartesian con-
+version. This dependency-light convention is not a certified closest-lattice-vector search for arbitrary
+skew cells. It deliberately isolates fractional-coordinate readout and is not a joint decoded-cell-and-
+coordinate error. Cell lengths, angles and relative absolute-volume error are assessed separately.
+
+\section*{3.5 Independent checks and saved transformation tests}
+
+An isolated, credential-free recipe using Python 3.12.14 and NumPy 2.3.5 parsed all 1200 original
+base-state envelopes and payloads. It reconstructed float32 values from BF16 bit patterns, decoded
+the 30 phase channels, checked retained ordered atomic numbers and common cell rows, and recom-
+puted coordinate and cell errors. Supplied Python modules were not executed, and original Torch
+checkpoint objects were not deserialized. The coordinate-metric comparison tolerance, declared be-
+fore examining full-cohort results, was 10\ensuremath{-}6 Angstrom: NumPy and original CUDA float32 atan2
+implementations need not be bit-identical.
+Transformation metrics instead remain saved-report/source evidence because transformed pay-
+loads were not supplied for this independent decode. The saved registered-cosine threshold is
+> 0.9999, with decoded origin and rotation covariance RMSD required to be below 0.01 Angstrom.
+Base reconstruction limits were 0.15 Angstrom for coordinate RMSD, 0.25 Angstrom for length
+error, one degree for angle error and 0.05 relative-volume error. These are diagnostic tolerances,
+not physical-property criteria. Cell sensitivity compares only the 130 residual channels under three
+prescribed perturbations: 5\% isotropic scaling, diagonal stretch (1.08, 0.96, 1) and an off-diagonal
+shear of 0.08. These perturbations retain fractional coordinates and atomic identities and left-
+multiply the row-basis cell; the shear entry is in the first row and second column. The diagonal
+stretch therefore scales lattice rows, not necessarily Cartesian principal axes. Its measurable-change
+threshold is residual RMS > 10\ensuremath{-}5.
+
+\section*{4 Experimental results}
+
+
+\section*{4.1 Independent stored geometry recovery}
+
+All 9600 checks passed across the 1200 base-state payloads. The maximum absolute difference
+between independently recomputed and saved coordinate RMSD was 3.16279 [U+0002] 10\ensuremath{-}8 Angstrom,
+well below the declared tolerance. Table 2 distinguishes the two summaries rather than substituting
+saved values for independent measurements. Exact canonical values are retained in Supplementary
+record S1.
+The independent phase decode numerically corroborates the source dependency result for every
+base payload. Very small coordinate error is therefore evidence for deterministic phase storage and
+readout, not a measurement of neural residual quality. Meanwhile, maximum relative-volume error
+is about 0.731\%, and cell-length errors reach 0.07565 Angstrom. These separate scales preclude
+describing the entire recovered physical structure as nearly exact solely from the coordinate RMSD.
+4
+
+Table 2: Pooled geometric errors. Coordinate RMSD uses the reference cell. Cell summaries were
+independently recomputed and agree with saved values.
+Quantity Independent Saved
+Coordinate median 0.000168188 0.000168187
+Coordinate p95 0.000240496 0.000240489
+Coordinate maximum 0.000309576 0.000309573
+Cell quantity Value
+Maximum length error 0.07565 Angstrom
+Maximum angle error 0.131842 degrees
+Relative-volume p95 0.00518218
+Relative-volume maximum 0.00730962
+Coordinate entries are in Angstrom.
+Table 3: Saved registered-action results. Supported comparisons use cosine > 0.9999; cell-basis
+records are explicitly unsupported.
+Action Comparison Passes/trials
+Origin, original Identity applied 0/1200
+Origin, corrected Inverse phase 1200/1200
+Proper rotation Vector identity 1200/1200
+Permutation Inverse row map 1200/1200
+Cell basis Unsupported 0/1200
+
+\section*{4.2 Original origin failure and corrected registration}
+
+The original 1200-case report had zero passing origin rows and minimum nominal-noncarrier co-
+sine 0.4894573469. A subsequently frozen forensic protocol compared the historical inverse-phase
+helper, analytic controls and adapter behavior across the same full cohort. It identified an omitted
+registration override: the old adapter inherited an identity operation despite declaring a registered
+phase action.
+Adding only that override routed registration through the existing inverse-phase helper; the
+source abstract syntax tree was otherwise unchanged. Saved forensic rows contain 1200 historical-
+helper passes, 1200 analytic-control passes and 1200 corrected passes, with no repack, correspon-
+dence or nonfinite failures. The saved classification is HARNESS\_IMPLEMENTATION\_MISMATCH. A new
+isolated 28-check recipe independently verified source, identity and aggregate relationships without
+rerunning neural inference. The original failure, protocol, all forensic rows and correction evidence
+remain in Supplementary record S1. This is a measurement-adapter correction, not improved
+weights or evidence that an originally failing learned model was repaired.
+The corrected saved minimum supported-action cosine is 0.9999993324. Maximum decoded
+origin-covariance RMSD is 0.000316426 Angstrom and rotation-covariance RMSD is 0.000309573
+Angstrom. A historical aggregate used a hard-coded denominator and reported 1.5; independent
+arithmetic gives 3600/3600 = 1 .0 over supported trials and 3600/4800 = 0 .75 over all recorded
+actions, including unsupported cell-basis records. Neither fraction denotes success under all crystal
+equivalences.
+All 3600 saved cell-sensitivity comparisons showed a noncollapsed residual representation. This
+establishes response of the 130 residual channels to the specified cell perturbations, not accurate
+5
+
+Table 4: Stored payload rates in bits per atom.
+Encoding Median p95
+Raw BF16 hybrid 3136.71 3138.18
+Gzip, level 9 2066.39 2092.91
+cell-conditioned physical predictions. A separate precision-sweep summary lists float32, float16 and
+BF16 storage points and detected cell-blind and magnitude-only controls. Those controls were not
+run in the principal corrected report, and architectural ablations remain incomplete; the summary
+does not support detailed architectural attribution.
+
+\section*{4.3 Actual payload rates}
+
+The payload stores 192[U+0002]16 bits per atom, an explicit 64-bit atomic number per atom and a 12-byte
+structure header. Consequently,
+Rraw(n) = 3136 + 96 /n (6)
+in bits per atom. Table 4 reports the full hybrid payload, excluding the separately counted com-
+parison envelope. Independent recompression reproduced all 1200 gzip payload byte counts using
+level 9 and zero timestamp.
+These measurements establish absolute storage accounting for the captured representation, in-
+cluding deterministic and neural channels. Without a matched baseline and distortion budget, they
+do not establish optimal compression or an advantage over crystal strings or sequences.
+
+\section*{5 Discussion and limitations}
+
+The central result is a separation of three evidential levels. First, source dependencies identify
+which information determines fractional reconstruction. Second, independent numerical decoding
+demonstrates that the specified mechanism works on every stored base payload. Third, saved
+transformed-input measurements characterize registered actions, with independent checks restricted
+to their recorded arithmetic and source relationships. Keeping these levels distinct avoids describing
+a stored-data reconstruction as an independently reproduced learned encoder.
+The coexistence of recoverable signed phases and rotation-invariant Gram information is useful
+conceptually. Origin-dependent coordinate information need not be erased to permit meaningful
+comparison: it can instead carry an explicit group action. Conversely, rotation invariance of a
+cell descriptor does not provide invariance to general integer basis changes. Proper rotations were
+tested, but these results do not establish reflection or handedness handling, arbitrary-origin byte
+invariance, full cell-basis invariance or universal crystal uniqueness. The representation comparison
+also excludes carrier channels, so a high noncarrier cosine says nothing about equality of complete
+payload bytes.
+Residual sensitivity is a narrower result than learned utility. Nonconstant responses to cell
+changes can rule out collapse under those perturbations without establishing useful response mag-
+nitude, chemically meaningful organization or accurate predictions. Similarly, retained atomic
+numbers cannot validate the separate learned species head. Geometry recovery alone establishes
+neither energy/force accuracy, material stability nor downstream predictive performance.
+6
+
+The cohort boundaries matter even for such narrowly framed conclusions. Multiple frames share
+parent identifiers; selection-labelled validation contributes to pooled quantiles; and source-labelled
+out-of-distribution data do not independently demonstrate transfer. The latest 1200-case analysis
+is kept separate from older 300-case reconstruction and other crystal-projection cohorts because
+their decoder and cohort relationships have not been reconciled. The present evidence supports a
+focused stored-geometry result, rather than a broad materials-model benchmark.
+
+\section*{6 Conclusion}
+
+All 1200 captured BF16 base payloads support independent geometric decoding through deter-
+ministic signed Fourier phases, with coordinate errors near 10\ensuremath{-}4 Angstrom under a reference-cell
+metric. Source analysis establishes why this precision cannot be credited to the 130 neural residual
+channels. Separate cell errors and explicitly registered transformation comparisons define the actual
+scope of recovery. Preserving the original failed origin test alongside its adapter-only correction
+further shows that a symmetry result depends on implementing the declared action. Stored geo-
+metric fidelity, registered covariance and learned feature quality are distinct scientific claims and
+require distinct evidence.
+
+\section*{7 Data and Code A vailability}
+
+Supplementary record S1 contains the frozen cohort arrays, all 1200 original base-state serialized
+payloads, supplied source code and reports, original failed-origin evidence, forensic rows and source
+comparison, independent checking scripts and outputs, and exact canonical numerical summaries.
+The NumPy decoding script neither executes supplied model code nor deserializes Torch check-
+points; the separate forensic script checks saved source and measurement relationships. Supple-
+mentary record S1 exists as a private supplementary export, not a public repository or archive. Its
+existence does not establish public redistribution permission or reviewer access; no external access
+procedure is specified here. Transformed payloads are not included in the independently decoded
+collection, and these scripts do not reproduce learned encoding.
+
+\section*{References}
+
+[1] H. Xiao, R. Li, X. Shi, Y. Chen, L. Zhu, X. Chen, and L. Wang. An invertible, invariant crystal
+representation for inverse design of solid-state materials using generative deep learning. Nature
+Communications 14:7027, 2023. doi:10.1038/s41467-023-42870-7.
+[2] K. Yan, X. Li, H. Ling, K. Ashen, C. Edwards, R. Arróyave, M. Zitnik, H. Ji, X. Qian, X.
+Qian, and S. Ji. Invariant Tokenization of Crystalline Materials for Language Model Enabled
+Generation. Advances in Neural Information Processing Systems 37, 2024.
+7
+
+\end{document}

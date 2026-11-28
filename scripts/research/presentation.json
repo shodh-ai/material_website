@@ -8,6 +8,10 @@
     "ogImage": "/social/research.png",
     "ogAlt": "Shodh Research"
   },
+  "P27": {
+    "ogImage": "/social/beyond-reconstruction-error.png",
+    "ogAlt": "Beyond Reconstruction Error · Shodh Research"
+  },
   "LUCAN10B": {
     "slug": "lucan-10b-physics",
     "ogImage": "/social/lucan-10b.png",

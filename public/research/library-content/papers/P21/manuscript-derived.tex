@@ -1,0 +1,395 @@
+% PDF-derived LaTeX transcription. Original manuscript source was unavailable.
+% Published PDF SHA-256: debccb06de0ca5c38ee3465448669b7b18de51128f8dc6c045d20caa9931a2a4
+% Extracted text SHA-256: f017f6026df01cad63765c2b9af4a8922e8837a586b2a431ce9fcbabd5c83122
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setlength{\emergencystretch}{3em}
+\title{Separate Gates for Reconstruction, Symmetry and Population Size in an Adsorbate–Slab Codec}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\noindent\textbf{PDF-derived LaTeX transcription.} This editable text follows the PDF extraction. Refer to the published PDF for figures, table layouts, and mathematical notation.
+
+% Extracted chunk 1
+
+Separate Gates for Reconstruction, Symmetry and Population Size
+in an Adsorbate–Slab Codec
+
+\section*{Abstract}
+
+Scientific qualification of an atomistic codec requires more than a small reconstruction me-
+dian. We reconcile retained evaluations of an adsorbate–slab representation while separating
+a historical checkpoint, a later two-seed pilot, a source-expansion audit and a fresh single-case
+symmetry diagnostic. The shared 200-entry pilot holdout reports learned stored-byte median
+atom errors of 0.00842 and 0.00854 Å, but 95th percentiles of 0.187 and 0.167 Å and maxima
+near 19 Å. The checked cache identifiers match the complete pilot manifest. Reaggregation of
+all 672583 retained duplicate groups reconciles 200079631 distinct frames from the reported
+upstream count, leaving a 799920369-frame shortfall against the frozen target. The historical
+checkpoint separately fails a saved rigid-transform test whose original numeric input and ap-
+plied transform we independently verify. Its scalar is an energy-trace difference rather than
+an adsorption label, and its species checks compare inputs rather than decoded conservation.
+These results distinguish median reconstruction, tail robustness, symmetry and source capacity
+without claiming new neural inference or physical certification.
+
+\section*{1 Introduction}
+
+An atomistic representation can reconstruct many coordinates accurately without preserving every
+property needed for scientific use. Median reconstruction, large-error tails, symmetry, energy defi-
+nitions, and the population available for training answer different questions. A successful result on
+one of these axes does not determine the others. This distinction is particularly consequential when
+a learned representation accompanies explicit atomic and cell information: exact recovery through
+the explicit lane need not demonstrate accuracy of the learned decoder.
+We examine retained artifacts from an adsorbate–slab codec and its subsequent evaluation cam-
+paigns. The study separates four bodies of evidence: a July 2026 historical checkpoint evaluation,
+a later two-seed pilot drawn from an OC20-Dense-derived cache, a source-expansion capacity as-
+sessment, and an October single-case rigid-transform diagnostic of the historical checkpoint. These
+are neither interchangeable cohorts nor stages of one continuously improving model.
+The contribution is a retrospective reconciliation of what each evaluation supports. The pilot
+reports small median errors after a stored-precision round trip, but substantial tails remain. The
+expansion campaign fails its frozen population target even after duplicate accounting is reconciled.
+A separately recorded symmetry counterexample survives independent checking of its raw input
+and applied transform. This combination identifies a concrete qualification gap between typical
+reconstruction accuracy, robustness of the decoded representation, and the size of its admissible
+physical population. It does not introduce a new codec, retrain an existing one, or independently
+reproduce its neural predictions.
+1
+
+
+\section*{2 Scientific context}
+
+OC20 distinguishes prediction of energy and forces from prediction of relaxed structures or relaxed
+energies, and defines separate evaluation distributions [ 1]. These task definitions matter here: an
+error in stored coordinate reconstruction is not, by itself, an error measure for a catalyst-screening
+task. Our private pilot also uses its own material-group split and cannot be treated as an official
+OC20 benchmark submission.
+The inspected first AdsorbML preprint defines adsorption energy through the combined system,
+clean slab, and gas reference, filters physically unsuitable relaxed configurations, and uses DFT
+follow-up to evaluate candidate structures [ 2]. We use this distinction to interpret the scalar
+quantities in our retained records. A change along a single energy trace does not provide the
+required component references. The same preprint specifies RPBE/V ASP calculations; a result
+from a different electronic-structure method would require a method-equivalence argument before
+a numerical discrepancy could be interpreted as an adsorption-energy error. These references
+provide task and method context, not external validation of our codec or its reported performance.
+
+\section*{3 Materials and methods}
+
+
+\section*{3.1 Evidence and cohort separation}
+
+The retained material includes complete pilot identifiers and cache files, original aggregate evalu-
+ation reports, source snapshots, frozen acceptance specifications, the complete retained duplicate-
+group table and digest list, and the raw numeric file used by the later symmetry diagnostic. Private
+supplementary record S1 preserves these originals and the exact local checking inputs and results.
+Source programs were inspected as text. No retrieved application, serialized model, training pro-
+cedure, or DFT calculation was executed in this analysis.
+The historical evaluation concerns a checkpoint selected at training step 24000 and reports 598
+selection-validation and 469 representative-validation examples. The prospective pilot uses 1600
+training, 100 selection, 100 representative-validation, and 200 holdout entries, with two indepen-
+dently recorded training seeds. The 200-entry holdout is shared by the two seeds; the seeds are
+not independent datasets. The expansion campaign counts physical frames rather than trajectory
+identifiers. Finally, the October diagnostic contains one fresh input, evaluated against the historical
+checkpoint; it does not rerun that checkpoint’s held-out cohort.
+
+\section*{3.2 Pilot identity, storage and error summaries}
+
+We rechecked all 2000 manifest records and the original byte hashes of all four pilot cache archives.
+Fixed numeric and string fields were read directly from bounded array members. Eight object-
+array fields per archive, including fractional coordinates, atomic numbers, displacements and scalar
+targets, remained opaque; pickle deserialization was disabled. Thus the cache check authenticates
+identities and selected metadata, not the complete geometry or target values.
+The manifest supplies trajectory identifiers, system identifiers, material identifiers, source hashes
+and semantic-token hashes. For each key k and split s, let Is,k be its set of recorded values. We
+test
+Is,k \ensuremath{\cap} It,k = \ensuremath{\varnothing} (s ̸= t). (1)
+2
+
+This is recorded-identity separation. It does not prove that physically similar structures are absent
+or that the intended generalization distribution has been realized.
+The codec represents each atom by 192 components: a 32-component explicit carrier and a 160-
+component learned lane. The carrier stores initial fractional coordinates, Cartesian displacements
+for four selected trajectory frames, and species and configuration information. A separate header
+supplies atomic numbers, the full cell, atom masks and branch identity. The encoder receives
+species, fractional-coordinate Fourier features, folded displacements, masks, cell features, branch
+identity and the normalized target scalar. A message-passing encoder produces bounded per-atom
+learned features; a set-transformer decoder consumes these features and header information, but
+not the carrier coordinates or displacements. It reconstructs initial fractional coordinates, folded
+Cartesian displacements and the scalar. The carried-coordinate control instead reads the explicit
+fractional coordinates and multiplies them by the target cell. This is an autoencoding comparison,
+not geometry generation from an information-free input, and the 160-component learned lane is
+not a compressive representation of the raw atomic degrees of freedom.
+The same historical branch-trainer snapshot is retained as method evidence in a companion an-
+tibody pose and reconstruction study. This is shared implementation lineage, not evidence of a
+common checkpoint execution or measured population. The antibody cohorts, historical adsorbate
+branch and later OC20 pilot retain separate empirical and source-version scopes; the pilot modi-
+fications are described below. Source identity and companion-version bindings are retained with
+Supplementary record S1.
+The pilot uses full 3 \ensuremath{\times} 3 cells, including skew cells, with all three fractional axes periodic and
+vacuum separating slab images. This differs from the historical implementation’s two periodic
+axes. The pilot encoder sums radial-basis features over every periodic image within a 12 Å cutoff,
+replacing the historical encoder’s single-image distance features. The pilot’s position training loss
+and stored-byte scoring use an exact nearest-lattice-image search under the full cell, rather than
+componentwise fractional rounding. Both the learned and carried-coordinate routes are scored
+after a float32-to-bfloat16 (BF16)-to-uint16-bitcast round trip through BF16 back to float32. The
+learned decoder receives only the learned lane read back from these packed tokens, together with
+the header information. Its atomwise error ei is the Cartesian distance between corresponding
+reconstructed and target atoms, minimized over integer lattice translations by a provably bounded
+search; no fitted rigid alignment is applied. We retain the atomwise median, upper quantiles,
+maximum and root mean squared error separately. For M scored atoms, the median and root
+mean squared error are
+q0.5 = median i ei, e rms =
+(
+M \ensuremath{-}1
+M\ensuremath{\sum}
+i=1
+e2
+i
+) 1/2
+. (2)
+The pilot’s acceptance condition applies a 0.05 Å bound to the aggregate and required subgroup
+medians, together with its other recorded controls. It is not a 0.05 Å bound on every atom or upper
+quantile. The retained aggregate reports are reconciled with each other and with manifest-derived
+denominators; the underlying decoded predictions are not independently recomputed.
+For each trajectory, four frames are selected by rounding an evenly spaced index grid from
+the first to the last frame. Targets comprise the initial fractional coordinates and the selected
+frames’ Cartesian displacements from the initial positions. Reconstructed frame positions are the
+decoded initial coordinates multiplied by the cell, plus the decoded displacements. Adsorbate-
+trajectory RMSD is computed separately for each trajectory by averaging squared corresponding-
+atom displacement norms over valid selected frames and adsorbate atoms, then taking the square
+3
+
+root; reported quantiles are across trajectories, not pooled atoms. The pilot uses exact full-cell
+nearest-image distances and identifies adsorbate atoms from source tags equal to 2. Its persistence
+comparator repeats the initial positions at every selected frame. The historical evaluator instead
+uses its diagonal cells with Cartesian image reduction along the two periodic axes and identifies
+adsorbate atoms by excluding Fe, Co and Ru. Its sample-maximum-error statistic is the maximum
+initial-coordinate error over active atoms in each sample, subsequently summarized across samples.
+These metric definitions involve no fitted rigid alignment and are distinct from the pilot’s pooled
+atom-error summaries.
+
+\section*{3.3 Population accounting}
+
+The expansion specification defines its target as one billion distinct physical frames in its declared
+source scope. Physical-frame identity is defined by a canonical payload containing species, periodic-
+ity, the full cell and wrapped fractional coordinates. The admitted convention requires all three axes
+to be periodic. Cell coefficients are quantized at 10\ensuremath{-}6 Å and fractional coordinates at 10\ensuremath{-}7. Canon-
+icalization removes atom-order, integer-lattice-wrapping and global periodic-origin differences, but
+does not canonicalize lattice-basis changes or rotated-cell representations. Finite quantization can
+merge extremely close geometries: exact comparison means equality of these quantized canonical
+payloads, not equality of unquantized coordinates or general physical equivalence. Distinct frames
+within a trajectory may remain correlated. A hash-grouping stage identifies candidate duplicate
+groups; the saved exact canonical-payload comparisons assign each group a distinct-payload count.
+For reported upstream frame count N , group sizes rg and retained distinct-payload counts dg, the
+accounting identity is
+Ndistinct = N \ensuremath{-}
+\ensuremath{\sum}
+g
+(rg \ensuremath{-} dg). (3)
+We independently parse every retained group row, compare its digest with the binary digest list,
+and reaggregate the subtraction. We do not reread the upstream 200-million-frame payloads or
+repeat their canonical physical comparisons. Consequently, N and the exact-payload classifications
+remain saved-report evidence; the complete retained group accounting is directly remeasured.
+
+\section*{3.4 Rigid-input diagnostic}
+
+The raw numeric archive contains 11 saved position frames for 57 atoms. The diagnostic selects four
+frames using a rounded, evenly spaced index grid, giving indices 0, 3, 7, 10. Its transform rotates
+about the measured slab normal by 47 degrees and translates by (1.5, 0, 0) Å. With row-vector
+coordinates X, cell matrix C, proper rotation R and translation t, the implemented transformation
+is
+X \ensuremath{\prime} = XR T + t, C \ensuremath{\prime} = CR T, \ensuremath{\Delta}X \ensuremath{\prime} = \ensuremath{\Delta}XR T. (4)
+The cell and vectors transform together. The diagnostic wraps the first two fractional axes and
+leaves the surface-normal axis nonperiodic. We independently reproduce this input operation and
+its periodic pair-distance comparison from the original arrays. This tests the validity of the applied
+input transform; it does not reproduce the learned output or infer invariance under every possible
+rigid motion.
+4
+
+
+\section*{4 Results}
+
+
+\section*{4.1 A separated pilot with small medians and large tails}
+
+All 2000 pilot entries have distinct trajectory identifiers, source hashes and semantic-token hashes.
+They represent 763 system identifiers and 676 material identifiers. None of the five recorded iden-
+tity keys is shared across splits. The four cache byte hashes match the pilot audit. The checked
+trajectory, system, material and source-hash fields match their manifest rows. The checked cell,
+reference-energy, shift and recorded-frame metadata are finite and structurally consistent. These
+findings establish the retained identity and metadata record, while the object-array geometry re-
+mains outside independent readback.
+The holdout contains 19601 atoms and the training manifest contains 122777 atoms, matching
+the reported denominators. Both saved seed reports pass their declared median-based stored-byte
+gate. Table 1 retains the large-error statistics alongside those medians.
+Table 1: Saved learned-route atom errors on the shared 200-entry pilot holdout, in Å. These are
+original aggregate reports, not new neural inference.
+Seed Median 95th percentile Maximum RMS error
+20260730 0.0084163 0.18728 18.728 0.62411
+20260731 0.0085373 0.16724 18.998 0.63354
+The median spread is 0.000120994 Å. This is descriptive agreement between two seed medians,
+not a confidence interval. In both seeds the 95th-percentile atom error exceeds the median gate
+threshold; the largest errors approach 19 Å. Required subgroup passes are likewise median-based.
+A passing verdict therefore supports the specified median criterion, not uniformly accurate recon-
+struction.
+The carried-coordinate control has a saved median error of 0.0300535 Å on the same atom pop-
+ulation. The specified training-atom nearest-neighbour codebook has a median of 0.818882 Å. The
+learned median improves on these particular comparisons. The codebook result is not an exclusion
+of every memorization mechanism, and the carried-coordinate error is not a universal information-
+theoretic floor.
+Report-only trajectory metrics also retain tails. The two learned adsorbate-trajectory medians
+are 0.0464702 and 0.0440590 Å, with 95th percentiles 2.20425 and 1.92524 Å. The saved persistence
+comparator has median 1.08662 and 95th percentile 2.02071 Å. The first seed improves the median
+while its 95th percentile is worse than persistence. The report-only energy reconstruction mean
+absolute errors are 0.0230020 and 0.0186036 eV over the 200 holdout entries. The normalized target
+adsorption-energy scalar is supplied to the encoder, so these values measure scalar reconstruction
+through the stored learned representation, not prediction of an unknown adsorption energy from ge-
+ometry alone. These pilot labels are distinct from the historical symmetry diagnostic’s energy-trace
+difference. Neither these aggregate reconstruction errors nor the stored-coordinate gate supplies an
+independent adsorption-energy oracle.
+5
+
+
+\section*{4.2 Historical results are not a new held-out test}
+
+The historical checkpoint’s representative-validation report gives adsorbate-trajectory median er-
+ror 0.0635430 Å, 95th percentile 7.24637 Å, and sample-maximum-error 95th percentile 0.325931 Å.
+The October audit compares these values with its declared limits of 0.05, 0.10 and 0.25 Å, respec-
+tively. All three comparisons fail. The October records reference the original July report, so this is
+a retrospective classification against later declared gates, not a freshly executed historical holdout.
+The historical all-atom median and these adsorbate-trajectory statistics also have different popu-
+lations and definitions; they cannot be substituted for one another. The later pilot uses different
+checkpoints and does not retrospectively repair the historical evaluation.
+
+\section*{4.3 Complete retained duplicate accounting confirms a capacity shortfall}
+
+The expansion’s four source counts sum to 200982344 input frames (Table 2). The retained table has
+672583 groups, containing 1575296 records. Every group digest matches the corresponding original
+binary entry, group identifiers are sequential, and the digests are strictly ordered and unique. All
+retained exact-comparison classifications assign one distinct payload to each group, yielding 902713
+extra duplicate rows and 200079631 distinct frames by the accounting identity. No collision split is
+recorded. The physical equality underlying these classifications is not independently rerun here.
+Table 2: Saved source-expansion counts and independently reconciled duplicate subtraction. Input
+source counts remain upstream report evidence.
+Counting category Frames
+S2EF all 133934018
+S2EF rattled 16677031
+S2EF molecular dynamics 38315405
+Dense source 12055890
+Input sum 200982344
+Extra duplicates 902713
+Distinct-frame accounting 200079631
+Frozen target 1000000000
+Shortfall 799920369
+The resulting fraction of the target is 0.200079631. Even the pre-deduplication upper bound
+falls below the target. The 20-million-frame proxy is a subset and is not added again. The final
+capacity result is a hard failure, with no frozen expanded manifest or authorized expansion training.
+Its split/leakage audit was not run after the capacity failure. This expansion-specific limitation is
+distinct from the earlier pilot’s checked split identities. A repeated GPU DFT fixture is recorded
+as feasibility-only and contributes zero additional capacity frames.
+
+\section*{4.4 A valid input transform accompanies a saved symmetry failure}
+
+The exact cited raw archive matches the original diagnostic’s hash. Its numeric arrays can be
+inspected without object deserialization. The independently reconstructed rotation has determi-
+nant one and preserves the diagnostic’s input periodic pair distances to 2.665 \ensuremath{\times} 10\ensuremath{-}15 Å. The
+displacement-vector transformation differs from its float64 expectation by at most 5.912 \ensuremath{\times} 10\ensuremath{-}8 Å
+6
+
+after float32 rounding, reproducing the saved input diagnostic. These measurements support the
+consistency of this applied input transform.
+The saved learned-output report nevertheless fails all four declared checks (Table 3). The position
+measure is a maximum atomic displacement norm; the pair-distance measure is a maximum absolute
+distance difference. The learned-lane entry tests the contract’s atom-aligned invariance convention
+and is not a general theorem about arbitrary equivariant features.
+Table 3: Saved one-case rigid-transform errors for the historical checkpoint. The input transform
+was independently checked; decoded outputs were not rerun.
+Declared quantity Observed Limit
+Position displacement (Å) 0.317611 10\ensuremath{-}4
+Pair-distance difference (Å) 0.442535 10\ensuremath{-}4
+Atom-aligned learned-lane difference 1.35301 10\ensuremath{-}5
+Scalar difference (eV) 12022.7612 10\ensuremath{-}5
+The scalar is the difference between the last and first entries of an 80-entry energy trace, whereas
+only 11 position frames are stored. It is not a matched slab-plus-gas adsorption label or a frame-
+aligned energy ledger. The large scalar discrepancy therefore concerns this diagnostic scalar under
+a rigid transform; it is not an independently measured error in physical adsorption energy. The
+reported count and species checks compare the baseline and transformed inputs. They do not
+establish conservation by learned decoded outputs. Velocity, momentum, charge and total-energy
+conservation remain unsupported by the specified native channels and ledger.
+Two retained October reports contain identical output metrics but record different source com-
+mits. We treat them as one saved counterexample, not two independent replications. One valid-
+input counterexample challenges the tested model’s stated symmetry requirement for that case; it
+supplies neither a failure rate over the pilot nor evidence that the later pilot checkpoints behave
+identically.
+
+\section*{5 Discussion and limitations}
+
+The evaluations support a layered interpretation. The prospective pilot demonstrates a reported
+improvement in typical reconstruction under its specific stored-precision and split protocol. It also
+exposes substantial tails that the median gate does not constrain. Population sufficiency fails a
+separate, prespecified target, regardless of the pilot medians. The historical checkpoint’s saved
+rigid-transform result identifies a different vulnerability, supported by independently checked input
+geometry but not by new model inference. Pooling these findings into a single success or failure
+score would discard their scientific content.
+The practical distinction is between a gate and the property it measures. A reconstruction cri-
+terion should name its population and statistic. An energy criterion should identify its physical
+target and component references. A symmetry criterion should transform cell, coordinates and
+vector quantities consistently and declare the expected transformation of learned features. A ca-
+pacity criterion should count the intended physical unit and avoid adding a subset to its parent.
+These conditions are illustrated by the retained study; they are not a claim of a universally optimal
+acceptance threshold.
+7
+
+Several limits remain. The original decoded arrays and model checkpoints were not replayed,
+and the pilot’s coordinate and scalar object arrays remain opaque. The complete historical raw
+manifest is unresolved at its recorded location. Upstream capacity frames were not independently
+reread; exact group classifications and source totals retain their original report status. The one-
+case MACE-derived diagnostic is not an independent DFT oracle. Its input-validity check does
+not resolve whether a model implementation, training choice or representation causes the observed
+output failure. No conservation law is inferred from preservation of copied input identities.
+The two inspected primary references establish task context and relevant energy definitions,
+rather than a comprehensive novelty survey. This study is a retrospective evaluation case, with
+no claim of state-of-the-art performance, physical certification, production readiness or universal
+codec failure. Its contribution is the supported separation of otherwise easily conflated evaluation
+results.
+
+\section*{6 Conclusion}
+
+The retained adsorbate–slab study shows that small stored-byte reconstruction medians, large tails,
+a valid-input symmetry counterexample and an insufficient physical population can coexist. Both
+pilot seeds pass their declared median gate, while their maximum saved atom errors approach
+19 Å. Complete retained duplicate-group reaggregation reconciles 200079631 distinct frames from
+the reported upstream input, below the one-billion target. The historical checkpoint’s saved sym-
+metry failure remains distinct from those pilot results, and its input transform is independently
+reproduced.
+These findings favor reporting each qualification on its own evidence and counting unit. They
+preserve the pilot’s demonstrated scope while making its tails, source-capacity limit and outstanding
+physical checks visible. Independent prediction replay and matched physical references are the next
+requirements for stronger qualification.
+
+\section*{7 Data and code availability}
+
+Supplementary record S1 is a private export of the retained pilot cache arrays and manifest,
+duplicate-group table and digest list, numeric rigid-transform input arrays, original aggregate re-
+ports, source snapshots, checking recipes and inputs, capture records, and version-specific literature
+evidence. Its 171 final local checks cover full retained duplicate-group reaggregation, fixed pilot-
+cache metadata, manifest identity comparisons and the numeric rigid-transform input; they are not
+new neural or physical experiments. The pilot caches retain opaque object-array fields, and the
+checks do not provide independent decoded-prediction replay.
+The original source snapshots were inspected as text, not executed. No public repository,
+external-reviewer access mechanism or redistribution entitlement has been established for the pri-
+vate material. Supplementary record S1 therefore documents the retained material but does not
+establish public or external-reviewer access to its arrays, source snapshots or checking recipes.
+8
+
+
+\section*{References}
+
+[1] L. Chanussot et al. The Open Catalyst 2020 (OC20) Dataset and Community Challenges.
+arXiv:2010.09990v5, September 24, 2021. https://arxiv.org/abs/2010.09990v5.
+[2] J. Lan, A. Palizhati, M. Shuaibi, B. M. Wood, B. Wander, A. Das, M. Uyttendaele, C. L. Zit-
+nick, and Z. W. Ulissi. AdsorbML: Accelerating Adsorption Energy Calculations with Machine
+Learning. arXiv:2211.16486v1, November 29, 2022. https://arxiv.org/abs/2211.16486v1.
+9
+
+\end{document}
