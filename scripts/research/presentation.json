@@ -1,16 +1,88 @@
 {
   "P20": {
     "slug": "reactor-h100-triton",
-    "ogImage": "/social/reactor-h100-triton.png",
-    "ogAlt": "Finite equivalence and nested performance limits in a fused reactor-field generator"
+    "ogImage": "/social/charts/p20.png",
+    "ogAlt": "Bar chart plotted from Table 3 of the paper: Merged-kernel speed ratio by timing scope"
   },
   "P26": {
-    "ogImage": "/social/research.png",
-    "ogAlt": "Shodh Research"
+    "ogImage": "/social/charts/p26.png",
+    "ogAlt": "Figure 1: matching sample digests in one chunk-4 replay sample: saved trajectory 256/256, interface flux 256/256, metadata 215/256"
   },
   "LUCAN10B": {
     "slug": "lucan-10b-physics",
     "ogImage": "/social/lucan-10b.png",
     "ogAlt": "LUCAN-10B-Physics cross-scale architecture, Figure 1"
+  },
+  "P03": {
+    "ogImage": "/social/charts/p03.png",
+    "ogAlt": "Figure 1: the frozen antibody codec architecture and the three compared decoding routes"
+  },
+  "P01": {
+    "ogImage": "/social/charts/p01.png",
+    "ogAlt": "Bar chart plotted from Table 3 of the paper: Adjacent decrements, raw vs contracted decoder"
+  },
+  "P02": {
+    "ogImage": "/social/charts/p02.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Lost contact range for all affected pairs"
+  },
+  "P04": {
+    "ogImage": "/social/charts/p04.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Transformation diagnostics over 256 cases"
+  },
+  "P06": {
+    "ogImage": "/social/charts/p06.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Pooled coordinate RMSD, independent vs saved"
+  },
+  "P07": {
+    "ogImage": "/social/charts/p07.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Learned pair-distance summaries by cohort"
+  },
+  "P09": {
+    "ogImage": "/social/charts/p09.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Default-to-highest ratios of final fluid-cell diagnostics"
+  },
+  "P10": {
+    "ogImage": "/social/charts/p10.png",
+    "ogAlt": "Bar chart plotted from Table 4 of the paper: Re-reduced Rg results: relative error vs reference"
+  },
+  "P11": {
+    "ogImage": "/social/charts/p11.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Hard-grid results remeasured from retained fields"
+  },
+  "P12": {
+    "ogImage": "/social/charts/p12.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Joint trajectory relative-L2 errors after correction"
+  },
+  "P13": {
+    "ogImage": "/social/charts/p13.png",
+    "ogAlt": "Bar chart plotted from Table 4 of the paper: Retained Couette physical acceptance failures"
+  },
+  "P14": {
+    "ogImage": "/social/charts/p14.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Later fluid audit: relative vorticity MSE"
+  },
+  "P15": {
+    "ogImage": "/social/charts/p15.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Hypersonic smoke: peak vs mean kinetic-energy density"
+  },
+  "P16": {
+    "ogImage": "/social/charts/p16.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: TAF1 temporal ladder: final energy residual vs CFL"
+  },
+  "P18": {
+    "ogImage": "/social/charts/p18.png",
+    "ogAlt": "Bar chart plotted from Table 2 of the paper: Test reconstruction RMSD p50: model vs controls"
+  },
+  "P19": {
+    "ogImage": "/social/charts/p19.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Field vs target-charge error, 32 selected scenes"
+  },
+  "P21": {
+    "ogImage": "/social/charts/p21.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Learned-route atom errors on 200-entry pilot holdout"
+  },
+  "P25": {
+    "ogImage": "/social/charts/p25.png",
+    "ogAlt": "Bar chart plotted from Table 1 of the paper: Measured particle-vault storage per dynamic row"
   }
 }

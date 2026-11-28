@@ -24,6 +24,16 @@ The generator sets canonical and social metadata under `https://shodh.ai/researc
 
 The LUCAN-10B manuscript is the unmodified 17-page PDF under `papers/lucan-10b/`. Its preview comes from Figure 1. The earlier physical-intelligence whitepaper retains its existing main-site URL.
 
+## Social previews (og:image)
+
+Every paper page shares a chart from its own manuscript, set per paper in `presentation.json` (`ogImage`, `ogAlt`). Images live in `public/research/library-content/social/charts/`. The tools are macOS-only Swift scripts; run them from the repository root:
+
+- Papers with a figure: `swift scripts/research/social_figure.swift <paper.pdf> "Figure 1" above "<footer label>" <out.png>` crops the figure from the PDF.
+- Papers with only tables: add an entry to `social-charts.json` (values copied verbatim from one table, which the footer cites) and run `swift scripts/research/social_chart.swift scripts/research/social-charts.json public/research/library-content/social/charts`.
+- Reading guides: `swift scripts/research/social_guide.swift "<title>" <out.png> <chart.png>...` combines the guide's paper charts.
+
+Check every chart against its source table before publishing.
+
 ## Old hostname
 
 The optional [redirect deployment](../../deploy/legacy-research-redirect/README.md) is in this same repository. The owner of the existing `shodh-research` hosting project must connect that directory to activate the redirects. The main-domain research pages are independent of that deployment.

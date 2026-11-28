@@ -1,0 +1,513 @@
+[
+  {
+    "id": "P01",
+    "table": "Table 3",
+    "chartTitle": "Adjacent decrements, raw vs contracted decoder",
+    "valueLabel": "decrements below −10⁻⁸ (of 1,342,177,280 comparisons)",
+    "scale": "linear",
+    "categories": [
+      "Damage",
+      "Accumulated plastic strain"
+    ],
+    "series": [
+      {
+        "name": "Raw",
+        "values": [
+          "31,605,800",
+          "639,173,958"
+        ]
+      },
+      {
+        "name": "Contracted",
+        "values": [
+          "0",
+          "0"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 3 · Reconstruction Accuracy and Irreversible Ordering in Quantized Cyclic-Mechanics Fields"
+  },
+  {
+    "id": "P02",
+    "table": "Table 1",
+    "chartTitle": "Lost contact range for all affected pairs",
+    "valueLabel": "Lost range (nm)",
+    "scale": "linear",
+    "categories": [
+      "A–G",
+      "C–G",
+      "G–G",
+      "G–S"
+    ],
+    "series": [
+      {
+        "name": "Lost range",
+        "values": [
+          "0.092",
+          "0.004",
+          "0.200",
+          "0.064"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Source-faithful static validation of archived CALVADOS-2 interactions: parameter equality, contact-range semantics, and backend-dependent test outcomes"
+  },
+  {
+    "id": "P04",
+    "table": "Table 2",
+    "chartTitle": "Transformation diagnostics over 256 cases",
+    "valueLabel": "median nominal learned-lane cosine",
+    "scale": "linear",
+    "categories": [
+      "Original rotation",
+      "Original translation",
+      "Paired baseline rotation",
+      "Geometric rotation"
+    ],
+    "series": [
+      {
+        "name": "Cosine",
+        "values": [
+          "0.638207",
+          "0.999996",
+          "0.627356",
+          "1.000000"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Rotation sensitivity after BF16 storage in coarse-grained molecular encoding and a conditional pocket-frame correction"
+  },
+  {
+    "id": "P06",
+    "table": "Table 2",
+    "chartTitle": "Pooled coordinate RMSD, independent vs saved",
+    "valueLabel": "Coordinate RMSD (Å)",
+    "scale": "linear",
+    "categories": [
+      "Coordinate median",
+      "Coordinate p95",
+      "Coordinate maximum"
+    ],
+    "series": [
+      {
+        "name": "Independent",
+        "values": [
+          "0.000168188",
+          "0.000240496",
+          "0.000309576"
+        ]
+      },
+      {
+        "name": "Saved",
+        "values": [
+          "0.000168187",
+          "0.000240489",
+          "0.000309573"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Registered Fourier-phase geometry after bfloat16 storage: separating reconstruction from learned feature quality"
+  },
+  {
+    "id": "P07",
+    "table": "Table 1",
+    "chartTitle": "Learned pair-distance summaries by cohort",
+    "valueLabel": "pair-distance MAE (Å)",
+    "scale": "linear",
+    "categories": [
+      "Median structure MAE",
+      "Equal-structure mean",
+      "Global pair mean",
+      "Maximum structure MAE"
+    ],
+    "series": [
+      {
+        "name": "Support-balanced",
+        "values": [
+          "0.05543956",
+          "0.09960445",
+          "0.25050952",
+          "2.96538825"
+        ]
+      },
+      {
+        "name": "Fixed-test-style",
+        "values": [
+          "0.07294420",
+          "0.14995929",
+          "0.26015436",
+          "4.59009499"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Explicit coordinate carriers, learned distance tails, and runtime frame augmentation in an atomwise molecular representation"
+  },
+  {
+    "id": "P09",
+    "table": "Table 1",
+    "chartTitle": "Default-to-highest ratios of final fluid-cell diagnostics",
+    "valueLabel": "ratio (default / highest)",
+    "scale": "linear",
+    "categories": [
+      "Ef (specific kinetic energy)",
+      "Mean shear"
+    ],
+    "series": [
+      {
+        "name": "Initialization A",
+        "values": [
+          "9.8174856242",
+          "3.1238637003"
+        ]
+      },
+      {
+        "name": "Initialization B",
+        "values": [
+          "9.7828628947",
+          "3.1161765253"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Contraction-precision sensitivity in a coupled D3Q19 rheology–particulate workflow"
+  },
+  {
+    "id": "P10",
+    "table": "Table 4",
+    "chartTitle": "Re-reduced Rg results: relative error vs reference",
+    "valueLabel": "100e (%) (relative Rg error)",
+    "scale": "linear",
+    "categories": [
+      "DSS1",
+      "PTMA",
+      "NHE6cmdd",
+      "ANAC046"
+    ],
+    "series": [
+      {
+        "name": "100e (%)",
+        "values": [
+          "5.500345",
+          "12.266234",
+          "4.090191",
+          "2.222797"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 4 · Physical-response diagnostics, ensemble agreement, and fixed-coordinate fidelity in residue-level IDP simulations"
+  },
+  {
+    "id": "P11",
+    "table": "Table 2",
+    "chartTitle": "Hard-grid results remeasured from retained fields",
+    "valueLabel": "Dh (hard-grid cold/slow fraction)",
+    "scale": "linear",
+    "categories": [
+      "Initial decoder",
+      "Volume-connected",
+      "Final V2 hard grid"
+    ],
+    "series": [
+      {
+        "name": "Dh",
+        "values": [
+          "0.2469879518",
+          "0.3156383064",
+          "0.3029557981"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Metric semantics and geometry constraints in neural mixer inverse design: a retrospective retained-artifact case study"
+  },
+  {
+    "id": "P12",
+    "table": "Table 2",
+    "chartTitle": "Joint trajectory relative-L2 errors after correction",
+    "valueLabel": "joint relative-L2 error",
+    "scale": "linear",
+    "categories": [
+      "Fixed-vault",
+      "Patchified",
+      "Stream A",
+      "Stream B",
+      "Stream C"
+    ],
+    "series": [
+      {
+        "name": "p50",
+        "values": [
+          "0.01897",
+          "0.02734",
+          "0.02913",
+          "0.03089",
+          "0.03155"
+        ]
+      },
+      {
+        "name": "p95",
+        "values": [
+          "0.05641",
+          "0.06700",
+          "0.07436",
+          "0.08087",
+          "0.09303"
+        ]
+      },
+      {
+        "name": "Max",
+        "values": [
+          "0.11353",
+          "0.15266",
+          "0.13234",
+          "0.16546",
+          "0.18983"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Grid-native latent patchification for two-dimensional Maxwell-field reconstruction: a checkpoint-selection-aware retrospective case study"
+  },
+  {
+    "id": "P13",
+    "table": "Table 4",
+    "chartTitle": "Retained Couette physical acceptance failures",
+    "valueLabel": "Error (%) · acceptance limit 5%",
+    "scale": "linear",
+    "categories": [
+      "Surface torque, r = 4.8 m",
+      "Surface torque, r = 5.0 m",
+      "Surface torque, r = 5.2 m",
+      "Aggregate profile",
+      "Final profile"
+    ],
+    "series": [
+      {
+        "name": "Error (%)",
+        "values": [
+          "7.06174",
+          "6.17514",
+          "5.52880",
+          "7.32722",
+          "5.19725"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 4 · What Passing Solver Checks Establish: Periodic Decay, Manufactured Pressure, and Failed Boundary Response in Fluid Verification"
+  },
+  {
+    "id": "P14",
+    "table": "Table 2",
+    "chartTitle": "Later fluid audit: relative vorticity MSE",
+    "valueLabel": "relative vorticity MSE",
+    "scale": "linear",
+    "categories": [
+      "Relative vorticity MSE",
+      "Relative vorticity MSE, p95"
+    ],
+    "series": [
+      {
+        "name": "Train-labeled",
+        "values": [
+          "0.474494",
+          "0.549369"
+        ]
+      },
+      {
+        "name": "Validation-labeled",
+        "values": [
+          "0.458089",
+          "0.613239"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Discrete Constraints, Harmonic Modes, and Reconstruction Fidelity in Periodic Fluid and Magnetic Autoencoders"
+  },
+  {
+    "id": "P15",
+    "table": "Table 2",
+    "chartTitle": "Hypersonic smoke: peak vs mean kinetic-energy density",
+    "valueLabel": "ratio (predicted / target kinetic-energy density)",
+    "scale": "linear",
+    "categories": [
+      "Maximum ratio",
+      "Mean retention ratio"
+    ],
+    "series": [
+      {
+        "name": "Ratio",
+        "values": [
+          "1.06938784",
+          "0.04041034"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Peak and Spectral Agreement Do Not Establish Field Reconstruction"
+  },
+  {
+    "id": "P16",
+    "table": "Table 2",
+    "chartTitle": "TAF1 temporal ladder: final energy residual vs CFL",
+    "valueLabel": "Final 100ηE (relative energy residual, %)",
+    "scale": "linear",
+    "categories": [
+      "CFL 0.250000",
+      "CFL 0.125000",
+      "CFL 0.062500",
+      "CFL 0.031250",
+      "CFL 0.015625"
+    ],
+    "series": [
+      {
+        "name": "Final 100ηE",
+        "values": [
+          "88.3429",
+          "44.0329",
+          "21.7618",
+          "11.4524",
+          "6.9786"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Energy Balance and Comparison Observables in a PMMA Impact-Fracture Simulation Audit"
+  },
+  {
+    "id": "P18",
+    "table": "Table 2",
+    "chartTitle": "Test reconstruction RMSD p50: model vs controls",
+    "valueLabel": "RMSD p50 (Å)",
+    "scale": "log",
+    "categories": [
+      "C15 cluster",
+      "½⟨111⟩ loop",
+      "Spherical void",
+      "All"
+    ],
+    "series": [
+      {
+        "name": "Model p50",
+        "values": [
+          "0.00630546",
+          "0.00784431",
+          "0.00653364",
+          "0.00687997"
+        ]
+      },
+      {
+        "name": "Zero lane p50",
+        "values": [
+          "6.87489709",
+          "6.90919233",
+          "7.08345667",
+          "6.90719071"
+        ]
+      },
+      {
+        "name": "Shadow p50",
+        "values": [
+          "0.19163345",
+          "0.23676155",
+          "0.23412313",
+          "0.21764073"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 2 · Reconstruction, symmetry response, and reference stability in an inherited Fe–Cr geometry tokenizer"
+  },
+  {
+    "id": "P19",
+    "table": "Table 1",
+    "chartTitle": "Field vs target-charge error, 32 selected scenes",
+    "valueLabel": "relative RMSE (p95 over scenes)",
+    "scale": "linear",
+    "categories": [
+      "Field nRMSE",
+      "Target-charge relative RMSE"
+    ],
+    "series": [
+      {
+        "name": "p95",
+        "values": [
+          "0.0539417",
+          "0.1065627"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Independent Field and Charge Fidelity Versus Constructed Constraints in a Three-Dimensional Electromagnetic Spectral Codec"
+  },
+  {
+    "id": "P20",
+    "table": "Table 3",
+    "chartTitle": "Merged-kernel speed ratio by timing scope",
+    "valueLabel": "Ratio (reference time / merged-path time)",
+    "scale": "linear",
+    "categories": [
+      "Device sequence",
+      "Second full chunk"
+    ],
+    "series": [
+      {
+        "name": "Ratio",
+        "values": [
+          "1.39238",
+          "1.10104"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 3 · Finite Equivalence and Nested Performance Limits in a Fused Reactor-Field Generator"
+  },
+  {
+    "id": "P21",
+    "table": "Table 1",
+    "chartTitle": "Learned-route atom errors on 200-entry pilot holdout",
+    "valueLabel": "atom error (Å)",
+    "scale": "log",
+    "categories": [
+      "Median",
+      "95th percentile",
+      "Maximum",
+      "RMS error"
+    ],
+    "series": [
+      {
+        "name": "Seed 20260730",
+        "values": [
+          "0.0084163",
+          "0.18728",
+          "18.728",
+          "0.62411"
+        ]
+      },
+      {
+        "name": "Seed 20260731",
+        "values": [
+          "0.0085373",
+          "0.16724",
+          "18.998",
+          "0.63354"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Separate Gates for Reconstruction, Symmetry and Population Size in an Adsorbate–Slab Codec"
+  },
+  {
+    "id": "P25",
+    "table": "Table 1",
+    "chartTitle": "Measured particle-vault storage per dynamic row",
+    "valueLabel": "Bytes per dynamic row",
+    "scale": "linear",
+    "categories": [
+      "Dynamic arrays",
+      "Reference arrays",
+      "Combined"
+    ],
+    "series": [
+      {
+        "name": "Bytes per dynamic row",
+        "values": [
+          "4096.259048",
+          "310.857143",
+          "4407.116190"
+        ]
+      }
+    ],
+    "footer": "Plotted from Table 1 · Stored-Byte Distinctness and Physical Population Accounting in Scientific Latent Datasets"
+  }
+]
